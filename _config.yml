@@ -106,3 +106,8 @@ theme: landscape
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: ''
+
+# 搜索功能
+search:
+  path: search.xml
+  field: all
