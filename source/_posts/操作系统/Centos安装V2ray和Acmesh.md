@@ -11,8 +11,8 @@ acme.sh要做到自动签发就需要在域名服务商哪授权token，用来ac
 
 在CentOS中创建Secret的临时key和Secret
 ```shell
-export Ali_Key="LTAI5tQUtNo8zC1ZQtMxm8AK"
-export Ali_Secret="7OW6o15AxHvo5TbaXoCAywudUrdfKH"
+export Ali_Key=""
+export Ali_Secret=""
 ```
 
 安装acme.sh,会在执行该命令的用户目录下生成一个.acme.sh目录，目录为隐藏目录，可以用ls -a查看
