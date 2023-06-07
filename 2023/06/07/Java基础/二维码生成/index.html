@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>二维码生成 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="ZxingPOM文件的引入12345&lt;dependency&gt;    &lt;groupId&gt;com.google.zxing&lt;&#x2F;groupId&gt;    &lt;artifactId&gt;javase&lt;&#x2F;artifactId&gt;    &lt;version&gt;3.3.3&lt;&#x2F;version&gt;&lt;&#x2F;dependency&gt;    后端C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二维码生成">
+<meta property="og:url" content="http://ajiehome.online/2023/06/07/Java%E5%9F%BA%E7%A1%80/%E4%BA%8C%E7%BB%B4%E7%A0%81%E7%94%9F%E6%88%90/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="ZxingPOM文件的引入12345&lt;dependency&gt;    &lt;groupId&gt;com.google.zxing&lt;&#x2F;groupId&gt;    &lt;artifactId&gt;javase&lt;&#x2F;artifactId&gt;    &lt;version&gt;3.3.3&lt;&#x2F;version&gt;&lt;&#x2F;dependency&gt;    后端C">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-06-07T07:58:40.000Z">
+<meta property="article:modified_time" content="2023-06-07T08:12:58.214Z">
+<meta property="article:author" content="ajiehome">
+<meta property="article:tag" content="ajiehome">
+<meta property="article:tag" content="阿杰之家">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/hexo-web/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/hexo-web/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/hexo-web/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/hexo-web/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/hexo-web/" id="logo">Hexo</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/hexo-web/" id="subtitle">阿杰之家</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/hexo-web/">Home</a>
+        
+          <a class="main-nav-link" href="/hexo-web/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/hexo-web/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ajiehome.online"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Java基础/二维码生成" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/%E4%BA%8C%E7%BB%B4%E7%A0%81%E7%94%9F%E6%88%90/" class="article-date">
+  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/hexo-web/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      二维码生成
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Zxing"><a href="#Zxing" class="headerlink" title="Zxing"></a>Zxing</h1><h3 id="POM文件的引入"><a href="#POM文件的引入" class="headerlink" title="POM文件的引入"></a>POM文件的引入</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.google.zxing<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>javase<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.3.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="后端Controller的port代码"><a href="#后端Controller的port代码" class="headerlink" title="后端Controller的port代码"></a>后端Controller的port代码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@PortMapping(&quot;/qrCode/&quot;)</span></span><br><span class="line">   <span class="keyword">public</span> Object <span class="title function_">qrCode</span><span class="params">(<span class="meta">@RequestParam(&quot;centext&quot;)</span>String centext, HttpServletResponse response, HttpServletRequest request)</span>&#123;</span><br><span class="line">       Map&lt;EncodeHintType, Object&gt; hints = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;(<span class="number">3</span>);</span><br><span class="line">       hints.put(EncodeHintType.CHARACTER_SET,<span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">       hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);</span><br><span class="line">       hints.put(EncodeHintType.MARGIN,<span class="number">1</span>);</span><br><span class="line">       <span class="keyword">try</span> &#123;</span><br><span class="line">           response.setContentType(<span class="string">&quot;image/png;charset=UTF-8&quot;</span>);</span><br><span class="line">           <span class="type">ServletOutputStream</span> <span class="variable">outputStream</span> <span class="operator">=</span> response.getOutputStream();</span><br><span class="line">           <span class="type">ByteArrayOutputStream</span> <span class="variable">byteArrayOutputStream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ByteArrayOutputStream</span>();</span><br><span class="line">           <span class="type">BitMatrix</span> <span class="variable">bitMatrix</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MultiFormatWriter</span>().encode(context, BarcodeFormat.QR_CODE, <span class="number">200</span>, <span class="number">200</span>, hints);</span><br><span class="line">           MatrixToImageWriter.writeToStream(bitMatrix,<span class="string">&quot;png&quot;</span>,byteArrayOutputStream);</span><br><span class="line">  <span class="comment">//编码格式转换，由于前端用ajax设置img标签的src属性需要</span></span><br><span class="line"> response.getOutputStream().write(Base64.encodeBase64(byteArrayOutputStream.toByteArray()));</span><br><span class="line">           outputStream.flush();</span><br><span class="line">           outputStream.close();</span><br><span class="line">       &#125; <span class="keyword">catch</span> (WriterException | IOException e) &#123;</span><br><span class="line">           e.printStackTrace();</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="comment">//枚举内容替换成了字符串，不好展示</span></span><br><span class="line">       <span class="keyword">return</span> &#123;<span class="string">&quot;code&quot;</span>:<span class="number">2001</span>,<span class="string">&quot;message&quot;</span>:<span class="string">&quot;二维码生成成功&quot;</span>&#125;;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="前端js代码"><a href="#前端js代码" class="headerlink" title="前端js代码"></a>前端js代码</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="variable language_">document</span>).<span class="title function_">ready</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">           $(<span class="string">&quot;#showQRCode&quot;</span>).<span class="title function_">click</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">               <span class="keyword">let</span> inputText = $(<span class="string">&quot;#inputText&quot;</span>).<span class="title function_">val</span>();</span><br><span class="line">               $.<span class="title function_">port</span>(&#123;</span><br><span class="line">                   <span class="attr">url</span>: <span class="string">&quot;/qrCode&quot;</span>,</span><br><span class="line">                   <span class="attr">data</span>: &#123;<span class="string">&quot;context&quot;</span>:inputText&#125;,</span><br><span class="line">                   <span class="attr">dataType</span>: <span class="string">&quot;application/json&quot;</span>,</span><br><span class="line">                   <span class="attr">contentType</span>: <span class="string">&quot;application/json&quot;</span>,</span><br><span class="line">                   <span class="attr">responseType</span>: <span class="string">&quot;blob&quot;</span>,</span><br><span class="line">                   <span class="attr">accept</span>:<span class="string">&quot;image/png&quot;</span>,</span><br><span class="line">                   <span class="attr">success</span>: <span class="keyword">function</span> (<span class="params">response</span>)&#123;</span><br><span class="line">                       <span class="comment">//后台的Base64编码作用于这里</span></span><br><span class="line">                       $(<span class="string">&quot;#qrCode&quot;</span>).<span class="title function_">attr</span>(<span class="string">&quot;src&quot;</span>,<span class="string">&quot;data:image/png;base64,&quot;</span>+response);</span><br><span class="line">                   &#125;,</span><br><span class="line">                   <span class="attr">error</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">                       <span class="title function_">alert</span>(<span class="string">&quot;请求错误&quot;</span>);</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;)</span><br><span class="line">           &#125;);</span><br><span class="line">       &#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="前端HTML代码"><a href="#前端HTML代码" class="headerlink" title="前端HTML代码"></a>前端HTML代码</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">img</span>  <span class="attr">id</span>=<span class="string">&quot;qrCode&quot;</span> <span class="attr">style</span>=<span class="string">&quot;padding-left: 20px&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;QRCode&quot;</span> <span class="attr">src</span>=<span class="string">&quot;&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;inputText&quot;</span>&gt;</span>输入二维码内容：<span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">id</span>=<span class="string">&quot;inputText&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;showQRCode&quot;</span>&gt;</span>提交<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h4><p>*使用<strong>Zxing</strong>第三方jar包，使用<strong>MultiFormatWriter</strong>的<strong>encode()<strong>方法生成一个二维码类</strong>BitMatrix</strong>的对象，然后用<strong>MatrixToImageWriter</strong>的流写入方法<strong>writeToStream()<strong>以</strong>png</strong>的形式写入<strong>OutputStresam</strong>流中，如果需要，可以进行相应的编码转换。*</p>
+<p><em><strong>如果使用get的方式，直接往img标签的src属性添加生成二维码的访问地址即可，并且不需要base64编码。</strong></em></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ajiehome.online/2023/06/07/Java%E5%9F%BA%E7%A1%80/%E4%BA%8C%E7%BB%B4%E7%A0%81%E7%94%9F%E6%88%90/" data-id="clilfmzrz0016bnow48xxcl4n" data-title="二维码生成" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jvm%E8%99%9A%E6%8B%9F%E6%9C%BA/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          Jvm虚拟机
+        
+      </div>
+    </a>
+  
+  
+    <a href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%96%87%E4%BB%B6%E7%9A%84MD5/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">计算文件的MD5</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/C-%E5%9F%BA%E7%A1%80/">C++基础</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/">前端杂烩</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">开发工具</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/">开源框架</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/%E7%90%86%E8%AE%BA%E4%BD%93%E7%B3%BB/">理论体系</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/">脚本语言</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/%E8%99%9A%E6%8B%9F%E5%AE%B9%E5%99%A8/">虚拟容器</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/hexo-web/archives/2023/06/">六月 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/hexo-web/2023/06/07/C++%E5%9F%BA%E7%A1%80/C++%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/">C++内存分配</a>
+          </li>
+        
+          <li>
+            <a href="/hexo-web/2023/06/07/C++%E5%9F%BA%E7%A1%80/C++%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/">C++基础语法</a>
+          </li>
+        
+          <li>
+            <a href="/hexo-web/2023/06/07/C++%E5%9F%BA%E7%A1%80/C++%E8%AF%AD%E6%B3%95_%E7%BB%A7%E6%89%BF/">C++语法_继承</a>
+          </li>
+        
+          <li>
+            <a href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/IO%E4%B8%8ENIO/">IO与NIO</a>
+          </li>
+        
+          <li>
+            <a href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jar%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/">Jar后台运行</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 ajiehome<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/hexo-web/" class="mobile-nav-link">Home</a>
+  
+    <a href="/hexo-web/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/hexo-web/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/hexo-web/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/hexo-web/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Java反射根据方法名获取参数名 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Java 反射 根据方法名获取参数名首先实现一个可序列化的Function集成接口 123interface CustomFunction&lt;T, R&gt; extends Function&lt;T, R&gt;, Serializable &amp;#123;&amp;#125;  再构建一个Student类，作为本次获取的测试Entity 1234567891011121314151617181920">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java反射根据方法名获取参数名">
+<meta property="og:url" content="http://ajiehome.online/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E5%8F%8D%E5%B0%84%E6%A0%B9%E6%8D%AE%E6%96%B9%E6%B3%95%E5%90%8D%E8%8E%B7%E5%8F%96%E5%8F%82%E6%95%B0%E5%90%8D/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Java 反射 根据方法名获取参数名首先实现一个可序列化的Function集成接口 123interface CustomFunction&lt;T, R&gt; extends Function&lt;T, R&gt;, Serializable &amp;#123;&amp;#125;  再构建一个Student类，作为本次获取的测试Entity 1234567891011121314151617181920">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-06-07T07:58:40.000Z">
+<meta property="article:modified_time" content="2023-06-07T08:12:58.214Z">
+<meta property="article:author" content="ajiehome">
+<meta property="article:tag" content="ajiehome">
+<meta property="article:tag" content="阿杰之家">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/hexo-web/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/hexo-web/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/hexo-web/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/hexo-web/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/hexo-web/" id="logo">Hexo</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/hexo-web/" id="subtitle">阿杰之家</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/hexo-web/">Home</a>
+        
+          <a class="main-nav-link" href="/hexo-web/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/hexo-web/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ajiehome.online"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Java基础/Java反射根据方法名获取参数名" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E5%8F%8D%E5%B0%84%E6%A0%B9%E6%8D%AE%E6%96%B9%E6%B3%95%E5%90%8D%E8%8E%B7%E5%8F%96%E5%8F%82%E6%95%B0%E5%90%8D/" class="article-date">
+  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/hexo-web/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Java反射根据方法名获取参数名
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Java-反射-根据方法名获取参数名"><a href="#Java-反射-根据方法名获取参数名" class="headerlink" title="Java 反射 根据方法名获取参数名"></a>Java 反射 根据方法名获取参数名</h1><p>首先实现一个可序列化的Function集成接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">CustomFunction</span>&lt;T, R&gt; <span class="keyword">extends</span> <span class="title class_">Function</span>&lt;T, R&gt;, Serializable &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>再构建一个Student类，作为本次获取的测试Entity</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Student</span> <span class="keyword">implements</span> <span class="title class_">Serializable</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">long</span> <span class="variable">serialVersionUID</span> <span class="operator">=</span> -<span class="number">5681957118855943196L</span>;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">    <span class="keyword">private</span> String studentName;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Student</span><span class="params">(Integer age, String studentName)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">        <span class="built_in">this</span>.studentName = studentName;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setAge</span><span class="params">(Integer age)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setStudentName</span><span class="params">(String studentName)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.studentName = studentName;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> Integer <span class="title function_">getAge</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getStudentName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> studentName;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用反射获取当前方法的名称，然后切割出对应的属性名称，就是获取get的方法名称，再把get的切割，把第一个字母大写</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T, R&gt; String <span class="title function_">functionToProperStr</span><span class="params">(CustomFunction&lt;T, R&gt; function)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">    <span class="type">Method</span> <span class="variable">writeReplace</span> <span class="operator">=</span> function.getClass().getDeclaredMethod(<span class="string">&quot;writeReplace&quot;</span>);</span><br><span class="line">    <span class="type">boolean</span> <span class="variable">accessible</span> <span class="operator">=</span> writeReplace.isAccessible();</span><br><span class="line">    writeReplace.setAccessible(<span class="literal">true</span>);</span><br><span class="line">    <span class="type">SerializedLambda</span> <span class="variable">serializedLambda</span> <span class="operator">=</span> (SerializedLambda) writeReplace.invoke(function);</span><br><span class="line">    writeReplace.setAccessible(accessible);</span><br><span class="line">    <span class="type">String</span> <span class="variable">fieldName</span> <span class="operator">=</span> serializedLambda.getImplMethodName().substring(<span class="string">&quot;get&quot;</span>.length());</span><br><span class="line">    fieldName = fieldName.replaceFirst(String.valueOf(fieldName.charAt(<span class="number">0</span>)), String.valueOf(fieldName.charAt(<span class="number">0</span>)).toLowerCase());</span><br><span class="line">    <span class="keyword">return</span> fieldName;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ajiehome.online/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E5%8F%8D%E5%B0%84%E6%A0%B9%E6%8D%AE%E6%96%B9%E6%B3%95%E5%90%8D%E8%8E%B7%E5%8F%96%E5%8F%82%E6%95%B0%E5%90%8D/" data-id="clilfmzrq000lbnowcxehb548" data-title="Java反射根据方法名获取参数名" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E5%92%8C%E5%8F%8D%E5%B0%84%E5%AE%9E%E7%8E%B0%E5%AD%97%E6%AE%B5%E5%90%8D%E6%A0%88%E6%B7%B1%E5%AF%BB%E5%80%BC/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          Java动态代理和反射实现字段名栈深寻值
+        
+      </div>
+    </a>
+  
+  
+    <a href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E7%9A%84ArrayList/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">Java的ArrayList</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/C-%E5%9F%BA%E7%A1%80/">C++基础</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/">前端杂烩</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">开发工具</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/">开源框架</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/%E7%90%86%E8%AE%BA%E4%BD%93%E7%B3%BB/">理论体系</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/">脚本语言</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/%E8%99%9A%E6%8B%9F%E5%AE%B9%E5%99%A8/">虚拟容器</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/hexo-web/archives/2023/06/">六月 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/hexo-web/2023/06/07/C++%E5%9F%BA%E7%A1%80/C++%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/">C++内存分配</a>
+          </li>
+        
+          <li>
+            <a href="/hexo-web/2023/06/07/C++%E5%9F%BA%E7%A1%80/C++%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/">C++基础语法</a>
+          </li>
+        
+          <li>
+            <a href="/hexo-web/2023/06/07/C++%E5%9F%BA%E7%A1%80/C++%E8%AF%AD%E6%B3%95_%E7%BB%A7%E6%89%BF/">C++语法_继承</a>
+          </li>
+        
+          <li>
+            <a href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/IO%E4%B8%8ENIO/">IO与NIO</a>
+          </li>
+        
+          <li>
+            <a href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jar%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/">Jar后台运行</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 ajiehome<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/hexo-web/" class="mobile-nav-link">Home</a>
+  
+    <a href="/hexo-web/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/hexo-web/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/hexo-web/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/hexo-web/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

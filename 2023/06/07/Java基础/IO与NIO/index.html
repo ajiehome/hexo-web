@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>IO与NIO | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="IO与NIO1、阻塞与非阻塞阻塞与非阻塞是描述进程在访问某个资源时，数据是否准备就绪的的一种处理方式。当数据没有准备就绪时：  阻塞：线程持续等待资源中数据准备完成，直到返回响应结果。 非阻塞：线程直接返回结果，不会持续等待资源准备数据结束后才响应结果。  2、同步与异步 同步与异步是指访问数据的机制，同步一般指主动请求并等待IO操作完成的方式。 异步则指主动请求数据后便可以继续处理其它任务，随后">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IO与NIO">
+<meta property="og:url" content="http://ajiehome.online/2023/06/07/Java%E5%9F%BA%E7%A1%80/IO%E4%B8%8ENIO/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="IO与NIO1、阻塞与非阻塞阻塞与非阻塞是描述进程在访问某个资源时，数据是否准备就绪的的一种处理方式。当数据没有准备就绪时：  阻塞：线程持续等待资源中数据准备完成，直到返回响应结果。 非阻塞：线程直接返回结果，不会持续等待资源准备数据结束后才响应结果。  2、同步与异步 同步与异步是指访问数据的机制，同步一般指主动请求并等待IO操作完成的方式。 异步则指主动请求数据后便可以继续处理其它任务，随后">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13449209-300fd48a7251c327.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/654/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13449209-d261cbcb9b9ed88f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/506/format/webp">
+<meta property="article:published_time" content="2023-06-07T07:58:40.000Z">
+<meta property="article:modified_time" content="2023-06-07T08:12:58.214Z">
+<meta property="article:author" content="ajiehome">
+<meta property="article:tag" content="ajiehome">
+<meta property="article:tag" content="阿杰之家">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/13449209-300fd48a7251c327.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/654/format/webp">
+  
+    <link rel="alternate" href="/hexo-web/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/hexo-web/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/hexo-web/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/hexo-web/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/hexo-web/" id="logo">Hexo</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/hexo-web/" id="subtitle">阿杰之家</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/hexo-web/">Home</a>
+        
+          <a class="main-nav-link" href="/hexo-web/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/hexo-web/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ajiehome.online"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Java基础/IO与NIO" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/IO%E4%B8%8ENIO/" class="article-date">
+  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/hexo-web/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      IO与NIO
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="IO与NIO"><a href="#IO与NIO" class="headerlink" title="IO与NIO"></a>IO与NIO</h1><h3 id="1、阻塞与非阻塞"><a href="#1、阻塞与非阻塞" class="headerlink" title="1、阻塞与非阻塞"></a>1、阻塞与非阻塞</h3><p>阻塞与非阻塞是描述进程在访问某个资源时，数据是否准备就绪的的一种处理方式。当数据没有准备就绪时：</p>
+<ul>
+<li>阻塞：线程持续等待资源中数据准备完成，直到返回响应结果。</li>
+<li>非阻塞：线程直接返回结果，不会持续等待资源准备数据结束后才响应结果。</li>
+</ul>
+<h3 id="2、同步与异步"><a href="#2、同步与异步" class="headerlink" title="2、同步与异步"></a>2、同步与异步</h3><ul>
+<li>同步与异步是指访问数据的机制，同步一般指主动请求并等待IO操作完成的方式。</li>
+<li>异步则指主动请求数据后便可以继续处理其它任务，随后等待IO操作完毕的通知。</li>
+</ul>
+<p>老王烧开水：<br> 1、普通水壶煮水，站在旁边，主动的看水开了没有？同步的阻塞<br> 2、普通水壶煮水，去干点别的事，每过一段时间去看看水开了没有，水没开就走人。 同步非阻塞<br> 3、响水壶煮水，站在旁边，不会每过一段时间主动看水开了没有。如果水开了，水壶自动通知他。 异步阻塞<br> 4、响水壶煮水，去干点别的事，如果水开了，水壶自动通知他。异步非阻塞</p>
+<h3 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h3><h4 id="1、传统BIO模型"><a href="#1、传统BIO模型" class="headerlink" title="1、传统BIO模型"></a>1、传统BIO模型</h4><p>传统BIO是一种同步的阻塞IO，IO在进行读写时，该线程将被阻塞，线程无法进行其它操作。<br> IO流在读取时，会阻塞。直到发生以下情况：1、有数据可以读取。2、数据读取完成。3、发生异常</p>
+<h4 id="2、伪异步IO模型"><a href="#2、伪异步IO模型" class="headerlink" title="2、伪异步IO模型"></a>2、伪异步IO模型</h4><p>以传统BIO模型为基础，通过线程池的方式维护所有的IO线程，实现相对高效的线程开销及管理。</p>
+<h4 id="3、NIO模型"><a href="#3、NIO模型" class="headerlink" title="3、NIO模型"></a>3、NIO模型</h4><p>NIO（JDK1.4）模型是一种同步非阻塞IO，主要有三大核心部分：Channel(通道)，Buffer(缓冲区), Selector（多路复用器）。传统IO基于字节流和字符流进行操作，而NIO基于Channel和Buffer(缓冲区)进行操作，数据总是从通道读取到缓冲区中，或者从缓冲区写入到通道中。Selector(多路复用器)用于监听多个通道的事件（比如：连接打开，数据到达）。因此，单个线程可以监听多个数据通道。<br> NIO和传统IO（一下简称IO）之间第一个最大的区别是，IO是面向流的，NIO是面向缓冲区的。 Java IO面向流意味着每次从流中读一个或多个字节，直至读取所有字节，它们没有被缓存在任何地方。此外，它不能前后移动流中的数据。如果需要前后移动从流中读取的数据，需要先将它缓存到一个缓冲区。NIO的缓冲导向方法略有不同。数据读取到一个它稍后处理的缓冲区，需要时可在缓冲区中前后移动。这就增加了处理过程中的灵活性。但是，还需要检查是否该缓冲区中包含所有您需要处理的数据。而且，需确保当更多的数据读入缓冲区时，不要覆盖缓冲区里尚未处理的数据。<br> IO的各种流是阻塞的。这意味着，当一个线程调用read() 或 write()时，该线程被阻塞，直到有一些数据被读取，或数据完全写入。该线程在此期间不能再干任何事情了。 NIO的非阻塞模式，使一个线程从某通道发送请求读取数据，但是它仅能得到目前可用的数据，如果目前没有数据可用时，就什么都不会获取。而不是保持线程阻塞，所以直至数据变的可以读取之前，该线程可以继续做其他的事情。 非阻塞写也是如此。一个线程请求写入一些数据到某通道，但不需要等待它完全写入，这个线程同时可以去做别的事情。 线程通常将非阻塞IO的空闲时间用于在其它通道上执行IO操作，所以一个单独的线程现在可以管理多个输入和输出通道（channel）。</p>
+<h4 id="NIO优点："><a href="#NIO优点：" class="headerlink" title="NIO优点："></a>NIO优点：</h4><ol>
+<li>通过Channel注册到Selector上的状态来实现一种客户端与服务端的通信。</li>
+<li>Channel中数据的读取是通过Buffer , 一种非阻塞的读取方式。</li>
+<li>Selector 多路复用器  单线程模型，  线程的资源开销相对比较小。</li>
+</ol>
+<h4 id="Channel-通道"><a href="#Channel-通道" class="headerlink" title="Channel(通道)"></a>Channel(通道)</h4><p>传统IO操作对read()或write()方法的调用，可能会因为没有数据可读&#x2F;可写而阻塞，直到有数据响应。也就是说读写数据的IO调用，可能会无限期的阻塞等待，效率依赖网络传输的速度。最重要的是在调用一个方法前，无法知道是否会被阻塞。</p>
+<p>NIO的Channel抽象了一个重要特征就是可以通过配置它的阻塞行为，来实现非阻塞式的通道。</p>
+<p>Channel是一个双向通道，与传统IO操作只允许单向的读写不同的是，NIO的Channel允许在一个通道上进行读和写的操作。</p>
+<p>FileChannel:文件</p>
+<p>SocketChannel:</p>
+<p>ServerSocketChannel:</p>
+<p>DatagramChannel: UDP</p>
+<h4 id="Buffer-缓冲区"><a href="#Buffer-缓冲区" class="headerlink" title="Buffer(缓冲区)"></a>Buffer(缓冲区)</h4><p>Bufer顾名思义，它是一个缓冲区，实际上是一个容器，一个连续数组。Channel提供从文件、网络读取数据的渠道，但是读写的数据都必须经过Buffer。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/13449209-300fd48a7251c327.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/654/format/webp" alt="img"></p>
+<p>Buffer(缓冲区)</p>
+<p>Buffer缓冲区本质上是一块可以写入数据，然后可以从中读取数据的内存。这块内存被包装成NIO Buffer对象，并提供了一组方法，用来方便的访问该模块内存。为了理解Buffer的工作原理，需要熟悉它的三个属性：capacity、position和limit。</p>
+<p>position和limit的含义取决于Buffer处在读模式还是写模式。不管Buffer处在什么模式，capacity的含义总是一样的。见下图：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/13449209-d261cbcb9b9ed88f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/506/format/webp" alt="img"></p>
+<p>capacity、position和limit</p>
+<ul>
+<li>capacity：作为一个内存块，Buffer有固定的大小值，也叫作“capacity”，只能往其中写入capacity个byte、long、char等类型。一旦Buffer满了，需要将其清空（通过读数据或者清楚数据）才能继续写数据。</li>
+<li>position：当你写数据到Buffer中时，position表示当前的位置。出事的position值为0，当写入一个字节数据到Buffer中后，position会向前移动到下一个可插入数据的Buffer单元。position最大可为capacity-1。当读取数据时，也是从某个特定位置读，讲Buffer从写模式切换到读模式，position会被重置为0。当从Buffer的position处读取一个字节数据后，position向前移动到下一个可读的位置。</li>
+<li>limit：在写模式下，Buffer的limit表示你最多能往Buffer里写多少数据。 写模式下，limit等于Buffer的capacity。当切换Buffer到读模式时， limit表示你最多能读到多少数据。因此，当切换Buffer到读模式时，limit会被设置成写模式下的position值。换句话说，你能读到之前写入的所有数据（limit被设置成已写数据的数量，这个值在写模式下就是position）</li>
+</ul>
+<h4 id="Buffer的分配："><a href="#Buffer的分配：" class="headerlink" title="Buffer的分配："></a>Buffer的分配：</h4><p>对Buffer对象的操作必须首先进行分配，Buffer提供一个allocate(int capacity)方法分配一个指定字节大小的对象。<br> 向Buffer中写数据：写数据到Buffer中有两种方式：<br> 1.从channel写到Buffer</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> bytes = channel.<span class="built_in">read</span>(buf); <span class="comment">//将channel中的数据读取到buf中</span></span><br></pre></td></tr></table></figure>
+
+<p>2.通过Buffer的put()方法写到Buffer</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">buf.put(<span class="built_in">byte</span>); <span class="comment">//将数据通过put()方法写入到buf中</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>flip()方法：将Buffer从写模式切换到读模式，调用flip()方法会将position设置为0，并将limit设置为之前的position的值。<br> 从Buffer中读数据：从Buffer中读数据有两种方式：<br> 1.从Buffer读取数据到Channel</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> bytes = channel.<span class="built_in">write</span>(buf); <span class="comment">//将buf中的数据读取到channel中</span></span><br></pre></td></tr></table></figure>
+
+<p>2.通过Buffer的get()方法读取数据</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">byte</span> bt = buf.<span class="keyword">get</span>(); <span class="comment">//从buf中读取一个byte</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>rewind()方法：Buffer.rewind()方法将position设置为0，使得可以重读Buffer中的所有数据，limit保持不变。</li>
+<li>clear()与compact()方法：一旦读完Buffer中的数据，需要让Buffer准备好再次被写入，可以通过clear()或compact()方法完成。如果调用的是clear()方法，position将被设置为0，limit设置为capacity的值。但是Buffer并未被清空，只是通过这些标记告诉我们可以从哪里开始往Buffer中写入多少数据。如果Buffer中还有一些未读的数据，调用clear()方法将被”遗忘 “。compact()方法将所有未读的数据拷贝到Buffer起始处，然后将position设置到最后一个未读元素的后面，limit属性依然设置为capacity。可以使得Buffer中的未读数据还可以在后续中被使用。</li>
+<li>mark()与reset()方法：通过调用Buffer.mark()方法可以标记一个特定的position，之后可以通过调用Buffer.reset()恢复到这个position上。</li>
+</ul>
+<h4 id="Selector-多路复用器"><a href="#Selector-多路复用器" class="headerlink" title="Selector(多路复用器)"></a>Selector(多路复用器)</h4><p>Selector与Channel是相互配合使用的，将Channel注册在Selector上之后，才可以正确的使用Selector，但此时Channel必须为非阻塞模式。Selector可以监听Channel的四种状态（Connect、Accept、Read、Write），当监听到某一Channel的某个状态时，才允许对Channel进行相应的操作。</p>
+<ul>
+<li>Connect：某一个客户端连接成功后</li>
+<li>Accept：准备好进行连接</li>
+<li>Read:可读</li>
+<li>Write:可写</li>
+</ul>
+<p>作者：林亚希<br>链接：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/5bb812ca5f8e">https://www.jianshu.com/p/5bb812ca5f8e</a><br>来源：简书<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ajiehome.online/2023/06/07/Java%E5%9F%BA%E7%A1%80/IO%E4%B8%8ENIO/" data-id="clilfmzrg0008bnow6mp1ek3i" data-title="IO与NIO" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/hexo-web/2023/06/07/C++%E5%9F%BA%E7%A1%80/C++%E8%AF%AD%E6%B3%95_%E7%BB%A7%E6%89%BF/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          C++语法_继承
+        
+      </div>
+    </a>
+  
+  
+    <a href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jar%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">Jar后台运行</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/C-%E5%9F%BA%E7%A1%80/">C++基础</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/">前端杂烩</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">开发工具</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/">开源框架</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/%E7%90%86%E8%AE%BA%E4%BD%93%E7%B3%BB/">理论体系</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/">脚本语言</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/%E8%99%9A%E6%8B%9F%E5%AE%B9%E5%99%A8/">虚拟容器</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/hexo-web/archives/2023/06/">六月 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/hexo-web/2023/06/07/C++%E5%9F%BA%E7%A1%80/C++%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/">C++内存分配</a>
+          </li>
+        
+          <li>
+            <a href="/hexo-web/2023/06/07/C++%E5%9F%BA%E7%A1%80/C++%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/">C++基础语法</a>
+          </li>
+        
+          <li>
+            <a href="/hexo-web/2023/06/07/C++%E5%9F%BA%E7%A1%80/C++%E8%AF%AD%E6%B3%95_%E7%BB%A7%E6%89%BF/">C++语法_继承</a>
+          </li>
+        
+          <li>
+            <a href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/IO%E4%B8%8ENIO/">IO与NIO</a>
+          </li>
+        
+          <li>
+            <a href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jar%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/">Jar后台运行</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 ajiehome<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/hexo-web/" class="mobile-nav-link">Home</a>
+  
+    <a href="/hexo-web/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/hexo-web/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/hexo-web/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/hexo-web/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

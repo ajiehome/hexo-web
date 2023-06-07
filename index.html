@@ -81,65 +81,14 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-C++基础/C++内存分配" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/hexo-web/2023/06/07/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2023-06-07T06:47:00.005Z" itemprop="datePublished">2023-06-07</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/hexo-web/2023/06/07/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ajiehome.online/2023/06/07/hello-world/" data-id="clilckh9i0002bxon1nn9f27r" data-title="Hello World" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-cate-test" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/hexo-web/2023/06/06/cate-test/" class="article-date">
-  <time class="dt-published" datetime="2023-06-06T22:36:41.000Z" itemprop="datePublished">2023-06-07</time>
+    <a href="/hexo-web/2023/06/07/C++%E5%9F%BA%E7%A1%80/C++%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/" class="article-date">
+  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/hexo-web/categories/%E4%BD%A0%E5%A5%BD/">你好</a>
+    <a class="article-category-link" href="/hexo-web/categories/C-%E5%9F%BA%E7%A1%80/">C++基础</a>
   </div>
 
   </div>
@@ -150,7 +99,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/hexo-web/2023/06/06/cate-test/">cate test</a>
+      <a class="p-name article-title" href="/hexo-web/2023/06/07/C++%E5%9F%BA%E7%A1%80/C++%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/">C++内存分配</a>
     </h1>
   
 
@@ -158,11 +107,523 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        
+        <h1 id="内存分配"><a href="#内存分配" class="headerlink" title="内存分配"></a>内存分配</h1><p>内存分配与释放：</p>
+<p> <code>new</code>：内存分配</p>
+<p><code>delete/delete[]</code>：内存释放</p>
+<p>程序代码也是存在于内存中</p>
+<p>堆空间与栈空间是数据空间</p>
+<p>堆空间从低往上走</p>
+<p>栈空间从高往低走</p>
+<h2 id="深拷贝与浅拷贝"><a href="#深拷贝与浅拷贝" class="headerlink" title="深拷贝与浅拷贝"></a>深拷贝与浅拷贝</h2><p>浅拷贝：只拷贝栈内存，也就是说只拷贝了栈内存中的堆内存的地址，最终拷贝的两个对象指向同一个堆内存地址</p>
+<p>深拷贝：拷贝栈内存数据，但是栈内存中存储堆内存地址部分却是重新申请的堆内存的空间地址，堆内存只拷贝数据内容，而内存空间是重新申请生成的</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ajiehome.online/2023/06/06/cate-test/" data-id="clilckh9e0001bxon2kpf2qsr" data-title="cate test" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://ajiehome.online/2023/06/07/C++%E5%9F%BA%E7%A1%80/C++%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/" data-id="clilfmzr70001bnow8aew47f2" data-title="C++内存分配" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-C++基础/C++基础语法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/hexo-web/2023/06/07/C++%E5%9F%BA%E7%A1%80/C++%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" class="article-date">
+  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/hexo-web/categories/C-%E5%9F%BA%E7%A1%80/">C++基础</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/hexo-web/2023/06/07/C++%E5%9F%BA%E7%A1%80/C++%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/">C++基础语法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="C-基础语法"><a href="#C-基础语法" class="headerlink" title="C++基础语法"></a>C++基础语法</h1><p><strong>构造函数与析构函数</strong></p>
+<ol>
+<li>一个类中析构函数只能有一个，而构造函数可以有很多个</li>
+<li>析构函数没有函数参数、没有返回值、没有返回类型</li>
+<li>由于没有函数参数，所以不能被重载</li>
+<li>构造函数在类的构建时调用，析构函数在类的声明周期结束时调用</li>
+</ol>
+<p>Test.h文件</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifdef</span> _TEST_H_ </span></span><br><span class="line"><span class="meta">#defind _TEST_H_ </span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> sth</span><br><span class="line"><span class="keyword">namespace</span> test&#123;</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Test</span>&#123;</span><br><span class="line">        <span class="keyword">public</span>:</span><br><span class="line">            <span class="built_in">Test</span>()&#123;</span><br><span class="line">                <span class="keyword">this</span>.sex=<span class="number">0</span>;</span><br><span class="line">                <span class="keyword">this</span>.sex=<span class="number">0L</span>;</span><br><span class="line">            &#125; <span class="comment">//构造函数</span></span><br><span class="line">            ~<span class="built_in">Test</span>()&#123;&#125; <span class="comment">//析构函数</span></span><br><span class="line">        <span class="keyword">public</span>:</span><br><span class="line">            <span class="function"><span class="type">void</span> <span class="title">setSex</span><span class="params">(<span class="type">int</span> sex)</span></span>; <span class="comment">//公共方法</span></span><br><span class="line">            <span class="function"><span class="type">void</span> <span class="title">setPhone</span><span class="params">(<span class="type">long</span> phone)</span></span>; </span><br><span class="line">            <span class="function"><span class="type">int</span> <span class="title">getSex</span><span class="params">()</span></span>;</span><br><span class="line">            <span class="function"><span class="type">long</span> <span class="title">getPhone</span><span class="params">()</span></span>;</span><br><span class="line">        <span class="keyword">private</span>:</span><br><span class="line">            <span class="type">int</span> sex; <span class="comment">//私有属性</span></span><br><span class="line">            <span class="type">long</span> phone;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125; <span class="comment">//namespace</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">//_TEST_H_</span></span></span><br></pre></td></tr></table></figure>
+
+<p>Test.cpp文件</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;Test.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> test&#123;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Test::setSex</span><span class="params">(<span class="type">int</span> s)</span></span>&#123;</span><br><span class="line">        sex = s;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Test::setPhone</span><span class="params">(<span class="type">long</span> p)</span></span>&#123;</span><br><span class="line">        phone = p;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">Test::getSex</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> sex;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">long</span> <span class="title">Test::getPhone</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> phone;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>名存空间</strong></p>
+<p><code>using namespace &#39;Name&#39;</code>：选择名存空间</p>
+<p><code>namespace &#39;Name&#39;</code>：创建名存空间关键字</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ajiehome.online/2023/06/07/C++%E5%9F%BA%E7%A1%80/C++%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" data-id="clilfmzrb0003bnow7dxd566c" data-title="C++基础语法" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-C++基础/C++语法_继承" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/hexo-web/2023/06/07/C++%E5%9F%BA%E7%A1%80/C++%E8%AF%AD%E6%B3%95_%E7%BB%A7%E6%89%BF/" class="article-date">
+  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/hexo-web/categories/C-%E5%9F%BA%E7%A1%80/">C++基础</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/hexo-web/2023/06/07/C++%E5%9F%BA%E7%A1%80/C++%E8%AF%AD%E6%B3%95_%E7%BB%A7%E6%89%BF/">C++语法_继承</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h1><p><strong>Fight.h</strong>文件</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#ifdel _CLIENT_TEST_H_</span></span><br><span class="line"><span class="meta">#default _CLIENT_TEST_H_</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;Test.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> fight&#123;</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Fight</span>: <span class="keyword">public</span> Test&#123;</span><br><span class="line">      <span class="keyword">public</span>:</span><br><span class="line">        <span class="built_in">Figint</span>()&#123;</span><br><span class="line">            wea = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        ~<span class="built_in">Fight</span>()&#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">private</span>:</span><br><span class="line">            <span class="type">int</span> wea;</span><br><span class="line">        <span class="keyword">public</span>:</span><br><span class="line">            <span class="function"><span class="type">void</span> <span class="title">setWea</span><span class="params">(<span class="type">int</span> w)</span></span>;</span><br><span class="line">            <span class="function"><span class="type">int</span> <span class="title">getWea</span><span class="params">()</span></span>;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125; <span class="comment">//namespace</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">// _CLIENT_FIGht_H_</span></span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Feight.cpp</strong>文件</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;Fight.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> fight&#123;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Fight::setWea</span><span class="params">(w)</span></span>&#123;</span><br><span class="line">        wea = w;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">Fight::getWea</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> wea;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>调用</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;Fight.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>* agev[])</span></span>&#123;</span><br><span class="line">    fight::Fight</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ajiehome.online/2023/06/07/C++%E5%9F%BA%E7%A1%80/C++%E8%AF%AD%E6%B3%95_%E7%BB%A7%E6%89%BF/" data-id="clilfmzrf0006bnowdz6tea32" data-title="C++语法_继承" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Java基础/IO与NIO" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/IO%E4%B8%8ENIO/" class="article-date">
+  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/hexo-web/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/IO%E4%B8%8ENIO/">IO与NIO</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="IO与NIO"><a href="#IO与NIO" class="headerlink" title="IO与NIO"></a>IO与NIO</h1><h3 id="1、阻塞与非阻塞"><a href="#1、阻塞与非阻塞" class="headerlink" title="1、阻塞与非阻塞"></a>1、阻塞与非阻塞</h3><p>阻塞与非阻塞是描述进程在访问某个资源时，数据是否准备就绪的的一种处理方式。当数据没有准备就绪时：</p>
+<ul>
+<li>阻塞：线程持续等待资源中数据准备完成，直到返回响应结果。</li>
+<li>非阻塞：线程直接返回结果，不会持续等待资源准备数据结束后才响应结果。</li>
+</ul>
+<h3 id="2、同步与异步"><a href="#2、同步与异步" class="headerlink" title="2、同步与异步"></a>2、同步与异步</h3><ul>
+<li>同步与异步是指访问数据的机制，同步一般指主动请求并等待IO操作完成的方式。</li>
+<li>异步则指主动请求数据后便可以继续处理其它任务，随后等待IO操作完毕的通知。</li>
+</ul>
+<p>老王烧开水：<br> 1、普通水壶煮水，站在旁边，主动的看水开了没有？同步的阻塞<br> 2、普通水壶煮水，去干点别的事，每过一段时间去看看水开了没有，水没开就走人。 同步非阻塞<br> 3、响水壶煮水，站在旁边，不会每过一段时间主动看水开了没有。如果水开了，水壶自动通知他。 异步阻塞<br> 4、响水壶煮水，去干点别的事，如果水开了，水壶自动通知他。异步非阻塞</p>
+<h3 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h3><h4 id="1、传统BIO模型"><a href="#1、传统BIO模型" class="headerlink" title="1、传统BIO模型"></a>1、传统BIO模型</h4><p>传统BIO是一种同步的阻塞IO，IO在进行读写时，该线程将被阻塞，线程无法进行其它操作。<br> IO流在读取时，会阻塞。直到发生以下情况：1、有数据可以读取。2、数据读取完成。3、发生异常</p>
+<h4 id="2、伪异步IO模型"><a href="#2、伪异步IO模型" class="headerlink" title="2、伪异步IO模型"></a>2、伪异步IO模型</h4><p>以传统BIO模型为基础，通过线程池的方式维护所有的IO线程，实现相对高效的线程开销及管理。</p>
+<h4 id="3、NIO模型"><a href="#3、NIO模型" class="headerlink" title="3、NIO模型"></a>3、NIO模型</h4><p>NIO（JDK1.4）模型是一种同步非阻塞IO，主要有三大核心部分：Channel(通道)，Buffer(缓冲区), Selector（多路复用器）。传统IO基于字节流和字符流进行操作，而NIO基于Channel和Buffer(缓冲区)进行操作，数据总是从通道读取到缓冲区中，或者从缓冲区写入到通道中。Selector(多路复用器)用于监听多个通道的事件（比如：连接打开，数据到达）。因此，单个线程可以监听多个数据通道。<br> NIO和传统IO（一下简称IO）之间第一个最大的区别是，IO是面向流的，NIO是面向缓冲区的。 Java IO面向流意味着每次从流中读一个或多个字节，直至读取所有字节，它们没有被缓存在任何地方。此外，它不能前后移动流中的数据。如果需要前后移动从流中读取的数据，需要先将它缓存到一个缓冲区。NIO的缓冲导向方法略有不同。数据读取到一个它稍后处理的缓冲区，需要时可在缓冲区中前后移动。这就增加了处理过程中的灵活性。但是，还需要检查是否该缓冲区中包含所有您需要处理的数据。而且，需确保当更多的数据读入缓冲区时，不要覆盖缓冲区里尚未处理的数据。<br> IO的各种流是阻塞的。这意味着，当一个线程调用read() 或 write()时，该线程被阻塞，直到有一些数据被读取，或数据完全写入。该线程在此期间不能再干任何事情了。 NIO的非阻塞模式，使一个线程从某通道发送请求读取数据，但是它仅能得到目前可用的数据，如果目前没有数据可用时，就什么都不会获取。而不是保持线程阻塞，所以直至数据变的可以读取之前，该线程可以继续做其他的事情。 非阻塞写也是如此。一个线程请求写入一些数据到某通道，但不需要等待它完全写入，这个线程同时可以去做别的事情。 线程通常将非阻塞IO的空闲时间用于在其它通道上执行IO操作，所以一个单独的线程现在可以管理多个输入和输出通道（channel）。</p>
+<h4 id="NIO优点："><a href="#NIO优点：" class="headerlink" title="NIO优点："></a>NIO优点：</h4><ol>
+<li>通过Channel注册到Selector上的状态来实现一种客户端与服务端的通信。</li>
+<li>Channel中数据的读取是通过Buffer , 一种非阻塞的读取方式。</li>
+<li>Selector 多路复用器  单线程模型，  线程的资源开销相对比较小。</li>
+</ol>
+<h4 id="Channel-通道"><a href="#Channel-通道" class="headerlink" title="Channel(通道)"></a>Channel(通道)</h4><p>传统IO操作对read()或write()方法的调用，可能会因为没有数据可读&#x2F;可写而阻塞，直到有数据响应。也就是说读写数据的IO调用，可能会无限期的阻塞等待，效率依赖网络传输的速度。最重要的是在调用一个方法前，无法知道是否会被阻塞。</p>
+<p>NIO的Channel抽象了一个重要特征就是可以通过配置它的阻塞行为，来实现非阻塞式的通道。</p>
+<p>Channel是一个双向通道，与传统IO操作只允许单向的读写不同的是，NIO的Channel允许在一个通道上进行读和写的操作。</p>
+<p>FileChannel:文件</p>
+<p>SocketChannel:</p>
+<p>ServerSocketChannel:</p>
+<p>DatagramChannel: UDP</p>
+<h4 id="Buffer-缓冲区"><a href="#Buffer-缓冲区" class="headerlink" title="Buffer(缓冲区)"></a>Buffer(缓冲区)</h4><p>Bufer顾名思义，它是一个缓冲区，实际上是一个容器，一个连续数组。Channel提供从文件、网络读取数据的渠道，但是读写的数据都必须经过Buffer。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/13449209-300fd48a7251c327.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/654/format/webp" alt="img"></p>
+<p>Buffer(缓冲区)</p>
+<p>Buffer缓冲区本质上是一块可以写入数据，然后可以从中读取数据的内存。这块内存被包装成NIO Buffer对象，并提供了一组方法，用来方便的访问该模块内存。为了理解Buffer的工作原理，需要熟悉它的三个属性：capacity、position和limit。</p>
+<p>position和limit的含义取决于Buffer处在读模式还是写模式。不管Buffer处在什么模式，capacity的含义总是一样的。见下图：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/13449209-d261cbcb9b9ed88f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/506/format/webp" alt="img"></p>
+<p>capacity、position和limit</p>
+<ul>
+<li>capacity：作为一个内存块，Buffer有固定的大小值，也叫作“capacity”，只能往其中写入capacity个byte、long、char等类型。一旦Buffer满了，需要将其清空（通过读数据或者清楚数据）才能继续写数据。</li>
+<li>position：当你写数据到Buffer中时，position表示当前的位置。出事的position值为0，当写入一个字节数据到Buffer中后，position会向前移动到下一个可插入数据的Buffer单元。position最大可为capacity-1。当读取数据时，也是从某个特定位置读，讲Buffer从写模式切换到读模式，position会被重置为0。当从Buffer的position处读取一个字节数据后，position向前移动到下一个可读的位置。</li>
+<li>limit：在写模式下，Buffer的limit表示你最多能往Buffer里写多少数据。 写模式下，limit等于Buffer的capacity。当切换Buffer到读模式时， limit表示你最多能读到多少数据。因此，当切换Buffer到读模式时，limit会被设置成写模式下的position值。换句话说，你能读到之前写入的所有数据（limit被设置成已写数据的数量，这个值在写模式下就是position）</li>
+</ul>
+<h4 id="Buffer的分配："><a href="#Buffer的分配：" class="headerlink" title="Buffer的分配："></a>Buffer的分配：</h4><p>对Buffer对象的操作必须首先进行分配，Buffer提供一个allocate(int capacity)方法分配一个指定字节大小的对象。<br> 向Buffer中写数据：写数据到Buffer中有两种方式：<br> 1.从channel写到Buffer</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> bytes = channel.<span class="built_in">read</span>(buf); <span class="comment">//将channel中的数据读取到buf中</span></span><br></pre></td></tr></table></figure>
+
+<p>2.通过Buffer的put()方法写到Buffer</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">buf.put(<span class="built_in">byte</span>); <span class="comment">//将数据通过put()方法写入到buf中</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>flip()方法：将Buffer从写模式切换到读模式，调用flip()方法会将position设置为0，并将limit设置为之前的position的值。<br> 从Buffer中读数据：从Buffer中读数据有两种方式：<br> 1.从Buffer读取数据到Channel</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> bytes = channel.<span class="built_in">write</span>(buf); <span class="comment">//将buf中的数据读取到channel中</span></span><br></pre></td></tr></table></figure>
+
+<p>2.通过Buffer的get()方法读取数据</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">byte</span> bt = buf.<span class="keyword">get</span>(); <span class="comment">//从buf中读取一个byte</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>rewind()方法：Buffer.rewind()方法将position设置为0，使得可以重读Buffer中的所有数据，limit保持不变。</li>
+<li>clear()与compact()方法：一旦读完Buffer中的数据，需要让Buffer准备好再次被写入，可以通过clear()或compact()方法完成。如果调用的是clear()方法，position将被设置为0，limit设置为capacity的值。但是Buffer并未被清空，只是通过这些标记告诉我们可以从哪里开始往Buffer中写入多少数据。如果Buffer中还有一些未读的数据，调用clear()方法将被”遗忘 “。compact()方法将所有未读的数据拷贝到Buffer起始处，然后将position设置到最后一个未读元素的后面，limit属性依然设置为capacity。可以使得Buffer中的未读数据还可以在后续中被使用。</li>
+<li>mark()与reset()方法：通过调用Buffer.mark()方法可以标记一个特定的position，之后可以通过调用Buffer.reset()恢复到这个position上。</li>
+</ul>
+<h4 id="Selector-多路复用器"><a href="#Selector-多路复用器" class="headerlink" title="Selector(多路复用器)"></a>Selector(多路复用器)</h4><p>Selector与Channel是相互配合使用的，将Channel注册在Selector上之后，才可以正确的使用Selector，但此时Channel必须为非阻塞模式。Selector可以监听Channel的四种状态（Connect、Accept、Read、Write），当监听到某一Channel的某个状态时，才允许对Channel进行相应的操作。</p>
+<ul>
+<li>Connect：某一个客户端连接成功后</li>
+<li>Accept：准备好进行连接</li>
+<li>Read:可读</li>
+<li>Write:可写</li>
+</ul>
+<p>作者：林亚希<br>链接：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/5bb812ca5f8e">https://www.jianshu.com/p/5bb812ca5f8e</a><br>来源：简书<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ajiehome.online/2023/06/07/Java%E5%9F%BA%E7%A1%80/IO%E4%B8%8ENIO/" data-id="clilfmzrg0008bnow6mp1ek3i" data-title="IO与NIO" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Java基础/Jar后台运行" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jar%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/" class="article-date">
+  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/hexo-web/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jar%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/">Jar后台运行</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="JAR后台运行"><a href="#JAR后台运行" class="headerlink" title="JAR后台运行"></a>JAR后台运行</h1><p>保存后台运行，且把日志信息打印输出到指定的文件中</p>
+<p>jar name：jar包的名字</p>
+<p>log file：完整的日志文件路径，包括日志文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar &#x27;jar name&#x27; &gt; &#x27;log file&#x27; &amp;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ajiehome.online/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jar%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/" data-id="clilfmzri000abnowgg2l8xe5" data-title="Jar后台运行" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Java基础/JavaScript获取视频流且回显" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/JavaScript%E8%8E%B7%E5%8F%96%E8%A7%86%E9%A2%91%E6%B5%81%E4%B8%94%E5%9B%9E%E6%98%BE/" class="article-date">
+  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/hexo-web/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/JavaScript%E8%8E%B7%E5%8F%96%E8%A7%86%E9%A2%91%E6%B5%81%E4%B8%94%E5%9B%9E%E6%98%BE/">JavaScript获取视频流且回显</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="JavaScript获取视频流且回显"><a href="#JavaScript获取视频流且回显" class="headerlink" title="JavaScript获取视频流且回显"></a>JavaScript获取视频流且回显</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line">		<span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">video</span> <span class="attr">id</span>=<span class="string">&quot;video&quot;</span> <span class="attr">width</span>=<span class="string">&quot;640&quot;</span> <span class="attr">height</span>=<span class="string">&quot;480&quot;</span> <span class="attr">autoplay</span>=<span class="string">&quot;autoplay&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;snap&quot;</span>&gt;</span>截取图像<span class="tag">&lt;/<span class="name">button</span>&gt;</span><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;start&quot;</span>&gt;</span>开始录制<span class="tag">&lt;/<span class="name">button</span>&gt;</span><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;stop&quot;</span>&gt;</span>停止录制<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">&quot;canvas&quot;</span> <span class="attr">width</span>=<span class="string">&quot;640&quot;</span> <span class="attr">height</span>=<span class="string">&quot;480&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">		<span class="keyword">let</span> videoView = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;video&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">		<span class="keyword">let</span> buttonView = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;snap&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">		<span class="keyword">let</span> startButton = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;start&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">		<span class="keyword">let</span> stopButton = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;stop&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">		<span class="keyword">let</span> canvasView = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;canvas&quot;</span>);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">		navigator.<span class="property">mediaDevices</span>.<span class="title function_">getDisplayMedia</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">			<span class="attr">video</span>: &#123;</span></span><br><span class="line"><span class="language-javascript">				<span class="attr">width</span>: <span class="number">640</span>,</span></span><br><span class="line"><span class="language-javascript">				<span class="attr">height</span>: <span class="number">480</span></span></span><br><span class="line"><span class="language-javascript">			&#125;,</span></span><br><span class="line"><span class="language-javascript">			<span class="attr">audio</span>: <span class="literal">true</span></span></span><br><span class="line"><span class="language-javascript">		&#125;).<span class="title function_">then</span>(<span class="function"><span class="params">stream</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">			<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;摄像头打开成功！！！&quot;</span>, stream);</span></span><br><span class="line"><span class="language-javascript">			<span class="comment">//以ID为基准,video控件的ID是什么此处的video就是什么</span></span></span><br><span class="line"><span class="language-javascript">			video.<span class="property">srcObject</span> = stream;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">			<span class="comment">// 创建下载对象</span></span></span><br><span class="line"><span class="language-javascript">			<span class="keyword">let</span> mediaRecorder = <span class="keyword">new</span> <span class="title class_">MediaRecorder</span>(stream, &#123;</span></span><br><span class="line"><span class="language-javascript">				<span class="attr">audioBitsPerSecond</span>: <span class="number">128000</span>, <span class="comment">// 音频码率</span></span></span><br><span class="line"><span class="language-javascript">				<span class="attr">videoBitsPerSecond</span>: <span class="number">100000</span>, <span class="comment">// 视频码率</span></span></span><br><span class="line"><span class="language-javascript">				<span class="attr">mimeType</span>: <span class="string">&#x27;video/webm;codecs=h264&#x27;</span> <span class="comment">// 编码格式</span></span></span><br><span class="line"><span class="language-javascript">			&#125;);</span></span><br><span class="line"><span class="language-javascript">			startButton.<span class="property">onclick</span> = (<span class="function"><span class="params">e</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">				<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;触发下载按钮！！！&quot;</span>, e)</span></span><br><span class="line"><span class="language-javascript">				mediaRecorder.<span class="title function_">start</span>(<span class="number">5000</span>);</span></span><br><span class="line"><span class="language-javascript">			&#125;);</span></span><br><span class="line"><span class="language-javascript">			stopButton.<span class="property">onclick</span> = (<span class="function"><span class="params">e</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">				<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;触发结束按钮！！！&quot;</span>, e)</span></span><br><span class="line"><span class="language-javascript">				mediaRecorder.<span class="title function_">stop</span>();</span></span><br><span class="line"><span class="language-javascript">			&#125;);</span></span><br><span class="line"><span class="language-javascript">			mediaRecorder.<span class="property">ondataavailable</span> = (<span class="function"><span class="params">e</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">				<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;开始下载&quot;</span>)</span></span><br><span class="line"><span class="language-javascript">			    <span class="comment">// 下载视频</span></span></span><br><span class="line"><span class="language-javascript">			    <span class="keyword">var</span> blob = <span class="keyword">new</span> <span class="title class_">Blob</span>([e.<span class="property">data</span>], &#123; <span class="string">&#x27;type&#x27;</span> : <span class="string">&#x27;video/mp4&#x27;</span> &#125;)</span></span><br><span class="line"><span class="language-javascript">			    <span class="keyword">let</span> a = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;a&#x27;</span>)</span></span><br><span class="line"><span class="language-javascript">			    a.<span class="property">href</span> = <span class="variable constant_">URL</span>.<span class="title function_">createObjectURL</span>(blob)</span></span><br><span class="line"><span class="language-javascript">			    a.<span class="property">download</span> = <span class="string">`test.mp4`</span></span></span><br><span class="line"><span class="language-javascript">			    a.<span class="title function_">click</span>()</span></span><br><span class="line"><span class="language-javascript">			&#125;);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">			<span class="comment">//监听流录入失败</span></span></span><br><span class="line"><span class="language-javascript">			video.<span class="property">onerror</span> = (<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">				<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;加载错误！！！&quot;</span>, err);</span></span><br><span class="line"><span class="language-javascript">			&#125;);</span></span><br><span class="line"><span class="language-javascript">			<span class="comment">//监听流录入成功</span></span></span><br><span class="line"><span class="language-javascript">			video.<span class="property">onloadeddata</span> = (<span class="function"><span class="params">e</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">				<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;加载成功！！！&quot;</span>, e);</span></span><br><span class="line"><span class="language-javascript">			&#125;);</span></span><br><span class="line"><span class="language-javascript">		&#125;).<span class="title function_">catch</span>(<span class="function"><span class="params">stream</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">			<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;摄像头打开失败！！！&quot;</span>, stream);</span></span><br><span class="line"><span class="language-javascript">		&#125;);</span></span><br><span class="line"><span class="language-javascript">		<span class="comment">//给button按钮设置一个点击事件监听</span></span></span><br><span class="line"><span class="language-javascript">		buttonView.<span class="property">onclick</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">			<span class="comment">//获取画布的2d上下文，然后把视频内的一帧绘制到画布上</span></span></span><br><span class="line"><span class="language-javascript">			canvasView.<span class="title function_">getContext</span>(<span class="string">&quot;2d&quot;</span>).<span class="title function_">drawImage</span>(videoView, <span class="number">0</span>, <span class="number">0</span>, <span class="number">640</span>, <span class="number">480</span>)</span></span><br><span class="line"><span class="language-javascript">		&#125;</span></span><br><span class="line"><span class="language-javascript">	</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ajiehome.online/2023/06/07/Java%E5%9F%BA%E7%A1%80/JavaScript%E8%8E%B7%E5%8F%96%E8%A7%86%E9%A2%91%E6%B5%81%E4%B8%94%E5%9B%9E%E6%98%BE/" data-id="clilfmzrk000dbnow7h7b6n7n" data-title="JavaScript获取视频流且回显" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Java基础/Java反射对象内容" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E5%8F%8D%E5%B0%84%E5%AF%B9%E8%B1%A1%E5%86%85%E5%AE%B9/" class="article-date">
+  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/hexo-web/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E5%8F%8D%E5%B0%84%E5%AF%B9%E8%B1%A1%E5%86%85%E5%AE%B9/">Java反射对象内容</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>调用方式</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">MonthlyCardOrderParam</span> <span class="variable">param</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MonthlyCardOrderParam</span>();</span><br><span class="line">        param.setRefundStatus(<span class="number">1</span>);</span><br><span class="line">        notNullCheck(param, NotNull.class, <span class="string">&quot;message&quot;</span>);</span><br><span class="line"></span><br><span class="line">        notNullCheck(param, NotNull.class, <span class="keyword">new</span> <span class="title class_">INotNullParamCheck</span>&lt;NotNull&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">check</span><span class="params">(String attributeName, Object attributeValue, NotNull annotation)</span> &#123;</span><br><span class="line">                System.out.println(attributeName+<span class="string">&quot;[&quot;</span>+attributeValue+<span class="string">&quot;] -&gt;&quot;</span>+annotation.message());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>方法一</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 判定某个对象的属性值是否为空，通过注解来判定</span></span><br><span class="line"><span class="comment">     * 主要用在非 Controller 上接受参数的时候</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> param 所要判定的对象</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> annotationClass 所要判定的注解</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> func 所执行注解方法的名称</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &lt;E&gt; 判定对象泛型</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &lt;T&gt; 注解方法泛型 Annotation 的实例</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IllegalAccessException 获取字段的异常</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> NoSuchMethodException 找不到方法异常</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> InvocationTargetException 反射执行方法异常</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;E,T <span class="keyword">extends</span> <span class="title class_">Annotation</span>&gt; <span class="keyword">void</span> <span class="title function_">notNullCheck</span> <span class="params">(E param, Class&lt;T&gt; annotationClass, String func)</span></span><br><span class="line">            <span class="keyword">throws</span> IllegalAccessException, NoSuchMethodException, InvocationTargetException &#123;</span><br><span class="line">        <span class="comment">// 获取 Field 对象：也就是对象的所有属性对象</span></span><br><span class="line">        Field[] fields = param.getClass().getDeclaredFields();</span><br><span class="line">        <span class="keyword">for</span> (Field field : fields) &#123;</span><br><span class="line">            <span class="comment">// 设置 private 属性可读</span></span><br><span class="line">            field.setAccessible(<span class="literal">true</span>);</span><br><span class="line">            <span class="comment">// 获取当前属性上的某个注解，并且做空值判断</span></span><br><span class="line">            <span class="type">T</span> <span class="variable">annotation</span> <span class="operator">=</span> field.getAnnotation(annotationClass);</span><br><span class="line">            <span class="keyword">if</span> (annotation!=<span class="literal">null</span>)&#123;</span><br><span class="line">                <span class="comment">// 获取当前属性的对应值</span></span><br><span class="line">                <span class="keyword">if</span> (field.get(param) == <span class="literal">null</span>)&#123;</span><br><span class="line">                    <span class="keyword">if</span> (func!=<span class="literal">null</span>)&#123;</span><br><span class="line">                        System.out.println(annotationClass.getMethod(func).invoke(annotation));</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>方法二</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 校验回调接口</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &lt;T&gt;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">interface</span> <span class="title class_">INotNullParamCheck</span>&lt;T&gt;&#123;</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 校验回调</span></span><br><span class="line"><span class="comment">         *</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@param</span> attributeName 属性名称</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@param</span> attributeValue 参数</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@param</span> annotation 注解对象</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="keyword">void</span> <span class="title function_">check</span><span class="params">(String attributeName,Object attributeValue,T annotation)</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 为空校验</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> param 校验对象</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> annotationClass 查询的接口 Class</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> notNullParamCheck 校验回调接口</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &lt;E&gt; 参数对象泛型</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &lt;T&gt; 查询接口泛型</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IllegalAccessException 找不到属性异常</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;E, T <span class="keyword">extends</span> <span class="title class_">Annotation</span>&gt; <span class="keyword">void</span> <span class="title function_">notNullCheck</span><span class="params">(E param, Class&lt;T&gt; annotationClass,INotNullParamCheck&lt;T&gt; notNullParamCheck)</span></span><br><span class="line">            <span class="keyword">throws</span> IllegalAccessException &#123;</span><br><span class="line">        Field[] fields = param.getClass().getDeclaredFields();</span><br><span class="line">        <span class="keyword">for</span> (Field field : fields) &#123;</span><br><span class="line">            field.setAccessible(<span class="literal">true</span>);</span><br><span class="line">            <span class="type">T</span> <span class="variable">annotation</span> <span class="operator">=</span> field.getAnnotation(annotationClass);</span><br><span class="line">            <span class="type">Object</span> <span class="variable">item</span> <span class="operator">=</span> field.get(param);</span><br><span class="line">            <span class="keyword">if</span> (annotation!=<span class="literal">null</span>) &#123;</span><br><span class="line">                System.out.println(item);</span><br><span class="line">                notNullParamCheck.check(field.getName(),item,annotation);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ajiehome.online/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E5%8F%8D%E5%B0%84%E5%AF%B9%E8%B1%A1%E5%86%85%E5%AE%B9/" data-id="clilfmzrm000fbnow7dl17t4v" data-title="Java反射对象内容" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Java基础/Java动态代理和反射实现字段名栈深寻值" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E5%92%8C%E5%8F%8D%E5%B0%84%E5%AE%9E%E7%8E%B0%E5%AD%97%E6%AE%B5%E5%90%8D%E6%A0%88%E6%B7%B1%E5%AF%BB%E5%80%BC/" class="article-date">
+  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/hexo-web/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E5%92%8C%E5%8F%8D%E5%B0%84%E5%AE%9E%E7%8E%B0%E5%AD%97%E6%AE%B5%E5%90%8D%E6%A0%88%E6%B7%B1%E5%AF%BB%E5%80%BC/">Java动态代理和反射实现字段名栈深寻值</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Java-动态代理与反射实现属性名称栈深寻值"><a href="#Java-动态代理与反射实现属性名称栈深寻值" class="headerlink" title="Java 动态代理与反射实现属性名称栈深寻值"></a>Java 动态代理与反射实现属性名称栈深寻值</h1><p>原因：对方法做动态代理，并且动态代理依赖方法形参的某些属性值，而属性值可能是对象的属性的属性，形成一个栈深寻找</p>
+<p>思路：</p>
+<ol>
+<li>使用Map对所有的形参进行名称和形参对象的映射</li>
+<li>把所指定的属性字符串按照指定规则切割载入队列</li>
+<li>利用队列出栈的特性，对第一个参数名称做map的 key value 值匹配，找到对应的参数对象</li>
+<li>对找到的参数对象做反射解析，利用递归做栈深的属性匹配和值查找</li>
+<li>在队列没有匹配字符串的时候，所拿到的值就是我们最终需要的值，直接强转为字符串类型</li>
+</ol>
+<p>代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 参数对象</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line">    <span class="keyword">private</span> String phone;</span><br><span class="line">    <span class="keyword">private</span> String birthday;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> User user;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">User</span><span class="params">(String username, String phone, User user)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.username = username;</span><br><span class="line">        <span class="built_in">this</span>.phone = phone;</span><br><span class="line">        <span class="built_in">this</span>.user = user;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">// 由于JDK的Proxy代理只能代理接口，所以需要创建一个接口</span></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">Ts</span> &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">a</span><span class="params">(User user)</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 执行信息体</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Test</span> <span class="keyword">implements</span> <span class="title class_">Ts</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">a</span><span class="params">(User user)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;主要信息执行&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 执行代码</span></span><br><span class="line"><span class="type">Test</span> <span class="variable">test</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Test</span>();</span><br><span class="line">HashMap&lt;String, Object&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;(<span class="number">10</span>);</span><br><span class="line">LinkedBlockingQueue&lt;String&gt; queue = <span class="keyword">new</span> <span class="title class_">LinkedBlockingQueue</span>&lt;&gt;(Arrays.asList(<span class="string">&quot;user.user.username&quot;</span>.split(<span class="string">&quot;\\.&quot;</span>)));</span><br><span class="line"></span><br><span class="line"><span class="type">Ts</span> <span class="variable">ts</span> <span class="operator">=</span> (Ts) Proxy.newProxyInstance(Thread.currentThread().getContextClassLoader(),</span><br><span class="line">            Test.class.getInterfaces(), (Object proxy, Method method, Object[] args1) -&gt; &#123;</span><br><span class="line">                <span class="comment">// 初始化map</span></span><br><span class="line">                Parameter[] parameters = method.getParameters();</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; parameters.length; i++) &#123;</span><br><span class="line">                    map.put(parameters[i].getName(), args1[i]);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 匹配参数对象</span></span><br><span class="line">                <span class="type">Object</span> <span class="variable">o</span> <span class="operator">=</span> map.get(queue.poll());</span><br><span class="line">                <span class="comment">// 递归寻值</span></span><br><span class="line">                <span class="keyword">while</span> (queue.size() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                    o = diGui(queue.poll(), o);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="type">String</span> <span class="variable">result</span> <span class="operator">=</span> (String) o;</span><br><span class="line">                System.out.println(<span class="string">&quot;lock&quot;</span> + result);</span><br><span class="line">                <span class="type">Object</span> <span class="variable">invoke</span> <span class="operator">=</span> method.invoke(test, args1);</span><br><span class="line">                System.out.println(<span class="string">&quot;unlock&quot;</span> + result);</span><br><span class="line">                map.clear();</span><br><span class="line">                queue.clear();</span><br><span class="line">                <span class="keyword">return</span> invoke;</span><br><span class="line">            &#125;);</span><br><span class="line">    ts.a(<span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">&quot;huang&quot;</span>, <span class="string">&quot;153&quot;</span>, <span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">&quot;Q202111222256489&quot;</span>, <span class="string">&quot;158&quot;</span>)));</span><br><span class="line">    </span><br><span class="line"><span class="comment">// 递归寻值</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> Object <span class="title function_">diGui</span><span class="params">(String fieldName, Object o)</span> <span class="keyword">throws</span> NoSuchFieldException, IllegalAccessException &#123;</span><br><span class="line">    <span class="type">Field</span> <span class="variable">field</span> <span class="operator">=</span> o.getClass().getDeclaredField(fieldName);</span><br><span class="line">    field.setAccessible(<span class="literal">true</span>);</span><br><span class="line">    <span class="keyword">return</span> field.get(o);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ajiehome.online/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E5%92%8C%E5%8F%8D%E5%B0%84%E5%AE%9E%E7%8E%B0%E5%AD%97%E6%AE%B5%E5%90%8D%E6%A0%88%E6%B7%B1%E5%AF%BB%E5%80%BC/" data-id="clilfmzro000jbnow8j8m2knv" data-title="Java动态代理和反射实现字段名栈深寻值" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Java基础/Java反射根据方法名获取参数名" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E5%8F%8D%E5%B0%84%E6%A0%B9%E6%8D%AE%E6%96%B9%E6%B3%95%E5%90%8D%E8%8E%B7%E5%8F%96%E5%8F%82%E6%95%B0%E5%90%8D/" class="article-date">
+  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/hexo-web/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E5%8F%8D%E5%B0%84%E6%A0%B9%E6%8D%AE%E6%96%B9%E6%B3%95%E5%90%8D%E8%8E%B7%E5%8F%96%E5%8F%82%E6%95%B0%E5%90%8D/">Java反射根据方法名获取参数名</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Java-反射-根据方法名获取参数名"><a href="#Java-反射-根据方法名获取参数名" class="headerlink" title="Java 反射 根据方法名获取参数名"></a>Java 反射 根据方法名获取参数名</h1><p>首先实现一个可序列化的Function集成接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">CustomFunction</span>&lt;T, R&gt; <span class="keyword">extends</span> <span class="title class_">Function</span>&lt;T, R&gt;, Serializable &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>再构建一个Student类，作为本次获取的测试Entity</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Student</span> <span class="keyword">implements</span> <span class="title class_">Serializable</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">long</span> <span class="variable">serialVersionUID</span> <span class="operator">=</span> -<span class="number">5681957118855943196L</span>;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">    <span class="keyword">private</span> String studentName;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Student</span><span class="params">(Integer age, String studentName)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">        <span class="built_in">this</span>.studentName = studentName;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setAge</span><span class="params">(Integer age)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setStudentName</span><span class="params">(String studentName)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.studentName = studentName;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> Integer <span class="title function_">getAge</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getStudentName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> studentName;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用反射获取当前方法的名称，然后切割出对应的属性名称，就是获取get的方法名称，再把get的切割，把第一个字母大写</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T, R&gt; String <span class="title function_">functionToProperStr</span><span class="params">(CustomFunction&lt;T, R&gt; function)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">    <span class="type">Method</span> <span class="variable">writeReplace</span> <span class="operator">=</span> function.getClass().getDeclaredMethod(<span class="string">&quot;writeReplace&quot;</span>);</span><br><span class="line">    <span class="type">boolean</span> <span class="variable">accessible</span> <span class="operator">=</span> writeReplace.isAccessible();</span><br><span class="line">    writeReplace.setAccessible(<span class="literal">true</span>);</span><br><span class="line">    <span class="type">SerializedLambda</span> <span class="variable">serializedLambda</span> <span class="operator">=</span> (SerializedLambda) writeReplace.invoke(function);</span><br><span class="line">    writeReplace.setAccessible(accessible);</span><br><span class="line">    <span class="type">String</span> <span class="variable">fieldName</span> <span class="operator">=</span> serializedLambda.getImplMethodName().substring(<span class="string">&quot;get&quot;</span>.length());</span><br><span class="line">    fieldName = fieldName.replaceFirst(String.valueOf(fieldName.charAt(<span class="number">0</span>)), String.valueOf(fieldName.charAt(<span class="number">0</span>)).toLowerCase());</span><br><span class="line">    <span class="keyword">return</span> fieldName;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ajiehome.online/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E5%8F%8D%E5%B0%84%E6%A0%B9%E6%8D%AE%E6%96%B9%E6%B3%95%E5%90%8D%E8%8E%B7%E5%8F%96%E5%8F%82%E6%95%B0%E5%90%8D/" data-id="clilfmzrq000lbnowcxehb548" data-title="Java反射根据方法名获取参数名" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Java基础/Java的ArrayList" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E7%9A%84ArrayList/" class="article-date">
+  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/hexo-web/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E7%9A%84ArrayList/">Java的ArrayList</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Collection中的List中的ArrayList"><a href="#Collection中的List中的ArrayList" class="headerlink" title="Collection中的List中的ArrayList"></a>Collection中的List中的ArrayList</h1><p><code>DEFAULT_CAPACITY = 10;</code>默认大小</p>
+<p>ArrayList的初始化操作为，如果你没有传入参数就是赋予一个默认的Object数组对象，然后在添加第一个元素的时候进行扩容，如果我们传入了创建大小的参数，那么会做大小判定，如果为0就赋予一个空的对象，也是一个Object数组，还有如果参数是Collection对象等等情况。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">grow</span><span class="params">(<span class="type">int</span> minCapacity)</span> &#123;</span><br><span class="line">        <span class="comment">// overflow-conscious code</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">oldCapacity</span> <span class="operator">=</span> elementData.length;</span><br><span class="line">        <span class="type">int</span> <span class="variable">newCapacity</span> <span class="operator">=</span> oldCapacity + (oldCapacity &gt;&gt; <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span> (newCapacity - minCapacity &lt; <span class="number">0</span>)</span><br><span class="line">            newCapacity = minCapacity;</span><br><span class="line">        <span class="keyword">if</span> (newCapacity - MAX_ARRAY_SIZE &gt; <span class="number">0</span>)</span><br><span class="line">            newCapacity = hugeCapacity(minCapacity);</span><br><span class="line">        <span class="comment">// minCapacity is usually close to size, so this is a win:</span></span><br><span class="line">        elementData = Arrays.copyOf(elementData, newCapacity);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>在这里有一行重要的代码即使<code>int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</code>这里得到的新的容量大小为原大小的1.5倍，是因为使用了向右唯一了一个，相当于除以了2，也就是加上了0.5倍的大小</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ajiehome.online/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E7%9A%84ArrayList/" data-id="clilfmzrr000pbnoweckg5qjl" data-title="Java的ArrayList" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -175,6 +636,11 @@
 
   
 
+
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/hexo-web/page/2/">2</a><a class="page-number" href="/hexo-web/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/hexo-web/page/9/">9</a><a class="extend next" rel="next" href="/hexo-web/page/2/">下一页 &raquo;</a>
+  </nav>
 
 </section>
         
@@ -184,7 +650,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/%E4%BD%A0%E5%A5%BD/">你好</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/C-%E5%9F%BA%E7%A1%80/">C++基础</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/">前端杂烩</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">开发工具</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/">开源框架</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/%E7%90%86%E8%AE%BA%E4%BD%93%E7%B3%BB/">理论体系</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/">脚本语言</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/%E8%99%9A%E6%8B%9F%E5%AE%B9%E5%99%A8/">虚拟容器</a></li></ul>
     </div>
   </div>
 
@@ -212,11 +678,23 @@
       <ul>
         
           <li>
-            <a href="/hexo-web/2023/06/07/hello-world/">Hello World</a>
+            <a href="/hexo-web/2023/06/07/C++%E5%9F%BA%E7%A1%80/C++%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/">C++内存分配</a>
           </li>
         
           <li>
-            <a href="/hexo-web/2023/06/06/cate-test/">cate test</a>
+            <a href="/hexo-web/2023/06/07/C++%E5%9F%BA%E7%A1%80/C++%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/">C++基础语法</a>
+          </li>
+        
+          <li>
+            <a href="/hexo-web/2023/06/07/C++%E5%9F%BA%E7%A1%80/C++%E8%AF%AD%E6%B3%95_%E7%BB%A7%E6%89%BF/">C++语法_继承</a>
+          </li>
+        
+          <li>
+            <a href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/IO%E4%B8%8ENIO/">IO与NIO</a>
+          </li>
+        
+          <li>
+            <a href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jar%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/">Jar后台运行</a>
           </li>
         
       </ul>

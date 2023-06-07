@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="山有扶苏，隰有荷华">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://ajiehome.online/page/6/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="山有扶苏，隰有荷华">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="ajiehome">
+<meta property="article:tag" content="ajiehome">
+<meta property="article:tag" content="阿杰之家">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/hexo-web/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/hexo-web/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/hexo-web/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/hexo-web/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/hexo-web/" id="logo">Hexo</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/hexo-web/" id="subtitle">阿杰之家</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/hexo-web/">Home</a>
+        
+          <a class="main-nav-link" href="/hexo-web/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/hexo-web/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ajiehome.online"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-操作系统/Centos安装FTP" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/hexo-web/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85FTP/" class="article-date">
+  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/hexo-web/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/hexo-web/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85FTP/">Centos安装FTP</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Centos安装FTP-gt-简单安装"><a href="#Centos安装FTP-gt-简单安装" class="headerlink" title="Centos安装FTP-&gt;简单安装"></a>Centos安装FTP-&gt;简单安装</h1><p><strong>1、查看是否安装了FTP</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa | grep vsftpd</span><br></pre></td></tr></table></figure>
+
+<p><strong>2、没有安装-&gt;安装vsftp</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install vsftpd</span><br></pre></td></tr></table></figure>
+
+<p><strong>3、添加FTP用户并修改密码</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">useradd ftpLogin -d /home/ftpLogin</span><br><span class="line">passwd ftpLogin</span><br></pre></td></tr></table></figure>
+
+<p><strong>4、修改vsftpd.conf配置文件</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/vsftpd/vsftpd.conf</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">把允许匿名登陆改为不允许</span></span><br><span class="line">anonymous_enable=YES -&gt;  anonymous_enable=NO</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">在最后一行加上默认的加载目录-&gt;也就是FTP目录</span></span><br><span class="line">local_root=/home/ftpLogin/</span><br></pre></td></tr></table></figure>
+
+<p><strong>5、修改文件夹的用户权限</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod -R 777 /home/ftpLogin</span><br></pre></td></tr></table></figure>
+
+<p><strong>6、查看服务是否运行</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">active为绿色则是运行状态 如何非运行的话就重新启动一下服务</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">重新启动</span></span><br><span class="line">systemctl restart vsftpd</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">启动服务</span></span><br><span class="line">systemctl start vsftpd</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看服务状态</span></span><br><span class="line">systemctl status vsftpd</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">设置自动启动</span></span><br><span class="line">systemctl enable vsftpd</span><br><span class="line"></span><br><span class="line">yum -y install ftp</span><br></pre></td></tr></table></figure>
+
+<p><strong>7、安装FTP测试</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">我的已经安装过了就不再测试</span></span><br><span class="line">yum -y install ftp</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">使用anonymous登陆 可以无密码登陆</span></span><br><span class="line">ftp localhost</span><br></pre></td></tr></table></figure>
+
+<p><strong>8、关掉防火墙-&gt;放行20&amp;21端口 让其他设备也可访问（也可以设置防火墙规则，放行端口组）</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">关掉防火墙</span></span><br><span class="line">systemctl stop firewalld.service</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">为了防止防火墙自启，设置的永久关闭</span></span><br><span class="line">systemctl disable firewalld.service</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ajiehome.online/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85FTP/" data-id="clilfmzsz003fbnow9cvt8eiu" data-title="Centos安装FTP" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-操作系统/Centos和Apache" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/hexo-web/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%92%8CApache/" class="article-date">
+  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/hexo-web/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/hexo-web/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%92%8CApache/">Centos和Apache</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Centos与Apache"><a href="#Centos与Apache" class="headerlink" title="Centos与Apache"></a>Centos与Apache</h1><p>Apache<br>在Apache的安装目录，默认：<code>/etc/httpd</code>下有若干文件夹，<code>conf.d</code>文件夹是用来存储各个模块的配置文件，<code>conf.module.d</code>是用来给各个模块做映入的，也就是很多模块的引入都在这里面，<code>conf</code>文件夹主要是主配置文件的目录，<code>logs</code>文件夹打印日志的存储地，<code>moduls</code>是各个模块的位置</p>
+<h2 id="例如：httpd-conf：这个文件是apache的主配置文件，其他的conf-d和conf-module-d内的配置文件夹能够生效也是因为在这里面引入了两个文件夹下的所有文件，如-gt-在我的主配置文件里面还有一个功能，那就是多域名的配置，这个的主要作用是，针对不同域名的访问，映射到不同的访问文件夹，具体的映射由vhost-map文件配置"><a href="#例如：httpd-conf：这个文件是apache的主配置文件，其他的conf-d和conf-module-d内的配置文件夹能够生效也是因为在这里面引入了两个文件夹下的所有文件，如-gt-在我的主配置文件里面还有一个功能，那就是多域名的配置，这个的主要作用是，针对不同域名的访问，映射到不同的访问文件夹，具体的映射由vhost-map文件配置" class="headerlink" title="例如：httpd.conf：这个文件是apache的主配置文件，其他的conf.d和conf.module.d内的配置文件夹能够生效也是因为在这里面引入了两个文件夹下的所有文件，如&gt;在我的主配置文件里面还有一个功能，那就是多域名的配置，这个的主要作用是，针对不同域名的访问，映射到不同的访问文件夹，具体的映射由vhost.map文件配置"></a>例如：<code>httpd.conf</code>：这个文件是apache的主配置文件，其他的<code>conf.d</code>和<code>conf.module.d</code>内的配置文件夹能够生效也是因为在这里面引入了两个文件夹下的所有文件，如<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">引入了conf.moudles.d下的所有配置文件，也就是所有需要的模块</span></span><br><span class="line">Include conf.modules.d/*.conf</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">引入了conf.d下的所有配置文件，也就是每个模块服务需要做的详细配置</span></span><br><span class="line">IncludeOptional conf.d/*.conf</span><br></pre></td></tr></table></figure><br>&gt;在我的主配置文件里面还有一个功能，那就是多域名的配置，这个的主要作用是，针对不同域名的访问，映射到不同的访问文件夹，具体的映射由<code>vhost.map</code>文件配置<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">RewriteEngine on</span><br><span class="line">RewriteMap lowercase int:tolower</span><br><span class="line">RewriteMap vhost txt:/var/www/vhost.map</span><br><span class="line">RewriteCond $&#123;lowercase:%&#123;SERVER_NAME&#125;&#125; ^(.+)$</span><br><span class="line">RewriteCond $&#123;vhost:%1&#125; ^(/.*)$</span><br><span class="line">RewriteRule ^/(.*)$ %1/$1</span><br></pre></td></tr></table></figure></h2><blockquote>
+<p>在开启了SSL服务之后，存在一个问题，由于我的域名证书是单域名证书，所以我只能够给特定的域名SSL授权，所以我配置了一个SSL的但域名拦截重定向，这里的意思是只拦截<code>ajiehome.cn</code>和<code>www.ajiehome.cn</code>两个服务请求开头的所有服务，并且转到<code>https</code>服务</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">RewriteEngine On</span><br><span class="line">RewriteCond %&#123;SERVER_PORT&#125; 80</span><br><span class="line">RewriteCond %&#123;HTTP_HOST&#125; ^ajiehome.cn [NC,OR]</span><br><span class="line">RewriteCond %&#123;HTTP_HOST&#125; ^www.ajiehome.cn [NC]</span><br><span class="line">RewriteRule ^(.*)$ https://%&#123;HTTP_HOST&#125;/$1 [R,L]</span><br></pre></td></tr></table></figure>
+<hr>
+<blockquote>
+<p>如果用下面这个进行拦截重定向的话，会造成所有二级子域名全部转到https，甚至由于正则匹配写的不当会全部重定向到主服务之下，这里的意思是，所有不是443端口的服务请求，全部重定向https下去，<br><code>SERVER_NAME</code>：指的是服务，也就是域名部分<br><code>REQUEST_URI</code>：指的是请求的地址，也就是域名的后半部分<br><code>HTTP_HOST</code>：</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">RewriteEngine On</span><br><span class="line">RewriteCond %&#123;SERVER_PORT&#125; !^443 \$</span><br><span class="line">RewriteRule ^(.*)? \$ https://%&#123;SERVER_NAME&#125;%&#123;REQUEST_URI&#125; [L,R]</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>例如：<code>conf.module.d</code>下的<code>00-ssl.cof</code>文件</p>
+<blockquote>
+<p><code>00-ss.conf</code>文件，里面有一个<code>mod_ssl</code>模块的引用，这个文件夹里的模块主要就是给<code>ssl</code>服务使用的模块，如：</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LoadModule ssl_module modules/mod_ssl.so</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ajiehome.online/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%92%8CApache/" data-id="clilfmzsz003hbnowfg12bsdd" data-title="Centos和Apache" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-操作系统/Centos安装Java" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/hexo-web/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85Java/" class="article-date">
+  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/hexo-web/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/hexo-web/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85Java/">Centos安装Java</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Centos使用yum安装java"><a href="#Centos使用yum安装java" class="headerlink" title="Centos使用yum安装java"></a>Centos使用yum安装java</h1><p><strong>首先查询系统是否自带jdk</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa | grep java</span><br><span class="line">rpm -qa | grep jdk</span><br><span class="line">rpm -qa | grep gcj</span><br></pre></td></tr></table></figure>
+
+<p><strong>如果有就卸载对应的</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa | grep java | xargs rpm -e --nodeps</span><br></pre></td></tr></table></figure>
+
+<p><strong>列出所有可安装的rpm包</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum list java-1.8*</span><br></pre></td></tr></table></figure>
+
+<p><strong>安装java</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install java-1.8.0-openjdk* -y</span><br></pre></td></tr></table></figure>
+
+<p><strong>校验版本</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ajiehome.online/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85Java/" data-id="clilfmzt0003kbnow0a0ybs7g" data-title="Centos安装Java" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-操作系统/Centos安装MySQL" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/hexo-web/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85MySQL/" class="article-date">
+  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/hexo-web/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/hexo-web/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85MySQL/">Centos安装MySQL</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Centos安装MySQL"><a href="#Centos安装MySQL" class="headerlink" title="Centos安装MySQL"></a>Centos安装MySQL</h1><h4 id="1、首先更新yum命令"><a href="#1、首先更新yum命令" class="headerlink" title="1、首先更新yum命令"></a>1、首先更新yum命令</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum update -y</span><br></pre></td></tr></table></figure>
+
+<h4 id="3、下载MySQL的npm源"><a href="#3、下载MySQL的npm源" class="headerlink" title="3、下载MySQL的npm源"></a>3、下载MySQL的npm源</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="4、添加MySQL的npm源"><a href="#4、添加MySQL的npm源" class="headerlink" title="4、添加MySQL的npm源"></a>4、添加MySQL的npm源</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum localinstall mysql80-community-release-el7-3.noarch.rpm</span><br></pre></td></tr></table></figure>
+
+<h4 id="5、查看当前的MySQL版本"><a href="#5、查看当前的MySQL版本" class="headerlink" title="5、查看当前的MySQL版本"></a>5、查看当前的MySQL版本</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum repolist enabled | grep &quot;mysql.*-community.*&quot;</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="6、查看所有MySQL可用版本"><a href="#6、查看所有MySQL可用版本" class="headerlink" title="6、查看所有MySQL可用版本"></a>6、查看所有MySQL可用版本</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum repolist all | grep mysql</span><br></pre></td></tr></table></figure>
+
+<h4 id="7、关闭-x2F-禁用8-0的MySQL版本并且启用5-7的版本"><a href="#7、关闭-x2F-禁用8-0的MySQL版本并且启用5-7的版本" class="headerlink" title="7、关闭&#x2F;禁用8.0的MySQL版本并且启用5.7的版本"></a>7、关闭&#x2F;禁用8.0的MySQL版本并且启用5.7的版本</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum-config-manager --disable mysql80-community</span><br><span class="line"></span><br><span class="line">yum-config-manager --enable mysql57-community</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="8、再次查看当前版本（正则匹配）"><a href="#8、再次查看当前版本（正则匹配）" class="headerlink" title="8、再次查看当前版本（正则匹配）"></a>8、再次查看当前版本（正则匹配）</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum repolist enabled | grep mysql</span><br></pre></td></tr></table></figure>
+
+<h4 id="9、安装MySQL服务"><a href="#9、安装MySQL服务" class="headerlink" title="9、安装MySQL服务"></a>9、安装MySQL服务</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y mysql-community-server</span><br></pre></td></tr></table></figure>
+
+<h4 id="10、启用MySQL服务"><a href="#10、启用MySQL服务" class="headerlink" title="10、启用MySQL服务"></a>10、启用MySQL服务</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start mysqld</span><br></pre></td></tr></table></figure>
+
+<h4 id="11、查看临时默认密码，且修改密码"><a href="#11、查看临时默认密码，且修改密码" class="headerlink" title="11、查看临时默认密码，且修改密码"></a>11、查看临时默认密码，且修改密码</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cat /var/log/mysqld.log</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">由于密码策略所以只能设置较为复杂的密码</span></span><br><span class="line">alter user &#x27;root&#x27;@&#x27;localhost&#x27; identified by &#x27;ZhonHua@5000Nian&#x27;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="12、查看MySQL的密码安全策略"><a href="#12、查看MySQL的密码安全策略" class="headerlink" title="12、查看MySQL的密码安全策略"></a>12、查看MySQL的密码安全策略</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show variables like &#x27;validate_password%&#x27;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="13、修改密码杂度为最低以及把密码长度改为自己想要的"><a href="#13、修改密码杂度为最低以及把密码长度改为自己想要的" class="headerlink" title="13、修改密码杂度为最低以及把密码长度改为自己想要的"></a>13、修改密码杂度为最低以及把密码长度改为自己想要的</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set global validate_password_policy = LOW;</span><br><span class="line">set global validate_password_length = 6;</span><br></pre></td></tr></table></figure>
+
+<h4 id="14、修改密码为自己想要的"><a href="#14、修改密码为自己想要的" class="headerlink" title="14、修改密码为自己想要的"></a>14、修改密码为自己想要的</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter user &#x27;root&#x27;@&#x27;localhost&#x27; identified by &#x27;123456&#x27;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="15、允许远程登陆然后刷新"><a href="#15、允许远程登陆然后刷新" class="headerlink" title="15、允许远程登陆然后刷新"></a>15、允许远程登陆然后刷新</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">允许登录</span></span><br><span class="line">grant all on *.* to root@&#x27;%&#x27; identified by &#x27;you new password&#x27; with grant option;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">刷新</span></span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
+<p>you new password：设置的新密码</p>
+<h4 id="16、重启MySQL服务"><a href="#16、重启MySQL服务" class="headerlink" title="16、重启MySQL服务"></a>16、重启MySQL服务</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart mysqld.service</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/mysql-yum-repo-quick-guide/en/">详情参照官方文档</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ajiehome.online/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85MySQL/" data-id="clilfmzt1003lbnowfakqhlc3" data-title="Centos安装MySQL" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-操作系统/Centos安装RabbitMQ" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/hexo-web/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85RabbitMQ/" class="article-date">
+  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/hexo-web/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/hexo-web/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85RabbitMQ/">Centos安装RabbitMQ</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Centos安装RabbitMQ"><a href="#Centos安装RabbitMQ" class="headerlink" title="Centos安装RabbitMQ"></a>Centos安装RabbitMQ</h1><h2 id="安装Erlang环境"><a href="#安装Erlang环境" class="headerlink" title="安装Erlang环境"></a>安装Erlang环境</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">1、安装依赖项</span></span><br><span class="line">yum install -y epel-release</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">2、添加存储库条目</span></span><br><span class="line">wget https://packages.erlang-solutions.com/erlang-solutions-1.0-1.noarch.rpm</span><br><span class="line">rpm -Uvh erlang-solutions-1.0-1.noarch.rpm</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">3、安装</span></span><br><span class="line">yum install -y erlang</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">4、验证是否安装成功</span></span><br><span class="line">erl -version</span><br></pre></td></tr></table></figure>
+
+<h2 id="rabbitmq的命令"><a href="#rabbitmq的命令" class="headerlink" title="rabbitmq的命令"></a>rabbitmq的命令</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">开启web管理界面</span></span><br><span class="line">rabbitmq-plugins enable rabbitmq_management</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">添加用户</span></span><br><span class="line">rabbitmqctl add_user admin admin</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">设置用户对 <span class="string">&#x27;/ 的权限</span></span></span><br><span class="line">rabbitmqctl set_permissions -p &quot;/&quot; &quot;admin&quot; &quot;.*&quot; &quot;.*&quot; &quot;.*&quot;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">设置用户角色</span></span></span><br><span class="line">rabbitmqctl set_user_tags admin administrator</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ajiehome.online/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85RabbitMQ/" data-id="clilfmzt2003obnowgrus8onq" data-title="Centos安装RabbitMQ" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-操作系统/Centos定时任务Crontabs" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/hexo-web/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1Crontabs/" class="article-date">
+  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/hexo-web/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/hexo-web/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1Crontabs/">Centos定时任务Crontabs</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="crontabs-定时执行执行sh"><a href="#crontabs-定时执行执行sh" class="headerlink" title="crontabs-定时执行执行sh"></a>crontabs-定时执行执行sh</h1><p>首先安装crontabs工具</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install crontabs</span><br></pre></td></tr></table></figure>
+
+<p>安装完之后，系统默认安装了<code>crond</code>服务，<code>crond</code>默认是自启状态</p>
+<p><code>crond</code>的执行方式为每一分钟扫描本地是否有需要执行的事务</p>
+<p><code>crontab</code> 命令。该命令和 at 命令类似，也是通过 <code>/etc/cron.allow </code>和 <code>/etc/cron.deny</code> 文件来限制某些用户是否可以使用 crontab 命令的。</p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>选项</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-u user</td>
+<td>用来选择某个用户的crontab服务，如-u demo，则运行demo用户的crontab服务，一般默认root用户</td>
+</tr>
+<tr>
+<td>-e</td>
+<td>编辑某个用户的crontab文件内容，如果不指定用户，则默认编辑当前用户的crontab文件</td>
+</tr>
+<tr>
+<td>-l</td>
+<td>显示某个用户的crontab文件内容，如果不指定用户，则默认编辑当前用户的crontab文件</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>从&#x2F;var&#x2F;spool&#x2F;cron中删除某个用户的crontab文件，如果不指定用户，则默认删除当前用户的crontab文件</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>删除用户的crontab文件是给予提示</td>
+</tr>
+</tbody></table>
+<p>例如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">crontab -e</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">进入crontab文件显示当前用户的所有内容</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">如下所示</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">* * * * * /root/test.sh &gt;&gt; /root/log.log</span></span><br></pre></td></tr></table></figure>
+
+<p>crontab的定时执行任务是通过<code>*</code>来进行确认时间的</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>含义</th>
+<th>范围</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>第一个<code>*</code></td>
+<td>一小时当中的第几分钟（minute）</td>
+<td>0~59</td>
+</tr>
+<tr>
+<td>第二个<code>*</code></td>
+<td>一天当中的第几小时（hour）</td>
+<td>0~23</td>
+</tr>
+<tr>
+<td>第三个<code>*</code></td>
+<td>一个月当中的第几天（day）</td>
+<td>1~31</td>
+</tr>
+<tr>
+<td>第四个<code>*</code></td>
+<td>一年当中的第几个月（month）</td>
+<td>1~12</td>
+</tr>
+<tr>
+<td>第五个<code>*</code></td>
+<td>一周当中的星期几（week）</td>
+<td>0~7（0和7都代表星期日）</td>
+</tr>
+</tbody></table>
+<p>在时间表示中还有一些符号含有特殊含义</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>*</td>
+<td>表任何时间。比如第一个”*”就代表一小时中<br />每分钟都执行一次的意思。</td>
+</tr>
+<tr>
+<td>,</td>
+<td>代表不连续的时间。比如”0 8，12，16***”命令就代表在每<br />天的8点0分、12点0分、16点0分都执行一次命令</td>
+</tr>
+<tr>
+<td>-</td>
+<td>代表连续的时间范围。比如”0 5 ** 1-6”命令<br />代表在周一到周六的凌晨5点0分执行命令。</td>
+</tr>
+<tr>
+<td>&#x2F;</td>
+<td>代表每隔多久执行一次。比如”<em>&#x2F;10</em>***命令”<br />代表每隔 10 分钟就执行一次命令。</td>
+</tr>
+</tbody></table>
+<p>例如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">每五分钟执行一次</span></span><br><span class="line">*/5 * * * * /root/test.sh &gt;&gt; /root/log.log</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">每一分钟执行一次</span></span><br><span class="line">* * * * * /root/test.sh &gt;&gt; /root/log.log</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">没五分钟往<span class="built_in">log</span>里面写入11</span></span><br><span class="line">*/5 * * * * /bin/echo &quot;11&quot; &gt;&gt; /root/log.log</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>45 22 * * *</code></td>
+<td>在 22 点 45 分执行命令</td>
+</tr>
+<tr>
+<td><code>0 17 * * 1</code></td>
+<td>在每周一的 17 点 0 分执行命令</td>
+</tr>
+<tr>
+<td><code>0 5 1，15 * *</code></td>
+<td>在每月1日和15日的凌晨 5 点 0 分执行命令</td>
+</tr>
+<tr>
+<td><code>40 4 * * 1-5</code></td>
+<td>在每周一到周五的凌晨 4 点 40 分执行命令</td>
+</tr>
+<tr>
+<td><code>*/10 4 * * *</code></td>
+<td>在每天的凌晨 4 点，每隔 10 分钟执行一次命令</td>
+</tr>
+<tr>
+<td><code>0 0 1，15 * 1</code></td>
+<td>在每月1日和15日，每周一个0点0分都会执行命令<br />注意：星期几和几日最好不要同时出现，因为它们定义的都是天，非常容易让管理员混淆</td>
+</tr>
+</tbody></table>
+<p><em>注意</em>：每个用户都可以执行自己的crontab任务</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ajiehome.online/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1Crontabs/" data-id="clilfmzt3003pbnowebs031bw" data-title="Centos定时任务Crontabs" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-操作系统/Centos安装V2ray和Acmesh" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/hexo-web/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85V2ray%E5%92%8CAcmesh/" class="article-date">
+  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/hexo-web/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/hexo-web/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85V2ray%E5%92%8CAcmesh/">Centos安装V2ray和Acmesh</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>acme.sh作为自动签发ssl证书，为域名提供https的服务<br>v2ray作为代理使用<br>acme.sh要做到自动签发就需要在域名服务商哪授权token，用来acme.sh在验证域名所有权的时候使用，所以我们使用阿里云的平台，授权一个能够访问验证域名权限的子用户，并且创建一个Secret</p>
+<p>在CentOS中创建Secret的临时key和Secret</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export Ali_Key=&quot;LTAI5tQUtNo8zC1ZQtMxm8AK&quot;</span><br><span class="line">export Ali_Secret=&quot;7OW6o15AxHvo5TbaXoCAywudUrdfKH&quot;</span><br></pre></td></tr></table></figure>
+
+<p>安装acme.sh,会在执行该命令的用户目录下生成一个.acme.sh目录，目录为隐藏目录，可以用ls -a查看</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl  https://get.acme.sh | sh</span><br></pre></td></tr></table></figure>
+
+<p>为指定的域名请求证书</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/root/.acme.sh/acme.sh   --issue   --dns dns_ali   -d ajiehome.online  -d www.ajiehome.online</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">或</span></span><br><span class="line">/root/.acme.sh/acme.sh   --issue   --dns dns_ali   -d v.ajiehome.online</span><br></pre></td></tr></table></figure>
+
+<p>将生成的域名ssl密钥文件拷贝到指定的目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/root/.acme.sh/acme.sh --install-cert -d ajiehome.online  \</span><br><span class="line">--key-file       /etc/nginx/ssl/ajiehome.online/ajiehome.online.key  \</span><br><span class="line">--fullchain-file /etc/nginx/ssl/ajiehome.online/ajiehome.online.cert \</span><br><span class="line">--reloadcmd     &quot;service nginx force-reload&quot;</span><br></pre></td></tr></table></figure>
+<p>然后就是nginx的配置项</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">        listen  80;</span><br><span class="line">        listen [::]:80;</span><br><span class="line">        server_name ajiehome.online;</span><br><span class="line"></span><br><span class="line">        root /usr/share/nginx/ajiehome.online;</span><br><span class="line"></span><br><span class="line">        index index.html index.htm;</span><br><span class="line"></span><br><span class="line">        rewrite ^(.*)$ https://$&#123;server_name&#125;$1 permanent;</span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line">server &#123;</span><br><span class="line"></span><br><span class="line">        listen 443 ssl;</span><br><span class="line">        listen [::]:443 ssl;</span><br><span class="line">        server_name ajiehome.online;</span><br><span class="line"></span><br><span class="line">        root /usr/share/nginx/ajiehome.online;</span><br><span class="line">        index index.html inex.htm;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line"></span><br><span class="line">                proxy_pass http://127.0.0.1:8090;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        ssl_certificate /etc/nginx/ssl/ajiehome.online/ajiehome.online.cert;</span><br><span class="line">        ssl_certificate_key /etc/nginx/ssl/ajiehome.online/ajiehome.online.key;</span><br><span class="line"></span><br><span class="line">        ssl_session_timeout 1d;</span><br><span class="line">        ssl_session_cache shared:MozSSL:10m;</span><br><span class="line">        ssl_session_tickets off;</span><br><span class="line"></span><br><span class="line">        ssl_protocols         TLSv1.2 TLSv1.3;</span><br><span class="line">        ssl_ciphers           ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384;</span><br><span class="line">        ssl_prefer_server_ciphers off;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ajiehome.online/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85V2ray%E5%92%8CAcmesh/" data-id="clilfmzt5003sbnow1gwagwox" data-title="Centos安装V2ray和Acmesh" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-操作系统/Centos权限的浅解" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/hexo-web/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E6%9D%83%E9%99%90%E7%9A%84%E6%B5%85%E8%A7%A3/" class="article-date">
+  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/hexo-web/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/hexo-web/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E6%9D%83%E9%99%90%E7%9A%84%E6%B5%85%E8%A7%A3/">Centos权限的浅解</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Centos权限的浅解"><a href="#Centos权限的浅解" class="headerlink" title="Centos权限的浅解"></a>Centos权限的浅解</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chomd 777 test.sh</span><br></pre></td></tr></table></figure>
+<p><code>chomd</code>：修改文件及文件夹等的权限<br><code>777</code>：表示三个组的权限，第一个为文件所有者的权限，第二个为所属用户组的权限，第三个为其他用户的权限,7-&gt;rwx</p>
+<ul>
+<li>r-&gt;4:为读取权限</li>
+<li>w-&gt;2:为写入权限</li>
+<li>x-&gt;1:为执行权限<br><code>test.sh</code>：需要修改的目标<br>此外，在权限前面可添加-+&#x3D;等三个符号，分别表示减去权限，增加权限，唯一权限</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ajiehome.online/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E6%9D%83%E9%99%90%E7%9A%84%E6%B5%85%E8%A7%A3/" data-id="clilfmzt9003tbnowaybug88r" data-title="Centos权限的浅解" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-操作系统/Ubuntu idae 不能输入中文" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/hexo-web/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Ubuntu%20idae%20%E4%B8%8D%E8%83%BD%E8%BE%93%E5%85%A5%E4%B8%AD%E6%96%87/" class="article-date">
+  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/hexo-web/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/hexo-web/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Ubuntu%20idae%20%E4%B8%8D%E8%83%BD%E8%BE%93%E5%85%A5%E4%B8%AD%E6%96%87/">Ubuntu idae 不能输入中文</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="title-ubuntu-idae-不能输入中文date-2022-08-29-20-48-14-684updated-2022-10-13-14-45-23-084url-x2F-archives-x2F-ubuntuidae-bu-neng-shu-ru-zhong-wencategories-Ubuntu-Ideatags-Ubuntu-Idea"><a href="#title-ubuntu-idae-不能输入中文date-2022-08-29-20-48-14-684updated-2022-10-13-14-45-23-084url-x2F-archives-x2F-ubuntuidae-bu-neng-shu-ru-zhong-wencategories-Ubuntu-Ideatags-Ubuntu-Idea" class="headerlink" title="title: ubuntu idae 不能输入中文date: 2022-08-29 20:48:14.684updated: 2022-10-13 14:45:23.084url: &#x2F;archives&#x2F;ubuntuidae-bu-neng-shu-ru-zhong-wencategories:- Ubuntu- Ideatags:- Ubuntu- Idea"></a>title: ubuntu idae 不能输入中文<br>date: 2022-08-29 20:48:14.684<br>updated: 2022-10-13 14:45:23.084<br>url: &#x2F;archives&#x2F;ubuntuidae-bu-neng-shu-ru-zhong-wen<br>categories:<br>- Ubuntu<br>- Idea<br>tags:<br>- Ubuntu<br>- Idea</h2><p>解决方案<br>在<code>Edit Custom VM options</code>中配置如下参数</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">-Drecreate.x11.input.method</span>=<span class="string">true</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ajiehome.online/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Ubuntu%20idae%20%E4%B8%8D%E8%83%BD%E8%BE%93%E5%85%A5%E4%B8%AD%E6%96%87/" data-id="clilfmzta003wbnowfs25fdy0" data-title="Ubuntu idae 不能输入中文" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-操作系统/Windows11改小状态栏" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/hexo-web/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Windows11%E6%94%B9%E5%B0%8F%E7%8A%B6%E6%80%81%E6%A0%8F/" class="article-date">
+  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/hexo-web/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/hexo-web/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Windows11%E6%94%B9%E5%B0%8F%E7%8A%B6%E6%80%81%E6%A0%8F/">Windows11改小状态栏</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>在注册表如下路径</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced</span><br></pre></td></tr></table></figure>
+
+<p>新建一个<code>DWORD</code><br>名称为：<code>TaskbarSi </code><br>值为：<code>0、1、2</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ajiehome.online/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Windows11%E6%94%B9%E5%B0%8F%E7%8A%B6%E6%80%81%E6%A0%8F/" data-id="clilfmztb003xbnow0x643042" data-title="Windows11改小状态栏" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/hexo-web/page/5/">&laquo; 上一页</a><a class="page-number" href="/hexo-web/">1</a><span class="space">&hellip;</span><a class="page-number" href="/hexo-web/page/4/">4</a><a class="page-number" href="/hexo-web/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/hexo-web/page/7/">7</a><a class="page-number" href="/hexo-web/page/8/">8</a><a class="page-number" href="/hexo-web/page/9/">9</a><a class="extend next" rel="next" href="/hexo-web/page/7/">下一页 &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/C-%E5%9F%BA%E7%A1%80/">C++基础</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/">前端杂烩</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">开发工具</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/">开源框架</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/%E7%90%86%E8%AE%BA%E4%BD%93%E7%B3%BB/">理论体系</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/">脚本语言</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo-web/categories/%E8%99%9A%E6%8B%9F%E5%AE%B9%E5%99%A8/">虚拟容器</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/hexo-web/archives/2023/06/">六月 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/hexo-web/2023/06/07/C++%E5%9F%BA%E7%A1%80/C++%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/">C++内存分配</a>
+          </li>
+        
+          <li>
+            <a href="/hexo-web/2023/06/07/C++%E5%9F%BA%E7%A1%80/C++%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/">C++基础语法</a>
+          </li>
+        
+          <li>
+            <a href="/hexo-web/2023/06/07/C++%E5%9F%BA%E7%A1%80/C++%E8%AF%AD%E6%B3%95_%E7%BB%A7%E6%89%BF/">C++语法_继承</a>
+          </li>
+        
+          <li>
+            <a href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/IO%E4%B8%8ENIO/">IO与NIO</a>
+          </li>
+        
+          <li>
+            <a href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jar%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/">Jar后台运行</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 ajiehome<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/hexo-web/" class="mobile-nav-link">Home</a>
+  
+    <a href="/hexo-web/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/hexo-web/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/hexo-web/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/hexo-web/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
