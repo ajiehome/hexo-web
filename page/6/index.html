@@ -81,185 +81,6 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-操作系统/Centos和Apache" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/hexo-web/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%92%8CApache/" class="article-date">
-  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/hexo-web/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/hexo-web/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%92%8CApache/">Centos和Apache</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="Centos与Apache"><a href="#Centos与Apache" class="headerlink" title="Centos与Apache"></a>Centos与Apache</h1><p>Apache<br>在Apache的安装目录，默认：<code>/etc/httpd</code>下有若干文件夹，<code>conf.d</code>文件夹是用来存储各个模块的配置文件，<code>conf.module.d</code>是用来给各个模块做映入的，也就是很多模块的引入都在这里面，<code>conf</code>文件夹主要是主配置文件的目录，<code>logs</code>文件夹打印日志的存储地，<code>moduls</code>是各个模块的位置</p>
-<h2 id="例如：httpd-conf：这个文件是apache的主配置文件，其他的conf-d和conf-module-d内的配置文件夹能够生效也是因为在这里面引入了两个文件夹下的所有文件，如-gt-在我的主配置文件里面还有一个功能，那就是多域名的配置，这个的主要作用是，针对不同域名的访问，映射到不同的访问文件夹，具体的映射由vhost-map文件配置"><a href="#例如：httpd-conf：这个文件是apache的主配置文件，其他的conf-d和conf-module-d内的配置文件夹能够生效也是因为在这里面引入了两个文件夹下的所有文件，如-gt-在我的主配置文件里面还有一个功能，那就是多域名的配置，这个的主要作用是，针对不同域名的访问，映射到不同的访问文件夹，具体的映射由vhost-map文件配置" class="headerlink" title="例如：httpd.conf：这个文件是apache的主配置文件，其他的conf.d和conf.module.d内的配置文件夹能够生效也是因为在这里面引入了两个文件夹下的所有文件，如&gt;在我的主配置文件里面还有一个功能，那就是多域名的配置，这个的主要作用是，针对不同域名的访问，映射到不同的访问文件夹，具体的映射由vhost.map文件配置"></a>例如：<code>httpd.conf</code>：这个文件是apache的主配置文件，其他的<code>conf.d</code>和<code>conf.module.d</code>内的配置文件夹能够生效也是因为在这里面引入了两个文件夹下的所有文件，如<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">引入了conf.moudles.d下的所有配置文件，也就是所有需要的模块</span></span><br><span class="line">Include conf.modules.d/*.conf</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">引入了conf.d下的所有配置文件，也就是每个模块服务需要做的详细配置</span></span><br><span class="line">IncludeOptional conf.d/*.conf</span><br></pre></td></tr></table></figure><br>&gt;在我的主配置文件里面还有一个功能，那就是多域名的配置，这个的主要作用是，针对不同域名的访问，映射到不同的访问文件夹，具体的映射由<code>vhost.map</code>文件配置<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">RewriteEngine on</span><br><span class="line">RewriteMap lowercase int:tolower</span><br><span class="line">RewriteMap vhost txt:/var/www/vhost.map</span><br><span class="line">RewriteCond $&#123;lowercase:%&#123;SERVER_NAME&#125;&#125; ^(.+)$</span><br><span class="line">RewriteCond $&#123;vhost:%1&#125; ^(/.*)$</span><br><span class="line">RewriteRule ^/(.*)$ %1/$1</span><br></pre></td></tr></table></figure></h2><blockquote>
-<p>在开启了SSL服务之后，存在一个问题，由于我的域名证书是单域名证书，所以我只能够给特定的域名SSL授权，所以我配置了一个SSL的但域名拦截重定向，这里的意思是只拦截<code>ajiehome.cn</code>和<code>www.ajiehome.cn</code>两个服务请求开头的所有服务，并且转到<code>https</code>服务</p>
-</blockquote>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">RewriteEngine On</span><br><span class="line">RewriteCond %&#123;SERVER_PORT&#125; 80</span><br><span class="line">RewriteCond %&#123;HTTP_HOST&#125; ^ajiehome.cn [NC,OR]</span><br><span class="line">RewriteCond %&#123;HTTP_HOST&#125; ^www.ajiehome.cn [NC]</span><br><span class="line">RewriteRule ^(.*)$ https://%&#123;HTTP_HOST&#125;/$1 [R,L]</span><br></pre></td></tr></table></figure>
-<hr>
-<blockquote>
-<p>如果用下面这个进行拦截重定向的话，会造成所有二级子域名全部转到https，甚至由于正则匹配写的不当会全部重定向到主服务之下，这里的意思是，所有不是443端口的服务请求，全部重定向https下去，<br><code>SERVER_NAME</code>：指的是服务，也就是域名部分<br><code>REQUEST_URI</code>：指的是请求的地址，也就是域名的后半部分<br><code>HTTP_HOST</code>：</p>
-</blockquote>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">RewriteEngine On</span><br><span class="line">RewriteCond %&#123;SERVER_PORT&#125; !^443 \$</span><br><span class="line">RewriteRule ^(.*)? \$ https://%&#123;SERVER_NAME&#125;%&#123;REQUEST_URI&#125; [L,R]</span><br></pre></td></tr></table></figure>
-
-<hr>
-<p>例如：<code>conf.module.d</code>下的<code>00-ssl.cof</code>文件</p>
-<blockquote>
-<p><code>00-ss.conf</code>文件，里面有一个<code>mod_ssl</code>模块的引用，这个文件夹里的模块主要就是给<code>ssl</code>服务使用的模块，如：</p>
-</blockquote>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LoadModule ssl_module modules/mod_ssl.so</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ajiehome.online/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%92%8CApache/" data-id="clilg1q67003eaznaah1cc6rp" data-title="Centos和Apache" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-操作系统/Centos安装FTP" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/hexo-web/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85FTP/" class="article-date">
-  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/hexo-web/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/hexo-web/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85FTP/">Centos安装FTP</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="Centos安装FTP-gt-简单安装"><a href="#Centos安装FTP-gt-简单安装" class="headerlink" title="Centos安装FTP-&gt;简单安装"></a>Centos安装FTP-&gt;简单安装</h1><p><strong>1、查看是否安装了FTP</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa | grep vsftpd</span><br></pre></td></tr></table></figure>
-
-<p><strong>2、没有安装-&gt;安装vsftp</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install vsftpd</span><br></pre></td></tr></table></figure>
-
-<p><strong>3、添加FTP用户并修改密码</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">useradd ftpLogin -d /home/ftpLogin</span><br><span class="line">passwd ftpLogin</span><br></pre></td></tr></table></figure>
-
-<p><strong>4、修改vsftpd.conf配置文件</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/vsftpd/vsftpd.conf</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">把允许匿名登陆改为不允许</span></span><br><span class="line">anonymous_enable=YES -&gt;  anonymous_enable=NO</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">在最后一行加上默认的加载目录-&gt;也就是FTP目录</span></span><br><span class="line">local_root=/home/ftpLogin/</span><br></pre></td></tr></table></figure>
-
-<p><strong>5、修改文件夹的用户权限</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod -R 777 /home/ftpLogin</span><br></pre></td></tr></table></figure>
-
-<p><strong>6、查看服务是否运行</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">active为绿色则是运行状态 如何非运行的话就重新启动一下服务</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">重新启动</span></span><br><span class="line">systemctl restart vsftpd</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">启动服务</span></span><br><span class="line">systemctl start vsftpd</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看服务状态</span></span><br><span class="line">systemctl status vsftpd</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">设置自动启动</span></span><br><span class="line">systemctl enable vsftpd</span><br><span class="line"></span><br><span class="line">yum -y install ftp</span><br></pre></td></tr></table></figure>
-
-<p><strong>7、安装FTP测试</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">我的已经安装过了就不再测试</span></span><br><span class="line">yum -y install ftp</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">使用anonymous登陆 可以无密码登陆</span></span><br><span class="line">ftp localhost</span><br></pre></td></tr></table></figure>
-
-<p><strong>8、关掉防火墙-&gt;放行20&amp;21端口 让其他设备也可访问（也可以设置防火墙规则，放行端口组）</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">关掉防火墙</span></span><br><span class="line">systemctl stop firewalld.service</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">为了防止防火墙自启，设置的永久关闭</span></span><br><span class="line">systemctl disable firewalld.service</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ajiehome.online/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85FTP/" data-id="clilg1q69003hazna7ggu1rn9" data-title="Centos安装FTP" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-操作系统/Centos安装Java" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/hexo-web/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85Java/" class="article-date">
-  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/hexo-web/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/hexo-web/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85Java/">Centos安装Java</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="Centos使用yum安装java"><a href="#Centos使用yum安装java" class="headerlink" title="Centos使用yum安装java"></a>Centos使用yum安装java</h1><p><strong>首先查询系统是否自带jdk</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa | grep java</span><br><span class="line">rpm -qa | grep jdk</span><br><span class="line">rpm -qa | grep gcj</span><br></pre></td></tr></table></figure>
-
-<p><strong>如果有就卸载对应的</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa | grep java | xargs rpm -e --nodeps</span><br></pre></td></tr></table></figure>
-
-<p><strong>列出所有可安装的rpm包</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum list java-1.8*</span><br></pre></td></tr></table></figure>
-
-<p><strong>安装java</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install java-1.8.0-openjdk* -y</span><br></pre></td></tr></table></figure>
-
-<p><strong>校验版本</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ajiehome.online/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85Java/" data-id="clilg1q6a003jazna390kd8ag" data-title="Centos安装Java" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
     <article id="post-操作系统/Centos安装MySQL" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/hexo-web/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85MySQL/" class="article-date">
@@ -325,7 +146,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ajiehome.online/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85MySQL/" data-id="clilg1q6c003maznabepo9wyl" data-title="Centos安装MySQL" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://ajiehome.online/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85MySQL/" data-id="clilg59h8003hbpow9pv2gus9" data-title="Centos安装MySQL" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -369,7 +190,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ajiehome.online/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85RabbitMQ/" data-id="clilg1q6d003nazna90n805wd" data-title="Centos安装RabbitMQ" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://ajiehome.online/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85RabbitMQ/" data-id="clilg59h9003ibpow8s1bd5kb" data-title="Centos安装RabbitMQ" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -424,7 +245,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ajiehome.online/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85V2ray%E5%92%8CAcmesh/" data-id="clilg1q6e003qazna2l3t9so1" data-title="Centos安装V2ray和Acmesh" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://ajiehome.online/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85V2ray%E5%92%8CAcmesh/" data-id="clilg59ha003lbpowcwnp1svy" data-title="Centos安装V2ray和Acmesh" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -599,7 +420,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ajiehome.online/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1Crontabs/" data-id="clilg1q6f003razna4oonb286" data-title="Centos定时任务Crontabs" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://ajiehome.online/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1Crontabs/" data-id="clilg59hb003mbpow7tghbpsy" data-title="Centos定时任务Crontabs" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -648,7 +469,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ajiehome.online/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E6%9D%83%E9%99%90%E7%9A%84%E6%B5%85%E8%A7%A3/" data-id="clilg1q6g003uaznag55i4lza" data-title="Centos权限的浅解" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://ajiehome.online/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E6%9D%83%E9%99%90%E7%9A%84%E6%B5%85%E8%A7%A3/" data-id="clilg59hb003pbpow3e1u48ee" data-title="Centos权限的浅解" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -692,7 +513,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ajiehome.online/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Ubuntu%20idae%20%E4%B8%8D%E8%83%BD%E8%BE%93%E5%85%A5%E4%B8%AD%E6%96%87/" data-id="clilg1q6h003vazna8cbf6la5" data-title="Ubuntu idae 不能输入中文" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://ajiehome.online/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Ubuntu%20idae%20%E4%B8%8D%E8%83%BD%E8%BE%93%E5%85%A5%E4%B8%AD%E6%96%87/" data-id="clilg59hc003qbpowghmw0mzb" data-title="Ubuntu idae 不能输入中文" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -738,7 +559,217 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ajiehome.online/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Windows11%E6%94%B9%E5%B0%8F%E7%8A%B6%E6%80%81%E6%A0%8F/" data-id="clilg1q6h003yaznaggqb95gp" data-title="Windows11改小状态栏" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://ajiehome.online/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Windows11%E6%94%B9%E5%B0%8F%E7%8A%B6%E6%80%81%E6%A0%8F/" data-id="clilg59hd003tbpow8lbn9bvk" data-title="Windows11改小状态栏" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-操作系统/Windows删除BIOS内的引导选项" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/hexo-web/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Windows%E5%88%A0%E9%99%A4BIOS%E5%86%85%E7%9A%84%E5%BC%95%E5%AF%BC%E9%80%89%E9%A1%B9/" class="article-date">
+  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/hexo-web/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/hexo-web/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Windows%E5%88%A0%E9%99%A4BIOS%E5%86%85%E7%9A%84%E5%BC%95%E5%AF%BC%E9%80%89%E9%A1%B9/">Windows删除BIOS内的引导选项</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="删除BIOS内的UEFI引导选项"><a href="#删除BIOS内的UEFI引导选项" class="headerlink" title="删除BIOS内的UEFI引导选项"></a>删除BIOS内的UEFI引导选项</h1><ol>
+<li>首先使用管理员打开<code>cmd</code>面板</li>
+<li>输入<code>diskpart</code>进入工具</li>
+<li>输入<code>list disk</code>查看磁盘窗台</li>
+<li>使用<code>select disk [磁盘编号]</code>选择包含<code>UEFI</code>分区的磁盘</li>
+<li>使用<code>list partition</code>列举出所有的分区</li>
+<li>使用<code>select partition [分区编号]</code>选中<code>UTFI</code>分区</li>
+<li>使用<code>assign letter [挂载号]</code>挂载分区为某一磁盘驱动器</li>
+<li>打开文件管理器，发现有一个新的分区出现，就是<code>EFI</code>分区</li>
+<li>我们没有权限打开<code>EFI</code>分区，所以使用管理员运行记事本，使用打开的方式进入到<code>EFI</code>分区</li>
+<li>里面对应的文件夹就是不同系统的引导，删除对应即可，千万不能删除不知道的分区</li>
+<li>最后使用<code>remove letter [挂载号]</code>移除分区即可</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ajiehome.online/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Windows%E5%88%A0%E9%99%A4BIOS%E5%86%85%E7%9A%84%E5%BC%95%E5%AF%BC%E9%80%89%E9%A1%B9/" data-id="clilg59he003ubpow96faei11" data-title="Windows删除BIOS内的引导选项" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-数据库/MySQL事务隔离级别" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/hexo-web/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/" class="article-date">
+  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/hexo-web/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/hexo-web/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/">MySQL事务隔离级别</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="SQL隔离级别"><a href="#SQL隔离级别" class="headerlink" title="SQL隔离级别"></a>SQL隔离级别</h1><ol>
+<li><p>未提交读（Read Uncomminted）也叫 脏读（Dirty Reader）</p>
+<p>在事物中的修改即使没有提交，对其他事物也是可见的。事务可以读取未被提交的数据</p>
+</li>
+<li><p>提交读（Read Comminted）也叫 不可重复读（Nonrepeatable Read）</p>
+<p>一个事务开始时，只能“看到”已经提交的事物所做的修改。一个事务从开始知道提交之前，所作的任何修改对其他事务都是不可见</p>
+</li>
+<li><p>可重复读（Repeatable Read）</p>
+<p>当前事务只能读取到在当前事务开启之前，其他事务已提交的数据。就算是在该事物开启前，其他事务已开始但是并未提交的事务也是不可见的。可重复读隔离级别还是无法解决另外一个幻读（Phantom Read) 的问题</p>
+<p>幻读（Phantom Read）：指的是当某个事务在读取某个范围内的记录时，另外一个事务又在该范围内插入了新的记录，当之前的事务再次读取该范围的记录时，会产生幻行（Phantom Row）</p>
+</li>
+<li><p>可串行化（SERIALIZABLE）</p>
+<p>通过强制事务串行执行，避免了前面所说的幻读的问题。简单来说，SERIALIZABLE会再读取的每一行数据上都加锁，所有可能导致大量的超时和锁争用的问题</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>隔离级别</th>
+<th>脏读可能性</th>
+<th>不可重复读可能性</th>
+<th>幻读可能性</th>
+<th>加锁读</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>READ UNCOMMITTED 未提交读</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr>
+<td>READ COMMITTED 提交读</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr>
+<td>REPEATABLE READ 可重复读</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr>
+<td>SERIALIZABLE 可串行化</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+</tbody></table>
+<h2 id="数据库的四大特性（ACID）"><a href="#数据库的四大特性（ACID）" class="headerlink" title="数据库的四大特性（ACID）"></a>数据库的四大特性（ACID）</h2><ul>
+<li><p>原子性（Atomicity）</p>
+<p>事务内包含的所有操作要么全部成功，要么全部失败回滚；</p>
+</li>
+<li><p>一致性（Consistency）</p>
+<p>不管任何时间有少个并发的事务，系统也必须保持一致；</p>
+</li>
+<li><p>隔离性（Isolation）</p>
+<p>多个并发的事务的操作，在同一时间只能有一个事务执行（及串行的执行）；</p>
+</li>
+<li><p>持久性（Durability）</p>
+<p>事务正确执行后，事务中对数据的操作不会回滚；</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ajiehome.online/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/" data-id="clilg59hf003xbpowg6zbhjtq" data-title="MySQL事务隔离级别" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-数据库/MySQL同表多外键" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/hexo-web/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E5%90%8C%E8%A1%A8%E5%A4%9A%E5%A4%96%E9%94%AE/" class="article-date">
+  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/hexo-web/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/hexo-web/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E5%90%8C%E8%A1%A8%E5%A4%9A%E5%A4%96%E9%94%AE/">MySQL同表多外键</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="MySQL同表多外键"><a href="#MySQL同表多外键" class="headerlink" title="MySQL同表多外键"></a>MySQL同表多外键</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> database if <span class="keyword">exists</span> test;</span><br><span class="line"><span class="keyword">create</span> database if <span class="keyword">not</span> <span class="keyword">exists</span> test;</span><br><span class="line"></span><br><span class="line">use test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> if <span class="keyword">exists</span> <span class="keyword">user</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span>  if <span class="keyword">not</span> <span class="keyword">exists</span> <span class="keyword">user</span>(</span><br><span class="line">	user_id <span class="type">bigint</span>(<span class="number">18</span>) comment <span class="string">&#x27;用户ID&#x27;</span>,</span><br><span class="line">	user_name <span class="type">varchar</span>(<span class="number">128</span>) comment <span class="string">&#x27;用户名称&#x27;</span>,</span><br><span class="line">	user_sex <span class="type">int</span>(<span class="number">11</span>) comment <span class="string">&#x27;用户性别&#x27;</span>,</span><br><span class="line">	pass_word <span class="type">varchar</span>(<span class="number">128</span>) comment <span class="string">&#x27;用户密码&#x27;</span>,</span><br><span class="line">	<span class="keyword">primary</span> key (user_id)</span><br><span class="line">)engine <span class="operator">=</span> innodb <span class="keyword">default</span> charset <span class="operator">=</span> utf8;</span><br><span class="line"></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> if <span class="keyword">exists</span> user_related;</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> if <span class="keyword">not</span> <span class="keyword">exists</span> user_related(</span><br><span class="line">	related_id <span class="type">bigint</span>(<span class="number">18</span>) comment <span class="string">&#x27;关系ID&#x27;</span>,</span><br><span class="line">	from_user_id <span class="type">bigint</span>(<span class="number">18</span>) comment <span class="string">&#x27;用户ID&#x27;</span>,</span><br><span class="line">	to_user_id <span class="type">bigint</span>(<span class="number">18</span>) comment <span class="string">&#x27;用户ID&#x27;</span>,</span><br><span class="line">	<span class="keyword">primary</span> key (related_id),</span><br><span class="line">	<span class="keyword">foreign</span> key (from_user_id) <span class="keyword">references</span> <span class="keyword">user</span> (user_id),</span><br><span class="line">	<span class="keyword">foreign</span> key (to_user_id) <span class="keyword">references</span> <span class="keyword">user</span> (user_id)</span><br><span class="line">)engine <span class="operator">=</span> innodb <span class="keyword">default</span> charset <span class="operator">=</span> utf8;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">lock tables <span class="keyword">user</span> write;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> <span class="keyword">user</span>(user_id,user_name,user_sex,pass_word) <span class="keyword">values</span> (<span class="number">012345678911121314</span>,<span class="string">&#x27;用户1&#x27;</span>,<span class="number">1</span>,<span class="string">&#x27;123456&#x27;</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> <span class="keyword">user</span>(user_id,user_name,user_sex,pass_word) <span class="keyword">values</span> (<span class="number">012345678911121315</span>,<span class="string">&#x27;用户2&#x27;</span>,<span class="number">1</span>,<span class="string">&#x27;123456&#x27;</span>);</span><br><span class="line">unlock tables;</span><br><span class="line"></span><br><span class="line">lock tables user_related write;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> user_related (related_id,from_user_id,to_user_id) <span class="keyword">values</span> (<span class="number">012345678911121313</span>,<span class="number">012345678911121314</span>,<span class="number">012345678911121315</span>);</span><br><span class="line">unlock tables;</span><br></pre></td></tr></table></figure>
+
+<p>一个用户表设置多个外键，外键的名字可以不和原表一样，只要类型一致就可</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ajiehome.online/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E5%90%8C%E8%A1%A8%E5%A4%9A%E5%A4%96%E9%94%AE/" data-id="clilg59hf003ybpow01bh9l4w" data-title="MySQL同表多外键" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       

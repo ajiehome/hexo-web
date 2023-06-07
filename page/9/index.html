@@ -81,14 +81,14 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-虚拟容器/Docker的常用命令" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-Java基础/Jvm垃圾收集器" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/hexo-web/2023/06/07/%E8%99%9A%E6%8B%9F%E5%AE%B9%E5%99%A8/Docker%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="article-date">
+    <a href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jvm%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/" class="article-date">
   <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/hexo-web/categories/%E8%99%9A%E6%8B%9F%E5%AE%B9%E5%99%A8/">虚拟容器</a>
+    <a class="article-category-link" href="/hexo-web/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
   </div>
 
   </div>
@@ -99,7 +99,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/hexo-web/2023/06/07/%E8%99%9A%E6%8B%9F%E5%AE%B9%E5%99%A8/Docker%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">Docker的常用命令</a>
+      <a class="p-name article-title" href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jvm%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/">Jvm垃圾收集器</a>
     </h1>
   
 
@@ -107,73 +107,16 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="docker的常用命令"><a href="#docker的常用命令" class="headerlink" title="docker的常用命令"></a>docker的常用命令</h1><p>容器的创建</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -i ubuntu:15.10 </span><br></pre></td></tr></table></figure>
-
-<p>创建后台运行容器</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -itd [--name specified_name] ubuntu /bin/bash</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>docker</code>Docker的二进制执行文件</li>
-<li><code>run </code>与docker组合来运行一个容器</li>
-<li><code>/bin/bash</code>放在镜像名后的是命令，这里我们希望有个交互式 Shell，因此用的是 &#x2F;bin&#x2F;bash</li>
-<li><code>-t:</code>终端</li>
-<li><code>-i:</code>交互式操作</li>
-<li><code>-d:</code> 参数默认不会进入容器，想要进入容器需要使用指令 <strong>docker exec</strong></li>
-<li><code>ubuntu:15.10</code>指定需要运行的镜像，docker首先在本地查找是否有该镜像，如果没有的话就将从镜像库中获取对应的镜像</li>
-</ul>
-<p>查看所有容器</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps -a</span><br></pre></td></tr></table></figure>
-
-<p>启动容器</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker start [mirror_name or mirror_id]</span><br></pre></td></tr></table></figure>
-
-<p>停止容器</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker stop [docker_name or docker_id]</span><br></pre></td></tr></table></figure>
-
-<p>删除容器</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm [specifind_name or specifind_id]</span><br></pre></td></tr></table></figure>
-
-<hr>
-<p>镜像获取</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull [mirror_name]</span><br></pre></td></tr></table></figure>
-
-<p>进入容器</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it [specifind_name or specifind_id] /bin/bash</span><br><span class="line">docker attach [specifind_name or specifind_id]</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>exec:</code>此退出容器终端，不会导致容器的停止，推荐使用</li>
-</ul>
-<p>导出容器</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker export [specifind_name or specifind_id] &gt; ubuntu.tar</span><br></pre></td></tr></table></figure>
-
-<p>导入容器快照</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ubuntu.tar | docker import - test/ubuntu:v1</span><br></pre></td></tr></table></figure>
-
-<p>通过URL导入快照</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker import http://example.com/exampleimage.tgz example/imagerepo</span><br></pre></td></tr></table></figure>
-
-<p><img src="http://www.ajiehome.cn/wp-content/uploads/2021/03/docker%E7%9A%84%E6%89%80%E6%9C%89%E9%95%9C%E5%83%8F.png"></p>
-<p>载入镜像</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull training/webapp</span><br></pre></td></tr></table></figure>
-
-<p>运行镜像程序</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -P training/webapp python app.py</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>-d:</code>让容器在后台运行。</li>
-<li><code>-P:</code>将容器内部使用的网络端口随机映射到我们使用的主机上</li>
-</ul>
-<p><img src="http://www.ajiehome.cn/wp-content/uploads/2021/03/webapp%E8%BF%90%E8%A1%8C%E5%9B%BE.png"></p>
-<p><strong>PORTS</strong></p>
-<ul>
-<li><code>0.0.0.0:49153-&gt;5000:</code>表明docker开放了5000端口，映射到了本地的49153端口</li>
-</ul>
+        <h1 id="垃圾收集器"><a href="#垃圾收集器" class="headerlink" title="垃圾收集器"></a>垃圾收集器</h1><p>新生代垃圾收集器</p>
+<p>Serial垃圾收集器：是单线程的收集器，并且在垃圾收集的时候需要暂停所有的用户线程</p>
+<p>ParNew垃圾收集器：是Serial收集器的多线程版本，在垃圾收集的时候一样需要暂停所有的用户线程，在多CPU条件下性能比Serial收集器要好，但是由于线程切换需要损耗一定的资源，所以在单CPU的环境下，性能不如Serial好</p>
+<p>Parallel Scavenge垃圾收集器：</p>
+<p>​	</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ajiehome.online/2023/06/07/%E8%99%9A%E6%8B%9F%E5%AE%B9%E5%99%A8/Docker%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" data-id="clilg1q790053azna4zn8g46p" data-title="Docker的常用命令" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://ajiehome.online/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jvm%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/" data-id="clilg59hy0053bpow3vw5055x" data-title="Jvm垃圾收集器" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       

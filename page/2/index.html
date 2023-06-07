@@ -117,7 +117,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ajiehome.online/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E7%9A%84HashMap/" data-id="clilg1q4p0011azna7rkxh6gt" data-title="Java的HashMap" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://ajiehome.online/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E7%9A%84HashMap/" data-id="clilg59fo000rbpowctbj17tz" data-title="Java的HashMap" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -168,165 +168,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ajiehome.online/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E7%9A%84Vector/" data-id="clilg1q4q0012azna5yt27ug6" data-title="Java的Vector" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-Java基础/Java计算文件MD5" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E8%AE%A1%E7%AE%97%E6%96%87%E4%BB%B6MD5/" class="article-date">
-  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/hexo-web/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E8%AE%A1%E7%AE%97%E6%96%87%E4%BB%B6MD5/">Java计算文件MD5</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="计算文件的MD5"><a href="#计算文件的MD5" class="headerlink" title="计算文件的MD5"></a>计算文件的MD5</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> String <span class="title function_">md5</span><span class="params">(File file)</span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">MessageDigest</span> <span class="variable">md5</span> <span class="operator">=</span> MessageDigest.getInstance(<span class="string">&quot;MD5&quot;</span>);</span><br><span class="line">            <span class="type">FileInputStream</span> <span class="variable">fileInputStream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(file);</span><br><span class="line">            <span class="type">ByteArrayOutputStream</span> <span class="variable">stream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ByteArrayOutputStream</span>();</span><br><span class="line">            <span class="type">byte</span> [] bytes = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>];</span><br><span class="line">            <span class="type">int</span> <span class="variable">read</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span> ((read=(fileInputStream.read(bytes)))!=-<span class="number">1</span>)&#123;</span><br><span class="line">                stream.write(bytes,<span class="number">0</span>,read);</span><br><span class="line">            &#125;</span><br><span class="line">            fileInputStream.close();</span><br><span class="line">            stream.close();</span><br><span class="line">            <span class="type">byte</span>[] byteArray = stream.toByteArray();</span><br><span class="line">            md5.update(byteArray);</span><br><span class="line">            <span class="type">byte</span>[] digest = md5.digest();</span><br><span class="line">            <span class="type">BigInteger</span> <span class="variable">bigInteger</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BigInteger</span>(<span class="number">1</span>,digest);</span><br><span class="line">            <span class="comment">//生成MD5的进制数</span></span><br><span class="line">            <span class="keyword">return</span> bigInteger.toString(<span class="number">16</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (NoSuchAlgorithmException | IOException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">ApplicationException</span>(CodeType.SERVICE_ERROR, <span class="string">&quot;MD5转换失败&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ajiehome.online/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E8%AE%A1%E7%AE%97%E6%96%87%E4%BB%B6MD5/" data-id="clilg1q4r0014azna2nmib11f" data-title="Java计算文件MD5" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-Java基础/Jvm内存结构" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jvm%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/" class="article-date">
-  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/hexo-web/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jvm%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/">Jvm内存结构</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="JVM内存结构"><a href="#JVM内存结构" class="headerlink" title="JVM内存结构"></a><code>JVM</code>内存结构</h1><p>Java虚拟机分为五个部分：程序计数器、Java虚拟机栈、本地方法栈、堆、方法区</p>
-<p><img src="https://camo.githubusercontent.com/9ab34e9114814b84731635c2b2cc2abd0084edc44d220602948742aa8ad83340/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f646f6f63732f6a766d406d61696e2f696d616765732f6a766d2d6d656d6f72792d7374727563747572652e6a7067"></p>
-<p><strong>程序计数器（PC寄存器）</strong></p>
-<p>定义：</p>
-<ul>
-<li>程序计数器是一块较小内存空间，是当前线程执行那条字节码的所在地址，如果当前线程正在执行的是一个本地方法（Native），那么此程序计数器为Undefined。</li>
-</ul>
-<p>作用：</p>
-<ul>
-<li>字节码解读器通过切换程序计数器的顺序，来改变当前执行的指令，从而实现程序的流程控制</li>
-<li>在多线程的情况下，线程计数器记录的是当前线程的执行位置，当线程切换回来的时候，就知道上次线程的执行位置</li>
-</ul>
-<p>特点：</p>
-<ul>
-<li>是一块较小的空间</li>
-<li>线程私有，每个线程都有自己的程序计数器</li>
-<li>生命周期随着线程的诞生而诞生，随着线程的销毁而销毁</li>
-<li>是唯一一个不会出现<code>OutOfMemoryError</code>的内存区域</li>
-</ul>
-<p><strong>Java虚拟机栈（Java栈）</strong></p>
-<p><img src="https://camo.githubusercontent.com/109d4eff5b60971060cef6cb1e7923e274771d5e1655e0e5aabaf40df9f9aa6a/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f646f6f63732f6a766d406d61696e2f696d616765732f6a766d2d737461636b2e6a7067"></p>
-<p>定义：</p>
-<ul>
-<li>Java虚拟机栈是描述Java方法运行过程的内存模型，Java虚拟机栈会为每一个即将运行的方法创建一块帧栈内存，用于存放该方法运行过程中的一些信息，如局部变量表、操作数栈、动态链接、方法出口信息</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ajiehome.online/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jvm%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/" data-id="clilg1q4s0016aznac7a9gh6l" data-title="Jvm内存结构" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-Java基础/Jvm垃圾收集器" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jvm%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/" class="article-date">
-  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/hexo-web/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jvm%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/">Jvm垃圾收集器</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="垃圾收集器"><a href="#垃圾收集器" class="headerlink" title="垃圾收集器"></a>垃圾收集器</h1><p>新生代垃圾收集器</p>
-<p>Serial垃圾收集器：是单线程的收集器，并且在垃圾收集的时候需要暂停所有的用户线程</p>
-<p>ParNew垃圾收集器：是Serial收集器的多线程版本，在垃圾收集的时候一样需要暂停所有的用户线程，在多CPU条件下性能比Serial收集器要好，但是由于线程切换需要损耗一定的资源，所以在单CPU的环境下，性能不如Serial好</p>
-<p>Parallel Scavenge垃圾收集器：</p>
-<p>​	</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ajiehome.online/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jvm%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/" data-id="clilg1q4t0018azna1z6peu6z" data-title="Jvm垃圾收集器" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://ajiehome.online/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E7%9A%84Vector/" data-id="clilg59g10016bpow98t0d3u4" data-title="Java的Vector" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -369,7 +211,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ajiehome.online/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jvm%E8%99%9A%E6%8B%9F%E6%9C%BA/" data-id="clilg1q4u001aazna3ngxd70q" data-title="Jvm虚拟机" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://ajiehome.online/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jvm%E8%99%9A%E6%8B%9F%E6%9C%BA/" data-id="clilg59g20017bpow4n9q0pd5" data-title="Jvm虚拟机" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -424,7 +266,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ajiehome.online/2023/06/07/Java%E5%9F%BA%E7%A1%80/%E4%BA%8C%E7%BB%B4%E7%A0%81%E7%94%9F%E6%88%90/" data-id="clilg1q4v001caznad3zncyg9" data-title="二维码生成" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://ajiehome.online/2023/06/07/Java%E5%9F%BA%E7%A1%80/%E4%BA%8C%E7%BB%B4%E7%A0%81%E7%94%9F%E6%88%90/" data-id="clilg59g60018bpow6o2n31fb" data-title="二维码生成" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -469,7 +311,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ajiehome.online/2023/06/07/Java%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%96%87%E4%BB%B6%E7%9A%84MD5/" data-id="clilg1q4w001eaznad5go2joc" data-title="计算文件的MD5" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://ajiehome.online/2023/06/07/Java%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%96%87%E4%BB%B6%E7%9A%84MD5/" data-id="clilg59gb0019bpowduotgm57" data-title="计算文件的MD5" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -525,7 +367,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ajiehome.online/2023/06/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/Kafka%E5%AE%89%E8%A3%85/" data-id="clilg1q4x001gazna8axj07xh" data-title="Kafka安装" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://ajiehome.online/2023/06/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/Kafka%E5%AE%89%E8%A3%85/" data-id="clilg59gc001bbpow6q191d5g" data-title="Kafka安装" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -583,7 +425,159 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ajiehome.online/2023/06/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/RocketMQ%E4%B8%8ESystemd/" data-id="clilg1q50001iazna3hah65q0" data-title="RocketMQ与Systemd" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://ajiehome.online/2023/06/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/RocketMQ%E4%B8%8ESystemd/" data-id="clilg59gd001dbpowap8k4a9o" data-title="RocketMQ与Systemd" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-中间件/RocketMQ关系梳理" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/hexo-web/2023/06/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/RocketMQ%E5%85%B3%E7%B3%BB%E6%A2%B3%E7%90%86/" class="article-date">
+  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/hexo-web/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/hexo-web/2023/06/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/RocketMQ%E5%85%B3%E7%B3%BB%E6%A2%B3%E7%90%86/">RocketMQ关系梳理</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="RocketMQ关系梳理"><a href="#RocketMQ关系梳理" class="headerlink" title="RocketMQ关系梳理"></a>RocketMQ关系梳理</h1><p>对于RocketMQ的生产者、消息、消费者、消费者分组、主题、队列、订阅关系的梳理</p>
+<p>主题: 主题是订阅的首要关系，不管是生产者还是消费者都是和主题进行关联订阅，而主题内是由队列组成，队列拥有读、写等权限控制，主题通过队列进行横向扩展，来提要主题的性能，主题是存储消息的实际。</p>
+<p>消息: 消息是队列内信息流通的最小粒子，消息本身拥有一定的特性，如延迟消息等。</p>
+<p>生产者: 生产者通过向指定的主题发送消息完成生产任务，更多理解暂时没有</p>
+<p>消费者: 消费者必定需要提起续费这分组，因为消费者与主题之间的订阅关系是由消费者分组完成的，换句话说，消费者与主题没有直接关系，与主题有直接关系的是消费者组，消费者组通过订阅关系与主题构建关联，而消费者属于消费者组，那么在消费者组得到消息之后，通过进一步的消息订阅关系分发给组下面的消费者，需要注意的是，在同一个消费者分组下的消费者，其订阅关系必须保持一致性，如果多个消费者分组订阅同一个主题，那么这个主题的消息会分发给所有的消费者分组。</p>
+<p><img src="https://rocketmq.apache.org/zh/assets/images/archiforproducer-ebb8ff832f6e857cbebc2c17c2044a3b.png" alt="alt"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ajiehome.online/2023/06/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/RocketMQ%E5%85%B3%E7%B3%BB%E6%A2%B3%E7%90%86/" data-id="clilg59ge001gbpowfde83a43" data-title="RocketMQ关系梳理" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-中间件/Zookeeper单机部署" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/hexo-web/2023/06/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/Zookeeper%E5%8D%95%E6%9C%BA%E9%83%A8%E7%BD%B2/" class="article-date">
+  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/hexo-web/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/hexo-web/2023/06/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/Zookeeper%E5%8D%95%E6%9C%BA%E9%83%A8%E7%BD%B2/">Zookeeper单机部署</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="title-Zookeeper单机部署date-2022-10-10-13-59-49-654updated-2022-10-13-14-44-16-087url-x2F-archives-x2F-zookeeper-dan-ji-bu-shucategories-Zookeepertags-Zookeeper"><a href="#title-Zookeeper单机部署date-2022-10-10-13-59-49-654updated-2022-10-13-14-44-16-087url-x2F-archives-x2F-zookeeper-dan-ji-bu-shucategories-Zookeepertags-Zookeeper" class="headerlink" title="title: Zookeeper单机部署date: 2022-10-10 13:59:49.654updated: 2022-10-13 14:44:16.087url: &#x2F;archives&#x2F;zookeeper-dan-ji-bu-shucategories:- Zookeepertags:- Zookeeper"></a>title: Zookeeper单机部署<br>date: 2022-10-10 13:59:49.654<br>updated: 2022-10-13 14:44:16.087<br>url: &#x2F;archives&#x2F;zookeeper-dan-ji-bu-shu<br>categories:<br>- Zookeeper<br>tags:<br>- Zookeeper</h2><h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><blockquote>
+<p>CentOS7、openJdk11</p>
+</blockquote>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><ol>
+<li>首先使用<code>wget</code>下载zk的二进制包 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    wget https://dlcdn.apache.org/zookeeper/zookeeper-3.8.0/apache-zookeeper-3.8.0-bin.tar.gz</span><br><span class="line">    ````</span><br><span class="line">2. 解压出到opt目录下</span><br><span class="line">   ```shell</span><br><span class="line">   tar -zxvf apache-zookeeper-3.8.0-bin.tar.gz -O /opt</span><br></pre></td></tr></table></figure></li>
+<li>配置systemd服务管理<br> 在&#x2F;etc&#x2F;systemd&#x2F;system目录下创建zkServer.service文件<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=zkServer</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">PIDFile=/var/run/zkServer_2181.pid</span></span><br><span class="line">ExecStart=/opt/apache-zookeeper-3.8.0-bin/bin/zkServer.sh start</span><br><span class="line">ExecStartPost=/bin/sleep 0.1</span><br><span class="line">ExecReload=/bin/kill -s HUP $MAINPID</span><br><span class="line">ExecStop=/opt/apache-zookeeper-3.8.0-bin/bin/zkServer.sh stop</span><br><span class="line">PrivateTmp=true</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-commands.html">含义参考</a></li>
+<li>使用systemd启用服务即可 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启用</span></span><br><span class="line">systemctl start zkServer</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">停止</span></span><br><span class="line">systemctl stop zkServer</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">重启</span></span><br><span class="line">systemctl restart zkServer</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ajiehome.online/2023/06/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/Zookeeper%E5%8D%95%E6%9C%BA%E9%83%A8%E7%BD%B2/" data-id="clilg59gg001ibpowgp4td94g" data-title="Zookeeper单机部署" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-前端杂烩/Android_头部导航标签" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/hexo-web/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Android_%E5%A4%B4%E9%83%A8%E5%AF%BC%E8%88%AA%E6%A0%87%E7%AD%BE/" class="article-date">
+  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/hexo-web/categories/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/">前端杂烩</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/hexo-web/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Android_%E5%A4%B4%E9%83%A8%E5%AF%BC%E8%88%AA%E6%A0%87%E7%AD%BE/">Android_头部导航标签</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Toolbar"><a href="#Toolbar" class="headerlink" title="Toolbar"></a>Toolbar</h1><p>关于toolbar使用的几个要点，包如下</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">androidx.appcompat.widget.Toolbar</span><br></pre></td></tr></table></figure>
+<p>这里作为toolbar的最左标签使用</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app:navigationIcon=&quot;@mipmap/sidebar&quot;</span><br></pre></td></tr></table></figure>
+<p>最左侧按钮点击事件，这里的点击事件有一个很重要的事情，就是只有在toolbar提交之后才能生效，也就是</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setSupportActionBar(toolbar);</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">onOptionsItemSelected</span><span class="params">(<span class="meta">@NonNull</span> MenuItem item)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (item.getItemId() ==android.R.id.home)&#123;</span><br><span class="line">            drawerLayout.openDrawer(Gravity.LEFT);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">super</span>.onOptionsItemSelected(item);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>而其他的所有操作，如设置title，logo等等方法，也要在提交了toolbar之后才能生效，例如</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 设置title无效</span><br><span class="line">getSupportActionBar().setDisplayShowTitleEnabled(<span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+<p>还有设置toolbar的title的颜色字体大小，等等信息</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ajiehome.online/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Android_%E5%A4%B4%E9%83%A8%E5%AF%BC%E8%88%AA%E6%A0%87%E7%AD%BE/" data-id="clilg59gh001jbpowemql9dvp" data-title="Android_头部导航标签" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       

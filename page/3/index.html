@@ -81,158 +81,6 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-中间件/RocketMQ关系梳理" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/hexo-web/2023/06/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/RocketMQ%E5%85%B3%E7%B3%BB%E6%A2%B3%E7%90%86/" class="article-date">
-  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/hexo-web/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/hexo-web/2023/06/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/RocketMQ%E5%85%B3%E7%B3%BB%E6%A2%B3%E7%90%86/">RocketMQ关系梳理</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="RocketMQ关系梳理"><a href="#RocketMQ关系梳理" class="headerlink" title="RocketMQ关系梳理"></a>RocketMQ关系梳理</h1><p>对于RocketMQ的生产者、消息、消费者、消费者分组、主题、队列、订阅关系的梳理</p>
-<p>主题: 主题是订阅的首要关系，不管是生产者还是消费者都是和主题进行关联订阅，而主题内是由队列组成，队列拥有读、写等权限控制，主题通过队列进行横向扩展，来提要主题的性能，主题是存储消息的实际。</p>
-<p>消息: 消息是队列内信息流通的最小粒子，消息本身拥有一定的特性，如延迟消息等。</p>
-<p>生产者: 生产者通过向指定的主题发送消息完成生产任务，更多理解暂时没有</p>
-<p>消费者: 消费者必定需要提起续费这分组，因为消费者与主题之间的订阅关系是由消费者分组完成的，换句话说，消费者与主题没有直接关系，与主题有直接关系的是消费者组，消费者组通过订阅关系与主题构建关联，而消费者属于消费者组，那么在消费者组得到消息之后，通过进一步的消息订阅关系分发给组下面的消费者，需要注意的是，在同一个消费者分组下的消费者，其订阅关系必须保持一致性，如果多个消费者分组订阅同一个主题，那么这个主题的消息会分发给所有的消费者分组。</p>
-<p><img src="https://rocketmq.apache.org/zh/assets/images/archiforproducer-ebb8ff832f6e857cbebc2c17c2044a3b.png" alt="alt"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ajiehome.online/2023/06/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/RocketMQ%E5%85%B3%E7%B3%BB%E6%A2%B3%E7%90%86/" data-id="clilg1q51001laznaeroy5q8n" data-title="RocketMQ关系梳理" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-中间件/Zookeeper单机部署" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/hexo-web/2023/06/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/Zookeeper%E5%8D%95%E6%9C%BA%E9%83%A8%E7%BD%B2/" class="article-date">
-  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/hexo-web/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/hexo-web/2023/06/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/Zookeeper%E5%8D%95%E6%9C%BA%E9%83%A8%E7%BD%B2/">Zookeeper单机部署</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="title-Zookeeper单机部署date-2022-10-10-13-59-49-654updated-2022-10-13-14-44-16-087url-x2F-archives-x2F-zookeeper-dan-ji-bu-shucategories-Zookeepertags-Zookeeper"><a href="#title-Zookeeper单机部署date-2022-10-10-13-59-49-654updated-2022-10-13-14-44-16-087url-x2F-archives-x2F-zookeeper-dan-ji-bu-shucategories-Zookeepertags-Zookeeper" class="headerlink" title="title: Zookeeper单机部署date: 2022-10-10 13:59:49.654updated: 2022-10-13 14:44:16.087url: &#x2F;archives&#x2F;zookeeper-dan-ji-bu-shucategories:- Zookeepertags:- Zookeeper"></a>title: Zookeeper单机部署<br>date: 2022-10-10 13:59:49.654<br>updated: 2022-10-13 14:44:16.087<br>url: &#x2F;archives&#x2F;zookeeper-dan-ji-bu-shu<br>categories:<br>- Zookeeper<br>tags:<br>- Zookeeper</h2><h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><blockquote>
-<p>CentOS7、openJdk11</p>
-</blockquote>
-<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><ol>
-<li>首先使用<code>wget</code>下载zk的二进制包 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    wget https://dlcdn.apache.org/zookeeper/zookeeper-3.8.0/apache-zookeeper-3.8.0-bin.tar.gz</span><br><span class="line">    ````</span><br><span class="line">2. 解压出到opt目录下</span><br><span class="line">   ```shell</span><br><span class="line">   tar -zxvf apache-zookeeper-3.8.0-bin.tar.gz -O /opt</span><br></pre></td></tr></table></figure></li>
-<li>配置systemd服务管理<br> 在&#x2F;etc&#x2F;systemd&#x2F;system目录下创建zkServer.service文件<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=zkServer</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">PIDFile=/var/run/zkServer_2181.pid</span></span><br><span class="line">ExecStart=/opt/apache-zookeeper-3.8.0-bin/bin/zkServer.sh start</span><br><span class="line">ExecStartPost=/bin/sleep 0.1</span><br><span class="line">ExecReload=/bin/kill -s HUP $MAINPID</span><br><span class="line">ExecStop=/opt/apache-zookeeper-3.8.0-bin/bin/zkServer.sh stop</span><br><span class="line">PrivateTmp=true</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
-<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-commands.html">含义参考</a></li>
-<li>使用systemd启用服务即可 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启用</span></span><br><span class="line">systemctl start zkServer</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">停止</span></span><br><span class="line">systemctl stop zkServer</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">重启</span></span><br><span class="line">systemctl restart zkServer</span><br></pre></td></tr></table></figure></li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ajiehome.online/2023/06/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/Zookeeper%E5%8D%95%E6%9C%BA%E9%83%A8%E7%BD%B2/" data-id="clilg1q52001nazna8nd2d06c" data-title="Zookeeper单机部署" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-前端杂烩/Android_头部导航标签" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/hexo-web/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Android_%E5%A4%B4%E9%83%A8%E5%AF%BC%E8%88%AA%E6%A0%87%E7%AD%BE/" class="article-date">
-  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/hexo-web/categories/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/">前端杂烩</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/hexo-web/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Android_%E5%A4%B4%E9%83%A8%E5%AF%BC%E8%88%AA%E6%A0%87%E7%AD%BE/">Android_头部导航标签</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="Toolbar"><a href="#Toolbar" class="headerlink" title="Toolbar"></a>Toolbar</h1><p>关于toolbar使用的几个要点，包如下</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">androidx.appcompat.widget.Toolbar</span><br></pre></td></tr></table></figure>
-<p>这里作为toolbar的最左标签使用</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app:navigationIcon=&quot;@mipmap/sidebar&quot;</span><br></pre></td></tr></table></figure>
-<p>最左侧按钮点击事件，这里的点击事件有一个很重要的事情，就是只有在toolbar提交之后才能生效，也就是</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setSupportActionBar(toolbar);</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">onOptionsItemSelected</span><span class="params">(<span class="meta">@NonNull</span> MenuItem item)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (item.getItemId() ==android.R.id.home)&#123;</span><br><span class="line">            drawerLayout.openDrawer(Gravity.LEFT);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">super</span>.onOptionsItemSelected(item);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>而其他的所有操作，如设置title，logo等等方法，也要在提交了toolbar之后才能生效，例如</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 设置title无效</span><br><span class="line">getSupportActionBar().setDisplayShowTitleEnabled(<span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
-<p>还有设置toolbar的title的颜色字体大小，等等信息</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ajiehome.online/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Android_%E5%A4%B4%E9%83%A8%E5%AF%BC%E8%88%AA%E6%A0%87%E7%AD%BE/" data-id="clilg1q5b001oaznadxef10n1" data-title="Android_头部导航标签" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
     <article id="post-前端杂烩/Android网络请求回调" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/hexo-web/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Android%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%E5%9B%9E%E8%B0%83/" class="article-date">
@@ -266,7 +114,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ajiehome.online/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Android%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%E5%9B%9E%E8%B0%83/" data-id="clilg1q5c001qaznaeogaeyzg" data-title="Android网络请求回调" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://ajiehome.online/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Android%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%E5%9B%9E%E8%B0%83/" data-id="clilg59gi001lbpowdqbnc1om" data-title="Android网络请求回调" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -309,7 +157,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ajiehome.online/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/CSS%E5%B8%83%E5%B1%80%E9%97%AE%E9%A2%98/" data-id="clilg1q5c001raznabztahict" data-title="CSS布局问题" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://ajiehome.online/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/CSS%E5%B8%83%E5%B1%80%E9%97%AE%E9%A2%98/" data-id="clilg59gj001mbpow4omh2gbj" data-title="CSS布局问题" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -352,7 +200,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ajiehome.online/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/HTML5%E5%9B%BE%E7%89%87%E6%8B%96%E6%94%BE/" data-id="clilg1q5e001uazna8qmq04yh" data-title="HTML5图片拖放" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://ajiehome.online/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/HTML5%E5%9B%BE%E7%89%87%E6%8B%96%E6%94%BE/" data-id="clilg59gk001pbpow6dzh66ni" data-title="HTML5图片拖放" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -417,7 +265,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ajiehome.online/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/HTML%E9%AB%98%E5%BA%A6%E5%A1%8C%E9%99%B7/" data-id="clilg1q5e001wazna3peick02" data-title="HTML高度塌陷" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://ajiehome.online/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/HTML%E9%AB%98%E5%BA%A6%E5%A1%8C%E9%99%B7/" data-id="clilg59gk001rbpowaylxcm76" data-title="HTML高度塌陷" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -460,7 +308,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ajiehome.online/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/JavaScript%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6/" data-id="clilg1q5g001zaznafqm2ewxq" data-title="JavaScript下载文件" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://ajiehome.online/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/JavaScript%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6/" data-id="clilg59gl001ubpow5770c430" data-title="JavaScript下载文件" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -505,7 +353,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ajiehome.online/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/JavaScript%E8%8E%B7%E5%8F%96%E8%A7%86%E9%A2%91%E6%B5%81%E4%B8%94%E5%9B%9E%E6%98%BE/" data-id="clilg1q5g0020azna7h3n3p0t" data-title="JavaScript获取视频流且回显" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://ajiehome.online/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/JavaScript%E8%8E%B7%E5%8F%96%E8%A7%86%E9%A2%91%E6%B5%81%E4%B8%94%E5%9B%9E%E6%98%BE/" data-id="clilg59gm001vbpowazo97djj" data-title="JavaScript获取视频流且回显" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -548,7 +396,212 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ajiehome.online/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Javascript%E6%AD%A3%E5%88%99/" data-id="clilg1q5h0023aznab4ya78x3" data-title="Javascript正则" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://ajiehome.online/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Javascript%E6%AD%A3%E5%88%99/" data-id="clilg59gn001ybpow1bze6zz9" data-title="Javascript正则" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-前端杂烩/Javascript的dom操作" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/hexo-web/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Javascript%E7%9A%84dom%E6%93%8D%E4%BD%9C/" class="article-date">
+  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/hexo-web/categories/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/">前端杂烩</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/hexo-web/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Javascript%E7%9A%84dom%E6%93%8D%E4%BD%9C/">Javascript的dom操作</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="JS原生DOM操作"><a href="#JS原生DOM操作" class="headerlink" title="JS原生DOM操作"></a>JS原生DOM操作</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> mainView = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;main&quot;</span>);</span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(mainView)</span><br><span class="line">                <span class="keyword">let</span> textDom = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&quot;img&quot;</span>);</span><br><span class="line">                <span class="keyword">let</span> x = <span class="title class_">Math</span>.<span class="title function_">random</span>()*<span class="number">200</span>+<span class="string">&quot;px&quot;</span>;</span><br><span class="line">                <span class="keyword">let</span> y = (<span class="title class_">Math</span>.<span class="title function_">random</span>()*<span class="number">300</span>+<span class="number">100</span>)+<span class="string">&quot;px&quot;</span>;</span><br><span class="line">                textDom.<span class="property">style</span>.<span class="property">top</span> = y;</span><br><span class="line">                textDom.<span class="property">style</span>.<span class="property">width</span> = <span class="string">&quot;20px&quot;</span>;</span><br><span class="line">                textDom.<span class="property">style</span>.<span class="property">height</span> = <span class="string">&quot;20px&quot;</span>;</span><br><span class="line">                textDom.<span class="property">style</span>.<span class="property">left</span> = x;</span><br><span class="line">                textDom.<span class="property">style</span>.<span class="property">border</span> = <span class="string">&quot;solid 1px #cccccc&quot;</span>;</span><br><span class="line">                textDom.<span class="property">style</span>.<span class="property">zIndex</span> = <span class="string">&quot;999&quot;</span>;</span><br><span class="line">                textDom.<span class="property">style</span>.<span class="property">position</span> = <span class="string">&quot;absolute&quot;</span>;</span><br><span class="line">                textDom.<span class="title function_">setAttribute</span>(<span class="string">&quot;src&quot;</span>,<span class="string">&quot;../../static/log.jpg&quot;</span>);</span><br><span class="line">                <span class="comment">// textDom.setAttribute(&quot;src&quot;,&quot;http://a2.att.hudong.com/36/48/19300001357258133412489354717.jpg&quot;);</span></span><br><span class="line">                mainView.<span class="title function_">appendChild</span>(textDom)</span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(mainView)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ajiehome.online/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Javascript%E7%9A%84dom%E6%93%8D%E4%BD%9C/" data-id="clilg59go001zbpowe6bi4gvf" data-title="Javascript的dom操作" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-前端杂烩/NodeJS配置创建VUE项目" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/hexo-web/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/NodeJS%E9%85%8D%E7%BD%AE%E5%88%9B%E5%BB%BAVUE%E9%A1%B9%E7%9B%AE/" class="article-date">
+  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/hexo-web/categories/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/">前端杂烩</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/hexo-web/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/NodeJS%E9%85%8D%E7%BD%AE%E5%88%9B%E5%BB%BAVUE%E9%A1%B9%E7%9B%AE/">NodeJS配置创建VUE项目</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="nodejs"><a href="#nodejs" class="headerlink" title="nodejs"></a>nodejs</h1><p>查看node版本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br></pre></td></tr></table></figure>
+
+<p>查看npm版本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm -v</span><br></pre></td></tr></table></figure>
+
+<p>查看配置文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config list</span><br></pre></td></tr></table></figure>
+
+<p>修改本地仓库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm config set prefix &quot;C:\Software\node\node_global&quot;</span><br><span class="line">npm config set cache &quot;C:\Software\node\node_cache&quot;</span><br></pre></td></tr></table></figure>
+
+<p>修改镜像站</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config set registry=https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+
+<p>node更新</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">*# 全局安装n</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">npm install -g n</span> </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">升级到最新稳定版</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">n stable</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">升级到最新版</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">n latest</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">升级到定制版</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">n v7.10.0</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">切换使用版本</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">n 7.10.0 (ENTER)</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>配置文件所在位置<code>C:\Users\Administrator\.npmrc</code></p>
+<p>获取镜像信息（非安装）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm info vue</span><br></pre></td></tr></table></figure>
+
+<p>更新模块命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">老版本安装方式 2.*</span></span><br><span class="line">npm install npm –g</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">老版本安装方式 3.* /4.*</span></span><br><span class="line">npm install -g @vue/cli</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>npm install&#96;：表示更新</li>
+<li><code>第二个npm</code>：表示需要更新的模块</li>
+<li><code>-g</code>：表示安装到global目录下</li>
+</ul>
+<p>配置NodeJS的环境变量</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">path: D:\software\nodejs</span><br></pre></td></tr></table></figure>
+
+<p>配置global仓的环境变量</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">path: D:\software\nodejs\node_global</span><br></pre></td></tr></table></figure>
+
+<p>新增一个<code>NODE_PATH</code>环节变量（子项的全局命令）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:\software\nodejs\node_global\node_modules</span><br></pre></td></tr></table></figure>
+
+<p>安装vue，安装vue-routher，安装vue脚手架，验证是否安装成功</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">npm install vue -g</span><br><span class="line">npm install vue-routher -g</span><br><span class="line">npm install @vue/cli -g</span><br><span class="line">vue -V</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>老版本构建方式</strong></p>
+<p>1、构建初始化vue项目</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vuew init webpack vue01</span><br></pre></td></tr></table></figure>
+
+<p>2、进入vue01的目录，初始化安装依赖</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br></pre></td></tr></table></figure>
+
+<p>3、运行vue01的dev状态</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run dev</span><br></pre></td></tr></table></figure>
+
+<p>然后访问**<a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080</a>**</p>
+<p>4、编译生成静态文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run build</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>新版本构建方式</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue create vue01</span><br></pre></td></tr></table></figure>
+
+<p>可以选择创建的方式，moban是我创建的模板，可以选择default默认，或者Manually重新选择</p>
+<blockquote>
+<p>√ Babel<br>× TyreScript<br>× Progressive Web App (PWA) Support<br>√ Routher<br>√ Vuex<br>√ CSS Pre-processors<br>× Linter &#x2F; Formatter<br>× Unit Testing<br>× E2E Testing</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ajiehome.online/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/NodeJS%E9%85%8D%E7%BD%AE%E5%88%9B%E5%BB%BAVUE%E9%A1%B9%E7%9B%AE/" data-id="clilg59gp0022bpow6n3x1g3j" data-title="NodeJS配置创建VUE项目" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-开发工具/Git常用命令" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/hexo-web/2023/06/07/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="article-date">
+  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/hexo-web/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">开发工具</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/hexo-web/2023/06/07/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">Git常用命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Git基本常用命令"><a href="#Git基本常用命令" class="headerlink" title="Git基本常用命令"></a>Git基本常用命令</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">初始化一个Git仓库</span></span><br><span class="line">git init</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">把文件添加到本地git仓储缓存</span></span><br><span class="line">git add &quot;file name&quot;</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">把当前目录下全部文件加入到本地git仓储缓存</span></span><br><span class="line">git add .</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">把仓储缓存提交上去</span></span><br><span class="line">git commit -m&quot;description&quot;</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看所有的远程分支</span></span><br><span class="line">git remote -v</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">添加远程分支</span></span><br><span class="line">git remote add origin &quot;git remote warehouse url&quot;</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">移除本地添加的远程分支</span></span><br><span class="line">git remote remove &quot;remote branch name&quot;</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">获取远程分支与本地分支合并</span></span><br><span class="line">git pull</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">把本地分支提交到远程分支</span></span><br><span class="line">git push</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看所有的远程分支和本地分支</span></span><br><span class="line"></span><br><span class="line">git branch -a</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看所有的本地分支</span></span><br><span class="line">git branch</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">本地分支与远程分支关联</span></span><br><span class="line">git branch --set-upstream-to=origin/master master</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">创建本地分支</span></span><br><span class="line">git branch &quot;local branch name&quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">清除输入过的账号密码</span></span><br><span class="line">git config --system --unset credential.helper</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">回滚</span></span><br><span class="line">git log</span><br><span class="line">git checkout [commit id] [file name]</span><br><span class="line">commit id:commit提交的编号</span><br><span class="line">file name:需要回滚的文件名称，不输入则整个版本回滚</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">克隆远程仓库到本地</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">fileName:为指定本地文件夹的名字，如果没有就会使用远程仓库默认s的名称</span></span><br><span class="line">git clone &quot;git remote warehouse url&quot; [ specified file name]</span><br></pre></td></tr></table></figure>
+
+<h2 id="谨慎使用"><a href="#谨慎使用" class="headerlink" title="谨慎使用"></a>谨慎使用</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="string">&#x27;fatal: refusing to merge unrelated histories&#x27;</span>:无法合并两个不相干分支，此命令可强行合并建立关系</span></span><br><span class="line">git pull origin master --allow-unrelated-histories</span><br></pre></td></tr></table></figure>
+
+<h2 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h2><p><code>.gitignore</code>：文件的内容将是忽略提交的部分，也就是git不会检索该文件指定的文件和文件夹</p>
+<p>例如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">HELP.md</span><br><span class="line">target/</span><br><span class="line">!.mvn/wrapper/maven-wrapper.jar</span><br><span class="line">!**/src/main/**</span><br><span class="line">!**/src/test/**</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment">## STS ###</span></span></span><br><span class="line">.apt_generated</span><br><span class="line">.classpath</span><br><span class="line">.factorypath</span><br><span class="line">.project</span><br><span class="line">.settings</span><br><span class="line">.springBeans</span><br><span class="line">.sts4-cache</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment">## IntelliJ IDEA ###</span></span></span><br><span class="line">.idea</span><br><span class="line">*.iws</span><br><span class="line">*.iml</span><br><span class="line">*.ipr</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment">## NetBeans ###</span></span></span><br><span class="line">/nbproject/private/</span><br><span class="line">/nbbuild/</span><br><span class="line">/dist/</span><br><span class="line">/nbdist/</span><br><span class="line">/.nb-gradle/</span><br><span class="line">build/</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment">## VS Code ###</span></span></span><br><span class="line">.vscode/</span><br></pre></td></tr></table></figure>
+
+<p>更多高级操作见下一篇：Git操作</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ajiehome.online/2023/06/07/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" data-id="clilg59gp0024bpowfbo01wgc" data-title="Git常用命令" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
