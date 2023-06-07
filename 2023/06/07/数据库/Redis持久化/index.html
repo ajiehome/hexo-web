@@ -9,12 +9,12 @@
   <meta name="description" content="redis的持久化 aop（append only file） 把每一次的数据变化都写入到本地文件 ——— 全持久化模式以日志的形式记录 每一次的写、删操作，以文本的形式记录 rdb 定时把redis中的数据写入到本地文件 ——— 半持久化模式 fork一个字进程，把数据写入临时文件，然后在替换掉本地的文件，使用二进制压缩  RDB持久化配置Redis会将数据集的快照dump到dump.rdb文件">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redis持久化">
-<meta property="og:url" content="http://ajiehome.github.io/hexo-web/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E6%8C%81%E4%B9%85%E5%8C%96/index.html">
+<meta property="og:url" content="http://ajiehome.github.io/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E6%8C%81%E4%B9%85%E5%8C%96/index.html">
 <meta property="og:site_name" content="阿杰之家">
 <meta property="og:description" content="redis的持久化 aop（append only file） 把每一次的数据变化都写入到本地文件 ——— 全持久化模式以日志的形式记录 每一次的写、删操作，以文本的形式记录 rdb 定时把redis中的数据写入到本地文件 ——— 半持久化模式 fork一个字进程，把数据写入临时文件，然后在替换掉本地的文件，使用二进制压缩  RDB持久化配置Redis会将数据集的快照dump到dump.rdb文件">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-06-07T07:58:40.000Z">
-<meta property="article:modified_time" content="2023-06-07T09:23:38.006Z">
+<meta property="article:modified_time" content="2023-06-07T09:24:35.251Z">
 <meta property="article:author" content="ajiehome">
 <meta property="article:tag" content="ajiehome">
 <meta property="article:tag" content="阿杰之家">
@@ -74,7 +74,7 @@
         <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ajiehome.github.io/hexo-web"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ajiehome.github.io"></form>
       </div>
     </div>
   </div>
@@ -119,7 +119,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ajiehome.github.io/hexo-web/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E6%8C%81%E4%B9%85%E5%8C%96/" data-id="clili60q5004nf7n3dul4349z" data-title="Redis持久化" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://ajiehome.github.io/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E6%8C%81%E4%B9%85%E5%8C%96/" data-id="clili71f4004cblp22z6l7o64" data-title="Redis持久化" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       

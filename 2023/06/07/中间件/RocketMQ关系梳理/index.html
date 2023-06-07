@@ -9,13 +9,13 @@
   <meta name="description" content="RocketMQ关系梳理对于RocketMQ的生产者、消息、消费者、消费者分组、主题、队列、订阅关系的梳理 主题: 主题是订阅的首要关系，不管是生产者还是消费者都是和主题进行关联订阅，而主题内是由队列组成，队列拥有读、写等权限控制，主题通过队列进行横向扩展，来提要主题的性能，主题是存储消息的实际。 消息: 消息是队列内信息流通的最小粒子，消息本身拥有一定的特性，如延迟消息等。 生产者: 生产者通过">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RocketMQ关系梳理">
-<meta property="og:url" content="http://ajiehome.github.io/hexo-web/2023/06/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/RocketMQ%E5%85%B3%E7%B3%BB%E6%A2%B3%E7%90%86/index.html">
+<meta property="og:url" content="http://ajiehome.github.io/2023/06/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/RocketMQ%E5%85%B3%E7%B3%BB%E6%A2%B3%E7%90%86/index.html">
 <meta property="og:site_name" content="阿杰之家">
 <meta property="og:description" content="RocketMQ关系梳理对于RocketMQ的生产者、消息、消费者、消费者分组、主题、队列、订阅关系的梳理 主题: 主题是订阅的首要关系，不管是生产者还是消费者都是和主题进行关联订阅，而主题内是由队列组成，队列拥有读、写等权限控制，主题通过队列进行横向扩展，来提要主题的性能，主题是存储消息的实际。 消息: 消息是队列内信息流通的最小粒子，消息本身拥有一定的特性，如延迟消息等。 生产者: 生产者通过">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://rocketmq.apache.org/zh/assets/images/archiforproducer-ebb8ff832f6e857cbebc2c17c2044a3b.png">
 <meta property="article:published_time" content="2023-06-07T07:58:40.000Z">
-<meta property="article:modified_time" content="2023-06-07T09:23:38.006Z">
+<meta property="article:modified_time" content="2023-06-07T09:24:35.247Z">
 <meta property="article:author" content="ajiehome">
 <meta property="article:tag" content="ajiehome">
 <meta property="article:tag" content="阿杰之家">
@@ -76,7 +76,7 @@
         <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ajiehome.github.io/hexo-web"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ajiehome.github.io"></form>
       </div>
     </div>
   </div>
@@ -119,7 +119,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ajiehome.github.io/hexo-web/2023/06/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/RocketMQ%E5%85%B3%E7%B3%BB%E6%A2%B3%E7%90%86/" data-id="clili60n8001ff7n3bt4ndrmt" data-title="RocketMQ关系梳理" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://ajiehome.github.io/2023/06/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/RocketMQ%E5%85%B3%E7%B3%BB%E6%A2%B3%E7%90%86/" data-id="clili71dn001fblp2gd2b8i3y" data-title="RocketMQ关系梳理" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
