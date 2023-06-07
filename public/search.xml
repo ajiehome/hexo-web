@@ -232,6 +232,63 @@
     
     
     <entry>
+      <title>Java计算文件MD5</title>
+      <link href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E8%AE%A1%E7%AE%97%E6%96%87%E4%BB%B6MD5/"/>
+      <url>/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E8%AE%A1%E7%AE%97%E6%96%87%E4%BB%B6MD5/</url>
+      
+        <content type="html"><![CDATA[<h1 id="计算文件的MD5"><a href="#计算文件的MD5" class="headerlink" title="计算文件的MD5"></a>计算文件的MD5</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> String <span class="title function_">md5</span><span class="params">(File file)</span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">MessageDigest</span> <span class="variable">md5</span> <span class="operator">=</span> MessageDigest.getInstance(<span class="string">&quot;MD5&quot;</span>);</span><br><span class="line">            <span class="type">FileInputStream</span> <span class="variable">fileInputStream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(file);</span><br><span class="line">            <span class="type">ByteArrayOutputStream</span> <span class="variable">stream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ByteArrayOutputStream</span>();</span><br><span class="line">            <span class="type">byte</span> [] bytes = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>];</span><br><span class="line">            <span class="type">int</span> <span class="variable">read</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span> ((read=(fileInputStream.read(bytes)))!=-<span class="number">1</span>)&#123;</span><br><span class="line">                stream.write(bytes,<span class="number">0</span>,read);</span><br><span class="line">            &#125;</span><br><span class="line">            fileInputStream.close();</span><br><span class="line">            stream.close();</span><br><span class="line">            <span class="type">byte</span>[] byteArray = stream.toByteArray();</span><br><span class="line">            md5.update(byteArray);</span><br><span class="line">            <span class="type">byte</span>[] digest = md5.digest();</span><br><span class="line">            <span class="type">BigInteger</span> <span class="variable">bigInteger</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BigInteger</span>(<span class="number">1</span>,digest);</span><br><span class="line">            <span class="comment">//生成MD5的进制数</span></span><br><span class="line">            <span class="keyword">return</span> bigInteger.toString(<span class="number">16</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (NoSuchAlgorithmException | IOException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">ApplicationException</span>(CodeType.SERVICE_ERROR, <span class="string">&quot;MD5转换失败&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Java基础 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Jvm内存结构</title>
+      <link href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jvm%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/"/>
+      <url>/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jvm%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/</url>
+      
+        <content type="html"><![CDATA[<h1 id="JVM内存结构"><a href="#JVM内存结构" class="headerlink" title="JVM内存结构"></a><code>JVM</code>内存结构</h1><p>Java虚拟机分为五个部分：程序计数器、Java虚拟机栈、本地方法栈、堆、方法区</p><p><img src="https://camo.githubusercontent.com/9ab34e9114814b84731635c2b2cc2abd0084edc44d220602948742aa8ad83340/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f646f6f63732f6a766d406d61696e2f696d616765732f6a766d2d6d656d6f72792d7374727563747572652e6a7067"></p><p><strong>程序计数器（PC寄存器）</strong></p><p>定义：</p><ul><li>程序计数器是一块较小内存空间，是当前线程执行那条字节码的所在地址，如果当前线程正在执行的是一个本地方法（Native），那么此程序计数器为Undefined。</li></ul><p>作用：</p><ul><li>字节码解读器通过切换程序计数器的顺序，来改变当前执行的指令，从而实现程序的流程控制</li><li>在多线程的情况下，线程计数器记录的是当前线程的执行位置，当线程切换回来的时候，就知道上次线程的执行位置</li></ul><p>特点：</p><ul><li>是一块较小的空间</li><li>线程私有，每个线程都有自己的程序计数器</li><li>生命周期随着线程的诞生而诞生，随着线程的销毁而销毁</li><li>是唯一一个不会出现<code>OutOfMemoryError</code>的内存区域</li></ul><p><strong>Java虚拟机栈（Java栈）</strong></p><p><img src="https://camo.githubusercontent.com/109d4eff5b60971060cef6cb1e7923e274771d5e1655e0e5aabaf40df9f9aa6a/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f646f6f63732f6a766d406d61696e2f696d616765732f6a766d2d737461636b2e6a7067"></p><p>定义：</p><ul><li>Java虚拟机栈是描述Java方法运行过程的内存模型，Java虚拟机栈会为每一个即将运行的方法创建一块帧栈内存，用于存放该方法运行过程中的一些信息，如局部变量表、操作数栈、动态链接、方法出口信息</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Java基础 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Jvm垃圾收集器</title>
+      <link href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jvm%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/"/>
+      <url>/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jvm%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/</url>
+      
+        <content type="html"><![CDATA[<h1 id="垃圾收集器"><a href="#垃圾收集器" class="headerlink" title="垃圾收集器"></a>垃圾收集器</h1><p>新生代垃圾收集器</p><p>Serial垃圾收集器：是单线程的收集器，并且在垃圾收集的时候需要暂停所有的用户线程</p><p>ParNew垃圾收集器：是Serial收集器的多线程版本，在垃圾收集的时候一样需要暂停所有的用户线程，在多CPU条件下性能比Serial收集器要好，但是由于线程切换需要损耗一定的资源，所以在单CPU的环境下，性能不如Serial好</p><p>Parallel Scavenge垃圾收集器：</p><p>​</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Java基础 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Jvm虚拟机</title>
       <link href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jvm%E8%99%9A%E6%8B%9F%E6%9C%BA/"/>
       <url>/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jvm%E8%99%9A%E6%8B%9F%E6%9C%BA/</url>
@@ -1484,186 +1541,6 @@
     </entry>
     
     
-    
-    <entry>
-      <title>Java计算文件MD5</title>
-      <link href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E8%AE%A1%E7%AE%97%E6%96%87%E4%BB%B6MD5/"/>
-      <url>/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E8%AE%A1%E7%AE%97%E6%96%87%E4%BB%B6MD5/</url>
-      
-        <content type="html"><![CDATA[<h1 id="计算文件的MD5"><a href="#计算文件的MD5" class="headerlink" title="计算文件的MD5"></a>计算文件的MD5</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> String <span class="title function_">md5</span><span class="params">(File file)</span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">MessageDigest</span> <span class="variable">md5</span> <span class="operator">=</span> MessageDigest.getInstance(<span class="string">&quot;MD5&quot;</span>);</span><br><span class="line">            <span class="type">FileInputStream</span> <span class="variable">fileInputStream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(file);</span><br><span class="line">            <span class="type">ByteArrayOutputStream</span> <span class="variable">stream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ByteArrayOutputStream</span>();</span><br><span class="line">            <span class="type">byte</span> [] bytes = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>];</span><br><span class="line">            <span class="type">int</span> <span class="variable">read</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span> ((read=(fileInputStream.read(bytes)))!=-<span class="number">1</span>)&#123;</span><br><span class="line">                stream.write(bytes,<span class="number">0</span>,read);</span><br><span class="line">            &#125;</span><br><span class="line">            fileInputStream.close();</span><br><span class="line">            stream.close();</span><br><span class="line">            <span class="type">byte</span>[] byteArray = stream.toByteArray();</span><br><span class="line">            md5.update(byteArray);</span><br><span class="line">            <span class="type">byte</span>[] digest = md5.digest();</span><br><span class="line">            <span class="type">BigInteger</span> <span class="variable">bigInteger</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BigInteger</span>(<span class="number">1</span>,digest);</span><br><span class="line">            <span class="comment">//生成MD5的进制数</span></span><br><span class="line">            <span class="keyword">return</span> bigInteger.toString(<span class="number">16</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (NoSuchAlgorithmException | IOException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">ApplicationException</span>(CodeType.SERVICE_ERROR, <span class="string">&quot;MD5转换失败&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>]]></content>
-      
-      
-      <categories>
-          
-          <category> Java基础 </category>
-          
-      </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Jvm内存结构</title>
-      <link href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jvm%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/"/>
-      <url>/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jvm%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/</url>
-      
-        <content type="html"><![CDATA[<h1 id="JVM内存结构"><a href="#JVM内存结构" class="headerlink" title="JVM内存结构"></a><code>JVM</code>内存结构</h1><p>Java虚拟机分为五个部分：程序计数器、Java虚拟机栈、本地方法栈、堆、方法区</p><p><img src="https://camo.githubusercontent.com/9ab34e9114814b84731635c2b2cc2abd0084edc44d220602948742aa8ad83340/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f646f6f63732f6a766d406d61696e2f696d616765732f6a766d2d6d656d6f72792d7374727563747572652e6a7067"></p><p><strong>程序计数器（PC寄存器）</strong></p><p>定义：</p><ul><li>程序计数器是一块较小内存空间，是当前线程执行那条字节码的所在地址，如果当前线程正在执行的是一个本地方法（Native），那么此程序计数器为Undefined。</li></ul><p>作用：</p><ul><li>字节码解读器通过切换程序计数器的顺序，来改变当前执行的指令，从而实现程序的流程控制</li><li>在多线程的情况下，线程计数器记录的是当前线程的执行位置，当线程切换回来的时候，就知道上次线程的执行位置</li></ul><p>特点：</p><ul><li>是一块较小的空间</li><li>线程私有，每个线程都有自己的程序计数器</li><li>生命周期随着线程的诞生而诞生，随着线程的销毁而销毁</li><li>是唯一一个不会出现<code>OutOfMemoryError</code>的内存区域</li></ul><p><strong>Java虚拟机栈（Java栈）</strong></p><p><img src="https://camo.githubusercontent.com/109d4eff5b60971060cef6cb1e7923e274771d5e1655e0e5aabaf40df9f9aa6a/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f646f6f63732f6a766d406d61696e2f696d616765732f6a766d2d737461636b2e6a7067"></p><p>定义：</p><ul><li>Java虚拟机栈是描述Java方法运行过程的内存模型，Java虚拟机栈会为每一个即将运行的方法创建一块帧栈内存，用于存放该方法运行过程中的一些信息，如局部变量表、操作数栈、动态链接、方法出口信息</li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> Java基础 </category>
-          
-      </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Jvm垃圾收集器</title>
-      <link href="/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jvm%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/"/>
-      <url>/hexo-web/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jvm%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/</url>
-      
-        <content type="html"><![CDATA[<h1 id="垃圾收集器"><a href="#垃圾收集器" class="headerlink" title="垃圾收集器"></a>垃圾收集器</h1><p>新生代垃圾收集器</p><p>Serial垃圾收集器：是单线程的收集器，并且在垃圾收集的时候需要暂停所有的用户线程</p><p>ParNew垃圾收集器：是Serial收集器的多线程版本，在垃圾收集的时候一样需要暂停所有的用户线程，在多CPU条件下性能比Serial收集器要好，但是由于线程切换需要损耗一定的资源，所以在单CPU的环境下，性能不如Serial好</p><p>Parallel Scavenge垃圾收集器：</p><p>​</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> Java基础 </category>
-          
-      </categories>
-      
-      
-    </entry>
-    
-    
   
-  
-    
-    
-    <entry>
-      <title>C++基础</title>
-      <link href="/hexo-web/categories/C++%E5%9F%BA%E7%A1%80/index.html"/>
-      <url>/hexo-web/categories/C++%E5%9F%BA%E7%A1%80/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Java基础</title>
-      <link href="/hexo-web/categories/Java%E5%9F%BA%E7%A1%80/index.html"/>
-      <url>/hexo-web/categories/Java%E5%9F%BA%E7%A1%80/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>中间件</title>
-      <link href="/hexo-web/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/index.html"/>
-      <url>/hexo-web/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>前端杂烩</title>
-      <link href="/hexo-web/categories/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/index.html"/>
-      <url>/hexo-web/categories/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>开发工具</title>
-      <link href="/hexo-web/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/index.html"/>
-      <url>/hexo-web/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>开源框架</title>
-      <link href="/hexo-web/categories/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/index.html"/>
-      <url>/hexo-web/categories/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>操作系统</title>
-      <link href="/hexo-web/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/index.html"/>
-      <url>/hexo-web/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>数据库</title>
-      <link href="/hexo-web/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/index.html"/>
-      <url>/hexo-web/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>理论体系</title>
-      <link href="/hexo-web/categories/%E7%90%86%E8%AE%BA%E4%BD%93%E7%B3%BB/index.html"/>
-      <url>/hexo-web/categories/%E7%90%86%E8%AE%BA%E4%BD%93%E7%B3%BB/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>脚本语言</title>
-      <link href="/hexo-web/categories/%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/index.html"/>
-      <url>/hexo-web/categories/%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>虚拟容器</title>
-      <link href="/hexo-web/categories/%E8%99%9A%E6%8B%9F%E5%AE%B9%E5%99%A8/index.html"/>
-      <url>/hexo-web/categories/%E8%99%9A%E6%8B%9F%E5%AE%B9%E5%99%A8/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
   
 </search>
