@@ -57,7 +57,7 @@ index_img: https://fastly.jsdelivr.net/npm/halo-theme-butterfly@latest/above.png
 default_top_img:
 
 # The banner image of archive page
-archive_img:
+archive_img: https://api.btstu.cn/sjbz/api.php?lx=dongman&format=images
 
 # If the banner of tag page not setting, it will show the top_img
 # note: tag page, not tags page (子標籤頁面的 top_img)
