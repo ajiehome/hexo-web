@@ -1,13 +1,13 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>SpringCloud笔记 | 阿杰之家</title><meta name="author" content="ajiehome"><meta name="copyright" content="ajiehome"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Spring Cloud服务注册中心eureka-server pom支持  &lt;dependency&gt;      &lt;groupId&gt;org.springframework.cloud&lt;&#x2F;groupId&gt;      &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-server&lt;&#x2F;artifactId">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>SpringCloud笔记 | 阿杰之家</title><meta name="author" content="ajiehome"><meta name="copyright" content="ajiehome"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Spring Cloud服务注册中心eureka-server pom支持  &lt;dependency&gt;      &lt;groupId&gt;org.springframework.cloud&lt;&#x2F;groupId&gt;      &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-server&lt;&#x2F;artifactId&gt; &lt;&#x2F;depen">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringCloud笔记">
 <meta property="og:url" content="http://ajiehome.github.io/hexo-web/2023/06/07/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/SpringCloud%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="阿杰之家">
-<meta property="og:description" content="Spring Cloud服务注册中心eureka-server pom支持  &lt;dependency&gt;      &lt;groupId&gt;org.springframework.cloud&lt;&#x2F;groupId&gt;      &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-server&lt;&#x2F;artifactId">
+<meta property="og:description" content="Spring Cloud服务注册中心eureka-server pom支持  &lt;dependency&gt;      &lt;groupId&gt;org.springframework.cloud&lt;&#x2F;groupId&gt;      &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-server&lt;&#x2F;artifactId&gt; &lt;&#x2F;depen">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
 <meta property="article:published_time" content="2023-06-07T07:58:40.000Z">
-<meta property="article:modified_time" content="2023-06-08T08:35:18.365Z">
+<meta property="article:modified_time" content="2023-06-08T08:52:07.241Z">
 <meta property="article:author" content="ajiehome">
 <meta property="article:tag" content="ajiehome">
 <meta property="article:tag" content="阿杰之家">
@@ -18,7 +18,7 @@
   localSearch: {"path":"/./search.xml","preload":false,"top_n_per_article":1,"unescape":true,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
   translate: undefined,
   noticeOutdate: undefined,
-  highlight: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
   copy: {
     success: '复制成功',
     error: '复制错误',
@@ -59,7 +59,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2023-06-08 16:35:18'
+  postUpdate: '2023-06-08 16:52:07'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -163,259 +163,263 @@
       }
     }
     detectApple()
-    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">81</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">11</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://api.btstu.cn/sjbz/api.php?lx=dongman&amp;format=images')"><nav id="nav"><span id="blog-info"><a href="/" title="阿杰之家"><span class="site-name">阿杰之家</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">SpringCloud笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-06-07T07:58:40.000Z" title="发表于 2023-06-07 15:58:40">2023-06-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-06-08T08:35:18.365Z" title="更新于 2023-06-08 16:35:18">2023-06-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/">开源框架</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="SpringCloud笔记"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Spring-Cloud"><a href="#Spring-Cloud" class="headerlink" title="Spring Cloud"></a>Spring Cloud</h1><p><strong>服务注册中心<code>eureka-server</code></strong></p>
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">81</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">11</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://api.btstu.cn/sjbz/api.php?lx=dongman&amp;format=images')"><nav id="nav"><span id="blog-info"><a href="/" title="阿杰之家"><span class="site-name">阿杰之家</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">SpringCloud笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-06-07T07:58:40.000Z" title="发表于 2023-06-07 15:58:40">2023-06-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-06-08T08:52:07.241Z" title="更新于 2023-06-08 16:52:07">2023-06-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/">开源框架</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="SpringCloud笔记"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Spring-Cloud"><a href="#Spring-Cloud" class="headerlink" title="Spring Cloud"></a>Spring Cloud</h1><p><strong>服务注册中心<code>eureka-server</code></strong></p>
 <p>pom支持</p>
-<pre><code class="xml"> &lt;dependency&gt;
-     &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-     &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-server&lt;/artifactId&gt;
-&lt;/dependency&gt;
-</code></pre>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.cloud<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-cloud-starter-netflix-eureka-server<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>application.properties</p>
-<pre><code class="properties">server.port=8080
-eureka.instance.hostname=localhost
-#是否注册到服务中心，本身就是注册中
-eureka.client.register-with-eureka=false
-eureka.client.fetch-registry=false
-#服务中心的名字地址
-eureka.client.service-url.defaultZone=http://$&#123;eureka.instance.hostname&#125;:$&#123;server.port&#125;/eureka/
-spring.application.name=eureka-server
-</code></pre>
+<pre class="line-numbers language-properties" data-language="properties"><code class="language-properties"><span class="token key attr-name">server.port</span><span class="token punctuation">=</span><span class="token value attr-value">8080</span>
+<span class="token key attr-name">eureka.instance.hostname</span><span class="token punctuation">=</span><span class="token value attr-value">localhost</span>
+<span class="token comment">#是否注册到服务中心，本身就是注册中</span>
+<span class="token key attr-name">eureka.client.register-with-eureka</span><span class="token punctuation">=</span><span class="token value attr-value">false</span>
+<span class="token key attr-name">eureka.client.fetch-registry</span><span class="token punctuation">=</span><span class="token value attr-value">false</span>
+<span class="token comment">#服务中心的名字地址</span>
+<span class="token key attr-name">eureka.client.service-url.defaultZone</span><span class="token punctuation">=</span><span class="token value attr-value">http://$&#123;eureka.instance.hostname&#125;:$&#123;server.port&#125;/eureka/</span>
+<span class="token key attr-name">spring.application.name</span><span class="token punctuation">=</span><span class="token value attr-value">eureka-server</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>启动类支持<code>@EnableEurekaServer</code></p>
-<pre><code class="java">@SpringBootApplication
-@EnableEurekaServer
-public class SubkeyOneApplication &#123;
-    public static void main(String[] args) &#123;
-        SpringApplication.run(SubkeyOneApplication.class, args);
-    &#125;
-&#125;
-</code></pre>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@SpringBootApplication</span>
+<span class="token annotation punctuation">@EnableEurekaServer</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SubkeyOneApplication</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">SpringApplication</span><span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span><span class="token class-name">SubkeyOneApplication</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>访问<a href="http://localhost:8080即可看到所有已经注册的服务">http://localhost:8080即可看到所有已经注册的服务</a></p>
 <hr>
 <p><strong>服务注册</strong></p>
 <p>pom支持</p>
-<pre><code class="xml"> &lt;dependency&gt;
-            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-            &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-client&lt;/artifactId&gt;
-        &lt;/dependency&gt;
-</code></pre>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+           <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.cloud<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+           <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-cloud-starter-netflix-eureka-client<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+       <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>application.properties</p>
-<pre><code class="properties">server.port=8081
-spring.application.name=zuul-server
-eureka.client.service-url.defaultZone=http://localhost:8080/eureka
-</code></pre>
+<pre class="line-numbers language-properties" data-language="properties"><code class="language-properties"><span class="token key attr-name">server.port</span><span class="token punctuation">=</span><span class="token value attr-value">8081</span>
+<span class="token key attr-name">spring.application.name</span><span class="token punctuation">=</span><span class="token value attr-value">zuul-server</span>
+<span class="token key attr-name">eureka.client.service-url.defaultZone</span><span class="token punctuation">=</span><span class="token value attr-value">http://localhost:8080/eureka</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
 <p>启动类支持</p>
-<pre><code class="java">@SpringBootApplication
-@EnableEurekaClient
-@EnableDiscoveryClient
-</code></pre>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@SpringBootApplication</span>
+<span class="token annotation punctuation">@EnableEurekaClient</span>
+<span class="token annotation punctuation">@EnableDiscoveryClient</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+
+
 <hr>
 <p><strong>负载均衡：<code>Ribbon</code></strong></p>
 <p>在使用<code>Ribbon</code>作为负载均衡的时候，需要手动注入一个<code>RestTemplate</code>的Bean到Ioc，并且为该Bean加入<code>@LoadBalanced</code>开启负载均衡，使其能够以查询到服务注册中心的服务。</p>
 <p>例如：</p>
-<pre><code class="java">@Bean
-@LoadBalanced
-public RestTemplate getRestTemplate()&#123;
-    return new RestTemplate();
-&#125;
-</code></pre>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Bean</span>
+<span class="token annotation punctuation">@LoadBalanced</span>
+<span class="token keyword">public</span> <span class="token class-name">RestTemplate</span> <span class="token function">getRestTemplate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">RestTemplate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <hr>
 <p><strong>负载均衡：<code>Feign</code></strong></p>
 <p>使用<code>Feign</code>作为负载均衡的时候，需要先在启动类使用<code>@EnableFeignClients</code>来开启，而后创建一个接口，使用<code>@FeignClient(value = &quot;DATA-SERVER&quot;)</code>标签来指定访问的服务</p>
 <p>例如：</p>
-<pre><code class="java">@FeignClient(value = &quot;DATA-SERVER&quot;)
-public interface IProductClientFeign &#123;
-    /**
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@FeignClient</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token string">"DATA-SERVER"</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">IProductClientFeign</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">/**
      * 请求数据
      * @return 结果
-     */
-    @GetMapping(&quot;/product/all&quot;)
-    List&lt;Product&gt; allProduct();
-&#125;
-</code></pre>
+     */</span>
+    <span class="token annotation punctuation">@GetMapping</span><span class="token punctuation">(</span><span class="token string">"/product/all"</span><span class="token punctuation">)</span>
+    <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Product</span><span class="token punctuation">></span></span> <span class="token function">allProduct</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <hr>
 <p><strong>配置服务<code>ConfigServer</code></strong></p>
 <p>pom配置服务包</p>
-<pre><code class="xml">&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-cloud-config-server&lt;/artifactId&gt;
-&lt;/dependency&gt;
-</code></pre>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.cloud<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-cloud-config-server<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>配置文件<code>properties</code>，配置服务参数</p>
-<pre><code class="properties">server.port=8030
-spring.application.name=config-server
-eureka.client.service-url.defaultZone=http://localhost:8080/eureka
-spring.cloud.config.label=master
-spring.cloud.config.server.git.uri=https://github.com/Huangjie-Github/spring-cloud-config-server
-spring.cloud.config.server.git.search-paths=config
-spring.cloud.config.server.git.username=Huangjie-Github
-spring.cloud.config.server.git.password=h19981228j
-</code></pre>
+<pre class="line-numbers language-properties" data-language="properties"><code class="language-properties"><span class="token key attr-name">server.port</span><span class="token punctuation">=</span><span class="token value attr-value">8030</span>
+<span class="token key attr-name">spring.application.name</span><span class="token punctuation">=</span><span class="token value attr-value">config-server</span>
+<span class="token key attr-name">eureka.client.service-url.defaultZone</span><span class="token punctuation">=</span><span class="token value attr-value">http://localhost:8080/eureka</span>
+<span class="token key attr-name">spring.cloud.config.label</span><span class="token punctuation">=</span><span class="token value attr-value">master</span>
+<span class="token key attr-name">spring.cloud.config.server.git.uri</span><span class="token punctuation">=</span><span class="token value attr-value">https://github.com/Huangjie-Github/spring-cloud-config-server</span>
+<span class="token key attr-name">spring.cloud.config.server.git.search-paths</span><span class="token punctuation">=</span><span class="token value attr-value">config</span>
+<span class="token key attr-name">spring.cloud.config.server.git.username</span><span class="token punctuation">=</span><span class="token value attr-value">Huangjie-Github</span>
+<span class="token key attr-name">spring.cloud.config.server.git.password</span><span class="token punctuation">=</span><span class="token value attr-value">h19981228j</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>在启动类上开启服务</p>
-<pre><code class="java">@EnableEurekaClient
-@EnableConfigServer
-@EnableDiscoveryClient
-</code></pre>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@EnableEurekaClient</span>
+<span class="token annotation punctuation">@EnableConfigServer</span>
+<span class="token annotation punctuation">@EnableDiscoveryClient</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
 <hr>
 <p><strong>使用<code>ConfigServer</code></strong></p>
 <p>pom引入服务使用包</p>
-<pre><code class="xml">&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-cloud-starter-config&lt;/artifactId&gt;
-&lt;/dependency&gt;
-</code></pre>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.cloud<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-cloud-starter-config<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>配置文件中声明配置服务参数</p>
 <p><strong>注意：</strong>在使用配置服务的时候，下列参数一定要新建一个bootstrap.properties&#x2F;bootstrap.yml的配置文件，因为bootstrap的配置文件会比application的配置文件先启动加载，需要先启动加载好配置服务才能进行本服务的相关数据注入</p>
-<pre><code class="properties">#分支
-spring.cloud.config.label=master
-#启用的模式
-spring.cloud.config.profile=dev
-#是否发现启用
-spring.cloud.config.discovery.enabled=true
-#注册中心的名称
-spring.cloud.config.discovery.serviceId=CONFIG-SERVER
-eureka.client.service-url.defaultZone=http://localhost:8080/eureka
-</code></pre>
+<pre class="line-numbers language-properties" data-language="properties"><code class="language-properties"><span class="token comment">#分支</span>
+<span class="token key attr-name">spring.cloud.config.label</span><span class="token punctuation">=</span><span class="token value attr-value">master</span>
+<span class="token comment">#启用的模式</span>
+<span class="token key attr-name">spring.cloud.config.profile</span><span class="token punctuation">=</span><span class="token value attr-value">dev</span>
+<span class="token comment">#是否发现启用</span>
+<span class="token key attr-name">spring.cloud.config.discovery.enabled</span><span class="token punctuation">=</span><span class="token value attr-value">true</span>
+<span class="token comment">#注册中心的名称</span>
+<span class="token key attr-name">spring.cloud.config.discovery.serviceId</span><span class="token punctuation">=</span><span class="token value attr-value">CONFIG-SERVER</span>
+<span class="token key attr-name">eureka.client.service-url.defaultZone</span><span class="token punctuation">=</span><span class="token value attr-value">http://localhost:8080/eureka</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>配置之后，只需要在引用的类上使用<code>@RefreshScope</code>标签开启，需要引用的参数上使用<code>@Value</code>标签即可</p>
 <hr>
 <p><strong>消息总线bus：<code>RabbitMQ</code></strong></p>
 <p>pom使用jar</p>
-<pre><code class="xml">&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;
-&lt;/dependency&gt;   
-&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-cloud-starter-bus-amqp&lt;/artifactId&gt;
-&lt;/dependency&gt; 
-</code></pre>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-actuator<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>   
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.cloud<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-cloud-starter-bus-amqp<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>配置文件修改</p>
 <p>bootstrap.properties</p>
-<pre><code class="properties">#与配置服务绑定
-spring.cloud.config.label=master
-spring.cloud.config.profile=dev
-spring.cloud.config.discovery.enabled=true
-spring.cloud.config.discovery.serviceId=CONFIG-SERVER
-eureka.client.service-url.defaultZone=http://localhost:8080/eureka
-#bus总线配置
-spring.cloud.bus.enabled=true
-spring.cloud.bus.trace.enabled=true
-#配置RabbitMQ
-spring.rabbitmq.host=127.0.0.1
-spring.rabbitmq.port=5672
-spring.rabbitmq.username=guest
-spring.rabbitmq.password=guest
-</code></pre>
+<pre class="line-numbers language-properties" data-language="properties"><code class="language-properties"><span class="token comment">#与配置服务绑定</span>
+<span class="token key attr-name">spring.cloud.config.label</span><span class="token punctuation">=</span><span class="token value attr-value">master</span>
+<span class="token key attr-name">spring.cloud.config.profile</span><span class="token punctuation">=</span><span class="token value attr-value">dev</span>
+<span class="token key attr-name">spring.cloud.config.discovery.enabled</span><span class="token punctuation">=</span><span class="token value attr-value">true</span>
+<span class="token key attr-name">spring.cloud.config.discovery.serviceId</span><span class="token punctuation">=</span><span class="token value attr-value">CONFIG-SERVER</span>
+<span class="token key attr-name">eureka.client.service-url.defaultZone</span><span class="token punctuation">=</span><span class="token value attr-value">http://localhost:8080/eureka</span>
+<span class="token comment">#bus总线配置</span>
+<span class="token key attr-name">spring.cloud.bus.enabled</span><span class="token punctuation">=</span><span class="token value attr-value">true</span>
+<span class="token key attr-name">spring.cloud.bus.trace.enabled</span><span class="token punctuation">=</span><span class="token value attr-value">true</span>
+<span class="token comment">#配置RabbitMQ</span>
+<span class="token key attr-name">spring.rabbitmq.host</span><span class="token punctuation">=</span><span class="token value attr-value">127.0.0.1</span>
+<span class="token key attr-name">spring.rabbitmq.port</span><span class="token punctuation">=</span><span class="token value attr-value">5672</span>
+<span class="token key attr-name">spring.rabbitmq.username</span><span class="token punctuation">=</span><span class="token value attr-value">guest</span>
+<span class="token key attr-name">spring.rabbitmq.password</span><span class="token punctuation">=</span><span class="token value attr-value">guest</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>application.properties</p>
-<pre><code class="properties">server.port=8011
-spring.application.name=feign-server
-#路线访问允许/actuator/refresh
-management.endpoints.web.exposure.include=*
-management.endpoints.web.cors.allowed-origins=*
-management.endpoints.web.cors.allowed-methods=*
-</code></pre>
+<pre class="line-numbers language-properties" data-language="properties"><code class="language-properties"><span class="token key attr-name">server.port</span><span class="token punctuation">=</span><span class="token value attr-value">8011</span>
+<span class="token key attr-name">spring.application.name</span><span class="token punctuation">=</span><span class="token value attr-value">feign-server</span>
+<span class="token comment">#路线访问允许/actuator/refresh</span>
+<span class="token key attr-name">management.endpoints.web.exposure.include</span><span class="token punctuation">=</span><span class="token value attr-value">*</span>
+<span class="token key attr-name">management.endpoints.web.cors.allowed-origins</span><span class="token punctuation">=</span><span class="token value attr-value">*</span>
+<span class="token key attr-name">management.endpoints.web.cors.allowed-methods</span><span class="token punctuation">=</span><span class="token value attr-value">*</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>访问需要更新的微服务<a target="_blank" rel="noopener" href="http://localhost:801/actuator/refresh">http://localhost:801/actuator/refresh</a></p>
 <p>该访问不支持Get访问，只支持Post访问</p>
-<pre><code class="java">public static void main(String[] args) &#123;
-        HashMap&lt;String,String&gt; headers =new HashMap&lt;&gt;();
-        headers.put(&quot;Content-Type&quot;, &quot;application/json; charset=utf-8&quot;);
-        System.out.println(&quot;因为要去git获取，还要刷新config-server, 会比较卡，所以一般会要好几秒才能完成，请耐心等待&quot;);
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span><span class="token class-name">String</span><span class="token punctuation">></span></span> headers <span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        headers<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"Content-Type"</span><span class="token punctuation">,</span> <span class="token string">"application/json; charset=utf-8"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"因为要去git获取，还要刷新config-server, 会比较卡，所以一般会要好几秒才能完成，请耐心等待"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
  
-        String result = HttpUtil.createPost(&quot;http://localhost:8012/actuator/bus-refresh&quot;).addHeaders(headers).execute().body();
-        System.out.println(&quot;result:&quot;+result);
-        System.out.println(&quot;refresh 完成&quot;);
-    &#125;
-</code></pre>
+        <span class="token class-name">String</span> result <span class="token operator">=</span> <span class="token class-name">HttpUtil</span><span class="token punctuation">.</span><span class="token function">createPost</span><span class="token punctuation">(</span><span class="token string">"http://localhost:8012/actuator/bus-refresh"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">addHeaders</span><span class="token punctuation">(</span>headers<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">body</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"result:"</span><span class="token operator">+</span>result<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"refresh 完成"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <hr>
 <p><strong>断路器<code>Hystrix</code></strong></p>
 <p>pom支持</p>
-<pre><code class="xml">&lt;dependency&gt;
-     &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-     &lt;artifactId&gt;spring-cloud-starter-netflix-hystrix&lt;/artifactId&gt;
-&lt;/dependency&gt;   
-</code></pre>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.cloud<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-cloud-starter-netflix-hystrix<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>   <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>原来使用Feign做负载均衡的连接接口类修改其</p>
-<pre><code class="java">//原来的
-@FeignClient(value = &quot;DATA-SERVER&quot;)
-//修改之后的
-@FeignClient(value = &quot;DATA-SERVER&quot;,fallback = ProductClientFeignHystrixImpl.class)
-</code></pre>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">//原来的</span>
+<span class="token annotation punctuation">@FeignClient</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token string">"DATA-SERVER"</span><span class="token punctuation">)</span>
+<span class="token comment">//修改之后的</span>
+<span class="token annotation punctuation">@FeignClient</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token string">"DATA-SERVER"</span><span class="token punctuation">,</span>fallback <span class="token operator">=</span> <span class="token class-name">ProductClientFeignHystrixImpl</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p><code>fallback</code>：回退，大概就是说，当指定的微服务不可用时，回退到指定类中的复写方法。因为指定的回退类是继承与当前的接口，那么必定需要继承当前的访问抽象方法。所以，在微服务不可用的时候，调用其复写的方法，做微服务不可用处理。</p>
 <p>IProductClientFeign.class</p>
-<pre><code class="java">@FeignClient(value = &quot;DATA-SERVER&quot;,fallback = ProductClientFeignHystrixImpl.class)
-public interface IProductClientFeign &#123;
-    /**
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@FeignClient</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token string">"DATA-SERVER"</span><span class="token punctuation">,</span>fallback <span class="token operator">=</span> <span class="token class-name">ProductClientFeignHystrixImpl</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">IProductClientFeign</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">/**
      * 请求数据
      * @return 结果
-     */
-    @GetMapping(&quot;/product/all&quot;)
-    List&lt;Product&gt; allProduct();
-&#125;
-</code></pre>
+     */</span>
+    <span class="token annotation punctuation">@GetMapping</span><span class="token punctuation">(</span><span class="token string">"/product/all"</span><span class="token punctuation">)</span>
+    <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Product</span><span class="token punctuation">></span></span> <span class="token function">allProduct</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>ProductClientFeignHystrixImpl.class</p>
-<pre><code class="java">@Component
-public class ProductClientFeignHystrixImpl implements IProductClientFeign &#123;
-    @Override
-    public List&lt;Product&gt; allProduct() &#123;
-        ArrayList&lt;Product&gt; products = new ArrayList&lt;&gt;();
-        products.add(new Product(1,&quot;数据服务不可用&quot;,0));
-        return products;
-    &#125;
-&#125;
-</code></pre>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Component</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ProductClientFeignHystrixImpl</span> <span class="token keyword">implements</span> <span class="token class-name">IProductClientFeign</span> <span class="token punctuation">&#123;</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Product</span><span class="token punctuation">></span></span> <span class="token function">allProduct</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Product</span><span class="token punctuation">></span></span> products <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        products<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Product</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token string">"数据服务不可用"</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> products<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>配置完断路器之后，还需要去启动类中启用它<code>@EnableHystri</code>，以及去配置文件中开启相关服务操作<code>feign.hystrix.enabled=true</code></p>
 <hr>
 <p><strong>断路器监听<code>hystrix-dashboard</code></strong></p>
 <p>pom支持</p>
-<pre><code class="xml">&lt;!--        连接服务注册中心--&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-client&lt;/artifactId&gt;
-&lt;/dependency&gt;
-&lt;!--        断路器监听--&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-cloud-starter-netflix-hystrix-dashboard&lt;/artifactId&gt;
-&lt;/dependency&gt;
-&lt;!--        断路器--&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-cloud-starter-netflix-hystrix&lt;/artifactId&gt;
-&lt;/dependency&gt;
-&lt;!--        环节映射--&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;
-&lt;/dependency&gt;
-</code></pre>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token comment">&lt;!--        连接服务注册中心--></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.cloud<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-cloud-starter-netflix-eureka-client<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+<span class="token comment">&lt;!--        断路器监听--></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.cloud<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-cloud-starter-netflix-hystrix-dashboard<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+<span class="token comment">&lt;!--        断路器--></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.cloud<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-cloud-starter-netflix-hystrix<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+<span class="token comment">&lt;!--        环节映射--></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-actuator<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>启动类上开启断路器监听</p>
 <p><code>@EnableHystrixDashboard</code>：开启断路监听</p>
-<pre><code class="java">@SpringBootApplication
-@EnableHystrixDashboard
-@EnableEurekaClient
-public class HystrixMonitorServerApplication &#123;
-    public static void main(String[] args) &#123;
-        SpringApplication.run(HystrixMonitorServerApplication.class, args);
-    &#125;
-&#125;
-</code></pre>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@SpringBootApplication</span>
+<span class="token annotation punctuation">@EnableHystrixDashboard</span>
+<span class="token annotation punctuation">@EnableEurekaClient</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">HystrixMonitorServerApplication</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">SpringApplication</span><span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span><span class="token class-name">HystrixMonitorServerApplication</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>application.properties</p>
-<pre><code class="properties">server.port=8040
-spring.application.name=hystrix-monitor-server
-eureka.client.service-url.defaultZone=http://localhost:8080/eureka
-</code></pre>
+<pre class="line-numbers language-properties" data-language="properties"><code class="language-properties"><span class="token key attr-name">server.port</span><span class="token punctuation">=</span><span class="token value attr-value">8040</span>
+<span class="token key attr-name">spring.application.name</span><span class="token punctuation">=</span><span class="token value attr-value">hystrix-monitor-server</span>
+<span class="token key attr-name">eureka.client.service-url.defaultZone</span><span class="token punctuation">=</span><span class="token value attr-value">http://localhost:8080/eureka</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
 <p>给共享信息让监听器监听的微服务使用<code>@EnableCircuitBreaker</code>开启分享</p>
-<pre><code class="java">@SpringBootApplication
-@EnableEurekaClient
-@EnableFeignClients
-@EnableDiscoveryClient
-@EnableHystrix
-@EnableCircuitBreaker
-public class FeignServerApplication &#123;
-    public static void main(String[] args) &#123;
-        SpringApplication.run(FeignServerApplication.class, args);
-    &#125;
-&#125;
-</code></pre>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@SpringBootApplication</span>
+<span class="token annotation punctuation">@EnableEurekaClient</span>
+<span class="token annotation punctuation">@EnableFeignClients</span>
+<span class="token annotation punctuation">@EnableDiscoveryClient</span>
+<span class="token annotation punctuation">@EnableHystrix</span>
+<span class="token annotation punctuation">@EnableCircuitBreaker</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">FeignServerApplication</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">SpringApplication</span><span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span><span class="token class-name">FeignServerApplication</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p><code>@SpringBootApplication</code>：SpeingBoot启动类<br><code>@EnableEurekaClient</code>：启用微服务注册连接，让注册中心发现，扫描该服务<br><code>@EnableFeignClients</code>：让注册中心发现这个Feign负载均衡的服务<br><code>@EnableDiscoveryClient</code>：<br><code>@EnableHystrix</code>：启用熔断<br><code>@EnableCircuitBreaker</code>：分享信息给熔断监听，本身必须要有熔断机制</p>
 <p>访问地址</p>
 <p><a target="_blank" rel="noopener" href="http://localhost:8040/hystrix">http://localhost:8040/hystrix</a></p>
@@ -424,47 +428,47 @@ public class FeignServerApplication &#123;
 <hr>
 <p>断路器聚合监听</p>
 <p>pom支持</p>
-<pre><code class="xml">&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-client&lt;/artifactId&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-cloud-starter-netflix-hystrix&lt;/artifactId&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-cloud-starter-netflix-hystrix-dashboard&lt;/artifactId&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-cloud-starter-netflix-turbine&lt;/artifactId&gt;
-&lt;/dependency&gt;
-</code></pre>
-<p>application.properties</p>
-<pre><code class="properties">server.port=8050
-spring.application.name=hystrix-turbine-server
-eureka.client.service-url.defaultZone=http://localhost:8080/eureka
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.cloud<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-cloud-starter-netflix-eureka-client<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.cloud<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-cloud-starter-netflix-hystrix<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.cloud<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-cloud-starter-netflix-hystrix-dashboard<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-actuator<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.cloud<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-cloud-starter-netflix-turbine<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-turbine.aggregator.cluster-config=default
-#配置Eureka中的serviceId列表，表明监控哪些服务
-turbine.app-config=feign-server
-turbine.cluster-name-expression= new String(&quot;default&quot;)
-</code></pre>
+<p>application.properties</p>
+<pre class="line-numbers language-properties" data-language="properties"><code class="language-properties"><span class="token key attr-name">server.port</span><span class="token punctuation">=</span><span class="token value attr-value">8050</span>
+<span class="token key attr-name">spring.application.name</span><span class="token punctuation">=</span><span class="token value attr-value">hystrix-turbine-server</span>
+<span class="token key attr-name">eureka.client.service-url.defaultZone</span><span class="token punctuation">=</span><span class="token value attr-value">http://localhost:8080/eureka</span>
+
+<span class="token key attr-name">turbine.aggregator.cluster-config</span><span class="token punctuation">=</span><span class="token value attr-value">default</span>
+<span class="token comment">#配置Eureka中的serviceId列表，表明监控哪些服务</span>
+<span class="token key attr-name">turbine.app-config</span><span class="token punctuation">=</span><span class="token value attr-value">feign-server</span>
+<span class="token key attr-name">turbine.cluster-name-expression</span><span class="token punctuation">=</span> <span class="token value attr-value">new String("default")</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>启动类开启</p>
-<pre><code class="java">@SpringBootApplication
-@EnableTurbine
-@EnableEurekaClient
-public class HystrixTurbineServerApplication &#123;
-    public static void main(String[] args) &#123;
-        SpringApplication.run(HystrixTurbineServerApplication.class, args);
-    &#125;
-&#125;
-</code></pre>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@SpringBootApplication</span>
+<span class="token annotation punctuation">@EnableTurbine</span>
+<span class="token annotation punctuation">@EnableEurekaClient</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">HystrixTurbineServerApplication</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">SpringApplication</span><span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span><span class="token class-name">HystrixTurbineServerApplication</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>使用上面的熔断监听服务去获得监听服务</p>
 <p><a target="_blank" rel="noopener" href="http://localhost:8040/hystrix%E3%80%81">http://localhost:8040/hystrix、</a></p>
 <p>输入聚合监听的端口地址进行局和监听</p>
@@ -472,37 +476,37 @@ public class HystrixTurbineServerApplication &#123;
 <hr>
 <p><strong>网关<code>zuul</code></strong></p>
 <p>pom支持</p>
-<pre><code class="xml">&lt;dependency&gt;
-     &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-     &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-client&lt;/artifactId&gt;
-&lt;/dependency&gt;
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.cloud<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-cloud-starter-netflix-eureka-client<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
 
-&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-cloud-starter-netflix-zuul&lt;/artifactId&gt;
-&lt;/dependency&gt;
-</code></pre>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.cloud<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-cloud-starter-netflix-zuul<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>application.properties</p>
-<pre><code class="properties">server.port=8060
-spring.application.name=zuul-server
-eureka.client.service-url.defaultZone=http://localhost:8080/eureka
-#映射
-zuul.routes.api-a.path=/api-data/**
-zuul.routes.api-a.service-id=DATA-SERVER
-zuul.routes.api-b.path=/api-feign/**
-zuul.routes.api-b.service-id=FEIGN-SERVER
-</code></pre>
+<pre class="line-numbers language-properties" data-language="properties"><code class="language-properties"><span class="token key attr-name">server.port</span><span class="token punctuation">=</span><span class="token value attr-value">8060</span>
+<span class="token key attr-name">spring.application.name</span><span class="token punctuation">=</span><span class="token value attr-value">zuul-server</span>
+<span class="token key attr-name">eureka.client.service-url.defaultZone</span><span class="token punctuation">=</span><span class="token value attr-value">http://localhost:8080/eureka</span>
+<span class="token comment">#映射</span>
+<span class="token key attr-name">zuul.routes.api-a.path</span><span class="token punctuation">=</span><span class="token value attr-value">/api-data/**</span>
+<span class="token key attr-name">zuul.routes.api-a.service-id</span><span class="token punctuation">=</span><span class="token value attr-value">DATA-SERVER</span>
+<span class="token key attr-name">zuul.routes.api-b.path</span><span class="token punctuation">=</span><span class="token value attr-value">/api-feign/**</span>
+<span class="token key attr-name">zuul.routes.api-b.service-id</span><span class="token punctuation">=</span><span class="token value attr-value">FEIGN-SERVER</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>启动类开启网关注册<code>@EnableZuulProxy</code></p>
-<pre><code class="java">@SpringBootApplication
-@EnableEurekaClient
-@EnableDiscoveryClient
-@EnableZuulProxy
-public class ZuulServerApplication &#123;
-    public static void main(String[] args) &#123;
-        SpringApplication.run(ZuulServerApplication.class, args);
-    &#125;
-&#125;
-</code></pre>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@SpringBootApplication</span>
+<span class="token annotation punctuation">@EnableEurekaClient</span>
+<span class="token annotation punctuation">@EnableDiscoveryClient</span>
+<span class="token annotation punctuation">@EnableZuulProxy</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ZuulServerApplication</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">SpringApplication</span><span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span><span class="token class-name">ZuulServerApplication</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>访问地址</p>
 <p><a target="_blank" rel="noopener" href="http://localhost:8060/api-feign/feign/all">http://localhost:8060/api-feign/feign/all</a></p>
 <hr>
