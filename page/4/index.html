@@ -21,7 +21,7 @@
 <script src="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/highlight.min.js"></script>
 <link
     rel="stylesheet"
-    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/github.min.css"
+    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/devibeans.min.css"
 />
 <script src="/js/lib/highlight.js"></script>
 
@@ -171,6 +171,61 @@
         
 
 <div class="post">
+    <a href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Javascript%E7%9A%84dom%E6%93%8D%E4%BD%9C/">
+        <h2 class="post-title">Javascript的dom操作</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                前端杂烩
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="JS原生DOM操作"><a href="#JS原生DOM操作" class="headerlink" title="JS原生DOM操作"></a>JS原生DOM操作</h1><pre><code class="javascript">let mainView = document.getElementById(&quot;main&quot;);
+                console.log(mainView)
+                let textDom = document.createElement(&quot;img&quot;);
+                let x = Math.random()*200+&quot;px&quot;;
+                let y = (Math.random()*300+100)+&quot;px&quot;;
+                textDom.style.top = y;
+                textDom.style.width = &quot;20px&quot;;
+                textDom.style.height = &quot;20px&quot;;
+                textDom.style.left = x;
+                textDom.style.border = &quot;solid 1px #cccccc&quot;;
+                textDom.style.zIndex = &quot;999&quot;;
+                textDom.style.position = &quot;absolute&quot;;
+                textDom.setAttribute(&quot;src&quot;,&quot;../../static/log.jpg&quot;);
+                // textDom.setAttribute(&quot;src&quot;,&quot;http://a2.att.hudong.com/36/48/19300001357258133412489354717.jpg&quot;);
+                mainView.appendChild(textDom)
+                console.log(mainView)
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Javascript%E7%9A%84dom%E6%93%8D%E4%BD%9C/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/NodeJS%E9%85%8D%E7%BD%AE%E5%88%9B%E5%BB%BAVUE%E9%A1%B9%E7%9B%AE/">
         <h2 class="post-title">NodeJS配置创建VUE项目</h2>
     </a>
@@ -288,61 +343,6 @@ vue -V
         
     </div>
     <a href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/NodeJS%E9%85%8D%E7%BD%AE%E5%88%9B%E5%BB%BAVUE%E9%A1%B9%E7%9B%AE/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Javascript%E7%9A%84dom%E6%93%8D%E4%BD%9C/">
-        <h2 class="post-title">Javascript的dom操作</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                前端杂烩
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="JS原生DOM操作"><a href="#JS原生DOM操作" class="headerlink" title="JS原生DOM操作"></a>JS原生DOM操作</h1><pre><code class="javascript">let mainView = document.getElementById(&quot;main&quot;);
-                console.log(mainView)
-                let textDom = document.createElement(&quot;img&quot;);
-                let x = Math.random()*200+&quot;px&quot;;
-                let y = (Math.random()*300+100)+&quot;px&quot;;
-                textDom.style.top = y;
-                textDom.style.width = &quot;20px&quot;;
-                textDom.style.height = &quot;20px&quot;;
-                textDom.style.left = x;
-                textDom.style.border = &quot;solid 1px #cccccc&quot;;
-                textDom.style.zIndex = &quot;999&quot;;
-                textDom.style.position = &quot;absolute&quot;;
-                textDom.setAttribute(&quot;src&quot;,&quot;../../static/log.jpg&quot;);
-                // textDom.setAttribute(&quot;src&quot;,&quot;http://a2.att.hudong.com/36/48/19300001357258133412489354717.jpg&quot;);
-                mainView.appendChild(textDom)
-                console.log(mainView)
-</code></pre>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Javascript%E7%9A%84dom%E6%93%8D%E4%BD%9C/" class="go-post">阅读全文</a>
 </div>
 
 <div class="post">
