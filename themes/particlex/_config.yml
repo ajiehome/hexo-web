@@ -60,8 +60,8 @@ card:
             theme: solid
             link: mailto:ajiehome1024@163.com
     friendLinks:
-        Yuzi: https://blog.yuzi.dev
-        LynxCatTheThird: https://lynxcatthethird.github.io
+        # Yuzi: https://blog.yuzi.dev
+        # LynxCatTheThird: https://lynxcatthethird.github.io
 
 # Footer info
 footer:
