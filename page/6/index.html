@@ -171,717 +171,6 @@
         
 
 <div class="post">
-    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%92%8CApache/">
-        <h2 class="post-title">Centos和Apache</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                操作系统
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="Centos与Apache"><a href="#Centos与Apache" class="headerlink" title="Centos与Apache"></a>Centos与Apache</h1><p>Apache<br>在Apache的安装目录，默认：<code>/etc/httpd</code>下有若干文件夹，<code>conf.d</code>文件夹是用来存储各个模块的配置文件，<code>conf.module.d</code>是用来给各个模块做映入的，也就是很多模块的引入都在这里面，<code>conf</code>文件夹主要是主配置文件的目录，<code>logs</code>文件夹打印日志的存储地，<code>moduls</code>是各个模块的位置</p>
-<h2 id="例如：httpd-conf：这个文件是apache的主配置文件，其他的conf-d和conf-module-d内的配置文件夹能够生效也是因为在这里面引入了两个文件夹下的所有文件，如shell-引入了conf-moudles-d下的所有配置文件，也就是所有需要的模块-Include-conf-modules-d-conf-引入了conf-d下的所有配置文件，也就是每个模块服务需要做的详细配置-IncludeOptional-conf-d-conf-gt-在我的主配置文件里面还有一个功能，那就是多域名的配置，这个的主要作用是，针对不同域名的访问，映射到不同的访问文件夹，具体的映射由vhost-map文件配置shell-RewriteEngine-on-RewriteMap-lowercase-int-tolower-RewriteMap-vhost-txt-var-www-vhost-map-RewriteCond-lowercase-SERVER-NAME-RewriteCond-vhost-1-RewriteRule-1-1"><a href="#例如：httpd-conf：这个文件是apache的主配置文件，其他的conf-d和conf-module-d内的配置文件夹能够生效也是因为在这里面引入了两个文件夹下的所有文件，如shell-引入了conf-moudles-d下的所有配置文件，也就是所有需要的模块-Include-conf-modules-d-conf-引入了conf-d下的所有配置文件，也就是每个模块服务需要做的详细配置-IncludeOptional-conf-d-conf-gt-在我的主配置文件里面还有一个功能，那就是多域名的配置，这个的主要作用是，针对不同域名的访问，映射到不同的访问文件夹，具体的映射由vhost-map文件配置shell-RewriteEngine-on-RewriteMap-lowercase-int-tolower-RewriteMap-vhost-txt-var-www-vhost-map-RewriteCond-lowercase-SERVER-NAME-RewriteCond-vhost-1-RewriteRule-1-1" class="headerlink" title="例如：httpd.conf：这个文件是apache的主配置文件，其他的conf.d和conf.module.d内的配置文件夹能够生效也是因为在这里面引入了两个文件夹下的所有文件，如shell #引入了conf.moudles.d下的所有配置文件，也就是所有需要的模块 Include conf.modules.d/*.conf #引入了conf.d下的所有配置文件，也就是每个模块服务需要做的详细配置 IncludeOptional conf.d/*.conf &gt;在我的主配置文件里面还有一个功能，那就是多域名的配置，这个的主要作用是，针对不同域名的访问，映射到不同的访问文件夹，具体的映射由vhost.map文件配置shell RewriteEngine on RewriteMap lowercase int:tolower RewriteMap vhost txt:/var/www/vhost.map RewriteCond ${lowercase:%{SERVER_NAME}} ^(.+)$ RewriteCond ${vhost:%1} ^(/.*)$ RewriteRule ^/(.*)$ %1/$1 "></a>例如：<code>httpd.conf</code>：这个文件是apache的主配置文件，其他的<code>conf.d</code>和<code>conf.module.d</code>内的配置文件夹能够生效也是因为在这里面引入了两个文件夹下的所有文件，如<br><code>shell #引入了conf.moudles.d下的所有配置文件，也就是所有需要的模块 Include conf.modules.d/*.conf #引入了conf.d下的所有配置文件，也就是每个模块服务需要做的详细配置 IncludeOptional conf.d/*.conf </code><br>&gt;在我的主配置文件里面还有一个功能，那就是多域名的配置，这个的主要作用是，针对不同域名的访问，映射到不同的访问文件夹，具体的映射由<code>vhost.map</code>文件配置<br><code>shell RewriteEngine on RewriteMap lowercase int:tolower RewriteMap vhost txt:/var/www/vhost.map RewriteCond $&#123;lowercase:%&#123;SERVER_NAME&#125;&#125; ^(.+)$ RewriteCond $&#123;vhost:%1&#125; ^(/.*)$ RewriteRule ^/(.*)$ %1/$1 </code></h2><blockquote>
-<p>在开启了SSL服务之后，存在一个问题，由于我的域名证书是单域名证书，所以我只能够给特定的域名SSL授权，所以我配置了一个SSL的但域名拦截重定向，这里的意思是只拦截<code>ajiehome.cn</code>和<code>www.ajiehome.cn</code>两个服务请求开头的所有服务，并且转到<code>https</code>服务</p>
-</blockquote>
-<pre><code class="shell">RewriteEngine On
-RewriteCond %&#123;SERVER_PORT&#125; 80
-RewriteCond %&#123;HTTP_HOST&#125; ^ajiehome.cn [NC,OR]
-RewriteCond %&#123;HTTP_HOST&#125; ^www.ajiehome.cn [NC]
-RewriteRule ^(.*)$ https://%&#123;HTTP_HOST&#125;/$1 [R,L]
-</code></pre>
-<hr>
-<blockquote>
-<p>如果用下面这个进行拦截重定向的话，会造成所有二级子域名全部转到https，甚至由于正则匹配写的不当会全部重定向到主服务之下，这里的意思是，所有不是443端口的服务请求，全部重定向https下去，<br><code>SERVER_NAME</code>：指的是服务，也就是域名部分<br><code>REQUEST_URI</code>：指的是请求的地址，也就是域名的后半部分<br><code>HTTP_HOST</code>：</p>
-</blockquote>
-<pre><code class="shell">RewriteEngine On
-RewriteCond %&#123;SERVER_PORT&#125; !^443 \$
-RewriteRule ^(.*)? \$ https://%&#123;SERVER_NAME&#125;%&#123;REQUEST_URI&#125; [L,R]
-</code></pre>
-<hr>
-<p>例如：<code>conf.module.d</code>下的<code>00-ssl.cof</code>文件</p>
-<blockquote>
-<p><code>00-ss.conf</code>文件，里面有一个<code>mod_ssl</code>模块的引用，这个文件夹里的模块主要就是给<code>ssl</code>服务使用的模块，如：</p>
-</blockquote>
-<pre><code class="shell">LoadModule ssl_module modules/mod_ssl.so
-</code></pre>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%92%8CApache/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85FTP/">
-        <h2 class="post-title">Centos安装FTP</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                操作系统
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="Centos安装FTP-gt-简单安装"><a href="#Centos安装FTP-gt-简单安装" class="headerlink" title="Centos安装FTP-&gt;简单安装"></a>Centos安装FTP-&gt;简单安装</h1><p><strong>1、查看是否安装了FTP</strong></p>
-<pre><code class="shell">rpm -qa | grep vsftpd
-</code></pre>
-<p><strong>2、没有安装-&gt;安装vsftp</strong></p>
-<pre><code class="shell">yum -y install vsftpd
-</code></pre>
-<p><strong>3、添加FTP用户并修改密码</strong></p>
-<pre><code class="shell">useradd ftpLogin -d /home/ftpLogin
-passwd ftpLogin
-</code></pre>
-<p><strong>4、修改vsftpd.conf配置文件</strong></p>
-<pre><code class="shell">vi /etc/vsftpd/vsftpd.conf
-
-#把允许匿名登陆改为不允许
-anonymous_enable=YES -&gt;  anonymous_enable=NO
-
-#在最后一行加上默认的加载目录-&gt;也就是FTP目录
-local_root=/home/ftpLogin/
-</code></pre>
-<p><strong>5、修改文件夹的用户权限</strong></p>
-<pre><code class="shell">chmod -R 777 /home/ftpLogin
-</code></pre>
-<p><strong>6、查看服务是否运行</strong></p>
-<pre><code class="shell">#active为绿色则是运行状态 如何非运行的话就重新启动一下服务
-#重新启动
-systemctl restart vsftpd
-#启动服务
-systemctl start vsftpd
-#查看服务状态
-systemctl status vsftpd
-#设置自动启动
-systemctl enable vsftpd
-
-yum -y install ftp
-</code></pre>
-<p><strong>7、安装FTP测试</strong></p>
-<pre><code class="shell">#我的已经安装过了就不再测试
-yum -y install ftp
-#使用anonymous登陆 可以无密码登陆
-ftp localhost
-</code></pre>
-<p><strong>8、关掉防火墙-&gt;放行20&amp;21端口 让其他设备也可访问（也可以设置防火墙规则，放行端口组）</strong></p>
-<pre><code class="shell">#关掉防火墙
-systemctl stop firewalld.service
-#为了防止防火墙自启，设置的永久关闭
-systemctl disable firewalld.service
-</code></pre>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85FTP/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85Java/">
-        <h2 class="post-title">Centos安装Java</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                操作系统
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="Centos使用yum安装java"><a href="#Centos使用yum安装java" class="headerlink" title="Centos使用yum安装java"></a>Centos使用yum安装java</h1><p><strong>首先查询系统是否自带jdk</strong></p>
-<pre><code class="shell">rpm -qa | grep java
-rpm -qa | grep jdk
-rpm -qa | grep gcj
-</code></pre>
-<p><strong>如果有就卸载对应的</strong></p>
-<pre><code class="shell">rpm -qa | grep java | xargs rpm -e --nodeps
-</code></pre>
-<p><strong>列出所有可安装的rpm包</strong></p>
-<pre><code class="shell">yum list java-1.8*
-</code></pre>
-<p><strong>安装java</strong></p>
-<pre><code class="shell">yum install java-1.8.0-openjdk* -y
-</code></pre>
-<p><strong>校验版本</strong></p>
-<pre><code class="shell">java -version
-</code></pre>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85Java/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85MySQL/">
-        <h2 class="post-title">Centos安装MySQL</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                操作系统
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="Centos安装MySQL"><a href="#Centos安装MySQL" class="headerlink" title="Centos安装MySQL"></a>Centos安装MySQL</h1><h4 id="1、首先更新yum命令"><a href="#1、首先更新yum命令" class="headerlink" title="1、首先更新yum命令"></a>1、首先更新yum命令</h4><pre><code class="shell">yum update -y
-</code></pre>
-<h4 id="3、下载MySQL的npm源"><a href="#3、下载MySQL的npm源" class="headerlink" title="3、下载MySQL的npm源"></a>3、下载MySQL的npm源</h4><pre><code class="shell">wget https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm
-</code></pre>
-<h4 id="4、添加MySQL的npm源"><a href="#4、添加MySQL的npm源" class="headerlink" title="4、添加MySQL的npm源"></a>4、添加MySQL的npm源</h4><pre><code class="shell">yum localinstall mysql80-community-release-el7-3.noarch.rpm
-</code></pre>
-<h4 id="5、查看当前的MySQL版本"><a href="#5、查看当前的MySQL版本" class="headerlink" title="5、查看当前的MySQL版本"></a>5、查看当前的MySQL版本</h4><pre><code class="shell">yum repolist enabled | grep &quot;mysql.*-community.*&quot;
-</code></pre>
-<h4 id="6、查看所有MySQL可用版本"><a href="#6、查看所有MySQL可用版本" class="headerlink" title="6、查看所有MySQL可用版本"></a>6、查看所有MySQL可用版本</h4><pre><code class="shell">yum repolist all | grep mysql
-</code></pre>
-<h4 id="7、关闭-x2F-禁用8-0的MySQL版本并且启用5-7的版本"><a href="#7、关闭-x2F-禁用8-0的MySQL版本并且启用5-7的版本" class="headerlink" title="7、关闭&#x2F;禁用8.0的MySQL版本并且启用5.7的版本"></a>7、关闭&#x2F;禁用8.0的MySQL版本并且启用5.7的版本</h4><pre><code class="shell">yum-config-manager --disable mysql80-community
-
-yum-config-manager --enable mysql57-community
-</code></pre>
-<h4 id="8、再次查看当前版本（正则匹配）"><a href="#8、再次查看当前版本（正则匹配）" class="headerlink" title="8、再次查看当前版本（正则匹配）"></a>8、再次查看当前版本（正则匹配）</h4><pre><code class="shell">yum repolist enabled | grep mysql
-</code></pre>
-<h4 id="9、安装MySQL服务"><a href="#9、安装MySQL服务" class="headerlink" title="9、安装MySQL服务"></a>9、安装MySQL服务</h4><pre><code class="shell">yum install -y mysql-community-server
-</code></pre>
-<h4 id="10、启用MySQL服务"><a href="#10、启用MySQL服务" class="headerlink" title="10、启用MySQL服务"></a>10、启用MySQL服务</h4><pre><code class="shell">systemctl start mysqld
-</code></pre>
-<h4 id="11、查看临时默认密码，且修改密码"><a href="#11、查看临时默认密码，且修改密码" class="headerlink" title="11、查看临时默认密码，且修改密码"></a>11、查看临时默认密码，且修改密码</h4><pre><code class="shell">cat /var/log/mysqld.log
-# 由于密码策略所以只能设置较为复杂的密码
-alter user &#39;root&#39;@&#39;localhost&#39; identified by &#39;ZhonHua@5000Nian&#39;;
-</code></pre>
-<h4 id="12、查看MySQL的密码安全策略"><a href="#12、查看MySQL的密码安全策略" class="headerlink" title="12、查看MySQL的密码安全策略"></a>12、查看MySQL的密码安全策略</h4><pre><code class="shell">show variables like &#39;validate_password%&#39;;
-</code></pre>
-<h4 id="13、修改密码杂度为最低以及把密码长度改为自己想要的"><a href="#13、修改密码杂度为最低以及把密码长度改为自己想要的" class="headerlink" title="13、修改密码杂度为最低以及把密码长度改为自己想要的"></a>13、修改密码杂度为最低以及把密码长度改为自己想要的</h4><pre><code class="shell">set global validate_password_policy = LOW;
-set global validate_password_length = 6;
-</code></pre>
-<h4 id="14、修改密码为自己想要的"><a href="#14、修改密码为自己想要的" class="headerlink" title="14、修改密码为自己想要的"></a>14、修改密码为自己想要的</h4><pre><code class="shell">alter user &#39;root&#39;@&#39;localhost&#39; identified by &#39;123456&#39;;
-</code></pre>
-<h4 id="15、允许远程登陆然后刷新"><a href="#15、允许远程登陆然后刷新" class="headerlink" title="15、允许远程登陆然后刷新"></a>15、允许远程登陆然后刷新</h4><pre><code class="shell"># 允许登录
-grant all on *.* to root@&#39;%&#39; identified by &#39;you new password&#39; with grant option;
-# 刷新
-flush privileges;
-</code></pre>
-<p>you new password：设置的新密码</p>
-<h4 id="16、重启MySQL服务"><a href="#16、重启MySQL服务" class="headerlink" title="16、重启MySQL服务"></a>16、重启MySQL服务</h4><pre><code class="shell">systemctl restart mysqld.service
-</code></pre>
-<hr>
-<p><a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/mysql-yum-repo-quick-guide/en/">详情参照官方文档</a></p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85MySQL/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85RabbitMQ/">
-        <h2 class="post-title">Centos安装RabbitMQ</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                操作系统
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="Centos安装RabbitMQ"><a href="#Centos安装RabbitMQ" class="headerlink" title="Centos安装RabbitMQ"></a>Centos安装RabbitMQ</h1><h2 id="安装Erlang环境"><a href="#安装Erlang环境" class="headerlink" title="安装Erlang环境"></a>安装Erlang环境</h2><pre><code class="shell"># 1、安装依赖项
-yum install -y epel-release
-
-# 2、添加存储库条目
-wget https://packages.erlang-solutions.com/erlang-solutions-1.0-1.noarch.rpm
-rpm -Uvh erlang-solutions-1.0-1.noarch.rpm
-
-# 3、安装
-yum install -y erlang
-
-# 4、验证是否安装成功
-erl -version
-</code></pre>
-<h2 id="rabbitmq的命令"><a href="#rabbitmq的命令" class="headerlink" title="rabbitmq的命令"></a>rabbitmq的命令</h2><pre><code class="shell"># 开启web管理界面
-rabbitmq-plugins enable rabbitmq_management
-# 添加用户
-rabbitmqctl add_user admin admin
-# 设置用户对 &#39;/ 的权限
-rabbitmqctl set_permissions -p &quot;/&quot; &quot;admin&quot; &quot;.*&quot; &quot;.*&quot; &quot;.*&quot;
-# 设置用户角色
-rabbitmqctl set_user_tags admin administrator
-</code></pre>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85RabbitMQ/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85V2ray%E5%92%8CAcmesh/">
-        <h2 class="post-title">Centos安装V2ray和Acmesh</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                操作系统
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>acme.sh作为自动签发ssl证书，为域名提供https的服务<br>v2ray作为代理使用<br>acme.sh要做到自动签发就需要在域名服务商哪授权token，用来acme.sh在验证域名所有权的时候使用，所以我们使用阿里云的平台，授权一个能够访问验证域名权限的子用户，并且创建一个Secret</p>
-<p>在CentOS中创建Secret的临时key和Secret</p>
-<pre><code class="shell">export Ali_Key=&quot;&quot;
-export Ali_Secret=&quot;&quot;
-</code></pre>
-<p>安装acme.sh,会在执行该命令的用户目录下生成一个.acme.sh目录，目录为隐藏目录，可以用ls -a查看</p>
-<pre><code class="shell">curl  https://get.acme.sh | sh
-</code></pre>
-<p>为指定的域名请求证书</p>
-<pre><code class="shell">/root/.acme.sh/acme.sh   --issue   --dns dns_ali   -d ajiehome.online  -d www.ajiehome.online
-# 或
-/root/.acme.sh/acme.sh   --issue   --dns dns_ali   -d v.ajiehome.online
-</code></pre>
-<p>将生成的域名ssl密钥文件拷贝到指定的目录</p>
-<pre><code class="shell">/root/.acme.sh/acme.sh --install-cert -d ajiehome.online  \
---key-file       /etc/nginx/ssl/ajiehome.online/ajiehome.online.key  \
---fullchain-file /etc/nginx/ssl/ajiehome.online/ajiehome.online.cert \
---reloadcmd     &quot;service nginx force-reload&quot;
-</code></pre>
-<p>然后就是nginx的配置项</p>
-<pre><code class="conf">server &#123;
-        listen  80;
-        listen [::]:80;
-        server_name ajiehome.online;
-
-        root /usr/share/nginx/ajiehome.online;
-
-        index index.html index.htm;
-
-        rewrite ^(.*)$ https://$&#123;server_name&#125;$1 permanent;
-
-        location / &#123;
-
-        &#125;
-&#125;
-server &#123;
-
-        listen 443 ssl;
-        listen [::]:443 ssl;
-        server_name ajiehome.online;
-
-        root /usr/share/nginx/ajiehome.online;
-        index index.html inex.htm;
-
-
-        location / &#123;
-
-                proxy_pass http://127.0.0.1:8090;
-
-        &#125;
-
-        ssl_certificate /etc/nginx/ssl/ajiehome.online/ajiehome.online.cert;
-        ssl_certificate_key /etc/nginx/ssl/ajiehome.online/ajiehome.online.key;
-
-        ssl_session_timeout 1d;
-        ssl_session_cache shared:MozSSL:10m;
-        ssl_session_tickets off;
-
-        ssl_protocols         TLSv1.2 TLSv1.3;
-        ssl_ciphers           ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384;
-        ssl_prefer_server_ciphers off;
-
-&#125;
-</code></pre>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85V2ray%E5%92%8CAcmesh/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1Crontabs/">
-        <h2 class="post-title">Centos定时任务Crontabs</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                操作系统
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="crontabs-定时执行执行sh"><a href="#crontabs-定时执行执行sh" class="headerlink" title="crontabs-定时执行执行sh"></a>crontabs-定时执行执行sh</h1><p>首先安装crontabs工具</p>
-<pre><code class="shell">yum install crontabs
-</code></pre>
-<p>安装完之后，系统默认安装了<code>crond</code>服务，<code>crond</code>默认是自启状态</p>
-<p><code>crond</code>的执行方式为每一分钟扫描本地是否有需要执行的事务</p>
-<p><code>crontab</code> 命令。该命令和 at 命令类似，也是通过 <code>/etc/cron.allow </code>和 <code>/etc/cron.deny</code> 文件来限制某些用户是否可以使用 crontab 命令的。</p>
-<table>
-<thead>
-<tr>
-<th>功能</th>
-<th>选项</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>-u user</td>
-<td>用来选择某个用户的crontab服务，如-u demo，则运行demo用户的crontab服务，一般默认root用户</td>
-</tr>
-<tr>
-<td>-e</td>
-<td>编辑某个用户的crontab文件内容，如果不指定用户，则默认编辑当前用户的crontab文件</td>
-</tr>
-<tr>
-<td>-l</td>
-<td>显示某个用户的crontab文件内容，如果不指定用户，则默认编辑当前用户的crontab文件</td>
-</tr>
-<tr>
-<td>-r</td>
-<td>从&#x2F;var&#x2F;spool&#x2F;cron中删除某个用户的crontab文件，如果不指定用户，则默认删除当前用户的crontab文件</td>
-</tr>
-<tr>
-<td>-i</td>
-<td>删除用户的crontab文件是给予提示</td>
-</tr>
-</tbody></table>
-<p>例如：</p>
-<pre><code class="shell">crontab -e
-# 进入crontab文件显示当前用户的所有内容
-# 如下所示
-# * * * * * /root/test.sh &gt;&gt; /root/log.log
-</code></pre>
-<p>crontab的定时执行任务是通过<code>*</code>来进行确认时间的</p>
-<table>
-<thead>
-<tr>
-<th>项目</th>
-<th>含义</th>
-<th>范围</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>第一个<code>*</code></td>
-<td>一小时当中的第几分钟（minute）</td>
-<td>0~59</td>
-</tr>
-<tr>
-<td>第二个<code>*</code></td>
-<td>一天当中的第几小时（hour）</td>
-<td>0~23</td>
-</tr>
-<tr>
-<td>第三个<code>*</code></td>
-<td>一个月当中的第几天（day）</td>
-<td>1~31</td>
-</tr>
-<tr>
-<td>第四个<code>*</code></td>
-<td>一年当中的第几个月（month）</td>
-<td>1~12</td>
-</tr>
-<tr>
-<td>第五个<code>*</code></td>
-<td>一周当中的星期几（week）</td>
-<td>0~7（0和7都代表星期日）</td>
-</tr>
-</tbody></table>
-<p>在时间表示中还有一些符号含有特殊含义</p>
-<table>
-<thead>
-<tr>
-<th>符号</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>*</td>
-<td>表任何时间。比如第一个”*”就代表一小时中<br />每分钟都执行一次的意思。</td>
-</tr>
-<tr>
-<td>,</td>
-<td>代表不连续的时间。比如”0 8，12，16***”命令就代表在每<br />天的8点0分、12点0分、16点0分都执行一次命令</td>
-</tr>
-<tr>
-<td>-</td>
-<td>代表连续的时间范围。比如”0 5 ** 1-6”命令<br />代表在周一到周六的凌晨5点0分执行命令。</td>
-</tr>
-<tr>
-<td>&#x2F;</td>
-<td>代表每隔多久执行一次。比如”<em>&#x2F;10</em>***命令”<br />代表每隔 10 分钟就执行一次命令。</td>
-</tr>
-</tbody></table>
-<p>例如：</p>
-<pre><code class="shell"># 每五分钟执行一次
-*/5 * * * * /root/test.sh &gt;&gt; /root/log.log
-# 每一分钟执行一次
-* * * * * /root/test.sh &gt;&gt; /root/log.log
-# 没五分钟往log里面写入11
-*/5 * * * * /bin/echo &quot;11&quot; &gt;&gt; /root/log.log
-</code></pre>
-<table>
-<thead>
-<tr>
-<th>时间</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>45 22 * * *</code></td>
-<td>在 22 点 45 分执行命令</td>
-</tr>
-<tr>
-<td><code>0 17 * * 1</code></td>
-<td>在每周一的 17 点 0 分执行命令</td>
-</tr>
-<tr>
-<td><code>0 5 1，15 * *</code></td>
-<td>在每月1日和15日的凌晨 5 点 0 分执行命令</td>
-</tr>
-<tr>
-<td><code>40 4 * * 1-5</code></td>
-<td>在每周一到周五的凌晨 4 点 40 分执行命令</td>
-</tr>
-<tr>
-<td><code>*/10 4 * * *</code></td>
-<td>在每天的凌晨 4 点，每隔 10 分钟执行一次命令</td>
-</tr>
-<tr>
-<td><code>0 0 1，15 * 1</code></td>
-<td>在每月1日和15日，每周一个0点0分都会执行命令<br />注意：星期几和几日最好不要同时出现，因为它们定义的都是天，非常容易让管理员混淆</td>
-</tr>
-</tbody></table>
-<p><em>注意</em>：每个用户都可以执行自己的crontab任务</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1Crontabs/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E6%9D%83%E9%99%90%E7%9A%84%E6%B5%85%E8%A7%A3/">
-        <h2 class="post-title">Centos权限的浅解</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                操作系统
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="Centos权限的浅解"><a href="#Centos权限的浅解" class="headerlink" title="Centos权限的浅解"></a>Centos权限的浅解</h1><pre><code class="shell">chomd 777 test.sh
-</code></pre>
-<p><code>chomd</code>：修改文件及文件夹等的权限<br><code>777</code>：表示三个组的权限，第一个为文件所有者的权限，第二个为所属用户组的权限，第三个为其他用户的权限,7-&gt;rwx</p>
-<ul>
-<li>r-&gt;4:为读取权限</li>
-<li>w-&gt;2:为写入权限</li>
-<li>x-&gt;1:为执行权限<br><code>test.sh</code>：需要修改的目标<br>此外，在权限前面可添加-+&#x3D;等三个符号，分别表示减去权限，增加权限，唯一权限</li>
-</ul>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E6%9D%83%E9%99%90%E7%9A%84%E6%B5%85%E8%A7%A3/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Ubuntu%20idae%20%E4%B8%8D%E8%83%BD%E8%BE%93%E5%85%A5%E4%B8%AD%E6%96%87/">
-        <h2 class="post-title">Ubuntu idae 不能输入中文</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                操作系统
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <hr>
-<h2 id="title-ubuntu-idae-不能输入中文date-2022-08-29-20-48-14-684updated-2022-10-13-14-45-23-084url-x2F-archives-x2F-ubuntuidae-bu-neng-shu-ru-zhong-wencategories-Ubuntu-Ideatags-Ubuntu-Idea"><a href="#title-ubuntu-idae-不能输入中文date-2022-08-29-20-48-14-684updated-2022-10-13-14-45-23-084url-x2F-archives-x2F-ubuntuidae-bu-neng-shu-ru-zhong-wencategories-Ubuntu-Ideatags-Ubuntu-Idea" class="headerlink" title="title: ubuntu idae 不能输入中文date: 2022-08-29 20:48:14.684updated: 2022-10-13 14:45:23.084url: &#x2F;archives&#x2F;ubuntuidae-bu-neng-shu-ru-zhong-wencategories:- Ubuntu- Ideatags:- Ubuntu- Idea"></a>title: ubuntu idae 不能输入中文<br>date: 2022-08-29 20:48:14.684<br>updated: 2022-10-13 14:45:23.084<br>url: &#x2F;archives&#x2F;ubuntuidae-bu-neng-shu-ru-zhong-wen<br>categories:<br>- Ubuntu<br>- Idea<br>tags:<br>- Ubuntu<br>- Idea</h2><p>解决方案<br>在<code>Edit Custom VM options</code>中配置如下参数</p>
-<pre><code class="properties">-Drecreate.x11.input.method=true
-</code></pre>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Ubuntu%20idae%20%E4%B8%8D%E8%83%BD%E8%BE%93%E5%85%A5%E4%B8%AD%E6%96%87/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
     <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Windows%E5%88%A0%E9%99%A4BIOS%E5%86%85%E7%9A%84%E5%BC%95%E5%AF%BC%E9%80%89%E9%A1%B9/">
         <h2 class="post-title">Windows删除BIOS内的引导选项</h2>
     </a>
@@ -930,6 +219,924 @@ server &#123;
         
     </div>
     <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Windows%E5%88%A0%E9%99%A4BIOS%E5%86%85%E7%9A%84%E5%BC%95%E5%AF%BC%E9%80%89%E9%A1%B9/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/">
+        <h2 class="post-title">MySQL事务隔离级别</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                数据库
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="SQL隔离级别"><a href="#SQL隔离级别" class="headerlink" title="SQL隔离级别"></a>SQL隔离级别</h1><ol>
+<li><p>未提交读（Read Uncomminted）也叫 脏读（Dirty Reader）</p>
+<p>在事物中的修改即使没有提交，对其他事物也是可见的。事务可以读取未被提交的数据</p>
+</li>
+<li><p>提交读（Read Comminted）也叫 不可重复读（Nonrepeatable Read）</p>
+<p>一个事务开始时，只能“看到”已经提交的事物所做的修改。一个事务从开始知道提交之前，所作的任何修改对其他事务都是不可见</p>
+</li>
+<li><p>可重复读（Repeatable Read）</p>
+<p>当前事务只能读取到在当前事务开启之前，其他事务已提交的数据。就算是在该事物开启前，其他事务已开始但是并未提交的事务也是不可见的。可重复读隔离级别还是无法解决另外一个幻读（Phantom Read) 的问题</p>
+<p>幻读（Phantom Read）：指的是当某个事务在读取某个范围内的记录时，另外一个事务又在该范围内插入了新的记录，当之前的事务再次读取该范围的记录时，会产生幻行（Phantom Row）</p>
+</li>
+<li><p>可串行化（SERIALIZABLE）</p>
+<p>通过强制事务串行执行，避免了前面所说的幻读的问题。简单来说，SERIALIZABLE会再读取的每一行数据上都加锁，所有可能导致大量的超时和锁争用的问题</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>隔离级别</th>
+<th>脏读可能性</th>
+<th>不可重复读可能性</th>
+<th>幻读可能性</th>
+<th>加锁读</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>READ UNCOMMITTED 未提交读</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr>
+<td>READ COMMITTED 提交读</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr>
+<td>REPEATABLE READ 可重复读</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr>
+<td>SERIALIZABLE 可串行化</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+</tbody></table>
+<h2 id="数据库的四大特性（ACID）"><a href="#数据库的四大特性（ACID）" class="headerlink" title="数据库的四大特性（ACID）"></a>数据库的四大特性（ACID）</h2><ul>
+<li><p>原子性（Atomicity）</p>
+<p>事务内包含的所有操作要么全部成功，要么全部失败回滚；</p>
+</li>
+<li><p>一致性（Consistency）</p>
+<p>不管任何时间有少个并发的事务，系统也必须保持一致；</p>
+</li>
+<li><p>隔离性（Isolation）</p>
+<p>多个并发的事务的操作，在同一时间只能有一个事务执行（及串行的执行）；</p>
+</li>
+<li><p>持久性（Durability）</p>
+<p>事务正确执行后，事务中对数据的操作不会回滚；</p>
+</li>
+</ul>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E5%90%8C%E8%A1%A8%E5%A4%9A%E5%A4%96%E9%94%AE/">
+        <h2 class="post-title">MySQL同表多外键</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                数据库
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="MySQL同表多外键"><a href="#MySQL同表多外键" class="headerlink" title="MySQL同表多外键"></a>MySQL同表多外键</h1><pre><code class="sql">drop database if exists test;
+create database if not exists test;
+
+use test;
+
+drop table if exists user;
+
+create table  if not exists user(
+    user_id bigint(18) comment &#39;用户ID&#39;,
+    user_name varchar(128) comment &#39;用户名称&#39;,
+    user_sex int(11) comment &#39;用户性别&#39;,
+    pass_word varchar(128) comment &#39;用户密码&#39;,
+    primary key (user_id)
+)engine = innodb default charset = utf8;
+
+drop table if exists user_related;
+
+create table if not exists user_related(
+    related_id bigint(18) comment &#39;关系ID&#39;,
+    from_user_id bigint(18) comment &#39;用户ID&#39;,
+    to_user_id bigint(18) comment &#39;用户ID&#39;,
+    primary key (related_id),
+    foreign key (from_user_id) references user (user_id),
+    foreign key (to_user_id) references user (user_id)
+)engine = innodb default charset = utf8;
+
+
+lock tables user write;
+insert into user(user_id,user_name,user_sex,pass_word) values (012345678911121314,&#39;用户1&#39;,1,&#39;123456&#39;);
+insert into user(user_id,user_name,user_sex,pass_word) values (012345678911121315,&#39;用户2&#39;,1,&#39;123456&#39;);
+unlock tables;
+
+lock tables user_related write;
+insert into user_related (related_id,from_user_id,to_user_id) values (012345678911121313,012345678911121314,012345678911121315);
+unlock tables;
+</code></pre>
+<p>一个用户表设置多个外键，外键的名字可以不和原表一样，只要类型一致就可</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E5%90%8C%E8%A1%A8%E5%A4%9A%E5%A4%96%E9%94%AE/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E5%91%BD%E4%BB%A4%E9%9B%86/">
+        <h2 class="post-title">MySQL命令集</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                数据库
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="MySQL命令集"><a href="#MySQL命令集" class="headerlink" title="MySQL命令集"></a>MySQL命令集</h1><p><strong>MySQL连接</strong></p>
+<pre><code class="shell">#本地连接
+#password:可直接填写密码，或者直接回车，然后再保密输入密码
+mysql -u root -p &quot;password&quot;;
+#远程连接
+mysql -h &quot;ip&quot; -u root -p &quot;password&quot;;
+</code></pre>
+<p><strong>修改密码</strong></p>
+<p>进入mysql的bin目录下运行cmd</p>
+<pre><code class="shell">#没有密码时可以省略 -p 参数
+mysqladmin  -uroot -p &quot;old password&quot; password &quot;new password&quot;;
+</code></pre>
+<p><strong>新建用户</strong></p>
+<pre><code class="shell">grant [select,insert,update,delete] on &quot;database&quot;.* to &quot;user name&quot;@&quot;login host&quot; identified by &quot;password&quot;;
+</code></pre>
+<p>例如：新建一个number1用户，密码为123456，该用户只有对db1数据库所有的表有读取权限，且只能在MySQL所在的主机上登录，取消密码则重复这行命令，只是把密码置空</p>
+<pre><code class="shell">grant select on db1.* to number1@localhost identified by &quot;123456&quot;;
+</code></pre>
+<p><strong>查询连接</strong></p>
+<pre><code class="shell"># 查询连接超时时间
+show variables like &#39;%timeout%&#39;;
+# 查询连接数
+show status like  &#39;Threads%&#39;;
+</code></pre>
+<p>Threads_connected ：这个数值指的是打开的连接数.</p>
+<p>Threads_running ：这个数值指的是激活的连接数，这个数值一般远低于connected数值.</p>
+<p>Threads_connected 跟show processlist结果相同，表示当前连接数。准确的来说，Threads_running是代表当前并发数</p>
+<pre><code class="shell">#查询最大连接数
+show variables like &#39;max_connections&#39;;
+#修改最大连接数
+#方法一
+set global max_connections = 1000;
+#方法二 修改my.conf配置文件：加上或者修改max_connections
+max_connections = 1000
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E5%91%BD%E4%BB%A4%E9%9B%86/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E7%94%A8%E6%88%B7%E4%B8%8E%E6%8E%88%E6%9D%83/">
+        <h2 class="post-title">MySQL用户与授权</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                数据库
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="MySQL用户与授权"><a href="#MySQL用户与授权" class="headerlink" title="MySQL用户与授权"></a>MySQL用户与授权</h1><p><strong>1、创建用户</strong></p>
+<pre><code class="shell">create user &#39;userName&#39;@&#39;host&#39; identified by &#39;passWord&#39;;
+</code></pre>
+<ul>
+<li><code>userName</code>：你需要创建的用户名</li>
+<li><code>host</code>：指定该用户可以在那个主机上可以登录，本地为<code>localhost</code>，任意主机可以使用通配符<code>%</code></li>
+<li><code>passWord</code>：指定该用户的登录密码，密码可以为空，</li>
+</ul>
+<p><strong>例如：</strong></p>
+<pre><code class="shell">create user &#39;admin&#39;@&#39;localhost&#39; identified by &#39;123456&#39;;
+create user &#39;admin&#39;@&#39;192.168.1.101&#39; identified by &#39;123456&#39;;
+create user &#39;admin&#39;@&#39;%&#39; identified by &#39;123456&#39;;
+create user &#39;admin&#39;@&#39;%&#39; identified by &#39;&#39;;
+create user &#39;admin&#39;@&#39;%&#39;;
+</code></pre>
+<p><strong>2、授权</strong></p>
+<pre><code class="shell">grant &#39;privileges&#39; on &#39;database.table&#39; to &#39;userName&#39;@&#39;host&#39;
+</code></pre>
+<ul>
+<li><code>privileges</code>：用户操作的权限，如<code>select</code>，<code>insert</code>，<code>update</code>等，如果全部需要，使用<code>all</code></li>
+<li><code>database</code>：授权的数据库名</li>
+<li><code>table</code>：授权的数据库表名称，如果对该数据库的所有表都授权可使用<code>*</code>通配符</li>
+</ul>
+<p><strong>例如：</strong></p>
+<pre><code class="shell">grant select, insert on test.user TO &#39;admin&#39;@&#39;%&#39;;
+grant all on test.* to &#39;admin&#39;@&#39;%&#39;;
+grant all on *.* to &#39;admin&#39;@&#39;%&#39;;
+</code></pre>
+<p><strong>注意：</strong></p>
+<p>用以上命令授权的用户不能给其他用户授权，如果需要使该用户可以授权，使用如下命令</p>
+<pre><code class="shell">grant &#39;privileges&#39; on &#39;database.table&#39; to &#39;username&#39;@&#39;host&#39; with grant option;
+</code></pre>
+<p><strong>3、设置与更改用户密码</strong></p>
+<pre><code class="shell">set password for &#39;userName&#39;@&#39;host&#39; = password(&#39;passWord&#39;);
+</code></pre>
+<ul>
+<li><code>userName</code>：用户的名称</li>
+<li><code>host</code>：用户登录范围</li>
+<li><code>passWord</code>：用户的新密码</li>
+</ul>
+<p><strong>例如：</strong></p>
+<pre><code class="shell">set password for &#39;admin&#39;@&#39;%&#39; = password(&quot;123456&quot;);
+</code></pre>
+<p><strong>4、撤销用户权限</strong></p>
+<pre><code class="shell">revoke &#39;privilege&#39; on &#39;database.table&#39; from &#39;username&#39;@&#39;host&#39;;
+</code></pre>
+<ul>
+<li><code>privilege</code>, <code>database</code>, <code>table</code>：同授权部分，参照授权部分</li>
+</ul>
+<p><strong>例如：</strong></p>
+<pre><code class="shell">revoke select on *.* from &#39;admin&#39;@&#39;%&#39;;
+</code></pre>
+<p><strong>注意</strong></p>
+<p>假如你在给用户<code>&#39;pig&#39;@&#39;%&#39;</code>授权的时候是这样的（或类似的）：<code>GRANT SELECT ON test.user TO &#39;pig&#39;@&#39;%&#39;</code>，则在使用<code>REVOKE SELECT ON *.* FROM &#39;pig&#39;@&#39;%&#39;;</code>命令并不能撤销该用户对test数据库中user表的<code>SELECT</code> 操作。相反，如果授权使用的是<code>GRANT SELECT ON *.* TO &#39;pig&#39;@&#39;%&#39;;</code>则<code>REVOKE SELECT ON test.user FROM &#39;pig&#39;@&#39;%&#39;;</code>命令也不能撤销该用户对test数据库中user表的<code>Select</code>权限</p>
+<p>具体信息可以用命令<code>SHOW GRANTS FOR &#39;pig&#39;@&#39;%&#39;;</code> 查看</p>
+<p><strong>5、删除用户</strong></p>
+<pre><code class="shell">drop user &#39;username&#39;@&#39;host&#39;;
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E7%94%A8%E6%88%B7%E4%B8%8E%E6%8E%88%E6%9D%83/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E8%A7%86%E5%9B%BE/">
+        <h2 class="post-title">MySQL视图</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                数据库
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p><strong>1、数据库的查询</strong></p>
+<pre><code class="sql">//选择指定列
+select  name, age from demo1;
+//定义列的别名
+select name as 姓名 ,age as 年龄 from demo1;
+//当定义列的别名有空格的时候必须要用引号将标题括起来
+select name as &quot;student name&quot; ,age as &quot;student age&quot; from demo1;
+//替换查询结果的数据，end后面的字符串代替的是整个case...end语句，不然会直接输出整个case...end语句
+select name,age,
+  case
+    when age is null then &quot;尚未设置&quot;
+    when age &lt; 18 then &quot;未成年&quot;
+    else &quot;成年&quot;
+  end as &quot;是否成年&quot;
+  from demo1;
+//计算列值，把age扩大10被输出
+select name,age*10 as &quot;年龄x10&quot; from demo1;
+//消除重复的行
+select distinct  name,age,sex from demo1;
+</code></pre>
+<p>聚合函数</p>
+<table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>count</td>
+<td>求组中的项数，返回int类型整数</td>
+</tr>
+<tr>
+<td>max</td>
+<td>求最大值</td>
+</tr>
+<tr>
+<td>min</td>
+<td>求最小值</td>
+</tr>
+<tr>
+<td>sum</td>
+<td>返回表达式中所有值的和</td>
+</tr>
+<tr>
+<td>avg</td>
+<td>求组中值的平均值</td>
+</tr>
+<tr>
+<td>std或stddev</td>
+<td>返回给定表达式中所有值的标准值</td>
+</tr>
+<tr>
+<td>variance</td>
+<td>返回给定表达式中所有值的方差</td>
+</tr>
+</tbody></table>
+<pre><code class="sql">select count(*) as &#39;一共有多少组&#39;  from demo1;
+ select max(age) as &#39;年龄最大的为&#39; from demo1;
+select min(age) as &#39;年龄最小的为&#39; from demo1;
+select sum(age) as &#39;所有年龄之和&#39; from demo1;
+select avg(age) as &#39;平均年龄为&#39; from demo1;
+select std(age) as &quot;标准差&quot; from demo1;
+select variance(age) as &quot;方差&quot; from demo1;
+//返回一组指定列的的所有非null的值，这些值一个接一个的放置，中间用逗号隔开
+select group_concat(age) from demo1;
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>group_concat()</td>
+<td>返回一组指定列的的所有非null的值，这些值一个接一个的放置，中间用逗号隔开</td>
+</tr>
+<tr>
+<td>rit_or()</td>
+<td>与二进制里面的 或 相对应</td>
+</tr>
+<tr>
+<td>rit_and()</td>
+<td>与二进制里面的&amp;（与）相对应</td>
+</tr>
+<tr>
+<td>rit_xor()</td>
+<td>与二进制里卖弄的^（异或）相对应</td>
+</tr>
+</tbody></table>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E8%A7%86%E5%9B%BE/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E5%91%BD%E4%BB%A4/">
+        <h2 class="post-title">Redis命令</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                数据库
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><p><a target="_blank" rel="noopener" href="http://www.redis.cn/commands.html">官方命令文档地址</a></p>
+<ul>
+<li><p>五种数据类型</p>
+<ul>
+<li>String（字符串）</li>
+<li>List（列表）</li>
+<li>Hash（字典）</li>
+<li>Set（集合）</li>
+<li>Sorted Set（有序集合）</li>
+</ul>
+</li>
+<li><p>String的常见命令</p>
+<ul>
+<li><pre><code class="shell">SET key value                   设置keyd的值value
+GET key                         获得键key对应的值
+GETRANGE key start end          得到字符串的子字符串存放在一个键
+GETSET key value                设置键的字符串值，并返回旧值
+GETBIT key offset               返回存储在键位值的字符串值的偏移
+MGET key1 [key2..]              得到所有的给定键的值
+SETBIT key offset value         设置或清除该位在存储在键的字符串值偏移
+SETEX key seconds value         键到期时设置值
+SETNX key value                 设置键的值，只有当该键不存在
+SETRANGE key offset value       覆盖字符串的一部分从指定键的偏移
+STRLEN key                      得到存储在键的值的长度
+MSET key value [key value...]   设置多个键和多个值
+MSETNX key value [key value...] 设置多个键多个值，只有在当没有按键的存在时
+PSETEX key milliseconds value   设置键的毫秒值和到期时间
+INCR key                        增加键的整数值一次
+INCRBY key increment            由给定的数量递增键的整数值
+INCRBYFLOAT key increment       由给定的数量递增键的浮点值
+DECR key                        递减键一次的整数值
+DECRBY key decrement            由给定数目递减键的整数值
+APPEND key value                追加值到一个键
+DEL key                         如果存在删除键
+DUMP key                        返回存储在指定键的值的序列化版本
+EXISTS key                      此命令检查该键是否存在
+EXPIRE key seconds              指定键的过期时间
+EXPIREAT key timestamp          指定的键过期时间。在这里，时间是在Unix时间戳格式
+PEXPIRE key milliseconds        设置键以毫秒为单位到期
+PEXPIREAT key milliseconds-timestamp        设置键在Unix时间戳指定为毫秒到期
+KEYS pattern                    查找与指定模式匹配的所有键
+MOVE key db                     移动键到另一个数据库
+PERSIST key                     移除过期的键
+PTTL key                        以毫秒为单位获取剩余时间的到期键。
+TTL key                         获取键到期的剩余时间。
+RANDOMKEY                       从Redis返回随机键
+RENAME key newkey               更改键的名称
+RENAMENX key newkey             重命名键，如果新的键不存在
+TYPE key                        返回存储在键的数据类型的值
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p>List列表常见命令</p>
+<ul>
+<li><pre><code class="shell">BLPOP key1 [key2 ] timeout 取出并获取列表中的第一个元素，或阻塞，直到有可用
+BRPOP key1 [key2 ] timeout 取出并获取列表中的最后一个元素，或阻塞，直到有可用
+BRPOPLPUSH source destination timeout 从列表中弹出一个值，它推到另一个列表并返回它;或阻塞，直到有可用
+LINDEX key index 从一个列表其索引获取对应的元素
+LINSERT key BEFORE|AFTER pivot value 在列表中的其他元素之后或之前插入一个元素
+LLEN key 获取列表的长度
+LPOP key 获取并取出列表中的第一个元素
+LPUSH key value1 [value2] 在前面加上一个或多个值的列表
+LPUSHX key value 在前面加上一个值列表，仅当列表中存在
+LRANGE key start stop 从一个列表获取各种元素
+LREM key count value 从列表中删除元素
+LSET key index value 在列表中的索引设置一个元素的值
+LTRIM key start stop 修剪列表到指定的范围内
+RPOP key 取出并获取列表中的最后一个元素
+RPOPLPUSH source destination 删除最后一个元素的列表，将其附加到另一个列表并返回它
+RPUSH key value1 [value2] 添加一个或多个值到列表
+RPUSHX key value 添加一个值列表，仅当列表中存在
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p>Hash的常见命令</p>
+<ul>
+<li><pre><code class="shell">HDEL key field[field...] 删除对象的一个或几个属性域，不存在的属性将被忽略
+HEXISTS key field 查看对象是否存在该属性域
+HGET key field 获取对象中该field属性域的值
+HGETALL key 获取对象的所有属性域和值
+HINCRBY key field value 将该对象中指定域的值增加给定的value，原子自增操作，只能是integer的属性值可以使用
+HINCRBYFLOAT key field increment 将该对象中指定域的值增加给定的浮点数
+HKEYS key 获取对象的所有属性字段
+HVALS key 获取对象的所有属性值
+HLEN key 获取对象的所有属性字段的总数
+HMGET key field[field...] 获取对象的一个或多个指定字段的值
+HSET key field value 设置对象指定字段的值
+HMSET key field value [field value ...] 同时设置对象中一个或多个字段的值
+HSETNX key field value 只在对象不存在指定的字段时才设置字段的值
+HSTRLEN key field 返回对象指定field的value的字符串长度，如果该对象或者field不存在，返回0.
+HSCAN key cursor [MATCH pattern] [COUNT count] 类似SCAN命令
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p>Set的常见命令</p>
+<ul>
+<li><pre><code class="shell">SADD key member [member ...] 添加一个或者多个元素到集合(set)里
+SCARD key 获取集合里面的元素数量
+SDIFF key [key ...] 获得队列不存在的元素
+SDIFFSTORE destination key [key ...] 获得队列不存在的元素，并存储在一个关键的结果集
+SINTER key [key ...] 获得两个集合的交集
+SINTERSTORE destination key [key ...] 获得两个集合的交集，并存储在一个集合中
+SISMEMBER key member 确定一个给定的值是一个集合的成员
+SMEMBERS key 获取集合里面的所有key
+SMOVE source destination member 移动集合里面的一个key到另一个集合
+SPOP key [count] 获取并删除一个集合里面的元素
+SRANDMEMBER key [count] 从集合里面随机获取一个元素
+SREM key member [member ...] 从集合里删除一个或多个元素，不存在的元素会被忽略
+SUNION key [key ...] 添加多个set元素
+SUNIONSTORE destination key [key ...] 合并set元素，并将结果存入新的set里面
+SSCAN key cursor [MATCH pattern] [COUNT count] 迭代set里面的元素
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p>Sorted Set的常见命令</p>
+<ul>
+<li><pre><code class="shell">ZADD key score1 member1 [score2 member2] 添加一个或多个成员到有序集合，或者如果它已经存在更新其分数
+ZCARD key 得到的有序集合成员的数量
+ZCOUNT key min max 计算一个有序集合成员与给定值范围内的分数
+ZINCRBY key increment member 在有序集合增加成员的分数
+ZINTERSTORE destination numkeys key [key ...] 多重交叉排序集合，并存储生成一个新的键有序集合。
+ZLEXCOUNT key min max 计算一个给定的字典范围之间的有序集合成员的数量
+ZRANGE key start stop [WITHSCORES] 由索引返回一个成员范围的有序集合（从低到高）
+ZRANGEBYLEX key min max [LIMIT offset count]返回一个成员范围的有序集合（由字典范围）
+ZRANGEBYSCORE key min max [WITHSCORES] [LIMIT] 返回有序集key中，所有 score 值介于 min 和 max 之间(包括等于 min 或 max )的成员，有序集成员按 score 值递增(从小到大)次序排列
+ZRANK key member 确定成员的索引中有序集合
+ZREM key member [member ...] 从有序集合中删除一个或多个成员，不存在的成员将被忽略
+ZREMRANGEBYLEX key min max 删除所有成员在给定的字典范围之间的有序集合
+ZREMRANGEBYRANK key start stop 在给定的索引之内删除所有成员的有序集合
+ZREMRANGEBYSCORE key min max 在给定的分数之内删除所有成员的有序集合
+ZREVRANGE key start stop [WITHSCORES] 返回一个成员范围的有序集合，通过索引，以分数排序，从高分到低分
+ZREVRANGEBYSCORE key max min [WITHSCORES] 返回一个成员范围的有序集合，以socre排序从高到低
+ZREVRANK key member 确定一个有序集合成员的索引，以分数排序，从高分到低分
+ZSCORE key member 获取给定成员相关联的分数在一个有序集合
+ZUNIONSTORE destination numkeys key [key ...] 添加多个集排序，所得排序集合存储在一个新的键
+ZSCAN key cursor [MATCH pattern] [COUNT count] 增量迭代排序元素集和相关的分数
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p><strong>常用命令</strong></p>
+<ul>
+<li><code>config get requirepass</code>   查看当前redis是否由设置密码，显示<code>requirepass</code> <code>null</code>为没有密码</li>
+<li><code>config set requirepass 123456</code>   设置密码</li>
+<li><code>redis-cli --raw -h &#39;ip&#39; -p &#39;port&#39;</code>   连接方式 </li>
+<li><code>auth 123456</code>   密码验证</li>
+</ul>
+<p><strong>配置文件修改</strong></p>
+<ul>
+<li>永久密码修改<ul>
+<li>进入redis.conf配置文件，找到requirepass属性，修改成自己想要的密码，保存重启redis即可</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p><strong>Redis与代码</strong></p>
+<ul>
+<li><p>连接的jar包叫做jedis</p>
+<p>基础使用样例，其方法名称和命令形式基本一致</p>
+<pre><code class="java">Jedis jedis = new Jedis(&quot;localhost&quot;);
+jedis.set(&quot;key1&quot;,&quot;value1&quot;);
+String value = jedis.get(&quot;key1&quot;);
+</code></pre>
+</li>
+<li><p>与Spring等框架的时候记得配置好配置文件</p>
+</li>
+<li><p>Redis的图形化界面工具-RedisClient</p>
+</li>
+</ul>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E5%91%BD%E4%BB%A4/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E6%8C%81%E4%B9%85%E5%8C%96/">
+        <h2 class="post-title">Redis持久化</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                数据库
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="redis的持久化"><a href="#redis的持久化" class="headerlink" title="redis的持久化"></a>redis的持久化</h1><ol>
+<li>aop（append only file）<br> 把每一次的数据变化都写入到本地文件 ——— 全持久化模式以日志的形式记录 每一次的写、删操作，以文本的形式记录</li>
+<li>rdb<br> 定时把redis中的数据写入到本地文件 ——— 半持久化模式<br> fork一个字进程，把数据写入临时文件，然后在替换掉本地的文件，使用二进制压缩</li>
+</ol>
+<h2 id="RDB持久化配置"><a href="#RDB持久化配置" class="headerlink" title="RDB持久化配置"></a>RDB持久化配置</h2><p>Redis会将数据集的快照dump到dump.rdb文件中。此外，我们也可以通过配置文件来修改Redis服务器dump快照的频率，在打开6379.conf文件之后，我们搜索save，可以看到下面的配置信息：</p>
+<p>save 900 1       #在900秒(15分钟)之后，如果至少有1个key发生变化，则dump内存快照。<br>save 300 10      #在300秒(5分钟)之后，如果至少有10个key发生变化，则dump内存快照。<br>save 60 10000    #在60秒(1分钟)之后，如果至少有10000个key发生变化，则dump内存快照。</p>
+<h2 id="AOF持久化配置"><a href="#AOF持久化配置" class="headerlink" title="AOF持久化配置"></a>AOF持久化配置</h2><p>在Redis的配置文件中存在三种同步方式，它们分别是：</p>
+<p>appendfsync always   #每次有数据修改发生时都会写入AOF文件。<br>appendfsync everysec #每秒钟同步一次，该策略为AOF的缺省策略。<br>appendfsync no     #从不同步。高效但是数据不会被持久化。</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E6%8C%81%E4%B9%85%E5%8C%96/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E6%8F%8F%E8%BF%B0/">
+        <h2 class="post-title">Redis描述</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                数据库
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="redis-understand"><a href="#redis-understand" class="headerlink" title="redis understand"></a>redis understand</h1><p><strong>概述</strong></p>
+<p>redis全称是 remote dictionary server（远程字典服务），是一个ANSI C语言编写、支持网络、可基于内存也可以持久化的日志型的 kay-value 数据库。</p>
+<p>于mysql不同的是，redis的信息是存在于内存当中，读写速度快，每秒读写（iops）10w+，因此redis常被应用自缓存，另外redis也经常被用作分布式锁，redis支持事务、持久化、lua脚本、lru驱动事件、多种集群方案。</p>
+<p><strong>数据类型</strong></p>
+<p>redis有如下五种基础数据类型</p>
+<ol>
+<li>String（字符串）</li>
+<li>Hash（哈希）</li>
+<li>List（列表）</li>
+<li>Set（集合）</li>
+<li>zset（有序集合）</li>
+</ol>
+<p>三种特殊的数据结构类型</p>
+<ol>
+<li>Geospatial</li>
+<li>Hyperloglog</li>
+<li>Bitmap</li>
+</ol>
+<p><strong>缓存问题</strong></p>
+<p>穿透：</p>
+<p>指查询一个不存在的数据，redis查不到就往db中差，db也查不到就无法创建缓存，一直查就会一直请求数据库，进而给db带来压力</p>
+<p>解决方案：</p>
+<ol>
+<li>接口API验证，避免非法请求，过滤非法值</li>
+<li>如果查询为空，我们也设置一个缓存，或者叫默认值，每次返回默认值即可，直到下次写入刷新，也要给缓存设置一定时间的过期</li>
+<li>布隆过滤，</li>
+</ol>
+<p>雪崩：</p>
+<p>指某一时刻，redis中大量的数据过期，而同时查询的数据量巨大，那么请求都将直接访问db，引起db的压力过大深圳down机</p>
+<p>解决方案：</p>
+<ol>
+<li>把redis数据过期的时间做微调，也就是说，我们在给定的时间上，做微量偏移，使得过期的时间分布在一个范围内，而不是聚集在某一时刻</li>
+<li>单个redis宕机也会造成，这个时候要使用redis的集群服务</li>
+</ol>
+<p>击穿：</p>
+<p>击穿与雪崩很像，击穿是指某一个key过期，而当前的key又有很大的访问量，造成全部去访问db，造成压力过大宕机</p>
+<p>解决方案：</p>
+<ol>
+<li>使用互斥锁方案，缓存失效的时候，不马上去加载db，而是先使用某些带返回的原子操作命令（就是给redis设置一个值，先让这个给值顶着，然后我跑去db拿数据刷新过来，保证只有一个db操作进入），成功了再去数据库加载数据</li>
+<li>永不过期，指不设置过期时间，在快过期的时候，由异步线程去刷新数据</li>
+</ol>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E6%8F%8F%E8%BF%B0/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Windows%E5%AE%89%E8%A3%85MySQL/">
+        <h2 class="post-title">Windows安装MySQL</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                数据库
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="Windows下MySQL的安装"><a href="#Windows下MySQL的安装" class="headerlink" title="Windows下MySQL的安装"></a>Windows下MySQL的安装</h1><p>首先下载MySQL的的压缩包（MySQL社区版）</p>
+<p><a target="_blank" rel="noopener" href="https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-5.7.37-winx64.zip">MySQL5.7社区版</a></p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>如果以前安装过其它版本的MySQL那么需要先卸载mysql的服务在进行安装<br>卸载方式：以管理员身份进入CMD控制台，然后输入一下命令进行删除服务<br>如果未安装则可以忽略这一步骤：mysql是服务的名称</p>
+<pre><code class="shell">sc delete mysql
+</code></pre>
+<h2 id="1、MySQL的解压"><a href="#1、MySQL的解压" class="headerlink" title="1、MySQL的解压"></a>1、MySQL的解压</h2><p>将下载好的mysql的压缩包解压，并且把解压之后的mysql-8.0.15-winx64文件夹放到安装文件夹<br>我的是放在：D:\Software\MySQL\mysql-8.0.15-winx64</p>
+<h2 id="2、配置环境变量"><a href="#2、配置环境变量" class="headerlink" title="2、配置环境变量"></a>2、配置环境变量</h2><p>右键我的计算机-&gt;属性-&gt;高级系统设置-&gt;环境变量<br>新建系统变量</p>
+<pre><code class="shell">变量名称：MYSQL_HOME
+变量路径：D:\Software\MySQL\mysql-8.0.15-winx64\bin
+</code></pre>
+<p>修改path变量，加入</p>
+<pre><code class="shell">%MYSQL_HOME%\bin
+</code></pre>
+<p><strong>注意：</strong>如果失败，可以创建一个指定初始配置文件(我现在这个版本是没有配置的)<br>初始化mysql前，可以通过ini文件来指定部分初始配置，比如<code>basedir</code>和<code>datadir</code>等，当然，也可以不指定利用默认的，参考文档<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/windows-create-option-file.html">官方文档</a><br>在mysql的根目录下，创建mysql.ini文件，加入下面内容</p>
+<pre><code class="yml">[mysqld]
+# set basedir to your installation path
+basedir=D:\Software\MySQL\mysql-8.0.15-winx64
+# set datadir to the location of your data directory
+datadir=D:\Software\MySQL\mysql-8.0.15-winx64\data
+</code></pre>
+<h2 id="3、初始化"><a href="#3、初始化" class="headerlink" title="3、初始化"></a>3、初始化</h2><p>打开cmd控制台，输入初始化命令（由于配置了系统的环境变量，所以不需要进入到D:\Software\MySQL\mysql-8.0.15-winx64\bin下）</p>
+<pre><code class="shell">//生成临时密码
+mysqlid --initialize --console
+</code></pre>
+<p>或者</p>
+<pre><code class="shell">//空密码
+mysqld --initialize-insecure --console
+</code></pre>
+<p>如果选择临时密码，控制台会有以下输出，可以看到里面有临时密码（temporary password is generated for root@localhost:后面的值，注意去掉空格），请一定要记住，当然你如果不想记住也可以，只是需要再折腾一下去重置密码</p>
+<pre><code class="yml">2018-08-15T02:55:43.924361Z 0 [System] [MY-013169] [Server] C:\MyPrograms\mysql-8.0.12-winx64\bin\mysqld.exe (mysqld 8.0.12) initializing of server in progress as process 12040
+2018-08-15T02:55:55.962035Z 5 [Note] [MY-010454] [Server] A temporary password is generated for root@localhost: XCeQtsgMO7-F
+2018-08-15T02:56:03.261174Z 0 [System] [MY-013170] [Server] C:\MyPrograms\mysql-8.0.12-winx64\bin\mysqld.exe (mysqld 8.0.12) initializing of server has completed
+</code></pre>
+<h2 id="4、安装windows服务"><a href="#4、安装windows服务" class="headerlink" title="4、安装windows服务"></a>4、安装windows服务</h2><p>用管理员身份打开CMD，在里面输入如下命令</p>
+<pre><code class="shell">//serviceName为服务名，不输入默认为mysql
+mysqld --install [serviceName]
+</code></pre>
+<p>如果看到下面内容，则证明服务安装成功</p>
+<pre><code>Service successfully installed.
+</code></pre>
+<h2 id="5、启动服务"><a href="#5、启动服务" class="headerlink" title="5、启动服务"></a>5、启动服务</h2><p>还是用管理员身份打开CMD，输入如下命令</p>
+<pre><code class="shell">net start mysql
+
+//以下输出证明启动成功
+MySQL 服务正在启动 ..
+MySQL 服务已经启动成功。
+
+//如果你要关闭的话
+net stop mysql
+</code></pre>
+<h2 id="6、更改密码"><a href="#6、更改密码" class="headerlink" title="6、更改密码"></a>6、更改密码</h2><p>连接到mysql</p>
+<pre><code class="shell">//下面-p后面的内容就是临时密码
+mysql -uroot -pXCeQtsgMO7-F
+</code></pre>
+<p>修改密码</p>
+<pre><code class="shell">ALTER USER &#39;root&#39;@&#39;localhost&#39; IDENTIFIED WITH mysql_native_password BY &#39;newpassword&#39;;
+</code></pre>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>1、环境变量是为了在命令行CMD中更加方便使用mysql命令；</li>
+<li>2、如果有之前有安装过其他版本mysql，记得先卸载并删除服务；</li>
+<li>3、安装完记得登录并修改密码，不论是采用空密码还是临时密码；</li>
+<li>4、当然，命令行终归是不方便的，现在有很多可视化界面，如：Navicat等。</li>
+</ul>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Windows%E5%AE%89%E8%A3%85MySQL/" class="go-post">阅读全文</a>
 </div>
 
 

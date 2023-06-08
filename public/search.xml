@@ -289,11 +289,11 @@
     
     
     <entry>
-      <title>Jvm虚拟机</title>
-      <link href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jvm%E8%99%9A%E6%8B%9F%E6%9C%BA/"/>
-      <url>/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jvm%E8%99%9A%E6%8B%9F%E6%9C%BA/</url>
+      <title>二维码生成</title>
+      <link href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/%E4%BA%8C%E7%BB%B4%E7%A0%81%E7%94%9F%E6%88%90/"/>
+      <url>/2023/06/07/Java%E5%9F%BA%E7%A1%80/%E4%BA%8C%E7%BB%B4%E7%A0%81%E7%94%9F%E6%88%90/</url>
       
-        <content type="html"><![CDATA[<h1 id="JVM虚拟机"><a href="#JVM虚拟机" class="headerlink" title="JVM虚拟机"></a>JVM虚拟机</h1><p>指针碰撞（bump the pointer）： 指在分配内存的时候，由于堆空间的内存是整齐规划的，一边是使用的内存，一边是空闲的内存，中间由指针分开，在移动指针进行内存分配的时候叫做内存分配</p>]]></content>
+        <content type="html"><![CDATA[<h1 id="Zxing"><a href="#Zxing" class="headerlink" title="Zxing"></a>Zxing</h1><h3 id="POM文件的引入"><a href="#POM文件的引入" class="headerlink" title="POM文件的引入"></a>POM文件的引入</h3><pre><code class="xml">&lt;dependency&gt;    &lt;groupId&gt;com.google.zxing&lt;/groupId&gt;    &lt;artifactId&gt;javase&lt;/artifactId&gt;    &lt;version&gt;3.3.3&lt;/version&gt;&lt;/dependency&gt;</code></pre><h3 id="后端Controller的port代码"><a href="#后端Controller的port代码" class="headerlink" title="后端Controller的port代码"></a>后端Controller的port代码</h3><pre><code class="java"> @PortMapping(&quot;/qrCode/&quot;)    public Object qrCode(@RequestParam(&quot;centext&quot;)String centext, HttpServletResponse response, HttpServletRequest request)&#123;        Map&lt;EncodeHintType, Object&gt; hints = new HashMap&lt;&gt;(3);        hints.put(EncodeHintType.CHARACTER_SET,&quot;UTF-8&quot;);        hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);        hints.put(EncodeHintType.MARGIN,1);        try &#123;            response.setContentType(&quot;image/png;charset=UTF-8&quot;);            ServletOutputStream outputStream = response.getOutputStream();            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();            BitMatrix bitMatrix = new MultiFormatWriter().encode(context, BarcodeFormat.QR_CODE, 200, 200, hints);            MatrixToImageWriter.writeToStream(bitMatrix,&quot;png&quot;,byteArrayOutputStream);   //编码格式转换，由于前端用ajax设置img标签的src属性需要  response.getOutputStream().write(Base64.encodeBase64(byteArrayOutputStream.toByteArray()));            outputStream.flush();            outputStream.close();        &#125; catch (WriterException | IOException e) &#123;            e.printStackTrace();        &#125;        //枚举内容替换成了字符串，不好展示        return &#123;&quot;code&quot;:2001,&quot;message&quot;:&quot;二维码生成成功&quot;&#125;;    &#125;</code></pre><h3 id="前端js代码"><a href="#前端js代码" class="headerlink" title="前端js代码"></a>前端js代码</h3><pre><code class="javascript"> $(document).ready(function () &#123;            $(&quot;#showQRCode&quot;).click(function () &#123;                let inputText = $(&quot;#inputText&quot;).val();                $.port(&#123;                    url: &quot;/qrCode&quot;,                    data: &#123;&quot;context&quot;:inputText&#125;,                    dataType: &quot;application/json&quot;,                    contentType: &quot;application/json&quot;,                    responseType: &quot;blob&quot;,                    accept:&quot;image/png&quot;,                    success: function (response)&#123;                        //后台的Base64编码作用于这里                        $(&quot;#qrCode&quot;).attr(&quot;src&quot;,&quot;data:image/png;base64,&quot;+response);                    &#125;,                    error: function () &#123;                        alert(&quot;请求错误&quot;);                    &#125;                &#125;)            &#125;);        &#125;);</code></pre><h3 id="前端HTML代码"><a href="#前端HTML代码" class="headerlink" title="前端HTML代码"></a>前端HTML代码</h3><pre><code class="html">&lt;div&gt;        &lt;img  id=&quot;qrCode&quot; style=&quot;padding-left: 20px&quot; alt=&quot;QRCode&quot; src=&quot;&quot;&gt;&lt;br/&gt;        &lt;label for=&quot;inputText&quot;&gt;输入二维码内容：&lt;/label&gt;&lt;input type=&quot;text&quot; id=&quot;inputText&quot;&gt;&lt;br/&gt;        &lt;button id=&quot;showQRCode&quot;&gt;提交&lt;/button&gt;&lt;/div&gt;</code></pre><hr><h4 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h4><p>*使用<strong>Zxing</strong>第三方jar包，使用<strong>MultiFormatWriter</strong>的<strong>encode()<strong>方法生成一个二维码类</strong>BitMatrix</strong>的对象，然后用<strong>MatrixToImageWriter</strong>的流写入方法<strong>writeToStream()<strong>以</strong>png</strong>的形式写入<strong>OutputStresam</strong>流中，如果需要，可以进行相应的编码转换。*</p><p><em><strong>如果使用get的方式，直接往img标签的src属性添加生成二维码的访问地址即可，并且不需要base64编码。</strong></em></p>]]></content>
       
       
       <categories>
@@ -308,11 +308,11 @@
     
     
     <entry>
-      <title>二维码生成</title>
-      <link href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/%E4%BA%8C%E7%BB%B4%E7%A0%81%E7%94%9F%E6%88%90/"/>
-      <url>/2023/06/07/Java%E5%9F%BA%E7%A1%80/%E4%BA%8C%E7%BB%B4%E7%A0%81%E7%94%9F%E6%88%90/</url>
+      <title>Jvm虚拟机</title>
+      <link href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jvm%E8%99%9A%E6%8B%9F%E6%9C%BA/"/>
+      <url>/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jvm%E8%99%9A%E6%8B%9F%E6%9C%BA/</url>
       
-        <content type="html"><![CDATA[<h1 id="Zxing"><a href="#Zxing" class="headerlink" title="Zxing"></a>Zxing</h1><h3 id="POM文件的引入"><a href="#POM文件的引入" class="headerlink" title="POM文件的引入"></a>POM文件的引入</h3><pre><code class="xml">&lt;dependency&gt;    &lt;groupId&gt;com.google.zxing&lt;/groupId&gt;    &lt;artifactId&gt;javase&lt;/artifactId&gt;    &lt;version&gt;3.3.3&lt;/version&gt;&lt;/dependency&gt;</code></pre><h3 id="后端Controller的port代码"><a href="#后端Controller的port代码" class="headerlink" title="后端Controller的port代码"></a>后端Controller的port代码</h3><pre><code class="java"> @PortMapping(&quot;/qrCode/&quot;)    public Object qrCode(@RequestParam(&quot;centext&quot;)String centext, HttpServletResponse response, HttpServletRequest request)&#123;        Map&lt;EncodeHintType, Object&gt; hints = new HashMap&lt;&gt;(3);        hints.put(EncodeHintType.CHARACTER_SET,&quot;UTF-8&quot;);        hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);        hints.put(EncodeHintType.MARGIN,1);        try &#123;            response.setContentType(&quot;image/png;charset=UTF-8&quot;);            ServletOutputStream outputStream = response.getOutputStream();            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();            BitMatrix bitMatrix = new MultiFormatWriter().encode(context, BarcodeFormat.QR_CODE, 200, 200, hints);            MatrixToImageWriter.writeToStream(bitMatrix,&quot;png&quot;,byteArrayOutputStream);   //编码格式转换，由于前端用ajax设置img标签的src属性需要  response.getOutputStream().write(Base64.encodeBase64(byteArrayOutputStream.toByteArray()));            outputStream.flush();            outputStream.close();        &#125; catch (WriterException | IOException e) &#123;            e.printStackTrace();        &#125;        //枚举内容替换成了字符串，不好展示        return &#123;&quot;code&quot;:2001,&quot;message&quot;:&quot;二维码生成成功&quot;&#125;;    &#125;</code></pre><h3 id="前端js代码"><a href="#前端js代码" class="headerlink" title="前端js代码"></a>前端js代码</h3><pre><code class="javascript"> $(document).ready(function () &#123;            $(&quot;#showQRCode&quot;).click(function () &#123;                let inputText = $(&quot;#inputText&quot;).val();                $.port(&#123;                    url: &quot;/qrCode&quot;,                    data: &#123;&quot;context&quot;:inputText&#125;,                    dataType: &quot;application/json&quot;,                    contentType: &quot;application/json&quot;,                    responseType: &quot;blob&quot;,                    accept:&quot;image/png&quot;,                    success: function (response)&#123;                        //后台的Base64编码作用于这里                        $(&quot;#qrCode&quot;).attr(&quot;src&quot;,&quot;data:image/png;base64,&quot;+response);                    &#125;,                    error: function () &#123;                        alert(&quot;请求错误&quot;);                    &#125;                &#125;)            &#125;);        &#125;);</code></pre><h3 id="前端HTML代码"><a href="#前端HTML代码" class="headerlink" title="前端HTML代码"></a>前端HTML代码</h3><pre><code class="html">&lt;div&gt;        &lt;img  id=&quot;qrCode&quot; style=&quot;padding-left: 20px&quot; alt=&quot;QRCode&quot; src=&quot;&quot;&gt;&lt;br/&gt;        &lt;label for=&quot;inputText&quot;&gt;输入二维码内容：&lt;/label&gt;&lt;input type=&quot;text&quot; id=&quot;inputText&quot;&gt;&lt;br/&gt;        &lt;button id=&quot;showQRCode&quot;&gt;提交&lt;/button&gt;&lt;/div&gt;</code></pre><hr><h4 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h4><p>*使用<strong>Zxing</strong>第三方jar包，使用<strong>MultiFormatWriter</strong>的<strong>encode()<strong>方法生成一个二维码类</strong>BitMatrix</strong>的对象，然后用<strong>MatrixToImageWriter</strong>的流写入方法<strong>writeToStream()<strong>以</strong>png</strong>的形式写入<strong>OutputStresam</strong>流中，如果需要，可以进行相应的编码转换。*</p><p><em><strong>如果使用get的方式，直接往img标签的src属性添加生成二维码的访问地址即可，并且不需要base64编码。</strong></em></p>]]></content>
+        <content type="html"><![CDATA[<h1 id="JVM虚拟机"><a href="#JVM虚拟机" class="headerlink" title="JVM虚拟机"></a>JVM虚拟机</h1><p>指针碰撞（bump the pointer）： 指在分配内存的时候，由于堆空间的内存是整齐规划的，一边是使用的内存，一边是空闲的内存，中间由指针分开，在移动指针进行内存分配的时候叫做内存分配</p>]]></content>
       
       
       <categories>
@@ -413,196 +413,6 @@
       <categories>
           
           <category> 中间件 </category>
-          
-      </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Android_头部导航标签</title>
-      <link href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Android_%E5%A4%B4%E9%83%A8%E5%AF%BC%E8%88%AA%E6%A0%87%E7%AD%BE/"/>
-      <url>/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Android_%E5%A4%B4%E9%83%A8%E5%AF%BC%E8%88%AA%E6%A0%87%E7%AD%BE/</url>
-      
-        <content type="html"><![CDATA[<h1 id="Toolbar"><a href="#Toolbar" class="headerlink" title="Toolbar"></a>Toolbar</h1><p>关于toolbar使用的几个要点，包如下</p><pre><code class="xml">androidx.appcompat.widget.Toolbar</code></pre><p>这里作为toolbar的最左标签使用</p><pre><code class="xml">app:navigationIcon=&quot;@mipmap/sidebar&quot;</code></pre><p>最左侧按钮点击事件，这里的点击事件有一个很重要的事情，就是只有在toolbar提交之后才能生效，也就是</p><pre><code class="java">setSupportActionBar(toolbar);</code></pre><pre><code class="java">@Override    public boolean onOptionsItemSelected(@NonNull MenuItem item) &#123;        if (item.getItemId() ==android.R.id.home)&#123;            drawerLayout.openDrawer(Gravity.LEFT);        &#125;        return super.onOptionsItemSelected(item);    &#125;</code></pre><p>而其他的所有操作，如设置title，logo等等方法，也要在提交了toolbar之后才能生效，例如</p><pre><code class="java"># 设置title无效getSupportActionBar().setDisplayShowTitleEnabled(false);</code></pre><p>还有设置toolbar的title的颜色字体大小，等等信息</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 前端杂烩 </category>
-          
-      </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Android网络请求回调</title>
-      <link href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Android%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%E5%9B%9E%E8%B0%83/"/>
-      <url>/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Android%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%E5%9B%9E%E8%B0%83/</url>
-      
-        <content type="html"><![CDATA[<h1 id="Android的HTTP网络请求超时UI更新（回调）"><a href="#Android的HTTP网络请求超时UI更新（回调）" class="headerlink" title="Android的HTTP网络请求超时UI更新（回调）"></a>Android的HTTP网络请求超时UI更新（回调）</h1><h3 id="原因及运行原理"><a href="#原因及运行原理" class="headerlink" title="原因及运行原理"></a>原因及运行原理</h3><p>当在网络请求出现连接超时（httpURLConnection.setConnectTimeout(TimeOut)）的时候，此时调用的活动中的Dialog弹窗会一直浮现在桌面上，而网络请求是位于子线程，活动只是调用之后就没有太多的关联，这时当网络出现连接超时的时候会一直卡在httpURLConnection.connect()中，此时可以在网络请求类中新建一个接口，并且实现一个刷新方法，再在活动中实例化一个请求类，并且参数为接口对象，然后再到网络请求出现超时，并且抛出异常的try…catch代码块的异常处理块中用接口对象调用刷新的方法，由于接口内的刷新方法时抽象方法，所以会自动往子级里面去找到运行的代码块，也就是说运行活动中覆写的代码块，注意：虽然运行的代码块时活动中的，但是其调用的主体方法还是在子线程中，所以需要更新UI的时候，还是需要回调到主线程中        </p><pre><code class="java">public  class BaseHttpConn &#123;    private static final String TAG = &quot;BaseHttpConn&quot;;    private static TimeOut shuaxin;    private static int TimeOut = 3*1000;    public static HttpURLConnection httpConn(String baseUrl, HashMap&lt;String, String&gt; map) &#123;        HttpURLConnection httpURLConnection = null;        try &#123;            URL url = new URL(baseUrl);            httpURLConnection = (HttpURLConnection) url.openConnection();            httpURLConnection.setConnectTimeout(TimeOut);//连接超时            httpURLConnection.setReadTimeout(TimeOut);//读取超时            httpURLConnection.setRequestMethod(&quot;POST&quot;);//请求方式            httpURLConnection.setInstanceFollowRedirects(true);//是否重定向            httpURLConnection.setUseCaches(true);//是否启用缓存            httpURLConnection.setRequestProperty(&quot;Content-Type&quot;,&quot;application/json&quot;);//传入服务器的数据类型            OutputStream outputStream = httpURLConnection.getOutputStream();            outputStream.write(getByte(map));            outputStream.close();        &#125; catch (Exception e) &#123;            e.printStackTrace();            httpURLConnection.disconnect();//关闭此次网络请求            shuaxin.ShuaXin();//通过接口对象调用抽象方法ShuaXin();        &#125;        return httpURLConnection;    &#125;    private static byte[] getByte(HashMap&lt;String,String&gt; map) &#123;        JSONObject jsonObject = new JSONObject();        for(String key: map.keySet())&#123;            try &#123;                jsonObject.put(key,map.get(key));            &#125; catch (JSONException e) &#123;                e.printStackTrace();            &#125;        &#125;        return jsonObject.toString().getBytes();    &#125;    public BaseHttpConn(TimeOut timeOut) &#123;        this.shuaxin = timeOut;    &#125;    //监听接口    public interface TimeOut&#123;        void ShuaXin();//接口中刷新的方法    &#125;&#125;</code></pre><h3 id="Activity中的代码"><a href="#Activity中的代码" class="headerlink" title="Activity中的代码"></a>Activity中的代码</h3><pre><code class="java">     BaseHttpConn baseHttpConn = new BaseHttpConn(new BaseHttpConn.TimeOut() &#123;        @Override        public void ShuaXin() &#123;            progressDialog.dismiss();            getActivity().runOnUiThread(new Runnable() &#123;//位于碎片中，所以需要通过getActivity()获取活动                @Override                public void run() &#123;                    Toast.makeText(getContext(),&quot;网络连接失败&quot;,Toast.LENGTH_SHORT).show();                &#125;            &#125;);        &#125;    &#125;);</code></pre>]]></content>
-      
-      
-      <categories>
-          
-          <category> 前端杂烩 </category>
-          
-      </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>CSS布局问题</title>
-      <link href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/CSS%E5%B8%83%E5%B1%80%E9%97%AE%E9%A2%98/"/>
-      <url>/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/CSS%E5%B8%83%E5%B1%80%E9%97%AE%E9%A2%98/</url>
-      
-        <content type="html"><![CDATA[<h1 id="CSS布局问题"><a href="#CSS布局问题" class="headerlink" title="CSS布局问题"></a>CSS布局问题</h1><pre><code class="css"># 作为行内表格元素，可以使相对于父元素有效display: inline-table;width:100%;height: 100%;</code></pre>]]></content>
-      
-      
-      <categories>
-          
-          <category> 前端杂烩 </category>
-          
-      </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>HTML5图片拖放</title>
-      <link href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/HTML5%E5%9B%BE%E7%89%87%E6%8B%96%E6%94%BE/"/>
-      <url>/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/HTML5%E5%9B%BE%E7%89%87%E6%8B%96%E6%94%BE/</url>
-      
-        <content type="html"><![CDATA[<h2 id="实现HTML5中图片的拖放"><a href="#实现HTML5中图片的拖放" class="headerlink" title="实现HTML5中图片的拖放"></a>实现HTML5中图片的拖放</h2><pre><code class="html">&lt;!DOCTYPE html&gt;&lt;html&gt;    &lt;head&gt;        &lt;meta charset=&quot;utf-8&quot;&gt;        &lt;title&gt;阿杰之家&lt;/title&gt;        &lt;style type=&quot;text/css&quot;&gt;            #div1,            #div2 &#123;                float: left;                width: 500px;                height: 350px;                margin: 10px;                padding: 10px;                border: 1px solid #aaaaaa;            &#125;        &lt;/style&gt;        &lt;script&gt;            function allowDrop(ev) &#123;                // 6、默认地，无法将数据/元素放置到其他元素中。如果需要设置允许放置，我们必须阻止对元素的默认处理方式,这要通过调用 ondragover 事件的 event.preventDefault() 方法.                ev.preventDefault();            &#125;            function drag(ev) &#123;                // 3、dataTransfer.setData() 方法设置被拖数据的数据类型和值                // 4、Text 是一个 DOMString 表示要添加到 drag object 的拖动数据的类型。值是可拖动元素的 id (&quot;drag1&quot;)。                ev.dataTransfer.setData(&quot;Text&quot;, ev.target.id);            &#125;            function drop(ev) &#123;                // 8、调用 preventDefault() 来避免浏览器对数据的默认处理（drop 事件的默认行为是以链接形式打开）                ev.preventDefault();                // 9、通过 dataTransfer.getData(&quot;Text&quot;) 方法获得被拖的数据。该方法将返回在 setData() 方法中设置为相同类型的任何数据。被拖数据是被拖元素的 id (&quot;drag1&quot;)                var data = ev.dataTransfer.getData(&quot;Text&quot;);                // 10、把被拖元素追加到放置元素（目标元素）中                ev.target.appendChild(document.getElementById(data));            &#125;        &lt;/script&gt;    &lt;/head&gt;    &lt;body&gt;        &lt;!-- 5、ondragover 事件规定在何处放置被拖动的数据。 --&gt;        &lt;!-- 7、当放置被拖数据时，会发生 drop 事件 --&gt;        &lt;div id=&quot;div1&quot; ondrop=&quot;drop(event)&quot; ondragover=&quot;allowDrop(event)&quot;&gt;            &lt;!-- 1、为了使元素可拖动，把 draggable 属性设置为 true --&gt;            &lt;!-- 2、ondragstart 属性调用了一个函数，drag(event)，它规定了被拖动的数据。 --&gt;            &lt;img src=&quot;./img/logo.png&quot; draggable=&quot;true&quot; ondragstart=&quot;drag(event)&quot; id=&quot;drag1&quot; width=&quot;500&quot; height=&quot;350&quot;&gt;&lt;/div&gt;        &lt;div id=&quot;div2&quot; ondrop=&quot;drop(event)&quot; ondragover=&quot;allowDrop(event)&quot;&gt;&lt;/div&gt;    &lt;/body&gt;&lt;/html&gt;</code></pre>]]></content>
-      
-      
-      <categories>
-          
-          <category> 前端杂烩 </category>
-          
-      </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>HTML高度塌陷</title>
-      <link href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/HTML%E9%AB%98%E5%BA%A6%E5%A1%8C%E9%99%B7/"/>
-      <url>/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/HTML%E9%AB%98%E5%BA%A6%E5%A1%8C%E9%99%B7/</url>
-      
-        <content type="html"><![CDATA[<h1 id="HTML盒子高度塌陷"><a href="#HTML盒子高度塌陷" class="headerlink" title="HTML盒子高度塌陷"></a>HTML盒子高度塌陷</h1><p>使用<code>overflow: hidden;</code>可以处理盒子的高度塌陷</p><p>引用：<a href="https://www.cnblogs.com/luoqian/p/5987788.html">https://www.cnblogs.com/luoqian/p/5987788.html</a></p><p>最近在看《CSS Mastery》这本书，里面有用overflow：hidden来清理浮动的方法。但是一直想不明白为什么能够实现清除浮动，查阅了网络上的解释，下面来总结一下。</p><p>一、首先来想想</p><p>我们大家理解的overflow:hidden是超出该元素的部分进行隐藏。这个时候就需要明确一点，该元素的高度是怎么定义的。当一个div中的两个元素浮动之后，此时div的高度就会塌陷，此时div的高度为0。那是不是意味着就要将浮动元素隐藏起来，如果是真的隐藏就是反布局常识的。所以这中间肯定有我们现在还不知道的机制。</p><p>二、不了解的机制-BFC</p><p>定义：BFC（Block Formatting Context）全称是块级格式化上下文，用于对块级元素排版，默认情况下只有根元素（body）一个块级上下文，但是如果一个块级元素设置了float:left,overflow:hidden或position:absolute样式，就会为这个块级元素生产一个独立的块级上下文，使这个块级元素内部的排版完全独立。</p><p>作用：独立的块级上下文可以包裹浮动流，全部浮动子元素也不会引起容器高度塌陷，就是说包含块会把浮动元素的高度也计算在内，所以就不用清除浮动来撑起包含块的高度。</p><p>三、总结清除浮动的方法</p><p>我经常用到的清除浮动的方法有</p><p>1、添加额外标签设置clearfix类为clear:both;</p><p>　　原理是这个空的div能让父级获取到高度，是因为设置之后这个div的左右都不能有浮动元素，所以这个空的div元素会向下移动，直到换行，而为了让这个div能够换行，父元素至少要包含浮动元素的高度才能提高足够的空间，这样实现清除浮动的影响。</p><p>2、设置父元素为浮动元素</p><p>3、设置position:absolute</p><p>我不常用的清除浮动的方法有</p><p>1、父级div定义height</p><p>3、overflow:hidden</p><p>2、父级div定义伪类:after和zoom;</p><p>　　这个方法的原理还不理解，欢迎大神解答。</p><p>四、清除浮动的影响方法分类</p><p>参考张鑫旭老师的说法，清除浮动的说法是不准确的。应该是为清除浮动的影响。我也觉得张老师的说法是正确的，因为float:none才叫清除浮动。张老师还说到了包裹的这个概念，根据这个概念将清除浮动的影响的方法分为两大类。</p><p>一类是clear:both&#x2F;left&#x2F;right，这就不用说了。</p><p>另一类是：包裹清除，因为他发现浮动、绝对定位、inline-block、overflow都有自适应元素宽度的特性，就想到了用包裹来形容。</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 前端杂烩 </category>
-          
-      </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>JavaScript下载文件</title>
-      <link href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/JavaScript%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6/"/>
-      <url>/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/JavaScript%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6/</url>
-      
-        <content type="html"><![CDATA[<p>JavaScript异步请求，把响应的Base64图片内容下载到本地文件存储</p><pre><code class="javascript">/** * Base64的文件下载 * @param content Base64字符内容 * @param fileName 文件名称 */function downloadFile(content, fileName) &#123; //下载base64图片    let base64ToBlob = function (code) &#123;        let parts = code.split(&#39;;base64,&#39;);        let contentType = parts[0].split(&#39;:&#39;)[1];        let raw = window.atob(parts[1]);        let rawLength = raw.length;        let uInt8Array = new Uint8Array(rawLength);        for (let i = 0; i &lt; rawLength; ++i) &#123;            uInt8Array[i] = raw.charCodeAt(i);        &#125;        return new Blob([uInt8Array], &#123;            type: contentType        &#125;);    &#125;;    let aLink = document.createElement(&#39;a&#39;);    let blob = base64ToBlob(content); //new Blob([content]);    let evt = document.createEvent(&quot;HTMLEvents&quot;);    evt.initEvent(&quot;click&quot;, true, true); //initEvent 不加后两个参数在FF下会报错  事件类型，是否冒泡，是否阻止浏览器的默认行为    aLink.download = fileName;    aLink.href = URL.createObjectURL(blob);    aLink.click();&#125;</code></pre>]]></content>
-      
-      
-      <categories>
-          
-          <category> 前端杂烩 </category>
-          
-      </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>JavaScript获取视频流且回显</title>
-      <link href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/JavaScript%E8%8E%B7%E5%8F%96%E8%A7%86%E9%A2%91%E6%B5%81%E4%B8%94%E5%9B%9E%E6%98%BE/"/>
-      <url>/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/JavaScript%E8%8E%B7%E5%8F%96%E8%A7%86%E9%A2%91%E6%B5%81%E4%B8%94%E5%9B%9E%E6%98%BE/</url>
-      
-        <content type="html"><![CDATA[<hr><h2 id="title-JavaScript获取视频流且回显date-2022-04-20-09-38-55-438updated-2022-10-13-14-58-40-564url-x2F-archives-x2F-javascript-huo-qu-shi-pin-liu-qie-hui-xiancategories-JavaScripttags-JavaScript"><a href="#title-JavaScript获取视频流且回显date-2022-04-20-09-38-55-438updated-2022-10-13-14-58-40-564url-x2F-archives-x2F-javascript-huo-qu-shi-pin-liu-qie-hui-xiancategories-JavaScripttags-JavaScript" class="headerlink" title="title: JavaScript获取视频流且回显date: 2022-04-20 09:38:55.438updated: 2022-10-13 14:58:40.564url: &#x2F;archives&#x2F;javascript-huo-qu-shi-pin-liu-qie-hui-xiancategories:- JavaScripttags:- JavaScript"></a>title: JavaScript获取视频流且回显<br>date: 2022-04-20 09:38:55.438<br>updated: 2022-10-13 14:58:40.564<br>url: &#x2F;archives&#x2F;javascript-huo-qu-shi-pin-liu-qie-hui-xian<br>categories:<br>- JavaScript<br>tags:<br>- JavaScript</h2><pre><code class="HTML">&lt;!DOCTYPE html&gt;&lt;html&gt;    &lt;head&gt;        &lt;style&gt;        &lt;/style&gt;    &lt;/head&gt;    &lt;body&gt;        &lt;video id=&quot;video&quot; width=&quot;640&quot; height=&quot;480&quot; autoplay=&quot;autoplay&quot;&gt;&lt;/video&gt;        &lt;br/&gt;        &lt;button id=&quot;snap&quot;&gt;截取图像&lt;/button&gt;&lt;button id=&quot;start&quot;&gt;开始录制&lt;/button&gt;&lt;button id=&quot;stop&quot;&gt;停止录制&lt;/button&gt;        &lt;br/&gt;        &lt;canvas id=&quot;canvas&quot; width=&quot;640&quot; height=&quot;480&quot;&gt;&lt;/canvas&gt;    &lt;/body&gt;    &lt;script type=&quot;text/javascript&quot;&gt;        let videoView = document.getElementById(&quot;video&quot;);        let buttonView = document.getElementById(&quot;snap&quot;);        let startButton = document.getElementById(&quot;start&quot;);        let stopButton = document.getElementById(&quot;stop&quot;);        let canvasView = document.getElementById(&quot;canvas&quot;);        navigator.mediaDevices.getDisplayMedia(&#123;            video: &#123;                width: 640,                height: 480            &#125;,            audio: true        &#125;).then(stream =&gt; &#123;            console.log(&quot;摄像头打开成功！！！&quot;, stream);            //以ID为基准,video控件的ID是什么此处的video就是什么            video.srcObject = stream;            // 创建下载对象            let mediaRecorder = new MediaRecorder(stream, &#123;                audioBitsPerSecond: 128000, // 音频码率                videoBitsPerSecond: 100000, // 视频码率                mimeType: &#39;video/webm;codecs=h264&#39; // 编码格式            &#125;);            startButton.onclick = (e =&gt; &#123;                console.log(&quot;触发下载按钮！！！&quot;, e)                mediaRecorder.start(5000);            &#125;);            stopButton.onclick = (e =&gt; &#123;                console.log(&quot;触发结束按钮！！！&quot;, e)                mediaRecorder.stop();            &#125;);            mediaRecorder.ondataavailable = (e =&gt; &#123;                console.log(&quot;开始下载&quot;)                // 下载视频                var blob = new Blob([e.data], &#123; &#39;type&#39; : &#39;video/mp4&#39; &#125;)                let a = document.createElement(&#39;a&#39;)                a.href = URL.createObjectURL(blob)                a.download = `test.mp4`                a.click()            &#125;);            //监听流录入失败            video.onerror = (err =&gt; &#123;                console.log(&quot;加载错误！！！&quot;, err);            &#125;);            //监听流录入成功            video.onloadeddata = (e =&gt; &#123;                console.log(&quot;加载成功！！！&quot;, e);            &#125;);        &#125;).catch(stream =&gt; &#123;            console.log(&quot;摄像头打开失败！！！&quot;, stream);        &#125;);        //给button按钮设置一个点击事件监听        buttonView.onclick = function() &#123;            //获取画布的2d上下文，然后把视频内的一帧绘制到画布上            canvasView.getContext(&quot;2d&quot;).drawImage(videoView, 0, 0, 640, 480)        &#125;    &lt;/script&gt;&lt;/html&gt;</code></pre>]]></content>
-      
-      
-      <categories>
-          
-          <category> 前端杂烩 </category>
-          
-      </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Javascript的dom操作</title>
-      <link href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Javascript%E7%9A%84dom%E6%93%8D%E4%BD%9C/"/>
-      <url>/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Javascript%E7%9A%84dom%E6%93%8D%E4%BD%9C/</url>
-      
-        <content type="html"><![CDATA[<h1 id="JS原生DOM操作"><a href="#JS原生DOM操作" class="headerlink" title="JS原生DOM操作"></a>JS原生DOM操作</h1><pre><code class="javascript">let mainView = document.getElementById(&quot;main&quot;);                console.log(mainView)                let textDom = document.createElement(&quot;img&quot;);                let x = Math.random()*200+&quot;px&quot;;                let y = (Math.random()*300+100)+&quot;px&quot;;                textDom.style.top = y;                textDom.style.width = &quot;20px&quot;;                textDom.style.height = &quot;20px&quot;;                textDom.style.left = x;                textDom.style.border = &quot;solid 1px #cccccc&quot;;                textDom.style.zIndex = &quot;999&quot;;                textDom.style.position = &quot;absolute&quot;;                textDom.setAttribute(&quot;src&quot;,&quot;../../static/log.jpg&quot;);                // textDom.setAttribute(&quot;src&quot;,&quot;http://a2.att.hudong.com/36/48/19300001357258133412489354717.jpg&quot;);                mainView.appendChild(textDom)                console.log(mainView)</code></pre>]]></content>
-      
-      
-      <categories>
-          
-          <category> 前端杂烩 </category>
-          
-      </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Javascript正则</title>
-      <link href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Javascript%E6%AD%A3%E5%88%99/"/>
-      <url>/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Javascript%E6%AD%A3%E5%88%99/</url>
-      
-        <content type="html"><![CDATA[<h2 id="Javascript正则"><a href="#Javascript正则" class="headerlink" title="Javascript正则"></a>Javascript正则</h2><pre><code class="javascript">let newData  = data.replace(/\&quot;toId\&quot;:(\d+)/,&#39;&quot;toId&quot;: &quot;$1&quot;&#39;);data = JSON.parse(newData)</code></pre>]]></content>
-      
-      
-      <categories>
-          
-          <category> 前端杂烩 </category>
-          
-      </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>NodeJS配置创建VUE项目</title>
-      <link href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/NodeJS%E9%85%8D%E7%BD%AE%E5%88%9B%E5%BB%BAVUE%E9%A1%B9%E7%9B%AE/"/>
-      <url>/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/NodeJS%E9%85%8D%E7%BD%AE%E5%88%9B%E5%BB%BAVUE%E9%A1%B9%E7%9B%AE/</url>
-      
-        <content type="html"><![CDATA[<h1 id="nodejs"><a href="#nodejs" class="headerlink" title="nodejs"></a>nodejs</h1><p>查看node版本</p><pre><code class="shell">node -v</code></pre><p>查看npm版本</p><pre><code class="shell">npm -v</code></pre><p>查看配置文件</p><pre><code class="shell">npm config list</code></pre><p>修改本地仓库</p><pre><code class="shell">npm config set prefix &quot;C:\Software\node\node_global&quot;npm config set cache &quot;C:\Software\node\node_cache&quot;</code></pre><p>修改镜像站</p><pre><code class="shell">npm config set registry=https://registry.npm.taobao.org</code></pre><p>node更新</p><pre><code class="shell">*# 全局安装n$ npm install -g n # 升级到最新稳定版$ n stable# 升级到最新版$ n latest# 升级到定制版$ n v7.10.0# 切换使用版本$ n 7.10.0 (ENTER)</code></pre><p>配置文件所在位置<code>C:\Users\Administrator\.npmrc</code></p><p>获取镜像信息（非安装）</p><pre><code class="shell">npm info vue</code></pre><p>更新模块命令</p><pre><code class="shell">#老版本安装方式 2.*npm install npm –g</code></pre><pre><code class="shell">#老版本安装方式 3.* /4.*npm install -g @vue/cli</code></pre><ul><li>npm install&#96;：表示更新</li><li><code>第二个npm</code>：表示需要更新的模块</li><li><code>-g</code>：表示安装到global目录下</li></ul><p>配置NodeJS的环境变量</p><pre><code class="shell">path: D:\software\nodejs</code></pre><p>配置global仓的环境变量</p><pre><code class="shell">path: D:\software\nodejs\node_global</code></pre><p>新增一个<code>NODE_PATH</code>环节变量（子项的全局命令）</p><pre><code class="shell">D:\software\nodejs\node_global\node_modules</code></pre><p>安装vue，安装vue-routher，安装vue脚手架，验证是否安装成功</p><pre><code class="shell">npm install vue -gnpm install vue-routher -gnpm install @vue/cli -gvue -V</code></pre><hr><p><strong>老版本构建方式</strong></p><p>1、构建初始化vue项目</p><pre><code class="shell">vuew init webpack vue01</code></pre><p>2、进入vue01的目录，初始化安装依赖</p><pre><code class="shell">npm install</code></pre><p>3、运行vue01的dev状态</p><pre><code class="shell">npm run dev</code></pre><p>然后访问**<a href="http://localhost:8080/">http://localhost:8080</a>**</p><p>4、编译生成静态文件</p><pre><code class="shell">npm run build</code></pre><hr><p><strong>新版本构建方式</strong></p><pre><code class="shell">vue create vue01</code></pre><p>可以选择创建的方式，moban是我创建的模板，可以选择default默认，或者Manually重新选择</p><blockquote><p>√ Babel<br>× TyreScript<br>× Progressive Web App (PWA) Support<br>√ Routher<br>√ Vuex<br>√ CSS Pre-processors<br>× Linter &#x2F; Formatter<br>× Unit Testing<br>× E2E Testing</p></blockquote>]]></content>
-      
-      
-      <categories>
-          
-          <category> 前端杂烩 </category>
           
       </categories>
       
@@ -897,11 +707,11 @@
     
     
     <entry>
-      <title>Centos7安装Wordpress</title>
-      <link href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos7%E5%AE%89%E8%A3%85Wordpress/"/>
-      <url>/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos7%E5%AE%89%E8%A3%85Wordpress/</url>
+      <title>Centos7常用命令</title>
+      <link href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos7%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+      <url>/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos7%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
       
-        <content type="html"><![CDATA[<h1 id="Centos7安装Wordpress以及环境"><a href="#Centos7安装Wordpress以及环境" class="headerlink" title="Centos7安装Wordpress以及环境"></a>Centos7安装Wordpress以及环境</h1><h2 id="一、安装MySQL57版本"><a href="#一、安装MySQL57版本" class="headerlink" title="一、安装MySQL57版本"></a>一、安装MySQL57版本</h2><p><strong>1、从MySQL官网下载YUM源的RPM安装包</strong></p><pre><code class="shell">wget http://dev.mysql.com/get/mysql57-community-release-el7-8.noarch.rpm</code></pre><p><strong>2、从下载好的rpm包安装MYSQL</strong></p><pre><code class="shell">yum localinstall mysql57-community-release-el7-8.noarch.rpm</code></pre><p><strong>3、安装MySQL服务</strong></p><pre><code class="shell">yum install mysql-community-server</code></pre><p><strong>4、启动MySQL服务</strong></p><pre><code class="shell">systemctl start mysqld.service</code></pre><p><strong>5、设置开机自启并且刷新</strong></p><pre><code class="shell">systemctl enable mysqldsystemctl daemon-reload</code></pre><p><strong>6、修改默认初始化密码-&gt;由于密码策略所以只能设置较为复杂的密码</strong></p><pre><code class="shell">#临时密码在/var/log/mysqld.logalter user &#39;root&#39;@&#39;localhost&#39; identified by &#39;ZhonHua@5000Nian&#39;;</code></pre><p><strong>7、查看MySQL的密码安全策略</strong></p><pre><code class="shell">show variables like &#39;validate_password%&#39;;</code></pre><p><img src="/./images/MYSQL%E5%AF%86%E7%A0%81%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5.PNG" alt="img"></p><p><strong>8、修改密码杂度为最低以及把密码长度改为自己想要的</strong></p><pre><code class="shell">set global validate_password_policy = LOW;set global validate_password_length = 6;</code></pre><p><img src="/./images/MySQL%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81%E7%AD%96%E7%95%A5.PNG" alt="img"></p><p><strong>9、修改为自己想要的密码</strong></p><pre><code class="shell">alter user &#39;root&#39;@&#39;localhost&#39; identified by &#39;123456&#39;;</code></pre><p><strong>10、创建wordpress数据库</strong></p><pre><code class="shell">create database wordpress;</code></pre><p><strong>11、允许远程登陆然后刷新</strong></p><pre><code class="shell">grant all on *.* to root@&#39;%&#39; identified by &#39;password&#39; with grant option;flush privileges;</code></pre><p><strong>12、重启MySQL服务</strong></p><pre><code class="shell">systemctl restart mysqld.service</code></pre><p><strong>13、密码忘记或者策略失败</strong></p><pre><code class="shell">#关闭密码验证策略，url：vi /root/my.cnfskip-grant-tables#修改mysql.user表的密码update mysql.user set authentication_string=password(&#39;新密码&#39;) where user=&#39;root&#39; ;#刷新flush privileges ;#然后删除skip-grant-tables之后重启MySQL服务</code></pre><h2 id="二、安装apache-gt-httpd"><a href="#二、安装apache-gt-httpd" class="headerlink" title="二、安装apache-&gt;httpd"></a>二、安装apache-&gt;httpd</h2><p><strong>1、安装httpd</strong></p><pre><code class="shell">yum install httpd</code></pre><p><strong>2、启动httpd服务</strong></p><pre><code class="shell">systemctl start httpd.service</code></pre><p><strong>3、设置成开机自启并且刷新</strong></p><pre><code class="shell">systemctl enable httpd.servicesystemctl daemon-reload</code></pre><h2 id="三、安装php-gt-及相关驱动"><a href="#三、安装php-gt-及相关驱动" class="headerlink" title="三、安装php-&gt;及相关驱动"></a>三、安装php-&gt;及相关驱动</h2><p><strong>1、安装php、php-fpm、php-mysql</strong></p><pre><code class="shell">yum install php php-fpm php-mysql</code></pre><p><strong>2、启动php-fpm服务</strong></p><pre><code class="shell">systemctl start php-fpm.service</code></pre><p><strong>3、设置成开机自启并且刷新</strong></p><pre><code class="shell">systemctl enable php-fpm.servicesystemctl daemon-reload</code></pre><h2 id="四、查看三个服务的运行状态"><a href="#四、查看三个服务的运行状态" class="headerlink" title="四、查看三个服务的运行状态"></a>四、查看三个服务的运行状态</h2><p><strong>httpd监听80端口，mysql监听3306端口，php-fpm监听9000端口</strong></p><pre><code class="shell">netstat -tunlp</code></pre><h2 id="五、安装wordpress官网tar-gz安装包"><a href="#五、安装wordpress官网tar-gz安装包" class="headerlink" title="五、安装wordpress官网tar.gz安装包"></a>五、安装wordpress官网tar.gz安装包</h2><p><strong>2、用wget获取wordpress安装包</strong></p><pre><code class="shell">wget https://ww.wp.xz.cn/wordpress-4.5.20.tar.gz</code></pre><p><strong>3、解压安装包到&#x2F;var&#x2F;www路径下</strong></p><pre><code class="shell">tar -zxf wordpress-4.5.20.tar.gz -C /var/www</code></pre><p><strong>4、修改httpd的配置文件把默认的映射路径改为&#x2F;var&#x2F;www&#x2F;wordpress</strong>  </p><pre><code class="shell">vi  /etc/httpd/conf/httpd.conf# DocumentRoot的值**5、保存修改文件退出后重新启动httpd服务**```shellsystemctl restart httpd.service</code></pre><p><strong>6、把wordpress目录赋予apache所有权限</strong></p><pre><code class="shell">chown -R apache:apache /var/www/wordpress</code></pre><h2 id="六、用浏览器启动绑定服务器的域名或者服务器的IP然后就可以开始配置相关的数据"><a href="#六、用浏览器启动绑定服务器的域名或者服务器的IP然后就可以开始配置相关的数据" class="headerlink" title="六、用浏览器启动绑定服务器的域名或者服务器的IP然后就可以开始配置相关的数据"></a>六、用浏览器启动绑定服务器的域名或者服务器的IP然后就可以开始配置相关的数据</h2>]]></content>
+        <content type="html"><![CDATA[<h1 id="Centos7常用命令"><a href="#Centos7常用命令" class="headerlink" title="Centos7常用命令"></a>Centos7常用命令</h1><p><strong>防火墙相关命令</strong></p><ul><li><p>防火墙的开启、关闭、重启、与状态</p><pre><code class="shell"> #开启 systemctl start   firewalld.service #关闭 systemctl stop    firewalld.service #重启 systemctl restart firewalld.service #状态 systemctl status  firewalld.service #设置开机自启 systemctl enable  firewalld.service #关闭开机自启 systemctl disable firewalld.service  #指定IP放行指定端口 firewall-cmd --permanent --add-rich-rule=&quot;rule family=&quot;ipv4&quot; source address=&quot;192.168.142.166&quot; port protocol=&quot;tcp&quot; port=&quot;5432&quot; accept&quot;</code></pre></li><li><p>查看所有公开项目</p><pre><code class="shell"> #查看所有公开项 firewall-cmd --list-all #查看端口是否放行 firewall-cmd --zone=public --query-port=80/tcp</code></pre></li><li><p>防火墙放行端口或服务</p><pre><code class="shell"> #添加放行端口 firewall-cmd --zone=public --add-port=80/tcp --permanent #重新加载所有的设置项 firewall-cmd --reload</code></pre><pre><code class="shell">  #添加放行服务  firewall-cmd --zone=public --add-service=http --permanent  firewall-cmd --reload</code></pre></li><li><p>防火墙移除放行端口或服务</p><pre><code class="shell"> #移除已经放行的端口 firewall-cmd --zone=public --remove-port=80/tcp firewall-cmd --reload</code></pre><pre><code class="shell">  #移除已经放行服务  firewall-cmd --zone=public --remove-service=http  firewall-cmd --reload</code></pre></li></ul><p><strong>端口操作</strong></p><ul><li><p>端口占用查询</p><pre><code class="shell"> netstat -tunlp | grep &#39;port&#39; ---------------------------------------------------------------------------------- -t (tcp) 仅显示tcp相关选项 -u (udp) 仅显示udp相关选项 -n 拒绝显示别名，能显示数字的全部转化为数字 -l 仅列出在Listen(监听)的服务状态 -p 显示建立相关链接的程序名</code></pre><pre><code class="shell"> lsof -i:&#39;port&#39;</code></pre></li><li><p>端口终结</p><pre><code class="shell"> kill -9 &#39;pid&#39;</code></pre></li></ul><p><strong>服务操作</strong></p><ul><li><p>服务状态查询</p><pre><code class="shell">  systemctl status &#39;serverName&#39;</code></pre></li><li><p>服务开启</p><pre><code class="shell">  sysyemctl start &#39;serverName&#39;</code></pre></li><li><p>服务关闭</p><pre><code class="shell"> systemctl stop &#39;serverName&#39;</code></pre></li><li><p>服务自启</p><pre><code class="shell">  systemctl enable &#39;serverName&#39;</code></pre></li><li><p>关闭服务自启</p><pre><code class="shell"> systemctl disable &#39;serverName&#39;</code></pre></li></ul><p><strong>用户和组</strong></p><ul><li><p>用户和组</p><pre><code class="shell">  #添加用户  adduser &#39;userName&#39;</code></pre><pre><code class="shell">#新建工作组groupadd &#39;groupName&#39;</code></pre><pre><code class="shell">#添加用户，并且把把用户添加到指定名称的组useradd -g &#39;groupName&#39; &#39;userName&#39;</code></pre><pre><code class="shell">#给已有用户添加到工作组usermod -G &#39;groupName&#39; &#39;userName&#39;gpasswd -a &#39;userName&#39; &#39;groupName&#39;</code></pre><pre><code class="shell">#临时锁定用户的密码，使账户失效passwd &#39;userName&#39; -l#把临时锁定密码的用户开发，使账户重新有效passwd &#39;userName&#39; -u</code></pre><pre><code class="shell">#永久删除用户userdel &#39;userName&#39;#永久删除组groupdel &#39;groupName&#39;#同时删除用户和组usermod -G &#39;userName&#39; &#39;groupName&#39;#从指定的组中删除指定的用户gpassed -d &#39;userName&#39; &#39;groupName&#39;</code></pre><pre><code class="shell">#显示用户信息id &#39;userName&#39;#将用户添加到指定组usermod -G &#39;groupName&#39; &#39;userName&#39;#修改用户userName1的名称为userName2usermod -l &#39;userName2&#39; &#39;userName1&#39;#锁定账户usermod -L &#39;userName&#39;#解除用户锁定usermod -U &#39;userName&#39;</code></pre></li></ul><hr><p><strong>持续更新中…</strong></p>]]></content>
       
       
       <categories>
@@ -916,11 +726,11 @@
     
     
     <entry>
-      <title>Centos7常用命令</title>
-      <link href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos7%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
-      <url>/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos7%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
+      <title>Centos7安装Wordpress</title>
+      <link href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos7%E5%AE%89%E8%A3%85Wordpress/"/>
+      <url>/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos7%E5%AE%89%E8%A3%85Wordpress/</url>
       
-        <content type="html"><![CDATA[<h1 id="Centos7常用命令"><a href="#Centos7常用命令" class="headerlink" title="Centos7常用命令"></a>Centos7常用命令</h1><p><strong>防火墙相关命令</strong></p><ul><li><p>防火墙的开启、关闭、重启、与状态</p><pre><code class="shell"> #开启 systemctl start   firewalld.service #关闭 systemctl stop    firewalld.service #重启 systemctl restart firewalld.service #状态 systemctl status  firewalld.service #设置开机自启 systemctl enable  firewalld.service #关闭开机自启 systemctl disable firewalld.service  #指定IP放行指定端口 firewall-cmd --permanent --add-rich-rule=&quot;rule family=&quot;ipv4&quot; source address=&quot;192.168.142.166&quot; port protocol=&quot;tcp&quot; port=&quot;5432&quot; accept&quot;</code></pre></li><li><p>查看所有公开项目</p><pre><code class="shell"> #查看所有公开项 firewall-cmd --list-all #查看端口是否放行 firewall-cmd --zone=public --query-port=80/tcp</code></pre></li><li><p>防火墙放行端口或服务</p><pre><code class="shell"> #添加放行端口 firewall-cmd --zone=public --add-port=80/tcp --permanent #重新加载所有的设置项 firewall-cmd --reload</code></pre><pre><code class="shell">  #添加放行服务  firewall-cmd --zone=public --add-service=http --permanent  firewall-cmd --reload</code></pre></li><li><p>防火墙移除放行端口或服务</p><pre><code class="shell"> #移除已经放行的端口 firewall-cmd --zone=public --remove-port=80/tcp firewall-cmd --reload</code></pre><pre><code class="shell">  #移除已经放行服务  firewall-cmd --zone=public --remove-service=http  firewall-cmd --reload</code></pre></li></ul><p><strong>端口操作</strong></p><ul><li><p>端口占用查询</p><pre><code class="shell"> netstat -tunlp | grep &#39;port&#39; ---------------------------------------------------------------------------------- -t (tcp) 仅显示tcp相关选项 -u (udp) 仅显示udp相关选项 -n 拒绝显示别名，能显示数字的全部转化为数字 -l 仅列出在Listen(监听)的服务状态 -p 显示建立相关链接的程序名</code></pre><pre><code class="shell"> lsof -i:&#39;port&#39;</code></pre></li><li><p>端口终结</p><pre><code class="shell"> kill -9 &#39;pid&#39;</code></pre></li></ul><p><strong>服务操作</strong></p><ul><li><p>服务状态查询</p><pre><code class="shell">  systemctl status &#39;serverName&#39;</code></pre></li><li><p>服务开启</p><pre><code class="shell">  sysyemctl start &#39;serverName&#39;</code></pre></li><li><p>服务关闭</p><pre><code class="shell"> systemctl stop &#39;serverName&#39;</code></pre></li><li><p>服务自启</p><pre><code class="shell">  systemctl enable &#39;serverName&#39;</code></pre></li><li><p>关闭服务自启</p><pre><code class="shell"> systemctl disable &#39;serverName&#39;</code></pre></li></ul><p><strong>用户和组</strong></p><ul><li><p>用户和组</p><pre><code class="shell">  #添加用户  adduser &#39;userName&#39;</code></pre><pre><code class="shell">#新建工作组groupadd &#39;groupName&#39;</code></pre><pre><code class="shell">#添加用户，并且把把用户添加到指定名称的组useradd -g &#39;groupName&#39; &#39;userName&#39;</code></pre><pre><code class="shell">#给已有用户添加到工作组usermod -G &#39;groupName&#39; &#39;userName&#39;gpasswd -a &#39;userName&#39; &#39;groupName&#39;</code></pre><pre><code class="shell">#临时锁定用户的密码，使账户失效passwd &#39;userName&#39; -l#把临时锁定密码的用户开发，使账户重新有效passwd &#39;userName&#39; -u</code></pre><pre><code class="shell">#永久删除用户userdel &#39;userName&#39;#永久删除组groupdel &#39;groupName&#39;#同时删除用户和组usermod -G &#39;userName&#39; &#39;groupName&#39;#从指定的组中删除指定的用户gpassed -d &#39;userName&#39; &#39;groupName&#39;</code></pre><pre><code class="shell">#显示用户信息id &#39;userName&#39;#将用户添加到指定组usermod -G &#39;groupName&#39; &#39;userName&#39;#修改用户userName1的名称为userName2usermod -l &#39;userName2&#39; &#39;userName1&#39;#锁定账户usermod -L &#39;userName&#39;#解除用户锁定usermod -U &#39;userName&#39;</code></pre></li></ul><hr><p><strong>持续更新中…</strong></p>]]></content>
+        <content type="html"><![CDATA[<h1 id="Centos7安装Wordpress以及环境"><a href="#Centos7安装Wordpress以及环境" class="headerlink" title="Centos7安装Wordpress以及环境"></a>Centos7安装Wordpress以及环境</h1><h2 id="一、安装MySQL57版本"><a href="#一、安装MySQL57版本" class="headerlink" title="一、安装MySQL57版本"></a>一、安装MySQL57版本</h2><p><strong>1、从MySQL官网下载YUM源的RPM安装包</strong></p><pre><code class="shell">wget http://dev.mysql.com/get/mysql57-community-release-el7-8.noarch.rpm</code></pre><p><strong>2、从下载好的rpm包安装MYSQL</strong></p><pre><code class="shell">yum localinstall mysql57-community-release-el7-8.noarch.rpm</code></pre><p><strong>3、安装MySQL服务</strong></p><pre><code class="shell">yum install mysql-community-server</code></pre><p><strong>4、启动MySQL服务</strong></p><pre><code class="shell">systemctl start mysqld.service</code></pre><p><strong>5、设置开机自启并且刷新</strong></p><pre><code class="shell">systemctl enable mysqldsystemctl daemon-reload</code></pre><p><strong>6、修改默认初始化密码-&gt;由于密码策略所以只能设置较为复杂的密码</strong></p><pre><code class="shell">#临时密码在/var/log/mysqld.logalter user &#39;root&#39;@&#39;localhost&#39; identified by &#39;ZhonHua@5000Nian&#39;;</code></pre><p><strong>7、查看MySQL的密码安全策略</strong></p><pre><code class="shell">show variables like &#39;validate_password%&#39;;</code></pre><p><img src="/./images/MYSQL%E5%AF%86%E7%A0%81%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5.PNG" alt="img"></p><p><strong>8、修改密码杂度为最低以及把密码长度改为自己想要的</strong></p><pre><code class="shell">set global validate_password_policy = LOW;set global validate_password_length = 6;</code></pre><p><img src="/./images/MySQL%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81%E7%AD%96%E7%95%A5.PNG" alt="img"></p><p><strong>9、修改为自己想要的密码</strong></p><pre><code class="shell">alter user &#39;root&#39;@&#39;localhost&#39; identified by &#39;123456&#39;;</code></pre><p><strong>10、创建wordpress数据库</strong></p><pre><code class="shell">create database wordpress;</code></pre><p><strong>11、允许远程登陆然后刷新</strong></p><pre><code class="shell">grant all on *.* to root@&#39;%&#39; identified by &#39;password&#39; with grant option;flush privileges;</code></pre><p><strong>12、重启MySQL服务</strong></p><pre><code class="shell">systemctl restart mysqld.service</code></pre><p><strong>13、密码忘记或者策略失败</strong></p><pre><code class="shell">#关闭密码验证策略，url：vi /root/my.cnfskip-grant-tables#修改mysql.user表的密码update mysql.user set authentication_string=password(&#39;新密码&#39;) where user=&#39;root&#39; ;#刷新flush privileges ;#然后删除skip-grant-tables之后重启MySQL服务</code></pre><h2 id="二、安装apache-gt-httpd"><a href="#二、安装apache-gt-httpd" class="headerlink" title="二、安装apache-&gt;httpd"></a>二、安装apache-&gt;httpd</h2><p><strong>1、安装httpd</strong></p><pre><code class="shell">yum install httpd</code></pre><p><strong>2、启动httpd服务</strong></p><pre><code class="shell">systemctl start httpd.service</code></pre><p><strong>3、设置成开机自启并且刷新</strong></p><pre><code class="shell">systemctl enable httpd.servicesystemctl daemon-reload</code></pre><h2 id="三、安装php-gt-及相关驱动"><a href="#三、安装php-gt-及相关驱动" class="headerlink" title="三、安装php-&gt;及相关驱动"></a>三、安装php-&gt;及相关驱动</h2><p><strong>1、安装php、php-fpm、php-mysql</strong></p><pre><code class="shell">yum install php php-fpm php-mysql</code></pre><p><strong>2、启动php-fpm服务</strong></p><pre><code class="shell">systemctl start php-fpm.service</code></pre><p><strong>3、设置成开机自启并且刷新</strong></p><pre><code class="shell">systemctl enable php-fpm.servicesystemctl daemon-reload</code></pre><h2 id="四、查看三个服务的运行状态"><a href="#四、查看三个服务的运行状态" class="headerlink" title="四、查看三个服务的运行状态"></a>四、查看三个服务的运行状态</h2><p><strong>httpd监听80端口，mysql监听3306端口，php-fpm监听9000端口</strong></p><pre><code class="shell">netstat -tunlp</code></pre><h2 id="五、安装wordpress官网tar-gz安装包"><a href="#五、安装wordpress官网tar-gz安装包" class="headerlink" title="五、安装wordpress官网tar.gz安装包"></a>五、安装wordpress官网tar.gz安装包</h2><p><strong>2、用wget获取wordpress安装包</strong></p><pre><code class="shell">wget https://ww.wp.xz.cn/wordpress-4.5.20.tar.gz</code></pre><p><strong>3、解压安装包到&#x2F;var&#x2F;www路径下</strong></p><pre><code class="shell">tar -zxf wordpress-4.5.20.tar.gz -C /var/www</code></pre><p><strong>4、修改httpd的配置文件把默认的映射路径改为&#x2F;var&#x2F;www&#x2F;wordpress</strong>  </p><pre><code class="shell">vi  /etc/httpd/conf/httpd.conf# DocumentRoot的值**5、保存修改文件退出后重新启动httpd服务**```shellsystemctl restart httpd.service</code></pre><p><strong>6、把wordpress目录赋予apache所有权限</strong></p><pre><code class="shell">chown -R apache:apache /var/www/wordpress</code></pre><h2 id="六、用浏览器启动绑定服务器的域名或者服务器的IP然后就可以开始配置相关的数据"><a href="#六、用浏览器启动绑定服务器的域名或者服务器的IP然后就可以开始配置相关的数据" class="headerlink" title="六、用浏览器启动绑定服务器的域名或者服务器的IP然后就可以开始配置相关的数据"></a>六、用浏览器启动绑定服务器的域名或者服务器的IP然后就可以开始配置相关的数据</h2>]]></content>
       
       
       <categories>
@@ -1125,11 +935,11 @@
     
     
     <entry>
-      <title>Windows删除BIOS内的引导选项</title>
-      <link href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Windows%E5%88%A0%E9%99%A4BIOS%E5%86%85%E7%9A%84%E5%BC%95%E5%AF%BC%E9%80%89%E9%A1%B9/"/>
-      <url>/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Windows%E5%88%A0%E9%99%A4BIOS%E5%86%85%E7%9A%84%E5%BC%95%E5%AF%BC%E9%80%89%E9%A1%B9/</url>
+      <title>Windows11改小状态栏</title>
+      <link href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Windows11%E6%94%B9%E5%B0%8F%E7%8A%B6%E6%80%81%E6%A0%8F/"/>
+      <url>/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Windows11%E6%94%B9%E5%B0%8F%E7%8A%B6%E6%80%81%E6%A0%8F/</url>
       
-        <content type="html"><![CDATA[<h1 id="删除BIOS内的UEFI引导选项"><a href="#删除BIOS内的UEFI引导选项" class="headerlink" title="删除BIOS内的UEFI引导选项"></a>删除BIOS内的UEFI引导选项</h1><ol><li>首先使用管理员打开<code>cmd</code>面板</li><li>输入<code>diskpart</code>进入工具</li><li>输入<code>list disk</code>查看磁盘窗台</li><li>使用<code>select disk [磁盘编号]</code>选择包含<code>UEFI</code>分区的磁盘</li><li>使用<code>list partition</code>列举出所有的分区</li><li>使用<code>select partition [分区编号]</code>选中<code>UTFI</code>分区</li><li>使用<code>assign letter [挂载号]</code>挂载分区为某一磁盘驱动器</li><li>打开文件管理器，发现有一个新的分区出现，就是<code>EFI</code>分区</li><li>我们没有权限打开<code>EFI</code>分区，所以使用管理员运行记事本，使用打开的方式进入到<code>EFI</code>分区</li><li>里面对应的文件夹就是不同系统的引导，删除对应即可，千万不能删除不知道的分区</li><li>最后使用<code>remove letter [挂载号]</code>移除分区即可</li></ol>]]></content>
+        <content type="html"><![CDATA[<p>在注册表如下路径</p><pre><code class="propreties">HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced</code></pre><p>新建一个<code>DWORD</code><br>名称为：<code>TaskbarSi </code><br>值为：<code>0、1、2</code></p>]]></content>
       
       
       <categories>
@@ -1144,11 +954,11 @@
     
     
     <entry>
-      <title>Windows11改小状态栏</title>
-      <link href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Windows11%E6%94%B9%E5%B0%8F%E7%8A%B6%E6%80%81%E6%A0%8F/"/>
-      <url>/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Windows11%E6%94%B9%E5%B0%8F%E7%8A%B6%E6%80%81%E6%A0%8F/</url>
+      <title>Windows删除BIOS内的引导选项</title>
+      <link href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Windows%E5%88%A0%E9%99%A4BIOS%E5%86%85%E7%9A%84%E5%BC%95%E5%AF%BC%E9%80%89%E9%A1%B9/"/>
+      <url>/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Windows%E5%88%A0%E9%99%A4BIOS%E5%86%85%E7%9A%84%E5%BC%95%E5%AF%BC%E9%80%89%E9%A1%B9/</url>
       
-        <content type="html"><![CDATA[<p>在注册表如下路径</p><pre><code class="propreties">HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced</code></pre><p>新建一个<code>DWORD</code><br>名称为：<code>TaskbarSi </code><br>值为：<code>0、1、2</code></p>]]></content>
+        <content type="html"><![CDATA[<h1 id="删除BIOS内的UEFI引导选项"><a href="#删除BIOS内的UEFI引导选项" class="headerlink" title="删除BIOS内的UEFI引导选项"></a>删除BIOS内的UEFI引导选项</h1><ol><li>首先使用管理员打开<code>cmd</code>面板</li><li>输入<code>diskpart</code>进入工具</li><li>输入<code>list disk</code>查看磁盘窗台</li><li>使用<code>select disk [磁盘编号]</code>选择包含<code>UEFI</code>分区的磁盘</li><li>使用<code>list partition</code>列举出所有的分区</li><li>使用<code>select partition [分区编号]</code>选中<code>UTFI</code>分区</li><li>使用<code>assign letter [挂载号]</code>挂载分区为某一磁盘驱动器</li><li>打开文件管理器，发现有一个新的分区出现，就是<code>EFI</code>分区</li><li>我们没有权限打开<code>EFI</code>分区，所以使用管理员运行记事本，使用打开的方式进入到<code>EFI</code>分区</li><li>里面对应的文件夹就是不同系统的引导，删除对应即可，千万不能删除不知道的分区</li><li>最后使用<code>remove letter [挂载号]</code>移除分区即可</li></ol>]]></content>
       
       
       <categories>
@@ -1334,11 +1144,220 @@
     
     
     <entry>
+      <title>Android_头部导航标签</title>
+      <link href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Android_%E5%A4%B4%E9%83%A8%E5%AF%BC%E8%88%AA%E6%A0%87%E7%AD%BE/"/>
+      <url>/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Android_%E5%A4%B4%E9%83%A8%E5%AF%BC%E8%88%AA%E6%A0%87%E7%AD%BE/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Toolbar"><a href="#Toolbar" class="headerlink" title="Toolbar"></a>Toolbar</h1><p>关于toolbar使用的几个要点，包如下</p><pre><code class="xml">androidx.appcompat.widget.Toolbar</code></pre><p>这里作为toolbar的最左标签使用</p><pre><code class="xml">app:navigationIcon=&quot;@mipmap/sidebar&quot;</code></pre><p>最左侧按钮点击事件，这里的点击事件有一个很重要的事情，就是只有在toolbar提交之后才能生效，也就是</p><pre><code class="java">setSupportActionBar(toolbar);</code></pre><pre><code class="java">@Override    public boolean onOptionsItemSelected(@NonNull MenuItem item) &#123;        if (item.getItemId() ==android.R.id.home)&#123;            drawerLayout.openDrawer(Gravity.LEFT);        &#125;        return super.onOptionsItemSelected(item);    &#125;</code></pre><p>而其他的所有操作，如设置title，logo等等方法，也要在提交了toolbar之后才能生效，例如</p><pre><code class="java"># 设置title无效getSupportActionBar().setDisplayShowTitleEnabled(false);</code></pre><p>还有设置toolbar的title的颜色字体大小，等等信息</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 前端杂烩 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Android网络请求回调</title>
+      <link href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Android%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%E5%9B%9E%E8%B0%83/"/>
+      <url>/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Android%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%E5%9B%9E%E8%B0%83/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Android的HTTP网络请求超时UI更新（回调）"><a href="#Android的HTTP网络请求超时UI更新（回调）" class="headerlink" title="Android的HTTP网络请求超时UI更新（回调）"></a>Android的HTTP网络请求超时UI更新（回调）</h1><h3 id="原因及运行原理"><a href="#原因及运行原理" class="headerlink" title="原因及运行原理"></a>原因及运行原理</h3><p>当在网络请求出现连接超时（httpURLConnection.setConnectTimeout(TimeOut)）的时候，此时调用的活动中的Dialog弹窗会一直浮现在桌面上，而网络请求是位于子线程，活动只是调用之后就没有太多的关联，这时当网络出现连接超时的时候会一直卡在httpURLConnection.connect()中，此时可以在网络请求类中新建一个接口，并且实现一个刷新方法，再在活动中实例化一个请求类，并且参数为接口对象，然后再到网络请求出现超时，并且抛出异常的try…catch代码块的异常处理块中用接口对象调用刷新的方法，由于接口内的刷新方法时抽象方法，所以会自动往子级里面去找到运行的代码块，也就是说运行活动中覆写的代码块，注意：虽然运行的代码块时活动中的，但是其调用的主体方法还是在子线程中，所以需要更新UI的时候，还是需要回调到主线程中        </p><pre><code class="java">public  class BaseHttpConn &#123;    private static final String TAG = &quot;BaseHttpConn&quot;;    private static TimeOut shuaxin;    private static int TimeOut = 3*1000;    public static HttpURLConnection httpConn(String baseUrl, HashMap&lt;String, String&gt; map) &#123;        HttpURLConnection httpURLConnection = null;        try &#123;            URL url = new URL(baseUrl);            httpURLConnection = (HttpURLConnection) url.openConnection();            httpURLConnection.setConnectTimeout(TimeOut);//连接超时            httpURLConnection.setReadTimeout(TimeOut);//读取超时            httpURLConnection.setRequestMethod(&quot;POST&quot;);//请求方式            httpURLConnection.setInstanceFollowRedirects(true);//是否重定向            httpURLConnection.setUseCaches(true);//是否启用缓存            httpURLConnection.setRequestProperty(&quot;Content-Type&quot;,&quot;application/json&quot;);//传入服务器的数据类型            OutputStream outputStream = httpURLConnection.getOutputStream();            outputStream.write(getByte(map));            outputStream.close();        &#125; catch (Exception e) &#123;            e.printStackTrace();            httpURLConnection.disconnect();//关闭此次网络请求            shuaxin.ShuaXin();//通过接口对象调用抽象方法ShuaXin();        &#125;        return httpURLConnection;    &#125;    private static byte[] getByte(HashMap&lt;String,String&gt; map) &#123;        JSONObject jsonObject = new JSONObject();        for(String key: map.keySet())&#123;            try &#123;                jsonObject.put(key,map.get(key));            &#125; catch (JSONException e) &#123;                e.printStackTrace();            &#125;        &#125;        return jsonObject.toString().getBytes();    &#125;    public BaseHttpConn(TimeOut timeOut) &#123;        this.shuaxin = timeOut;    &#125;    //监听接口    public interface TimeOut&#123;        void ShuaXin();//接口中刷新的方法    &#125;&#125;</code></pre><h3 id="Activity中的代码"><a href="#Activity中的代码" class="headerlink" title="Activity中的代码"></a>Activity中的代码</h3><pre><code class="java">     BaseHttpConn baseHttpConn = new BaseHttpConn(new BaseHttpConn.TimeOut() &#123;        @Override        public void ShuaXin() &#123;            progressDialog.dismiss();            getActivity().runOnUiThread(new Runnable() &#123;//位于碎片中，所以需要通过getActivity()获取活动                @Override                public void run() &#123;                    Toast.makeText(getContext(),&quot;网络连接失败&quot;,Toast.LENGTH_SHORT).show();                &#125;            &#125;);        &#125;    &#125;);</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 前端杂烩 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>CSS布局问题</title>
+      <link href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/CSS%E5%B8%83%E5%B1%80%E9%97%AE%E9%A2%98/"/>
+      <url>/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/CSS%E5%B8%83%E5%B1%80%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<h1 id="CSS布局问题"><a href="#CSS布局问题" class="headerlink" title="CSS布局问题"></a>CSS布局问题</h1><pre><code class="css"># 作为行内表格元素，可以使相对于父元素有效display: inline-table;width:100%;height: 100%;</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 前端杂烩 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>HTML5图片拖放</title>
+      <link href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/HTML5%E5%9B%BE%E7%89%87%E6%8B%96%E6%94%BE/"/>
+      <url>/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/HTML5%E5%9B%BE%E7%89%87%E6%8B%96%E6%94%BE/</url>
+      
+        <content type="html"><![CDATA[<h2 id="实现HTML5中图片的拖放"><a href="#实现HTML5中图片的拖放" class="headerlink" title="实现HTML5中图片的拖放"></a>实现HTML5中图片的拖放</h2><pre><code class="html">&lt;!DOCTYPE html&gt;&lt;html&gt;    &lt;head&gt;        &lt;meta charset=&quot;utf-8&quot;&gt;        &lt;title&gt;阿杰之家&lt;/title&gt;        &lt;style type=&quot;text/css&quot;&gt;            #div1,            #div2 &#123;                float: left;                width: 500px;                height: 350px;                margin: 10px;                padding: 10px;                border: 1px solid #aaaaaa;            &#125;        &lt;/style&gt;        &lt;script&gt;            function allowDrop(ev) &#123;                // 6、默认地，无法将数据/元素放置到其他元素中。如果需要设置允许放置，我们必须阻止对元素的默认处理方式,这要通过调用 ondragover 事件的 event.preventDefault() 方法.                ev.preventDefault();            &#125;            function drag(ev) &#123;                // 3、dataTransfer.setData() 方法设置被拖数据的数据类型和值                // 4、Text 是一个 DOMString 表示要添加到 drag object 的拖动数据的类型。值是可拖动元素的 id (&quot;drag1&quot;)。                ev.dataTransfer.setData(&quot;Text&quot;, ev.target.id);            &#125;            function drop(ev) &#123;                // 8、调用 preventDefault() 来避免浏览器对数据的默认处理（drop 事件的默认行为是以链接形式打开）                ev.preventDefault();                // 9、通过 dataTransfer.getData(&quot;Text&quot;) 方法获得被拖的数据。该方法将返回在 setData() 方法中设置为相同类型的任何数据。被拖数据是被拖元素的 id (&quot;drag1&quot;)                var data = ev.dataTransfer.getData(&quot;Text&quot;);                // 10、把被拖元素追加到放置元素（目标元素）中                ev.target.appendChild(document.getElementById(data));            &#125;        &lt;/script&gt;    &lt;/head&gt;    &lt;body&gt;        &lt;!-- 5、ondragover 事件规定在何处放置被拖动的数据。 --&gt;        &lt;!-- 7、当放置被拖数据时，会发生 drop 事件 --&gt;        &lt;div id=&quot;div1&quot; ondrop=&quot;drop(event)&quot; ondragover=&quot;allowDrop(event)&quot;&gt;            &lt;!-- 1、为了使元素可拖动，把 draggable 属性设置为 true --&gt;            &lt;!-- 2、ondragstart 属性调用了一个函数，drag(event)，它规定了被拖动的数据。 --&gt;            &lt;img src=&quot;./img/logo.png&quot; draggable=&quot;true&quot; ondragstart=&quot;drag(event)&quot; id=&quot;drag1&quot; width=&quot;500&quot; height=&quot;350&quot;&gt;&lt;/div&gt;        &lt;div id=&quot;div2&quot; ondrop=&quot;drop(event)&quot; ondragover=&quot;allowDrop(event)&quot;&gt;&lt;/div&gt;    &lt;/body&gt;&lt;/html&gt;</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 前端杂烩 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>HTML高度塌陷</title>
+      <link href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/HTML%E9%AB%98%E5%BA%A6%E5%A1%8C%E9%99%B7/"/>
+      <url>/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/HTML%E9%AB%98%E5%BA%A6%E5%A1%8C%E9%99%B7/</url>
+      
+        <content type="html"><![CDATA[<h1 id="HTML盒子高度塌陷"><a href="#HTML盒子高度塌陷" class="headerlink" title="HTML盒子高度塌陷"></a>HTML盒子高度塌陷</h1><p>使用<code>overflow: hidden;</code>可以处理盒子的高度塌陷</p><p>引用：<a href="https://www.cnblogs.com/luoqian/p/5987788.html">https://www.cnblogs.com/luoqian/p/5987788.html</a></p><p>最近在看《CSS Mastery》这本书，里面有用overflow：hidden来清理浮动的方法。但是一直想不明白为什么能够实现清除浮动，查阅了网络上的解释，下面来总结一下。</p><p>一、首先来想想</p><p>我们大家理解的overflow:hidden是超出该元素的部分进行隐藏。这个时候就需要明确一点，该元素的高度是怎么定义的。当一个div中的两个元素浮动之后，此时div的高度就会塌陷，此时div的高度为0。那是不是意味着就要将浮动元素隐藏起来，如果是真的隐藏就是反布局常识的。所以这中间肯定有我们现在还不知道的机制。</p><p>二、不了解的机制-BFC</p><p>定义：BFC（Block Formatting Context）全称是块级格式化上下文，用于对块级元素排版，默认情况下只有根元素（body）一个块级上下文，但是如果一个块级元素设置了float:left,overflow:hidden或position:absolute样式，就会为这个块级元素生产一个独立的块级上下文，使这个块级元素内部的排版完全独立。</p><p>作用：独立的块级上下文可以包裹浮动流，全部浮动子元素也不会引起容器高度塌陷，就是说包含块会把浮动元素的高度也计算在内，所以就不用清除浮动来撑起包含块的高度。</p><p>三、总结清除浮动的方法</p><p>我经常用到的清除浮动的方法有</p><p>1、添加额外标签设置clearfix类为clear:both;</p><p>　　原理是这个空的div能让父级获取到高度，是因为设置之后这个div的左右都不能有浮动元素，所以这个空的div元素会向下移动，直到换行，而为了让这个div能够换行，父元素至少要包含浮动元素的高度才能提高足够的空间，这样实现清除浮动的影响。</p><p>2、设置父元素为浮动元素</p><p>3、设置position:absolute</p><p>我不常用的清除浮动的方法有</p><p>1、父级div定义height</p><p>3、overflow:hidden</p><p>2、父级div定义伪类:after和zoom;</p><p>　　这个方法的原理还不理解，欢迎大神解答。</p><p>四、清除浮动的影响方法分类</p><p>参考张鑫旭老师的说法，清除浮动的说法是不准确的。应该是为清除浮动的影响。我也觉得张老师的说法是正确的，因为float:none才叫清除浮动。张老师还说到了包裹的这个概念，根据这个概念将清除浮动的影响的方法分为两大类。</p><p>一类是clear:both&#x2F;left&#x2F;right，这就不用说了。</p><p>另一类是：包裹清除，因为他发现浮动、绝对定位、inline-block、overflow都有自适应元素宽度的特性，就想到了用包裹来形容。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 前端杂烩 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>JavaScript下载文件</title>
+      <link href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/JavaScript%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6/"/>
+      <url>/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/JavaScript%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6/</url>
+      
+        <content type="html"><![CDATA[<p>JavaScript异步请求，把响应的Base64图片内容下载到本地文件存储</p><pre><code class="javascript">/** * Base64的文件下载 * @param content Base64字符内容 * @param fileName 文件名称 */function downloadFile(content, fileName) &#123; //下载base64图片    let base64ToBlob = function (code) &#123;        let parts = code.split(&#39;;base64,&#39;);        let contentType = parts[0].split(&#39;:&#39;)[1];        let raw = window.atob(parts[1]);        let rawLength = raw.length;        let uInt8Array = new Uint8Array(rawLength);        for (let i = 0; i &lt; rawLength; ++i) &#123;            uInt8Array[i] = raw.charCodeAt(i);        &#125;        return new Blob([uInt8Array], &#123;            type: contentType        &#125;);    &#125;;    let aLink = document.createElement(&#39;a&#39;);    let blob = base64ToBlob(content); //new Blob([content]);    let evt = document.createEvent(&quot;HTMLEvents&quot;);    evt.initEvent(&quot;click&quot;, true, true); //initEvent 不加后两个参数在FF下会报错  事件类型，是否冒泡，是否阻止浏览器的默认行为    aLink.download = fileName;    aLink.href = URL.createObjectURL(blob);    aLink.click();&#125;</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 前端杂烩 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>JavaScript获取视频流且回显</title>
+      <link href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/JavaScript%E8%8E%B7%E5%8F%96%E8%A7%86%E9%A2%91%E6%B5%81%E4%B8%94%E5%9B%9E%E6%98%BE/"/>
+      <url>/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/JavaScript%E8%8E%B7%E5%8F%96%E8%A7%86%E9%A2%91%E6%B5%81%E4%B8%94%E5%9B%9E%E6%98%BE/</url>
+      
+        <content type="html"><![CDATA[<hr><h2 id="title-JavaScript获取视频流且回显date-2022-04-20-09-38-55-438updated-2022-10-13-14-58-40-564url-x2F-archives-x2F-javascript-huo-qu-shi-pin-liu-qie-hui-xiancategories-JavaScripttags-JavaScript"><a href="#title-JavaScript获取视频流且回显date-2022-04-20-09-38-55-438updated-2022-10-13-14-58-40-564url-x2F-archives-x2F-javascript-huo-qu-shi-pin-liu-qie-hui-xiancategories-JavaScripttags-JavaScript" class="headerlink" title="title: JavaScript获取视频流且回显date: 2022-04-20 09:38:55.438updated: 2022-10-13 14:58:40.564url: &#x2F;archives&#x2F;javascript-huo-qu-shi-pin-liu-qie-hui-xiancategories:- JavaScripttags:- JavaScript"></a>title: JavaScript获取视频流且回显<br>date: 2022-04-20 09:38:55.438<br>updated: 2022-10-13 14:58:40.564<br>url: &#x2F;archives&#x2F;javascript-huo-qu-shi-pin-liu-qie-hui-xian<br>categories:<br>- JavaScript<br>tags:<br>- JavaScript</h2><pre><code class="HTML">&lt;!DOCTYPE html&gt;&lt;html&gt;    &lt;head&gt;        &lt;style&gt;        &lt;/style&gt;    &lt;/head&gt;    &lt;body&gt;        &lt;video id=&quot;video&quot; width=&quot;640&quot; height=&quot;480&quot; autoplay=&quot;autoplay&quot;&gt;&lt;/video&gt;        &lt;br/&gt;        &lt;button id=&quot;snap&quot;&gt;截取图像&lt;/button&gt;&lt;button id=&quot;start&quot;&gt;开始录制&lt;/button&gt;&lt;button id=&quot;stop&quot;&gt;停止录制&lt;/button&gt;        &lt;br/&gt;        &lt;canvas id=&quot;canvas&quot; width=&quot;640&quot; height=&quot;480&quot;&gt;&lt;/canvas&gt;    &lt;/body&gt;    &lt;script type=&quot;text/javascript&quot;&gt;        let videoView = document.getElementById(&quot;video&quot;);        let buttonView = document.getElementById(&quot;snap&quot;);        let startButton = document.getElementById(&quot;start&quot;);        let stopButton = document.getElementById(&quot;stop&quot;);        let canvasView = document.getElementById(&quot;canvas&quot;);        navigator.mediaDevices.getDisplayMedia(&#123;            video: &#123;                width: 640,                height: 480            &#125;,            audio: true        &#125;).then(stream =&gt; &#123;            console.log(&quot;摄像头打开成功！！！&quot;, stream);            //以ID为基准,video控件的ID是什么此处的video就是什么            video.srcObject = stream;            // 创建下载对象            let mediaRecorder = new MediaRecorder(stream, &#123;                audioBitsPerSecond: 128000, // 音频码率                videoBitsPerSecond: 100000, // 视频码率                mimeType: &#39;video/webm;codecs=h264&#39; // 编码格式            &#125;);            startButton.onclick = (e =&gt; &#123;                console.log(&quot;触发下载按钮！！！&quot;, e)                mediaRecorder.start(5000);            &#125;);            stopButton.onclick = (e =&gt; &#123;                console.log(&quot;触发结束按钮！！！&quot;, e)                mediaRecorder.stop();            &#125;);            mediaRecorder.ondataavailable = (e =&gt; &#123;                console.log(&quot;开始下载&quot;)                // 下载视频                var blob = new Blob([e.data], &#123; &#39;type&#39; : &#39;video/mp4&#39; &#125;)                let a = document.createElement(&#39;a&#39;)                a.href = URL.createObjectURL(blob)                a.download = `test.mp4`                a.click()            &#125;);            //监听流录入失败            video.onerror = (err =&gt; &#123;                console.log(&quot;加载错误！！！&quot;, err);            &#125;);            //监听流录入成功            video.onloadeddata = (e =&gt; &#123;                console.log(&quot;加载成功！！！&quot;, e);            &#125;);        &#125;).catch(stream =&gt; &#123;            console.log(&quot;摄像头打开失败！！！&quot;, stream);        &#125;);        //给button按钮设置一个点击事件监听        buttonView.onclick = function() &#123;            //获取画布的2d上下文，然后把视频内的一帧绘制到画布上            canvasView.getContext(&quot;2d&quot;).drawImage(videoView, 0, 0, 640, 480)        &#125;    &lt;/script&gt;&lt;/html&gt;</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 前端杂烩 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Javascript正则</title>
+      <link href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Javascript%E6%AD%A3%E5%88%99/"/>
+      <url>/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Javascript%E6%AD%A3%E5%88%99/</url>
+      
+        <content type="html"><![CDATA[<h2 id="Javascript正则"><a href="#Javascript正则" class="headerlink" title="Javascript正则"></a>Javascript正则</h2><pre><code class="javascript">let newData  = data.replace(/\&quot;toId\&quot;:(\d+)/,&#39;&quot;toId&quot;: &quot;$1&quot;&#39;);data = JSON.parse(newData)</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 前端杂烩 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Javascript的dom操作</title>
+      <link href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Javascript%E7%9A%84dom%E6%93%8D%E4%BD%9C/"/>
+      <url>/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Javascript%E7%9A%84dom%E6%93%8D%E4%BD%9C/</url>
+      
+        <content type="html"><![CDATA[<h1 id="JS原生DOM操作"><a href="#JS原生DOM操作" class="headerlink" title="JS原生DOM操作"></a>JS原生DOM操作</h1><pre><code class="javascript">let mainView = document.getElementById(&quot;main&quot;);                console.log(mainView)                let textDom = document.createElement(&quot;img&quot;);                let x = Math.random()*200+&quot;px&quot;;                let y = (Math.random()*300+100)+&quot;px&quot;;                textDom.style.top = y;                textDom.style.width = &quot;20px&quot;;                textDom.style.height = &quot;20px&quot;;                textDom.style.left = x;                textDom.style.border = &quot;solid 1px #cccccc&quot;;                textDom.style.zIndex = &quot;999&quot;;                textDom.style.position = &quot;absolute&quot;;                textDom.setAttribute(&quot;src&quot;,&quot;../../static/log.jpg&quot;);                // textDom.setAttribute(&quot;src&quot;,&quot;http://a2.att.hudong.com/36/48/19300001357258133412489354717.jpg&quot;);                mainView.appendChild(textDom)                console.log(mainView)</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 前端杂烩 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>NodeJS配置创建VUE项目</title>
+      <link href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/NodeJS%E9%85%8D%E7%BD%AE%E5%88%9B%E5%BB%BAVUE%E9%A1%B9%E7%9B%AE/"/>
+      <url>/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/NodeJS%E9%85%8D%E7%BD%AE%E5%88%9B%E5%BB%BAVUE%E9%A1%B9%E7%9B%AE/</url>
+      
+        <content type="html"><![CDATA[<h1 id="nodejs"><a href="#nodejs" class="headerlink" title="nodejs"></a>nodejs</h1><p>查看node版本</p><pre><code class="shell">node -v</code></pre><p>查看npm版本</p><pre><code class="shell">npm -v</code></pre><p>查看配置文件</p><pre><code class="shell">npm config list</code></pre><p>修改本地仓库</p><pre><code class="shell">npm config set prefix &quot;C:\Software\node\node_global&quot;npm config set cache &quot;C:\Software\node\node_cache&quot;</code></pre><p>修改镜像站</p><pre><code class="shell">npm config set registry=https://registry.npm.taobao.org</code></pre><p>node更新</p><pre><code class="shell">*# 全局安装n$ npm install -g n # 升级到最新稳定版$ n stable# 升级到最新版$ n latest# 升级到定制版$ n v7.10.0# 切换使用版本$ n 7.10.0 (ENTER)</code></pre><p>配置文件所在位置<code>C:\Users\Administrator\.npmrc</code></p><p>获取镜像信息（非安装）</p><pre><code class="shell">npm info vue</code></pre><p>更新模块命令</p><pre><code class="shell">#老版本安装方式 2.*npm install npm –g</code></pre><pre><code class="shell">#老版本安装方式 3.* /4.*npm install -g @vue/cli</code></pre><ul><li>npm install&#96;：表示更新</li><li><code>第二个npm</code>：表示需要更新的模块</li><li><code>-g</code>：表示安装到global目录下</li></ul><p>配置NodeJS的环境变量</p><pre><code class="shell">path: D:\software\nodejs</code></pre><p>配置global仓的环境变量</p><pre><code class="shell">path: D:\software\nodejs\node_global</code></pre><p>新增一个<code>NODE_PATH</code>环节变量（子项的全局命令）</p><pre><code class="shell">D:\software\nodejs\node_global\node_modules</code></pre><p>安装vue，安装vue-routher，安装vue脚手架，验证是否安装成功</p><pre><code class="shell">npm install vue -gnpm install vue-routher -gnpm install @vue/cli -gvue -V</code></pre><hr><p><strong>老版本构建方式</strong></p><p>1、构建初始化vue项目</p><pre><code class="shell">vuew init webpack vue01</code></pre><p>2、进入vue01的目录，初始化安装依赖</p><pre><code class="shell">npm install</code></pre><p>3、运行vue01的dev状态</p><pre><code class="shell">npm run dev</code></pre><p>然后访问**<a href="http://localhost:8080/">http://localhost:8080</a>**</p><p>4、编译生成静态文件</p><pre><code class="shell">npm run build</code></pre><hr><p><strong>新版本构建方式</strong></p><pre><code class="shell">vue create vue01</code></pre><p>可以选择创建的方式，moban是我创建的模板，可以选择default默认，或者Manually重新选择</p><blockquote><p>√ Babel<br>× TyreScript<br>× Progressive Web App (PWA) Support<br>√ Routher<br>√ Vuex<br>√ CSS Pre-processors<br>× Linter &#x2F; Formatter<br>× Unit Testing<br>× E2E Testing</p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> 前端杂烩 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>B树&amp;B+树</title>
       <link href="/2023/06/07/%E7%90%86%E8%AE%BA%E4%BD%93%E7%B3%BB/B%E6%A0%91&amp;B+%E6%A0%91/"/>
       <url>/2023/06/07/%E7%90%86%E8%AE%BA%E4%BD%93%E7%B3%BB/B%E6%A0%91&amp;B+%E6%A0%91/</url>
       
         <content type="html"><![CDATA[<hr><h2 id="title-B-Treedate-2022-04-26-13-44-11-89updated-2022-08-04-18-30-16-893url-x2F-archives-x2F-btreecategories-tags"><a href="#title-B-Treedate-2022-04-26-13-44-11-89updated-2022-08-04-18-30-16-893url-x2F-archives-x2F-btreecategories-tags" class="headerlink" title="title: B Treedate: 2022-04-26 13:44:11.89updated: 2022-08-04 18:30:16.893url: &#x2F;archives&#x2F;btreecategories:tags: "></a>title: B Tree<br>date: 2022-04-26 13:44:11.89<br>updated: 2022-08-04 18:30:16.893<br>url: &#x2F;archives&#x2F;btree<br>categories:<br>tags: </h2><h1 id="B-Tree"><a href="#B-Tree" class="headerlink" title="B Tree"></a>B Tree</h1><p>mi’g’c</p><ul><li>叶子节点：最后的那一场节点</li><li>非叶子节点：除去最后的那一层节点</li><li>阶：B树中所有孩子节点数的最大值</li><li>度：数的高度，一般不包括叶子节点那一层</li></ul><p>规则：</p><ol><li>树中每个节点最多只能有M（M为阶）颗子树</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 理论体系 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>二叉树定义</title>
+      <link href="/2023/06/07/%E7%90%86%E8%AE%BA%E4%BD%93%E7%B3%BB/%E4%BA%8C%E5%8F%89%E6%A0%91%E5%AE%9A%E4%B9%89/"/>
+      <url>/2023/06/07/%E7%90%86%E8%AE%BA%E4%BD%93%E7%B3%BB/%E4%BA%8C%E5%8F%89%E6%A0%91%E5%AE%9A%E4%B9%89/</url>
+      
+        <content type="html"><![CDATA[<hr><h2 id="title-二叉树定义date-2022-07-11-22-58-34-662updated-2022-08-04-18-30-08-316url-x2F-archives-x2F-二叉树定义categories-tags"><a href="#title-二叉树定义date-2022-07-11-22-58-34-662updated-2022-08-04-18-30-08-316url-x2F-archives-x2F-二叉树定义categories-tags" class="headerlink" title="title: 二叉树定义date: 2022-07-11 22:58:34.662updated: 2022-08-04 18:30:08.316url: &#x2F;archives&#x2F;二叉树定义categories:tags: "></a>title: 二叉树定义<br>date: 2022-07-11 22:58:34.662<br>updated: 2022-08-04 18:30:08.316<br>url: &#x2F;archives&#x2F;二叉树定义<br>categories:<br>tags: </h2><h4 id="前、中、后序遍历"><a href="#前、中、后序遍历" class="headerlink" title="前、中、后序遍历"></a>前、中、后序遍历</h4><pre><code class="mermaid">graph TBA((A))B((B))C((C))D((D))E((E))A–&gt;BA–&gt;CB–&gt;DB–&gt;E</code></pre>]]></content>
       
       
       <categories>
@@ -1377,25 +1396,6 @@
       <url>/2023/06/07/%E7%90%86%E8%AE%BA%E4%BD%93%E7%B3%BB/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E7%9A%84%E4%B8%83%E7%A7%8D%E6%96%B9%E6%A1%88/</url>
       
         <content type="html"><![CDATA[<h2 id="分布式事务的七种方案"><a href="#分布式事务的七种方案" class="headerlink" title="分布式事务的七种方案"></a>分布式事务的七种方案</h2><p>随着业务的快速发展、业务复杂度越来越高，几乎每个公司的系统都会从单体走向分布式，特别是转向微服务架构。随之而来就必然遇到分布式事务这个难题，这篇文章总结了分布式事务最经典的解决方案。</p><h3 id="◆-基础理论"><a href="#◆-基础理论" class="headerlink" title="◆ 基础理论"></a><strong>◆</strong> <strong>基础理论</strong></h3><p>在讲解具体方案之前，我们先了解一下分布式事务所涉及到的基础理论知识。</p><p>我们拿转账作为例子，A需要转100元给B，那么需要给A的余额-100元，给B的余额+100元，整个转账要保证，A-100和B+100同时成功，或者同时失败。看看在各种场景下，是如何解决这个问题的。</p><h3 id="◆-事务"><a href="#◆-事务" class="headerlink" title="◆ 事务"></a><strong>◆</strong> 事务</h3><p>把多条语句作为一个整体进行操作的功能，被称为数据库事务。数据库事务可以确保该事务范围内的所有操作都可以全部成功或者全部失败。</p><p>事务具有 4 个属性：原子性、一致性、隔离性、持久性。这四个属性通常称为 ACID 特性。</p><ul><li>Atomicity（原子性）：一个事务中的所有操作，要么全部完成，要么全部不完成，不会结束在中间某个环节。事务在执行过程中发生错误，会被恢复到事务开始前的状态，就像这个事务从来没有执行过一样。</li><li>Consistency（一致性）：在事务开始之前和事务结束以后，数据库的完整性没有被破坏。完整性包括外键约束、应用定义的等约束不会被破坏。</li><li>Isolation（隔离性）：数据库允许多个并发事务同时对其数据进行读写和修改的能力，隔离性可以防止多个事务并发执行时由于交叉执行而导致数据的不一致。</li><li>Durability（持久性）：事务处理结束后，对数据的修改就是永久的，即便系统故障也不会丢失。</li></ul><h3 id="◆-分布式事务"><a href="#◆-分布式事务" class="headerlink" title="◆ 分布式事务"></a><strong>◆</strong> 分布式事务</h3><p>银行跨行转账业务是一个典型分布式事务场景，假设A需要跨行转账给B，那么就涉及两个银行的数据，无法通过一个数据库的本地事务保证转账的ACID，只能够通过分布式事务来解决。</p><p>分布式事务就是指事务的发起者、资源及资源管理器和事务协调者分别位于分布式系统的不同节点之上。在上述转账的业务中，用户A-100操作和用户B+100操作不是位于同一个节点上。本质上来说，分布式事务就是为了保证在分布式场景下，数据操作的正确执行。</p><p>分布式事务在分布式环境下，为了满足可用性、性能与降级服务的需要，降低一致性与隔离性的要求，一方面遵循 BASE 理论（BASE相关理论，涉及内容非常多，感兴趣的同学，可以参考BASE理论）：</p><p>基本业务可用性（Basic Availability）<br>柔性状态（Soft state）<br>最终一致性（Eventual consistency）<br>同样的，分布式事务也部分遵循 ACID 规范：</p><p>原子性：严格遵循<br>一致性：事务完成后的一致性严格遵循；事务中的一致性可适当放宽<br>隔离性：并行事务间不可影响；事务中间结果可见性允许安全放宽<br>持久性：严格遵循</p><h3 id="◆-分布式事务的解决方案"><a href="#◆-分布式事务的解决方案" class="headerlink" title="◆ 分布式事务的解决方案"></a><strong>◆</strong> <strong>分布式事务的解决方案</strong></h3><h3 id="◆-两阶段提交-x2F-XA"><a href="#◆-两阶段提交-x2F-XA" class="headerlink" title="◆ 两阶段提交&#x2F;XA"></a><strong>◆</strong> 两阶段提交&#x2F;XA</h3><p>XA是由X&#x2F;Open组织提出的分布式事务的规范，XA规范主要定义了(全局)事务管理器(TM)和(局部)资源管理器(RM)之间的接口。本地的数据库如mysql在XA中扮演的是RM角色</p><p>XA一共分为两阶段：</p><p>第一阶段（prepare）：即所有的参与者RM准备执行事务并锁住需要的资源。参与者ready时，向TM报告已准备就绪。<br>第二阶段 (commit&#x2F;rollback)：当事务管理者(TM)确认所有参与者(RM)都ready后，向所有参与者发送commit命令。<br>目前主流的数据库基本都支持XA事务，包括mysql、oracle、sqlserver、postgre</p><p>XA 事务由一个或多个资源管理器（RM）、一个事务管理器（TM）和一个应用程序（ApplicationProgram）组成。</p><p>把上面的转账作为例子，一个成功完成的XA事务时序图如下：</p><p><img src="https://img-blog.csdnimg.cn/img_convert/35b866cfc4284a68903610140abb8563.png"></p><p>如果有任何一个参与者prepare失败，那么TM会通知所有完成prepare的参与者进行回滚。</p><p>XA事务的特点是：</p><ul><li>简单易理解，开发较容易</li><li>对资源进行了长时间的锁定，并发度低</li></ul><p>如果读者想要进一步研究XA，go语言可参考DTM，java语言可参考seata</p><h3 id="◆-SAGA"><a href="#◆-SAGA" class="headerlink" title="◆  SAGA"></a><strong>◆</strong>  SAGA</h3><p>Saga是这一篇数据库论文saga提到的一个方案。其核心思想是将长事务拆分为多个本地短事务，由Saga事务协调器协调，如果正常结束那就正常完成，如果某个步骤失败，则根据相反顺序一次调用补偿操作。</p><p>把上面的转账作为例子，一个成功完成的SAGA事务时序图如下：</p><p><img src="https://img-blog.csdnimg.cn/img_convert/9b08a9a34f19b376780cc949f76efb57.png"></p><p>SAGA事务的特点：</p><ul><li>并发度高，不用像XA事务那样长期锁定资源</li><li>需要定义正常操作以及补偿操作，开发量比XA大</li><li>一致性较弱，对于转账，可能发生A用户已扣款，最后转账又失败的情况</li></ul><p>论文里面的SAGA内容较多，包括两种恢复策略，包括分支事务并发执行，我们这里的讨论，仅包括最简单的SAGA</p><p>SAGA适用的场景较多，长事务适用，对中间结果不敏感的业务场景适用</p><p>如果读者想要进一步研究SAGA，go语言可参考DTM，java语言可参考seata</p><h3 id="◆-TCC"><a href="#◆-TCC" class="headerlink" title="◆  TCC"></a><strong>◆</strong>  TCC</h3><p>关于 TCC（Try-Confirm-Cancel）的概念，最早是由 Pat Helland 于 2007 年发表的一篇名为《Life beyond Distributed Transactions:an Apostate’s Opinion》的论文提出。</p><p><strong>TCC分为3个阶段</strong></p><ul><li>Try 阶段：尝试执行，完成所有业务检查（一致性）, 预留必须业务资源（准隔离性）</li><li>Confirm 阶段：确认执行真正执行业务，不作任何业务检查，只使用 Try 阶段预留的业务资源，Confirm 操作要求具备幂等设计，Confirm 失败后需要进行重试。</li><li>Cancel 阶段：取消执行，释放 Try 阶段预留的业务资源。Cancel 阶段的异常和 Confirm 阶段异常处理方案基本上一致，要求满足幂等设计。</li></ul><p>把上面的转账作为例子，通常会在Try里面冻结金额，但不扣款，Confirm里面扣款，Cancel里面解冻金额，一个成功完成的TCC事务时序图如下：</p><p><img src="https://img-blog.csdnimg.cn/img_convert/c033a1bda6370c72acb9874a396e9e31.png"></p><p><strong>TCC特点如下：</strong></p><ul><li>并发度较高，无长期资源锁定。</li><li>开发量较大，需要提供Try&#x2F;Confirm&#x2F;Cancel接口。</li><li>一致性较好，不会发生SAGA已扣款最后又转账失败的情况</li><li>TCC适用于订单类业务，对中间状态有约束的业务</li></ul><p>如果读者想要进一步研究TCC，go语言可参考DTM，java语言可参考seata</p><h3 id="◆-本地消息表"><a href="#◆-本地消息表" class="headerlink" title="◆ 本地消息表"></a><strong>◆</strong> 本地消息表</h3><p>本地消息表这个方案最初是 ebay 架构师 Dan Pritchett 在 2008 年发表给 ACM 的文章。设计核心是将需要分布式处理的任务通过消息的方式来异步确保执行。</p><p>大致流程如下：</p><p><img src="https://img-blog.csdnimg.cn/img_convert/bdf9dc84d0f12be25a35b76749f7a437.png"></p><p>写本地消息和业务操作放在一个事务里，保证了业务和发消息的原子性，要么他们全都成功，要么全都失败。</p><p><strong>容错机制：</strong></p><ul><li>扣减余额事务 失败时，事务直接回滚，无后续步骤</li><li>轮序生产消息失败， 增加余额事务失败都会进行重试</li></ul><p><strong>本地消息表的特点：</strong></p><ul><li>长事务仅需要分拆成多个任务，使用简单</li><li>生产者需要额外的创建消息表</li><li>每个本地消息表都需要进行轮询</li><li>消费者的逻辑如果无法通过重试成功，那么还需要更多的机制，来回滚操作</li></ul><p>适用于可异步执行的业务，且后续操作无需回滚的业务</p><h3 id="◆-事务消息"><a href="#◆-事务消息" class="headerlink" title="◆ 事务消息"></a>◆ <strong>事务消息</strong></h3><p>在上述的本地消息表方案中，生产者需要额外创建消息表，还需要对本地消息表进行轮询，业务负担较重。阿里开源的RocketMQ 4.3之后的版本正式支持事务消息，该事务消息本质上是把本地消息表放到RocketMQ上，解决生产端的消息发送与本地事务执行的原子性问题。</p><p>事务消息发送及提交：</p><ul><li>发送消息（half消息）</li><li>服务端存储消息，并响应消息的写入结果</li><li>根据发送结果执行本地事务（如果写入失败，此时half消息对业务不可见，本地逻辑不执行）</li><li>根据本地事务状态执行Commit或者Rollback（Commit操作发布消息，消息对消费者可见）</li></ul><p>正常发送的流程图如下：</p><p><img src="https://img-blog.csdnimg.cn/img_convert/614098725240c67ba7ab3aee2c1ddb15.png"></p><p><strong>补偿流程：</strong></p><p>对没有Commit&#x2F;Rollback的事务消息（pending状态的消息），从服务端发起一次”回查”<br>Producer收到回查消息，返回消息对应的本地事务的状态，为Commit或者Rollback<br>事务消息方案与本地消息表机制非常类似，区别主要在于原先相关的本地表操作替换成了一个反查接口</p><p><strong>事务消息特点如下：</strong></p><ul><li>长事务仅需要分拆成多个任务，并提供一个反查接口，使用简单</li><li>消费者的逻辑如果无法通过重试成功，那么还需要更多的机制，来回滚操作</li></ul><p>适用于可异步执行的业务，且后续操作无需回滚的业务</p><p>如果读者想要进一步研究事务消息，可参考rocketmq，为了方便大家学习事务消息，DTM也提供了简单实现</p><h3 id="◆-最大努力通知"><a href="#◆-最大努力通知" class="headerlink" title="◆ 最大努力通知"></a><strong>◆</strong> <strong>最大努力通知</strong></h3><p>发起通知方通过一定的机制最大努力将业务处理结果通知到接收方。具体包括：</p><p>有一定的消息重复通知机制。因为接收通知方可能没有接收到通知，此时要有一定的机制对消息重复通知。<br>消息校对机制。如果尽最大努力也没有通知到接收方，或者接收方消费消息后要再次消费，此时可由接收方主动向通知方查询消息信息来满足需求。<br>前面介绍的的本地消息表和事务消息都属于可靠消息，与这里介绍的最大努力通知有什么不同？</p><p>可靠消息一致性，发起通知方需要保证将消息发出去，并且将消息发到接收通知方，消息的可靠性关键由发起通知方来保证。</p><p>最大努力通知，发起通知方尽最大的努力将业务处理结果通知为接收通知方，但是可能消息接收不到，此时需要接收通知方主动调用发起通知方的接口查询业务处理结果，通知的可靠性关键在接收通知方。</p><p><strong>解决方案上，最大努力通知需要：</strong></p><ul><li>提供接口，让接受通知放能够通过接口查询业务处理结果</li><li>消息队列ACK机制，消息队列按照间隔1min、5min、10min、30min、1h、2h、5h、10h的方式，逐步拉大通知间隔 ，直到达到通知要求的时间窗口上限。之后不再通知</li></ul><p>最大努力通知适用于业务通知类型，例如微信交易的结果，就是通过最大努力通知方式通知各个商户，既有回调通知，也有交易查询接口</p><h3 id="◆-AT事务模式"><a href="#◆-AT事务模式" class="headerlink" title="◆  AT事务模式"></a><strong>◆</strong>  AT事务模式</h3><p>这是阿里开源项目seata中的一种事务模式，在蚂蚁金服也被称为FMT。优点是该事务模式使用方式，类似XA模式，业务无需编写各类补偿操作，回滚由框架自动完成，缺点也类似AT，存在较长时间的锁，不满足高并发的场景。有兴趣的同学可以参考seata-AT</p><h3 id="◆-分布式事务中的网络异常"><a href="#◆-分布式事务中的网络异常" class="headerlink" title="◆ 分布式事务中的网络异常"></a><strong>◆</strong> <strong>分布式事务中的网络异常</strong></h3><p>在分布式事务的各个环节都有可能出现网络以及业务故障等问题，这些问题需要分布式事务的业务方做到防空回滚，幂等，防悬挂三个特性，下面以TCC事务说明这些异常情况：</p><p>空回滚：</p><p>在没有调用 TCC 资源 Try 方法的情况下，调用了二阶段的 Cancel 方法，Cancel 方法需要识别出这是一个空回滚，然后直接返回成功。</p><p>出现原因是当一个分支事务所在服务宕机或网络异常，分支事务调用记录为失败，这个时候其实是没有执行Try阶段，当故障恢复后，分布式事务进行回滚则会调用二阶段的Cancel方法，从而形成空回滚。</p><p>幂等：</p><p>由于任何一个请求都可能出现网络异常，出现重复请求，所以所有的分布式事务分支，都需要保证幂等性</p><p>悬挂：</p><p>悬挂就是对于一个分布式事务，其二阶段 Cancel 接口比 Try 接口先执行。</p><p>出现原因是在 RPC 调用分支事务try时，先注册分支事务，再执行RPC调用，如果此时 RPC 调用的网络发生拥堵，RPC 超时以后，TM就会通知RM回滚该分布式事务，可能回滚完成后，RPC 请求才到达参与者真正执行。</p><p>下面看一个网络异常的时序图，更好的理解上述几种问题</p><p><img src="https://img-blog.csdnimg.cn/img_convert/c94ea718aca89549e4a3f53399d413cd.png"></p><p>业务处理请求4的时候，Cancel在Try之前执行，需要处理空回滚<br>业务处理请求6的时候，Cancel重复执行，需要幂等<br>业务处理请求8的时候，Try在Cancel后执行，需要处理悬挂</p><p>面对上述复杂的网络异常情况，目前看到各家建议的方案都是业务方通过唯一键，去查询相关联的操作是否已完成，如果已完成则直接返回成功。相关的判断逻辑较复杂，易出错，业务负担重。</p><p>在项目DTM中，出现了一种子事务屏障技术，使用该技术，能够达到这个效果，看示意图：</p><p><img src="https://img-blog.csdnimg.cn/img_convert/0c9d3034f184e61c06288f87639e3eea.png"></p><p>所有这些请求，到了子事务屏障后：不正常的请求，会被过滤；正常请求，通过屏障。开发者使用子事务屏障之后，前面所说的各种异常全部被妥善处理，业务开发人员只需要关注实际的业务逻辑，负担大大降低。<br>子事务屏障提供了方法ThroughBarrierCall，方法的原型为：</p><pre><code class="go">func ThroughBarrierCall(db *sql.DB, transInfo *TransInfo, busiCall BusiFunc)</code></pre><p>业务开发人员，在busiCall里面编写自己的相关逻辑，调用该函数。ThroughBarrierCall保证，在空回滚、悬挂等场景下，busiCall不会被调用；在业务被重复调用时，有幂等控制，保证只被提交一次。</p><p>子事务屏障会管理TCC、SAGA、XA、事务消息等，也可以扩展到其他领域</p><p>子事务屏障技术的原理是，在本地数据库，建立分支事务状态表sub_trans_barrier，唯一键为全局事务id-子事务id-子事务分支名称（try|confirm|cancel）</p><ul><li>开启事务</li><li>如果是Try分支，则那么insert ignore插入gid-branchid-try，如果成功插入，则调用屏障内逻辑</li><li>如果是Confirm分支，那么insert ignore插入gid-branchid-confirm，如果成功插入，则调用屏障内逻辑</li><li>如果是Cancel分支，那么insert ignore插入gid-branchid-try，再插入gid-branchid-cancel，如果try未插入并且cancel插入成功，则调用屏障内逻辑</li><li>屏障内逻辑返回成功，提交事务，返回成功</li><li>屏障内逻辑返回错误，回滚事务，返回错误</li></ul><p>在此机制下，解决了网络异常相关的问题</p><ul><li>空补偿控制–如果Try没有执行，直接执行了Cancel，那么Cancel插入gid-branchid-try会成功，不走屏障内的逻辑，保证了空补偿控制</li><li>幂等控制–任何一个分支都无法重复插入唯一键，保证了不会重复执行</li><li>防悬挂控制–Try在Cancel之后执行，那么插入的gid-branchid-try不成功，就不执行，保证了防悬挂控制</li></ul><p>对于SAGA事务，也是类似的机制。</p><p>子事务屏障技术，为DTM首创，它的意义在于设计简单易实现的算法，提供了简单易用的接口，在首创，它的意义在于设计简单易实现的算法，提供了简单易用的接口，在这两项的帮助下，开发人员彻底的从网络异常的处理中解放出来。</p><p>该技术目前需要搭配DTM事务管理器，目前SDK已经提供给go语言的开发者。其他语言的sdk正在规划中。对于其他的分布式事务框架，只要提供了合适的分布式事务信息，能够按照上述原理，快速实现该技术。</p><h3 id="◆-总结"><a href="#◆-总结" class="headerlink" title="◆ 总结"></a><strong>◆</strong> 总结</h3><p>本文介绍了分布式事务的一些基础理论，并对常用的分布式事务方案进行了讲解，在文章的后半部分还给出了事务异常的原因、分类以及优雅的解决方案。</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 理论体系 </category>
-          
-      </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>二叉树定义</title>
-      <link href="/2023/06/07/%E7%90%86%E8%AE%BA%E4%BD%93%E7%B3%BB/%E4%BA%8C%E5%8F%89%E6%A0%91%E5%AE%9A%E4%B9%89/"/>
-      <url>/2023/06/07/%E7%90%86%E8%AE%BA%E4%BD%93%E7%B3%BB/%E4%BA%8C%E5%8F%89%E6%A0%91%E5%AE%9A%E4%B9%89/</url>
-      
-        <content type="html"><![CDATA[<hr><h2 id="title-二叉树定义date-2022-07-11-22-58-34-662updated-2022-08-04-18-30-08-316url-x2F-archives-x2F-二叉树定义categories-tags"><a href="#title-二叉树定义date-2022-07-11-22-58-34-662updated-2022-08-04-18-30-08-316url-x2F-archives-x2F-二叉树定义categories-tags" class="headerlink" title="title: 二叉树定义date: 2022-07-11 22:58:34.662updated: 2022-08-04 18:30:08.316url: &#x2F;archives&#x2F;二叉树定义categories:tags: "></a>title: 二叉树定义<br>date: 2022-07-11 22:58:34.662<br>updated: 2022-08-04 18:30:08.316<br>url: &#x2F;archives&#x2F;二叉树定义<br>categories:<br>tags: </h2><h4 id="前、中、后序遍历"><a href="#前、中、后序遍历" class="headerlink" title="前、中、后序遍历"></a>前、中、后序遍历</h4><pre><code class="mermaid">graph TBA((A))B((B))C((C))D((D))E((E))A–&gt;BA–&gt;CB–&gt;DB–&gt;E</code></pre>]]></content>
       
       
       <categories>
