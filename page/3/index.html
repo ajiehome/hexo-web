@@ -826,8 +826,8 @@ function downloadFile(content, fileName) &#123; //下载base64图片
 </div>
 
 <div class="post">
-    <a href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Javascript%E6%AD%A3%E5%88%99/">
-        <h2 class="post-title">Javascript正则</h2>
+    <a href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Javascript%E7%9A%84dom%E6%93%8D%E4%BD%9C/">
+        <h2 class="post-title">Javascript的dom操作</h2>
     </a>
     <div class="category-and-date">
         
@@ -852,8 +852,22 @@ function downloadFile(content, fileName) &#123; //下载base64图片
     <div class="description">
         <div class="content" v-pre>
             
-            <h2 id="Javascript正则"><a href="#Javascript正则" class="headerlink" title="Javascript正则"></a>Javascript正则</h2><pre><code class="javascript">let newData  = data.replace(/\&quot;toId\&quot;:(\d+)/,&#39;&quot;toId&quot;: &quot;$1&quot;&#39;);
-data = JSON.parse(newData)
+            <h1 id="JS原生DOM操作"><a href="#JS原生DOM操作" class="headerlink" title="JS原生DOM操作"></a>JS原生DOM操作</h1><pre><code class="javascript">let mainView = document.getElementById(&quot;main&quot;);
+                console.log(mainView)
+                let textDom = document.createElement(&quot;img&quot;);
+                let x = Math.random()*200+&quot;px&quot;;
+                let y = (Math.random()*300+100)+&quot;px&quot;;
+                textDom.style.top = y;
+                textDom.style.width = &quot;20px&quot;;
+                textDom.style.height = &quot;20px&quot;;
+                textDom.style.left = x;
+                textDom.style.border = &quot;solid 1px #cccccc&quot;;
+                textDom.style.zIndex = &quot;999&quot;;
+                textDom.style.position = &quot;absolute&quot;;
+                textDom.setAttribute(&quot;src&quot;,&quot;../../static/log.jpg&quot;);
+                // textDom.setAttribute(&quot;src&quot;,&quot;http://a2.att.hudong.com/36/48/19300001357258133412489354717.jpg&quot;);
+                mainView.appendChild(textDom)
+                console.log(mainView)
 </code></pre>
 
             
@@ -863,7 +877,7 @@ data = JSON.parse(newData)
         
         
     </div>
-    <a href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Javascript%E6%AD%A3%E5%88%99/" class="go-post">阅读全文</a>
+    <a href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Javascript%E7%9A%84dom%E6%93%8D%E4%BD%9C/" class="go-post">阅读全文</a>
 </div>
 
 
