@@ -21,7 +21,7 @@
 <script src="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/highlight.min.js"></script>
 <link
     rel="stylesheet"
-    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/github.min.css"
+    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/Github Dark.min.css"
 />
 <script src="/js/lib/highlight.js"></script>
 
@@ -177,47 +177,45 @@
     </div>
     
     <div class="content" v-pre>
-        <h1 id="Centos安装MySQL"><a href="#Centos安装MySQL" class="headerlink" title="Centos安装MySQL"></a>Centos安装MySQL</h1><h4 id="1、首先更新yum命令"><a href="#1、首先更新yum命令" class="headerlink" title="1、首先更新yum命令"></a>1、首先更新yum命令</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yum update <span class="token parameter variable">-y</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+        <h1 id="Centos安装MySQL"><a href="#Centos安装MySQL" class="headerlink" title="Centos安装MySQL"></a>Centos安装MySQL</h1><h4 id="1、首先更新yum命令"><a href="#1、首先更新yum命令" class="headerlink" title="1、首先更新yum命令"></a>1、首先更新yum命令</h4><pre><code class="shell">yum update -y
+</code></pre>
+<h4 id="3、下载MySQL的npm源"><a href="#3、下载MySQL的npm源" class="headerlink" title="3、下载MySQL的npm源"></a>3、下载MySQL的npm源</h4><pre><code class="shell">wget https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm
+</code></pre>
+<h4 id="4、添加MySQL的npm源"><a href="#4、添加MySQL的npm源" class="headerlink" title="4、添加MySQL的npm源"></a>4、添加MySQL的npm源</h4><pre><code class="shell">yum localinstall mysql80-community-release-el7-3.noarch.rpm
+</code></pre>
+<h4 id="5、查看当前的MySQL版本"><a href="#5、查看当前的MySQL版本" class="headerlink" title="5、查看当前的MySQL版本"></a>5、查看当前的MySQL版本</h4><pre><code class="shell">yum repolist enabled | grep &quot;mysql.*-community.*&quot;
+</code></pre>
+<h4 id="6、查看所有MySQL可用版本"><a href="#6、查看所有MySQL可用版本" class="headerlink" title="6、查看所有MySQL可用版本"></a>6、查看所有MySQL可用版本</h4><pre><code class="shell">yum repolist all | grep mysql
+</code></pre>
+<h4 id="7、关闭-x2F-禁用8-0的MySQL版本并且启用5-7的版本"><a href="#7、关闭-x2F-禁用8-0的MySQL版本并且启用5-7的版本" class="headerlink" title="7、关闭&#x2F;禁用8.0的MySQL版本并且启用5.7的版本"></a>7、关闭&#x2F;禁用8.0的MySQL版本并且启用5.7的版本</h4><pre><code class="shell">yum-config-manager --disable mysql80-community
 
-<h4 id="3、下载MySQL的npm源"><a href="#3、下载MySQL的npm源" class="headerlink" title="3、下载MySQL的npm源"></a>3、下载MySQL的npm源</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">wget</span> https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-
-<h4 id="4、添加MySQL的npm源"><a href="#4、添加MySQL的npm源" class="headerlink" title="4、添加MySQL的npm源"></a>4、添加MySQL的npm源</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yum localinstall mysql80-community-release-el7-3.noarch.rpm<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h4 id="5、查看当前的MySQL版本"><a href="#5、查看当前的MySQL版本" class="headerlink" title="5、查看当前的MySQL版本"></a>5、查看当前的MySQL版本</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yum repolist enabled <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">"mysql.*-community.*"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-
-<h4 id="6、查看所有MySQL可用版本"><a href="#6、查看所有MySQL可用版本" class="headerlink" title="6、查看所有MySQL可用版本"></a>6、查看所有MySQL可用版本</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yum repolist all <span class="token operator">|</span> <span class="token function">grep</span> mysql<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h4 id="7、关闭-x2F-禁用8-0的MySQL版本并且启用5-7的版本"><a href="#7、关闭-x2F-禁用8-0的MySQL版本并且启用5-7的版本" class="headerlink" title="7、关闭&#x2F;禁用8.0的MySQL版本并且启用5.7的版本"></a>7、关闭&#x2F;禁用8.0的MySQL版本并且启用5.7的版本</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yum-config-manager <span class="token parameter variable">--disable</span> mysql80-community
-
-yum-config-manager <span class="token parameter variable">--enable</span> mysql57-community<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-
-<h4 id="8、再次查看当前版本（正则匹配）"><a href="#8、再次查看当前版本（正则匹配）" class="headerlink" title="8、再次查看当前版本（正则匹配）"></a>8、再次查看当前版本（正则匹配）</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yum repolist enabled <span class="token operator">|</span> <span class="token function">grep</span> mysql<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h4 id="9、安装MySQL服务"><a href="#9、安装MySQL服务" class="headerlink" title="9、安装MySQL服务"></a>9、安装MySQL服务</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yum <span class="token function">install</span> <span class="token parameter variable">-y</span> mysql-community-server<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h4 id="10、启用MySQL服务"><a href="#10、启用MySQL服务" class="headerlink" title="10、启用MySQL服务"></a>10、启用MySQL服务</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">systemctl start mysqld<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h4 id="11、查看临时默认密码，且修改密码"><a href="#11、查看临时默认密码，且修改密码" class="headerlink" title="11、查看临时默认密码，且修改密码"></a>11、查看临时默认密码，且修改密码</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">cat</span> /var/log/mysqld.log
-<span class="token comment"># 由于密码策略所以只能设置较为复杂的密码</span>
-alter user <span class="token string">'root'</span>@<span class="token string">'localhost'</span> identified by <span class="token string">'ZhonHua@5000Nian'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="12、查看MySQL的密码安全策略"><a href="#12、查看MySQL的密码安全策略" class="headerlink" title="12、查看MySQL的密码安全策略"></a>12、查看MySQL的密码安全策略</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">show variables like <span class="token string">'validate_password%'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h4 id="13、修改密码杂度为最低以及把密码长度改为自己想要的"><a href="#13、修改密码杂度为最低以及把密码长度改为自己想要的" class="headerlink" title="13、修改密码杂度为最低以及把密码长度改为自己想要的"></a>13、修改密码杂度为最低以及把密码长度改为自己想要的</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">set</span> global validate_password_policy <span class="token operator">=</span> LOW<span class="token punctuation">;</span>
-<span class="token builtin class-name">set</span> global validate_password_length <span class="token operator">=</span> <span class="token number">6</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<h4 id="14、修改密码为自己想要的"><a href="#14、修改密码为自己想要的" class="headerlink" title="14、修改密码为自己想要的"></a>14、修改密码为自己想要的</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">alter user <span class="token string">'root'</span>@<span class="token string">'localhost'</span> identified by <span class="token string">'123456'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h4 id="15、允许远程登陆然后刷新"><a href="#15、允许远程登陆然后刷新" class="headerlink" title="15、允许远程登陆然后刷新"></a>15、允许远程登陆然后刷新</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 允许登录</span>
-grant all on *.* to root@<span class="token string">'%'</span> identified by <span class="token string">'you new password'</span> with grant option<span class="token punctuation">;</span>
-<span class="token comment"># 刷新</span>
-flush privileges<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+yum-config-manager --enable mysql57-community
+</code></pre>
+<h4 id="8、再次查看当前版本（正则匹配）"><a href="#8、再次查看当前版本（正则匹配）" class="headerlink" title="8、再次查看当前版本（正则匹配）"></a>8、再次查看当前版本（正则匹配）</h4><pre><code class="shell">yum repolist enabled | grep mysql
+</code></pre>
+<h4 id="9、安装MySQL服务"><a href="#9、安装MySQL服务" class="headerlink" title="9、安装MySQL服务"></a>9、安装MySQL服务</h4><pre><code class="shell">yum install -y mysql-community-server
+</code></pre>
+<h4 id="10、启用MySQL服务"><a href="#10、启用MySQL服务" class="headerlink" title="10、启用MySQL服务"></a>10、启用MySQL服务</h4><pre><code class="shell">systemctl start mysqld
+</code></pre>
+<h4 id="11、查看临时默认密码，且修改密码"><a href="#11、查看临时默认密码，且修改密码" class="headerlink" title="11、查看临时默认密码，且修改密码"></a>11、查看临时默认密码，且修改密码</h4><pre><code class="shell">cat /var/log/mysqld.log
+# 由于密码策略所以只能设置较为复杂的密码
+alter user &#39;root&#39;@&#39;localhost&#39; identified by &#39;ZhonHua@5000Nian&#39;;
+</code></pre>
+<h4 id="12、查看MySQL的密码安全策略"><a href="#12、查看MySQL的密码安全策略" class="headerlink" title="12、查看MySQL的密码安全策略"></a>12、查看MySQL的密码安全策略</h4><pre><code class="shell">show variables like &#39;validate_password%&#39;;
+</code></pre>
+<h4 id="13、修改密码杂度为最低以及把密码长度改为自己想要的"><a href="#13、修改密码杂度为最低以及把密码长度改为自己想要的" class="headerlink" title="13、修改密码杂度为最低以及把密码长度改为自己想要的"></a>13、修改密码杂度为最低以及把密码长度改为自己想要的</h4><pre><code class="shell">set global validate_password_policy = LOW;
+set global validate_password_length = 6;
+</code></pre>
+<h4 id="14、修改密码为自己想要的"><a href="#14、修改密码为自己想要的" class="headerlink" title="14、修改密码为自己想要的"></a>14、修改密码为自己想要的</h4><pre><code class="shell">alter user &#39;root&#39;@&#39;localhost&#39; identified by &#39;123456&#39;;
+</code></pre>
+<h4 id="15、允许远程登陆然后刷新"><a href="#15、允许远程登陆然后刷新" class="headerlink" title="15、允许远程登陆然后刷新"></a>15、允许远程登陆然后刷新</h4><pre><code class="shell"># 允许登录
+grant all on *.* to root@&#39;%&#39; identified by &#39;you new password&#39; with grant option;
+# 刷新
+flush privileges;
+</code></pre>
 <p>you new password：设置的新密码</p>
-<h4 id="16、重启MySQL服务"><a href="#16、重启MySQL服务" class="headerlink" title="16、重启MySQL服务"></a>16、重启MySQL服务</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">systemctl restart mysqld.service<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<h4 id="16、重启MySQL服务"><a href="#16、重启MySQL服务" class="headerlink" title="16、重启MySQL服务"></a>16、重启MySQL服务</h4><pre><code class="shell">systemctl restart mysqld.service
+</code></pre>
 <hr>
 <p><a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/mysql-yum-repo-quick-guide/en/">详情参照官方文档</a></p>
 

@@ -21,7 +21,7 @@
 <script src="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/highlight.min.js"></script>
 <link
     rel="stylesheet"
-    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/github.min.css"
+    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/Github Dark.min.css"
 />
 <script src="/js/lib/highlight.js"></script>
 
@@ -180,119 +180,136 @@
         <h1 id="Centos7常用命令"><a href="#Centos7常用命令" class="headerlink" title="Centos7常用命令"></a>Centos7常用命令</h1><p><strong>防火墙相关命令</strong></p>
 <ul>
 <li><p>防火墙的开启、关闭、重启、与状态</p>
- <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#开启</span>
-systemctl start   firewalld.service
-<span class="token comment">#关闭</span>
-systemctl stop    firewalld.service
-<span class="token comment">#重启</span>
-systemctl restart firewalld.service
-<span class="token comment">#状态</span>
-systemctl status  firewalld.service
-<span class="token comment">#设置开机自启</span>
-systemctl <span class="token builtin class-name">enable</span>  firewalld.service
-<span class="token comment">#关闭开机自启</span>
-systemctl disable firewalld.service
-
-<span class="token comment">#指定IP放行指定端口</span>
-firewall-cmd <span class="token parameter variable">--permanent</span> --add-rich-rule<span class="token operator">=</span><span class="token string">"rule family="</span>ipv4<span class="token string">" source address="</span><span class="token number">192.168</span>.142.166<span class="token string">" port protocol="</span>tcp<span class="token string">" port="</span><span class="token number">5432</span><span class="token string">" accept"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre><code class="shell"> #开启
+ systemctl start   firewalld.service
+ #关闭
+ systemctl stop    firewalld.service
+ #重启
+ systemctl restart firewalld.service
+ #状态
+ systemctl status  firewalld.service
+ #设置开机自启
+ systemctl enable  firewalld.service
+ #关闭开机自启
+ systemctl disable firewalld.service
+ 
+ #指定IP放行指定端口
+ firewall-cmd --permanent --add-rich-rule=&quot;rule family=&quot;ipv4&quot; source address=&quot;192.168.142.166&quot; port protocol=&quot;tcp&quot; port=&quot;5432&quot; accept&quot;
+</code></pre>
 </li>
 <li><p>查看所有公开项目</p>
- <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#查看所有公开项</span>
-firewall-cmd --list-all
-<span class="token comment">#查看端口是否放行</span>
-firewall-cmd <span class="token parameter variable">--zone</span><span class="token operator">=</span>public --query-port<span class="token operator">=</span><span class="token number">80</span>/tcp<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<pre><code class="shell"> #查看所有公开项
+ firewall-cmd --list-all
+ #查看端口是否放行
+ firewall-cmd --zone=public --query-port=80/tcp
+</code></pre>
 </li>
 <li><p>防火墙放行端口或服务</p>
- <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#添加放行端口</span>
-firewall-cmd <span class="token parameter variable">--zone</span><span class="token operator">=</span>public --add-port<span class="token operator">=</span><span class="token number">80</span>/tcp <span class="token parameter variable">--permanent</span>
-<span class="token comment">#重新加载所有的设置项</span>
-firewall-cmd <span class="token parameter variable">--reload</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#添加放行服务</span>
-firewall-cmd <span class="token parameter variable">--zone</span><span class="token operator">=</span>public --add-service<span class="token operator">=</span>http <span class="token parameter variable">--permanent</span>
-firewall-cmd <span class="token parameter variable">--reload</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<pre><code class="shell"> #添加放行端口
+ firewall-cmd --zone=public --add-port=80/tcp --permanent
+ #重新加载所有的设置项
+ firewall-cmd --reload
+</code></pre>
+<pre><code class="shell">  #添加放行服务
+  firewall-cmd --zone=public --add-service=http --permanent
+  firewall-cmd --reload
+</code></pre>
 </li>
 <li><p>防火墙移除放行端口或服务</p>
- <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#移除已经放行的端口</span>
-firewall-cmd <span class="token parameter variable">--zone</span><span class="token operator">=</span>public --remove-port<span class="token operator">=</span><span class="token number">80</span>/tcp
-firewall-cmd <span class="token parameter variable">--reload</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#移除已经放行服务</span>
-firewall-cmd <span class="token parameter variable">--zone</span><span class="token operator">=</span>public --remove-service<span class="token operator">=</span>http
-firewall-cmd <span class="token parameter variable">--reload</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
+<pre><code class="shell"> #移除已经放行的端口
+ firewall-cmd --zone=public --remove-port=80/tcp
+ firewall-cmd --reload
+</code></pre>
+<pre><code class="shell">  #移除已经放行服务
+  firewall-cmd --zone=public --remove-service=http
+  firewall-cmd --reload
+</code></pre>
+</li>
 </ul>
 <p><strong>端口操作</strong></p>
 <ul>
 <li><p>端口占用查询</p>
- <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">netstat</span> <span class="token parameter variable">-tunlp</span> <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">'port'</span>
-----------------------------------------------------------------------------------
-<span class="token parameter variable">-t</span> <span class="token punctuation">(</span>tcp<span class="token punctuation">)</span> 仅显示tcp相关选项
-<span class="token parameter variable">-u</span> <span class="token punctuation">(</span>udp<span class="token punctuation">)</span> 仅显示udp相关选项
-<span class="token parameter variable">-n</span> 拒绝显示别名，能显示数字的全部转化为数字
-<span class="token parameter variable">-l</span> 仅列出在Listen<span class="token punctuation">(</span>监听<span class="token punctuation">)</span>的服务状态
-<span class="token parameter variable">-p</span> 显示建立相关链接的程序名<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
- <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">lsof</span> -i:<span class="token string">'port'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre><code class="shell"> netstat -tunlp | grep &#39;port&#39;
+ ----------------------------------------------------------------------------------
+ -t (tcp) 仅显示tcp相关选项
+ -u (udp) 仅显示udp相关选项
+ -n 拒绝显示别名，能显示数字的全部转化为数字
+ -l 仅列出在Listen(监听)的服务状态
+ -p 显示建立相关链接的程序名
+</code></pre>
+<pre><code class="shell"> lsof -i:&#39;port&#39;
+</code></pre>
 </li>
 <li><p>端口终结</p>
- <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">kill</span> <span class="token parameter variable">-9</span> <span class="token string">'pid'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<pre><code class="shell"> kill -9 &#39;pid&#39;
+</code></pre>
+</li>
 </ul>
 <p><strong>服务操作</strong></p>
 <ul>
 <li><p>服务状态查询</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">systemctl status <span class="token string">'serverName'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre><code class="shell">  systemctl status &#39;serverName&#39;
+</code></pre>
 </li>
 <li><p>服务开启</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sysyemctl start <span class="token string">'serverName'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre><code class="shell">  sysyemctl start &#39;serverName&#39;
+</code></pre>
 </li>
 <li><p>服务关闭</p>
- <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">systemctl stop <span class="token string">'serverName'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre><code class="shell"> systemctl stop &#39;serverName&#39;
+</code></pre>
 </li>
 <li><p>服务自启</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">systemctl <span class="token builtin class-name">enable</span> <span class="token string">'serverName'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre><code class="shell">  systemctl enable &#39;serverName&#39;
+</code></pre>
 </li>
 <li><p>关闭服务自启</p>
- <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">systemctl disable <span class="token string">'serverName'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<pre><code class="shell"> systemctl disable &#39;serverName&#39;
+</code></pre>
+</li>
 </ul>
 <p><strong>用户和组</strong></p>
 <ul>
 <li><p>用户和组</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#添加用户</span>
-adduser <span class="token string">'userName'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#新建工作组</span>
-<span class="token function">groupadd</span> <span class="token string">'groupName'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#添加用户，并且把把用户添加到指定名称的组</span>
-<span class="token function">useradd</span> <span class="token parameter variable">-g</span> <span class="token string">'groupName'</span> <span class="token string">'userName'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#给已有用户添加到工作组</span>
-<span class="token function">usermod</span> <span class="token parameter variable">-G</span> <span class="token string">'groupName'</span> <span class="token string">'userName'</span>
-gpasswd <span class="token parameter variable">-a</span> <span class="token string">'userName'</span> <span class="token string">'groupName'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#临时锁定用户的密码，使账户失效</span>
-<span class="token function">passwd</span> <span class="token string">'userName'</span> <span class="token parameter variable">-l</span>
-<span class="token comment">#把临时锁定密码的用户开发，使账户重新有效</span>
-<span class="token function">passwd</span> <span class="token string">'userName'</span> <span class="token parameter variable">-u</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#永久删除用户</span>
-<span class="token function">userdel</span> <span class="token string">'userName'</span>
-<span class="token comment">#永久删除组</span>
-<span class="token function">groupdel</span> <span class="token string">'groupName'</span>
-<span class="token comment">#同时删除用户和组</span>
-<span class="token function">usermod</span> <span class="token parameter variable">-G</span> <span class="token string">'userName'</span> <span class="token string">'groupName'</span>
-<span class="token comment">#从指定的组中删除指定的用户</span>
-gpassed <span class="token parameter variable">-d</span> <span class="token string">'userName'</span> <span class="token string">'groupName'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#显示用户信息</span>
-<span class="token function">id</span> <span class="token string">'userName'</span>
-<span class="token comment">#将用户添加到指定组</span>
-<span class="token function">usermod</span> <span class="token parameter variable">-G</span> <span class="token string">'groupName'</span> <span class="token string">'userName'</span>
-<span class="token comment">#修改用户userName1的名称为userName2</span>
-<span class="token function">usermod</span> <span class="token parameter variable">-l</span> <span class="token string">'userName2'</span> <span class="token string">'userName1'</span>
-<span class="token comment">#锁定账户</span>
-<span class="token function">usermod</span> <span class="token parameter variable">-L</span> <span class="token string">'userName'</span>
-<span class="token comment">#解除用户锁定</span>
-<span class="token function">usermod</span> <span class="token parameter variable">-U</span> <span class="token string">'userName'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<pre><code class="shell">  #添加用户
+  adduser &#39;userName&#39;
+</code></pre>
+<pre><code class="shell">#新建工作组
+groupadd &#39;groupName&#39;
+</code></pre>
+<pre><code class="shell">#添加用户，并且把把用户添加到指定名称的组
+useradd -g &#39;groupName&#39; &#39;userName&#39;
+</code></pre>
+<pre><code class="shell">#给已有用户添加到工作组
+usermod -G &#39;groupName&#39; &#39;userName&#39;
+gpasswd -a &#39;userName&#39; &#39;groupName&#39;
+</code></pre>
+<pre><code class="shell">#临时锁定用户的密码，使账户失效
+passwd &#39;userName&#39; -l
+#把临时锁定密码的用户开发，使账户重新有效
+passwd &#39;userName&#39; -u
+</code></pre>
+<pre><code class="shell">#永久删除用户
+userdel &#39;userName&#39;
+#永久删除组
+groupdel &#39;groupName&#39;
+#同时删除用户和组
+usermod -G &#39;userName&#39; &#39;groupName&#39;
+#从指定的组中删除指定的用户
+gpassed -d &#39;userName&#39; &#39;groupName&#39;
+</code></pre>
+<pre><code class="shell">#显示用户信息
+id &#39;userName&#39;
+#将用户添加到指定组
+usermod -G &#39;groupName&#39; &#39;userName&#39;
+#修改用户userName1的名称为userName2
+usermod -l &#39;userName2&#39; &#39;userName1&#39;
+#锁定账户
+usermod -L &#39;userName&#39;
+#解除用户锁定
+usermod -U &#39;userName&#39;
+</code></pre>
+</li>
 </ul>
 <hr>
 <p><strong>持续更新中…</strong></p>

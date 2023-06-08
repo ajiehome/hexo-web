@@ -21,7 +21,7 @@
 <script src="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/highlight.min.js"></script>
 <link
     rel="stylesheet"
-    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/github.min.css"
+    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/Github Dark.min.css"
 />
 <script src="/js/lib/highlight.js"></script>
 
@@ -177,22 +177,23 @@
     </div>
     
     <div class="content" v-pre>
-        <h1 id="JS原生DOM操作"><a href="#JS原生DOM操作" class="headerlink" title="JS原生DOM操作"></a>JS原生DOM操作</h1><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> mainView <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">"main"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>mainView<span class="token punctuation">)</span>
-                <span class="token keyword">let</span> textDom <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">"img"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token keyword">let</span> x <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">*</span><span class="token number">200</span><span class="token operator">+</span><span class="token string">"px"</span><span class="token punctuation">;</span>
-                <span class="token keyword">let</span> y <span class="token operator">=</span> <span class="token punctuation">(</span>Math<span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">*</span><span class="token number">300</span><span class="token operator">+</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token string">"px"</span><span class="token punctuation">;</span>
-                textDom<span class="token punctuation">.</span>style<span class="token punctuation">.</span>top <span class="token operator">=</span> y<span class="token punctuation">;</span>
-                textDom<span class="token punctuation">.</span>style<span class="token punctuation">.</span>width <span class="token operator">=</span> <span class="token string">"20px"</span><span class="token punctuation">;</span>
-                textDom<span class="token punctuation">.</span>style<span class="token punctuation">.</span>height <span class="token operator">=</span> <span class="token string">"20px"</span><span class="token punctuation">;</span>
-                textDom<span class="token punctuation">.</span>style<span class="token punctuation">.</span>left <span class="token operator">=</span> x<span class="token punctuation">;</span>
-                textDom<span class="token punctuation">.</span>style<span class="token punctuation">.</span>border <span class="token operator">=</span> <span class="token string">"solid 1px #cccccc"</span><span class="token punctuation">;</span>
-                textDom<span class="token punctuation">.</span>style<span class="token punctuation">.</span>zIndex <span class="token operator">=</span> <span class="token string">"999"</span><span class="token punctuation">;</span>
-                textDom<span class="token punctuation">.</span>style<span class="token punctuation">.</span>position <span class="token operator">=</span> <span class="token string">"absolute"</span><span class="token punctuation">;</span>
-                textDom<span class="token punctuation">.</span><span class="token function">setAttribute</span><span class="token punctuation">(</span><span class="token string">"src"</span><span class="token punctuation">,</span><span class="token string">"../../static/log.jpg"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token comment">// textDom.setAttribute("src","http://a2.att.hudong.com/36/48/19300001357258133412489354717.jpg");</span>
-                mainView<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>textDom<span class="token punctuation">)</span>
-                console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>mainView<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <h1 id="JS原生DOM操作"><a href="#JS原生DOM操作" class="headerlink" title="JS原生DOM操作"></a>JS原生DOM操作</h1><pre><code class="javascript">let mainView = document.getElementById(&quot;main&quot;);
+                console.log(mainView)
+                let textDom = document.createElement(&quot;img&quot;);
+                let x = Math.random()*200+&quot;px&quot;;
+                let y = (Math.random()*300+100)+&quot;px&quot;;
+                textDom.style.top = y;
+                textDom.style.width = &quot;20px&quot;;
+                textDom.style.height = &quot;20px&quot;;
+                textDom.style.left = x;
+                textDom.style.border = &quot;solid 1px #cccccc&quot;;
+                textDom.style.zIndex = &quot;999&quot;;
+                textDom.style.position = &quot;absolute&quot;;
+                textDom.setAttribute(&quot;src&quot;,&quot;../../static/log.jpg&quot;);
+                // textDom.setAttribute(&quot;src&quot;,&quot;http://a2.att.hudong.com/36/48/19300001357258133412489354717.jpg&quot;);
+                mainView.appendChild(textDom)
+                console.log(mainView)
+</code></pre>
 
     </div>
     

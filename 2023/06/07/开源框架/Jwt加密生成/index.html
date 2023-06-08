@@ -21,7 +21,7 @@
 <script src="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/highlight.min.js"></script>
 <link
     rel="stylesheet"
-    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/github.min.css"
+    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/Github Dark.min.css"
 />
 <script src="/js/lib/highlight.js"></script>
 
@@ -178,46 +178,44 @@
     
     <div class="content" v-pre>
         <h1 id="JWT初步使用"><a href="#JWT初步使用" class="headerlink" title="JWT初步使用"></a>JWT初步使用</h1><p><strong>POM文件导入</strong></p>
-<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.auth0<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>java-jwt<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>3.10.1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
+<pre><code class="xml">&lt;dependency&gt;
+    &lt;groupId&gt;com.auth0&lt;/groupId&gt;
+    &lt;artifactId&gt;java-jwt&lt;/artifactId&gt;
+    &lt;version&gt;3.10.1&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
 <p><strong>JWT实现类</strong></p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Component</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">JwtUtils</span> <span class="token punctuation">&#123;</span>
+<pre><code class="java">@Component
+public class JwtUtils &#123;
 
 
-    <span class="token comment">/**
+    /**
      *  获取Token，签名由ID代替，形成动态签名
      * @param autoDuration 超时的时间长度
      * @param jwtBeanBO 用户数据
      * @return token
-     */</span>
-    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getToken</span><span class="token punctuation">(</span><span class="token keyword">long</span> autoDuration<span class="token punctuation">,</span> <span class="token class-name">JwtBeanBO</span> jwtBeanBO<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-		
-        <span class="token keyword">long</span> outLong <span class="token operator">=</span> <span class="token class-name">System</span><span class="token punctuation">.</span><span class="token function">currentTimeMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> autoDuration<span class="token punctuation">;</span>
-        <span class="token class-name">Date</span> outDate <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span>outLong<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment">//加密方式HS256</span>
-        <span class="token class-name">Algorithm</span> algorithm <span class="token operator">=</span> <span class="token class-name">Algorithm</span><span class="token punctuation">.</span><span class="token function">HMAC256</span><span class="token punctuation">(</span>jwtBeanBO<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">Object</span><span class="token punctuation">></span></span> hashMap <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        hashMap<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"id"</span><span class="token punctuation">,</span>jwtBeanBO<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        hashMap<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"userName"</span><span class="token punctuation">,</span>jwtBeanBO<span class="token punctuation">.</span><span class="token function">getUserName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        hashMap<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"passWord"</span><span class="token punctuation">,</span>jwtBeanBO<span class="token punctuation">.</span><span class="token function">getPassWord</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        hashMap<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"userPhone"</span><span class="token punctuation">,</span>jwtBeanBO<span class="token punctuation">.</span><span class="token function">getUserPhone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        hashMap<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"userAddress"</span><span class="token punctuation">,</span>jwtBeanBO<span class="token punctuation">.</span><span class="token function">getUserAddress</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+     */
+    public String getToken(long autoDuration, JwtBeanBO jwtBeanBO)&#123;
+        
+        long outLong = System.currentTimeMillis() + autoDuration;
+        Date outDate = new Date(outLong);
+        //加密方式HS256
+        Algorithm algorithm = Algorithm.HMAC256(jwtBeanBO.getId().toString());
+        HashMap&lt;String, Object&gt; hashMap = new HashMap&lt;&gt;(5);
+        hashMap.put(&quot;id&quot;,jwtBeanBO.getId());
+        hashMap.put(&quot;userName&quot;,jwtBeanBO.getUserName());
+        hashMap.put(&quot;passWord&quot;,jwtBeanBO.getPassWord());
+        hashMap.put(&quot;userPhone&quot;,jwtBeanBO.getUserPhone());
+        hashMap.put(&quot;userAddress&quot;,jwtBeanBO.getUserAddress());
 
-        <span class="token keyword">return</span> <span class="token constant">JWT</span><span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-                <span class="token punctuation">.</span><span class="token function">withHeader</span><span class="token punctuation">(</span>hashMap<span class="token punctuation">)</span>
-                <span class="token punctuation">.</span><span class="token function">withIssuer</span><span class="token punctuation">(</span>jwtBeanBO<span class="token punctuation">.</span><span class="token function">getUserName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-                <span class="token punctuation">.</span><span class="token function">withExpiresAt</span><span class="token punctuation">(</span>outDate<span class="token punctuation">)</span>
-                <span class="token punctuation">.</span><span class="token function">sign</span><span class="token punctuation">(</span>algorithm<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+        return JWT.create()
+                .withHeader(hashMap)
+                .withIssuer(jwtBeanBO.getUserName())
+                .withExpiresAt(outDate)
+                .sign(algorithm);
+    &#125;
+&#125;
+</code></pre>
 <p><strong>具体操作见:<a target="_blank" rel="noopener" href="https://github.com/auth0/java-jwt">Jwt-Github</a></strong></p>
 
     </div>

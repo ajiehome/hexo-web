@@ -21,7 +21,7 @@
 <script src="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/highlight.min.js"></script>
 <link
     rel="stylesheet"
-    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/github.min.css"
+    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/Github Dark.min.css"
 />
 <script src="/js/lib/highlight.js"></script>
 
@@ -179,11 +179,11 @@
     <div class="content" v-pre>
         <h1 id="自定义注解AOP"><a href="#自定义注解AOP" class="headerlink" title="自定义注解AOP"></a>自定义注解AOP</h1><p><strong>POM文件导入</strong></p>
 <p>开启AOP操作</p>
-<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-aop<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
+<pre><code class="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-aop&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
 <p><strong>创建一个注解</strong></p>
 <p>元注解</p>
 <ul>
@@ -208,71 +208,70 @@
 </ul>
 </li>
 </ul>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Documented</span>
-<span class="token annotation punctuation">@Target</span><span class="token punctuation">(</span><span class="token class-name">ElementType</span><span class="token punctuation">.</span><span class="token constant">METHOD</span><span class="token punctuation">)</span>
-<span class="token annotation punctuation">@Retention</span><span class="token punctuation">(</span><span class="token class-name">RetentionPolicy</span><span class="token punctuation">.</span><span class="token constant">RUNTIME</span><span class="token punctuation">)</span>
-<span class="token keyword">public</span> <span class="token annotation punctuation">@interface</span> <span class="token class-name">AllowToken</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
+<pre><code class="java">@Documented
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface AllowToken &#123;&#125;
+</code></pre>
 <p><strong>创建AOP切入实现类</strong></p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Aspect</span>
-<span class="token annotation punctuation">@Component</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TokenAspect</span> <span class="token punctuation">&#123;</span>
-    <span class="token comment">//设置切入点</span>
-    <span class="token annotation punctuation">@Pointcut</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token string">"@annotation(cn.ajiehome.tools.annotations.AllowToken)"</span><span class="token punctuation">)</span>
-    <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">pointCut</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+<pre><code class="java">@Aspect
+@Component
+public class TokenAspect &#123;
+    //设置切入点
+    @Pointcut(value = &quot;@annotation(cn.ajiehome.tools.annotations.AllowToken)&quot;)
+    private void pointCut()&#123;&#125;
 
-    <span class="token annotation punctuation">@Before</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token string">"pointCut()&amp;&amp;@annotation(allowToken)"</span><span class="token punctuation">)</span>
-    <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">before</span><span class="token punctuation">(</span><span class="token class-name">AllowToken</span> allowToken<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-        <span class="token comment">//AOP前置通知 advice</span>
-        <span class="token comment">//获取被注解方法的request</span>
-        <span class="token class-name">ServletRequestAttributes</span> servletRequestAttributes <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">ServletRequestAttributes</span><span class="token punctuation">)</span> <span class="token class-name">RequestContextHolder</span><span class="token punctuation">.</span><span class="token function">getRequestAttributes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">assert</span> servletRequestAttributes <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
-        <span class="token class-name">HttpServletRequest</span> request <span class="token operator">=</span> servletRequestAttributes<span class="token punctuation">.</span><span class="token function">getRequest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    @Before(value = &quot;pointCut()&amp;&amp;@annotation(allowToken)&quot;)
+    private void before(AllowToken allowToken)&#123;
+        //AOP前置通知 advice
+        //获取被注解方法的request
+        ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        assert servletRequestAttributes != null;
+        HttpServletRequest request = servletRequestAttributes.getRequest();
         
-        <span class="token class-name">String</span> token <span class="token operator">=</span> request<span class="token punctuation">.</span><span class="token function">getHeader</span><span class="token punctuation">(</span><span class="token string">"token"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>token<span class="token operator">==</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">ApplicationException</span><span class="token punctuation">(</span><span class="token class-name">CodeType</span><span class="token punctuation">.</span><span class="token constant">TOKEN_TIME_OUT</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-        <span class="token comment">//解析token</span>
-        <span class="token class-name">DecodedJWT</span> decode <span class="token operator">=</span> <span class="token constant">JWT</span><span class="token punctuation">.</span><span class="token function">decode</span><span class="token punctuation">(</span>token<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment">//Jwt的头部，由于头部被Base64编码过了，所以需要base64逆解编码</span>
-        <span class="token class-name">String</span> header <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token class-name">Base64</span><span class="token punctuation">.</span><span class="token function">getDecoder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">decode</span><span class="token punctuation">(</span>decode<span class="token punctuation">.</span><span class="token function">getHeader</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment">//Jwt的中间部分，理由同上头部</span>
-        <span class="token class-name">String</span> payload <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token class-name">Base64</span><span class="token punctuation">.</span><span class="token function">getDecoder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">decode</span><span class="token punctuation">(</span>decode<span class="token punctuation">.</span><span class="token function">getPayload</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment">//解析头部</span>
-        <span class="token class-name">JSONObject</span> userJson <span class="token operator">=</span> <span class="token class-name">JSONObject</span><span class="token punctuation">.</span><span class="token function">parseObject</span><span class="token punctuation">(</span>header<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token class-name">String</span> id <span class="token operator">=</span> userJson<span class="token punctuation">.</span><span class="token function">getString</span><span class="token punctuation">(</span><span class="token string">"id"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token class-name">String</span> userName <span class="token operator">=</span> userJson<span class="token punctuation">.</span><span class="token function">getString</span><span class="token punctuation">(</span><span class="token string">"userName"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment">//逆解匹配整个Token的编码以及密钥key</span>
-        <span class="token class-name">Algorithm</span> algorithm <span class="token operator">=</span> <span class="token class-name">Algorithm</span><span class="token punctuation">.</span><span class="token function">HMAC256</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
-            <span class="token comment">//设置验证条件，这里设置了验证的密钥和编码以及验证的签发人</span>
-            <span class="token class-name">JWTVerifier</span> jwtVerifier <span class="token operator">=</span> <span class="token constant">JWT</span><span class="token punctuation">.</span><span class="token function">require</span><span class="token punctuation">(</span>algorithm<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">withIssuer</span><span class="token punctuation">(</span>userName<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token comment">//验证是否匹配，如果Token不匹配或者超时，此处将抛出异常</span>
-            <span class="token class-name">DecodedJWT</span> verify <span class="token operator">=</span> jwtVerifier<span class="token punctuation">.</span><span class="token function">verify</span><span class="token punctuation">(</span>token<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token comment">//需要的信息获取从头部份获取和中间部分获取</span>
-        <span class="token punctuation">&#125;</span><span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        String token = request.getHeader(&quot;token&quot;);
+        if (token==null)&#123;
+            throw new ApplicationException(CodeType.TOKEN_TIME_OUT);
+        &#125;
+        //解析token
+        DecodedJWT decode = JWT.decode(token);
+        //Jwt的头部，由于头部被Base64编码过了，所以需要base64逆解编码
+        String header = new String(Base64.getDecoder().decode(decode.getHeader()));
+        //Jwt的中间部分，理由同上头部
+        String payload = new String(Base64.getDecoder().decode(decode.getPayload()));
+        //解析头部
+        JSONObject userJson = JSONObject.parseObject(header);
+        String id = userJson.getString(&quot;id&quot;);
+        String userName = userJson.getString(&quot;userName&quot;);
+        //逆解匹配整个Token的编码以及密钥key
+        Algorithm algorithm = Algorithm.HMAC256(id);
+        try &#123;
+            //设置验证条件，这里设置了验证的密钥和编码以及验证的签发人
+            JWTVerifier jwtVerifier = JWT.require(algorithm).withIssuer(userName).build();
+            //验证是否匹配，如果Token不匹配或者超时，此处将抛出异常
+            DecodedJWT verify = jwtVerifier.verify(token);
+            //需要的信息获取从头部份获取和中间部分获取
+        &#125;catch (Exception e)&#123;
 
-            <span class="token keyword">throw</span>  <span class="token keyword">new</span> <span class="token class-name">ApplicationException</span><span class="token punctuation">(</span><span class="token class-name">CodeType</span><span class="token punctuation">.</span><span class="token constant">TOKEN_TIME_OUT</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token annotation punctuation">@After</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token string">"pointCut()&amp;&amp;@annotation(allowToken)"</span><span class="token punctuation">)</span>
-    <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">after</span><span class="token punctuation">(</span><span class="token class-name">AllowToken</span> allowToken<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-        <span class="token comment">//AOP后置通知 advice</span>
-    <span class="token punctuation">&#125;</span>
+            throw  new ApplicationException(CodeType.TOKEN_TIME_OUT);
+        &#125;
+    &#125;
+    @After(value = &quot;pointCut()&amp;&amp;@annotation(allowToken)&quot;)
+    private void after(AllowToken allowToken)&#123;
+        //AOP后置通知 advice
+    &#125;
 
-    <span class="token annotation punctuation">@AfterReturning</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token string">"pointCut()&amp;&amp; @annotation(allowToken)"</span><span class="token punctuation">,</span>returning <span class="token operator">=</span> <span class="token string">"o"</span><span class="token punctuation">)</span>
-    <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">alterReturn</span><span class="token punctuation">(</span><span class="token class-name">AllowToken</span> allowToken<span class="token punctuation">,</span><span class="token class-name">Object</span> o<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-        <span class="token comment">//AOP返回通知 advice</span>
-    <span class="token punctuation">&#125;</span>
+    @AfterReturning(value = &quot;pointCut()&amp;&amp; @annotation(allowToken)&quot;,returning = &quot;o&quot;)
+    private void alterReturn(AllowToken allowToken,Object o)&#123;
+        //AOP返回通知 advice
+    &#125;
 
-    <span class="token annotation punctuation">@AfterThrowing</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token string">"pointCut()&amp;&amp;@annotation(allowToken)"</span><span class="token punctuation">)</span>
-    <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">alterError</span><span class="token punctuation">(</span><span class="token class-name">AllowToken</span> allowToken<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-        <span class="token comment">//AOP异常通知 advice</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+    @AfterThrowing(value = &quot;pointCut()&amp;&amp;@annotation(allowToken)&quot;)
+    private void alterError(AllowToken allowToken)&#123;
+        //AOP异常通知 advice
+    &#125;
+&#125;
+</code></pre>
 
     </div>
     

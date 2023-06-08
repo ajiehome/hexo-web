@@ -21,7 +21,7 @@
 <script src="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/highlight.min.js"></script>
 <link
     rel="stylesheet"
-    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/github.min.css"
+    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/Github Dark.min.css"
 />
 <script src="/js/lib/highlight.js"></script>
 
@@ -178,24 +178,25 @@
     
     <div class="content" v-pre>
         <p><strong>1、数据库的查询</strong></p>
-<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment">//选择指定列</span>
-<span class="token keyword">select</span>  name<span class="token punctuation">,</span> age <span class="token keyword">from</span> demo1<span class="token punctuation">;</span>
-<span class="token comment">//定义列的别名</span>
-<span class="token keyword">select</span> name <span class="token keyword">as</span> 姓名 <span class="token punctuation">,</span>age <span class="token keyword">as</span> 年龄 <span class="token keyword">from</span> demo1<span class="token punctuation">;</span>
-<span class="token comment">//当定义列的别名有空格的时候必须要用引号将标题括起来</span>
-<span class="token keyword">select</span> name <span class="token keyword">as</span> <span class="token string">"student name"</span> <span class="token punctuation">,</span>age <span class="token keyword">as</span> <span class="token string">"student age"</span> <span class="token keyword">from</span> demo1<span class="token punctuation">;</span>
-<span class="token comment">//替换查询结果的数据，end后面的字符串代替的是整个case...end语句，不然会直接输出整个case...end语句</span>
-<span class="token keyword">select</span> name<span class="token punctuation">,</span>age<span class="token punctuation">,</span>
-  <span class="token keyword">case</span>
-    <span class="token keyword">when</span> age <span class="token operator">is</span> <span class="token boolean">null</span> <span class="token keyword">then</span> <span class="token string">"尚未设置"</span>
-    <span class="token keyword">when</span> age <span class="token operator">&lt;</span> <span class="token number">18</span> <span class="token keyword">then</span> <span class="token string">"未成年"</span>
-    <span class="token keyword">else</span> <span class="token string">"成年"</span>
-  <span class="token keyword">end</span> <span class="token keyword">as</span> <span class="token string">"是否成年"</span>
-  <span class="token keyword">from</span> demo1<span class="token punctuation">;</span>
-<span class="token comment">//计算列值，把age扩大10被输出</span>
-<span class="token keyword">select</span> name<span class="token punctuation">,</span>age<span class="token operator">*</span><span class="token number">10</span> <span class="token keyword">as</span> <span class="token string">"年龄x10"</span> <span class="token keyword">from</span> demo1<span class="token punctuation">;</span>
-<span class="token comment">//消除重复的行</span>
-<span class="token keyword">select</span> <span class="token keyword">distinct</span>  name<span class="token punctuation">,</span>age<span class="token punctuation">,</span>sex <span class="token keyword">from</span> demo1<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre><code class="sql">//选择指定列
+select  name, age from demo1;
+//定义列的别名
+select name as 姓名 ,age as 年龄 from demo1;
+//当定义列的别名有空格的时候必须要用引号将标题括起来
+select name as &quot;student name&quot; ,age as &quot;student age&quot; from demo1;
+//替换查询结果的数据，end后面的字符串代替的是整个case...end语句，不然会直接输出整个case...end语句
+select name,age,
+  case
+    when age is null then &quot;尚未设置&quot;
+    when age &lt; 18 then &quot;未成年&quot;
+    else &quot;成年&quot;
+  end as &quot;是否成年&quot;
+  from demo1;
+//计算列值，把age扩大10被输出
+select name,age*10 as &quot;年龄x10&quot; from demo1;
+//消除重复的行
+select distinct  name,age,sex from demo1;
+</code></pre>
 <p>聚合函数</p>
 <table>
 <thead>
@@ -233,16 +234,16 @@
 <td>返回给定表达式中所有值的方差</td>
 </tr>
 </tbody></table>
-<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">select</span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token keyword">as</span> <span class="token string">'一共有多少组'</span>  <span class="token keyword">from</span> demo1<span class="token punctuation">;</span>
- <span class="token keyword">select</span> <span class="token function">max</span><span class="token punctuation">(</span>age<span class="token punctuation">)</span> <span class="token keyword">as</span> <span class="token string">'年龄最大的为'</span> <span class="token keyword">from</span> demo1<span class="token punctuation">;</span>
-<span class="token keyword">select</span> <span class="token function">min</span><span class="token punctuation">(</span>age<span class="token punctuation">)</span> <span class="token keyword">as</span> <span class="token string">'年龄最小的为'</span> <span class="token keyword">from</span> demo1<span class="token punctuation">;</span>
-<span class="token keyword">select</span> <span class="token function">sum</span><span class="token punctuation">(</span>age<span class="token punctuation">)</span> <span class="token keyword">as</span> <span class="token string">'所有年龄之和'</span> <span class="token keyword">from</span> demo1<span class="token punctuation">;</span>
-<span class="token keyword">select</span> <span class="token function">avg</span><span class="token punctuation">(</span>age<span class="token punctuation">)</span> <span class="token keyword">as</span> <span class="token string">'平均年龄为'</span> <span class="token keyword">from</span> demo1<span class="token punctuation">;</span>
-<span class="token keyword">select</span> std<span class="token punctuation">(</span>age<span class="token punctuation">)</span> <span class="token keyword">as</span> <span class="token string">"标准差"</span> <span class="token keyword">from</span> demo1<span class="token punctuation">;</span>
-<span class="token keyword">select</span> variance<span class="token punctuation">(</span>age<span class="token punctuation">)</span> <span class="token keyword">as</span> <span class="token string">"方差"</span> <span class="token keyword">from</span> demo1<span class="token punctuation">;</span>
-<span class="token comment">//返回一组指定列的的所有非null的值，这些值一个接一个的放置，中间用逗号隔开</span>
-<span class="token keyword">select</span> group_concat<span class="token punctuation">(</span>age<span class="token punctuation">)</span> <span class="token keyword">from</span> demo1<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+<pre><code class="sql">select count(*) as &#39;一共有多少组&#39;  from demo1;
+ select max(age) as &#39;年龄最大的为&#39; from demo1;
+select min(age) as &#39;年龄最小的为&#39; from demo1;
+select sum(age) as &#39;所有年龄之和&#39; from demo1;
+select avg(age) as &#39;平均年龄为&#39; from demo1;
+select std(age) as &quot;标准差&quot; from demo1;
+select variance(age) as &quot;方差&quot; from demo1;
+//返回一组指定列的的所有非null的值，这些值一个接一个的放置，中间用逗号隔开
+select group_concat(age) from demo1;
+</code></pre>
 <table>
 <thead>
 <tr>

@@ -21,7 +21,7 @@
 <script src="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/highlight.min.js"></script>
 <link
     rel="stylesheet"
-    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/github.min.css"
+    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/Github Dark.min.css"
 />
 <script src="/js/lib/highlight.js"></script>
 
@@ -178,43 +178,40 @@
     
     <div class="content" v-pre>
         <h1 id="MySQL命令集"><a href="#MySQL命令集" class="headerlink" title="MySQL命令集"></a>MySQL命令集</h1><p><strong>MySQL连接</strong></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#本地连接</span>
-<span class="token comment">#password:可直接填写密码，或者直接回车，然后再保密输入密码</span>
-mysql <span class="token parameter variable">-u</span> root <span class="token parameter variable">-p</span> <span class="token string">"password"</span><span class="token punctuation">;</span>
-<span class="token comment">#远程连接</span>
-mysql <span class="token parameter variable">-h</span> <span class="token string">"ip"</span> <span class="token parameter variable">-u</span> root <span class="token parameter variable">-p</span> <span class="token string">"password"</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+<pre><code class="shell">#本地连接
+#password:可直接填写密码，或者直接回车，然后再保密输入密码
+mysql -u root -p &quot;password&quot;;
+#远程连接
+mysql -h &quot;ip&quot; -u root -p &quot;password&quot;;
+</code></pre>
 <p><strong>修改密码</strong></p>
 <p>进入mysql的bin目录下运行cmd</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#没有密码时可以省略 -p 参数</span>
-mysqladmin  <span class="token parameter variable">-uroot</span> <span class="token parameter variable">-p</span> <span class="token string">"old password"</span> password <span class="token string">"new password"</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
+<pre><code class="shell">#没有密码时可以省略 -p 参数
+mysqladmin  -uroot -p &quot;old password&quot; password &quot;new password&quot;;
+</code></pre>
 <p><strong>新建用户</strong></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">grant <span class="token punctuation">[</span>select,insert,update,delete<span class="token punctuation">]</span> on <span class="token string">"database"</span>.* to <span class="token string">"user name"</span>@<span class="token string">"login host"</span> identified by <span class="token string">"password"</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<pre><code class="shell">grant [select,insert,update,delete] on &quot;database&quot;.* to &quot;user name&quot;@&quot;login host&quot; identified by &quot;password&quot;;
+</code></pre>
 <p>例如：新建一个number1用户，密码为123456，该用户只有对db1数据库所有的表有读取权限，且只能在MySQL所在的主机上登录，取消密码则重复这行命令，只是把密码置空</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">grant <span class="token keyword">select</span> on db1.* to number1@localhost identified by <span class="token string">"123456"</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-
-
+<pre><code class="shell">grant select on db1.* to number1@localhost identified by &quot;123456&quot;;
+</code></pre>
 <p><strong>查询连接</strong></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 查询连接超时时间</span>
-show variables like <span class="token string">'%timeout%'</span><span class="token punctuation">;</span>
-<span class="token comment"># 查询连接数</span>
-show status like  <span class="token string">'Threads%'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
+<pre><code class="shell"># 查询连接超时时间
+show variables like &#39;%timeout%&#39;;
+# 查询连接数
+show status like  &#39;Threads%&#39;;
+</code></pre>
 <p>Threads_connected ：这个数值指的是打开的连接数.</p>
 <p>Threads_running ：这个数值指的是激活的连接数，这个数值一般远低于connected数值.</p>
 <p>Threads_connected 跟show processlist结果相同，表示当前连接数。准确的来说，Threads_running是代表当前并发数</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#查询最大连接数</span>
-show variables like <span class="token string">'max_connections'</span><span class="token punctuation">;</span>
-<span class="token comment">#修改最大连接数</span>
-<span class="token comment">#方法一</span>
-<span class="token builtin class-name">set</span> global max_connections <span class="token operator">=</span> <span class="token number">1000</span><span class="token punctuation">;</span>
-<span class="token comment">#方法二 修改my.conf配置文件：加上或者修改max_connections</span>
-max_connections <span class="token operator">=</span> <span class="token number">1000</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+<pre><code class="shell">#查询最大连接数
+show variables like &#39;max_connections&#39;;
+#修改最大连接数
+#方法一
+set global max_connections = 1000;
+#方法二 修改my.conf配置文件：加上或者修改max_connections
+max_connections = 1000
+</code></pre>
 
     </div>
     

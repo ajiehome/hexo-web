@@ -21,7 +21,7 @@
 <script src="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/highlight.min.js"></script>
 <link
     rel="stylesheet"
-    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/github.min.css"
+    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/Github Dark.min.css"
 />
 <script src="/js/lib/highlight.js"></script>
 
@@ -182,32 +182,36 @@
 <p>CentOS7、openJdk11</p>
 </blockquote>
 <h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><ol>
-<li>首先使用<code>wget</code>下载zk的二进制包 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">    <span class="token function">wget</span> https://dlcdn.apache.org/zookeeper/zookeeper-3.8.0/apache-zookeeper-3.8.0-bin.tar.gz
-    ```<span class="token variable"><span class="token variable">`</span>
-<span class="token number">2</span>. 解压出到opt目录下
-   <span class="token variable">`</span></span>``shell
-   <span class="token function">tar</span> <span class="token parameter variable">-zxvf</span> apache-zookeeper-3.8.0-bin.tar.gz <span class="token parameter variable">-O</span> /opt<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li>配置systemd服务管理<br> 在&#x2F;etc&#x2F;systemd&#x2F;system目录下创建zkServer.service文件<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>Unit<span class="token punctuation">]</span>
-<span class="token assign-left variable">Description</span><span class="token operator">=</span>zkServer
+<li>首先使用<code>wget</code>下载zk的二进制包<pre><code class="shell">wget https://dlcdn.apache.org/zookeeper/zookeeper-3.8.0/apache-zookeeper-3.8.0-bin.tar.gz
+</code></pre>
+</li>
+<li>解压出到opt目录下<pre><code class="shell">tar -zxvf apache-zookeeper-3.8.0-bin.tar.gz -O /opt
+</code></pre>
+</li>
+<li>配置systemd服务管理<br> 在&#x2F;etc&#x2F;systemd&#x2F;system目录下创建zkServer.service文件<pre><code class="shell">[Unit]
+Description=zkServer
 
-<span class="token punctuation">[</span>Service<span class="token punctuation">]</span>
-<span class="token assign-left variable">Type</span><span class="token operator">=</span>forking
-<span class="token comment">#PIDFile=/var/run/zkServer_2181.pid</span>
-<span class="token assign-left variable">ExecStart</span><span class="token operator">=</span>/opt/apache-zookeeper-3.8.0-bin/bin/zkServer.sh start
-<span class="token assign-left variable">ExecStartPost</span><span class="token operator">=</span>/bin/sleep <span class="token number">0.1</span>
-<span class="token assign-left variable">ExecReload</span><span class="token operator">=</span>/bin/kill <span class="token parameter variable">-s</span> HUP <span class="token variable">$MAINPID</span>
-<span class="token assign-left variable">ExecStop</span><span class="token operator">=</span>/opt/apache-zookeeper-3.8.0-bin/bin/zkServer.sh stop
-<span class="token assign-left variable">PrivateTmp</span><span class="token operator">=</span>true
+[Service]
+Type=forking
+#PIDFile=/var/run/zkServer_2181.pid
+ExecStart=/opt/apache-zookeeper-3.8.0-bin/bin/zkServer.sh start
+ExecStartPost=/bin/sleep 0.1
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/opt/apache-zookeeper-3.8.0-bin/bin/zkServer.sh stop
+PrivateTmp=true
 
-<span class="token punctuation">[</span>Install<span class="token punctuation">]</span>
-<span class="token assign-left variable">WantedBy</span><span class="token operator">=</span>multi-user.target<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+[Install]
+WantedBy=multi-user.target
+</code></pre>
 <a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-commands.html">含义参考</a></li>
-<li>使用systemd启用服务即可 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 启用</span>
+<li>使用systemd启用服务即可<pre><code class="shell"># 启用
 systemctl start zkServer
-<span class="token comment"># 停止</span>
+# 停止
 systemctl stop zkServer
-<span class="token comment"># 重启</span>
-systemctl restart zkServer<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+# 重启
+systemctl restart zkServer
+</code></pre>
+</li>
 </ol>
 
     </div>

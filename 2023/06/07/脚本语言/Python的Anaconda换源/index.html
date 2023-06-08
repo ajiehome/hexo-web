@@ -21,7 +21,7 @@
 <script src="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/highlight.min.js"></script>
 <link
     rel="stylesheet"
-    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/github.min.css"
+    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/Github Dark.min.css"
 />
 <script src="/js/lib/highlight.js"></script>
 
@@ -178,28 +178,29 @@
     
     <div class="content" v-pre>
         <h1 id="Anaconda-切换镜像源"><a href="#Anaconda-切换镜像源" class="headerlink" title="Anaconda 切换镜像源"></a>Anaconda 切换镜像源</h1><p>清华镜像源，由于https不通，只能将所有的链接全部换成http</p>
-<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">channels</span><span class="token punctuation">:</span>
-  <span class="token punctuation">-</span> defaults
-<span class="token key atrule">show_channel_urls</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
-<span class="token key atrule">default_channels</span><span class="token punctuation">:</span>
-  <span class="token punctuation">-</span> http<span class="token punctuation">:</span>//mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
-  <span class="token punctuation">-</span> http<span class="token punctuation">:</span>//mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r
-  <span class="token punctuation">-</span> http<span class="token punctuation">:</span>//mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2
-<span class="token key atrule">custom_channels</span><span class="token punctuation">:</span>
-  <span class="token key atrule">conda-forge</span><span class="token punctuation">:</span> http<span class="token punctuation">:</span>//mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
-  <span class="token key atrule">msys2</span><span class="token punctuation">:</span> http<span class="token punctuation">:</span>//mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
-  <span class="token key atrule">bioconda</span><span class="token punctuation">:</span> http<span class="token punctuation">:</span>//mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
-  <span class="token key atrule">menpo</span><span class="token punctuation">:</span> http<span class="token punctuation">:</span>//mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
-  <span class="token key atrule">pytorch</span><span class="token punctuation">:</span> http<span class="token punctuation">:</span>//mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
-  <span class="token key atrule">simpleitk</span><span class="token punctuation">:</span> http<span class="token punctuation">:</span>//mirrors.tuna.tsinghua.edu.cn/anaconda/cloud<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+<pre><code class="yaml">channels:
+  - defaults
+show_channel_urls: true
+default_channels:
+  - http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+  - http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r
+  - http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2
+custom_channels:
+  conda-forge: http://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  msys2: http://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  bioconda: http://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  menpo: http://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  pytorch: http://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  simpleitk: http://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+</code></pre>
 <p>基础命令</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 创建虚拟环境</span>
-conda crate <span class="token parameter variable">-n</span> py37 <span class="token assign-left variable">python</span><span class="token operator">=</span><span class="token number">3.7</span>
-<span class="token comment"># 激活环境，windows不用conda</span>
+<pre><code class="shell"># 创建虚拟环境
+conda crate -n py37 python=3.7
+# 激活环境，windows不用conda
 conda activate py37
-<span class="token comment"># 删除虚拟环境</span>
-conda remove <span class="token parameter variable">-n</span> py37 <span class="token parameter variable">--all</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+# 删除虚拟环境
+conda remove -n py37 --all
+</code></pre>
 
     </div>
     

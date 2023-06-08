@@ -21,7 +21,7 @@
 <script src="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/highlight.min.js"></script>
 <link
     rel="stylesheet"
-    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/github.min.css"
+    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/Github Dark.min.css"
 />
 <script src="/js/lib/highlight.js"></script>
 
@@ -298,8 +298,8 @@
 <p>在项目DTM中，出现了一种子事务屏障技术，使用该技术，能够达到这个效果，看示意图：</p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/0c9d3034f184e61c06288f87639e3eea.png"></p>
 <p>所有这些请求，到了子事务屏障后：不正常的请求，会被过滤；正常请求，通过屏障。开发者使用子事务屏障之后，前面所说的各种异常全部被妥善处理，业务开发人员只需要关注实际的业务逻辑，负担大大降低。<br>子事务屏障提供了方法ThroughBarrierCall，方法的原型为：</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">ThroughBarrierCall</span><span class="token punctuation">(</span>db <span class="token operator">*</span>sql<span class="token punctuation">.</span>DB<span class="token punctuation">,</span> transInfo <span class="token operator">*</span>TransInfo<span class="token punctuation">,</span> busiCall BusiFunc<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<pre><code class="go">func ThroughBarrierCall(db *sql.DB, transInfo *TransInfo, busiCall BusiFunc)
+</code></pre>
 <p>业务开发人员，在busiCall里面编写自己的相关逻辑，调用该函数。ThroughBarrierCall保证，在空回滚、悬挂等场景下，busiCall不会被调用；在业务被重复调用时，有幂等控制，保证只被提交一次。</p>
 <p>子事务屏障会管理TCC、SAGA、XA、事务消息等，也可以扩展到其他领域</p>
 <p>子事务屏障技术的原理是，在本地数据库，建立分支事务状态表sub_trans_barrier，唯一键为全局事务id-子事务id-子事务分支名称（try|confirm|cancel）</p>

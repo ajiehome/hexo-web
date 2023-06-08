@@ -21,7 +21,7 @@
 <script src="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/highlight.min.js"></script>
 <link
     rel="stylesheet"
-    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/github.min.css"
+    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/Github Dark.min.css"
 />
 <script src="/js/lib/highlight.js"></script>
 
@@ -171,116 +171,17 @@
         
 
 <div class="post">
-    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/%E4%BA%8C%E7%BB%B4%E7%A0%81%E7%94%9F%E6%88%90/">
-        <h2 class="post-title">二维码生成</h2>
+    <a href="/2023/06/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/Zookeeper%E5%8D%95%E6%9C%BA%E9%83%A8%E7%BD%B2/">
+        <h2 class="post-title">Zookeeper单机部署</h2>
     </a>
     <div class="category-and-date">
         
         <span class="category">
-            <a href="/categories/Java%E5%9F%BA%E7%A1%80/">
+            <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                Java基础
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="Zxing"><a href="#Zxing" class="headerlink" title="Zxing"></a>Zxing</h1><h3 id="POM文件的引入"><a href="#POM文件的引入" class="headerlink" title="POM文件的引入"></a>POM文件的引入</h3><pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.google.zxing<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>javase<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>3.3.3<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-<h3 id="后端Controller的port代码"><a href="#后端Controller的port代码" class="headerlink" title="后端Controller的port代码"></a>后端Controller的port代码</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@PortMapping</span><span class="token punctuation">(</span><span class="token string">"/qrCode/"</span><span class="token punctuation">)</span>
-   <span class="token keyword">public</span> <span class="token class-name">Object</span> <span class="token function">qrCode</span><span class="token punctuation">(</span><span class="token annotation punctuation">@RequestParam</span><span class="token punctuation">(</span><span class="token string">"centext"</span><span class="token punctuation">)</span><span class="token class-name">String</span> centext<span class="token punctuation">,</span> <span class="token class-name">HttpServletResponse</span> response<span class="token punctuation">,</span> <span class="token class-name">HttpServletRequest</span> request<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-       <span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">EncodeHintType</span><span class="token punctuation">,</span> <span class="token class-name">Object</span><span class="token punctuation">></span></span> hints <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-       hints<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token class-name">EncodeHintType</span><span class="token punctuation">.</span><span class="token constant">CHARACTER_SET</span><span class="token punctuation">,</span><span class="token string">"UTF-8"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-       hints<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token class-name">EncodeHintType</span><span class="token punctuation">.</span><span class="token constant">ERROR_CORRECTION</span><span class="token punctuation">,</span> <span class="token class-name">ErrorCorrectionLevel<span class="token punctuation">.</span>H</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-       hints<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token class-name">EncodeHintType</span><span class="token punctuation">.</span><span class="token constant">MARGIN</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-       <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
-           response<span class="token punctuation">.</span><span class="token function">setContentType</span><span class="token punctuation">(</span><span class="token string">"image/png;charset=UTF-8"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-           <span class="token class-name">ServletOutputStream</span> outputStream <span class="token operator">=</span> response<span class="token punctuation">.</span><span class="token function">getOutputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-           <span class="token class-name">ByteArrayOutputStream</span> byteArrayOutputStream <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ByteArrayOutputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-           <span class="token class-name">BitMatrix</span> bitMatrix <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MultiFormatWriter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">encode</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> <span class="token class-name">BarcodeFormat</span><span class="token punctuation">.</span><span class="token constant">QR_CODE</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">,</span> hints<span class="token punctuation">)</span><span class="token punctuation">;</span>
-           <span class="token class-name">MatrixToImageWriter</span><span class="token punctuation">.</span><span class="token function">writeToStream</span><span class="token punctuation">(</span>bitMatrix<span class="token punctuation">,</span><span class="token string">"png"</span><span class="token punctuation">,</span>byteArrayOutputStream<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token comment">//编码格式转换，由于前端用ajax设置img标签的src属性需要</span>
- response<span class="token punctuation">.</span><span class="token function">getOutputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span><span class="token class-name">Base64</span><span class="token punctuation">.</span><span class="token function">encodeBase64</span><span class="token punctuation">(</span>byteArrayOutputStream<span class="token punctuation">.</span><span class="token function">toByteArray</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-           outputStream<span class="token punctuation">.</span><span class="token function">flush</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-           outputStream<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-       <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">WriterException</span> <span class="token operator">|</span> <span class="token class-name">IOException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-           e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-       <span class="token punctuation">&#125;</span>
-       <span class="token comment">//枚举内容替换成了字符串，不好展示</span>
-       <span class="token keyword">return</span> <span class="token punctuation">&#123;</span><span class="token string">"code"</span><span class="token operator">:</span><span class="token number">2001</span><span class="token punctuation">,</span><span class="token string">"message"</span><span class="token operator">:</span><span class="token string">"二维码生成成功"</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-   <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="前端js代码"><a href="#前端js代码" class="headerlink" title="前端js代码"></a>前端js代码</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">$</span><span class="token punctuation">(</span>document<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">ready</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-           <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"#showQRCode"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">click</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-               <span class="token keyword">let</span> inputText <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"#inputText"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">val</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-               $<span class="token punctuation">.</span><span class="token function">port</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
-                   <span class="token literal-property property">url</span><span class="token operator">:</span> <span class="token string">"/qrCode"</span><span class="token punctuation">,</span>
-                   <span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span><span class="token string-property property">"context"</span><span class="token operator">:</span>inputText<span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-                   <span class="token literal-property property">dataType</span><span class="token operator">:</span> <span class="token string">"application/json"</span><span class="token punctuation">,</span>
-                   <span class="token literal-property property">contentType</span><span class="token operator">:</span> <span class="token string">"application/json"</span><span class="token punctuation">,</span>
-                   <span class="token literal-property property">responseType</span><span class="token operator">:</span> <span class="token string">"blob"</span><span class="token punctuation">,</span>
-                   <span class="token literal-property property">accept</span><span class="token operator">:</span><span class="token string">"image/png"</span><span class="token punctuation">,</span>
-                   <span class="token function-variable function">success</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">response</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-                       <span class="token comment">//后台的Base64编码作用于这里</span>
-                       <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"#qrCode"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">"src"</span><span class="token punctuation">,</span><span class="token string">"data:image/png;base64,"</span><span class="token operator">+</span>response<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                   <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-                   <span class="token function-variable function">error</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                       <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">"请求错误"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                   <span class="token punctuation">&#125;</span>
-               <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-           <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-       <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="前端HTML代码"><a href="#前端HTML代码" class="headerlink" title="前端HTML代码"></a>前端HTML代码</h3><pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span>  <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>qrCode<span class="token punctuation">"</span></span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css"><span class="token property">padding-left</span><span class="token punctuation">:</span> 20px</span><span class="token punctuation">"</span></span></span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>QRCode<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">/></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span> <span class="token attr-name">for</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>inputText<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>输入二维码内容：<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>inputText<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">/></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>showQRCode<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>提交<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<hr>
-<h4 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h4><p>*使用<strong>Zxing</strong>第三方jar包，使用<strong>MultiFormatWriter</strong>的<strong>encode()<strong>方法生成一个二维码类</strong>BitMatrix</strong>的对象，然后用<strong>MatrixToImageWriter</strong>的流写入方法<strong>writeToStream()<strong>以</strong>png</strong>的形式写入<strong>OutputStresam</strong>流中，如果需要，可以进行相应的编码转换。*</p>
-<p><em><strong>如果使用get的方式，直接往img标签的src属性添加生成二维码的访问地址即可，并且不需要base64编码。</strong></em></p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/%E4%BA%8C%E7%BB%B4%E7%A0%81%E7%94%9F%E6%88%90/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%96%87%E4%BB%B6%E7%9A%84MD5/">
-        <h2 class="post-title">计算文件的MD5</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/Java%E5%9F%BA%E7%A1%80/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Java基础
+                中间件
             </a>
         </span>
         
@@ -297,29 +198,41 @@
         <div class="content" v-pre>
             
             <hr>
-<h2 id="title-计算文件的MD5date-2022-04-20-09-41-15-031updated-2022-10-13-14-57-26-724url-x2F-archives-x2F-ji-suan-wen-jian-de-md5categories-Javatags-Java-MD5"><a href="#title-计算文件的MD5date-2022-04-20-09-41-15-031updated-2022-10-13-14-57-26-724url-x2F-archives-x2F-ji-suan-wen-jian-de-md5categories-Javatags-Java-MD5" class="headerlink" title="title: 计算文件的MD5date: 2022-04-20 09:41:15.031updated: 2022-10-13 14:57:26.724url: &#x2F;archives&#x2F;ji-suan-wen-jian-de-md5categories:- Javatags:- Java- MD5"></a>title: 计算文件的MD5<br>date: 2022-04-20 09:41:15.031<br>updated: 2022-10-13 14:57:26.724<br>url: &#x2F;archives&#x2F;ji-suan-wen-jian-de-md5<br>categories:<br>- Java<br>tags:<br>- Java<br>- MD5</h2><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">md5</span><span class="token punctuation">(</span><span class="token class-name">File</span> file<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-        <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
-            <span class="token class-name">MessageDigest</span> md5 <span class="token operator">=</span> <span class="token class-name">MessageDigest</span><span class="token punctuation">.</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token string">"MD5"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token class-name">FileInputStream</span> fileInputStream <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FileInputStream</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token class-name">ByteArrayOutputStream</span> stream <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ByteArrayOutputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">byte</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> bytes <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token number">1024</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-            <span class="token keyword">int</span> read <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-            <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>read<span class="token operator">=</span><span class="token punctuation">(</span>fileInputStream<span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span>bytes<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">!=</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-                stream<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span>bytes<span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span>read<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
-            fileInputStream<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            stream<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> byteArray <span class="token operator">=</span> stream<span class="token punctuation">.</span><span class="token function">toByteArray</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            md5<span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span>byteArray<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> digest <span class="token operator">=</span> md5<span class="token punctuation">.</span><span class="token function">digest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token class-name">BigInteger</span> bigInteger <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">BigInteger</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span>digest<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token comment">//生成MD5的进制数</span>
-            <span class="token keyword">return</span> bigInteger<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">NoSuchAlgorithmException</span> <span class="token operator">|</span> <span class="token class-name">IOException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">ApplicationException</span><span class="token punctuation">(</span><span class="token class-name">CodeType</span><span class="token punctuation">.</span><span class="token constant">SERVICE_ERROR</span><span class="token punctuation">,</span> <span class="token string">"MD5转换失败"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="title-Zookeeper单机部署date-2022-10-10-13-59-49-654updated-2022-10-13-14-44-16-087url-x2F-archives-x2F-zookeeper-dan-ji-bu-shucategories-Zookeepertags-Zookeeper"><a href="#title-Zookeeper单机部署date-2022-10-10-13-59-49-654updated-2022-10-13-14-44-16-087url-x2F-archives-x2F-zookeeper-dan-ji-bu-shucategories-Zookeepertags-Zookeeper" class="headerlink" title="title: Zookeeper单机部署date: 2022-10-10 13:59:49.654updated: 2022-10-13 14:44:16.087url: &#x2F;archives&#x2F;zookeeper-dan-ji-bu-shucategories:- Zookeepertags:- Zookeeper"></a>title: Zookeeper单机部署<br>date: 2022-10-10 13:59:49.654<br>updated: 2022-10-13 14:44:16.087<br>url: &#x2F;archives&#x2F;zookeeper-dan-ji-bu-shu<br>categories:<br>- Zookeeper<br>tags:<br>- Zookeeper</h2><h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><blockquote>
+<p>CentOS7、openJdk11</p>
+</blockquote>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><ol>
+<li>首先使用<code>wget</code>下载zk的二进制包<pre><code class="shell">wget https://dlcdn.apache.org/zookeeper/zookeeper-3.8.0/apache-zookeeper-3.8.0-bin.tar.gz
+</code></pre>
+</li>
+<li>解压出到opt目录下<pre><code class="shell">tar -zxvf apache-zookeeper-3.8.0-bin.tar.gz -O /opt
+</code></pre>
+</li>
+<li>配置systemd服务管理<br> 在&#x2F;etc&#x2F;systemd&#x2F;system目录下创建zkServer.service文件<pre><code class="shell">[Unit]
+Description=zkServer
 
+[Service]
+Type=forking
+#PIDFile=/var/run/zkServer_2181.pid
+ExecStart=/opt/apache-zookeeper-3.8.0-bin/bin/zkServer.sh start
+ExecStartPost=/bin/sleep 0.1
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/opt/apache-zookeeper-3.8.0-bin/bin/zkServer.sh stop
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
+</code></pre>
+<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-commands.html">含义参考</a></li>
+<li>使用systemd启用服务即可<pre><code class="shell"># 启用
+systemctl start zkServer
+# 停止
+systemctl stop zkServer
+# 重启
+systemctl restart zkServer
+</code></pre>
+</li>
+</ol>
 
             
         </div>
@@ -328,7 +241,51 @@
         
         
     </div>
-    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%96%87%E4%BB%B6%E7%9A%84MD5/" class="go-post">阅读全文</a>
+    <a href="/2023/06/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/Zookeeper%E5%8D%95%E6%9C%BA%E9%83%A8%E7%BD%B2/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/RocketMQ%E5%85%B3%E7%B3%BB%E6%A2%B3%E7%90%86/">
+        <h2 class="post-title">RocketMQ关系梳理</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                中间件
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="RocketMQ关系梳理"><a href="#RocketMQ关系梳理" class="headerlink" title="RocketMQ关系梳理"></a>RocketMQ关系梳理</h1><p>对于RocketMQ的生产者、消息、消费者、消费者分组、主题、队列、订阅关系的梳理</p>
+<p>主题: 主题是订阅的首要关系，不管是生产者还是消费者都是和主题进行关联订阅，而主题内是由队列组成，队列拥有读、写等权限控制，主题通过队列进行横向扩展，来提要主题的性能，主题是存储消息的实际。</p>
+<p>消息: 消息是队列内信息流通的最小粒子，消息本身拥有一定的特性，如延迟消息等。</p>
+<p>生产者: 生产者通过向指定的主题发送消息完成生产任务，更多理解暂时没有</p>
+<p>消费者: 消费者必定需要提起续费这分组，因为消费者与主题之间的订阅关系是由消费者分组完成的，换句话说，消费者与主题没有直接关系，与主题有直接关系的是消费者组，消费者组通过订阅关系与主题构建关联，而消费者属于消费者组，那么在消费者组得到消息之后，通过进一步的消息订阅关系分发给组下面的消费者，需要注意的是，在同一个消费者分组下的消费者，其订阅关系必须保持一致性，如果多个消费者分组订阅同一个主题，那么这个主题的消息会分发给所有的消费者分组。</p>
+<p><img src="https://rocketmq.apache.org/zh/assets/images/archiforproducer-ebb8ff832f6e857cbebc2c17c2044a3b.png" alt="alt"></p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/06/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/RocketMQ%E5%85%B3%E7%B3%BB%E6%A2%B3%E7%90%86/" class="go-post">阅读全文</a>
 </div>
 
 <div class="post">
@@ -359,21 +316,26 @@
         <div class="content" v-pre>
             
             <h1 id="Toolbar"><a href="#Toolbar" class="headerlink" title="Toolbar"></a>Toolbar</h1><p>关于toolbar使用的几个要点，包如下</p>
-<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">androidx.appcompat.widget.Toolbar<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre><code class="xml">androidx.appcompat.widget.Toolbar
+</code></pre>
 <p>这里作为toolbar的最左标签使用</p>
-<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">app:navigationIcon="@mipmap/sidebar"<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre><code class="xml">app:navigationIcon=&quot;@mipmap/sidebar&quot;
+</code></pre>
 <p>最左侧按钮点击事件，这里的点击事件有一个很重要的事情，就是只有在toolbar提交之后才能生效，也就是</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token function">setSupportActionBar</span><span class="token punctuation">(</span>toolbar<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">onOptionsItemSelected</span><span class="token punctuation">(</span><span class="token annotation punctuation">@NonNull</span> <span class="token class-name">MenuItem</span> item<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>item<span class="token punctuation">.</span><span class="token function">getItemId</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span><span class="token class-name"><span class="token namespace">android<span class="token punctuation">.</span></span>R</span><span class="token punctuation">.</span>id<span class="token punctuation">.</span>home<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-            drawerLayout<span class="token punctuation">.</span><span class="token function">openDrawer</span><span class="token punctuation">(</span><span class="token class-name">Gravity</span><span class="token punctuation">.</span><span class="token constant">LEFT</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-        <span class="token keyword">return</span> <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onOptionsItemSelected</span><span class="token punctuation">(</span>item<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre><code class="java">setSupportActionBar(toolbar);
+</code></pre>
+<pre><code class="java">@Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) &#123;
+        if (item.getItemId() ==android.R.id.home)&#123;
+            drawerLayout.openDrawer(Gravity.LEFT);
+        &#125;
+        return super.onOptionsItemSelected(item);
+    &#125;
+</code></pre>
 <p>而其他的所有操作，如设置title，logo等等方法，也要在提交了toolbar之后才能生效，例如</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"># 设置title无效
-<span class="token function">getSupportActionBar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setDisplayShowTitleEnabled</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre><code class="java"># 设置title无效
+getSupportActionBar().setDisplayShowTitleEnabled(false);
+</code></pre>
 <p>还有设置toolbar的title的颜色字体大小，等等信息</p>
 
             
@@ -414,68 +376,70 @@
         <div class="content" v-pre>
             
             <h1 id="Android的HTTP网络请求超时UI更新（回调）"><a href="#Android的HTTP网络请求超时UI更新（回调）" class="headerlink" title="Android的HTTP网络请求超时UI更新（回调）"></a>Android的HTTP网络请求超时UI更新（回调）</h1><h3 id="原因及运行原理"><a href="#原因及运行原理" class="headerlink" title="原因及运行原理"></a>原因及运行原理</h3><p>当在网络请求出现连接超时（httpURLConnection.setConnectTimeout(TimeOut)）的时候，此时调用的活动中的Dialog弹窗会一直浮现在桌面上，而网络请求是位于子线程，活动只是调用之后就没有太多的关联，这时当网络出现连接超时的时候会一直卡在httpURLConnection.connect()中，此时可以在网络请求类中新建一个接口，并且实现一个刷新方法，再在活动中实例化一个请求类，并且参数为接口对象，然后再到网络请求出现超时，并且抛出异常的try…catch代码块的异常处理块中用接口对象调用刷新的方法，由于接口内的刷新方法时抽象方法，所以会自动往子级里面去找到运行的代码块，也就是说运行活动中覆写的代码块，注意：虽然运行的代码块时活动中的，但是其调用的主体方法还是在子线程中，所以需要更新UI的时候，还是需要回调到主线程中        </p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span>  <span class="token keyword">class</span> <span class="token class-name">BaseHttpConn</span> <span class="token punctuation">&#123;</span>
+<pre><code class="java">public  class BaseHttpConn &#123;
 
-    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">String</span> <span class="token constant">TAG</span> <span class="token operator">=</span> <span class="token string">"BaseHttpConn"</span><span class="token punctuation">;</span>
-    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token class-name">TimeOut</span> shuaxin<span class="token punctuation">;</span>
-    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token class-name">TimeOut</span> <span class="token operator">=</span> <span class="token number">3</span><span class="token operator">*</span><span class="token number">1000</span><span class="token punctuation">;</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">HttpURLConnection</span> <span class="token function">httpConn</span><span class="token punctuation">(</span><span class="token class-name">String</span> baseUrl<span class="token punctuation">,</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">String</span><span class="token punctuation">></span></span> map<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token class-name">HttpURLConnection</span> httpURLConnection <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
-        <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
-            <span class="token class-name">URL</span> url <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">URL</span><span class="token punctuation">(</span>baseUrl<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            httpURLConnection <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">HttpURLConnection</span><span class="token punctuation">)</span> url<span class="token punctuation">.</span><span class="token function">openConnection</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            httpURLConnection<span class="token punctuation">.</span><span class="token function">setConnectTimeout</span><span class="token punctuation">(</span><span class="token class-name">TimeOut</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//连接超时</span>
-            httpURLConnection<span class="token punctuation">.</span><span class="token function">setReadTimeout</span><span class="token punctuation">(</span><span class="token class-name">TimeOut</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//读取超时</span>
-            httpURLConnection<span class="token punctuation">.</span><span class="token function">setRequestMethod</span><span class="token punctuation">(</span><span class="token string">"POST"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//请求方式</span>
-            httpURLConnection<span class="token punctuation">.</span><span class="token function">setInstanceFollowRedirects</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//是否重定向</span>
-            httpURLConnection<span class="token punctuation">.</span><span class="token function">setUseCaches</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//是否启用缓存</span>
-            httpURLConnection<span class="token punctuation">.</span><span class="token function">setRequestProperty</span><span class="token punctuation">(</span><span class="token string">"Content-Type"</span><span class="token punctuation">,</span><span class="token string">"application/json"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//传入服务器的数据类型</span>
-            <span class="token class-name">OutputStream</span> outputStream <span class="token operator">=</span> httpURLConnection<span class="token punctuation">.</span><span class="token function">getOutputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            outputStream<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span><span class="token function">getByte</span><span class="token punctuation">(</span>map<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            outputStream<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            httpURLConnection<span class="token punctuation">.</span><span class="token function">disconnect</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//关闭此次网络请求</span>
-            <span class="token class-name"><span class="token namespace">shuaxin<span class="token punctuation">.</span></span>ShuaXin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//通过接口对象调用抽象方法ShuaXin();</span>
+    private static final String TAG = &quot;BaseHttpConn&quot;;
+    private static TimeOut shuaxin;
+    private static int TimeOut = 3*1000;
+    public static HttpURLConnection httpConn(String baseUrl, HashMap&lt;String, String&gt; map) &#123;
+        HttpURLConnection httpURLConnection = null;
+        try &#123;
+            URL url = new URL(baseUrl);
+            httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setConnectTimeout(TimeOut);//连接超时
+            httpURLConnection.setReadTimeout(TimeOut);//读取超时
+            httpURLConnection.setRequestMethod(&quot;POST&quot;);//请求方式
+            httpURLConnection.setInstanceFollowRedirects(true);//是否重定向
+            httpURLConnection.setUseCaches(true);//是否启用缓存
+            httpURLConnection.setRequestProperty(&quot;Content-Type&quot;,&quot;application/json&quot;);//传入服务器的数据类型
+            OutputStream outputStream = httpURLConnection.getOutputStream();
+            outputStream.write(getByte(map));
+            outputStream.close();
+        &#125; catch (Exception e) &#123;
+            e.printStackTrace();
+            httpURLConnection.disconnect();//关闭此次网络请求
+            shuaxin.ShuaXin();//通过接口对象调用抽象方法ShuaXin();
 
-        <span class="token punctuation">&#125;</span>
-        <span class="token keyword">return</span> httpURLConnection<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+        &#125;
+        return httpURLConnection;
+    &#125;
 
-    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">getByte</span><span class="token punctuation">(</span><span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span><span class="token class-name">String</span><span class="token punctuation">></span></span> map<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token class-name">JSONObject</span> jsonObject <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">JSONObject</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token class-name">String</span> key<span class="token operator">:</span> map<span class="token punctuation">.</span><span class="token function">keySet</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-            <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
-                jsonObject<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>key<span class="token punctuation">,</span>map<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">JSONException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
-        <span class="token punctuation">&#125;</span>
-        <span class="token keyword">return</span> jsonObject<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getBytes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+    private static byte[] getByte(HashMap&lt;String,String&gt; map) &#123;
+        JSONObject jsonObject = new JSONObject();
+        for(String key: map.keySet())&#123;
+            try &#123;
+                jsonObject.put(key,map.get(key));
+            &#125; catch (JSONException e) &#123;
+                e.printStackTrace();
+            &#125;
+        &#125;
+        return jsonObject.toString().getBytes();
+    &#125;
 
-    <span class="token keyword">public</span> <span class="token class-name">BaseHttpConn</span><span class="token punctuation">(</span><span class="token class-name">TimeOut</span> timeOut<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>shuaxin <span class="token operator">=</span> timeOut<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+    public BaseHttpConn(TimeOut timeOut) &#123;
+        this.shuaxin = timeOut;
+    &#125;
 
-    <span class="token comment">//监听接口</span>
-    <span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">TimeOut</span><span class="token punctuation">&#123;</span>
-        <span class="token keyword">void</span> <span class="token class-name">ShuaXin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//接口中刷新的方法</span>
-    <span class="token punctuation">&#125;</span>
+    //监听接口
+    public interface TimeOut&#123;
+        void ShuaXin();//接口中刷新的方法
+    &#125;
 
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="Activity中的代码"><a href="#Activity中的代码" class="headerlink" title="Activity中的代码"></a>Activity中的代码</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"> <span class="token class-name">BaseHttpConn</span> baseHttpConn <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">BaseHttpConn</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">BaseHttpConn<span class="token punctuation">.</span>TimeOut</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token class-name">ShuaXin</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        progressDialog<span class="token punctuation">.</span><span class="token function">dismiss</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token function">getActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">runOnUiThread</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Runnable</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token comment">//位于碎片中，所以需要通过getActivity()获取活动</span>
-            <span class="token annotation punctuation">@Override</span>
-            <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                <span class="token class-name">Toast</span><span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span><span class="token function">getContext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token string">"网络连接失败"</span><span class="token punctuation">,</span><span class="token class-name">Toast</span><span class="token punctuation">.</span><span class="token constant">LENGTH_SHORT</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
-        <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+&#125;
+</code></pre>
+<h3 id="Activity中的代码"><a href="#Activity中的代码" class="headerlink" title="Activity中的代码"></a>Activity中的代码</h3><pre><code class="java">     BaseHttpConn baseHttpConn = new BaseHttpConn(new BaseHttpConn.TimeOut() &#123;
+        @Override
+        public void ShuaXin() &#123;
+            progressDialog.dismiss();
+            getActivity().runOnUiThread(new Runnable() &#123;//位于碎片中，所以需要通过getActivity()获取活动
+                @Override
+                public void run() &#123;
+                    Toast.makeText(getContext(),&quot;网络连接失败&quot;,Toast.LENGTH_SHORT).show();
+                &#125;
+            &#125;);
+        &#125;
+    &#125;);
+</code></pre>
 
             
         </div>
@@ -514,11 +478,12 @@
     <div class="description">
         <div class="content" v-pre>
             
-            <h1 id="CSS布局问题"><a href="#CSS布局问题" class="headerlink" title="CSS布局问题"></a>CSS布局问题</h1><pre class="line-numbers language-css" data-language="css"><code class="language-css"># 作为行内表格元素，可以使相对于父元素有效
+            <h1 id="CSS布局问题"><a href="#CSS布局问题" class="headerlink" title="CSS布局问题"></a>CSS布局问题</h1><pre><code class="css"># 作为行内表格元素，可以使相对于父元素有效
 
-<span class="token property">display</span><span class="token punctuation">:</span> inline-table<span class="token punctuation">;</span>
-<span class="token property">width</span><span class="token punctuation">:</span>100%<span class="token punctuation">;</span>
-<span class="token property">height</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+display: inline-table;
+width:100%;
+height: 100%;
+</code></pre>
 
             
         </div>
@@ -557,55 +522,56 @@
     <div class="description">
         <div class="content" v-pre>
             
-            <h2 id="实现HTML5中图片的拖放"><a href="#实现HTML5中图片的拖放" class="headerlink" title="实现HTML5中图片的拖放"></a>实现HTML5中图片的拖放</h2><pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">></span></span>
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>utf-8<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>阿杰之家<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text/css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
-			<span class="token selector">#div1,
-			#div2</span> <span class="token punctuation">&#123;</span>
-				<span class="token property">float</span><span class="token punctuation">:</span> left<span class="token punctuation">;</span>
-				<span class="token property">width</span><span class="token punctuation">:</span> 500px<span class="token punctuation">;</span>
-				<span class="token property">height</span><span class="token punctuation">:</span> 350px<span class="token punctuation">;</span>
-				<span class="token property">margin</span><span class="token punctuation">:</span> 10px<span class="token punctuation">;</span>
-				<span class="token property">padding</span><span class="token punctuation">:</span> 10px<span class="token punctuation">;</span>
-				<span class="token property">border</span><span class="token punctuation">:</span> 1px solid #aaaaaa<span class="token punctuation">;</span>
-			<span class="token punctuation">&#125;</span>
-		</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span>
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
-			<span class="token keyword">function</span> <span class="token function">allowDrop</span><span class="token punctuation">(</span><span class="token parameter">ev</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-				<span class="token comment">// 6、默认地，无法将数据/元素放置到其他元素中。如果需要设置允许放置，我们必须阻止对元素的默认处理方式,这要通过调用 ondragover 事件的 event.preventDefault() 方法.</span>
-				ev<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-			<span class="token punctuation">&#125;</span>
+            <h2 id="实现HTML5中图片的拖放"><a href="#实现HTML5中图片的拖放" class="headerlink" title="实现HTML5中图片的拖放"></a>实现HTML5中图片的拖放</h2><pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;utf-8&quot;&gt;
+        &lt;title&gt;阿杰之家&lt;/title&gt;
+        &lt;style type=&quot;text/css&quot;&gt;
+            #div1,
+            #div2 &#123;
+                float: left;
+                width: 500px;
+                height: 350px;
+                margin: 10px;
+                padding: 10px;
+                border: 1px solid #aaaaaa;
+            &#125;
+        &lt;/style&gt;
+        &lt;script&gt;
+            function allowDrop(ev) &#123;
+                // 6、默认地，无法将数据/元素放置到其他元素中。如果需要设置允许放置，我们必须阻止对元素的默认处理方式,这要通过调用 ondragover 事件的 event.preventDefault() 方法.
+                ev.preventDefault();
+            &#125;
 
-			<span class="token keyword">function</span> <span class="token function">drag</span><span class="token punctuation">(</span><span class="token parameter">ev</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-				<span class="token comment">// 3、dataTransfer.setData() 方法设置被拖数据的数据类型和值</span>
-				<span class="token comment">// 4、Text 是一个 DOMString 表示要添加到 drag object 的拖动数据的类型。值是可拖动元素的 id ("drag1")。</span>
-				ev<span class="token punctuation">.</span>dataTransfer<span class="token punctuation">.</span><span class="token function">setData</span><span class="token punctuation">(</span><span class="token string">"Text"</span><span class="token punctuation">,</span> ev<span class="token punctuation">.</span>target<span class="token punctuation">.</span>id<span class="token punctuation">)</span><span class="token punctuation">;</span>
-			<span class="token punctuation">&#125;</span>
+            function drag(ev) &#123;
+                // 3、dataTransfer.setData() 方法设置被拖数据的数据类型和值
+                // 4、Text 是一个 DOMString 表示要添加到 drag object 的拖动数据的类型。值是可拖动元素的 id (&quot;drag1&quot;)。
+                ev.dataTransfer.setData(&quot;Text&quot;, ev.target.id);
+            &#125;
 
-			<span class="token keyword">function</span> <span class="token function">drop</span><span class="token punctuation">(</span><span class="token parameter">ev</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-				<span class="token comment">// 8、调用 preventDefault() 来避免浏览器对数据的默认处理（drop 事件的默认行为是以链接形式打开）</span>
-				ev<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-				<span class="token comment">// 9、通过 dataTransfer.getData("Text") 方法获得被拖的数据。该方法将返回在 setData() 方法中设置为相同类型的任何数据。被拖数据是被拖元素的 id ("drag1")</span>
-				<span class="token keyword">var</span> data <span class="token operator">=</span> ev<span class="token punctuation">.</span>dataTransfer<span class="token punctuation">.</span><span class="token function">getData</span><span class="token punctuation">(</span><span class="token string">"Text"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-				<span class="token comment">// 10、把被拖元素追加到放置元素（目标元素）中</span>
-				ev<span class="token punctuation">.</span>target<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-			<span class="token punctuation">&#125;</span>
-		</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span>
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
-		<span class="token comment">&lt;!-- 5、ondragover 事件规定在何处放置被拖动的数据。 --></span>
-		<span class="token comment">&lt;!-- 7、当放置被拖数据时，会发生 drop 事件 --></span>
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>div1<span class="token punctuation">"</span></span> <span class="token attr-name">ondrop</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>drop(event)<span class="token punctuation">"</span></span> <span class="token attr-name">ondragover</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>allowDrop(event)<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-			<span class="token comment">&lt;!-- 1、为了使元素可拖动，把 draggable 属性设置为 true --></span>
-			<span class="token comment">&lt;!-- 2、ondragstart 属性调用了一个函数，drag(event)，它规定了被拖动的数据。 --></span>
-			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./img/logo.png<span class="token punctuation">"</span></span> <span class="token attr-name">draggable</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>true<span class="token punctuation">"</span></span> <span class="token attr-name">ondragstart</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>drag(event)<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>drag1<span class="token punctuation">"</span></span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>500<span class="token punctuation">"</span></span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>350<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>div2<span class="token punctuation">"</span></span> <span class="token attr-name">ondrop</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>drop(event)<span class="token punctuation">"</span></span> <span class="token attr-name">ondragover</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>allowDrop(event)<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+            function drop(ev) &#123;
+                // 8、调用 preventDefault() 来避免浏览器对数据的默认处理（drop 事件的默认行为是以链接形式打开）
+                ev.preventDefault();
+                // 9、通过 dataTransfer.getData(&quot;Text&quot;) 方法获得被拖的数据。该方法将返回在 setData() 方法中设置为相同类型的任何数据。被拖数据是被拖元素的 id (&quot;drag1&quot;)
+                var data = ev.dataTransfer.getData(&quot;Text&quot;);
+                // 10、把被拖元素追加到放置元素（目标元素）中
+                ev.target.appendChild(document.getElementById(data));
+            &#125;
+        &lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;!-- 5、ondragover 事件规定在何处放置被拖动的数据。 --&gt;
+        &lt;!-- 7、当放置被拖数据时，会发生 drop 事件 --&gt;
+        &lt;div id=&quot;div1&quot; ondrop=&quot;drop(event)&quot; ondragover=&quot;allowDrop(event)&quot;&gt;
+            &lt;!-- 1、为了使元素可拖动，把 draggable 属性设置为 true --&gt;
+            &lt;!-- 2、ondragstart 属性调用了一个函数，drag(event)，它规定了被拖动的数据。 --&gt;
+            &lt;img src=&quot;./img/logo.png&quot; draggable=&quot;true&quot; ondragstart=&quot;drag(event)&quot; id=&quot;drag1&quot; width=&quot;500&quot; height=&quot;350&quot;&gt;&lt;/div&gt;
+        &lt;div id=&quot;div2&quot; ondrop=&quot;drop(event)&quot; ondragover=&quot;allowDrop(event)&quot;&gt;&lt;/div&gt;
 
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 
             
         </div>
@@ -706,33 +672,35 @@
         <div class="content" v-pre>
             
             <p>JavaScript异步请求，把响应的Base64图片内容下载到本地文件存储</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">/**
+<pre><code class="javascript">/**
  * Base64的文件下载
  * @param content Base64字符内容
  * @param fileName 文件名称
- */</span>
-<span class="token keyword">function</span> <span class="token function">downloadFile</span><span class="token punctuation">(</span><span class="token parameter">content<span class="token punctuation">,</span> fileName</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">//下载base64图片</span>
-    <span class="token keyword">let</span> <span class="token function-variable function">base64ToBlob</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">code</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">let</span> parts <span class="token operator">=</span> code<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">';base64,'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">let</span> contentType <span class="token operator">=</span> parts<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">':'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-        <span class="token keyword">let</span> raw <span class="token operator">=</span> window<span class="token punctuation">.</span><span class="token function">atob</span><span class="token punctuation">(</span>parts<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">let</span> rawLength <span class="token operator">=</span> raw<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
-        <span class="token keyword">let</span> uInt8Array <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Uint8Array</span><span class="token punctuation">(</span>rawLength<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> rawLength<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            uInt8Array<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> raw<span class="token punctuation">.</span><span class="token function">charCodeAt</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Blob</span><span class="token punctuation">(</span><span class="token punctuation">[</span>uInt8Array<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
-            <span class="token literal-property property">type</span><span class="token operator">:</span> contentType
-        <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-    <span class="token keyword">let</span> aLink <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">let</span> blob <span class="token operator">=</span> <span class="token function">base64ToBlob</span><span class="token punctuation">(</span>content<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//new Blob([content]);</span>
-    <span class="token keyword">let</span> evt <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createEvent</span><span class="token punctuation">(</span><span class="token string">"HTMLEvents"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    evt<span class="token punctuation">.</span><span class="token function">initEvent</span><span class="token punctuation">(</span><span class="token string">"click"</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//initEvent 不加后两个参数在FF下会报错  事件类型，是否冒泡，是否阻止浏览器的默认行为</span>
-    aLink<span class="token punctuation">.</span>download <span class="token operator">=</span> fileName<span class="token punctuation">;</span>
-    aLink<span class="token punctuation">.</span>href <span class="token operator">=</span> <span class="token constant">URL</span><span class="token punctuation">.</span><span class="token function">createObjectURL</span><span class="token punctuation">(</span>blob<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    aLink<span class="token punctuation">.</span><span class="token function">click</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+ */
+function downloadFile(content, fileName) &#123; //下载base64图片
+    let base64ToBlob = function (code) &#123;
+        let parts = code.split(&#39;;base64,&#39;);
+        let contentType = parts[0].split(&#39;:&#39;)[1];
+        let raw = window.atob(parts[1]);
+        let rawLength = raw.length;
+        let uInt8Array = new Uint8Array(rawLength);
+        for (let i = 0; i &lt; rawLength; ++i) &#123;
+            uInt8Array[i] = raw.charCodeAt(i);
+        &#125;
+        return new Blob([uInt8Array], &#123;
+            type: contentType
+        &#125;);
+    &#125;;
+    let aLink = document.createElement(&#39;a&#39;);
+    let blob = base64ToBlob(content); //new Blob([content]);
+    let evt = document.createEvent(&quot;HTMLEvents&quot;);
+    evt.initEvent(&quot;click&quot;, true, true); //initEvent 不加后两个参数在FF下会报错  事件类型，是否冒泡，是否阻止浏览器的默认行为
+    aLink.download = fileName;
+    aLink.href = URL.createObjectURL(blob);
+    aLink.click();
+&#125;
+</code></pre>
+
             
         </div>
     </div>
@@ -741,6 +709,47 @@
         
     </div>
     <a href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/JavaScript%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Javascript%E6%AD%A3%E5%88%99/">
+        <h2 class="post-title">Javascript正则</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                前端杂烩
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h2 id="Javascript正则"><a href="#Javascript正则" class="headerlink" title="Javascript正则"></a>Javascript正则</h2><pre><code class="javascript">let newData  = data.replace(/\&quot;toId\&quot;:(\d+)/,&#39;&quot;toId&quot;: &quot;$1&quot;&#39;);
+data = JSON.parse(newData)
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Javascript%E6%AD%A3%E5%88%99/" class="go-post">阅读全文</a>
 </div>
 
 <div class="post">
@@ -771,82 +780,81 @@
         <div class="content" v-pre>
             
             <hr>
-<h2 id="title-JavaScript获取视频流且回显date-2022-04-20-09-38-55-438updated-2022-10-13-14-58-40-564url-x2F-archives-x2F-javascript-huo-qu-shi-pin-liu-qie-hui-xiancategories-JavaScripttags-JavaScript"><a href="#title-JavaScript获取视频流且回显date-2022-04-20-09-38-55-438updated-2022-10-13-14-58-40-564url-x2F-archives-x2F-javascript-huo-qu-shi-pin-liu-qie-hui-xiancategories-JavaScripttags-JavaScript" class="headerlink" title="title: JavaScript获取视频流且回显date: 2022-04-20 09:38:55.438updated: 2022-10-13 14:58:40.564url: &#x2F;archives&#x2F;javascript-huo-qu-shi-pin-liu-qie-hui-xiancategories:- JavaScripttags:- JavaScript"></a>title: JavaScript获取视频流且回显<br>date: 2022-04-20 09:38:55.438<br>updated: 2022-10-13 14:58:40.564<br>url: &#x2F;archives&#x2F;javascript-huo-qu-shi-pin-liu-qie-hui-xian<br>categories:<br>- JavaScript<br>tags:<br>- JavaScript</h2><pre class="line-numbers language-HTML" data-language="HTML"><code class="language-HTML">&lt;!DOCTYPE html&gt;
+<h2 id="title-JavaScript获取视频流且回显date-2022-04-20-09-38-55-438updated-2022-10-13-14-58-40-564url-x2F-archives-x2F-javascript-huo-qu-shi-pin-liu-qie-hui-xiancategories-JavaScripttags-JavaScript"><a href="#title-JavaScript获取视频流且回显date-2022-04-20-09-38-55-438updated-2022-10-13-14-58-40-564url-x2F-archives-x2F-javascript-huo-qu-shi-pin-liu-qie-hui-xiancategories-JavaScripttags-JavaScript" class="headerlink" title="title: JavaScript获取视频流且回显date: 2022-04-20 09:38:55.438updated: 2022-10-13 14:58:40.564url: &#x2F;archives&#x2F;javascript-huo-qu-shi-pin-liu-qie-hui-xiancategories:- JavaScripttags:- JavaScript"></a>title: JavaScript获取视频流且回显<br>date: 2022-04-20 09:38:55.438<br>updated: 2022-10-13 14:58:40.564<br>url: &#x2F;archives&#x2F;javascript-huo-qu-shi-pin-liu-qie-hui-xian<br>categories:<br>- JavaScript<br>tags:<br>- JavaScript</h2><pre><code class="HTML">&lt;!DOCTYPE html&gt;
 &lt;html&gt;
-	&lt;head&gt;
-		&lt;style&gt;
+    &lt;head&gt;
+        &lt;style&gt;
 
-		&lt;&#x2F;style&gt;
-	&lt;&#x2F;head&gt;
-	&lt;body&gt;
-		&lt;video id&#x3D;&quot;video&quot; width&#x3D;&quot;640&quot; height&#x3D;&quot;480&quot; autoplay&#x3D;&quot;autoplay&quot;&gt;&lt;&#x2F;video&gt;
-		&lt;br&#x2F;&gt;
-		&lt;button id&#x3D;&quot;snap&quot;&gt;截取图像&lt;&#x2F;button&gt;&lt;button id&#x3D;&quot;start&quot;&gt;开始录制&lt;&#x2F;button&gt;&lt;button id&#x3D;&quot;stop&quot;&gt;停止录制&lt;&#x2F;button&gt;
-		&lt;br&#x2F;&gt;
-		&lt;canvas id&#x3D;&quot;canvas&quot; width&#x3D;&quot;640&quot; height&#x3D;&quot;480&quot;&gt;&lt;&#x2F;canvas&gt;
-	&lt;&#x2F;body&gt;
-	&lt;script type&#x3D;&quot;text&#x2F;javascript&quot;&gt;
-		let videoView &#x3D; document.getElementById(&quot;video&quot;);
-		let buttonView &#x3D; document.getElementById(&quot;snap&quot;);
-		let startButton &#x3D; document.getElementById(&quot;start&quot;);
-		let stopButton &#x3D; document.getElementById(&quot;stop&quot;);
-		let canvasView &#x3D; document.getElementById(&quot;canvas&quot;);
+        &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;video id=&quot;video&quot; width=&quot;640&quot; height=&quot;480&quot; autoplay=&quot;autoplay&quot;&gt;&lt;/video&gt;
+        &lt;br/&gt;
+        &lt;button id=&quot;snap&quot;&gt;截取图像&lt;/button&gt;&lt;button id=&quot;start&quot;&gt;开始录制&lt;/button&gt;&lt;button id=&quot;stop&quot;&gt;停止录制&lt;/button&gt;
+        &lt;br/&gt;
+        &lt;canvas id=&quot;canvas&quot; width=&quot;640&quot; height=&quot;480&quot;&gt;&lt;/canvas&gt;
+    &lt;/body&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+        let videoView = document.getElementById(&quot;video&quot;);
+        let buttonView = document.getElementById(&quot;snap&quot;);
+        let startButton = document.getElementById(&quot;start&quot;);
+        let stopButton = document.getElementById(&quot;stop&quot;);
+        let canvasView = document.getElementById(&quot;canvas&quot;);
 
-		navigator.mediaDevices.getDisplayMedia(&#123;
-			video: &#123;
-				width: 640,
-				height: 480
-			&#125;,
-			audio: true
-		&#125;).then(stream &#x3D;&gt; &#123;
-			console.log(&quot;摄像头打开成功！！！&quot;, stream);
-			&#x2F;&#x2F;以ID为基准,video控件的ID是什么此处的video就是什么
-			video.srcObject &#x3D; stream;
+        navigator.mediaDevices.getDisplayMedia(&#123;
+            video: &#123;
+                width: 640,
+                height: 480
+            &#125;,
+            audio: true
+        &#125;).then(stream =&gt; &#123;
+            console.log(&quot;摄像头打开成功！！！&quot;, stream);
+            //以ID为基准,video控件的ID是什么此处的video就是什么
+            video.srcObject = stream;
 
-			&#x2F;&#x2F; 创建下载对象
-			let mediaRecorder &#x3D; new MediaRecorder(stream, &#123;
-				audioBitsPerSecond: 128000, &#x2F;&#x2F; 音频码率
-				videoBitsPerSecond: 100000, &#x2F;&#x2F; 视频码率
-				mimeType: &#39;video&#x2F;webm;codecs&#x3D;h264&#39; &#x2F;&#x2F; 编码格式
-			&#125;);
-			startButton.onclick &#x3D; (e &#x3D;&gt; &#123;
-				console.log(&quot;触发下载按钮！！！&quot;, e)
-				mediaRecorder.start(5000);
-			&#125;);
-			stopButton.onclick &#x3D; (e &#x3D;&gt; &#123;
-				console.log(&quot;触发结束按钮！！！&quot;, e)
-				mediaRecorder.stop();
-			&#125;);
-			mediaRecorder.ondataavailable &#x3D; (e &#x3D;&gt; &#123;
-				console.log(&quot;开始下载&quot;)
-			    &#x2F;&#x2F; 下载视频
-			    var blob &#x3D; new Blob([e.data], &#123; &#39;type&#39; : &#39;video&#x2F;mp4&#39; &#125;)
-			    let a &#x3D; document.createElement(&#39;a&#39;)
-			    a.href &#x3D; URL.createObjectURL(blob)
-			    a.download &#x3D; &#96;test.mp4&#96;
-			    a.click()
-			&#125;);
+            // 创建下载对象
+            let mediaRecorder = new MediaRecorder(stream, &#123;
+                audioBitsPerSecond: 128000, // 音频码率
+                videoBitsPerSecond: 100000, // 视频码率
+                mimeType: &#39;video/webm;codecs=h264&#39; // 编码格式
+            &#125;);
+            startButton.onclick = (e =&gt; &#123;
+                console.log(&quot;触发下载按钮！！！&quot;, e)
+                mediaRecorder.start(5000);
+            &#125;);
+            stopButton.onclick = (e =&gt; &#123;
+                console.log(&quot;触发结束按钮！！！&quot;, e)
+                mediaRecorder.stop();
+            &#125;);
+            mediaRecorder.ondataavailable = (e =&gt; &#123;
+                console.log(&quot;开始下载&quot;)
+                // 下载视频
+                var blob = new Blob([e.data], &#123; &#39;type&#39; : &#39;video/mp4&#39; &#125;)
+                let a = document.createElement(&#39;a&#39;)
+                a.href = URL.createObjectURL(blob)
+                a.download = `test.mp4`
+                a.click()
+            &#125;);
 
-			&#x2F;&#x2F;监听流录入失败
-			video.onerror &#x3D; (err &#x3D;&gt; &#123;
-				console.log(&quot;加载错误！！！&quot;, err);
-			&#125;);
-			&#x2F;&#x2F;监听流录入成功
-			video.onloadeddata &#x3D; (e &#x3D;&gt; &#123;
-				console.log(&quot;加载成功！！！&quot;, e);
-			&#125;);
-		&#125;).catch(stream &#x3D;&gt; &#123;
-			console.log(&quot;摄像头打开失败！！！&quot;, stream);
-		&#125;);
-		&#x2F;&#x2F;给button按钮设置一个点击事件监听
-		buttonView.onclick &#x3D; function() &#123;
-			&#x2F;&#x2F;获取画布的2d上下文，然后把视频内的一帧绘制到画布上
-			canvasView.getContext(&quot;2d&quot;).drawImage(videoView, 0, 0, 640, 480)
-		&#125;
-	&lt;&#x2F;script&gt;
-&lt;&#x2F;html&gt;
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+            //监听流录入失败
+            video.onerror = (err =&gt; &#123;
+                console.log(&quot;加载错误！！！&quot;, err);
+            &#125;);
+            //监听流录入成功
+            video.onloadeddata = (e =&gt; &#123;
+                console.log(&quot;加载成功！！！&quot;, e);
+            &#125;);
+        &#125;).catch(stream =&gt; &#123;
+            console.log(&quot;摄像头打开失败！！！&quot;, stream);
+        &#125;);
+        //给button按钮设置一个点击事件监听
+        buttonView.onclick = function() &#123;
+            //获取画布的2d上下文，然后把视频内的一帧绘制到画布上
+            canvasView.getContext(&quot;2d&quot;).drawImage(videoView, 0, 0, 640, 480)
+        &#125;
+    &lt;/script&gt;
+&lt;/html&gt;
+</code></pre>
 
             
         </div>
@@ -856,46 +864,6 @@
         
     </div>
     <a href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/JavaScript%E8%8E%B7%E5%8F%96%E8%A7%86%E9%A2%91%E6%B5%81%E4%B8%94%E5%9B%9E%E6%98%BE/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Javascript%E6%AD%A3%E5%88%99/">
-        <h2 class="post-title">Javascript正则</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                前端杂烩
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h2 id="Javascript正则"><a href="#Javascript正则" class="headerlink" title="Javascript正则"></a>Javascript正则</h2><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> newData  <span class="token operator">=</span> data<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">\"toId\":(\d+)</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">,</span><span class="token string">'"toId": "$1"'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-data <span class="token operator">=</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>newData<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Javascript%E6%AD%A3%E5%88%99/" class="go-post">阅读全文</a>
 </div>
 
 

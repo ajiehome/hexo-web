@@ -21,7 +21,7 @@
 <script src="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/highlight.min.js"></script>
 <link
     rel="stylesheet"
-    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/github.min.css"
+    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/Github Dark.min.css"
 />
 <script src="/js/lib/highlight.js"></script>
 
@@ -178,8 +178,8 @@
     
     <div class="content" v-pre>
         <h1 id="crontabs-定时执行执行sh"><a href="#crontabs-定时执行执行sh" class="headerlink" title="crontabs-定时执行执行sh"></a>crontabs-定时执行执行sh</h1><p>首先安装crontabs工具</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yum <span class="token function">install</span> crontabs<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<pre><code class="shell">yum install crontabs
+</code></pre>
 <p>安装完之后，系统默认安装了<code>crond</code>服务，<code>crond</code>默认是自启状态</p>
 <p><code>crond</code>的执行方式为每一分钟扫描本地是否有需要执行的事务</p>
 <p><code>crontab</code> 命令。该命令和 at 命令类似，也是通过 <code>/etc/cron.allow </code>和 <code>/etc/cron.deny</code> 文件来限制某些用户是否可以使用 crontab 命令的。</p>
@@ -212,11 +212,11 @@
 </tr>
 </tbody></table>
 <p>例如：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">crontab</span> <span class="token parameter variable">-e</span>
-<span class="token comment"># 进入crontab文件显示当前用户的所有内容</span>
-<span class="token comment"># 如下所示</span>
-<span class="token comment"># * * * * * /root/test.sh >> /root/log.log</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
+<pre><code class="shell">crontab -e
+# 进入crontab文件显示当前用户的所有内容
+# 如下所示
+# * * * * * /root/test.sh &gt;&gt; /root/log.log
+</code></pre>
 <p>crontab的定时执行任务是通过<code>*</code>来进行确认时间的</p>
 <table>
 <thead>
@@ -278,13 +278,13 @@
 </tr>
 </tbody></table>
 <p>例如：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 每五分钟执行一次</span>
-*/5 * * * * /root/test.sh <span class="token operator">>></span> /root/log.log
-<span class="token comment"># 每一分钟执行一次</span>
-* * * * * /root/test.sh <span class="token operator">>></span> /root/log.log
-<span class="token comment"># 没五分钟往log里面写入11</span>
-*/5 * * * * /bin/echo <span class="token string">"11"</span> <span class="token operator">>></span> /root/log.log<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+<pre><code class="shell"># 每五分钟执行一次
+*/5 * * * * /root/test.sh &gt;&gt; /root/log.log
+# 每一分钟执行一次
+* * * * * /root/test.sh &gt;&gt; /root/log.log
+# 没五分钟往log里面写入11
+*/5 * * * * /bin/echo &quot;11&quot; &gt;&gt; /root/log.log
+</code></pre>
 <table>
 <thead>
 <tr>

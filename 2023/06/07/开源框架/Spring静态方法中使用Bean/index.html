@@ -21,7 +21,7 @@
 <script src="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/highlight.min.js"></script>
 <link
     rel="stylesheet"
-    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/github.min.css"
+    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/Github Dark.min.css"
 />
 <script src="/js/lib/highlight.js"></script>
 
@@ -179,27 +179,28 @@
     <div class="content" v-pre>
         <hr>
 <h2 id="title-Java-在静态方法中引入beandate-2022-04-15-18-27-17-616updated-2022-10-13-15-03-27-631url-x2F-archives-x2F-java-zai-jing-tai-fang-fa-zhong-yin-ru-beancategories-SpringBoottags-SpringBoot"><a href="#title-Java-在静态方法中引入beandate-2022-04-15-18-27-17-616updated-2022-10-13-15-03-27-631url-x2F-archives-x2F-java-zai-jing-tai-fang-fa-zhong-yin-ru-beancategories-SpringBoottags-SpringBoot" class="headerlink" title="title: Java 在静态方法中引入beandate: 2022-04-15 18:27:17.616updated: 2022-10-13 15:03:27.631url: &#x2F;archives&#x2F;java-zai-jing-tai-fang-fa-zhong-yin-ru-beancategories:- SpringBoottags:- SpringBoot"></a>title: Java 在静态方法中引入bean<br>date: 2022-04-15 18:27:17.616<br>updated: 2022-10-13 15:03:27.631<br>url: &#x2F;archives&#x2F;java-zai-jing-tai-fang-fa-zhong-yin-ru-bean<br>categories:<br>- SpringBoot<br>tags:<br>- SpringBoot</h2><p>ApplicationContextAware: 相当于在ApplicationContext上下文初始化的时候，会触发的一个钩子，而要想触发就要加入到Bean容器中去进行管理</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SpringContextUtils</span> <span class="token keyword">implements</span> <span class="token class-name">ApplicationContextAware</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token class-name">ApplicationContext</span> applicationContext<span class="token punctuation">;</span>
+<pre><code class="java">public class SpringContextUtils implements ApplicationContextAware &#123;
+    private static ApplicationContext applicationContext;
 
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">setStatusApplicationContext</span><span class="token punctuation">(</span><span class="token class-name">ApplicationContext</span> applicationContext<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token class-name">SpringContextUtils</span><span class="token punctuation">.</span>applicationContext <span class="token operator">=</span> applicationContext<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+    public static void setStatusApplicationContext(ApplicationContext applicationContext) &#123;
+        SpringContextUtils.applicationContext = applicationContext;
+    &#125;
 
-    <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setApplicationContext</span><span class="token punctuation">(</span><span class="token class-name">ApplicationContext</span> applicationContext<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">BeansException</span> <span class="token punctuation">&#123;</span>
-        <span class="token class-name">SpringContextUtils</span><span class="token punctuation">.</span><span class="token function">setStatusApplicationContext</span><span class="token punctuation">(</span>applicationContext<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> <span class="token class-name">T</span> <span class="token function">bean</span><span class="token punctuation">(</span><span class="token class-name">Class</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> clazz<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">return</span> applicationContext<span class="token punctuation">.</span><span class="token function">getBean</span><span class="token punctuation">(</span>clazz<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException &#123;
+        SpringContextUtils.setStatusApplicationContext(applicationContext);
+    &#125;
+    public static &lt;T&gt; T bean(Class&lt;T&gt; clazz) &#123;
+        return applicationContext.getBean(clazz);
+    &#125;
+&#125;
+</code></pre>
 <p>bean注入</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Bean</span>
-<span class="token keyword">public</span> <span class="token class-name">SpringContextUtils</span> <span class="token function">springContextUtils</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">SpringContextUtils</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<pre><code class="java">@Bean
+public SpringContextUtils springContextUtils()&#123;
+    return new SpringContextUtils();
+&#125;
+</code></pre>
 <p>而后只需要在使用的时候使用bean方法，依据类型或者名称等等进行注入即可</p>
 
     </div>

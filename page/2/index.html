@@ -21,7 +21,7 @@
 <script src="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/highlight.min.js"></script>
 <link
     rel="stylesheet"
-    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/github.min.css"
+    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/Github Dark.min.css"
 />
 <script src="/js/lib/highlight.js"></script>
 
@@ -171,8 +171,8 @@
         
 
 <div class="post">
-    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E5%92%8C%E5%8F%8D%E5%B0%84%E5%AE%9E%E7%8E%B0%E5%AD%97%E6%AE%B5%E5%90%8D%E6%A0%88%E6%B7%B1%E5%AF%BB%E5%80%BC/">
-        <h2 class="post-title">Java动态代理和反射实现字段名栈深寻值</h2>
+    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E7%9A%84HashMap/">
+        <h2 class="post-title">Java的HashMap</h2>
     </a>
     <div class="category-and-date">
         
@@ -197,198 +197,18 @@
     <div class="description">
         <div class="content" v-pre>
             
-            <h1 id="Java-动态代理与反射实现属性名称栈深寻值"><a href="#Java-动态代理与反射实现属性名称栈深寻值" class="headerlink" title="Java 动态代理与反射实现属性名称栈深寻值"></a>Java 动态代理与反射实现属性名称栈深寻值</h1><p>原因：对方法做动态代理，并且动态代理依赖方法形参的某些属性值，而属性值可能是对象的属性的属性，形成一个栈深寻找</p>
-<p>思路：</p>
-<ol>
-<li>使用Map对所有的形参进行名称和形参对象的映射</li>
-<li>把所指定的属性字符串按照指定规则切割载入队列</li>
-<li>利用队列出栈的特性，对第一个参数名称做map的 key value 值匹配，找到对应的参数对象</li>
-<li>对找到的参数对象做反射解析，利用递归做栈深的属性匹配和值查找</li>
-<li>在队列没有匹配字符串的时候，所拿到的值就是我们最终需要的值，直接强转为字符串类型</li>
-</ol>
-<p>代码</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 参数对象</span>
-<span class="token keyword">class</span> <span class="token class-name">User</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">private</span> <span class="token class-name">String</span> username<span class="token punctuation">;</span>
-    <span class="token keyword">private</span> <span class="token class-name">String</span> phone<span class="token punctuation">;</span>
-    <span class="token keyword">private</span> <span class="token class-name">String</span> birthday<span class="token punctuation">;</span>
-
-    <span class="token keyword">private</span> <span class="token class-name">User</span> user<span class="token punctuation">;</span>
-    
-    <span class="token keyword">public</span> <span class="token class-name">User</span><span class="token punctuation">(</span><span class="token class-name">String</span> username<span class="token punctuation">,</span> <span class="token class-name">String</span> phone<span class="token punctuation">,</span> <span class="token class-name">User</span> user<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>username <span class="token operator">=</span> username<span class="token punctuation">;</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>phone <span class="token operator">=</span> phone<span class="token punctuation">;</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>user <span class="token operator">=</span> user<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token comment">// 由于JDK的Proxy代理只能代理接口，所以需要创建一个接口</span>
-<span class="token keyword">interface</span> <span class="token class-name">Ts</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">void</span> <span class="token function">a</span><span class="token punctuation">(</span><span class="token class-name">User</span> user<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token comment">// 执行信息体</span>
-<span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token keyword">implements</span> <span class="token class-name">Ts</span> <span class="token punctuation">&#123;</span>
-    <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">a</span><span class="token punctuation">(</span><span class="token class-name">User</span> user<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"主要信息执行"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token comment">// 执行代码</span>
-<span class="token class-name">Test</span> test <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">Object</span><span class="token punctuation">></span></span> map <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token class-name">LinkedBlockingQueue</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> queue <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">LinkedBlockingQueue</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token class-name">Arrays</span><span class="token punctuation">.</span><span class="token function">asList</span><span class="token punctuation">(</span><span class="token string">"user.user.username"</span><span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">"\\."</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token class-name">Ts</span> ts <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">Ts</span><span class="token punctuation">)</span> <span class="token class-name">Proxy</span><span class="token punctuation">.</span><span class="token function">newProxyInstance</span><span class="token punctuation">(</span><span class="token class-name">Thread</span><span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getContextClassLoader</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-            <span class="token class-name">Test</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">.</span><span class="token function">getInterfaces</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token class-name">Object</span> proxy<span class="token punctuation">,</span> <span class="token class-name">Method</span> method<span class="token punctuation">,</span> <span class="token class-name">Object</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args1<span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token punctuation">&#123;</span>
-                <span class="token comment">// 初始化map</span>
-                <span class="token class-name">Parameter</span><span class="token punctuation">[</span><span class="token punctuation">]</span> parameters <span class="token operator">=</span> method<span class="token punctuation">.</span><span class="token function">getParameters</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> parameters<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                    map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>parameters<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> args1<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token punctuation">&#125;</span>
-                <span class="token comment">// 匹配参数对象</span>
-                <span class="token class-name">Object</span> o <span class="token operator">=</span> map<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>queue<span class="token punctuation">.</span><span class="token function">poll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token comment">// 递归寻值</span>
-                <span class="token keyword">while</span> <span class="token punctuation">(</span>queue<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                    o <span class="token operator">=</span> <span class="token function">diGui</span><span class="token punctuation">(</span>queue<span class="token punctuation">.</span><span class="token function">poll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> o<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token punctuation">&#125;</span>
-                <span class="token class-name">String</span> result <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">)</span> o<span class="token punctuation">;</span>
-                <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"lock"</span> <span class="token operator">+</span> result<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token class-name">Object</span> invoke <span class="token operator">=</span> method<span class="token punctuation">.</span><span class="token function">invoke</span><span class="token punctuation">(</span>test<span class="token punctuation">,</span> args1<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"unlock"</span> <span class="token operator">+</span> result<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                map<span class="token punctuation">.</span><span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                queue<span class="token punctuation">.</span><span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token keyword">return</span> invoke<span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    ts<span class="token punctuation">.</span><span class="token function">a</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">User</span><span class="token punctuation">(</span><span class="token string">"huang"</span><span class="token punctuation">,</span> <span class="token string">"153"</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">User</span><span class="token punctuation">(</span><span class="token string">"Q202111222256489"</span><span class="token punctuation">,</span> <span class="token string">"158"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    
-<span class="token comment">// 递归寻值</span>
-<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">Object</span> <span class="token function">diGui</span><span class="token punctuation">(</span><span class="token class-name">String</span> fieldName<span class="token punctuation">,</span> <span class="token class-name">Object</span> o<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">NoSuchFieldException</span><span class="token punctuation">,</span> <span class="token class-name">IllegalAccessException</span> <span class="token punctuation">&#123;</span>
-    <span class="token class-name">Field</span> field <span class="token operator">=</span> o<span class="token punctuation">.</span><span class="token function">getClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getDeclaredField</span><span class="token punctuation">(</span>fieldName<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    field<span class="token punctuation">.</span><span class="token function">setAccessible</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> field<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>o<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E5%92%8C%E5%8F%8D%E5%B0%84%E5%AE%9E%E7%8E%B0%E5%AD%97%E6%AE%B5%E5%90%8D%E6%A0%88%E6%B7%B1%E5%AF%BB%E5%80%BC/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E5%8F%8D%E5%B0%84%E5%AF%B9%E8%B1%A1%E5%86%85%E5%AE%B9/">
-        <h2 class="post-title">Java反射对象内容</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/Java%E5%9F%BA%E7%A1%80/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Java基础
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>调用方式</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">MonthlyCardOrderParam</span> param <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MonthlyCardOrderParam</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        param<span class="token punctuation">.</span><span class="token function">setRefundStatus</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token function">notNullCheck</span><span class="token punctuation">(</span>param<span class="token punctuation">,</span> <span class="token class-name">NotNull</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> <span class="token string">"message"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-        <span class="token function">notNullCheck</span><span class="token punctuation">(</span>param<span class="token punctuation">,</span> <span class="token class-name">NotNull</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">INotNullParamCheck</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">NotNull</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token annotation punctuation">@Override</span>
-            <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">check</span><span class="token punctuation">(</span><span class="token class-name">String</span> attributeName<span class="token punctuation">,</span> <span class="token class-name">Object</span> attributeValue<span class="token punctuation">,</span> <span class="token class-name">NotNull</span> annotation<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>attributeName<span class="token operator">+</span><span class="token string">"["</span><span class="token operator">+</span>attributeValue<span class="token operator">+</span><span class="token string">"] ->"</span><span class="token operator">+</span>annotation<span class="token punctuation">.</span><span class="token function">message</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
-        <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<hr>
-<p>方法一</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
-     * 判定某个对象的属性值是否为空，通过注解来判定
-     * 主要用在非 Controller 上接受参数的时候
-     *
-     * @param param 所要判定的对象
-     * @param annotationClass 所要判定的注解
-     * @param func 所执行注解方法的名称
-     * @param &lt;E> 判定对象泛型
-     * @param &lt;T> 注解方法泛型 Annotation 的实例
-     * @throws IllegalAccessException 获取字段的异常
-     * @throws NoSuchMethodException 找不到方法异常
-     * @throws InvocationTargetException 反射执行方法异常
-     */</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">E</span><span class="token punctuation">,</span><span class="token class-name">T</span> <span class="token keyword">extends</span> <span class="token class-name">Annotation</span><span class="token punctuation">></span></span> <span class="token keyword">void</span> notNullCheck <span class="token punctuation">(</span><span class="token class-name">E</span> param<span class="token punctuation">,</span> <span class="token class-name">Class</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> annotationClass<span class="token punctuation">,</span> <span class="token class-name">String</span> func<span class="token punctuation">)</span>
-            <span class="token keyword">throws</span> <span class="token class-name">IllegalAccessException</span><span class="token punctuation">,</span> <span class="token class-name">NoSuchMethodException</span><span class="token punctuation">,</span> <span class="token class-name">InvocationTargetException</span> <span class="token punctuation">&#123;</span>
-        <span class="token comment">// 获取 Field 对象：也就是对象的所有属性对象</span>
-        <span class="token class-name">Field</span><span class="token punctuation">[</span><span class="token punctuation">]</span> fields <span class="token operator">=</span> param<span class="token punctuation">.</span><span class="token function">getClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getDeclaredFields</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">Field</span> field <span class="token operator">:</span> fields<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token comment">// 设置 private 属性可读</span>
-            field<span class="token punctuation">.</span><span class="token function">setAccessible</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token comment">// 获取当前属性上的某个注解，并且做空值判断</span>
-            <span class="token class-name">T</span> annotation <span class="token operator">=</span> field<span class="token punctuation">.</span><span class="token function">getAnnotation</span><span class="token punctuation">(</span>annotationClass<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>annotation<span class="token operator">!=</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-                <span class="token comment">// 获取当前属性的对应值</span>
-                <span class="token keyword">if</span> <span class="token punctuation">(</span>field<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>param<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-                    <span class="token keyword">if</span> <span class="token punctuation">(</span>func<span class="token operator">!=</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-                        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>annotationClass<span class="token punctuation">.</span><span class="token function">getMethod</span><span class="token punctuation">(</span>func<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">invoke</span><span class="token punctuation">(</span>annotation<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    <span class="token punctuation">&#125;</span>
-                <span class="token punctuation">&#125;</span>
-            <span class="token punctuation">&#125;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>方法二</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
-     * 校验回调接口
-     * @param &lt;T>
-     */</span>
-    <span class="token keyword">interface</span> <span class="token class-name">INotNullParamCheck</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span><span class="token punctuation">&#123;</span>
-        <span class="token comment">/**
-         * 校验回调
-         *
-         * @param attributeName 属性名称
-         * @param attributeValue 参数
-         * @param annotation 注解对象
-         */</span>
-        <span class="token keyword">void</span> <span class="token function">check</span><span class="token punctuation">(</span><span class="token class-name">String</span> attributeName<span class="token punctuation">,</span><span class="token class-name">Object</span> attributeValue<span class="token punctuation">,</span><span class="token class-name">T</span> annotation<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-
-    <span class="token comment">/**
-     * 为空校验
-     * @param param 校验对象
-     * @param annotationClass 查询的接口 Class
-     * @param notNullParamCheck 校验回调接口
-     * @param &lt;E> 参数对象泛型
-     * @param &lt;T> 查询接口泛型
-     * @throws IllegalAccessException 找不到属性异常
-     */</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">E</span><span class="token punctuation">,</span> <span class="token class-name">T</span> <span class="token keyword">extends</span> <span class="token class-name">Annotation</span><span class="token punctuation">></span></span> <span class="token keyword">void</span> <span class="token function">notNullCheck</span><span class="token punctuation">(</span><span class="token class-name">E</span> param<span class="token punctuation">,</span> <span class="token class-name">Class</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> annotationClass<span class="token punctuation">,</span><span class="token class-name">INotNullParamCheck</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> notNullParamCheck<span class="token punctuation">)</span>
-            <span class="token keyword">throws</span> <span class="token class-name">IllegalAccessException</span> <span class="token punctuation">&#123;</span>
-        <span class="token class-name">Field</span><span class="token punctuation">[</span><span class="token punctuation">]</span> fields <span class="token operator">=</span> param<span class="token punctuation">.</span><span class="token function">getClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getDeclaredFields</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">Field</span> field <span class="token operator">:</span> fields<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            field<span class="token punctuation">.</span><span class="token function">setAccessible</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token class-name">T</span> annotation <span class="token operator">=</span> field<span class="token punctuation">.</span><span class="token function">getAnnotation</span><span class="token punctuation">(</span>annotationClass<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token class-name">Object</span> item <span class="token operator">=</span> field<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>param<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>annotation<span class="token operator">!=</span><span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>item<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                notNullParamCheck<span class="token punctuation">.</span><span class="token function">check</span><span class="token punctuation">(</span>field<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>item<span class="token punctuation">,</span>annotation<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+            <h1 id="关于集合中的hashmap"><a href="#关于集合中的hashmap" class="headerlink" title="关于集合中的hashmap"></a>关于集合中的hashmap</h1><p>关于tableSizeFor方法：Returns a power of two size for the given target capacity.返回当前数的最小二次幂</p>
+<p>默认初始化的hashmap大小为16个大小，默认的负载系数为0.75<br>负载系数的计算公式：f &#x3D; 当前实际数目 &#x2F; hashmap总数目<br>也就是说当存入的数目大于等于总容量乘以负载系数的时候就会进扩容操作<br>如果负载系数大于或者等于了规定的负载系数，则会进行hashmap的扩容</p>
+<p>get、put：先求hash值，然后右移16位做高位对比，求出hash之后通过hash找到指定的桶，当发生hash冲突的时候，会在同一个桶内存在多个节点，当我们的节点数超过了8个的时候，会做红黑树与链表的转换</p>
+<pre><code class="Java">if ((e = p.next) == null) &#123;
+ p.next = newNode(hash, key, value, null);
+ if (binCount &gt;= TREEIFY_THRESHOLD - 1) // -1 for 1st
+   treeifyBin(tab, hash); //红黑树转换
+ break;
+&#125;
+</code></pre>
+<p>TREEIFY_THRESHOLD默认值为8，为树型阈值，在8以内使用链表，在8以外使用红黑树</p>
+<p>hash表里面所用的hashcode方法中的<code>Objects.hashCode(key)</code>，都取自于Object的hashcode方法，而Object的hashcode方法的标注是<code>public native int hashCode();</code>，native是java与其他编程语言进行交互的声明保留字段，也就是说这里的hashCode()方法其实调用的是C&#x2F;C++的hashCode的计算hash值</p>
 
             
         </div>
@@ -397,135 +217,7 @@
         
         
     </div>
-    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E5%8F%8D%E5%B0%84%E5%AF%B9%E8%B1%A1%E5%86%85%E5%AE%B9/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E5%8F%8D%E5%B0%84%E6%A0%B9%E6%8D%AE%E6%96%B9%E6%B3%95%E5%90%8D%E8%8E%B7%E5%8F%96%E5%8F%82%E6%95%B0%E5%90%8D/">
-        <h2 class="post-title">Java反射根据方法名获取参数名</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/Java%E5%9F%BA%E7%A1%80/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Java基础
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="Java-反射-根据方法名获取参数名"><a href="#Java-反射-根据方法名获取参数名" class="headerlink" title="Java 反射 根据方法名获取参数名"></a>Java 反射 根据方法名获取参数名</h1><p>首先实现一个可序列化的Function集成接口</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">interface</span> <span class="token class-name">CustomFunction</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">,</span> <span class="token class-name">R</span><span class="token punctuation">></span></span> <span class="token keyword">extends</span> <span class="token class-name">Function</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">,</span> <span class="token class-name">R</span><span class="token punctuation">></span></span><span class="token punctuation">,</span> <span class="token class-name">Serializable</span> <span class="token punctuation">&#123;</span>
-
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>再构建一个Student类，作为本次获取的测试Entity</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">Student</span> <span class="token keyword">implements</span> <span class="token class-name">Serializable</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">long</span> serialVersionUID <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">5681957118855943196L</span><span class="token punctuation">;</span>
-    <span class="token keyword">private</span> <span class="token class-name">Integer</span> age<span class="token punctuation">;</span>
-    <span class="token keyword">private</span> <span class="token class-name">String</span> studentName<span class="token punctuation">;</span>
-    <span class="token keyword">public</span> <span class="token class-name">Student</span><span class="token punctuation">(</span><span class="token class-name">Integer</span> age<span class="token punctuation">,</span> <span class="token class-name">String</span> studentName<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>age <span class="token operator">=</span> age<span class="token punctuation">;</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>studentName <span class="token operator">=</span> studentName<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setAge</span><span class="token punctuation">(</span><span class="token class-name">Integer</span> age<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>age <span class="token operator">=</span> age<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setStudentName</span><span class="token punctuation">(</span><span class="token class-name">String</span> studentName<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>studentName <span class="token operator">=</span> studentName<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token keyword">public</span> <span class="token class-name">Integer</span> <span class="token function">getAge</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">return</span> age<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getStudentName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">return</span> studentName<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>使用反射获取当前方法的名称，然后切割出对应的属性名称，就是获取get的方法名称，再把get的切割，把第一个字母大写</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">,</span> <span class="token class-name">R</span><span class="token punctuation">></span></span> <span class="token class-name">String</span> <span class="token function">functionToProperStr</span><span class="token punctuation">(</span><span class="token class-name">CustomFunction</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">,</span> <span class="token class-name">R</span><span class="token punctuation">></span></span> function<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">Exception</span> <span class="token punctuation">&#123;</span>
-    <span class="token class-name">Method</span> writeReplace <span class="token operator">=</span> function<span class="token punctuation">.</span><span class="token function">getClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getDeclaredMethod</span><span class="token punctuation">(</span><span class="token string">"writeReplace"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">boolean</span> accessible <span class="token operator">=</span> writeReplace<span class="token punctuation">.</span><span class="token function">isAccessible</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    writeReplace<span class="token punctuation">.</span><span class="token function">setAccessible</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token class-name">SerializedLambda</span> serializedLambda <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">SerializedLambda</span><span class="token punctuation">)</span> writeReplace<span class="token punctuation">.</span><span class="token function">invoke</span><span class="token punctuation">(</span>function<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    writeReplace<span class="token punctuation">.</span><span class="token function">setAccessible</span><span class="token punctuation">(</span>accessible<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token class-name">String</span> fieldName <span class="token operator">=</span> serializedLambda<span class="token punctuation">.</span><span class="token function">getImplMethodName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">substring</span><span class="token punctuation">(</span><span class="token string">"get"</span><span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    fieldName <span class="token operator">=</span> fieldName<span class="token punctuation">.</span><span class="token function">replaceFirst</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">.</span><span class="token function">valueOf</span><span class="token punctuation">(</span>fieldName<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token class-name">String</span><span class="token punctuation">.</span><span class="token function">valueOf</span><span class="token punctuation">(</span>fieldName<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toLowerCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> fieldName<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E5%8F%8D%E5%B0%84%E6%A0%B9%E6%8D%AE%E6%96%B9%E6%B3%95%E5%90%8D%E8%8E%B7%E5%8F%96%E5%8F%82%E6%95%B0%E5%90%8D/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E7%9A%84ArrayList/">
-        <h2 class="post-title">Java的ArrayList</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/Java%E5%9F%BA%E7%A1%80/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Java基础
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="Collection中的List中的ArrayList"><a href="#Collection中的List中的ArrayList" class="headerlink" title="Collection中的List中的ArrayList"></a>Collection中的List中的ArrayList</h1><p><code>DEFAULT_CAPACITY = 10;</code>默认大小</p>
-<p>ArrayList的初始化操作为，如果你没有传入参数就是赋予一个默认的Object数组对象，然后在添加第一个元素的时候进行扩容，如果我们传入了创建大小的参数，那么会做大小判定，如果为0就赋予一个空的对象，也是一个Object数组，还有如果参数是Collection对象等等情况。</p>
-<pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">private void grow(int minCapacity) &#123;
-        &#x2F;&#x2F; overflow-conscious code
-        int oldCapacity &#x3D; elementData.length;
-        int newCapacity &#x3D; oldCapacity + (oldCapacity &gt;&gt; 1);
-        if (newCapacity - minCapacity &lt; 0)
-            newCapacity &#x3D; minCapacity;
-        if (newCapacity - MAX_ARRAY_SIZE &gt; 0)
-            newCapacity &#x3D; hugeCapacity(minCapacity);
-        &#x2F;&#x2F; minCapacity is usually close to size, so this is a win:
-        elementData &#x3D; Arrays.copyOf(elementData, newCapacity);
-    &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>在这里有一行重要的代码即使<code>int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</code>这里得到的新的容量大小为原大小的1.5倍，是因为使用了向右唯一了一个，相当于除以了2，也就是加上了0.5倍的大小</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E7%9A%84ArrayList/" class="go-post">阅读全文</a>
+    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E7%9A%84HashMap/" class="go-post">阅读全文</a>
 </div>
 
 <div class="post">
@@ -576,55 +268,6 @@
 </div>
 
 <div class="post">
-    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E7%9A%84HashMap/">
-        <h2 class="post-title">Java的HashMap</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/Java%E5%9F%BA%E7%A1%80/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Java基础
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="关于集合中的hashmap"><a href="#关于集合中的hashmap" class="headerlink" title="关于集合中的hashmap"></a>关于集合中的hashmap</h1><p>关于tableSizeFor方法：Returns a power of two size for the given target capacity.返回当前数的最小二次幂</p>
-<p>默认初始化的hashmap大小为16个大小，默认的负载系数为0.75<br>负载系数的计算公式：f &#x3D; 当前实际数目 &#x2F; hashmap总数目<br>也就是说当存入的数目大于等于总容量乘以负载系数的时候就会进扩容操作<br>如果负载系数大于或者等于了规定的负载系数，则会进行hashmap的扩容</p>
-<p>get、put：先求hash值，然后右移16位做高位对比，求出hash之后通过hash找到指定的桶，当发生hash冲突的时候，会在同一个桶内存在多个节点，当我们的节点数超过了8个的时候，会做红黑树与链表的转换</p>
-<pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">if ((e &#x3D; p.next) &#x3D;&#x3D; null) &#123;
- p.next &#x3D; newNode(hash, key, value, null);
- if (binCount &gt;&#x3D; TREEIFY_THRESHOLD - 1) &#x2F;&#x2F; -1 for 1st
-   treeifyBin(tab, hash); &#x2F;&#x2F;红黑树转换
- break;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>TREEIFY_THRESHOLD默认值为8，为树型阈值，在8以内使用链表，在8以外使用红黑树</p>
-<p>hash表里面所用的hashcode方法中的<code>Objects.hashCode(key)</code>，都取自于Object的hashcode方法，而Object的hashcode方法的标注是<code>public native int hashCode();</code>，native是java与其他编程语言进行交互的声明保留字段，也就是说这里的hashCode()方法其实调用的是C&#x2F;C++的hashCode的计算hash值</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E7%9A%84HashMap/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
     <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E8%AE%A1%E7%AE%97%E6%96%87%E4%BB%B6MD5/">
         <h2 class="post-title">Java计算文件MD5</h2>
     </a>
@@ -651,29 +294,29 @@
     <div class="description">
         <div class="content" v-pre>
             
-            <h1 id="计算文件的MD5"><a href="#计算文件的MD5" class="headerlink" title="计算文件的MD5"></a>计算文件的MD5</h1><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">md5</span><span class="token punctuation">(</span><span class="token class-name">File</span> file<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-        <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
-            <span class="token class-name">MessageDigest</span> md5 <span class="token operator">=</span> <span class="token class-name">MessageDigest</span><span class="token punctuation">.</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token string">"MD5"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token class-name">FileInputStream</span> fileInputStream <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FileInputStream</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token class-name">ByteArrayOutputStream</span> stream <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ByteArrayOutputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">byte</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> bytes <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token number">1024</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-            <span class="token keyword">int</span> read <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-            <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>read<span class="token operator">=</span><span class="token punctuation">(</span>fileInputStream<span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span>bytes<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">!=</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-                stream<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span>bytes<span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span>read<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
-            fileInputStream<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            stream<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> byteArray <span class="token operator">=</span> stream<span class="token punctuation">.</span><span class="token function">toByteArray</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            md5<span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span>byteArray<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> digest <span class="token operator">=</span> md5<span class="token punctuation">.</span><span class="token function">digest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token class-name">BigInteger</span> bigInteger <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">BigInteger</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span>digest<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token comment">//生成MD5的进制数</span>
-            <span class="token keyword">return</span> bigInteger<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">NoSuchAlgorithmException</span> <span class="token operator">|</span> <span class="token class-name">IOException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">ApplicationException</span><span class="token punctuation">(</span><span class="token class-name">CodeType</span><span class="token punctuation">.</span><span class="token constant">SERVICE_ERROR</span><span class="token punctuation">,</span> <span class="token string">"MD5转换失败"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+            <h1 id="计算文件的MD5"><a href="#计算文件的MD5" class="headerlink" title="计算文件的MD5"></a>计算文件的MD5</h1><pre><code class="java">public String md5(File file)&#123;
+        try &#123;
+            MessageDigest md5 = MessageDigest.getInstance(&quot;MD5&quot;);
+            FileInputStream fileInputStream = new FileInputStream(file);
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            byte [] bytes = new byte[1024];
+            int read = 0;
+            while ((read=(fileInputStream.read(bytes)))!=-1)&#123;
+                stream.write(bytes,0,read);
+            &#125;
+            fileInputStream.close();
+            stream.close();
+            byte[] byteArray = stream.toByteArray();
+            md5.update(byteArray);
+            byte[] digest = md5.digest();
+            BigInteger bigInteger = new BigInteger(1,digest);
+            //生成MD5的进制数
+            return bigInteger.toString(16);
+        &#125; catch (NoSuchAlgorithmException | IOException e) &#123;
+            throw new ApplicationException(CodeType.SERVICE_ERROR, &quot;MD5转换失败&quot;);
+        &#125;
+    &#125;
+</code></pre>
 
             
         </div>
@@ -749,6 +392,45 @@
 </div>
 
 <div class="post">
+    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jvm%E8%99%9A%E6%8B%9F%E6%9C%BA/">
+        <h2 class="post-title">Jvm虚拟机</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/Java%E5%9F%BA%E7%A1%80/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Java基础
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="JVM虚拟机"><a href="#JVM虚拟机" class="headerlink" title="JVM虚拟机"></a>JVM虚拟机</h1><p>指针碰撞（bump the pointer）： 指在分配内存的时候，由于堆空间的内存是整齐规划的，一边是使用的内存，一边是空闲的内存，中间由指针分开，在移动指针进行内存分配的时候叫做内存分配</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jvm%E8%99%9A%E6%8B%9F%E6%9C%BA/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jvm%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/">
         <h2 class="post-title">Jvm垃圾收集器</h2>
     </a>
@@ -792,8 +474,8 @@
 </div>
 
 <div class="post">
-    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jvm%E8%99%9A%E6%8B%9F%E6%9C%BA/">
-        <h2 class="post-title">Jvm虚拟机</h2>
+    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%96%87%E4%BB%B6%E7%9A%84MD5/">
+        <h2 class="post-title">计算文件的MD5</h2>
     </a>
     <div class="category-and-date">
         
@@ -818,7 +500,30 @@
     <div class="description">
         <div class="content" v-pre>
             
-            <h1 id="JVM虚拟机"><a href="#JVM虚拟机" class="headerlink" title="JVM虚拟机"></a>JVM虚拟机</h1><p>指针碰撞（bump the pointer）： 指在分配内存的时候，由于堆空间的内存是整齐规划的，一边是使用的内存，一边是空闲的内存，中间由指针分开，在移动指针进行内存分配的时候叫做内存分配</p>
+            <hr>
+<h2 id="title-计算文件的MD5date-2022-04-20-09-41-15-031updated-2022-10-13-14-57-26-724url-x2F-archives-x2F-ji-suan-wen-jian-de-md5categories-Javatags-Java-MD5"><a href="#title-计算文件的MD5date-2022-04-20-09-41-15-031updated-2022-10-13-14-57-26-724url-x2F-archives-x2F-ji-suan-wen-jian-de-md5categories-Javatags-Java-MD5" class="headerlink" title="title: 计算文件的MD5date: 2022-04-20 09:41:15.031updated: 2022-10-13 14:57:26.724url: &#x2F;archives&#x2F;ji-suan-wen-jian-de-md5categories:- Javatags:- Java- MD5"></a>title: 计算文件的MD5<br>date: 2022-04-20 09:41:15.031<br>updated: 2022-10-13 14:57:26.724<br>url: &#x2F;archives&#x2F;ji-suan-wen-jian-de-md5<br>categories:<br>- Java<br>tags:<br>- Java<br>- MD5</h2><pre><code class="java">public String md5(File file)&#123;
+        try &#123;
+            MessageDigest md5 = MessageDigest.getInstance(&quot;MD5&quot;);
+            FileInputStream fileInputStream = new FileInputStream(file);
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            byte [] bytes = new byte[1024];
+            int read = 0;
+            while ((read=(fileInputStream.read(bytes)))!=-1)&#123;
+                stream.write(bytes,0,read);
+            &#125;
+            fileInputStream.close();
+            stream.close();
+            byte[] byteArray = stream.toByteArray();
+            md5.update(byteArray);
+            byte[] digest = md5.digest();
+            BigInteger bigInteger = new BigInteger(1,digest);
+            //生成MD5的进制数
+            return bigInteger.toString(16);
+        &#125; catch (NoSuchAlgorithmException | IOException e) &#123;
+            throw new ApplicationException(CodeType.SERVICE_ERROR, &quot;MD5转换失败&quot;);
+        &#125;
+    &#125;
+</code></pre>
 
             
         </div>
@@ -827,7 +532,398 @@
         
         
     </div>
-    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jvm%E8%99%9A%E6%8B%9F%E6%9C%BA/" class="go-post">阅读全文</a>
+    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%96%87%E4%BB%B6%E7%9A%84MD5/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/%E4%BA%8C%E7%BB%B4%E7%A0%81%E7%94%9F%E6%88%90/">
+        <h2 class="post-title">二维码生成</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/Java%E5%9F%BA%E7%A1%80/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Java基础
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="Zxing"><a href="#Zxing" class="headerlink" title="Zxing"></a>Zxing</h1><h3 id="POM文件的引入"><a href="#POM文件的引入" class="headerlink" title="POM文件的引入"></a>POM文件的引入</h3><pre><code class="xml">&lt;dependency&gt;
+    &lt;groupId&gt;com.google.zxing&lt;/groupId&gt;
+    &lt;artifactId&gt;javase&lt;/artifactId&gt;
+    &lt;version&gt;3.3.3&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<h3 id="后端Controller的port代码"><a href="#后端Controller的port代码" class="headerlink" title="后端Controller的port代码"></a>后端Controller的port代码</h3><pre><code class="java"> @PortMapping(&quot;/qrCode/&quot;)
+    public Object qrCode(@RequestParam(&quot;centext&quot;)String centext, HttpServletResponse response, HttpServletRequest request)&#123;
+        Map&lt;EncodeHintType, Object&gt; hints = new HashMap&lt;&gt;(3);
+        hints.put(EncodeHintType.CHARACTER_SET,&quot;UTF-8&quot;);
+        hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
+        hints.put(EncodeHintType.MARGIN,1);
+        try &#123;
+            response.setContentType(&quot;image/png;charset=UTF-8&quot;);
+            ServletOutputStream outputStream = response.getOutputStream();
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            BitMatrix bitMatrix = new MultiFormatWriter().encode(context, BarcodeFormat.QR_CODE, 200, 200, hints);
+            MatrixToImageWriter.writeToStream(bitMatrix,&quot;png&quot;,byteArrayOutputStream);
+   //编码格式转换，由于前端用ajax设置img标签的src属性需要
+  response.getOutputStream().write(Base64.encodeBase64(byteArrayOutputStream.toByteArray()));
+            outputStream.flush();
+            outputStream.close();
+        &#125; catch (WriterException | IOException e) &#123;
+            e.printStackTrace();
+        &#125;
+        //枚举内容替换成了字符串，不好展示
+        return &#123;&quot;code&quot;:2001,&quot;message&quot;:&quot;二维码生成成功&quot;&#125;;
+    &#125;
+</code></pre>
+<h3 id="前端js代码"><a href="#前端js代码" class="headerlink" title="前端js代码"></a>前端js代码</h3><pre><code class="javascript"> $(document).ready(function () &#123;
+            $(&quot;#showQRCode&quot;).click(function () &#123;
+                let inputText = $(&quot;#inputText&quot;).val();
+                $.port(&#123;
+                    url: &quot;/qrCode&quot;,
+                    data: &#123;&quot;context&quot;:inputText&#125;,
+                    dataType: &quot;application/json&quot;,
+                    contentType: &quot;application/json&quot;,
+                    responseType: &quot;blob&quot;,
+                    accept:&quot;image/png&quot;,
+                    success: function (response)&#123;
+                        //后台的Base64编码作用于这里
+                        $(&quot;#qrCode&quot;).attr(&quot;src&quot;,&quot;data:image/png;base64,&quot;+response);
+                    &#125;,
+                    error: function () &#123;
+                        alert(&quot;请求错误&quot;);
+                    &#125;
+                &#125;)
+            &#125;);
+        &#125;);
+</code></pre>
+<h3 id="前端HTML代码"><a href="#前端HTML代码" class="headerlink" title="前端HTML代码"></a>前端HTML代码</h3><pre><code class="html">&lt;div&gt;
+        &lt;img  id=&quot;qrCode&quot; style=&quot;padding-left: 20px&quot; alt=&quot;QRCode&quot; src=&quot;&quot;&gt;&lt;br/&gt;
+        &lt;label for=&quot;inputText&quot;&gt;输入二维码内容：&lt;/label&gt;&lt;input type=&quot;text&quot; id=&quot;inputText&quot;&gt;&lt;br/&gt;
+        &lt;button id=&quot;showQRCode&quot;&gt;提交&lt;/button&gt;
+&lt;/div&gt;
+</code></pre>
+<hr>
+<h4 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h4><p>*使用<strong>Zxing</strong>第三方jar包，使用<strong>MultiFormatWriter</strong>的<strong>encode()<strong>方法生成一个二维码类</strong>BitMatrix</strong>的对象，然后用<strong>MatrixToImageWriter</strong>的流写入方法<strong>writeToStream()<strong>以</strong>png</strong>的形式写入<strong>OutputStresam</strong>流中，如果需要，可以进行相应的编码转换。*</p>
+<p><em><strong>如果使用get的方式，直接往img标签的src属性添加生成二维码的访问地址即可，并且不需要base64编码。</strong></em></p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/%E4%BA%8C%E7%BB%B4%E7%A0%81%E7%94%9F%E6%88%90/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/Kafka%E5%AE%89%E8%A3%85/">
+        <h2 class="post-title">Kafka安装</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                中间件
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>首先下载Kafka的二进制包，以及Kafka-Manager Cmak工具</p>
+<p><a target="_blank" rel="noopener" href="https://downloads.apache.org/kafka/3.3.1/kafka_2.13-3.3.1.tgz">Kafka</a>(<a target="_blank" rel="noopener" href="https://downloads.apache.org/kafka/3.3.1/kafka_2.13-3.3.1.tgz">https://downloads.apache.org/kafka/3.3.1/kafka_2.13-3.3.1.tgz</a>)</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/yahoo/CMAK/releases/download/3.0.0.6/cmak-3.0.0.6.zip">Cmak</a>(<a target="_blank" rel="noopener" href="https://github.com/yahoo/CMAK/releases/download/3.0.0.6/cmak-3.0.0.6.zip">https://github.com/yahoo/CMAK/releases/download/3.0.0.6/cmak-3.0.0.6.zip</a>)</p>
+<p>解压Kafka到<code>/opt</code>目录shell</p>
+<pre><code class="shell">tar -zxvf kafka_2.13-3.3.1.tgz -C /opt
+</code></pre>
+<p>解压Cmak到<code>/opt</code>目录</p>
+<pre><code class="shell">unzip cmak-3.0.0.6 -C /opt
+</code></pre>
+<p>修改cmak的application.properties<code>/opt/cmak-3.0.0.6/conf/application.properties</code>的如下信息</p>
+<pre><code class="shell"># The address the socket server listens on. If not configured, the host name will be equal to the value of
+# java.net.InetAddress.getCanonicalHostName(), with PLAINTEXT listener name, and port 9092.
+#   FORMAT:
+#     listeners = listener_name://host_name:port
+#   EXAMPLE:
+#     listeners = PLAINTEXT://your.host.name:9092
+#listeners=PLAINTEXT://:9092
+
+listeners=PLAINTEXT://10.254.0.2:9092
+
+# Listener name, hostname and port the broker will advertise to clients.
+# If not set, it uses the value for &quot;listeners&quot;.
+#advertised.listeners=PLAINTEXT://your.host.name:9092
+advertised.listeners=PLAINTEXT://10.254.0.2:9092
+
+# Settings prefixed with &#39;kafka-manager.&#39; will be deprecated, use &#39;cmak.&#39; instead.
+# https://github.com/yahoo/CMAK/issues/713
+kafka-manager.zkhosts=&quot;kafka-manager-zookeeper:2181&quot;
+#kafka-manager.zkhosts=$&#123;?ZK_HOSTS&#125;
+kafka-manager.zkhosts=&quot;10.254.0.2:2181&quot;
+cmak.zkhosts=&quot;kafka-manager-zookeeper:2181&quot;
+#cmak.zkhosts=$&#123;?ZK_HOSTS&#125;
+cmak.zkhosts=&quot;10.254.0.2:2181&quot;
+</code></pre>
+<p>构建如下脚本，一键启动Kafka所需要的Zookeeper服务、Kafka服务以及Cmak管理工具</p>
+<pre><code class="shell">#!/bin/bash
+
+option=$1
+
+echo &quot;option $option&quot;
+
+case $option in 
+
+  &#39;start&#39;)
+
+    # create kafka catalogue
+    if [ -d &#39;/root/kafka&#39; ]; then
+      echo &#39;kafka catalogue exists&#39;
+    else 
+      mkdir /root/kafka
+      echo &#39;create kafka catalogue success&#39;
+    fi
+    # create kafka log catalogue
+    if [ -d &quot;/root/kafka/log&quot; ]; then
+      echo &#39;kafka log catalogue exists&#39;
+    else
+      mkdir /root/kafka/log
+      echo &#39;create kafka log catalogue success&#39;
+    fi
+    #  create kafka pid catalogue
+    if [ -d &#39;/root/kafka/pid&#39; ]; then
+      echo &#39;kafka pid catalogue exists&#39;
+    else
+      mkdir /root/kafka/pid
+      echo &#39;create kafka pid catalogue success&#39;
+    fi
+    # creare kafka zk log file 
+    if [ -f &#39;/root/kafka/log/zk.log&#39; ]; then
+      echo &#39;kafka zk log file already exists&#39;
+    else 
+      touch /root/kafka/log/zk.log
+      echo &#39;create kafka zk log file success&#39;
+    fi
+    # create zk pid file 
+    if [ -f &#39;/root/kafka/pid/zk-pid&#39; ]; then
+      echo &#39;kafka zk pid file already exists&#39;
+    else
+      touch /root/kafka/pid/zk-pid
+      echo &#39;create kafka zk pid file success&#39;
+    fi
+
+    nohup  /opt/kafka_2.13-3.3.1/bin/zookeeper-server-start.sh /opt/kafka_2.13-3.3.1/config/zookeeper.properties &gt; /root/kafka/log/zk.log 2&gt;&amp;1 &amp;
+    echo $!
+    echo $! &gt; /root/kafka/pid/zk-pid
+    echo &#39;loading 1 minute ......&#39; 
+    sleep 1m
+
+    # create kafka server log file
+    if [ -f &#39;/root/kafka/log/kafka.log&#39; ]; then
+      echo &#39;kafka server log file exists&#39;
+    else 
+      touch /root/kafka/log/kafka.log
+      echo &#39;create kafka server log file success&#39;
+    fi
+    # create kafka pid pid file
+    if [ -f &#39;/root/kafka/pid/kafka-pid&#39; ]; then
+      echo &#39;kafka server pid file exists&#39;
+    else
+      touch /root/kafka/pid/kafka-pid
+      echo &#39;create kafka server pid file success&#39;
+    fi
+
+    export JMX_PORT=9999
+
+    nohup /opt/kafka_2.13-3.3.1/bin/kafka-server-start.sh /opt/kafka_2.13-3.3.1/config/server.properties &gt; /root/kafka/log/kafka.log 2&gt;&amp;1 &amp;
+    echo $!
+    echo $! &gt; /root/kafka/pid/kafka-pid
+
+
+    # create kafka-manager cmak log file
+      if [ -f &#39;/root/kafka/log/cmak.log&#39; ]; then
+        echo &#39;kafka manager cmak log file exists&#39;
+      else
+        touch /root/kafka/log/cmak.log
+        echo &#39;create kafka manager cmak log file success&#39;
+      fi
+    # create kafka-manager cmak pid file
+     if [ -f &#39;/root/kafka/pid/cmak-pid&#39; ]; then
+       echo &#39;kafka manager cmak pid file exists&#39;
+     else 
+       touch /root/kafka/pid/cmak-pid
+       echo &#39;create kafka manager cmak pid file success&#39;
+     fi
+
+    nohup bash /opt/cmak-3.0.0.6/bin/cmak &gt; /root/kafka/log/cmak.log 2&gt;&amp;1 &amp;
+    echo $!
+    echo $! &gt; /root/kafka/pid/cmak-pid
+
+    echo &#39;loading 1 minute ......&#39;
+    sleep 1m
+    echo &#39;all server start success&#39;
+  ;;
+
+  &#39;stop&#39;)
+    zk_pid=$(cat /root/kafka/pid/zk-pid)
+    kill -9 $zk_pid
+    echo &#39;kill zookeeper server success&#39;
+
+    kafka_pid=$(cat /root/kafka/pid/kafka-pid)
+    kill -9 $kafka_pid
+    echo &#39;kill kafka server success&#39;
+
+    cmak_pid=$(cat /root/kafka/pid/cmak-pid)
+    kill -9 $cmak_pid
+    echo &#39;kill kafka manager cmak success&#39;     
+    rm -rf /opt/cmak-3.0.0.6/RUNNING_PID
+  ;;
+
+  *)
+    echo &#39;option error&#39;
+  ;;
+esac
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/06/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/Kafka%E5%AE%89%E8%A3%85/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/RocketMQ%E4%B8%8ESystemd/">
+        <h2 class="post-title">RocketMQ与Systemd</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                中间件
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="RocketMQ与Systemd"><a href="#RocketMQ与Systemd" class="headerlink" title="RocketMQ与Systemd"></a>RocketMQ与Systemd</h1><p>RocketMQ的安装比较简单，只需要提供了JAVA_HOME环境，之后运行对于的脚本即可，所以这里主要介绍的RocketMQ与Systemd的配置，结合Shell脚本，一次性的启用namsesrv和borker以及web管理工具<code>rocketmq-dashboard</code></p>
+<h2 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h2><p>Java: openjdk-11</p>
+<p>RocketMQ: <code>rocketmq-all-5.0.0-bin-release.zip</code><a target="_blank" rel="noopener" href="https://www.apache.org/dyn/closer.cgi?path=rocketmq/5.0.0/rocketmq-all-5.0.0-bin-release.zip">下载</a></p>
+<p>RocketMQ Dashboard: <code>rocketmq-dashboard-rocketmq-dashboard-1.0.0.tar.gz</code> <a target="_blank" rel="noopener" href="https://github.com/apache/rocketmq-dashboard">源码地址,该项目需要自己编译成jar包</a></p>
+<p>在下载了RocketMQ的二进制包之后，解压到指定位置，而后配置对于的<code>namesrv</code>和<code>borker</code>服务，systemd的服务配置在<code>/usr/lib/systemd/system/</code>或者<code>/etc/systemd/system/</code>目录下</p>
+<p>rmq_namesrv.service</p>
+<pre><code class="shell">[Unit]
+Description=rocketmq namesrv
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/opt/rocketmq-all-5.0.0-bin-release/bin/mqnamesrv
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=//opt/rocketmq-all-5.0.0-bin-release/bin/mqshutdown namesrv
+
+[Install]
+WantedBy=mulitiple-rmq-namesrv.target
+</code></pre>
+<p>rmq_borker.service</p>
+<pre><code class="shell">[Unit]
+Description=rocketmq broker
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/opt/rocketmq-all-5.0.0-bin-release/bin/mqbroker -n localhost:9876 --enable-proxy
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/opt/rocketmq-all-5.0.0-bin-release/bin/mqshutdown broker
+
+[Install]
+WantedBy=multiple-rmq-broker.target
+</code></pre>
+<p>在配置了这两个服务之后，即可通过systemctl start&#x2F;stop&#x2F;restart来执行服务了，由于每次都需要启动<code>namesrv</code>和<code>borker</code>服务还有web管理工具过于麻烦，所以引入<code>shell</code>脚本进行处理</p>
+<p>rocketmq.shell</p>
+<pre><code class="shell">#!/bin/bash
+
+instruct=$1
+
+echo $instruct
+
+case $instruct in
+ &#39;start&#39;)
+   systemctl start rmq_namesrv
+   systemctl start rmq_borker
+   export NAMSESRV_ADDR=localhost:9876
+   nohup java -jar /opt/rocketmq-dashboard-rocketmq-dashboard-1.0.0/target/rocketmq-dashboard-1.0.0.jar &gt; /root/rocketmq-dashboard.log &amp;
+   echo $! &gt; /root/rmq-d-pid
+   echo &quot;RocketMQ Start SUCCESS PID: &quot; + $!
+ ;;
+
+ &#39;stop&#39;)
+   systemctl stop rmq_namesrv
+   systemctl stop rmq_borker
+   PID=$(cat /root/rmq-d-pid)
+   kill -9 $&#123;PID&#125;
+   echo &quot;RocketMQ Stop SUCCESS&quot;
+ ;;
+
+ *)
+   echo &quot;Input instruct error&quot;
+ ;;
+esac
+</code></pre>
+<p>可以通过执行该shell脚本对RocketMQ进行启动和关闭</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/06/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/RocketMQ%E4%B8%8ESystemd/" class="go-post">阅读全文</a>
 </div>
 
 

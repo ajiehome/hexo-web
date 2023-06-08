@@ -21,7 +21,7 @@
 <script src="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/highlight.min.js"></script>
 <link
     rel="stylesheet"
-    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/github.min.css"
+    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/Github Dark.min.css"
 />
 <script src="/js/lib/highlight.js"></script>
 
@@ -194,54 +194,63 @@
 <li><p>下载数据库文件，这里我们选择MySQL，并且在MySQL数据库中创建一个数据库，并且执行下载下来的数据库文件</p>
 </li>
 <li><p>修改conf目录下的register.conf文件，首先必要修改的是register部分，register部分为seata-server服务启动之后的注册模式（file 、nacos 、eureka、redis、zk、consul、etcd3、sofa），这里我们选择的是nacos，配置如下：</p>
-<pre class="line-numbers language-conf" data-language="conf"><code class="language-conf">registry &#123;
+<pre><code class="conf">registry &#123;
    # file 、nacos 、eureka、redis、zk、consul、etcd3、sofa
-   type &#x3D; &quot;nacos&quot;
+   type = &quot;nacos&quot;
 
    nacos &#123;
-     application &#x3D; &quot;seata-server&quot;
-     serverAddr &#x3D; &quot;192.168.246.105:8848&quot;
-     group &#x3D; &quot;SEATA_GROUP&quot;
-     namespace &#x3D; &quot;8b191ab1-8b24-4ea1-be79-5f1668e9046c&quot;
-     cluster &#x3D; &quot;default&quot;
-     username &#x3D; &quot;nacos&quot;
-     password &#x3D; &quot;nacos&quot;
+     application = &quot;seata-server&quot;
+     serverAddr = &quot;192.168.246.105:8848&quot;
+     group = &quot;SEATA_GROUP&quot;
+     namespace = &quot;8b191ab1-8b24-4ea1-be79-5f1668e9046c&quot;
+     cluster = &quot;default&quot;
+     username = &quot;nacos&quot;
+     password = &quot;nacos&quot;
    &#125;
- &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+ &#125;
+</code></pre>
+</li>
 <li><p>选贼seata-server服务端的配置文件模式（file、nacos 、apollo、zk、consul、etcd3），如果是选择file就需要同目录下的file.conf文件，作为配置文件，这里我们选择nacos，配置如下：</p>
-<pre class="line-numbers language-conf" data-language="conf"><code class="language-conf">config &#123;
+<pre><code class="conf">config &#123;
    # file、nacos 、apollo、zk、consul、etcd3
-   type &#x3D; &quot;nacos&quot;
+   type = &quot;nacos&quot;
 
    nacos &#123;
-     serverAddr &#x3D; &quot;192.168.246.105:8848&quot;
-     namespace &#x3D; &quot;8b191ab1-8b24-4ea1-be79-5f1668e9046c&quot;
-     group &#x3D; &quot;SEATA_GROUP&quot;
-     username &#x3D; &quot;nacos&quot;
-     password &#x3D; &quot;nacos&quot;
-     dataId &#x3D; &quot;seataServer.properties&quot;
+     serverAddr = &quot;192.168.246.105:8848&quot;
+     namespace = &quot;8b191ab1-8b24-4ea1-be79-5f1668e9046c&quot;
+     group = &quot;SEATA_GROUP&quot;
+     username = &quot;nacos&quot;
+     password = &quot;nacos&quot;
+     dataId = &quot;seataServer.properties&quot;
    &#125;
- &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+ &#125;
+</code></pre>
+</li>
 <li><p>基于第四步选择的config模式，需要在指定的namespance创建dataId所指定的配置文件，配置文件的内容则是config.txt的内容，修改成需要的数据就好了，下面是我修改的部分，配置如下：</p>
-<pre class="line-numbers language-properties" data-language="properties"><code class="language-properties"><span class="token comment"># 修改事务分组，glcxw_tx_group 是分组，default集群名称</span>
-<span class="token key attr-name">service.vgroupMapping.glcxw_tx_group</span><span class="token punctuation">=</span><span class="token value attr-value">default</span>
+<pre><code class="properties"> # 修改事务分组，glcxw_tx_group 是分组，default集群名称
+ service.vgroupMapping.glcxw_tx_group=default
 
-<span class="token comment"># 选择配置模式</span>
-<span class="token key attr-name">store.mode</span><span class="token punctuation">=</span><span class="token value attr-value">db</span>
-<span class="token key attr-name">store.lock.mode</span><span class="token punctuation">=</span><span class="token value attr-value">db</span>
-<span class="token key attr-name">store.session.mode</span><span class="token punctuation">=</span><span class="token value attr-value">db</span>
+ # 选择配置模式
+ store.mode=db
+ store.lock.mode=db
+ store.session.mode=db
 
-<span class="token comment"># db的配置</span>
-<span class="token key attr-name">store.db.datasource</span><span class="token punctuation">=</span><span class="token value attr-value">druid</span>
-<span class="token key attr-name">store.db.dbType</span><span class="token punctuation">=</span><span class="token value attr-value">mysql</span>
-<span class="token key attr-name">store.db.driverClassName</span><span class="token punctuation">=</span><span class="token value attr-value">com.mysql.cj.jdbc.Driver</span>
-<span class="token key attr-name">store.db.url</span><span class="token punctuation">=</span><span class="token value attr-value">jdbc:mysql://192.168.246.107:3306/seata?useUnicode=true&amp;rewriteBatchedStatements=true</span>
-<span class="token key attr-name">store.db.user</span><span class="token punctuation">=</span><span class="token value attr-value">glcxw</span>
-<span class="token key attr-name">store.db.password</span><span class="token punctuation">=</span><span class="token value attr-value">glcxw_yyds</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+ # db的配置
+ store.db.datasource=druid
+ store.db.dbType=mysql
+ store.db.driverClassName=com.mysql.cj.jdbc.Driver
+ store.db.url=jdbc:mysql://192.168.246.107:3306/seata?useUnicode=true&amp;rewriteBatchedStatements=true
+ store.db.user=glcxw
+ store.db.password=glcxw_yyds
+</code></pre>
+</li>
 <li><p>还需要下载nacos-config.sh脚本文件，然后将修改好的config.txt放在脚本的父目录，例如脚本在conf下，config.txt在seata根目录，执行下面的命令，把每一项添加到nacos，为后面client使用</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sh</span> nacos_config.sh <span class="token parameter variable">-t</span> 8b191ab1-8b24-4ea1-be79-5f1668e9046c <span class="token parameter variable">-h</span> <span class="token number">192.168</span>.246.105<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<pre><code class="shell"> sh nacos_config.sh -t 8b191ab1-8b24-4ea1-be79-5f1668e9046c -h 192.168.246.105
+</code></pre>
+</li>
 <li><p>在seata-server的bin目录下执行如下命令，把seata-server注册到nacos中，并且指定访问地址和打开的端口</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sh</span> seata-server.sh <span class="token parameter variable">-h</span> <span class="token number">192.168</span>.246.110 <span class="token parameter variable">-p</span> <span class="token number">8091</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre><code class="shell"> sh seata-server.sh -h 192.168.246.110 -p 8091
+</code></pre>
 </li>
 <li><p>服务端到此配置完成</p>
 </li>
@@ -250,98 +259,102 @@
 <p><a target="_blank" rel="noopener" href="https://seata.io/zh-cn/docs/user/configuration/nacos.html">Nacos 配置中心</a></p>
 <p><a target="_blank" rel="noopener" href="https://seata.io/zh-cn/docs/user/registry/index.html">Nacos 注册中心</a></p>
 <p>首先按照官方的参照文档需要依赖如下文件</p>
-<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>io.seata<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>seata-spring-boot-starter<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>最新版<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.alibaba.nacos<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>nacos-client<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.2.0及以上版本<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+<pre><code class="xml">&lt;dependency&gt;
+    &lt;groupId&gt;io.seata&lt;/groupId&gt;
+    &lt;artifactId&gt;seata-spring-boot-starter&lt;/artifactId&gt;
+    &lt;version&gt;最新版&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.alibaba.nacos&lt;/groupId&gt;
+    &lt;artifactId&gt;nacos-client&lt;/artifactId&gt;
+    &lt;version&gt;1.2.0及以上版本&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
 <p>这里我们用的是springcloud组合seata，因为<code>seata-spring-boot-starter</code>默认带的是1.0.0的seata所以我排除默认的，导入了新的seata 1.4.2</p>
-<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.alibaba.cloud<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-cloud-starter-alibaba-seata<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>exclusions</span><span class="token punctuation">></span></span>
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>exclusion</span><span class="token punctuation">></span></span>
-			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>seata-spring-boot-starter<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>io.seata<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>exclusion</span><span class="token punctuation">></span></span>
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>exclusions</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>io.seata<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>seata-spring-boot-starter<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.4.2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+<pre><code class="xml"> &lt;dependency&gt;
+    &lt;groupId&gt;com.alibaba.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-alibaba-seata&lt;/artifactId&gt;
+    &lt;exclusions&gt;
+        &lt;exclusion&gt;
+            &lt;artifactId&gt;seata-spring-boot-starter&lt;/artifactId&gt;
+            &lt;groupId&gt;io.seata&lt;/groupId&gt;
+        &lt;/exclusion&gt;
+    &lt;/exclusions&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;io.seata&lt;/groupId&gt;
+    &lt;artifactId&gt;seata-spring-boot-starter&lt;/artifactId&gt;
+    &lt;version&gt;1.4.2&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
 <ol>
 <li><p>创建本地数据库中的<code>undo_log</code>表，在REDEME-zh.md中有提及</p>
 </li>
 <li><p>配置yaml文件</p>
-<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">seata</span><span class="token punctuation">:</span>
- <span class="token key atrule">enabled</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
- <span class="token key atrule">enable-auto-data-source-proxy</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
- <span class="token key atrule">tx-service-group</span><span class="token punctuation">:</span> glcxw_tx_group
- <span class="token key atrule">service</span><span class="token punctuation">:</span>
-   <span class="token key atrule">vgroup-mapping</span><span class="token punctuation">:</span>
-     <span class="token key atrule">glcxw_tx_group</span><span class="token punctuation">:</span> default
-   <span class="token key atrule">disable-global-transaction</span><span class="token punctuation">:</span> <span class="token boolean important">false</span>
- <span class="token key atrule">registry</span><span class="token punctuation">:</span>
-   <span class="token key atrule">type</span><span class="token punctuation">:</span> nacos
-   <span class="token key atrule">nacos</span><span class="token punctuation">:</span>
-     <span class="token key atrule">application</span><span class="token punctuation">:</span> seata<span class="token punctuation">-</span>server
-     <span class="token key atrule">server-addr</span><span class="token punctuation">:</span> 192.168.246.105<span class="token punctuation">:</span><span class="token number">8848</span>
-     <span class="token key atrule">namespace</span><span class="token punctuation">:</span> 8b191ab1<span class="token punctuation">-</span>8b24<span class="token punctuation">-</span>4ea1<span class="token punctuation">-</span>be79<span class="token punctuation">-</span>5f1668e9046c
-     <span class="token key atrule">group</span><span class="token punctuation">:</span> SEATA_GROUP
-     <span class="token key atrule">username</span><span class="token punctuation">:</span> nacos
-     <span class="token key atrule">password</span><span class="token punctuation">:</span> nacos
-     <span class="token key atrule">cluster</span><span class="token punctuation">:</span> default
- <span class="token key atrule">config</span><span class="token punctuation">:</span>
-   <span class="token key atrule">type</span><span class="token punctuation">:</span> nacos
-   <span class="token key atrule">nacos</span><span class="token punctuation">:</span>
-     <span class="token key atrule">server-addr</span><span class="token punctuation">:</span> 192.168.246.105<span class="token punctuation">:</span><span class="token number">8848</span>
-     <span class="token key atrule">namespace</span><span class="token punctuation">:</span> 8b191ab1<span class="token punctuation">-</span>8b24<span class="token punctuation">-</span>4ea1<span class="token punctuation">-</span>be79<span class="token punctuation">-</span>5f1668e9046c
-     <span class="token key atrule">group</span><span class="token punctuation">:</span> SEATA_GROUP
-     <span class="token key atrule">username</span><span class="token punctuation">:</span> nacos
-     <span class="token key atrule">password</span><span class="token punctuation">:</span> nacos
-     <span class="token key atrule">data-id</span><span class="token punctuation">:</span> seataServer.properties<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre><code class="yaml">seata:
+ enabled: true
+ enable-auto-data-source-proxy: true
+ tx-service-group: glcxw_tx_group
+ service:
+   vgroup-mapping:
+     glcxw_tx_group: default
+   disable-global-transaction: false
+ registry:
+   type: nacos
+   nacos:
+     application: seata-server
+     server-addr: 192.168.246.105:8848
+     namespace: 8b191ab1-8b24-4ea1-be79-5f1668e9046c
+     group: SEATA_GROUP
+     username: nacos
+     password: nacos
+     cluster: default
+ config:
+   type: nacos
+   nacos:
+     server-addr: 192.168.246.105:8848
+     namespace: 8b191ab1-8b24-4ea1-be79-5f1668e9046c
+     group: SEATA_GROUP
+     username: nacos
+     password: nacos
+     data-id: seataServer.properties
+</code></pre>
 </li>
 <li><p>在业务中使用全局事务</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@GlobalTransactional</span><span class="token punctuation">(</span>rollbackFor <span class="token operator">=</span> <span class="token class-name">Exception</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>
-<span class="token annotation punctuation">@Override</span>
-<span class="token keyword">public</span> <span class="token class-name">CommonResult</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> <span class="token function">create</span><span class="token punctuation">(</span><span class="token class-name">Integer</span> id<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token class-name">SeataOrder</span> entity <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">SeataOrder</span><span class="token punctuation">(</span><span class="token number">1L</span><span class="token punctuation">,</span> <span class="token number">1L</span><span class="token punctuation">,</span> <span class="token number">1L</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1F</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">int</span> insert <span class="token operator">=</span> baseMapper<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span>entity<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>id <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">RuntimeException</span><span class="token punctuation">(</span><span class="token string">"故意抛出"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">CommonResult</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">,</span> <span class="token string">"SUCCESS"</span><span class="token punctuation">,</span> <span class="token string">"插入成功"</span> <span class="token operator">+</span> entity<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<pre><code class="java">@GlobalTransactional(rollbackFor = Exception.class)
+@Override
+public CommonResult&lt;String&gt; create(Integer id) &#123;
+    SeataOrder entity = new SeataOrder(1L, 1L, 1L, 1, 1F, 1);
+    int insert = baseMapper.insert(entity);
+    if (id == 1) throw new RuntimeException(&quot;故意抛出&quot;);
+    return new CommonResult&lt;String&gt;(200, &quot;SUCCESS&quot;, &quot;插入成功&quot; + entity.toString());
+&#125;
+</code></pre>
+</li>
 <li><p>如果feign调用的服务使用了全局异常处理，那么处理好的异常会让调用端认为异常已经处理好了，业务为正常不需要回滚全局事务，所以我们需要自定义feign的decoder，在全局异常处理完后对返回的数据进行判断，如果业务失败就抛出一个异常，让全局事务检测到，feign的降级也是如此，decoder代码如下：</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java">    
-<span class="token annotation punctuation">@Slf4j</span>
-<span class="token annotation punctuation">@Configuration</span>
-<span class="token annotation punctuation">@Primary</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ResultStatusDecoder</span> <span class="token keyword">implements</span> <span class="token class-name">Decoder</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">final</span> <span class="token class-name">Decoder</span> decoder<span class="token punctuation">;</span>
+<pre><code class="java">     
+ @Slf4j
+ @Configuration
+ @Primary
+ public class ResultStatusDecoder implements Decoder &#123;
+     final Decoder decoder;
 
-    <span class="token keyword">public</span> <span class="token class-name">ResultStatusDecoder</span><span class="token punctuation">(</span><span class="token class-name">Decoder</span> decoder<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>decoder <span class="token operator">=</span> decoder<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+     public ResultStatusDecoder(Decoder decoder) &#123;
+         this.decoder = decoder;
+     &#125;
 
-    <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> <span class="token class-name">Object</span> <span class="token function">decode</span><span class="token punctuation">(</span><span class="token class-name">Response</span> response<span class="token punctuation">,</span> <span class="token class-name">Type</span> type<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IOException</span><span class="token punctuation">,</span> <span class="token class-name">DecodeException</span><span class="token punctuation">,</span> <span class="token class-name">FeignException</span> <span class="token punctuation">&#123;</span>
-        <span class="token class-name">String</span> resultStr <span class="token operator">=</span> response<span class="token punctuation">.</span><span class="token function">body</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token class-name">Integer</span> code <span class="token operator">=</span> <span class="token class-name">JSONObject</span><span class="token punctuation">.</span><span class="token function">parseObject</span><span class="token punctuation">(</span>resultStr<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getInteger</span><span class="token punctuation">(</span><span class="token string">"code"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>code <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">RuntimeException</span><span class="token punctuation">(</span><span class="token string">"seatA feign rollback"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-        <span class="token keyword">return</span> decoder<span class="token punctuation">.</span><span class="token function">decode</span><span class="token punctuation">(</span>response<span class="token punctuation">.</span><span class="token function">toBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">body</span><span class="token punctuation">(</span>resultStr<span class="token punctuation">,</span> <span class="token class-name">StandardCharsets</span><span class="token punctuation">.</span><span class="token constant">UTF_8</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> type<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+     @Override
+     public Object decode(Response response, Type type) throws IOException, DecodeException, FeignException &#123;
+         String resultStr = response.body().toString();
+         Integer code = JSONObject.parseObject(resultStr).getInteger(&quot;code&quot;);
+         if (code != 0) &#123;
+             throw new RuntimeException(&quot;seatA feign rollback&quot;);
+         &#125;
+         return decoder.decode(response.toBuilder().body(resultStr, StandardCharsets.UTF_8).build(), type);
+     &#125;
+ &#125;
+</code></pre>
+</li>
 </ol>
 
     </div>

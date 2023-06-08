@@ -21,7 +21,7 @@
 <script src="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/highlight.min.js"></script>
 <link
     rel="stylesheet"
-    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/github.min.css"
+    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/Github Dark.min.css"
 />
 <script src="/js/lib/highlight.js"></script>
 
@@ -178,90 +178,91 @@
     
     <div class="content" v-pre>
         <p>调用方式</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">MonthlyCardOrderParam</span> param <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MonthlyCardOrderParam</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        param<span class="token punctuation">.</span><span class="token function">setRefundStatus</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token function">notNullCheck</span><span class="token punctuation">(</span>param<span class="token punctuation">,</span> <span class="token class-name">NotNull</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> <span class="token string">"message"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre><code class="java">MonthlyCardOrderParam param = new MonthlyCardOrderParam();
+        param.setRefundStatus(1);
+        notNullCheck(param, NotNull.class, &quot;message&quot;);
 
-        <span class="token function">notNullCheck</span><span class="token punctuation">(</span>param<span class="token punctuation">,</span> <span class="token class-name">NotNull</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">INotNullParamCheck</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">NotNull</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token annotation punctuation">@Override</span>
-            <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">check</span><span class="token punctuation">(</span><span class="token class-name">String</span> attributeName<span class="token punctuation">,</span> <span class="token class-name">Object</span> attributeValue<span class="token punctuation">,</span> <span class="token class-name">NotNull</span> annotation<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>attributeName<span class="token operator">+</span><span class="token string">"["</span><span class="token operator">+</span>attributeValue<span class="token operator">+</span><span class="token string">"] ->"</span><span class="token operator">+</span>annotation<span class="token punctuation">.</span><span class="token function">message</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
-        <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+        notNullCheck(param, NotNull.class, new INotNullParamCheck&lt;NotNull&gt;() &#123;
+            @Override
+            public void check(String attributeName, Object attributeValue, NotNull annotation) &#123;
+                System.out.println(attributeName+&quot;[&quot;+attributeValue+&quot;] -&gt;&quot;+annotation.message());
+            &#125;
+        &#125;);
+</code></pre>
 <hr>
 <p>方法一</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
+<pre><code class="java">/**
      * 判定某个对象的属性值是否为空，通过注解来判定
      * 主要用在非 Controller 上接受参数的时候
      *
      * @param param 所要判定的对象
      * @param annotationClass 所要判定的注解
      * @param func 所执行注解方法的名称
-     * @param &lt;E> 判定对象泛型
-     * @param &lt;T> 注解方法泛型 Annotation 的实例
+     * @param &lt;E&gt; 判定对象泛型
+     * @param &lt;T&gt; 注解方法泛型 Annotation 的实例
      * @throws IllegalAccessException 获取字段的异常
      * @throws NoSuchMethodException 找不到方法异常
      * @throws InvocationTargetException 反射执行方法异常
-     */</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">E</span><span class="token punctuation">,</span><span class="token class-name">T</span> <span class="token keyword">extends</span> <span class="token class-name">Annotation</span><span class="token punctuation">></span></span> <span class="token keyword">void</span> notNullCheck <span class="token punctuation">(</span><span class="token class-name">E</span> param<span class="token punctuation">,</span> <span class="token class-name">Class</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> annotationClass<span class="token punctuation">,</span> <span class="token class-name">String</span> func<span class="token punctuation">)</span>
-            <span class="token keyword">throws</span> <span class="token class-name">IllegalAccessException</span><span class="token punctuation">,</span> <span class="token class-name">NoSuchMethodException</span><span class="token punctuation">,</span> <span class="token class-name">InvocationTargetException</span> <span class="token punctuation">&#123;</span>
-        <span class="token comment">// 获取 Field 对象：也就是对象的所有属性对象</span>
-        <span class="token class-name">Field</span><span class="token punctuation">[</span><span class="token punctuation">]</span> fields <span class="token operator">=</span> param<span class="token punctuation">.</span><span class="token function">getClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getDeclaredFields</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">Field</span> field <span class="token operator">:</span> fields<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token comment">// 设置 private 属性可读</span>
-            field<span class="token punctuation">.</span><span class="token function">setAccessible</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token comment">// 获取当前属性上的某个注解，并且做空值判断</span>
-            <span class="token class-name">T</span> annotation <span class="token operator">=</span> field<span class="token punctuation">.</span><span class="token function">getAnnotation</span><span class="token punctuation">(</span>annotationClass<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>annotation<span class="token operator">!=</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-                <span class="token comment">// 获取当前属性的对应值</span>
-                <span class="token keyword">if</span> <span class="token punctuation">(</span>field<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>param<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-                    <span class="token keyword">if</span> <span class="token punctuation">(</span>func<span class="token operator">!=</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-                        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>annotationClass<span class="token punctuation">.</span><span class="token function">getMethod</span><span class="token punctuation">(</span>func<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">invoke</span><span class="token punctuation">(</span>annotation<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    <span class="token punctuation">&#125;</span>
-                <span class="token punctuation">&#125;</span>
-            <span class="token punctuation">&#125;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+     */
+    public static &lt;E,T extends Annotation&gt; void notNullCheck (E param, Class&lt;T&gt; annotationClass, String func)
+            throws IllegalAccessException, NoSuchMethodException, InvocationTargetException &#123;
+        // 获取 Field 对象：也就是对象的所有属性对象
+        Field[] fields = param.getClass().getDeclaredFields();
+        for (Field field : fields) &#123;
+            // 设置 private 属性可读
+            field.setAccessible(true);
+            // 获取当前属性上的某个注解，并且做空值判断
+            T annotation = field.getAnnotation(annotationClass);
+            if (annotation!=null)&#123;
+                // 获取当前属性的对应值
+                if (field.get(param) == null)&#123;
+                    if (func!=null)&#123;
+                        System.out.println(annotationClass.getMethod(func).invoke(annotation));
+                    &#125;
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+</code></pre>
 <p>方法二</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
+<pre><code class="java">/**
      * 校验回调接口
-     * @param &lt;T>
-     */</span>
-    <span class="token keyword">interface</span> <span class="token class-name">INotNullParamCheck</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span><span class="token punctuation">&#123;</span>
-        <span class="token comment">/**
+     * @param &lt;T&gt;
+     */
+    interface INotNullParamCheck&lt;T&gt;&#123;
+        /**
          * 校验回调
          *
          * @param attributeName 属性名称
          * @param attributeValue 参数
          * @param annotation 注解对象
-         */</span>
-        <span class="token keyword">void</span> <span class="token function">check</span><span class="token punctuation">(</span><span class="token class-name">String</span> attributeName<span class="token punctuation">,</span><span class="token class-name">Object</span> attributeValue<span class="token punctuation">,</span><span class="token class-name">T</span> annotation<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+         */
+        void check(String attributeName,Object attributeValue,T annotation);
+    &#125;
 
-    <span class="token comment">/**
+    /**
      * 为空校验
      * @param param 校验对象
      * @param annotationClass 查询的接口 Class
      * @param notNullParamCheck 校验回调接口
-     * @param &lt;E> 参数对象泛型
-     * @param &lt;T> 查询接口泛型
+     * @param &lt;E&gt; 参数对象泛型
+     * @param &lt;T&gt; 查询接口泛型
      * @throws IllegalAccessException 找不到属性异常
-     */</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">E</span><span class="token punctuation">,</span> <span class="token class-name">T</span> <span class="token keyword">extends</span> <span class="token class-name">Annotation</span><span class="token punctuation">></span></span> <span class="token keyword">void</span> <span class="token function">notNullCheck</span><span class="token punctuation">(</span><span class="token class-name">E</span> param<span class="token punctuation">,</span> <span class="token class-name">Class</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> annotationClass<span class="token punctuation">,</span><span class="token class-name">INotNullParamCheck</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> notNullParamCheck<span class="token punctuation">)</span>
-            <span class="token keyword">throws</span> <span class="token class-name">IllegalAccessException</span> <span class="token punctuation">&#123;</span>
-        <span class="token class-name">Field</span><span class="token punctuation">[</span><span class="token punctuation">]</span> fields <span class="token operator">=</span> param<span class="token punctuation">.</span><span class="token function">getClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getDeclaredFields</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">Field</span> field <span class="token operator">:</span> fields<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            field<span class="token punctuation">.</span><span class="token function">setAccessible</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token class-name">T</span> annotation <span class="token operator">=</span> field<span class="token punctuation">.</span><span class="token function">getAnnotation</span><span class="token punctuation">(</span>annotationClass<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token class-name">Object</span> item <span class="token operator">=</span> field<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>param<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>annotation<span class="token operator">!=</span><span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>item<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                notNullParamCheck<span class="token punctuation">.</span><span class="token function">check</span><span class="token punctuation">(</span>field<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>item<span class="token punctuation">,</span>annotation<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+     */
+    public static &lt;E, T extends Annotation&gt; void notNullCheck(E param, Class&lt;T&gt; annotationClass,INotNullParamCheck&lt;T&gt; notNullParamCheck)
+            throws IllegalAccessException &#123;
+        Field[] fields = param.getClass().getDeclaredFields();
+        for (Field field : fields) &#123;
+            field.setAccessible(true);
+            T annotation = field.getAnnotation(annotationClass);
+            Object item = field.get(param);
+            if (annotation!=null) &#123;
+                System.out.println(item);
+                notNullParamCheck.check(field.getName(),item,annotation);
+            &#125;
+        &#125;
+    &#125;
+</code></pre>
 
     </div>
     

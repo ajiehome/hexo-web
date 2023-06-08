@@ -21,7 +21,7 @@
 <script src="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/highlight.min.js"></script>
 <link
     rel="stylesheet"
-    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/github.min.css"
+    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/Github Dark.min.css"
 />
 <script src="/js/lib/highlight.js"></script>
 
@@ -178,85 +178,83 @@
     
     <div class="content" v-pre>
         <h1 id="nodejs"><a href="#nodejs" class="headerlink" title="nodejs"></a>nodejs</h1><p>查看node版本</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">node</span> <span class="token parameter variable">-v</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<pre><code class="shell">node -v
+</code></pre>
 <p>查看npm版本</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> <span class="token parameter variable">-v</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<pre><code class="shell">npm -v
+</code></pre>
 <p>查看配置文件</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> config list<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<pre><code class="shell">npm config list
+</code></pre>
 <p>修改本地仓库</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> config <span class="token builtin class-name">set</span> prefix <span class="token string">"C:\Software<span class="token entity" title="\n">\n</span>ode<span class="token entity" title="\n">\n</span>ode_global"</span>
-<span class="token function">npm</span> config <span class="token builtin class-name">set</span> cache <span class="token string">"C:\Software<span class="token entity" title="\n">\n</span>ode<span class="token entity" title="\n">\n</span>ode_cache"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
+<pre><code class="shell">npm config set prefix &quot;C:\Software\node\node_global&quot;
+npm config set cache &quot;C:\Software\node\node_cache&quot;
+</code></pre>
 <p>修改镜像站</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> config <span class="token builtin class-name">set</span> <span class="token assign-left variable">registry</span><span class="token operator">=</span>https://registry.npm.taobao.org<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<pre><code class="shell">npm config set registry=https://registry.npm.taobao.org
+</code></pre>
 <p>node更新</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">*<span class="token comment"># 全局安装n</span>
-$ <span class="token function">npm</span> <span class="token function">install</span> <span class="token parameter variable">-g</span> n 
-<span class="token comment"># 升级到最新稳定版</span>
+<pre><code class="shell">*# 全局安装n
+$ npm install -g n 
+# 升级到最新稳定版
 $ n stable
-<span class="token comment"># 升级到最新版</span>
+# 升级到最新版
 $ n latest
-<span class="token comment"># 升级到定制版</span>
+# 升级到定制版
 $ n v7.10.0
-<span class="token comment"># 切换使用版本</span>
-$ n <span class="token number">7.10</span>.0 <span class="token punctuation">(</span>ENTER<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
+# 切换使用版本
+$ n 7.10.0 (ENTER)
+</code></pre>
 <p>配置文件所在位置<code>C:\Users\Administrator\.npmrc</code></p>
 <p>获取镜像信息（非安装）</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> info vue<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<pre><code class="shell">npm info vue
+</code></pre>
 <p>更新模块命令</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#老版本安装方式 2.*</span>
-<span class="token function">npm</span> <span class="token function">install</span> <span class="token function">npm</span> –g<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#老版本安装方式 3.* /4.*</span>
-<span class="token function">npm</span> <span class="token function">install</span> <span class="token parameter variable">-g</span> @vue/cli<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
+<pre><code class="shell">#老版本安装方式 2.*
+npm install npm –g
+</code></pre>
+<pre><code class="shell">#老版本安装方式 3.* /4.*
+npm install -g @vue/cli
+</code></pre>
 <ul>
 <li>npm install&#96;：表示更新</li>
 <li><code>第二个npm</code>：表示需要更新的模块</li>
 <li><code>-g</code>：表示安装到global目录下</li>
 </ul>
 <p>配置NodeJS的环境变量</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">path: D:<span class="token punctuation">\</span>software<span class="token punctuation">\</span>nodejs<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<pre><code class="shell">path: D:\software\nodejs
+</code></pre>
 <p>配置global仓的环境变量</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">path: D:<span class="token punctuation">\</span>software<span class="token punctuation">\</span>nodejs<span class="token punctuation">\</span>node_global<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<pre><code class="shell">path: D:\software\nodejs\node_global
+</code></pre>
 <p>新增一个<code>NODE_PATH</code>环节变量（子项的全局命令）</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">D:<span class="token punctuation">\</span>software<span class="token punctuation">\</span>nodejs<span class="token punctuation">\</span>node_global<span class="token punctuation">\</span>node_modules<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<pre><code class="shell">D:\software\nodejs\node_global\node_modules
+</code></pre>
 <p>安装vue，安装vue-routher，安装vue脚手架，验证是否安装成功</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> vue <span class="token parameter variable">-g</span>
-<span class="token function">npm</span> <span class="token function">install</span> vue-routher <span class="token parameter variable">-g</span>
-<span class="token function">npm</span> <span class="token function">install</span> @vue/cli <span class="token parameter variable">-g</span>
-vue <span class="token parameter variable">-V</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
+<pre><code class="shell">npm install vue -g
+npm install vue-routher -g
+npm install @vue/cli -g
+vue -V
+</code></pre>
 <hr>
 <p><strong>老版本构建方式</strong></p>
 <p>1、构建初始化vue项目</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">vuew init webpack vue01<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<pre><code class="shell">vuew init webpack vue01
+</code></pre>
 <p>2、进入vue01的目录，初始化安装依赖</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<pre><code class="shell">npm install
+</code></pre>
 <p>3、运行vue01的dev状态</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> run dev<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<pre><code class="shell">npm run dev
+</code></pre>
 <p>然后访问**<a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080</a>**</p>
 <p>4、编译生成静态文件</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> run build<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<pre><code class="shell">npm run build
+</code></pre>
 <hr>
 <p><strong>新版本构建方式</strong></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">vue create vue01<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<pre><code class="shell">vue create vue01
+</code></pre>
 <p>可以选择创建的方式，moban是我创建的模板，可以选择default默认，或者Manually重新选择</p>
 <blockquote>
 <p>√ Babel<br>× TyreScript<br>× Progressive Web App (PWA) Support<br>√ Routher<br>√ Vuex<br>√ CSS Pre-processors<br>× Linter &#x2F; Formatter<br>× Unit Testing<br>× E2E Testing</p>

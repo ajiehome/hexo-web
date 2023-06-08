@@ -21,7 +21,7 @@
 <script src="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/highlight.min.js"></script>
 <link
     rel="stylesheet"
-    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/github.min.css"
+    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/Github Dark.min.css"
 />
 <script src="/js/lib/highlight.js"></script>
 
@@ -177,64 +177,62 @@
     </div>
     
     <div class="content" v-pre>
-        <h1 id="Zxing"><a href="#Zxing" class="headerlink" title="Zxing"></a>Zxing</h1><h3 id="POM文件的引入"><a href="#POM文件的引入" class="headerlink" title="POM文件的引入"></a>POM文件的引入</h3><pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.google.zxing<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>javase<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>3.3.3<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-<h3 id="后端Controller的port代码"><a href="#后端Controller的port代码" class="headerlink" title="后端Controller的port代码"></a>后端Controller的port代码</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@PortMapping</span><span class="token punctuation">(</span><span class="token string">"/qrCode/"</span><span class="token punctuation">)</span>
-   <span class="token keyword">public</span> <span class="token class-name">Object</span> <span class="token function">qrCode</span><span class="token punctuation">(</span><span class="token annotation punctuation">@RequestParam</span><span class="token punctuation">(</span><span class="token string">"centext"</span><span class="token punctuation">)</span><span class="token class-name">String</span> centext<span class="token punctuation">,</span> <span class="token class-name">HttpServletResponse</span> response<span class="token punctuation">,</span> <span class="token class-name">HttpServletRequest</span> request<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-       <span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">EncodeHintType</span><span class="token punctuation">,</span> <span class="token class-name">Object</span><span class="token punctuation">></span></span> hints <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-       hints<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token class-name">EncodeHintType</span><span class="token punctuation">.</span><span class="token constant">CHARACTER_SET</span><span class="token punctuation">,</span><span class="token string">"UTF-8"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-       hints<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token class-name">EncodeHintType</span><span class="token punctuation">.</span><span class="token constant">ERROR_CORRECTION</span><span class="token punctuation">,</span> <span class="token class-name">ErrorCorrectionLevel<span class="token punctuation">.</span>H</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-       hints<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token class-name">EncodeHintType</span><span class="token punctuation">.</span><span class="token constant">MARGIN</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-       <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
-           response<span class="token punctuation">.</span><span class="token function">setContentType</span><span class="token punctuation">(</span><span class="token string">"image/png;charset=UTF-8"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-           <span class="token class-name">ServletOutputStream</span> outputStream <span class="token operator">=</span> response<span class="token punctuation">.</span><span class="token function">getOutputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-           <span class="token class-name">ByteArrayOutputStream</span> byteArrayOutputStream <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ByteArrayOutputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-           <span class="token class-name">BitMatrix</span> bitMatrix <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MultiFormatWriter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">encode</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> <span class="token class-name">BarcodeFormat</span><span class="token punctuation">.</span><span class="token constant">QR_CODE</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">,</span> hints<span class="token punctuation">)</span><span class="token punctuation">;</span>
-           <span class="token class-name">MatrixToImageWriter</span><span class="token punctuation">.</span><span class="token function">writeToStream</span><span class="token punctuation">(</span>bitMatrix<span class="token punctuation">,</span><span class="token string">"png"</span><span class="token punctuation">,</span>byteArrayOutputStream<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token comment">//编码格式转换，由于前端用ajax设置img标签的src属性需要</span>
- response<span class="token punctuation">.</span><span class="token function">getOutputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span><span class="token class-name">Base64</span><span class="token punctuation">.</span><span class="token function">encodeBase64</span><span class="token punctuation">(</span>byteArrayOutputStream<span class="token punctuation">.</span><span class="token function">toByteArray</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-           outputStream<span class="token punctuation">.</span><span class="token function">flush</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-           outputStream<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-       <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">WriterException</span> <span class="token operator">|</span> <span class="token class-name">IOException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-           e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-       <span class="token punctuation">&#125;</span>
-       <span class="token comment">//枚举内容替换成了字符串，不好展示</span>
-       <span class="token keyword">return</span> <span class="token punctuation">&#123;</span><span class="token string">"code"</span><span class="token operator">:</span><span class="token number">2001</span><span class="token punctuation">,</span><span class="token string">"message"</span><span class="token operator">:</span><span class="token string">"二维码生成成功"</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-   <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="前端js代码"><a href="#前端js代码" class="headerlink" title="前端js代码"></a>前端js代码</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">$</span><span class="token punctuation">(</span>document<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">ready</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-           <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"#showQRCode"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">click</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-               <span class="token keyword">let</span> inputText <span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"#inputText"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">val</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-               $<span class="token punctuation">.</span><span class="token function">port</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
-                   <span class="token literal-property property">url</span><span class="token operator">:</span> <span class="token string">"/qrCode"</span><span class="token punctuation">,</span>
-                   <span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span><span class="token string-property property">"context"</span><span class="token operator">:</span>inputText<span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-                   <span class="token literal-property property">dataType</span><span class="token operator">:</span> <span class="token string">"application/json"</span><span class="token punctuation">,</span>
-                   <span class="token literal-property property">contentType</span><span class="token operator">:</span> <span class="token string">"application/json"</span><span class="token punctuation">,</span>
-                   <span class="token literal-property property">responseType</span><span class="token operator">:</span> <span class="token string">"blob"</span><span class="token punctuation">,</span>
-                   <span class="token literal-property property">accept</span><span class="token operator">:</span><span class="token string">"image/png"</span><span class="token punctuation">,</span>
-                   <span class="token function-variable function">success</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">response</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-                       <span class="token comment">//后台的Base64编码作用于这里</span>
-                       <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"#qrCode"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">attr</span><span class="token punctuation">(</span><span class="token string">"src"</span><span class="token punctuation">,</span><span class="token string">"data:image/png;base64,"</span><span class="token operator">+</span>response<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                   <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-                   <span class="token function-variable function">error</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                       <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">"请求错误"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                   <span class="token punctuation">&#125;</span>
-               <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-           <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-       <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="前端HTML代码"><a href="#前端HTML代码" class="headerlink" title="前端HTML代码"></a>前端HTML代码</h3><pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span>  <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>qrCode<span class="token punctuation">"</span></span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css"><span class="token property">padding-left</span><span class="token punctuation">:</span> 20px</span><span class="token punctuation">"</span></span></span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>QRCode<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">/></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span> <span class="token attr-name">for</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>inputText<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>输入二维码内容：<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>inputText<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">/></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>showQRCode<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>提交<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+        <h1 id="Zxing"><a href="#Zxing" class="headerlink" title="Zxing"></a>Zxing</h1><h3 id="POM文件的引入"><a href="#POM文件的引入" class="headerlink" title="POM文件的引入"></a>POM文件的引入</h3><pre><code class="xml">&lt;dependency&gt;
+    &lt;groupId&gt;com.google.zxing&lt;/groupId&gt;
+    &lt;artifactId&gt;javase&lt;/artifactId&gt;
+    &lt;version&gt;3.3.3&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<h3 id="后端Controller的port代码"><a href="#后端Controller的port代码" class="headerlink" title="后端Controller的port代码"></a>后端Controller的port代码</h3><pre><code class="java"> @PortMapping(&quot;/qrCode/&quot;)
+    public Object qrCode(@RequestParam(&quot;centext&quot;)String centext, HttpServletResponse response, HttpServletRequest request)&#123;
+        Map&lt;EncodeHintType, Object&gt; hints = new HashMap&lt;&gt;(3);
+        hints.put(EncodeHintType.CHARACTER_SET,&quot;UTF-8&quot;);
+        hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
+        hints.put(EncodeHintType.MARGIN,1);
+        try &#123;
+            response.setContentType(&quot;image/png;charset=UTF-8&quot;);
+            ServletOutputStream outputStream = response.getOutputStream();
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            BitMatrix bitMatrix = new MultiFormatWriter().encode(context, BarcodeFormat.QR_CODE, 200, 200, hints);
+            MatrixToImageWriter.writeToStream(bitMatrix,&quot;png&quot;,byteArrayOutputStream);
+   //编码格式转换，由于前端用ajax设置img标签的src属性需要
+  response.getOutputStream().write(Base64.encodeBase64(byteArrayOutputStream.toByteArray()));
+            outputStream.flush();
+            outputStream.close();
+        &#125; catch (WriterException | IOException e) &#123;
+            e.printStackTrace();
+        &#125;
+        //枚举内容替换成了字符串，不好展示
+        return &#123;&quot;code&quot;:2001,&quot;message&quot;:&quot;二维码生成成功&quot;&#125;;
+    &#125;
+</code></pre>
+<h3 id="前端js代码"><a href="#前端js代码" class="headerlink" title="前端js代码"></a>前端js代码</h3><pre><code class="javascript"> $(document).ready(function () &#123;
+            $(&quot;#showQRCode&quot;).click(function () &#123;
+                let inputText = $(&quot;#inputText&quot;).val();
+                $.port(&#123;
+                    url: &quot;/qrCode&quot;,
+                    data: &#123;&quot;context&quot;:inputText&#125;,
+                    dataType: &quot;application/json&quot;,
+                    contentType: &quot;application/json&quot;,
+                    responseType: &quot;blob&quot;,
+                    accept:&quot;image/png&quot;,
+                    success: function (response)&#123;
+                        //后台的Base64编码作用于这里
+                        $(&quot;#qrCode&quot;).attr(&quot;src&quot;,&quot;data:image/png;base64,&quot;+response);
+                    &#125;,
+                    error: function () &#123;
+                        alert(&quot;请求错误&quot;);
+                    &#125;
+                &#125;)
+            &#125;);
+        &#125;);
+</code></pre>
+<h3 id="前端HTML代码"><a href="#前端HTML代码" class="headerlink" title="前端HTML代码"></a>前端HTML代码</h3><pre><code class="html">&lt;div&gt;
+        &lt;img  id=&quot;qrCode&quot; style=&quot;padding-left: 20px&quot; alt=&quot;QRCode&quot; src=&quot;&quot;&gt;&lt;br/&gt;
+        &lt;label for=&quot;inputText&quot;&gt;输入二维码内容：&lt;/label&gt;&lt;input type=&quot;text&quot; id=&quot;inputText&quot;&gt;&lt;br/&gt;
+        &lt;button id=&quot;showQRCode&quot;&gt;提交&lt;/button&gt;
+&lt;/div&gt;
+</code></pre>
 <hr>
 <h4 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h4><p>*使用<strong>Zxing</strong>第三方jar包，使用<strong>MultiFormatWriter</strong>的<strong>encode()<strong>方法生成一个二维码类</strong>BitMatrix</strong>的对象，然后用<strong>MatrixToImageWriter</strong>的流写入方法<strong>writeToStream()<strong>以</strong>png</strong>的形式写入<strong>OutputStresam</strong>流中，如果需要，可以进行相应的编码转换。*</p>
 <p><em><strong>如果使用get的方式，直接往img标签的src属性添加生成二维码的访问地址即可，并且不需要base64编码。</strong></em></p>

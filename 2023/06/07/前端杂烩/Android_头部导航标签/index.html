@@ -21,7 +21,7 @@
 <script src="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/highlight.min.js"></script>
 <link
     rel="stylesheet"
-    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/github.min.css"
+    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/Github Dark.min.css"
 />
 <script src="/js/lib/highlight.js"></script>
 
@@ -178,21 +178,26 @@
     
     <div class="content" v-pre>
         <h1 id="Toolbar"><a href="#Toolbar" class="headerlink" title="Toolbar"></a>Toolbar</h1><p>关于toolbar使用的几个要点，包如下</p>
-<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">androidx.appcompat.widget.Toolbar<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre><code class="xml">androidx.appcompat.widget.Toolbar
+</code></pre>
 <p>这里作为toolbar的最左标签使用</p>
-<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">app:navigationIcon="@mipmap/sidebar"<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre><code class="xml">app:navigationIcon=&quot;@mipmap/sidebar&quot;
+</code></pre>
 <p>最左侧按钮点击事件，这里的点击事件有一个很重要的事情，就是只有在toolbar提交之后才能生效，也就是</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token function">setSupportActionBar</span><span class="token punctuation">(</span>toolbar<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">onOptionsItemSelected</span><span class="token punctuation">(</span><span class="token annotation punctuation">@NonNull</span> <span class="token class-name">MenuItem</span> item<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>item<span class="token punctuation">.</span><span class="token function">getItemId</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span><span class="token class-name"><span class="token namespace">android<span class="token punctuation">.</span></span>R</span><span class="token punctuation">.</span>id<span class="token punctuation">.</span>home<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-            drawerLayout<span class="token punctuation">.</span><span class="token function">openDrawer</span><span class="token punctuation">(</span><span class="token class-name">Gravity</span><span class="token punctuation">.</span><span class="token constant">LEFT</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-        <span class="token keyword">return</span> <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onOptionsItemSelected</span><span class="token punctuation">(</span>item<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre><code class="java">setSupportActionBar(toolbar);
+</code></pre>
+<pre><code class="java">@Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) &#123;
+        if (item.getItemId() ==android.R.id.home)&#123;
+            drawerLayout.openDrawer(Gravity.LEFT);
+        &#125;
+        return super.onOptionsItemSelected(item);
+    &#125;
+</code></pre>
 <p>而其他的所有操作，如设置title，logo等等方法，也要在提交了toolbar之后才能生效，例如</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"># 设置title无效
-<span class="token function">getSupportActionBar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setDisplayShowTitleEnabled</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre><code class="java"># 设置title无效
+getSupportActionBar().setDisplayShowTitleEnabled(false);
+</code></pre>
 <p>还有设置toolbar的title的颜色字体大小，等等信息</p>
 
     </div>

@@ -21,7 +21,7 @@
 <script src="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/highlight.min.js"></script>
 <link
     rel="stylesheet"
-    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/github.min.css"
+    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/Github Dark.min.css"
 />
 <script src="/js/lib/highlight.js"></script>
 
@@ -181,154 +181,155 @@
 <p><a target="_blank" rel="noopener" href="https://downloads.apache.org/kafka/3.3.1/kafka_2.13-3.3.1.tgz">Kafka</a>(<a target="_blank" rel="noopener" href="https://downloads.apache.org/kafka/3.3.1/kafka_2.13-3.3.1.tgz">https://downloads.apache.org/kafka/3.3.1/kafka_2.13-3.3.1.tgz</a>)</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/yahoo/CMAK/releases/download/3.0.0.6/cmak-3.0.0.6.zip">Cmak</a>(<a target="_blank" rel="noopener" href="https://github.com/yahoo/CMAK/releases/download/3.0.0.6/cmak-3.0.0.6.zip">https://github.com/yahoo/CMAK/releases/download/3.0.0.6/cmak-3.0.0.6.zip</a>)</p>
 <p>解压Kafka到<code>/opt</code>目录shell</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">tar</span> <span class="token parameter variable">-zxvf</span> kafka_2.13-3.3.1.tgz <span class="token parameter variable">-C</span> /opt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<pre><code class="shell">tar -zxvf kafka_2.13-3.3.1.tgz -C /opt
+</code></pre>
 <p>解压Cmak到<code>/opt</code>目录</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">unzip</span> cmak-3.0.0.6 <span class="token parameter variable">-C</span> /opt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<pre><code class="shell">unzip cmak-3.0.0.6 -C /opt
+</code></pre>
 <p>修改cmak的application.properties<code>/opt/cmak-3.0.0.6/conf/application.properties</code>的如下信息</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># The address the socket server listens on. If not configured, the host name will be equal to the value of</span>
-<span class="token comment"># java.net.InetAddress.getCanonicalHostName(), with PLAINTEXT listener name, and port 9092.</span>
-<span class="token comment">#   FORMAT:</span>
-<span class="token comment">#     listeners = listener_name://host_name:port</span>
-<span class="token comment">#   EXAMPLE:</span>
-<span class="token comment">#     listeners = PLAINTEXT://your.host.name:9092</span>
-<span class="token comment">#listeners=PLAINTEXT://:9092</span>
+<pre><code class="shell"># The address the socket server listens on. If not configured, the host name will be equal to the value of
+# java.net.InetAddress.getCanonicalHostName(), with PLAINTEXT listener name, and port 9092.
+#   FORMAT:
+#     listeners = listener_name://host_name:port
+#   EXAMPLE:
+#     listeners = PLAINTEXT://your.host.name:9092
+#listeners=PLAINTEXT://:9092
 
-<span class="token assign-left variable">listeners</span><span class="token operator">=</span>PLAINTEXT://10.254.0.2:9092
+listeners=PLAINTEXT://10.254.0.2:9092
 
-<span class="token comment"># Listener name, hostname and port the broker will advertise to clients.</span>
-<span class="token comment"># If not set, it uses the value for "listeners".</span>
-<span class="token comment">#advertised.listeners=PLAINTEXT://your.host.name:9092</span>
-<span class="token assign-left variable">advertised.listeners</span><span class="token operator">=</span>PLAINTEXT://10.254.0.2:9092
+# Listener name, hostname and port the broker will advertise to clients.
+# If not set, it uses the value for &quot;listeners&quot;.
+#advertised.listeners=PLAINTEXT://your.host.name:9092
+advertised.listeners=PLAINTEXT://10.254.0.2:9092
 
-<span class="token comment"># Settings prefixed with 'kafka-manager.' will be deprecated, use 'cmak.' instead.</span>
-<span class="token comment"># https://github.com/yahoo/CMAK/issues/713</span>
-kafka-manager.zkhosts<span class="token operator">=</span><span class="token string">"kafka-manager-zookeeper:2181"</span>
-<span class="token comment">#kafka-manager.zkhosts=$&#123;?ZK_HOSTS&#125;</span>
-kafka-manager.zkhosts<span class="token operator">=</span><span class="token string">"10.254.0.2:2181"</span>
-<span class="token assign-left variable">cmak.zkhosts</span><span class="token operator">=</span><span class="token string">"kafka-manager-zookeeper:2181"</span>
-<span class="token comment">#cmak.zkhosts=$&#123;?ZK_HOSTS&#125;</span>
-<span class="token assign-left variable">cmak.zkhosts</span><span class="token operator">=</span><span class="token string">"10.254.0.2:2181"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+# Settings prefixed with &#39;kafka-manager.&#39; will be deprecated, use &#39;cmak.&#39; instead.
+# https://github.com/yahoo/CMAK/issues/713
+kafka-manager.zkhosts=&quot;kafka-manager-zookeeper:2181&quot;
+#kafka-manager.zkhosts=$&#123;?ZK_HOSTS&#125;
+kafka-manager.zkhosts=&quot;10.254.0.2:2181&quot;
+cmak.zkhosts=&quot;kafka-manager-zookeeper:2181&quot;
+#cmak.zkhosts=$&#123;?ZK_HOSTS&#125;
+cmak.zkhosts=&quot;10.254.0.2:2181&quot;
+</code></pre>
 <p>构建如下脚本，一键启动Kafka所需要的Zookeeper服务、Kafka服务以及Cmak管理工具</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
+<pre><code class="shell">#!/bin/bash
 
-<span class="token assign-left variable">option</span><span class="token operator">=</span><span class="token variable">$1</span>
+option=$1
 
-<span class="token builtin class-name">echo</span> <span class="token string">"option <span class="token variable">$option</span>"</span>
+echo &quot;option $option&quot;
 
-<span class="token keyword">case</span> <span class="token variable">$option</span> <span class="token keyword">in</span> 
+case $option in 
 
-  <span class="token string">'start'</span><span class="token punctuation">)</span>
+  &#39;start&#39;)
 
-    <span class="token comment"># create kafka catalogue</span>
-    <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token parameter variable">-d</span> <span class="token string">'/root/kafka'</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-      <span class="token builtin class-name">echo</span> <span class="token string">'kafka catalogue exists'</span>
-    <span class="token keyword">else</span> 
-      <span class="token function">mkdir</span> /root/kafka
-      <span class="token builtin class-name">echo</span> <span class="token string">'create kafka catalogue success'</span>
-    <span class="token keyword">fi</span>
-    <span class="token comment"># create kafka log catalogue</span>
-    <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token parameter variable">-d</span> <span class="token string">"/root/kafka/log"</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-      <span class="token builtin class-name">echo</span> <span class="token string">'kafka log catalogue exists'</span>
-    <span class="token keyword">else</span>
-      <span class="token function">mkdir</span> /root/kafka/log
-      <span class="token builtin class-name">echo</span> <span class="token string">'create kafka log catalogue success'</span>
-    <span class="token keyword">fi</span>
-    <span class="token comment">#  create kafka pid catalogue</span>
-    <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token parameter variable">-d</span> <span class="token string">'/root/kafka/pid'</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-      <span class="token builtin class-name">echo</span> <span class="token string">'kafka pid catalogue exists'</span>
-    <span class="token keyword">else</span>
-      <span class="token function">mkdir</span> /root/kafka/pid
-      <span class="token builtin class-name">echo</span> <span class="token string">'create kafka pid catalogue success'</span>
-    <span class="token keyword">fi</span>
-    <span class="token comment"># creare kafka zk log file </span>
-    <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token parameter variable">-f</span> <span class="token string">'/root/kafka/log/zk.log'</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-      <span class="token builtin class-name">echo</span> <span class="token string">'kafka zk log file already exists'</span>
-    <span class="token keyword">else</span> 
-      <span class="token function">touch</span> /root/kafka/log/zk.log
-      <span class="token builtin class-name">echo</span> <span class="token string">'create kafka zk log file success'</span>
-    <span class="token keyword">fi</span>
-    <span class="token comment"># create zk pid file </span>
-    <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token parameter variable">-f</span> <span class="token string">'/root/kafka/pid/zk-pid'</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-      <span class="token builtin class-name">echo</span> <span class="token string">'kafka zk pid file already exists'</span>
-    <span class="token keyword">else</span>
-      <span class="token function">touch</span> /root/kafka/pid/zk-pid
-      <span class="token builtin class-name">echo</span> <span class="token string">'create kafka zk pid file success'</span>
-    <span class="token keyword">fi</span>
+    # create kafka catalogue
+    if [ -d &#39;/root/kafka&#39; ]; then
+      echo &#39;kafka catalogue exists&#39;
+    else 
+      mkdir /root/kafka
+      echo &#39;create kafka catalogue success&#39;
+    fi
+    # create kafka log catalogue
+    if [ -d &quot;/root/kafka/log&quot; ]; then
+      echo &#39;kafka log catalogue exists&#39;
+    else
+      mkdir /root/kafka/log
+      echo &#39;create kafka log catalogue success&#39;
+    fi
+    #  create kafka pid catalogue
+    if [ -d &#39;/root/kafka/pid&#39; ]; then
+      echo &#39;kafka pid catalogue exists&#39;
+    else
+      mkdir /root/kafka/pid
+      echo &#39;create kafka pid catalogue success&#39;
+    fi
+    # creare kafka zk log file 
+    if [ -f &#39;/root/kafka/log/zk.log&#39; ]; then
+      echo &#39;kafka zk log file already exists&#39;
+    else 
+      touch /root/kafka/log/zk.log
+      echo &#39;create kafka zk log file success&#39;
+    fi
+    # create zk pid file 
+    if [ -f &#39;/root/kafka/pid/zk-pid&#39; ]; then
+      echo &#39;kafka zk pid file already exists&#39;
+    else
+      touch /root/kafka/pid/zk-pid
+      echo &#39;create kafka zk pid file success&#39;
+    fi
 
-    <span class="token function">nohup</span>  /opt/kafka_2.13-3.3.1/bin/zookeeper-server-start.sh /opt/kafka_2.13-3.3.1/config/zookeeper.properties <span class="token operator">></span> /root/kafka/log/zk.log <span class="token operator"><span class="token file-descriptor important">2</span>></span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span>
-    <span class="token builtin class-name">echo</span> <span class="token variable">$!</span>
-    <span class="token builtin class-name">echo</span> <span class="token variable">$!</span> <span class="token operator">></span> /root/kafka/pid/zk-pid
-    <span class="token builtin class-name">echo</span> <span class="token string">'loading 1 minute ......'</span> 
-    <span class="token function">sleep</span> 1m
+    nohup  /opt/kafka_2.13-3.3.1/bin/zookeeper-server-start.sh /opt/kafka_2.13-3.3.1/config/zookeeper.properties &gt; /root/kafka/log/zk.log 2&gt;&amp;1 &amp;
+    echo $!
+    echo $! &gt; /root/kafka/pid/zk-pid
+    echo &#39;loading 1 minute ......&#39; 
+    sleep 1m
 
-    <span class="token comment"># create kafka server log file</span>
-    <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token parameter variable">-f</span> <span class="token string">'/root/kafka/log/kafka.log'</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-      <span class="token builtin class-name">echo</span> <span class="token string">'kafka server log file exists'</span>
-    <span class="token keyword">else</span> 
-      <span class="token function">touch</span> /root/kafka/log/kafka.log
-      <span class="token builtin class-name">echo</span> <span class="token string">'create kafka server log file success'</span>
-    <span class="token keyword">fi</span>
-    <span class="token comment"># create kafka pid pid file</span>
-    <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token parameter variable">-f</span> <span class="token string">'/root/kafka/pid/kafka-pid'</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-      <span class="token builtin class-name">echo</span> <span class="token string">'kafka server pid file exists'</span>
-    <span class="token keyword">else</span>
-      <span class="token function">touch</span> /root/kafka/pid/kafka-pid
-      <span class="token builtin class-name">echo</span> <span class="token string">'create kafka server pid file success'</span>
-    <span class="token keyword">fi</span>
+    # create kafka server log file
+    if [ -f &#39;/root/kafka/log/kafka.log&#39; ]; then
+      echo &#39;kafka server log file exists&#39;
+    else 
+      touch /root/kafka/log/kafka.log
+      echo &#39;create kafka server log file success&#39;
+    fi
+    # create kafka pid pid file
+    if [ -f &#39;/root/kafka/pid/kafka-pid&#39; ]; then
+      echo &#39;kafka server pid file exists&#39;
+    else
+      touch /root/kafka/pid/kafka-pid
+      echo &#39;create kafka server pid file success&#39;
+    fi
 
-    <span class="token builtin class-name">export</span> <span class="token assign-left variable">JMX_PORT</span><span class="token operator">=</span><span class="token number">9999</span>
+    export JMX_PORT=9999
 
-    <span class="token function">nohup</span> /opt/kafka_2.13-3.3.1/bin/kafka-server-start.sh /opt/kafka_2.13-3.3.1/config/server.properties <span class="token operator">></span> /root/kafka/log/kafka.log <span class="token operator"><span class="token file-descriptor important">2</span>></span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span>
-    <span class="token builtin class-name">echo</span> <span class="token variable">$!</span>
-    <span class="token builtin class-name">echo</span> <span class="token variable">$!</span> <span class="token operator">></span> /root/kafka/pid/kafka-pid
+    nohup /opt/kafka_2.13-3.3.1/bin/kafka-server-start.sh /opt/kafka_2.13-3.3.1/config/server.properties &gt; /root/kafka/log/kafka.log 2&gt;&amp;1 &amp;
+    echo $!
+    echo $! &gt; /root/kafka/pid/kafka-pid
 
 
-    <span class="token comment"># create kafka-manager cmak log file</span>
-      <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token parameter variable">-f</span> <span class="token string">'/root/kafka/log/cmak.log'</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-        <span class="token builtin class-name">echo</span> <span class="token string">'kafka manager cmak log file exists'</span>
-      <span class="token keyword">else</span>
-        <span class="token function">touch</span> /root/kafka/log/cmak.log
-        <span class="token builtin class-name">echo</span> <span class="token string">'create kafka manager cmak log file success'</span>
-      <span class="token keyword">fi</span>
-    <span class="token comment"># create kafka-manager cmak pid file</span>
-     <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token parameter variable">-f</span> <span class="token string">'/root/kafka/pid/cmak-pid'</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-       <span class="token builtin class-name">echo</span> <span class="token string">'kafka manager cmak pid file exists'</span>
-     <span class="token keyword">else</span> 
-       <span class="token function">touch</span> /root/kafka/pid/cmak-pid
-       <span class="token builtin class-name">echo</span> <span class="token string">'create kafka manager cmak pid file success'</span>
-     <span class="token keyword">fi</span>
+    # create kafka-manager cmak log file
+      if [ -f &#39;/root/kafka/log/cmak.log&#39; ]; then
+        echo &#39;kafka manager cmak log file exists&#39;
+      else
+        touch /root/kafka/log/cmak.log
+        echo &#39;create kafka manager cmak log file success&#39;
+      fi
+    # create kafka-manager cmak pid file
+     if [ -f &#39;/root/kafka/pid/cmak-pid&#39; ]; then
+       echo &#39;kafka manager cmak pid file exists&#39;
+     else 
+       touch /root/kafka/pid/cmak-pid
+       echo &#39;create kafka manager cmak pid file success&#39;
+     fi
 
-    <span class="token function">nohup</span> <span class="token function">bash</span> /opt/cmak-3.0.0.6/bin/cmak <span class="token operator">></span> /root/kafka/log/cmak.log <span class="token operator"><span class="token file-descriptor important">2</span>></span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span>
-    <span class="token builtin class-name">echo</span> <span class="token variable">$!</span>
-    <span class="token builtin class-name">echo</span> <span class="token variable">$!</span> <span class="token operator">></span> /root/kafka/pid/cmak-pid
+    nohup bash /opt/cmak-3.0.0.6/bin/cmak &gt; /root/kafka/log/cmak.log 2&gt;&amp;1 &amp;
+    echo $!
+    echo $! &gt; /root/kafka/pid/cmak-pid
 
-    <span class="token builtin class-name">echo</span> <span class="token string">'loading 1 minute ......'</span>
-    <span class="token function">sleep</span> 1m
-    <span class="token builtin class-name">echo</span> <span class="token string">'all server start success'</span>
-  <span class="token punctuation">;</span><span class="token punctuation">;</span>
+    echo &#39;loading 1 minute ......&#39;
+    sleep 1m
+    echo &#39;all server start success&#39;
+  ;;
 
-  <span class="token string">'stop'</span><span class="token punctuation">)</span>
-    <span class="token assign-left variable">zk_pid</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">cat</span> /root/kafka/pid/zk-pid<span class="token variable">)</span></span>
-    <span class="token function">kill</span> <span class="token parameter variable">-9</span> <span class="token variable">$zk_pid</span>
-    <span class="token builtin class-name">echo</span> <span class="token string">'kill zookeeper server success'</span>
+  &#39;stop&#39;)
+    zk_pid=$(cat /root/kafka/pid/zk-pid)
+    kill -9 $zk_pid
+    echo &#39;kill zookeeper server success&#39;
 
-    <span class="token assign-left variable">kafka_pid</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">cat</span> /root/kafka/pid/kafka-pid<span class="token variable">)</span></span>
-    <span class="token function">kill</span> <span class="token parameter variable">-9</span> <span class="token variable">$kafka_pid</span>
-    <span class="token builtin class-name">echo</span> <span class="token string">'kill kafka server success'</span>
+    kafka_pid=$(cat /root/kafka/pid/kafka-pid)
+    kill -9 $kafka_pid
+    echo &#39;kill kafka server success&#39;
 
-    <span class="token assign-left variable">cmak_pid</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">cat</span> /root/kafka/pid/cmak-pid<span class="token variable">)</span></span>
-    <span class="token function">kill</span> <span class="token parameter variable">-9</span> <span class="token variable">$cmak_pid</span>
-    <span class="token builtin class-name">echo</span> <span class="token string">'kill kafka manager cmak success'</span>     
-    <span class="token function">rm</span> <span class="token parameter variable">-rf</span> /opt/cmak-3.0.0.6/RUNNING_PID
-  <span class="token punctuation">;</span><span class="token punctuation">;</span>
+    cmak_pid=$(cat /root/kafka/pid/cmak-pid)
+    kill -9 $cmak_pid
+    echo &#39;kill kafka manager cmak success&#39;     
+    rm -rf /opt/cmak-3.0.0.6/RUNNING_PID
+  ;;
 
-  *<span class="token punctuation">)</span>
-    <span class="token builtin class-name">echo</span> <span class="token string">'option error'</span>
-  <span class="token punctuation">;</span><span class="token punctuation">;</span>
-<span class="token keyword">esac</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  *)
+    echo &#39;option error&#39;
+  ;;
+esac
+</code></pre>
 
     </div>
     

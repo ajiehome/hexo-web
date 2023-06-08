@@ -21,7 +21,7 @@
 <script src="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/highlight.min.js"></script>
 <link
     rel="stylesheet"
-    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/github.min.css"
+    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/Github Dark.min.css"
 />
 <script src="/js/lib/highlight.js"></script>
 
@@ -177,59 +177,59 @@
     </div>
     
     <div class="content" v-pre>
-        <h1 id="Git基本常用命令"><a href="#Git基本常用命令" class="headerlink" title="Git基本常用命令"></a>Git基本常用命令</h1><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#初始化一个Git仓库</span>
-<span class="token function">git</span> init
-<span class="token comment">#把文件添加到本地git仓储缓存</span>
-<span class="token function">git</span> <span class="token function">add</span> <span class="token string">"file name"</span>
-<span class="token comment">#把当前目录下全部文件加入到本地git仓储缓存</span>
-<span class="token function">git</span> <span class="token function">add</span> <span class="token builtin class-name">.</span>
-<span class="token comment">#把仓储缓存提交上去</span>
-<span class="token function">git</span> commit -m<span class="token string">"description"</span>
-<span class="token comment">#查看所有的远程分支</span>
-<span class="token function">git</span> remote <span class="token parameter variable">-v</span>
-<span class="token comment">#添加远程分支</span>
-<span class="token function">git</span> remote <span class="token function">add</span> origin <span class="token string">"git remote warehouse url"</span>
-<span class="token comment">#移除本地添加的远程分支</span>
-<span class="token function">git</span> remote remove <span class="token string">"remote branch name"</span>
-<span class="token comment">#获取远程分支与本地分支合并</span>
-<span class="token function">git</span> pull
-<span class="token comment">#把本地分支提交到远程分支</span>
-<span class="token function">git</span> push
-<span class="token comment">#查看所有的远程分支和本地分支</span>
+        <h1 id="Git基本常用命令"><a href="#Git基本常用命令" class="headerlink" title="Git基本常用命令"></a>Git基本常用命令</h1><pre><code class="shell">#初始化一个Git仓库
+git init
+#把文件添加到本地git仓储缓存
+git add &quot;file name&quot;
+#把当前目录下全部文件加入到本地git仓储缓存
+git add .
+#把仓储缓存提交上去
+git commit -m&quot;description&quot;
+#查看所有的远程分支
+git remote -v
+#添加远程分支
+git remote add origin &quot;git remote warehouse url&quot;
+#移除本地添加的远程分支
+git remote remove &quot;remote branch name&quot;
+#获取远程分支与本地分支合并
+git pull
+#把本地分支提交到远程分支
+git push
+#查看所有的远程分支和本地分支
 
-<span class="token function">git</span> branch <span class="token parameter variable">-a</span>
-<span class="token comment">#查看所有的本地分支</span>
-<span class="token function">git</span> branch
-<span class="token comment">#本地分支与远程分支关联</span>
-<span class="token function">git</span> branch --set-upstream-to<span class="token operator">=</span>origin/master master
-<span class="token comment">#创建本地分支</span>
-<span class="token function">git</span> branch <span class="token string">"local branch name"</span>
+git branch -a
+#查看所有的本地分支
+git branch
+#本地分支与远程分支关联
+git branch --set-upstream-to=origin/master master
+#创建本地分支
+git branch &quot;local branch name&quot;
 
-<span class="token comment">#清除输入过的账号密码</span>
-<span class="token function">git</span> config <span class="token parameter variable">--system</span> <span class="token parameter variable">--unset</span> credential.helper
+#清除输入过的账号密码
+git config --system --unset credential.helper
 
-<span class="token comment">#回滚</span>
-<span class="token function">git</span> log
-<span class="token function">git</span> checkout <span class="token punctuation">[</span>commit id<span class="token punctuation">]</span> <span class="token punctuation">[</span>file name<span class="token punctuation">]</span>
+#回滚
+git log
+git checkout [commit id] [file name]
 commit id:commit提交的编号
-<span class="token function">file</span> name:需要回滚的文件名称，不输入则整个版本回滚
+file name:需要回滚的文件名称，不输入则整个版本回滚
 
-<span class="token comment">#克隆远程仓库到本地</span>
-<span class="token comment">#fileName:为指定本地文件夹的名字，如果没有就会使用远程仓库默认s的名称</span>
-<span class="token function">git</span> clone <span class="token string">"git remote warehouse url"</span> <span class="token punctuation">[</span> specified <span class="token function">file</span> name<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="谨慎使用"><a href="#谨慎使用" class="headerlink" title="谨慎使用"></a>谨慎使用</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#'fatal: refusing to merge unrelated histories':无法合并两个不相干分支，此命令可强行合并建立关系</span>
-<span class="token function">git</span> pull origin master --allow-unrelated-histories<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
+#克隆远程仓库到本地
+#fileName:为指定本地文件夹的名字，如果没有就会使用远程仓库默认s的名称
+git clone &quot;git remote warehouse url&quot; [ specified file name]
+</code></pre>
+<h2 id="谨慎使用"><a href="#谨慎使用" class="headerlink" title="谨慎使用"></a>谨慎使用</h2><pre><code class="shell">#&#39;fatal: refusing to merge unrelated histories&#39;:无法合并两个不相干分支，此命令可强行合并建立关系
+git pull origin master --allow-unrelated-histories
+</code></pre>
 <h2 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h2><p><code>.gitignore</code>：文件的内容将是忽略提交的部分，也就是git不会检索该文件指定的文件和文件夹</p>
 <p>例如：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">HELP.md
+<pre><code class="shell">HELP.md
 target/
-<span class="token operator">!</span>.mvn/wrapper/maven-wrapper.jar
-<span class="token operator">!</span>**/src/main/**
-<span class="token operator">!</span>**/src/test/**
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
 
-<span class="token comment">### STS ###</span>
+### STS ###
 .apt_generated
 .classpath
 .factorypath
@@ -238,13 +238,13 @@ target/
 .springBeans
 .sts4-cache
 
-<span class="token comment">### IntelliJ IDEA ###</span>
+### IntelliJ IDEA ###
 .idea
 *.iws
 *.iml
 *.ipr
 
-<span class="token comment">### NetBeans ###</span>
+### NetBeans ###
 /nbproject/private/
 /nbbuild/
 /dist/
@@ -252,9 +252,9 @@ target/
 /.nb-gradle/
 build/
 
-<span class="token comment">### VS Code ###</span>
-.vscode/<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+### VS Code ###
+.vscode/
+</code></pre>
 <p>更多高级操作见下一篇：Git操作</p>
 
     </div>

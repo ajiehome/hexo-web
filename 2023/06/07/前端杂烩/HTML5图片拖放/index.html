@@ -21,7 +21,7 @@
 <script src="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/highlight.min.js"></script>
 <link
     rel="stylesheet"
-    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/github.min.css"
+    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/Github Dark.min.css"
 />
 <script src="/js/lib/highlight.js"></script>
 
@@ -177,55 +177,56 @@
     </div>
     
     <div class="content" v-pre>
-        <h2 id="实现HTML5中图片的拖放"><a href="#实现HTML5中图片的拖放" class="headerlink" title="实现HTML5中图片的拖放"></a>实现HTML5中图片的拖放</h2><pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">></span></span>
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>utf-8<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>阿杰之家<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text/css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
-			<span class="token selector">#div1,
-			#div2</span> <span class="token punctuation">&#123;</span>
-				<span class="token property">float</span><span class="token punctuation">:</span> left<span class="token punctuation">;</span>
-				<span class="token property">width</span><span class="token punctuation">:</span> 500px<span class="token punctuation">;</span>
-				<span class="token property">height</span><span class="token punctuation">:</span> 350px<span class="token punctuation">;</span>
-				<span class="token property">margin</span><span class="token punctuation">:</span> 10px<span class="token punctuation">;</span>
-				<span class="token property">padding</span><span class="token punctuation">:</span> 10px<span class="token punctuation">;</span>
-				<span class="token property">border</span><span class="token punctuation">:</span> 1px solid #aaaaaa<span class="token punctuation">;</span>
-			<span class="token punctuation">&#125;</span>
-		</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span>
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
-			<span class="token keyword">function</span> <span class="token function">allowDrop</span><span class="token punctuation">(</span><span class="token parameter">ev</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-				<span class="token comment">// 6、默认地，无法将数据/元素放置到其他元素中。如果需要设置允许放置，我们必须阻止对元素的默认处理方式,这要通过调用 ondragover 事件的 event.preventDefault() 方法.</span>
-				ev<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-			<span class="token punctuation">&#125;</span>
+        <h2 id="实现HTML5中图片的拖放"><a href="#实现HTML5中图片的拖放" class="headerlink" title="实现HTML5中图片的拖放"></a>实现HTML5中图片的拖放</h2><pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;utf-8&quot;&gt;
+        &lt;title&gt;阿杰之家&lt;/title&gt;
+        &lt;style type=&quot;text/css&quot;&gt;
+            #div1,
+            #div2 &#123;
+                float: left;
+                width: 500px;
+                height: 350px;
+                margin: 10px;
+                padding: 10px;
+                border: 1px solid #aaaaaa;
+            &#125;
+        &lt;/style&gt;
+        &lt;script&gt;
+            function allowDrop(ev) &#123;
+                // 6、默认地，无法将数据/元素放置到其他元素中。如果需要设置允许放置，我们必须阻止对元素的默认处理方式,这要通过调用 ondragover 事件的 event.preventDefault() 方法.
+                ev.preventDefault();
+            &#125;
 
-			<span class="token keyword">function</span> <span class="token function">drag</span><span class="token punctuation">(</span><span class="token parameter">ev</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-				<span class="token comment">// 3、dataTransfer.setData() 方法设置被拖数据的数据类型和值</span>
-				<span class="token comment">// 4、Text 是一个 DOMString 表示要添加到 drag object 的拖动数据的类型。值是可拖动元素的 id ("drag1")。</span>
-				ev<span class="token punctuation">.</span>dataTransfer<span class="token punctuation">.</span><span class="token function">setData</span><span class="token punctuation">(</span><span class="token string">"Text"</span><span class="token punctuation">,</span> ev<span class="token punctuation">.</span>target<span class="token punctuation">.</span>id<span class="token punctuation">)</span><span class="token punctuation">;</span>
-			<span class="token punctuation">&#125;</span>
+            function drag(ev) &#123;
+                // 3、dataTransfer.setData() 方法设置被拖数据的数据类型和值
+                // 4、Text 是一个 DOMString 表示要添加到 drag object 的拖动数据的类型。值是可拖动元素的 id (&quot;drag1&quot;)。
+                ev.dataTransfer.setData(&quot;Text&quot;, ev.target.id);
+            &#125;
 
-			<span class="token keyword">function</span> <span class="token function">drop</span><span class="token punctuation">(</span><span class="token parameter">ev</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-				<span class="token comment">// 8、调用 preventDefault() 来避免浏览器对数据的默认处理（drop 事件的默认行为是以链接形式打开）</span>
-				ev<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-				<span class="token comment">// 9、通过 dataTransfer.getData("Text") 方法获得被拖的数据。该方法将返回在 setData() 方法中设置为相同类型的任何数据。被拖数据是被拖元素的 id ("drag1")</span>
-				<span class="token keyword">var</span> data <span class="token operator">=</span> ev<span class="token punctuation">.</span>dataTransfer<span class="token punctuation">.</span><span class="token function">getData</span><span class="token punctuation">(</span><span class="token string">"Text"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-				<span class="token comment">// 10、把被拖元素追加到放置元素（目标元素）中</span>
-				ev<span class="token punctuation">.</span>target<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-			<span class="token punctuation">&#125;</span>
-		</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span>
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
-		<span class="token comment">&lt;!-- 5、ondragover 事件规定在何处放置被拖动的数据。 --></span>
-		<span class="token comment">&lt;!-- 7、当放置被拖数据时，会发生 drop 事件 --></span>
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>div1<span class="token punctuation">"</span></span> <span class="token attr-name">ondrop</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>drop(event)<span class="token punctuation">"</span></span> <span class="token attr-name">ondragover</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>allowDrop(event)<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-			<span class="token comment">&lt;!-- 1、为了使元素可拖动，把 draggable 属性设置为 true --></span>
-			<span class="token comment">&lt;!-- 2、ondragstart 属性调用了一个函数，drag(event)，它规定了被拖动的数据。 --></span>
-			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./img/logo.png<span class="token punctuation">"</span></span> <span class="token attr-name">draggable</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>true<span class="token punctuation">"</span></span> <span class="token attr-name">ondragstart</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>drag(event)<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>drag1<span class="token punctuation">"</span></span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>500<span class="token punctuation">"</span></span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>350<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
-		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>div2<span class="token punctuation">"</span></span> <span class="token attr-name">ondrop</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>drop(event)<span class="token punctuation">"</span></span> <span class="token attr-name">ondragover</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>allowDrop(event)<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+            function drop(ev) &#123;
+                // 8、调用 preventDefault() 来避免浏览器对数据的默认处理（drop 事件的默认行为是以链接形式打开）
+                ev.preventDefault();
+                // 9、通过 dataTransfer.getData(&quot;Text&quot;) 方法获得被拖的数据。该方法将返回在 setData() 方法中设置为相同类型的任何数据。被拖数据是被拖元素的 id (&quot;drag1&quot;)
+                var data = ev.dataTransfer.getData(&quot;Text&quot;);
+                // 10、把被拖元素追加到放置元素（目标元素）中
+                ev.target.appendChild(document.getElementById(data));
+            &#125;
+        &lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;!-- 5、ondragover 事件规定在何处放置被拖动的数据。 --&gt;
+        &lt;!-- 7、当放置被拖数据时，会发生 drop 事件 --&gt;
+        &lt;div id=&quot;div1&quot; ondrop=&quot;drop(event)&quot; ondragover=&quot;allowDrop(event)&quot;&gt;
+            &lt;!-- 1、为了使元素可拖动，把 draggable 属性设置为 true --&gt;
+            &lt;!-- 2、ondragstart 属性调用了一个函数，drag(event)，它规定了被拖动的数据。 --&gt;
+            &lt;img src=&quot;./img/logo.png&quot; draggable=&quot;true&quot; ondragstart=&quot;drag(event)&quot; id=&quot;drag1&quot; width=&quot;500&quot; height=&quot;350&quot;&gt;&lt;/div&gt;
+        &lt;div id=&quot;div2&quot; ondrop=&quot;drop(event)&quot; ondragover=&quot;allowDrop(event)&quot;&gt;&lt;/div&gt;
 
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 
     </div>
     

@@ -21,7 +21,7 @@
 <script src="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/highlight.min.js"></script>
 <link
     rel="stylesheet"
-    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/github.min.css"
+    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/Github Dark.min.css"
 />
 <script src="/js/lib/highlight.js"></script>
 
@@ -354,42 +354,42 @@
     <div class="description">
         <div class="content" v-pre>
             
-            <h1 id="MySQL同表多外键"><a href="#MySQL同表多外键" class="headerlink" title="MySQL同表多外键"></a>MySQL同表多外键</h1><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">drop</span> <span class="token keyword">database</span> <span class="token keyword">if</span> <span class="token keyword">exists</span> test<span class="token punctuation">;</span>
-<span class="token keyword">create</span> <span class="token keyword">database</span> <span class="token keyword">if</span> <span class="token operator">not</span> <span class="token keyword">exists</span> test<span class="token punctuation">;</span>
+            <h1 id="MySQL同表多外键"><a href="#MySQL同表多外键" class="headerlink" title="MySQL同表多外键"></a>MySQL同表多外键</h1><pre><code class="sql">drop database if exists test;
+create database if not exists test;
 
-<span class="token keyword">use</span> test<span class="token punctuation">;</span>
+use test;
 
-<span class="token keyword">drop</span> <span class="token keyword">table</span> <span class="token keyword">if</span> <span class="token keyword">exists</span> <span class="token keyword">user</span><span class="token punctuation">;</span>
+drop table if exists user;
 
-<span class="token keyword">create</span> <span class="token keyword">table</span>  <span class="token keyword">if</span> <span class="token operator">not</span> <span class="token keyword">exists</span> <span class="token keyword">user</span><span class="token punctuation">(</span>
-	user_id <span class="token keyword">bigint</span><span class="token punctuation">(</span><span class="token number">18</span><span class="token punctuation">)</span> <span class="token keyword">comment</span> <span class="token string">'用户ID'</span><span class="token punctuation">,</span>
-	user_name <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token number">128</span><span class="token punctuation">)</span> <span class="token keyword">comment</span> <span class="token string">'用户名称'</span><span class="token punctuation">,</span>
-	user_sex <span class="token keyword">int</span><span class="token punctuation">(</span><span class="token number">11</span><span class="token punctuation">)</span> <span class="token keyword">comment</span> <span class="token string">'用户性别'</span><span class="token punctuation">,</span>
-	pass_word <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token number">128</span><span class="token punctuation">)</span> <span class="token keyword">comment</span> <span class="token string">'用户密码'</span><span class="token punctuation">,</span>
-	<span class="token keyword">primary</span> <span class="token keyword">key</span> <span class="token punctuation">(</span>user_id<span class="token punctuation">)</span>
-<span class="token punctuation">)</span><span class="token keyword">engine</span> <span class="token operator">=</span> <span class="token keyword">innodb</span> <span class="token keyword">default</span> <span class="token keyword">charset</span> <span class="token operator">=</span> utf8<span class="token punctuation">;</span>
+create table  if not exists user(
+    user_id bigint(18) comment &#39;用户ID&#39;,
+    user_name varchar(128) comment &#39;用户名称&#39;,
+    user_sex int(11) comment &#39;用户性别&#39;,
+    pass_word varchar(128) comment &#39;用户密码&#39;,
+    primary key (user_id)
+)engine = innodb default charset = utf8;
 
-<span class="token keyword">drop</span> <span class="token keyword">table</span> <span class="token keyword">if</span> <span class="token keyword">exists</span> user_related<span class="token punctuation">;</span>
+drop table if exists user_related;
 
-<span class="token keyword">create</span> <span class="token keyword">table</span> <span class="token keyword">if</span> <span class="token operator">not</span> <span class="token keyword">exists</span> user_related<span class="token punctuation">(</span>
-	related_id <span class="token keyword">bigint</span><span class="token punctuation">(</span><span class="token number">18</span><span class="token punctuation">)</span> <span class="token keyword">comment</span> <span class="token string">'关系ID'</span><span class="token punctuation">,</span>
-	from_user_id <span class="token keyword">bigint</span><span class="token punctuation">(</span><span class="token number">18</span><span class="token punctuation">)</span> <span class="token keyword">comment</span> <span class="token string">'用户ID'</span><span class="token punctuation">,</span>
-	to_user_id <span class="token keyword">bigint</span><span class="token punctuation">(</span><span class="token number">18</span><span class="token punctuation">)</span> <span class="token keyword">comment</span> <span class="token string">'用户ID'</span><span class="token punctuation">,</span>
-	<span class="token keyword">primary</span> <span class="token keyword">key</span> <span class="token punctuation">(</span>related_id<span class="token punctuation">)</span><span class="token punctuation">,</span>
-	<span class="token keyword">foreign</span> <span class="token keyword">key</span> <span class="token punctuation">(</span>from_user_id<span class="token punctuation">)</span> <span class="token keyword">references</span> <span class="token keyword">user</span> <span class="token punctuation">(</span>user_id<span class="token punctuation">)</span><span class="token punctuation">,</span>
-	<span class="token keyword">foreign</span> <span class="token keyword">key</span> <span class="token punctuation">(</span>to_user_id<span class="token punctuation">)</span> <span class="token keyword">references</span> <span class="token keyword">user</span> <span class="token punctuation">(</span>user_id<span class="token punctuation">)</span>
-<span class="token punctuation">)</span><span class="token keyword">engine</span> <span class="token operator">=</span> <span class="token keyword">innodb</span> <span class="token keyword">default</span> <span class="token keyword">charset</span> <span class="token operator">=</span> utf8<span class="token punctuation">;</span>
+create table if not exists user_related(
+    related_id bigint(18) comment &#39;关系ID&#39;,
+    from_user_id bigint(18) comment &#39;用户ID&#39;,
+    to_user_id bigint(18) comment &#39;用户ID&#39;,
+    primary key (related_id),
+    foreign key (from_user_id) references user (user_id),
+    foreign key (to_user_id) references user (user_id)
+)engine = innodb default charset = utf8;
 
 
-<span class="token keyword">lock</span> <span class="token keyword">tables</span> <span class="token keyword">user</span> <span class="token keyword">write</span><span class="token punctuation">;</span>
-<span class="token keyword">insert</span> <span class="token keyword">into</span> <span class="token keyword">user</span><span class="token punctuation">(</span>user_id<span class="token punctuation">,</span>user_name<span class="token punctuation">,</span>user_sex<span class="token punctuation">,</span>pass_word<span class="token punctuation">)</span> <span class="token keyword">values</span> <span class="token punctuation">(</span><span class="token number">012345678911121314</span><span class="token punctuation">,</span><span class="token string">'用户1'</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token string">'123456'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">insert</span> <span class="token keyword">into</span> <span class="token keyword">user</span><span class="token punctuation">(</span>user_id<span class="token punctuation">,</span>user_name<span class="token punctuation">,</span>user_sex<span class="token punctuation">,</span>pass_word<span class="token punctuation">)</span> <span class="token keyword">values</span> <span class="token punctuation">(</span><span class="token number">012345678911121315</span><span class="token punctuation">,</span><span class="token string">'用户2'</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token string">'123456'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">unlock</span> <span class="token keyword">tables</span><span class="token punctuation">;</span>
+lock tables user write;
+insert into user(user_id,user_name,user_sex,pass_word) values (012345678911121314,&#39;用户1&#39;,1,&#39;123456&#39;);
+insert into user(user_id,user_name,user_sex,pass_word) values (012345678911121315,&#39;用户2&#39;,1,&#39;123456&#39;);
+unlock tables;
 
-<span class="token keyword">lock</span> <span class="token keyword">tables</span> user_related <span class="token keyword">write</span><span class="token punctuation">;</span>
-<span class="token keyword">insert</span> <span class="token keyword">into</span> user_related <span class="token punctuation">(</span>related_id<span class="token punctuation">,</span>from_user_id<span class="token punctuation">,</span>to_user_id<span class="token punctuation">)</span> <span class="token keyword">values</span> <span class="token punctuation">(</span><span class="token number">012345678911121313</span><span class="token punctuation">,</span><span class="token number">012345678911121314</span><span class="token punctuation">,</span><span class="token number">012345678911121315</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">unlock</span> <span class="token keyword">tables</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+lock tables user_related write;
+insert into user_related (related_id,from_user_id,to_user_id) values (012345678911121313,012345678911121314,012345678911121315);
+unlock tables;
+</code></pre>
 <p>一个用户表设置多个外键，外键的名字可以不和原表一样，只要类型一致就可</p>
 
             
@@ -430,43 +430,40 @@
         <div class="content" v-pre>
             
             <h1 id="MySQL命令集"><a href="#MySQL命令集" class="headerlink" title="MySQL命令集"></a>MySQL命令集</h1><p><strong>MySQL连接</strong></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#本地连接</span>
-<span class="token comment">#password:可直接填写密码，或者直接回车，然后再保密输入密码</span>
-mysql <span class="token parameter variable">-u</span> root <span class="token parameter variable">-p</span> <span class="token string">"password"</span><span class="token punctuation">;</span>
-<span class="token comment">#远程连接</span>
-mysql <span class="token parameter variable">-h</span> <span class="token string">"ip"</span> <span class="token parameter variable">-u</span> root <span class="token parameter variable">-p</span> <span class="token string">"password"</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+<pre><code class="shell">#本地连接
+#password:可直接填写密码，或者直接回车，然后再保密输入密码
+mysql -u root -p &quot;password&quot;;
+#远程连接
+mysql -h &quot;ip&quot; -u root -p &quot;password&quot;;
+</code></pre>
 <p><strong>修改密码</strong></p>
 <p>进入mysql的bin目录下运行cmd</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#没有密码时可以省略 -p 参数</span>
-mysqladmin  <span class="token parameter variable">-uroot</span> <span class="token parameter variable">-p</span> <span class="token string">"old password"</span> password <span class="token string">"new password"</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
+<pre><code class="shell">#没有密码时可以省略 -p 参数
+mysqladmin  -uroot -p &quot;old password&quot; password &quot;new password&quot;;
+</code></pre>
 <p><strong>新建用户</strong></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">grant <span class="token punctuation">[</span>select,insert,update,delete<span class="token punctuation">]</span> on <span class="token string">"database"</span>.* to <span class="token string">"user name"</span>@<span class="token string">"login host"</span> identified by <span class="token string">"password"</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<pre><code class="shell">grant [select,insert,update,delete] on &quot;database&quot;.* to &quot;user name&quot;@&quot;login host&quot; identified by &quot;password&quot;;
+</code></pre>
 <p>例如：新建一个number1用户，密码为123456，该用户只有对db1数据库所有的表有读取权限，且只能在MySQL所在的主机上登录，取消密码则重复这行命令，只是把密码置空</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">grant <span class="token keyword">select</span> on db1.* to number1@localhost identified by <span class="token string">"123456"</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-
-
+<pre><code class="shell">grant select on db1.* to number1@localhost identified by &quot;123456&quot;;
+</code></pre>
 <p><strong>查询连接</strong></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 查询连接超时时间</span>
-show variables like <span class="token string">'%timeout%'</span><span class="token punctuation">;</span>
-<span class="token comment"># 查询连接数</span>
-show status like  <span class="token string">'Threads%'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
+<pre><code class="shell"># 查询连接超时时间
+show variables like &#39;%timeout%&#39;;
+# 查询连接数
+show status like  &#39;Threads%&#39;;
+</code></pre>
 <p>Threads_connected ：这个数值指的是打开的连接数.</p>
 <p>Threads_running ：这个数值指的是激活的连接数，这个数值一般远低于connected数值.</p>
 <p>Threads_connected 跟show processlist结果相同，表示当前连接数。准确的来说，Threads_running是代表当前并发数</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#查询最大连接数</span>
-show variables like <span class="token string">'max_connections'</span><span class="token punctuation">;</span>
-<span class="token comment">#修改最大连接数</span>
-<span class="token comment">#方法一</span>
-<span class="token builtin class-name">set</span> global max_connections <span class="token operator">=</span> <span class="token number">1000</span><span class="token punctuation">;</span>
-<span class="token comment">#方法二 修改my.conf配置文件：加上或者修改max_connections</span>
-max_connections <span class="token operator">=</span> <span class="token number">1000</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+<pre><code class="shell">#查询最大连接数
+show variables like &#39;max_connections&#39;;
+#修改最大连接数
+#方法一
+set global max_connections = 1000;
+#方法二 修改my.conf配置文件：加上或者修改max_connections
+max_connections = 1000
+</code></pre>
 
             
         </div>
@@ -476,6 +473,102 @@ max_connections <span class="token operator">=</span> <span class="token number"
         
     </div>
     <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E5%91%BD%E4%BB%A4%E9%9B%86/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E7%94%A8%E6%88%B7%E4%B8%8E%E6%8E%88%E6%9D%83/">
+        <h2 class="post-title">MySQL用户与授权</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                数据库
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="MySQL用户与授权"><a href="#MySQL用户与授权" class="headerlink" title="MySQL用户与授权"></a>MySQL用户与授权</h1><p><strong>1、创建用户</strong></p>
+<pre><code class="shell">create user &#39;userName&#39;@&#39;host&#39; identified by &#39;passWord&#39;;
+</code></pre>
+<ul>
+<li><code>userName</code>：你需要创建的用户名</li>
+<li><code>host</code>：指定该用户可以在那个主机上可以登录，本地为<code>localhost</code>，任意主机可以使用通配符<code>%</code></li>
+<li><code>passWord</code>：指定该用户的登录密码，密码可以为空，</li>
+</ul>
+<p><strong>例如：</strong></p>
+<pre><code class="shell">create user &#39;admin&#39;@&#39;localhost&#39; identified by &#39;123456&#39;;
+create user &#39;admin&#39;@&#39;192.168.1.101&#39; identified by &#39;123456&#39;;
+create user &#39;admin&#39;@&#39;%&#39; identified by &#39;123456&#39;;
+create user &#39;admin&#39;@&#39;%&#39; identified by &#39;&#39;;
+create user &#39;admin&#39;@&#39;%&#39;;
+</code></pre>
+<p><strong>2、授权</strong></p>
+<pre><code class="shell">grant &#39;privileges&#39; on &#39;database.table&#39; to &#39;userName&#39;@&#39;host&#39;
+</code></pre>
+<ul>
+<li><code>privileges</code>：用户操作的权限，如<code>select</code>，<code>insert</code>，<code>update</code>等，如果全部需要，使用<code>all</code></li>
+<li><code>database</code>：授权的数据库名</li>
+<li><code>table</code>：授权的数据库表名称，如果对该数据库的所有表都授权可使用<code>*</code>通配符</li>
+</ul>
+<p><strong>例如：</strong></p>
+<pre><code class="shell">grant select, insert on test.user TO &#39;admin&#39;@&#39;%&#39;;
+grant all on test.* to &#39;admin&#39;@&#39;%&#39;;
+grant all on *.* to &#39;admin&#39;@&#39;%&#39;;
+</code></pre>
+<p><strong>注意：</strong></p>
+<p>用以上命令授权的用户不能给其他用户授权，如果需要使该用户可以授权，使用如下命令</p>
+<pre><code class="shell">grant &#39;privileges&#39; on &#39;database.table&#39; to &#39;username&#39;@&#39;host&#39; with grant option;
+</code></pre>
+<p><strong>3、设置与更改用户密码</strong></p>
+<pre><code class="shell">set password for &#39;userName&#39;@&#39;host&#39; = password(&#39;passWord&#39;);
+</code></pre>
+<ul>
+<li><code>userName</code>：用户的名称</li>
+<li><code>host</code>：用户登录范围</li>
+<li><code>passWord</code>：用户的新密码</li>
+</ul>
+<p><strong>例如：</strong></p>
+<pre><code class="shell">set password for &#39;admin&#39;@&#39;%&#39; = password(&quot;123456&quot;);
+</code></pre>
+<p><strong>4、撤销用户权限</strong></p>
+<pre><code class="shell">revoke &#39;privilege&#39; on &#39;database.table&#39; from &#39;username&#39;@&#39;host&#39;;
+</code></pre>
+<ul>
+<li><code>privilege</code>, <code>database</code>, <code>table</code>：同授权部分，参照授权部分</li>
+</ul>
+<p><strong>例如：</strong></p>
+<pre><code class="shell">revoke select on *.* from &#39;admin&#39;@&#39;%&#39;;
+</code></pre>
+<p><strong>注意</strong></p>
+<p>假如你在给用户<code>&#39;pig&#39;@&#39;%&#39;</code>授权的时候是这样的（或类似的）：<code>GRANT SELECT ON test.user TO &#39;pig&#39;@&#39;%&#39;</code>，则在使用<code>REVOKE SELECT ON *.* FROM &#39;pig&#39;@&#39;%&#39;;</code>命令并不能撤销该用户对test数据库中user表的<code>SELECT</code> 操作。相反，如果授权使用的是<code>GRANT SELECT ON *.* TO &#39;pig&#39;@&#39;%&#39;;</code>则<code>REVOKE SELECT ON test.user FROM &#39;pig&#39;@&#39;%&#39;;</code>命令也不能撤销该用户对test数据库中user表的<code>Select</code>权限</p>
+<p>具体信息可以用命令<code>SHOW GRANTS FOR &#39;pig&#39;@&#39;%&#39;;</code> 查看</p>
+<p><strong>5、删除用户</strong></p>
+<pre><code class="shell">drop user &#39;username&#39;@&#39;host&#39;;
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E7%94%A8%E6%88%B7%E4%B8%8E%E6%8E%88%E6%9D%83/" class="go-post">阅读全文</a>
 </div>
 
 <div class="post">
@@ -506,24 +599,25 @@ max_connections <span class="token operator">=</span> <span class="token number"
         <div class="content" v-pre>
             
             <p><strong>1、数据库的查询</strong></p>
-<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment">//选择指定列</span>
-<span class="token keyword">select</span>  name<span class="token punctuation">,</span> age <span class="token keyword">from</span> demo1<span class="token punctuation">;</span>
-<span class="token comment">//定义列的别名</span>
-<span class="token keyword">select</span> name <span class="token keyword">as</span> 姓名 <span class="token punctuation">,</span>age <span class="token keyword">as</span> 年龄 <span class="token keyword">from</span> demo1<span class="token punctuation">;</span>
-<span class="token comment">//当定义列的别名有空格的时候必须要用引号将标题括起来</span>
-<span class="token keyword">select</span> name <span class="token keyword">as</span> <span class="token string">"student name"</span> <span class="token punctuation">,</span>age <span class="token keyword">as</span> <span class="token string">"student age"</span> <span class="token keyword">from</span> demo1<span class="token punctuation">;</span>
-<span class="token comment">//替换查询结果的数据，end后面的字符串代替的是整个case...end语句，不然会直接输出整个case...end语句</span>
-<span class="token keyword">select</span> name<span class="token punctuation">,</span>age<span class="token punctuation">,</span>
-  <span class="token keyword">case</span>
-    <span class="token keyword">when</span> age <span class="token operator">is</span> <span class="token boolean">null</span> <span class="token keyword">then</span> <span class="token string">"尚未设置"</span>
-    <span class="token keyword">when</span> age <span class="token operator">&lt;</span> <span class="token number">18</span> <span class="token keyword">then</span> <span class="token string">"未成年"</span>
-    <span class="token keyword">else</span> <span class="token string">"成年"</span>
-  <span class="token keyword">end</span> <span class="token keyword">as</span> <span class="token string">"是否成年"</span>
-  <span class="token keyword">from</span> demo1<span class="token punctuation">;</span>
-<span class="token comment">//计算列值，把age扩大10被输出</span>
-<span class="token keyword">select</span> name<span class="token punctuation">,</span>age<span class="token operator">*</span><span class="token number">10</span> <span class="token keyword">as</span> <span class="token string">"年龄x10"</span> <span class="token keyword">from</span> demo1<span class="token punctuation">;</span>
-<span class="token comment">//消除重复的行</span>
-<span class="token keyword">select</span> <span class="token keyword">distinct</span>  name<span class="token punctuation">,</span>age<span class="token punctuation">,</span>sex <span class="token keyword">from</span> demo1<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre><code class="sql">//选择指定列
+select  name, age from demo1;
+//定义列的别名
+select name as 姓名 ,age as 年龄 from demo1;
+//当定义列的别名有空格的时候必须要用引号将标题括起来
+select name as &quot;student name&quot; ,age as &quot;student age&quot; from demo1;
+//替换查询结果的数据，end后面的字符串代替的是整个case...end语句，不然会直接输出整个case...end语句
+select name,age,
+  case
+    when age is null then &quot;尚未设置&quot;
+    when age &lt; 18 then &quot;未成年&quot;
+    else &quot;成年&quot;
+  end as &quot;是否成年&quot;
+  from demo1;
+//计算列值，把age扩大10被输出
+select name,age*10 as &quot;年龄x10&quot; from demo1;
+//消除重复的行
+select distinct  name,age,sex from demo1;
+</code></pre>
 <p>聚合函数</p>
 <table>
 <thead>
@@ -561,16 +655,16 @@ max_connections <span class="token operator">=</span> <span class="token number"
 <td>返回给定表达式中所有值的方差</td>
 </tr>
 </tbody></table>
-<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">select</span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token keyword">as</span> <span class="token string">'一共有多少组'</span>  <span class="token keyword">from</span> demo1<span class="token punctuation">;</span>
- <span class="token keyword">select</span> <span class="token function">max</span><span class="token punctuation">(</span>age<span class="token punctuation">)</span> <span class="token keyword">as</span> <span class="token string">'年龄最大的为'</span> <span class="token keyword">from</span> demo1<span class="token punctuation">;</span>
-<span class="token keyword">select</span> <span class="token function">min</span><span class="token punctuation">(</span>age<span class="token punctuation">)</span> <span class="token keyword">as</span> <span class="token string">'年龄最小的为'</span> <span class="token keyword">from</span> demo1<span class="token punctuation">;</span>
-<span class="token keyword">select</span> <span class="token function">sum</span><span class="token punctuation">(</span>age<span class="token punctuation">)</span> <span class="token keyword">as</span> <span class="token string">'所有年龄之和'</span> <span class="token keyword">from</span> demo1<span class="token punctuation">;</span>
-<span class="token keyword">select</span> <span class="token function">avg</span><span class="token punctuation">(</span>age<span class="token punctuation">)</span> <span class="token keyword">as</span> <span class="token string">'平均年龄为'</span> <span class="token keyword">from</span> demo1<span class="token punctuation">;</span>
-<span class="token keyword">select</span> std<span class="token punctuation">(</span>age<span class="token punctuation">)</span> <span class="token keyword">as</span> <span class="token string">"标准差"</span> <span class="token keyword">from</span> demo1<span class="token punctuation">;</span>
-<span class="token keyword">select</span> variance<span class="token punctuation">(</span>age<span class="token punctuation">)</span> <span class="token keyword">as</span> <span class="token string">"方差"</span> <span class="token keyword">from</span> demo1<span class="token punctuation">;</span>
-<span class="token comment">//返回一组指定列的的所有非null的值，这些值一个接一个的放置，中间用逗号隔开</span>
-<span class="token keyword">select</span> group_concat<span class="token punctuation">(</span>age<span class="token punctuation">)</span> <span class="token keyword">from</span> demo1<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+<pre><code class="sql">select count(*) as &#39;一共有多少组&#39;  from demo1;
+ select max(age) as &#39;年龄最大的为&#39; from demo1;
+select min(age) as &#39;年龄最小的为&#39; from demo1;
+select sum(age) as &#39;所有年龄之和&#39; from demo1;
+select avg(age) as &#39;平均年龄为&#39; from demo1;
+select std(age) as &quot;标准差&quot; from demo1;
+select variance(age) as &quot;方差&quot; from demo1;
+//返回一组指定列的的所有非null的值，这些值一个接一个的放置，中间用逗号隔开
+select group_concat(age) from demo1;
+</code></pre>
 <table>
 <thead>
 <tr>
@@ -607,8 +701,8 @@ max_connections <span class="token operator">=</span> <span class="token number"
 </div>
 
 <div class="post">
-    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E7%94%A8%E6%88%B7%E4%B8%8E%E6%8E%88%E6%9D%83/">
-        <h2 class="post-title">MySQL用户与授权</h2>
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E6%8C%81%E4%B9%85%E5%8C%96/">
+        <h2 class="post-title">Redis持久化</h2>
     </a>
     <div class="category-and-date">
         
@@ -633,66 +727,14 @@ max_connections <span class="token operator">=</span> <span class="token number"
     <div class="description">
         <div class="content" v-pre>
             
-            <h1 id="MySQL用户与授权"><a href="#MySQL用户与授权" class="headerlink" title="MySQL用户与授权"></a>MySQL用户与授权</h1><p><strong>1、创建用户</strong></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">create user <span class="token string">'userName'</span>@<span class="token string">'host'</span> identified by <span class="token string">'passWord'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<ul>
-<li><code>userName</code>：你需要创建的用户名</li>
-<li><code>host</code>：指定该用户可以在那个主机上可以登录，本地为<code>localhost</code>，任意主机可以使用通配符<code>%</code></li>
-<li><code>passWord</code>：指定该用户的登录密码，密码可以为空，</li>
-</ul>
-<p><strong>例如：</strong></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">create user <span class="token string">'admin'</span>@<span class="token string">'localhost'</span> identified by <span class="token string">'123456'</span><span class="token punctuation">;</span>
-create user <span class="token string">'admin'</span>@<span class="token string">'192.168.1.101'</span> identified by <span class="token string">'123456'</span><span class="token punctuation">;</span>
-create user <span class="token string">'admin'</span>@<span class="token string">'%'</span> identified by <span class="token string">'123456'</span><span class="token punctuation">;</span>
-create user <span class="token string">'admin'</span>@<span class="token string">'%'</span> identified by <span class="token string">''</span><span class="token punctuation">;</span>
-create user <span class="token string">'admin'</span>@<span class="token string">'%'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>2、授权</strong></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">grant <span class="token string">'privileges'</span> on <span class="token string">'database.table'</span> to <span class="token string">'userName'</span>@<span class="token string">'host'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<ul>
-<li><code>privileges</code>：用户操作的权限，如<code>select</code>，<code>insert</code>，<code>update</code>等，如果全部需要，使用<code>all</code></li>
-<li><code>database</code>：授权的数据库名</li>
-<li><code>table</code>：授权的数据库表名称，如果对该数据库的所有表都授权可使用<code>*</code>通配符</li>
-</ul>
-<p><strong>例如：</strong></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">grant select, insert on test.user TO <span class="token string">'admin'</span>@<span class="token string">'%'</span><span class="token punctuation">;</span>
-grant all on test.* to <span class="token string">'admin'</span>@<span class="token string">'%'</span><span class="token punctuation">;</span>
-grant all on *.* to <span class="token string">'admin'</span>@<span class="token string">'%'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>注意：</strong></p>
-<p>用以上命令授权的用户不能给其他用户授权，如果需要使该用户可以授权，使用如下命令</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">grant <span class="token string">'privileges'</span> on <span class="token string">'database.table'</span> to <span class="token string">'username'</span>@<span class="token string">'host'</span> with grant option<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-
-
-<p><strong>3、设置与更改用户密码</strong></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">set</span> password <span class="token keyword">for</span> <span class="token string">'userName'</span>@<span class="token string">'host'</span> <span class="token operator">=</span> password<span class="token punctuation">(</span><span class="token string">'passWord'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<ul>
-<li><code>userName</code>：用户的名称</li>
-<li><code>host</code>：用户登录范围</li>
-<li><code>passWord</code>：用户的新密码</li>
-</ul>
-<p><strong>例如：</strong></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">set</span> password <span class="token keyword">for</span> <span class="token string">'admin'</span>@<span class="token string">'%'</span> <span class="token operator">=</span> password<span class="token punctuation">(</span><span class="token string">"123456"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p><strong>4、撤销用户权限</strong></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">revoke <span class="token string">'privilege'</span> on <span class="token string">'database.table'</span> from <span class="token string">'username'</span>@<span class="token string">'host'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<ul>
-<li><code>privilege</code>, <code>database</code>, <code>table</code>：同授权部分，参照授权部分</li>
-</ul>
-<p><strong>例如：</strong></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">revoke <span class="token keyword">select</span> on *.* from <span class="token string">'admin'</span>@<span class="token string">'%'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p><strong>注意</strong></p>
-<p>假如你在给用户<code>&#39;pig&#39;@&#39;%&#39;</code>授权的时候是这样的（或类似的）：<code>GRANT SELECT ON test.user TO &#39;pig&#39;@&#39;%&#39;</code>，则在使用<code>REVOKE SELECT ON *.* FROM &#39;pig&#39;@&#39;%&#39;;</code>命令并不能撤销该用户对test数据库中user表的<code>SELECT</code> 操作。相反，如果授权使用的是<code>GRANT SELECT ON *.* TO &#39;pig&#39;@&#39;%&#39;;</code>则<code>REVOKE SELECT ON test.user FROM &#39;pig&#39;@&#39;%&#39;;</code>命令也不能撤销该用户对test数据库中user表的<code>Select</code>权限</p>
-<p>具体信息可以用命令<code>SHOW GRANTS FOR &#39;pig&#39;@&#39;%&#39;;</code> 查看</p>
-<p><strong>5、删除用户</strong></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">drop user <span class="token string">'username'</span>@<span class="token string">'host'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+            <h1 id="redis的持久化"><a href="#redis的持久化" class="headerlink" title="redis的持久化"></a>redis的持久化</h1><ol>
+<li>aop（append only file）<br> 把每一次的数据变化都写入到本地文件 ——— 全持久化模式以日志的形式记录 每一次的写、删操作，以文本的形式记录</li>
+<li>rdb<br> 定时把redis中的数据写入到本地文件 ——— 半持久化模式<br> fork一个字进程，把数据写入临时文件，然后在替换掉本地的文件，使用二进制压缩</li>
+</ol>
+<h2 id="RDB持久化配置"><a href="#RDB持久化配置" class="headerlink" title="RDB持久化配置"></a>RDB持久化配置</h2><p>Redis会将数据集的快照dump到dump.rdb文件中。此外，我们也可以通过配置文件来修改Redis服务器dump快照的频率，在打开6379.conf文件之后，我们搜索save，可以看到下面的配置信息：</p>
+<p>save 900 1       #在900秒(15分钟)之后，如果至少有1个key发生变化，则dump内存快照。<br>save 300 10      #在300秒(5分钟)之后，如果至少有10个key发生变化，则dump内存快照。<br>save 60 10000    #在60秒(1分钟)之后，如果至少有10000个key发生变化，则dump内存快照。</p>
+<h2 id="AOF持久化配置"><a href="#AOF持久化配置" class="headerlink" title="AOF持久化配置"></a>AOF持久化配置</h2><p>在Redis的配置文件中存在三种同步方式，它们分别是：</p>
+<p>appendfsync always   #每次有数据修改发生时都会写入AOF文件。<br>appendfsync everysec #每秒钟同步一次，该策略为AOF的缺省策略。<br>appendfsync no     #从不同步。高效但是数据不会被持久化。</p>
 
             
         </div>
@@ -701,7 +743,7 @@ grant all on *.* to <span class="token string">'admin'</span>@<span class="token
         
         
     </div>
-    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E7%94%A8%E6%88%B7%E4%B8%8E%E6%8E%88%E6%9D%83/" class="go-post">阅读全文</a>
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E6%8C%81%E4%B9%85%E5%8C%96/" class="go-post">阅读全文</a>
 </div>
 
 <div class="post">
@@ -780,27 +822,29 @@ RANDOMKEY                       从Redis返回随机键
 RENAME key newkey               更改键的名称
 RENAMENX key newkey             重命名键，如果新的键不存在
 TYPE key                        返回存储在键的数据类型的值
-<pre class="line-numbers language-none"><code class="language-none">
-- List列表常见命令
-
-  - &#96;&#96;&#96;shell
-    BLPOP key1 [key2 ] timeout 取出并获取列表中的第一个元素，或阻塞，直到有可用
-    BRPOP key1 [key2 ] timeout 取出并获取列表中的最后一个元素，或阻塞，直到有可用
-    BRPOPLPUSH source destination timeout 从列表中弹出一个值，它推到另一个列表并返回它;或阻塞，直到有可用
-    LINDEX key index 从一个列表其索引获取对应的元素
-    LINSERT key BEFORE|AFTER pivot value 在列表中的其他元素之后或之前插入一个元素
-    LLEN key 获取列表的长度
-    LPOP key 获取并取出列表中的第一个元素
-    LPUSH key value1 [value2] 在前面加上一个或多个值的列表
-    LPUSHX key value 在前面加上一个值列表，仅当列表中存在
-    LRANGE key start stop 从一个列表获取各种元素
-    LREM key count value 从列表中删除元素
-    LSET key index value 在列表中的索引设置一个元素的值
-    LTRIM key start stop 修剪列表到指定的范围内
-    RPOP key 取出并获取列表中的最后一个元素
-    RPOPLPUSH source destination 删除最后一个元素的列表，将其附加到另一个列表并返回它
-    RPUSH key value1 [value2] 添加一个或多个值到列表
-    RPUSHX key value 添加一个值列表，仅当列表中存在<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p>List列表常见命令</p>
+<ul>
+<li><pre><code class="shell">BLPOP key1 [key2 ] timeout 取出并获取列表中的第一个元素，或阻塞，直到有可用
+BRPOP key1 [key2 ] timeout 取出并获取列表中的最后一个元素，或阻塞，直到有可用
+BRPOPLPUSH source destination timeout 从列表中弹出一个值，它推到另一个列表并返回它;或阻塞，直到有可用
+LINDEX key index 从一个列表其索引获取对应的元素
+LINSERT key BEFORE|AFTER pivot value 在列表中的其他元素之后或之前插入一个元素
+LLEN key 获取列表的长度
+LPOP key 获取并取出列表中的第一个元素
+LPUSH key value1 [value2] 在前面加上一个或多个值的列表
+LPUSHX key value 在前面加上一个值列表，仅当列表中存在
+LRANGE key start stop 从一个列表获取各种元素
+LREM key count value 从列表中删除元素
+LSET key index value 在列表中的索引设置一个元素的值
+LTRIM key start stop 修剪列表到指定的范围内
+RPOP key 取出并获取列表中的最后一个元素
+RPOPLPUSH source destination 删除最后一个元素的列表，将其附加到另一个列表并返回它
+RPUSH key value1 [value2] 添加一个或多个值到列表
+RPUSHX key value 添加一个值列表，仅当列表中存在
 </code></pre>
 </li>
 </ul>
@@ -822,25 +866,27 @@ HMSET key field value [field value ...] 同时设置对象中一个或多个字�
 HSETNX key field value 只在对象不存在指定的字段时才设置字段的值
 HSTRLEN key field 返回对象指定field的value的字符串长度，如果该对象或者field不存在，返回0.
 HSCAN key cursor [MATCH pattern] [COUNT count] 类似SCAN命令
-<pre class="line-numbers language-none"><code class="language-none">
-- Set的常见命令
-
-  - &#96;&#96;&#96;shell
-    SADD key member [member ...] 添加一个或者多个元素到集合(set)里
-    SCARD key 获取集合里面的元素数量
-    SDIFF key [key ...] 获得队列不存在的元素
-    SDIFFSTORE destination key [key ...] 获得队列不存在的元素，并存储在一个关键的结果集
-    SINTER key [key ...] 获得两个集合的交集
-    SINTERSTORE destination key [key ...] 获得两个集合的交集，并存储在一个集合中
-    SISMEMBER key member 确定一个给定的值是一个集合的成员
-    SMEMBERS key 获取集合里面的所有key
-    SMOVE source destination member 移动集合里面的一个key到另一个集合
-    SPOP key [count] 获取并删除一个集合里面的元素
-    SRANDMEMBER key [count] 从集合里面随机获取一个元素
-    SREM key member [member ...] 从集合里删除一个或多个元素，不存在的元素会被忽略
-    SUNION key [key ...] 添加多个set元素
-    SUNIONSTORE destination key [key ...] 合并set元素，并将结果存入新的set里面
-    SSCAN key cursor [MATCH pattern] [COUNT count] 迭代set里面的元素<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p>Set的常见命令</p>
+<ul>
+<li><pre><code class="shell">SADD key member [member ...] 添加一个或者多个元素到集合(set)里
+SCARD key 获取集合里面的元素数量
+SDIFF key [key ...] 获得队列不存在的元素
+SDIFFSTORE destination key [key ...] 获得队列不存在的元素，并存储在一个关键的结果集
+SINTER key [key ...] 获得两个集合的交集
+SINTERSTORE destination key [key ...] 获得两个集合的交集，并存储在一个集合中
+SISMEMBER key member 确定一个给定的值是一个集合的成员
+SMEMBERS key 获取集合里面的所有key
+SMOVE source destination member 移动集合里面的一个key到另一个集合
+SPOP key [count] 获取并删除一个集合里面的元素
+SRANDMEMBER key [count] 从集合里面随机获取一个元素
+SREM key member [member ...] 从集合里删除一个或多个元素，不存在的元素会被忽略
+SUNION key [key ...] 添加多个set元素
+SUNIONSTORE destination key [key ...] 合并set元素，并将结果存入新的set里面
+SSCAN key cursor [MATCH pattern] [COUNT count] 迭代set里面的元素
 </code></pre>
 </li>
 </ul>
@@ -867,36 +913,35 @@ ZREVRANK key member 确定一个有序集合成员的索引，以分数排序，
 ZSCORE key member 获取给定成员相关联的分数在一个有序集合
 ZUNIONSTORE destination numkeys key [key ...] 添加多个集排序，所得排序集合存储在一个新的键
 ZSCAN key cursor [MATCH pattern] [COUNT count] 增量迭代排序元素集和相关的分数
-<pre class="line-numbers language-none"><code class="language-none">
----
-
-**常用命令**
-
-- &#96;config get requirepass&#96;   查看当前redis是否由设置密码，显示&#96;requirepass&#96; &#96;null&#96;为没有密码
-- &#96;config set requirepass 123456&#96;   设置密码
-- &#96;redis-cli --raw -h &#39;ip&#39; -p &#39;port&#39;&#96;   连接方式 
-- &#96;auth 123456&#96;   密码验证
-
-**配置文件修改**
-
-- 永久密码修改
-  - 进入redis.conf配置文件，找到requirepass属性，修改成自己想要的密码，保存重启redis即可
-
----
-
-**Redis与代码**
-
-- 连接的jar包叫做jedis
-
-  基础使用样例，其方法名称和命令形式基本一致
-
-  &#96;&#96;&#96;java
-  Jedis jedis &#x3D; new Jedis(&quot;localhost&quot;);
-  jedis.set(&quot;key1&quot;,&quot;value1&quot;);
-  String value &#x3D; jedis.get(&quot;key1&quot;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </code></pre>
 </li>
 </ul>
+</li>
+</ul>
+<hr>
+<p><strong>常用命令</strong></p>
+<ul>
+<li><code>config get requirepass</code>   查看当前redis是否由设置密码，显示<code>requirepass</code> <code>null</code>为没有密码</li>
+<li><code>config set requirepass 123456</code>   设置密码</li>
+<li><code>redis-cli --raw -h &#39;ip&#39; -p &#39;port&#39;</code>   连接方式 </li>
+<li><code>auth 123456</code>   密码验证</li>
+</ul>
+<p><strong>配置文件修改</strong></p>
+<ul>
+<li>永久密码修改<ul>
+<li>进入redis.conf配置文件，找到requirepass属性，修改成自己想要的密码，保存重启redis即可</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p><strong>Redis与代码</strong></p>
+<ul>
+<li><p>连接的jar包叫做jedis</p>
+<p>基础使用样例，其方法名称和命令形式基本一致</p>
+<pre><code class="java">Jedis jedis = new Jedis(&quot;localhost&quot;);
+jedis.set(&quot;key1&quot;,&quot;value1&quot;);
+String value = jedis.get(&quot;key1&quot;);
+</code></pre>
 </li>
 <li><p>与Spring等框架的时候记得配置好配置文件</p>
 </li>
@@ -912,52 +957,6 @@ ZSCAN key cursor [MATCH pattern] [COUNT count] 增量迭代排序元素集和相
         
     </div>
     <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E5%91%BD%E4%BB%A4/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E6%8C%81%E4%B9%85%E5%8C%96/">
-        <h2 class="post-title">Redis持久化</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                数据库
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="redis的持久化"><a href="#redis的持久化" class="headerlink" title="redis的持久化"></a>redis的持久化</h1><ol>
-<li>aop（append only file）<br> 把每一次的数据变化都写入到本地文件 ——— 全持久化模式以日志的形式记录 每一次的写、删操作，以文本的形式记录</li>
-<li>rdb<br> 定时把redis中的数据写入到本地文件 ——— 半持久化模式<br> fork一个字进程，把数据写入临时文件，然后在替换掉本地的文件，使用二进制压缩</li>
-</ol>
-<h2 id="RDB持久化配置"><a href="#RDB持久化配置" class="headerlink" title="RDB持久化配置"></a>RDB持久化配置</h2><p>Redis会将数据集的快照dump到dump.rdb文件中。此外，我们也可以通过配置文件来修改Redis服务器dump快照的频率，在打开6379.conf文件之后，我们搜索save，可以看到下面的配置信息：</p>
-<p>save 900 1       #在900秒(15分钟)之后，如果至少有1个key发生变化，则dump内存快照。<br>save 300 10      #在300秒(5分钟)之后，如果至少有10个key发生变化，则dump内存快照。<br>save 60 10000    #在60秒(1分钟)之后，如果至少有10000个key发生变化，则dump内存快照。</p>
-<h2 id="AOF持久化配置"><a href="#AOF持久化配置" class="headerlink" title="AOF持久化配置"></a>AOF持久化配置</h2><p>在Redis的配置文件中存在三种同步方式，它们分别是：</p>
-<p>appendfsync always   #每次有数据修改发生时都会写入AOF文件。<br>appendfsync everysec #每秒钟同步一次，该策略为AOF的缺省策略。<br>appendfsync no     #从不同步。高效但是数据不会被持久化。</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E6%8C%81%E4%B9%85%E5%8C%96/" class="go-post">阅读全文</a>
 </div>
 
 <div class="post">
@@ -1040,17 +1039,17 @@ ZSCAN key cursor [MATCH pattern] [COUNT count] 增量迭代排序元素集和相
 </div>
 
 <div class="post">
-    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Windows%E5%AE%89%E8%A3%85MySQL/">
-        <h2 class="post-title">Windows安装MySQL</h2>
+    <a href="/2023/06/07/%E7%90%86%E8%AE%BA%E4%BD%93%E7%B3%BB/B%E6%A0%91&B+%E6%A0%91/">
+        <h2 class="post-title">B树&amp;B+树</h2>
     </a>
     <div class="category-and-date">
         
         <span class="category">
-            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+            <a href="/categories/%E7%90%86%E8%AE%BA%E4%BD%93%E7%B3%BB/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                数据库
+                理论体系
             </a>
         </span>
         
@@ -1066,57 +1065,18 @@ ZSCAN key cursor [MATCH pattern] [COUNT count] 增量迭代排序元素集和相
     <div class="description">
         <div class="content" v-pre>
             
-            <h1 id="Windows下MySQL的安装"><a href="#Windows下MySQL的安装" class="headerlink" title="Windows下MySQL的安装"></a>Windows下MySQL的安装</h1><p>首先下载MySQL的的压缩包（MySQL社区版）</p>
-<p><a target="_blank" rel="noopener" href="https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-5.7.37-winx64.zip">MySQL5.7社区版</a></p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>如果以前安装过其它版本的MySQL那么需要先卸载mysql的服务在进行安装<br>卸载方式：以管理员身份进入CMD控制台，然后输入一下命令进行删除服务<br>如果未安装则可以忽略这一步骤：mysql是服务的名称</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sc delete mysql<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h2 id="1、MySQL的解压"><a href="#1、MySQL的解压" class="headerlink" title="1、MySQL的解压"></a>1、MySQL的解压</h2><p>将下载好的mysql的压缩包解压，并且把解压之后的mysql-8.0.15-winx64文件夹放到安装文件夹<br>我的是放在：D:\Software\MySQL\mysql-8.0.15-winx64</p>
-<h2 id="2、配置环境变量"><a href="#2、配置环境变量" class="headerlink" title="2、配置环境变量"></a>2、配置环境变量</h2><p>右键我的计算机-&gt;属性-&gt;高级系统设置-&gt;环境变量<br>新建系统变量</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">变量名称：MYSQL_HOME
-变量路径：D:<span class="token punctuation">\</span>Software<span class="token punctuation">\</span>MySQL<span class="token punctuation">\</span>mysql-8.0.15-winx64<span class="token punctuation">\</span>bin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>修改path变量，加入</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">%MYSQL_HOME%<span class="token punctuation">\</span>bin<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><strong>注意：</strong>如果失败，可以创建一个指定初始配置文件(我现在这个版本是没有配置的)<br>初始化mysql前，可以通过ini文件来指定部分初始配置，比如<code>basedir</code>和<code>datadir</code>等，当然，也可以不指定利用默认的，参考文档<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/windows-create-option-file.html">官方文档</a><br>在mysql的根目录下，创建mysql.ini文件，加入下面内容</p>
-<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token punctuation">[</span>mysqld<span class="token punctuation">]</span>
-<span class="token comment"># set basedir to your installation path</span>
-basedir=D<span class="token punctuation">:</span>\Software\MySQL\mysql<span class="token punctuation">-</span>8.0.15<span class="token punctuation">-</span>winx64
-<span class="token comment"># set datadir to the location of your data directory</span>
-datadir=D<span class="token punctuation">:</span>\Software\MySQL\mysql<span class="token punctuation">-</span>8.0.15<span class="token punctuation">-</span>winx64\data<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="3、初始化"><a href="#3、初始化" class="headerlink" title="3、初始化"></a>3、初始化</h2><p>打开cmd控制台，输入初始化命令（由于配置了系统的环境变量，所以不需要进入到D:\Software\MySQL\mysql-8.0.15-winx64\bin下）</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">//生成临时密码
-mysqlid <span class="token parameter variable">--initialize</span> <span class="token parameter variable">--console</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>或者</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">//空密码
-mysqld --initialize-insecure <span class="token parameter variable">--console</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>如果选择临时密码，控制台会有以下输出，可以看到里面有临时密码（temporary password is generated for root@localhost:后面的值，注意去掉空格），请一定要记住，当然你如果不想记住也可以，只是需要再折腾一下去重置密码</p>
-<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">2018<span class="token punctuation">-</span>08<span class="token punctuation">-</span>15T02<span class="token punctuation">:</span>55<span class="token punctuation">:</span>43.924361Z 0 <span class="token punctuation">[</span>System<span class="token punctuation">]</span> <span class="token punctuation">[</span>MY<span class="token punctuation">-</span><span class="token number">013169</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>Server<span class="token punctuation">]</span> C<span class="token punctuation">:</span>\MyPrograms\mysql<span class="token punctuation">-</span>8.0.12<span class="token punctuation">-</span>winx64\bin\mysqld.exe (mysqld 8.0.12) initializing of server in progress as process 12040
-2018<span class="token punctuation">-</span>08<span class="token punctuation">-</span>15T02<span class="token punctuation">:</span>55<span class="token punctuation">:</span>55.962035Z 5 <span class="token punctuation">[</span>Note<span class="token punctuation">]</span> <span class="token punctuation">[</span>MY<span class="token punctuation">-</span><span class="token number">010454</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>Server<span class="token punctuation">]</span> A temporary password is generated for root@localhost<span class="token punctuation">:</span> XCeQtsgMO7<span class="token punctuation">-</span>F
-2018<span class="token punctuation">-</span>08<span class="token punctuation">-</span>15T02<span class="token punctuation">:</span>56<span class="token punctuation">:</span>03.261174Z 0 <span class="token punctuation">[</span>System<span class="token punctuation">]</span> <span class="token punctuation">[</span>MY<span class="token punctuation">-</span><span class="token number">013170</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>Server<span class="token punctuation">]</span> C<span class="token punctuation">:</span>\MyPrograms\mysql<span class="token punctuation">-</span>8.0.12<span class="token punctuation">-</span>winx64\bin\mysqld.exe (mysqld 8.0.12) initializing of server has completed<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<h2 id="4、安装windows服务"><a href="#4、安装windows服务" class="headerlink" title="4、安装windows服务"></a>4、安装windows服务</h2><p>用管理员身份打开CMD，在里面输入如下命令</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">//serviceName为服务名，不输入默认为mysql
-mysqld <span class="token parameter variable">--install</span> <span class="token punctuation">[</span>serviceName<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>如果看到下面内容，则证明服务安装成功</p>
-<pre class="line-numbers language-none"><code class="language-none">Service successfully installed.<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h2 id="5、启动服务"><a href="#5、启动服务" class="headerlink" title="5、启动服务"></a>5、启动服务</h2><p>还是用管理员身份打开CMD，输入如下命令</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">net start mysql
-
-//以下输出证明启动成功
-MySQL 服务正在启动 <span class="token punctuation">..</span>
-MySQL 服务已经启动成功。
-
-//如果你要关闭的话
-net stop mysql<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="6、更改密码"><a href="#6、更改密码" class="headerlink" title="6、更改密码"></a>6、更改密码</h2><p>连接到mysql</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">//下面-p后面的内容就是临时密码
-mysql <span class="token parameter variable">-uroot</span> -pXCeQtsgMO7-F<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>修改密码</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ALTER <span class="token environment constant">USER</span> <span class="token string">'root'</span>@<span class="token string">'localhost'</span> IDENTIFIED WITH mysql_native_password BY <span class="token string">'newpassword'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
-<li>1、环境变量是为了在命令行CMD中更加方便使用mysql命令；</li>
-<li>2、如果有之前有安装过其他版本mysql，记得先卸载并删除服务；</li>
-<li>3、安装完记得登录并修改密码，不论是采用空密码还是临时密码；</li>
-<li>4、当然，命令行终归是不方便的，现在有很多可视化界面，如：Navicat等。</li>
+            <hr>
+<h2 id="title-B-Treedate-2022-04-26-13-44-11-89updated-2022-08-04-18-30-16-893url-x2F-archives-x2F-btreecategories-tags"><a href="#title-B-Treedate-2022-04-26-13-44-11-89updated-2022-08-04-18-30-16-893url-x2F-archives-x2F-btreecategories-tags" class="headerlink" title="title: B Treedate: 2022-04-26 13:44:11.89updated: 2022-08-04 18:30:16.893url: &#x2F;archives&#x2F;btreecategories:tags: "></a>title: B Tree<br>date: 2022-04-26 13:44:11.89<br>updated: 2022-08-04 18:30:16.893<br>url: &#x2F;archives&#x2F;btree<br>categories:<br>tags: </h2><h1 id="B-Tree"><a href="#B-Tree" class="headerlink" title="B Tree"></a>B Tree</h1><p>mi’g’c</p>
+<ul>
+<li>叶子节点：最后的那一场节点</li>
+<li>非叶子节点：除去最后的那一层节点</li>
+<li>阶：B树中所有孩子节点数的最大值</li>
+<li>度：数的高度，一般不包括叶子节点那一层</li>
 </ul>
+<p>规则：</p>
+<ol>
+<li>树中每个节点最多只能有M（M为阶）颗子树</li>
+</ol>
 
             
         </div>
@@ -1125,7 +1085,7 @@ mysql <span class="token parameter variable">-uroot</span> -pXCeQtsgMO7-F<span a
         
         
     </div>
-    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Windows%E5%AE%89%E8%A3%85MySQL/" class="go-post">阅读全文</a>
+    <a href="/2023/06/07/%E7%90%86%E8%AE%BA%E4%BD%93%E7%B3%BB/B%E6%A0%91&B+%E6%A0%91/" class="go-post">阅读全文</a>
 </div>
 
 

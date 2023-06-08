@@ -21,7 +21,7 @@
 <script src="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/highlight.min.js"></script>
 <link
     rel="stylesheet"
-    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/github.min.css"
+    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/Github Dark.min.css"
 />
 <script src="/js/lib/highlight.js"></script>
 
@@ -177,7 +177,8 @@
     </div>
     
     <div class="content" v-pre>
-        <h1 id="Centos权限的浅解"><a href="#Centos权限的浅解" class="headerlink" title="Centos权限的浅解"></a>Centos权限的浅解</h1><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">chomd <span class="token number">777</span> test.sh<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+        <h1 id="Centos权限的浅解"><a href="#Centos权限的浅解" class="headerlink" title="Centos权限的浅解"></a>Centos权限的浅解</h1><pre><code class="shell">chomd 777 test.sh
+</code></pre>
 <p><code>chomd</code>：修改文件及文件夹等的权限<br><code>777</code>：表示三个组的权限，第一个为文件所有者的权限，第二个为所属用户组的权限，第三个为其他用户的权限,7-&gt;rwx</p>
 <ul>
 <li>r-&gt;4:为读取权限</li>

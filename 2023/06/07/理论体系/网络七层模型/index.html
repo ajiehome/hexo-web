@@ -21,7 +21,7 @@
 <script src="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/highlight.min.js"></script>
 <link
     rel="stylesheet"
-    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/github.min.css"
+    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/Github Dark.min.css"
 />
 <script src="/js/lib/highlight.js"></script>
 
@@ -177,27 +177,26 @@
     </div>
     
     <div class="content" v-pre>
-        <h1 id="网络七层模型"><a href="#网络七层模型" class="headerlink" title="网络七层模型"></a>网络七层模型</h1><pre class="line-numbers language-mermaid" data-language="mermaid"><code class="language-mermaid"><span class="token keyword">graph</span> LR
-A<span class="token text string">[物理层]</span> <span class="token arrow operator">--></span> B<span class="token text string">[数据链路层]</span> <span class="token arrow operator">--></span> C<span class="token text string">[网络层]</span> <span class="token arrow operator">--></span> D<span class="token text string">[传输层]</span> <span class="token arrow operator">--></span> E<span class="token text string">[会话层]</span> <span class="token arrow operator">--></span> F<span class="token text string">[表示层]</span> <span class="token arrow operator">--></span> G<span class="token text string">[应用层]</span>
+        <h1 id="网络七层模型"><a href="#网络七层模型" class="headerlink" title="网络七层模型"></a>网络七层模型</h1><pre><code class="mermaid">graph LR
+A[物理层] --&gt; B[数据链路层] --&gt; C[网络层] --&gt; D[传输层] --&gt; E[会话层] --&gt; F[表示层] --&gt; G[应用层]
 
-G<span class="token text string">[应用层]</span> <span class="token arrow operator">--></span> F<span class="token text string">[表示层]</span> <span class="token arrow operator">--></span> E<span class="token text string">[会话层]</span> <span class="token arrow operator">--></span> D<span class="token text string">[传输层]</span> <span class="token arrow operator">--></span> C<span class="token text string">[网络层]</span> <span class="token arrow operator">--></span> B<span class="token text string">[数据链路层]</span> <span class="token arrow operator">--></span> A<span class="token text string">[物理层]</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<pre class="line-numbers language-mermaid" data-language="mermaid"><code class="language-mermaid"><span class="token keyword">graph</span> LR
-A<span class="token text string">[设备1]</span> <span class="token arrow operator">--></span> <span class="token label property">|物理链路|</span>B<span class="token text string">[设备2]</span> <span class="token arrow operator">--></span> <span class="token label property">|物理链路|</span>C<span class="token text string">[设备3]</span> 
-C <span class="token arrow operator">--></span><span class="token label property">|物理链路|</span> A<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<pre class="line-numbers language-mermaid" data-language="mermaid"><code class="language-mermaid"><span class="token keyword">sequenceDiagram</span>
-    <span class="token keyword">participant</span> 设备A
-    <span class="token keyword">participant</span> 设备B
-   	设备A <span class="token arrow operator">-></span> 设备B<span class="token operator">:</span> 1.物理链路层
-   	设备A <span class="token arrow operator">-></span> 设备B<span class="token operator">:</span> 2.数据链路层（基于物理链路，为数据提供可靠的数据传输，确认01的传输方式、顺序、速率）
-   	设备A <span class="token arrow operator">-></span> 设备B<span class="token operator">:</span> 3.网络层（建立两个设备之间的连接，IPV4 IPV6）
-	设备A <span class="token arrow operator">-></span> 设备B<span class="token operator">:</span> 4.传输层（在网络层建立的通道中，选择一个门户，建立一个端口对端口的网络数据流服务管道）
-	设备A <span class="token arrow operator">-></span> 设备B<span class="token operator">:</span> 5.会话层（创建完通讯管道之后，需要建立两端的会话，并且维护、终结等等）
-	设备A <span class="token arrow operator">-></span> 设备B<span class="token operator">:</span> 6.表示层（在建立端口之后需要进行数据传递，分属不同设备，需要编译一个同意的公共编码，这层就是对数据编码）
-	设备A <span class="token arrow operator">-></span> 设备B<span class="token operator">:</span> 7.应用层（包括但不限于HTTP、SMTP、FTP等等，为用户提供可使用的网络服务）<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+G[应用层] --&gt; F[表示层] --&gt; E[会话层] --&gt; D[传输层] --&gt; C[网络层] --&gt; B[数据链路层] --&gt; A[物理层]
+</code></pre>
+<pre><code class="mermaid">graph LR
+A[设备1] --&gt; |物理链路|B[设备2] --&gt; |物理链路|C[设备3] 
+C --&gt;|物理链路| A
+</code></pre>
+<pre><code class="mermaid">sequenceDiagram
+    participant 设备A
+    participant 设备B
+       设备A -&gt; 设备B: 1.物理链路层
+       设备A -&gt; 设备B: 2.数据链路层（基于物理链路，为数据提供可靠的数据传输，确认01的传输方式、顺序、速率）
+       设备A -&gt; 设备B: 3.网络层（建立两个设备之间的连接，IPV4 IPV6）
+    设备A -&gt; 设备B: 4.传输层（在网络层建立的通道中，选择一个门户，建立一个端口对端口的网络数据流服务管道）
+    设备A -&gt; 设备B: 5.会话层（创建完通讯管道之后，需要建立两端的会话，并且维护、终结等等）
+    设备A -&gt; 设备B: 6.表示层（在建立端口之后需要进行数据传递，分属不同设备，需要编译一个同意的公共编码，这层就是对数据编码）
+    设备A -&gt; 设备B: 7.应用层（包括但不限于HTTP、SMTP、FTP等等，为用户提供可使用的网络服务）
+</code></pre>
 <ol>
 <li>物理层<br>物理层负责将最后的信息编码转化成电流脉冲或者其他电信号用于传输，也就是对应的硬件支持</li>
 <li>数据链路层<br>基于物理链路，为数据传输提供可靠的传输服务，对传输数据进行维护，数据帧的形式、传输的顺序、速率等等</li>

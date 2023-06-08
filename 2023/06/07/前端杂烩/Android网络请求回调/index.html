@@ -21,7 +21,7 @@
 <script src="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/highlight.min.js"></script>
 <link
     rel="stylesheet"
-    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/github.min.css"
+    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/Github Dark.min.css"
 />
 <script src="/js/lib/highlight.js"></script>
 
@@ -178,68 +178,70 @@
     
     <div class="content" v-pre>
         <h1 id="Android的HTTP网络请求超时UI更新（回调）"><a href="#Android的HTTP网络请求超时UI更新（回调）" class="headerlink" title="Android的HTTP网络请求超时UI更新（回调）"></a>Android的HTTP网络请求超时UI更新（回调）</h1><h3 id="原因及运行原理"><a href="#原因及运行原理" class="headerlink" title="原因及运行原理"></a>原因及运行原理</h3><p>当在网络请求出现连接超时（httpURLConnection.setConnectTimeout(TimeOut)）的时候，此时调用的活动中的Dialog弹窗会一直浮现在桌面上，而网络请求是位于子线程，活动只是调用之后就没有太多的关联，这时当网络出现连接超时的时候会一直卡在httpURLConnection.connect()中，此时可以在网络请求类中新建一个接口，并且实现一个刷新方法，再在活动中实例化一个请求类，并且参数为接口对象，然后再到网络请求出现超时，并且抛出异常的try…catch代码块的异常处理块中用接口对象调用刷新的方法，由于接口内的刷新方法时抽象方法，所以会自动往子级里面去找到运行的代码块，也就是说运行活动中覆写的代码块，注意：虽然运行的代码块时活动中的，但是其调用的主体方法还是在子线程中，所以需要更新UI的时候，还是需要回调到主线程中        </p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span>  <span class="token keyword">class</span> <span class="token class-name">BaseHttpConn</span> <span class="token punctuation">&#123;</span>
+<pre><code class="java">public  class BaseHttpConn &#123;
 
-    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">String</span> <span class="token constant">TAG</span> <span class="token operator">=</span> <span class="token string">"BaseHttpConn"</span><span class="token punctuation">;</span>
-    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token class-name">TimeOut</span> shuaxin<span class="token punctuation">;</span>
-    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token class-name">TimeOut</span> <span class="token operator">=</span> <span class="token number">3</span><span class="token operator">*</span><span class="token number">1000</span><span class="token punctuation">;</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">HttpURLConnection</span> <span class="token function">httpConn</span><span class="token punctuation">(</span><span class="token class-name">String</span> baseUrl<span class="token punctuation">,</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">String</span><span class="token punctuation">></span></span> map<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token class-name">HttpURLConnection</span> httpURLConnection <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
-        <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
-            <span class="token class-name">URL</span> url <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">URL</span><span class="token punctuation">(</span>baseUrl<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            httpURLConnection <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">HttpURLConnection</span><span class="token punctuation">)</span> url<span class="token punctuation">.</span><span class="token function">openConnection</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            httpURLConnection<span class="token punctuation">.</span><span class="token function">setConnectTimeout</span><span class="token punctuation">(</span><span class="token class-name">TimeOut</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//连接超时</span>
-            httpURLConnection<span class="token punctuation">.</span><span class="token function">setReadTimeout</span><span class="token punctuation">(</span><span class="token class-name">TimeOut</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//读取超时</span>
-            httpURLConnection<span class="token punctuation">.</span><span class="token function">setRequestMethod</span><span class="token punctuation">(</span><span class="token string">"POST"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//请求方式</span>
-            httpURLConnection<span class="token punctuation">.</span><span class="token function">setInstanceFollowRedirects</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//是否重定向</span>
-            httpURLConnection<span class="token punctuation">.</span><span class="token function">setUseCaches</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//是否启用缓存</span>
-            httpURLConnection<span class="token punctuation">.</span><span class="token function">setRequestProperty</span><span class="token punctuation">(</span><span class="token string">"Content-Type"</span><span class="token punctuation">,</span><span class="token string">"application/json"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//传入服务器的数据类型</span>
-            <span class="token class-name">OutputStream</span> outputStream <span class="token operator">=</span> httpURLConnection<span class="token punctuation">.</span><span class="token function">getOutputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            outputStream<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span><span class="token function">getByte</span><span class="token punctuation">(</span>map<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            outputStream<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            httpURLConnection<span class="token punctuation">.</span><span class="token function">disconnect</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//关闭此次网络请求</span>
-            <span class="token class-name"><span class="token namespace">shuaxin<span class="token punctuation">.</span></span>ShuaXin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//通过接口对象调用抽象方法ShuaXin();</span>
+    private static final String TAG = &quot;BaseHttpConn&quot;;
+    private static TimeOut shuaxin;
+    private static int TimeOut = 3*1000;
+    public static HttpURLConnection httpConn(String baseUrl, HashMap&lt;String, String&gt; map) &#123;
+        HttpURLConnection httpURLConnection = null;
+        try &#123;
+            URL url = new URL(baseUrl);
+            httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setConnectTimeout(TimeOut);//连接超时
+            httpURLConnection.setReadTimeout(TimeOut);//读取超时
+            httpURLConnection.setRequestMethod(&quot;POST&quot;);//请求方式
+            httpURLConnection.setInstanceFollowRedirects(true);//是否重定向
+            httpURLConnection.setUseCaches(true);//是否启用缓存
+            httpURLConnection.setRequestProperty(&quot;Content-Type&quot;,&quot;application/json&quot;);//传入服务器的数据类型
+            OutputStream outputStream = httpURLConnection.getOutputStream();
+            outputStream.write(getByte(map));
+            outputStream.close();
+        &#125; catch (Exception e) &#123;
+            e.printStackTrace();
+            httpURLConnection.disconnect();//关闭此次网络请求
+            shuaxin.ShuaXin();//通过接口对象调用抽象方法ShuaXin();
 
-        <span class="token punctuation">&#125;</span>
-        <span class="token keyword">return</span> httpURLConnection<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+        &#125;
+        return httpURLConnection;
+    &#125;
 
-    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">getByte</span><span class="token punctuation">(</span><span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span><span class="token class-name">String</span><span class="token punctuation">></span></span> map<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token class-name">JSONObject</span> jsonObject <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">JSONObject</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token class-name">String</span> key<span class="token operator">:</span> map<span class="token punctuation">.</span><span class="token function">keySet</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-            <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
-                jsonObject<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>key<span class="token punctuation">,</span>map<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">JSONException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
-        <span class="token punctuation">&#125;</span>
-        <span class="token keyword">return</span> jsonObject<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getBytes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+    private static byte[] getByte(HashMap&lt;String,String&gt; map) &#123;
+        JSONObject jsonObject = new JSONObject();
+        for(String key: map.keySet())&#123;
+            try &#123;
+                jsonObject.put(key,map.get(key));
+            &#125; catch (JSONException e) &#123;
+                e.printStackTrace();
+            &#125;
+        &#125;
+        return jsonObject.toString().getBytes();
+    &#125;
 
-    <span class="token keyword">public</span> <span class="token class-name">BaseHttpConn</span><span class="token punctuation">(</span><span class="token class-name">TimeOut</span> timeOut<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>shuaxin <span class="token operator">=</span> timeOut<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+    public BaseHttpConn(TimeOut timeOut) &#123;
+        this.shuaxin = timeOut;
+    &#125;
 
-    <span class="token comment">//监听接口</span>
-    <span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">TimeOut</span><span class="token punctuation">&#123;</span>
-        <span class="token keyword">void</span> <span class="token class-name">ShuaXin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//接口中刷新的方法</span>
-    <span class="token punctuation">&#125;</span>
+    //监听接口
+    public interface TimeOut&#123;
+        void ShuaXin();//接口中刷新的方法
+    &#125;
 
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="Activity中的代码"><a href="#Activity中的代码" class="headerlink" title="Activity中的代码"></a>Activity中的代码</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"> <span class="token class-name">BaseHttpConn</span> baseHttpConn <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">BaseHttpConn</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">BaseHttpConn<span class="token punctuation">.</span>TimeOut</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token class-name">ShuaXin</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        progressDialog<span class="token punctuation">.</span><span class="token function">dismiss</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token function">getActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">runOnUiThread</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Runnable</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token comment">//位于碎片中，所以需要通过getActivity()获取活动</span>
-            <span class="token annotation punctuation">@Override</span>
-            <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                <span class="token class-name">Toast</span><span class="token punctuation">.</span><span class="token function">makeText</span><span class="token punctuation">(</span><span class="token function">getContext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token string">"网络连接失败"</span><span class="token punctuation">,</span><span class="token class-name">Toast</span><span class="token punctuation">.</span><span class="token constant">LENGTH_SHORT</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">show</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
-        <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+&#125;
+</code></pre>
+<h3 id="Activity中的代码"><a href="#Activity中的代码" class="headerlink" title="Activity中的代码"></a>Activity中的代码</h3><pre><code class="java">     BaseHttpConn baseHttpConn = new BaseHttpConn(new BaseHttpConn.TimeOut() &#123;
+        @Override
+        public void ShuaXin() &#123;
+            progressDialog.dismiss();
+            getActivity().runOnUiThread(new Runnable() &#123;//位于碎片中，所以需要通过getActivity()获取活动
+                @Override
+                public void run() &#123;
+                    Toast.makeText(getContext(),&quot;网络连接失败&quot;,Toast.LENGTH_SHORT).show();
+                &#125;
+            &#125;);
+        &#125;
+    &#125;);
+</code></pre>
 
     </div>
     

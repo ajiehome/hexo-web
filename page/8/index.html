@@ -21,7 +21,7 @@
 <script src="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/highlight.min.js"></script>
 <link
     rel="stylesheet"
-    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/github.min.css"
+    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/Github Dark.min.css"
 />
 <script src="/js/lib/highlight.js"></script>
 
@@ -171,17 +171,17 @@
         
 
 <div class="post">
-    <a href="/2023/06/07/%E7%90%86%E8%AE%BA%E4%BD%93%E7%B3%BB/B%E6%A0%91&B+%E6%A0%91/">
-        <h2 class="post-title">B树&amp;B+树</h2>
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Windows%E5%AE%89%E8%A3%85MySQL/">
+        <h2 class="post-title">Windows安装MySQL</h2>
     </a>
     <div class="category-and-date">
         
         <span class="category">
-            <a href="/categories/%E7%90%86%E8%AE%BA%E4%BD%93%E7%B3%BB/">
+            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                理论体系
+                数据库
             </a>
         </span>
         
@@ -197,18 +197,69 @@
     <div class="description">
         <div class="content" v-pre>
             
-            <hr>
-<h2 id="title-B-Treedate-2022-04-26-13-44-11-89updated-2022-08-04-18-30-16-893url-x2F-archives-x2F-btreecategories-tags"><a href="#title-B-Treedate-2022-04-26-13-44-11-89updated-2022-08-04-18-30-16-893url-x2F-archives-x2F-btreecategories-tags" class="headerlink" title="title: B Treedate: 2022-04-26 13:44:11.89updated: 2022-08-04 18:30:16.893url: &#x2F;archives&#x2F;btreecategories:tags: "></a>title: B Tree<br>date: 2022-04-26 13:44:11.89<br>updated: 2022-08-04 18:30:16.893<br>url: &#x2F;archives&#x2F;btree<br>categories:<br>tags: </h2><h1 id="B-Tree"><a href="#B-Tree" class="headerlink" title="B Tree"></a>B Tree</h1><p>mi’g’c</p>
-<ul>
-<li>叶子节点：最后的那一场节点</li>
-<li>非叶子节点：除去最后的那一层节点</li>
-<li>阶：B树中所有孩子节点数的最大值</li>
-<li>度：数的高度，一般不包括叶子节点那一层</li>
+            <h1 id="Windows下MySQL的安装"><a href="#Windows下MySQL的安装" class="headerlink" title="Windows下MySQL的安装"></a>Windows下MySQL的安装</h1><p>首先下载MySQL的的压缩包（MySQL社区版）</p>
+<p><a target="_blank" rel="noopener" href="https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-5.7.37-winx64.zip">MySQL5.7社区版</a></p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>如果以前安装过其它版本的MySQL那么需要先卸载mysql的服务在进行安装<br>卸载方式：以管理员身份进入CMD控制台，然后输入一下命令进行删除服务<br>如果未安装则可以忽略这一步骤：mysql是服务的名称</p>
+<pre><code class="shell">sc delete mysql
+</code></pre>
+<h2 id="1、MySQL的解压"><a href="#1、MySQL的解压" class="headerlink" title="1、MySQL的解压"></a>1、MySQL的解压</h2><p>将下载好的mysql的压缩包解压，并且把解压之后的mysql-8.0.15-winx64文件夹放到安装文件夹<br>我的是放在：D:\Software\MySQL\mysql-8.0.15-winx64</p>
+<h2 id="2、配置环境变量"><a href="#2、配置环境变量" class="headerlink" title="2、配置环境变量"></a>2、配置环境变量</h2><p>右键我的计算机-&gt;属性-&gt;高级系统设置-&gt;环境变量<br>新建系统变量</p>
+<pre><code class="shell">变量名称：MYSQL_HOME
+变量路径：D:\Software\MySQL\mysql-8.0.15-winx64\bin
+</code></pre>
+<p>修改path变量，加入</p>
+<pre><code class="shell">%MYSQL_HOME%\bin
+</code></pre>
+<p><strong>注意：</strong>如果失败，可以创建一个指定初始配置文件(我现在这个版本是没有配置的)<br>初始化mysql前，可以通过ini文件来指定部分初始配置，比如<code>basedir</code>和<code>datadir</code>等，当然，也可以不指定利用默认的，参考文档<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/windows-create-option-file.html">官方文档</a><br>在mysql的根目录下，创建mysql.ini文件，加入下面内容</p>
+<pre><code class="yml">[mysqld]
+# set basedir to your installation path
+basedir=D:\Software\MySQL\mysql-8.0.15-winx64
+# set datadir to the location of your data directory
+datadir=D:\Software\MySQL\mysql-8.0.15-winx64\data
+</code></pre>
+<h2 id="3、初始化"><a href="#3、初始化" class="headerlink" title="3、初始化"></a>3、初始化</h2><p>打开cmd控制台，输入初始化命令（由于配置了系统的环境变量，所以不需要进入到D:\Software\MySQL\mysql-8.0.15-winx64\bin下）</p>
+<pre><code class="shell">//生成临时密码
+mysqlid --initialize --console
+</code></pre>
+<p>或者</p>
+<pre><code class="shell">//空密码
+mysqld --initialize-insecure --console
+</code></pre>
+<p>如果选择临时密码，控制台会有以下输出，可以看到里面有临时密码（temporary password is generated for root@localhost:后面的值，注意去掉空格），请一定要记住，当然你如果不想记住也可以，只是需要再折腾一下去重置密码</p>
+<pre><code class="yml">2018-08-15T02:55:43.924361Z 0 [System] [MY-013169] [Server] C:\MyPrograms\mysql-8.0.12-winx64\bin\mysqld.exe (mysqld 8.0.12) initializing of server in progress as process 12040
+2018-08-15T02:55:55.962035Z 5 [Note] [MY-010454] [Server] A temporary password is generated for root@localhost: XCeQtsgMO7-F
+2018-08-15T02:56:03.261174Z 0 [System] [MY-013170] [Server] C:\MyPrograms\mysql-8.0.12-winx64\bin\mysqld.exe (mysqld 8.0.12) initializing of server has completed
+</code></pre>
+<h2 id="4、安装windows服务"><a href="#4、安装windows服务" class="headerlink" title="4、安装windows服务"></a>4、安装windows服务</h2><p>用管理员身份打开CMD，在里面输入如下命令</p>
+<pre><code class="shell">//serviceName为服务名，不输入默认为mysql
+mysqld --install [serviceName]
+</code></pre>
+<p>如果看到下面内容，则证明服务安装成功</p>
+<pre><code>Service successfully installed.
+</code></pre>
+<h2 id="5、启动服务"><a href="#5、启动服务" class="headerlink" title="5、启动服务"></a>5、启动服务</h2><p>还是用管理员身份打开CMD，输入如下命令</p>
+<pre><code class="shell">net start mysql
+
+//以下输出证明启动成功
+MySQL 服务正在启动 ..
+MySQL 服务已经启动成功。
+
+//如果你要关闭的话
+net stop mysql
+</code></pre>
+<h2 id="6、更改密码"><a href="#6、更改密码" class="headerlink" title="6、更改密码"></a>6、更改密码</h2><p>连接到mysql</p>
+<pre><code class="shell">//下面-p后面的内容就是临时密码
+mysql -uroot -pXCeQtsgMO7-F
+</code></pre>
+<p>修改密码</p>
+<pre><code class="shell">ALTER USER &#39;root&#39;@&#39;localhost&#39; IDENTIFIED WITH mysql_native_password BY &#39;newpassword&#39;;
+</code></pre>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>1、环境变量是为了在命令行CMD中更加方便使用mysql命令；</li>
+<li>2、如果有之前有安装过其他版本mysql，记得先卸载并删除服务；</li>
+<li>3、安装完记得登录并修改密码，不论是采用空密码还是临时密码；</li>
+<li>4、当然，命令行终归是不方便的，现在有很多可视化界面，如：Navicat等。</li>
 </ul>
-<p>规则：</p>
-<ol>
-<li>树中每个节点最多只能有M（M为阶）颗子树</li>
-</ol>
 
             
         </div>
@@ -217,7 +268,7 @@
         
         
     </div>
-    <a href="/2023/06/07/%E7%90%86%E8%AE%BA%E4%BD%93%E7%B3%BB/B%E6%A0%91&B+%E6%A0%91/" class="go-post">阅读全文</a>
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Windows%E5%AE%89%E8%A3%85MySQL/" class="go-post">阅读全文</a>
 </div>
 
 <div class="post">
@@ -292,19 +343,19 @@
 <li>limit：在写模式下，Buffer的limit表示你最多能往Buffer里写多少数据。 写模式下，limit等于Buffer的capacity。当切换Buffer到读模式时， limit表示你最多能读到多少数据。因此，当切换Buffer到读模式时，limit会被设置成写模式下的position值。换句话说，你能读到之前写入的所有数据（limit被设置成已写数据的数量，这个值在写模式下就是position）</li>
 </ul>
 <h4 id="Buffer的分配："><a href="#Buffer的分配：" class="headerlink" title="Buffer的分配："></a>Buffer的分配：</h4><p>对Buffer对象的操作必须首先进行分配，Buffer提供一个allocate(int capacity)方法分配一个指定字节大小的对象。<br> 向Buffer中写数据：写数据到Buffer中有两种方式：<br> 1.从channel写到Buffer</p>
-<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> bytes <span class="token operator">=</span> channel<span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span>buf<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//将channel中的数据读取到buf中</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<pre><code class="cpp">int bytes = channel.read(buf); //将channel中的数据读取到buf中
+</code></pre>
 <p>2.通过Buffer的put()方法写到Buffer</p>
-<pre class="line-numbers language-csharp" data-language="csharp"><code class="language-csharp">buf<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token keyword">byte</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//将数据通过put()方法写入到buf中</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<pre><code class="csharp">buf.put(byte); //将数据通过put()方法写入到buf中
+</code></pre>
 <ul>
 <li>flip()方法：将Buffer从写模式切换到读模式，调用flip()方法会将position设置为0，并将limit设置为之前的position的值。<br> 从Buffer中读数据：从Buffer中读数据有两种方式：<br> 1.从Buffer读取数据到Channel</li>
 </ul>
-<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> bytes <span class="token operator">=</span> channel<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span>buf<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//将buf中的数据读取到channel中</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<pre><code class="cpp">int bytes = channel.write(buf); //将buf中的数据读取到channel中
+</code></pre>
 <p>2.通过Buffer的get()方法读取数据</p>
-<pre class="line-numbers language-csharp" data-language="csharp"><code class="language-csharp"><span class="token class-name"><span class="token keyword">byte</span></span> bt <span class="token operator">=</span> buf<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//从buf中读取一个byte</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<pre><code class="csharp">byte bt = buf.get(); //从buf中读取一个byte
+</code></pre>
 <ul>
 <li>rewind()方法：Buffer.rewind()方法将position设置为0，使得可以重读Buffer中的所有数据，limit保持不变。</li>
 <li>clear()与compact()方法：一旦读完Buffer中的数据，需要让Buffer准备好再次被写入，可以通过clear()或compact()方法完成。如果调用的是clear()方法，position将被设置为0，limit设置为capacity的值。但是Buffer并未被清空，只是通过这些标记告诉我们可以从哪里开始往Buffer中写入多少数据。如果Buffer中还有一些未读的数据，调用clear()方法将被”遗忘 “。compact()方法将所有未读的数据拷贝到Buffer起始处，然后将position设置到最后一个未读元素的后面，limit属性依然设置为capacity。可以使得Buffer中的未读数据还可以在后续中被使用。</li>
@@ -357,18 +408,20 @@
         <div class="content" v-pre>
             
             <hr>
-<h2 id="title-二叉树定义date-2022-07-11-22-58-34-662updated-2022-08-04-18-30-08-316url-x2F-archives-x2F-二叉树定义categories-tags"><a href="#title-二叉树定义date-2022-07-11-22-58-34-662updated-2022-08-04-18-30-08-316url-x2F-archives-x2F-二叉树定义categories-tags" class="headerlink" title="title: 二叉树定义date: 2022-07-11 22:58:34.662updated: 2022-08-04 18:30:08.316url: &#x2F;archives&#x2F;二叉树定义categories:tags: "></a>title: 二叉树定义<br>date: 2022-07-11 22:58:34.662<br>updated: 2022-08-04 18:30:08.316<br>url: &#x2F;archives&#x2F;二叉树定义<br>categories:<br>tags: </h2><h4 id="前、中、后序遍历"><a href="#前、中、后序遍历" class="headerlink" title="前、中、后序遍历"></a>前、中、后序遍历</h4><pre class="line-numbers language-mermaid" data-language="mermaid"><code class="language-mermaid"><span class="token keyword">graph</span> TB
+<h2 id="title-二叉树定义date-2022-07-11-22-58-34-662updated-2022-08-04-18-30-08-316url-x2F-archives-x2F-二叉树定义categories-tags"><a href="#title-二叉树定义date-2022-07-11-22-58-34-662updated-2022-08-04-18-30-08-316url-x2F-archives-x2F-二叉树定义categories-tags" class="headerlink" title="title: 二叉树定义date: 2022-07-11 22:58:34.662updated: 2022-08-04 18:30:08.316url: &#x2F;archives&#x2F;二叉树定义categories:tags: "></a>title: 二叉树定义<br>date: 2022-07-11 22:58:34.662<br>updated: 2022-08-04 18:30:08.316<br>url: &#x2F;archives&#x2F;二叉树定义<br>categories:<br>tags: </h2><h4 id="前、中、后序遍历"><a href="#前、中、后序遍历" class="headerlink" title="前、中、后序遍历"></a>前、中、后序遍历</h4><pre><code class="mermaid">graph TB
 
-A<span class="token text string">((A))</span>
-B<span class="token text string">((B))</span>
-C<span class="token text string">((C))</span>
-D<span class="token text string">((D))</span>
-E<span class="token text string">((E))</span>
+A((A))
+B((B))
+C((C))
+D((D))
+E((E))
 
-A–>B
-A–>C
-B–>D
-B–>E<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+A–&gt;B
+A–&gt;C
+B–&gt;D
+B–&gt;E
+</code></pre>
+
             
         </div>
     </div>
@@ -527,8 +580,8 @@ B–>E<span aria-hidden="true" class="line-numbers-rows"><span></span><span></sp
 <p>在项目DTM中，出现了一种子事务屏障技术，使用该技术，能够达到这个效果，看示意图：</p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/0c9d3034f184e61c06288f87639e3eea.png"></p>
 <p>所有这些请求，到了子事务屏障后：不正常的请求，会被过滤；正常请求，通过屏障。开发者使用子事务屏障之后，前面所说的各种异常全部被妥善处理，业务开发人员只需要关注实际的业务逻辑，负担大大降低。<br>子事务屏障提供了方法ThroughBarrierCall，方法的原型为：</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">ThroughBarrierCall</span><span class="token punctuation">(</span>db <span class="token operator">*</span>sql<span class="token punctuation">.</span>DB<span class="token punctuation">,</span> transInfo <span class="token operator">*</span>TransInfo<span class="token punctuation">,</span> busiCall BusiFunc<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<pre><code class="go">func ThroughBarrierCall(db *sql.DB, transInfo *TransInfo, busiCall BusiFunc)
+</code></pre>
 <p>业务开发人员，在busiCall里面编写自己的相关逻辑，调用该函数。ThroughBarrierCall保证，在空回滚、悬挂等场景下，busiCall不会被调用；在业务被重复调用时，有幂等控制，保证只被提交一次。</p>
 <p>子事务屏障会管理TCC、SAGA、XA、事务消息等，也可以扩展到其他领域</p>
 <p>子事务屏障技术的原理是，在本地数据库，建立分支事务状态表sub_trans_barrier，唯一键为全局事务id-子事务id-子事务分支名称（try|confirm|cancel）</p>
@@ -588,27 +641,26 @@ B–>E<span aria-hidden="true" class="line-numbers-rows"><span></span><span></sp
     <div class="description">
         <div class="content" v-pre>
             
-            <h1 id="网络七层模型"><a href="#网络七层模型" class="headerlink" title="网络七层模型"></a>网络七层模型</h1><pre class="line-numbers language-mermaid" data-language="mermaid"><code class="language-mermaid"><span class="token keyword">graph</span> LR
-A<span class="token text string">[物理层]</span> <span class="token arrow operator">--></span> B<span class="token text string">[数据链路层]</span> <span class="token arrow operator">--></span> C<span class="token text string">[网络层]</span> <span class="token arrow operator">--></span> D<span class="token text string">[传输层]</span> <span class="token arrow operator">--></span> E<span class="token text string">[会话层]</span> <span class="token arrow operator">--></span> F<span class="token text string">[表示层]</span> <span class="token arrow operator">--></span> G<span class="token text string">[应用层]</span>
+            <h1 id="网络七层模型"><a href="#网络七层模型" class="headerlink" title="网络七层模型"></a>网络七层模型</h1><pre><code class="mermaid">graph LR
+A[物理层] --&gt; B[数据链路层] --&gt; C[网络层] --&gt; D[传输层] --&gt; E[会话层] --&gt; F[表示层] --&gt; G[应用层]
 
-G<span class="token text string">[应用层]</span> <span class="token arrow operator">--></span> F<span class="token text string">[表示层]</span> <span class="token arrow operator">--></span> E<span class="token text string">[会话层]</span> <span class="token arrow operator">--></span> D<span class="token text string">[传输层]</span> <span class="token arrow operator">--></span> C<span class="token text string">[网络层]</span> <span class="token arrow operator">--></span> B<span class="token text string">[数据链路层]</span> <span class="token arrow operator">--></span> A<span class="token text string">[物理层]</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<pre class="line-numbers language-mermaid" data-language="mermaid"><code class="language-mermaid"><span class="token keyword">graph</span> LR
-A<span class="token text string">[设备1]</span> <span class="token arrow operator">--></span> <span class="token label property">|物理链路|</span>B<span class="token text string">[设备2]</span> <span class="token arrow operator">--></span> <span class="token label property">|物理链路|</span>C<span class="token text string">[设备3]</span> 
-C <span class="token arrow operator">--></span><span class="token label property">|物理链路|</span> A<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<pre class="line-numbers language-mermaid" data-language="mermaid"><code class="language-mermaid"><span class="token keyword">sequenceDiagram</span>
-    <span class="token keyword">participant</span> 设备A
-    <span class="token keyword">participant</span> 设备B
-   	设备A <span class="token arrow operator">-></span> 设备B<span class="token operator">:</span> 1.物理链路层
-   	设备A <span class="token arrow operator">-></span> 设备B<span class="token operator">:</span> 2.数据链路层（基于物理链路，为数据提供可靠的数据传输，确认01的传输方式、顺序、速率）
-   	设备A <span class="token arrow operator">-></span> 设备B<span class="token operator">:</span> 3.网络层（建立两个设备之间的连接，IPV4 IPV6）
-	设备A <span class="token arrow operator">-></span> 设备B<span class="token operator">:</span> 4.传输层（在网络层建立的通道中，选择一个门户，建立一个端口对端口的网络数据流服务管道）
-	设备A <span class="token arrow operator">-></span> 设备B<span class="token operator">:</span> 5.会话层（创建完通讯管道之后，需要建立两端的会话，并且维护、终结等等）
-	设备A <span class="token arrow operator">-></span> 设备B<span class="token operator">:</span> 6.表示层（在建立端口之后需要进行数据传递，分属不同设备，需要编译一个同意的公共编码，这层就是对数据编码）
-	设备A <span class="token arrow operator">-></span> 设备B<span class="token operator">:</span> 7.应用层（包括但不限于HTTP、SMTP、FTP等等，为用户提供可使用的网络服务）<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+G[应用层] --&gt; F[表示层] --&gt; E[会话层] --&gt; D[传输层] --&gt; C[网络层] --&gt; B[数据链路层] --&gt; A[物理层]
+</code></pre>
+<pre><code class="mermaid">graph LR
+A[设备1] --&gt; |物理链路|B[设备2] --&gt; |物理链路|C[设备3] 
+C --&gt;|物理链路| A
+</code></pre>
+<pre><code class="mermaid">sequenceDiagram
+    participant 设备A
+    participant 设备B
+       设备A -&gt; 设备B: 1.物理链路层
+       设备A -&gt; 设备B: 2.数据链路层（基于物理链路，为数据提供可靠的数据传输，确认01的传输方式、顺序、速率）
+       设备A -&gt; 设备B: 3.网络层（建立两个设备之间的连接，IPV4 IPV6）
+    设备A -&gt; 设备B: 4.传输层（在网络层建立的通道中，选择一个门户，建立一个端口对端口的网络数据流服务管道）
+    设备A -&gt; 设备B: 5.会话层（创建完通讯管道之后，需要建立两端的会话，并且维护、终结等等）
+    设备A -&gt; 设备B: 6.表示层（在建立端口之后需要进行数据传递，分属不同设备，需要编译一个同意的公共编码，这层就是对数据编码）
+    设备A -&gt; 设备B: 7.应用层（包括但不限于HTTP、SMTP、FTP等等，为用户提供可使用的网络服务）
+</code></pre>
 <ol>
 <li>物理层<br>物理层负责将最后的信息编码转化成电流脉冲或者其他电信号用于传输，也就是对应的硬件支持</li>
 <li>数据链路层<br>基于物理链路，为数据传输提供可靠的传输服务，对传输数据进行维护，数据帧的形式、传输的顺序、速率等等</li>
@@ -705,28 +757,29 @@ C <span class="token arrow operator">--></span><span class="token label property
         <div class="content" v-pre>
             
             <h1 id="Anaconda-切换镜像源"><a href="#Anaconda-切换镜像源" class="headerlink" title="Anaconda 切换镜像源"></a>Anaconda 切换镜像源</h1><p>清华镜像源，由于https不通，只能将所有的链接全部换成http</p>
-<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">channels</span><span class="token punctuation">:</span>
-  <span class="token punctuation">-</span> defaults
-<span class="token key atrule">show_channel_urls</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
-<span class="token key atrule">default_channels</span><span class="token punctuation">:</span>
-  <span class="token punctuation">-</span> http<span class="token punctuation">:</span>//mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
-  <span class="token punctuation">-</span> http<span class="token punctuation">:</span>//mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r
-  <span class="token punctuation">-</span> http<span class="token punctuation">:</span>//mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2
-<span class="token key atrule">custom_channels</span><span class="token punctuation">:</span>
-  <span class="token key atrule">conda-forge</span><span class="token punctuation">:</span> http<span class="token punctuation">:</span>//mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
-  <span class="token key atrule">msys2</span><span class="token punctuation">:</span> http<span class="token punctuation">:</span>//mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
-  <span class="token key atrule">bioconda</span><span class="token punctuation">:</span> http<span class="token punctuation">:</span>//mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
-  <span class="token key atrule">menpo</span><span class="token punctuation">:</span> http<span class="token punctuation">:</span>//mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
-  <span class="token key atrule">pytorch</span><span class="token punctuation">:</span> http<span class="token punctuation">:</span>//mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
-  <span class="token key atrule">simpleitk</span><span class="token punctuation">:</span> http<span class="token punctuation">:</span>//mirrors.tuna.tsinghua.edu.cn/anaconda/cloud<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+<pre><code class="yaml">channels:
+  - defaults
+show_channel_urls: true
+default_channels:
+  - http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+  - http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r
+  - http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2
+custom_channels:
+  conda-forge: http://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  msys2: http://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  bioconda: http://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  menpo: http://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  pytorch: http://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  simpleitk: http://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+</code></pre>
 <p>基础命令</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 创建虚拟环境</span>
-conda crate <span class="token parameter variable">-n</span> py37 <span class="token assign-left variable">python</span><span class="token operator">=</span><span class="token number">3.7</span>
-<span class="token comment"># 激活环境，windows不用conda</span>
+<pre><code class="shell"># 创建虚拟环境
+conda crate -n py37 python=3.7
+# 激活环境，windows不用conda
 conda activate py37
-<span class="token comment"># 删除虚拟环境</span>
-conda remove <span class="token parameter variable">-n</span> py37 <span class="token parameter variable">--all</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+# 删除虚拟环境
+conda remove -n py37 --all
+</code></pre>
 
             
         </div>
@@ -871,53 +924,53 @@ conda remove <span class="token parameter variable">-n</span> py37 <span class="
     <div class="description">
         <div class="content" v-pre>
             
-            <h1 id="Shell笔记"><a href="#Shell笔记" class="headerlink" title="Shell笔记"></a>Shell笔记</h1><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 定义变量tips</span>
-<span class="token assign-left variable">tips</span><span class="token operator">=</span><span class="token string">'Hello Word ！'</span>
-<span class="token comment"># 使用tips变量</span>
-<span class="token builtin class-name">echo</span> <span class="token variable">$&#123;tips&#125;</span>
-<span class="token comment"># 设置为只读</span>
-<span class="token builtin class-name">readonly</span> tips
-<span class="token comment"># 删除变量</span>
-<span class="token builtin class-name">unset</span> tips<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+            <h1 id="Shell笔记"><a href="#Shell笔记" class="headerlink" title="Shell笔记"></a>Shell笔记</h1><pre><code class="shell"># 定义变量tips
+tips=&#39;Hello Word ！&#39;
+# 使用tips变量
+echo $&#123;tips&#125;
+# 设置为只读
+readonly tips
+# 删除变量
+unset tips
+</code></pre>
 <p>选择器语法</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 获取第一个参数，默认是从0开始，但是由于第0个是sh脚本名称所以从第一个开始</span>
-<span class="token assign-left variable">param1</span><span class="token operator">=</span><span class="token variable">$1</span><span class="token punctuation">;</span>
+<pre><code class="shell"># 获取第一个参数，默认是从0开始，但是由于第0个是sh脚本名称所以从第一个开始
+param1=$1;
 
-<span class="token keyword">case</span> <span class="token variable">$param1</span> <span class="token keyword">in</span>
-  <span class="token string">'start'</span><span class="token punctuation">)</span>
-    <span class="token builtin class-name">echo</span> <span class="token string">'service start ...'</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
-  <span class="token string">'restart'</span><span class="token punctuation">)</span>
-    <span class="token builtin class-name">echo</span> <span class="token string">'service restart ...'</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
-    <span class="token string">'stop'</span><span class="token punctuation">)</span>
-      <span class="token builtin class-name">echo</span> <span class="token string">'service stop ...'</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
-    *<span class="token punctuation">)</span>
-      <span class="token builtin class-name">echo</span> <span class="token string">'comment not exists ...'</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
-<span class="token keyword">esac</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+case $param1 in
+  &#39;start&#39;)
+    echo &#39;service start ...&#39;;;
+  &#39;restart&#39;)
+    echo &#39;service restart ...&#39;;;
+    &#39;stop&#39;)
+      echo &#39;service stop ...&#39;;;
+    *)
+      echo &#39;comment not exists ...&#39;;;
+esac
+</code></pre>
 <p>条件语法</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token assign-left variable">param</span><span class="token operator">=</span><span class="token variable">$1</span><span class="token punctuation">;</span>
-<span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> param <span class="token operator">==</span> <span class="token string">'start'</span> <span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-  <span class="token builtin class-name">echo</span> <span class="token string">'service start ...'</span><span class="token punctuation">;</span>
-<span class="token keyword">fi</span>
+<pre><code class="shell">param=$1;
+if [[ param == &#39;start&#39; ]]; then
+  echo &#39;service start ...&#39;;
+fi
 
-<span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> param <span class="token operator">==</span> <span class="token string">'start'</span> <span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-  <span class="token builtin class-name">echo</span> <span class="token string">'service start ...'</span><span class="token punctuation">;</span>
-<span class="token keyword">elif</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> param <span class="token operator">==</span> <span class="token string">'restart'</span> <span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-  <span class="token builtin class-name">echo</span> <span class="token string">'service restart ...'</span><span class="token punctuation">;</span>  
-<span class="token keyword">fi</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+if [[ param == &#39;start&#39; ]]; then
+  echo &#39;service start ...&#39;;
+elif [[ param == &#39;restart&#39; ]]; then
+  echo &#39;service restart ...&#39;;  
+fi
+</code></pre>
 <p>循环语法</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token assign-left variable">param1</span><span class="token operator">=</span><span class="token variable">$1</span><span class="token punctuation">;</span>
-<span class="token keyword">while</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> condition <span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">do</span>
-  <span class="token builtin class-name">echo</span> <span class="token string">"----<span class="token variable">$param1</span>----"</span><span class="token punctuation">;</span>
-  <span class="token builtin class-name">let</span> <span class="token string">"param1-=1"</span><span class="token punctuation">;</span>
-<span class="token keyword">done</span>
+<pre><code class="shell">param1=$1;
+while [[ condition ]]; do
+  echo &quot;----$param1----&quot;;
+  let &quot;param1-=1&quot;;
+done
 
-<span class="token keyword">for</span> <span class="token variable"><span class="token punctuation">((</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">))</span></span><span class="token punctuation">;</span> <span class="token keyword">do</span>
-  <span class="token comment">#statements</span>
-<span class="token keyword">done</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+for (( i = 0; i &lt; 10; i++ )); do
+  #statements
+done
+</code></pre>
 <p><strong>要点</strong></p>
 <ol>
 <li>shell的变量定义为直接定义，变量名与内容之间不能有空格</li>
@@ -966,8 +1019,8 @@ conda remove <span class="token parameter variable">-n</span> py37 <span class="
         <div class="content" v-pre>
             
             <h1 id="docker初步使用"><a href="#docker初步使用" class="headerlink" title="docker初步使用"></a>docker初步使用</h1><p>命令解析</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> run ubuntu:15.10 /bin/echo <span class="token string">"Hello Word"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<pre><code class="shell">docker run ubuntu:15.10 /bin/echo &quot;Hello Word&quot;
+</code></pre>
 <ul>
 <li><code>docker</code>Docker的二进制执行文件</li>
 <li><code>run </code>与docker组合来运行一个容器</li>
@@ -975,8 +1028,8 @@ conda remove <span class="token parameter variable">-n</span> py37 <span class="
 <li><code>/bin/echo &quot;Hellow Word&quot;</code>在启动的容器中执行的命令</li>
 </ul>
 <p>交互式容器的运行</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> run <span class="token parameter variable">-it</span> ubuntu:15.10 /bin/bash<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<pre><code class="shell">docker run -it ubuntu:15.10 /bin/bash
+</code></pre>
 <ul>
 <li><code>-i</code>运行对容器内的标准输入（STDIN）进行交互</li>
 <li><code>-t</code>在新的容器内指定一个伪终端或者终端</li>

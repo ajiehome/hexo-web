@@ -21,7 +21,7 @@
 <script src="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/highlight.min.js"></script>
 <link
     rel="stylesheet"
-    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/github.min.css"
+    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/Github Dark.min.css"
 />
 <script src="/js/lib/highlight.js"></script>
 
@@ -178,36 +178,31 @@
     
     <div class="content" v-pre>
         <h1 id="Centos与Apache"><a href="#Centos与Apache" class="headerlink" title="Centos与Apache"></a>Centos与Apache</h1><p>Apache<br>在Apache的安装目录，默认：<code>/etc/httpd</code>下有若干文件夹，<code>conf.d</code>文件夹是用来存储各个模块的配置文件，<code>conf.module.d</code>是用来给各个模块做映入的，也就是很多模块的引入都在这里面，<code>conf</code>文件夹主要是主配置文件的目录，<code>logs</code>文件夹打印日志的存储地，<code>moduls</code>是各个模块的位置</p>
-<h2 id="例如：httpd-conf：这个文件是apache的主配置文件，其他的conf-d和conf-module-d内的配置文件夹能够生效也是因为在这里面引入了两个文件夹下的所有文件，如-gt-在我的主配置文件里面还有一个功能，那就是多域名的配置，这个的主要作用是，针对不同域名的访问，映射到不同的访问文件夹，具体的映射由vhost-map文件配置"><a href="#例如：httpd-conf：这个文件是apache的主配置文件，其他的conf-d和conf-module-d内的配置文件夹能够生效也是因为在这里面引入了两个文件夹下的所有文件，如-gt-在我的主配置文件里面还有一个功能，那就是多域名的配置，这个的主要作用是，针对不同域名的访问，映射到不同的访问文件夹，具体的映射由vhost-map文件配置" class="headerlink" title="例如：httpd.conf：这个文件是apache的主配置文件，其他的conf.d和conf.module.d内的配置文件夹能够生效也是因为在这里面引入了两个文件夹下的所有文件，如&gt;在我的主配置文件里面还有一个功能，那就是多域名的配置，这个的主要作用是，针对不同域名的访问，映射到不同的访问文件夹，具体的映射由vhost.map文件配置"></a>例如：<code>httpd.conf</code>：这个文件是apache的主配置文件，其他的<code>conf.d</code>和<code>conf.module.d</code>内的配置文件夹能够生效也是因为在这里面引入了两个文件夹下的所有文件，如<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#引入了conf.moudles.d下的所有配置文件，也就是所有需要的模块</span>
-Include conf.modules.d/*.conf
-<span class="token comment">#引入了conf.d下的所有配置文件，也就是每个模块服务需要做的详细配置</span>
-IncludeOptional conf.d/*.conf<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><br>&gt;在我的主配置文件里面还有一个功能，那就是多域名的配置，这个的主要作用是，针对不同域名的访问，映射到不同的访问文件夹，具体的映射由<code>vhost.map</code>文件配置<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">RewriteEngine on
-RewriteMap lowercase int:tolower
-RewriteMap vhost txt:/var/www/vhost.map
-RewriteCond <span class="token variable">$&#123;lowercase<span class="token operator">:</span><span class="token operator">%</span>&#123;SERVER_NAME&#125;</span><span class="token punctuation">&#125;</span> ^<span class="token punctuation">(</span>.+<span class="token punctuation">)</span>$
-RewriteCond <span class="token variable">$&#123;vhost<span class="token operator">:</span><span class="token operator">%</span>1&#125;</span> ^<span class="token punctuation">(</span>/.*<span class="token punctuation">)</span>$
-RewriteRule ^/<span class="token punctuation">(</span>.*<span class="token punctuation">)</span>$ %1/<span class="token variable">$1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></h2><blockquote>
+<h2 id="例如：httpd-conf：这个文件是apache的主配置文件，其他的conf-d和conf-module-d内的配置文件夹能够生效也是因为在这里面引入了两个文件夹下的所有文件，如shell-引入了conf-moudles-d下的所有配置文件，也就是所有需要的模块-Include-conf-modules-d-conf-引入了conf-d下的所有配置文件，也就是每个模块服务需要做的详细配置-IncludeOptional-conf-d-conf-gt-在我的主配置文件里面还有一个功能，那就是多域名的配置，这个的主要作用是，针对不同域名的访问，映射到不同的访问文件夹，具体的映射由vhost-map文件配置shell-RewriteEngine-on-RewriteMap-lowercase-int-tolower-RewriteMap-vhost-txt-var-www-vhost-map-RewriteCond-lowercase-SERVER-NAME-RewriteCond-vhost-1-RewriteRule-1-1"><a href="#例如：httpd-conf：这个文件是apache的主配置文件，其他的conf-d和conf-module-d内的配置文件夹能够生效也是因为在这里面引入了两个文件夹下的所有文件，如shell-引入了conf-moudles-d下的所有配置文件，也就是所有需要的模块-Include-conf-modules-d-conf-引入了conf-d下的所有配置文件，也就是每个模块服务需要做的详细配置-IncludeOptional-conf-d-conf-gt-在我的主配置文件里面还有一个功能，那就是多域名的配置，这个的主要作用是，针对不同域名的访问，映射到不同的访问文件夹，具体的映射由vhost-map文件配置shell-RewriteEngine-on-RewriteMap-lowercase-int-tolower-RewriteMap-vhost-txt-var-www-vhost-map-RewriteCond-lowercase-SERVER-NAME-RewriteCond-vhost-1-RewriteRule-1-1" class="headerlink" title="例如：httpd.conf：这个文件是apache的主配置文件，其他的conf.d和conf.module.d内的配置文件夹能够生效也是因为在这里面引入了两个文件夹下的所有文件，如shell #引入了conf.moudles.d下的所有配置文件，也就是所有需要的模块 Include conf.modules.d/*.conf #引入了conf.d下的所有配置文件，也就是每个模块服务需要做的详细配置 IncludeOptional conf.d/*.conf &gt;在我的主配置文件里面还有一个功能，那就是多域名的配置，这个的主要作用是，针对不同域名的访问，映射到不同的访问文件夹，具体的映射由vhost.map文件配置shell RewriteEngine on RewriteMap lowercase int:tolower RewriteMap vhost txt:/var/www/vhost.map RewriteCond ${lowercase:%{SERVER_NAME}} ^(.+)$ RewriteCond ${vhost:%1} ^(/.*)$ RewriteRule ^/(.*)$ %1/$1 "></a>例如：<code>httpd.conf</code>：这个文件是apache的主配置文件，其他的<code>conf.d</code>和<code>conf.module.d</code>内的配置文件夹能够生效也是因为在这里面引入了两个文件夹下的所有文件，如<br><code>shell #引入了conf.moudles.d下的所有配置文件，也就是所有需要的模块 Include conf.modules.d/*.conf #引入了conf.d下的所有配置文件，也就是每个模块服务需要做的详细配置 IncludeOptional conf.d/*.conf </code><br>&gt;在我的主配置文件里面还有一个功能，那就是多域名的配置，这个的主要作用是，针对不同域名的访问，映射到不同的访问文件夹，具体的映射由<code>vhost.map</code>文件配置<br><code>shell RewriteEngine on RewriteMap lowercase int:tolower RewriteMap vhost txt:/var/www/vhost.map RewriteCond $&#123;lowercase:%&#123;SERVER_NAME&#125;&#125; ^(.+)$ RewriteCond $&#123;vhost:%1&#125; ^(/.*)$ RewriteRule ^/(.*)$ %1/$1 </code></h2><blockquote>
 <p>在开启了SSL服务之后，存在一个问题，由于我的域名证书是单域名证书，所以我只能够给特定的域名SSL授权，所以我配置了一个SSL的但域名拦截重定向，这里的意思是只拦截<code>ajiehome.cn</code>和<code>www.ajiehome.cn</code>两个服务请求开头的所有服务，并且转到<code>https</code>服务</p>
 </blockquote>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">RewriteEngine On
-RewriteCond %<span class="token punctuation">&#123;</span>SERVER_PORT<span class="token punctuation">&#125;</span> <span class="token number">80</span>
-RewriteCond %<span class="token punctuation">&#123;</span>HTTP_HOST<span class="token punctuation">&#125;</span> ^ajiehome.cn <span class="token punctuation">[</span>NC,OR<span class="token punctuation">]</span>
-RewriteCond %<span class="token punctuation">&#123;</span>HTTP_HOST<span class="token punctuation">&#125;</span> ^www.ajiehome.cn <span class="token punctuation">[</span>NC<span class="token punctuation">]</span>
-RewriteRule ^<span class="token punctuation">(</span>.*<span class="token punctuation">)</span>$ https://%<span class="token punctuation">&#123;</span>HTTP_HOST<span class="token punctuation">&#125;</span>/<span class="token variable">$1</span> <span class="token punctuation">[</span>R,L<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre><code class="shell">RewriteEngine On
+RewriteCond %&#123;SERVER_PORT&#125; 80
+RewriteCond %&#123;HTTP_HOST&#125; ^ajiehome.cn [NC,OR]
+RewriteCond %&#123;HTTP_HOST&#125; ^www.ajiehome.cn [NC]
+RewriteRule ^(.*)$ https://%&#123;HTTP_HOST&#125;/$1 [R,L]
+</code></pre>
 <hr>
 <blockquote>
 <p>如果用下面这个进行拦截重定向的话，会造成所有二级子域名全部转到https，甚至由于正则匹配写的不当会全部重定向到主服务之下，这里的意思是，所有不是443端口的服务请求，全部重定向https下去，<br><code>SERVER_NAME</code>：指的是服务，也就是域名部分<br><code>REQUEST_URI</code>：指的是请求的地址，也就是域名的后半部分<br><code>HTTP_HOST</code>：</p>
 </blockquote>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">RewriteEngine On
-RewriteCond %<span class="token punctuation">&#123;</span>SERVER_PORT<span class="token punctuation">&#125;</span> <span class="token operator">!</span>^443 <span class="token punctuation">\</span>$
-RewriteRule ^<span class="token punctuation">(</span>.*<span class="token punctuation">)</span>? <span class="token punctuation">\</span>$ https://%<span class="token punctuation">&#123;</span>SERVER_NAME<span class="token punctuation">&#125;</span>%<span class="token punctuation">&#123;</span>REQUEST_URI<span class="token punctuation">&#125;</span> <span class="token punctuation">[</span>L,R<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
+<pre><code class="shell">RewriteEngine On
+RewriteCond %&#123;SERVER_PORT&#125; !^443 \$
+RewriteRule ^(.*)? \$ https://%&#123;SERVER_NAME&#125;%&#123;REQUEST_URI&#125; [L,R]
+</code></pre>
 <hr>
 <p>例如：<code>conf.module.d</code>下的<code>00-ssl.cof</code>文件</p>
 <blockquote>
 <p><code>00-ss.conf</code>文件，里面有一个<code>mod_ssl</code>模块的引用，这个文件夹里的模块主要就是给<code>ssl</code>服务使用的模块，如：</p>
 </blockquote>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">LoadModule ssl_module modules/mod_ssl.so<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre><code class="shell">LoadModule ssl_module modules/mod_ssl.so
+</code></pre>
+
     </div>
     
     

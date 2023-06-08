@@ -21,7 +21,7 @@
 <script src="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/highlight.min.js"></script>
 <link
     rel="stylesheet"
-    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/github.min.css"
+    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/Github Dark.min.css"
 />
 <script src="/js/lib/highlight.js"></script>
 
@@ -252,7 +252,7 @@
 <li>构造函数在类的构建时调用，析构函数在类的声明周期结束时调用</li>
 </ol>
 <p>Test.h文件</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#ifdef _TEST_H_ 
+<pre><code class="c++">#ifdef _TEST_H_ 
 #defind _TEST_H_ 
 
 #include &lt;iostream&gt;
@@ -261,32 +261,32 @@ namespace test&#123;
     class Test&#123;
         public:
             Test()&#123;
-                this.sex&#x3D;0;
-                this.sex&#x3D;0L;
-            &#125; &#x2F;&#x2F;构造函数
-            ~Test()&#123;&#125; &#x2F;&#x2F;析构函数
+                this.sex=0;
+                this.sex=0L;
+            &#125; //构造函数
+            ~Test()&#123;&#125; //析构函数
         public:
-            void setSex(int sex); &#x2F;&#x2F;公共方法
+            void setSex(int sex); //公共方法
             void setPhone(long phone); 
             int getSex();
             long getPhone();
         private:
-            int sex; &#x2F;&#x2F;私有属性
+            int sex; //私有属性
             long phone;
     &#125;;
-&#125; &#x2F;&#x2F;namespace
-#endif &#x2F;&#x2F;_TEST_H_<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+&#125; //namespace
+#endif //_TEST_H_
+</code></pre>
 <p>Test.cpp文件</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+<pre><code class="c++">#include &lt;iostream&gt;
 #include &quot;Test.h&quot;
 
 namespace test&#123;
     void Test::setSex(int s)&#123;
-        sex &#x3D; s;
+        sex = s;
     &#125;
     void Test::setPhone(long p)&#123;
-        phone &#x3D; p;
+        phone = p;
     &#125;
     int Test::getSex()&#123;
         return sex;
@@ -294,8 +294,8 @@ namespace test&#123;
     long Test::getPhone()&#123;
         return phone;
     &#125;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+&#125;
+</code></pre>
 <p><strong>名存空间</strong></p>
 <p><code>using namespace &#39;Name&#39;</code>：选择名存空间</p>
 <p><code>namespace &#39;Name&#39;</code>：创建名存空间关键字</p>
@@ -338,7 +338,7 @@ namespace test&#123;
         <div class="content" v-pre>
             
             <h1 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h1><p><strong>Fight.h</strong>文件</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#ifdel _CLIENT_TEST_H_
+<pre><code class="c++">#ifdel _CLIENT_TEST_H_
 #default _CLIENT_TEST_H_
 #include &lt;iostream&gt;
 #include &quot;Test.h&quot;
@@ -347,7 +347,7 @@ namespace fight&#123;
     class Fight: public Test&#123;
       public:
         Figint()&#123;
-            wea &#x3D; 1;
+            wea = 1;
         &#125;
         ~Fight()&#123;
 
@@ -358,29 +358,30 @@ namespace fight&#123;
             void setWea(int w);
             int getWea();
     &#125;;
-&#125; &#x2F;&#x2F;namespace
-#endif &#x2F;&#x2F; _CLIENT_FIGht_H_<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+&#125; //namespace
+#endif // _CLIENT_FIGht_H_
+</code></pre>
 <p><strong>Feight.cpp</strong>文件</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+<pre><code class="c++">#include &lt;iostream&gt;
 #include &quot;Fight.h&quot;
 
 namespace fight&#123;
     void Fight::setWea(w)&#123;
-        wea &#x3D; w;
+        wea = w;
     &#125;
     int Fight::getWea()&#123;
         return wea;
     &#125;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+&#125;
+</code></pre>
 <p><strong>调用</strong></p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+<pre><code class="c++">#include &lt;iostream&gt;
 #include &quot;Fight.h&quot;
 
 int main(int argc, char* agev[])&#123;
     fight::Fight
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+&#125;
+</code></pre>
 
             
         </div>
@@ -393,17 +394,17 @@ int main(int argc, char* agev[])&#123;
 </div>
 
 <div class="post">
-    <a href="/2023/06/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/Kafka%E5%AE%89%E8%A3%85/">
-        <h2 class="post-title">Kafka安装</h2>
+    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jar%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/">
+        <h2 class="post-title">Jar后台运行</h2>
     </a>
     <div class="category-and-date">
         
         <span class="category">
-            <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">
+            <a href="/categories/Java%E5%9F%BA%E7%A1%80/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                中间件
+                Java基础
             </a>
         </span>
         
@@ -419,158 +420,11 @@ int main(int argc, char* agev[])&#123;
     <div class="description">
         <div class="content" v-pre>
             
-            <p>首先下载Kafka的二进制包，以及Kafka-Manager Cmak工具</p>
-<p><a target="_blank" rel="noopener" href="https://downloads.apache.org/kafka/3.3.1/kafka_2.13-3.3.1.tgz">Kafka</a>(<a target="_blank" rel="noopener" href="https://downloads.apache.org/kafka/3.3.1/kafka_2.13-3.3.1.tgz">https://downloads.apache.org/kafka/3.3.1/kafka_2.13-3.3.1.tgz</a>)</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/yahoo/CMAK/releases/download/3.0.0.6/cmak-3.0.0.6.zip">Cmak</a>(<a target="_blank" rel="noopener" href="https://github.com/yahoo/CMAK/releases/download/3.0.0.6/cmak-3.0.0.6.zip">https://github.com/yahoo/CMAK/releases/download/3.0.0.6/cmak-3.0.0.6.zip</a>)</p>
-<p>解压Kafka到<code>/opt</code>目录shell</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">tar</span> <span class="token parameter variable">-zxvf</span> kafka_2.13-3.3.1.tgz <span class="token parameter variable">-C</span> /opt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>解压Cmak到<code>/opt</code>目录</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">unzip</span> cmak-3.0.0.6 <span class="token parameter variable">-C</span> /opt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>修改cmak的application.properties<code>/opt/cmak-3.0.0.6/conf/application.properties</code>的如下信息</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># The address the socket server listens on. If not configured, the host name will be equal to the value of</span>
-<span class="token comment"># java.net.InetAddress.getCanonicalHostName(), with PLAINTEXT listener name, and port 9092.</span>
-<span class="token comment">#   FORMAT:</span>
-<span class="token comment">#     listeners = listener_name://host_name:port</span>
-<span class="token comment">#   EXAMPLE:</span>
-<span class="token comment">#     listeners = PLAINTEXT://your.host.name:9092</span>
-<span class="token comment">#listeners=PLAINTEXT://:9092</span>
-
-<span class="token assign-left variable">listeners</span><span class="token operator">=</span>PLAINTEXT://10.254.0.2:9092
-
-<span class="token comment"># Listener name, hostname and port the broker will advertise to clients.</span>
-<span class="token comment"># If not set, it uses the value for "listeners".</span>
-<span class="token comment">#advertised.listeners=PLAINTEXT://your.host.name:9092</span>
-<span class="token assign-left variable">advertised.listeners</span><span class="token operator">=</span>PLAINTEXT://10.254.0.2:9092
-
-<span class="token comment"># Settings prefixed with 'kafka-manager.' will be deprecated, use 'cmak.' instead.</span>
-<span class="token comment"># https://github.com/yahoo/CMAK/issues/713</span>
-kafka-manager.zkhosts<span class="token operator">=</span><span class="token string">"kafka-manager-zookeeper:2181"</span>
-<span class="token comment">#kafka-manager.zkhosts=$&#123;?ZK_HOSTS&#125;</span>
-kafka-manager.zkhosts<span class="token operator">=</span><span class="token string">"10.254.0.2:2181"</span>
-<span class="token assign-left variable">cmak.zkhosts</span><span class="token operator">=</span><span class="token string">"kafka-manager-zookeeper:2181"</span>
-<span class="token comment">#cmak.zkhosts=$&#123;?ZK_HOSTS&#125;</span>
-<span class="token assign-left variable">cmak.zkhosts</span><span class="token operator">=</span><span class="token string">"10.254.0.2:2181"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>构建如下脚本，一键启动Kafka所需要的Zookeeper服务、Kafka服务以及Cmak管理工具</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
-
-<span class="token assign-left variable">option</span><span class="token operator">=</span><span class="token variable">$1</span>
-
-<span class="token builtin class-name">echo</span> <span class="token string">"option <span class="token variable">$option</span>"</span>
-
-<span class="token keyword">case</span> <span class="token variable">$option</span> <span class="token keyword">in</span> 
-
-  <span class="token string">'start'</span><span class="token punctuation">)</span>
-
-    <span class="token comment"># create kafka catalogue</span>
-    <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token parameter variable">-d</span> <span class="token string">'/root/kafka'</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-      <span class="token builtin class-name">echo</span> <span class="token string">'kafka catalogue exists'</span>
-    <span class="token keyword">else</span> 
-      <span class="token function">mkdir</span> /root/kafka
-      <span class="token builtin class-name">echo</span> <span class="token string">'create kafka catalogue success'</span>
-    <span class="token keyword">fi</span>
-    <span class="token comment"># create kafka log catalogue</span>
-    <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token parameter variable">-d</span> <span class="token string">"/root/kafka/log"</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-      <span class="token builtin class-name">echo</span> <span class="token string">'kafka log catalogue exists'</span>
-    <span class="token keyword">else</span>
-      <span class="token function">mkdir</span> /root/kafka/log
-      <span class="token builtin class-name">echo</span> <span class="token string">'create kafka log catalogue success'</span>
-    <span class="token keyword">fi</span>
-    <span class="token comment">#  create kafka pid catalogue</span>
-    <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token parameter variable">-d</span> <span class="token string">'/root/kafka/pid'</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-      <span class="token builtin class-name">echo</span> <span class="token string">'kafka pid catalogue exists'</span>
-    <span class="token keyword">else</span>
-      <span class="token function">mkdir</span> /root/kafka/pid
-      <span class="token builtin class-name">echo</span> <span class="token string">'create kafka pid catalogue success'</span>
-    <span class="token keyword">fi</span>
-    <span class="token comment"># creare kafka zk log file </span>
-    <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token parameter variable">-f</span> <span class="token string">'/root/kafka/log/zk.log'</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-      <span class="token builtin class-name">echo</span> <span class="token string">'kafka zk log file already exists'</span>
-    <span class="token keyword">else</span> 
-      <span class="token function">touch</span> /root/kafka/log/zk.log
-      <span class="token builtin class-name">echo</span> <span class="token string">'create kafka zk log file success'</span>
-    <span class="token keyword">fi</span>
-    <span class="token comment"># create zk pid file </span>
-    <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token parameter variable">-f</span> <span class="token string">'/root/kafka/pid/zk-pid'</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-      <span class="token builtin class-name">echo</span> <span class="token string">'kafka zk pid file already exists'</span>
-    <span class="token keyword">else</span>
-      <span class="token function">touch</span> /root/kafka/pid/zk-pid
-      <span class="token builtin class-name">echo</span> <span class="token string">'create kafka zk pid file success'</span>
-    <span class="token keyword">fi</span>
-
-    <span class="token function">nohup</span>  /opt/kafka_2.13-3.3.1/bin/zookeeper-server-start.sh /opt/kafka_2.13-3.3.1/config/zookeeper.properties <span class="token operator">></span> /root/kafka/log/zk.log <span class="token operator"><span class="token file-descriptor important">2</span>></span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span>
-    <span class="token builtin class-name">echo</span> <span class="token variable">$!</span>
-    <span class="token builtin class-name">echo</span> <span class="token variable">$!</span> <span class="token operator">></span> /root/kafka/pid/zk-pid
-    <span class="token builtin class-name">echo</span> <span class="token string">'loading 1 minute ......'</span> 
-    <span class="token function">sleep</span> 1m
-
-    <span class="token comment"># create kafka server log file</span>
-    <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token parameter variable">-f</span> <span class="token string">'/root/kafka/log/kafka.log'</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-      <span class="token builtin class-name">echo</span> <span class="token string">'kafka server log file exists'</span>
-    <span class="token keyword">else</span> 
-      <span class="token function">touch</span> /root/kafka/log/kafka.log
-      <span class="token builtin class-name">echo</span> <span class="token string">'create kafka server log file success'</span>
-    <span class="token keyword">fi</span>
-    <span class="token comment"># create kafka pid pid file</span>
-    <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token parameter variable">-f</span> <span class="token string">'/root/kafka/pid/kafka-pid'</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-      <span class="token builtin class-name">echo</span> <span class="token string">'kafka server pid file exists'</span>
-    <span class="token keyword">else</span>
-      <span class="token function">touch</span> /root/kafka/pid/kafka-pid
-      <span class="token builtin class-name">echo</span> <span class="token string">'create kafka server pid file success'</span>
-    <span class="token keyword">fi</span>
-
-    <span class="token builtin class-name">export</span> <span class="token assign-left variable">JMX_PORT</span><span class="token operator">=</span><span class="token number">9999</span>
-
-    <span class="token function">nohup</span> /opt/kafka_2.13-3.3.1/bin/kafka-server-start.sh /opt/kafka_2.13-3.3.1/config/server.properties <span class="token operator">></span> /root/kafka/log/kafka.log <span class="token operator"><span class="token file-descriptor important">2</span>></span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span>
-    <span class="token builtin class-name">echo</span> <span class="token variable">$!</span>
-    <span class="token builtin class-name">echo</span> <span class="token variable">$!</span> <span class="token operator">></span> /root/kafka/pid/kafka-pid
-
-
-    <span class="token comment"># create kafka-manager cmak log file</span>
-      <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token parameter variable">-f</span> <span class="token string">'/root/kafka/log/cmak.log'</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-        <span class="token builtin class-name">echo</span> <span class="token string">'kafka manager cmak log file exists'</span>
-      <span class="token keyword">else</span>
-        <span class="token function">touch</span> /root/kafka/log/cmak.log
-        <span class="token builtin class-name">echo</span> <span class="token string">'create kafka manager cmak log file success'</span>
-      <span class="token keyword">fi</span>
-    <span class="token comment"># create kafka-manager cmak pid file</span>
-     <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token parameter variable">-f</span> <span class="token string">'/root/kafka/pid/cmak-pid'</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-       <span class="token builtin class-name">echo</span> <span class="token string">'kafka manager cmak pid file exists'</span>
-     <span class="token keyword">else</span> 
-       <span class="token function">touch</span> /root/kafka/pid/cmak-pid
-       <span class="token builtin class-name">echo</span> <span class="token string">'create kafka manager cmak pid file success'</span>
-     <span class="token keyword">fi</span>
-
-    <span class="token function">nohup</span> <span class="token function">bash</span> /opt/cmak-3.0.0.6/bin/cmak <span class="token operator">></span> /root/kafka/log/cmak.log <span class="token operator"><span class="token file-descriptor important">2</span>></span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span>
-    <span class="token builtin class-name">echo</span> <span class="token variable">$!</span>
-    <span class="token builtin class-name">echo</span> <span class="token variable">$!</span> <span class="token operator">></span> /root/kafka/pid/cmak-pid
-
-    <span class="token builtin class-name">echo</span> <span class="token string">'loading 1 minute ......'</span>
-    <span class="token function">sleep</span> 1m
-    <span class="token builtin class-name">echo</span> <span class="token string">'all server start success'</span>
-  <span class="token punctuation">;</span><span class="token punctuation">;</span>
-
-  <span class="token string">'stop'</span><span class="token punctuation">)</span>
-    <span class="token assign-left variable">zk_pid</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">cat</span> /root/kafka/pid/zk-pid<span class="token variable">)</span></span>
-    <span class="token function">kill</span> <span class="token parameter variable">-9</span> <span class="token variable">$zk_pid</span>
-    <span class="token builtin class-name">echo</span> <span class="token string">'kill zookeeper server success'</span>
-
-    <span class="token assign-left variable">kafka_pid</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">cat</span> /root/kafka/pid/kafka-pid<span class="token variable">)</span></span>
-    <span class="token function">kill</span> <span class="token parameter variable">-9</span> <span class="token variable">$kafka_pid</span>
-    <span class="token builtin class-name">echo</span> <span class="token string">'kill kafka server success'</span>
-
-    <span class="token assign-left variable">cmak_pid</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">cat</span> /root/kafka/pid/cmak-pid<span class="token variable">)</span></span>
-    <span class="token function">kill</span> <span class="token parameter variable">-9</span> <span class="token variable">$cmak_pid</span>
-    <span class="token builtin class-name">echo</span> <span class="token string">'kill kafka manager cmak success'</span>     
-    <span class="token function">rm</span> <span class="token parameter variable">-rf</span> /opt/cmak-3.0.0.6/RUNNING_PID
-  <span class="token punctuation">;</span><span class="token punctuation">;</span>
-
-  *<span class="token punctuation">)</span>
-    <span class="token builtin class-name">echo</span> <span class="token string">'option error'</span>
-  <span class="token punctuation">;</span><span class="token punctuation">;</span>
-<span class="token keyword">esac</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+            <h1 id="JAR后台运行"><a href="#JAR后台运行" class="headerlink" title="JAR后台运行"></a>JAR后台运行</h1><p>保存后台运行，且把日志信息打印输出到指定的文件中</p>
+<p>jar name：jar包的名字</p>
+<p>log file：完整的日志文件路径，包括日志文件</p>
+<pre><code class="shell">nohup java -jar &#39;jar name&#39; &gt; &#39;log file&#39; &amp;
+</code></pre>
 
             
         </div>
@@ -579,224 +433,7 @@ kafka-manager.zkhosts<span class="token operator">=</span><span class="token str
         
         
     </div>
-    <a href="/2023/06/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/Kafka%E5%AE%89%E8%A3%85/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/06/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/RocketMQ%E4%B8%8ESystemd/">
-        <h2 class="post-title">RocketMQ与Systemd</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                中间件
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="RocketMQ与Systemd"><a href="#RocketMQ与Systemd" class="headerlink" title="RocketMQ与Systemd"></a>RocketMQ与Systemd</h1><p>RocketMQ的安装比较简单，只需要提供了JAVA_HOME环境，之后运行对于的脚本即可，所以这里主要介绍的RocketMQ与Systemd的配置，结合Shell脚本，一次性的启用namsesrv和borker以及web管理工具<code>rocketmq-dashboard</code></p>
-<h2 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h2><p>Java: openjdk-11</p>
-<p>RocketMQ: <code>rocketmq-all-5.0.0-bin-release.zip</code><a target="_blank" rel="noopener" href="https://www.apache.org/dyn/closer.cgi?path=rocketmq/5.0.0/rocketmq-all-5.0.0-bin-release.zip">下载</a></p>
-<p>RocketMQ Dashboard: <code>rocketmq-dashboard-rocketmq-dashboard-1.0.0.tar.gz</code> <a target="_blank" rel="noopener" href="https://github.com/apache/rocketmq-dashboard">源码地址,该项目需要自己编译成jar包</a></p>
-<p>在下载了RocketMQ的二进制包之后，解压到指定位置，而后配置对于的<code>namesrv</code>和<code>borker</code>服务，systemd的服务配置在<code>/usr/lib/systemd/system/</code>或者<code>/etc/systemd/system/</code>目录下</p>
-<p>rmq_namesrv.service</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>Unit<span class="token punctuation">]</span>
-<span class="token assign-left variable">Description</span><span class="token operator">=</span>rocketmq namesrv
-<span class="token assign-left variable">After</span><span class="token operator">=</span>network.target
-
-<span class="token punctuation">[</span>Service<span class="token punctuation">]</span>
-<span class="token assign-left variable">Type</span><span class="token operator">=</span>simple
-<span class="token assign-left variable">ExecStart</span><span class="token operator">=</span>/opt/rocketmq-all-5.0.0-bin-release/bin/mqnamesrv
-<span class="token assign-left variable">ExecReload</span><span class="token operator">=</span>/bin/kill <span class="token parameter variable">-s</span> HUP <span class="token variable">$MAINPID</span>
-<span class="token assign-left variable">ExecStop</span><span class="token operator">=</span>//opt/rocketmq-all-5.0.0-bin-release/bin/mqshutdown namesrv
-
-<span class="token punctuation">[</span>Install<span class="token punctuation">]</span>
-<span class="token assign-left variable">WantedBy</span><span class="token operator">=</span>mulitiple-rmq-namesrv.target<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>rmq_borker.service</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>Unit<span class="token punctuation">]</span>
-<span class="token assign-left variable">Description</span><span class="token operator">=</span>rocketmq broker
-<span class="token assign-left variable">After</span><span class="token operator">=</span>network.target
-
-<span class="token punctuation">[</span>Service<span class="token punctuation">]</span>
-<span class="token assign-left variable">Type</span><span class="token operator">=</span>simple
-<span class="token assign-left variable">ExecStart</span><span class="token operator">=</span>/opt/rocketmq-all-5.0.0-bin-release/bin/mqbroker <span class="token parameter variable">-n</span> localhost:9876 --enable-proxy
-<span class="token assign-left variable">ExecReload</span><span class="token operator">=</span>/bin/kill <span class="token parameter variable">-s</span> HUP <span class="token variable">$MAINPID</span>
-<span class="token assign-left variable">ExecStop</span><span class="token operator">=</span>/opt/rocketmq-all-5.0.0-bin-release/bin/mqshutdown broker
-
-<span class="token punctuation">[</span>Install<span class="token punctuation">]</span>
-<span class="token assign-left variable">WantedBy</span><span class="token operator">=</span>multiple-rmq-broker.target<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>在配置了这两个服务之后，即可通过systemctl start&#x2F;stop&#x2F;restart来执行服务了，由于每次都需要启动<code>namesrv</code>和<code>borker</code>服务还有web管理工具过于麻烦，所以引入<code>shell</code>脚本进行处理</p>
-<p>rocketmq.shell</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
-
-<span class="token assign-left variable">instruct</span><span class="token operator">=</span><span class="token variable">$1</span>
-
-<span class="token builtin class-name">echo</span> <span class="token variable">$instruct</span>
-
-<span class="token keyword">case</span> <span class="token variable">$instruct</span> <span class="token keyword">in</span>
- <span class="token string">'start'</span><span class="token punctuation">)</span>
-   systemctl start rmq_namesrv
-   systemctl start rmq_borker
-   <span class="token builtin class-name">export</span> <span class="token assign-left variable">NAMSESRV_ADDR</span><span class="token operator">=</span>localhost:9876
-   <span class="token function">nohup</span> <span class="token function">java</span> <span class="token parameter variable">-jar</span> /opt/rocketmq-dashboard-rocketmq-dashboard-1.0.0/target/rocketmq-dashboard-1.0.0.jar <span class="token operator">></span> /root/rocketmq-dashboard.log <span class="token operator">&amp;</span>
-   <span class="token builtin class-name">echo</span> <span class="token variable">$!</span> <span class="token operator">></span> /root/rmq-d-pid
-   <span class="token builtin class-name">echo</span> <span class="token string">"RocketMQ Start SUCCESS PID: "</span> + <span class="token variable">$!</span>
- <span class="token punctuation">;</span><span class="token punctuation">;</span>
-
- <span class="token string">'stop'</span><span class="token punctuation">)</span>
-   systemctl stop rmq_namesrv
-   systemctl stop rmq_borker
-   <span class="token assign-left variable">PID</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">cat</span> /root/rmq-d-pid<span class="token variable">)</span></span>
-   <span class="token function">kill</span> <span class="token parameter variable">-9</span> <span class="token variable">$&#123;PID&#125;</span>
-   <span class="token builtin class-name">echo</span> <span class="token string">"RocketMQ Stop SUCCESS"</span>
- <span class="token punctuation">;</span><span class="token punctuation">;</span>
-
- *<span class="token punctuation">)</span>
-   <span class="token builtin class-name">echo</span> <span class="token string">"Input instruct error"</span>
- <span class="token punctuation">;</span><span class="token punctuation">;</span>
-<span class="token keyword">esac</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>可以通过执行该shell脚本对RocketMQ进行启动和关闭</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/06/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/RocketMQ%E4%B8%8ESystemd/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/06/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/RocketMQ%E5%85%B3%E7%B3%BB%E6%A2%B3%E7%90%86/">
-        <h2 class="post-title">RocketMQ关系梳理</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                中间件
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="RocketMQ关系梳理"><a href="#RocketMQ关系梳理" class="headerlink" title="RocketMQ关系梳理"></a>RocketMQ关系梳理</h1><p>对于RocketMQ的生产者、消息、消费者、消费者分组、主题、队列、订阅关系的梳理</p>
-<p>主题: 主题是订阅的首要关系，不管是生产者还是消费者都是和主题进行关联订阅，而主题内是由队列组成，队列拥有读、写等权限控制，主题通过队列进行横向扩展，来提要主题的性能，主题是存储消息的实际。</p>
-<p>消息: 消息是队列内信息流通的最小粒子，消息本身拥有一定的特性，如延迟消息等。</p>
-<p>生产者: 生产者通过向指定的主题发送消息完成生产任务，更多理解暂时没有</p>
-<p>消费者: 消费者必定需要提起续费这分组，因为消费者与主题之间的订阅关系是由消费者分组完成的，换句话说，消费者与主题没有直接关系，与主题有直接关系的是消费者组，消费者组通过订阅关系与主题构建关联，而消费者属于消费者组，那么在消费者组得到消息之后，通过进一步的消息订阅关系分发给组下面的消费者，需要注意的是，在同一个消费者分组下的消费者，其订阅关系必须保持一致性，如果多个消费者分组订阅同一个主题，那么这个主题的消息会分发给所有的消费者分组。</p>
-<p><img src="https://rocketmq.apache.org/zh/assets/images/archiforproducer-ebb8ff832f6e857cbebc2c17c2044a3b.png" alt="alt"></p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/06/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/RocketMQ%E5%85%B3%E7%B3%BB%E6%A2%B3%E7%90%86/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/06/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/Zookeeper%E5%8D%95%E6%9C%BA%E9%83%A8%E7%BD%B2/">
-        <h2 class="post-title">Zookeeper单机部署</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                中间件
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <hr>
-<h2 id="title-Zookeeper单机部署date-2022-10-10-13-59-49-654updated-2022-10-13-14-44-16-087url-x2F-archives-x2F-zookeeper-dan-ji-bu-shucategories-Zookeepertags-Zookeeper"><a href="#title-Zookeeper单机部署date-2022-10-10-13-59-49-654updated-2022-10-13-14-44-16-087url-x2F-archives-x2F-zookeeper-dan-ji-bu-shucategories-Zookeepertags-Zookeeper" class="headerlink" title="title: Zookeeper单机部署date: 2022-10-10 13:59:49.654updated: 2022-10-13 14:44:16.087url: &#x2F;archives&#x2F;zookeeper-dan-ji-bu-shucategories:- Zookeepertags:- Zookeeper"></a>title: Zookeeper单机部署<br>date: 2022-10-10 13:59:49.654<br>updated: 2022-10-13 14:44:16.087<br>url: &#x2F;archives&#x2F;zookeeper-dan-ji-bu-shu<br>categories:<br>- Zookeeper<br>tags:<br>- Zookeeper</h2><h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><blockquote>
-<p>CentOS7、openJdk11</p>
-</blockquote>
-<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><ol>
-<li>首先使用<code>wget</code>下载zk的二进制包 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">    <span class="token function">wget</span> https://dlcdn.apache.org/zookeeper/zookeeper-3.8.0/apache-zookeeper-3.8.0-bin.tar.gz
-    ```<span class="token variable"><span class="token variable">`</span>
-<span class="token number">2</span>. 解压出到opt目录下
-   <span class="token variable">`</span></span>``shell
-   <span class="token function">tar</span> <span class="token parameter variable">-zxvf</span> apache-zookeeper-3.8.0-bin.tar.gz <span class="token parameter variable">-O</span> /opt<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li>配置systemd服务管理<br> 在&#x2F;etc&#x2F;systemd&#x2F;system目录下创建zkServer.service文件<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>Unit<span class="token punctuation">]</span>
-<span class="token assign-left variable">Description</span><span class="token operator">=</span>zkServer
-
-<span class="token punctuation">[</span>Service<span class="token punctuation">]</span>
-<span class="token assign-left variable">Type</span><span class="token operator">=</span>forking
-<span class="token comment">#PIDFile=/var/run/zkServer_2181.pid</span>
-<span class="token assign-left variable">ExecStart</span><span class="token operator">=</span>/opt/apache-zookeeper-3.8.0-bin/bin/zkServer.sh start
-<span class="token assign-left variable">ExecStartPost</span><span class="token operator">=</span>/bin/sleep <span class="token number">0.1</span>
-<span class="token assign-left variable">ExecReload</span><span class="token operator">=</span>/bin/kill <span class="token parameter variable">-s</span> HUP <span class="token variable">$MAINPID</span>
-<span class="token assign-left variable">ExecStop</span><span class="token operator">=</span>/opt/apache-zookeeper-3.8.0-bin/bin/zkServer.sh stop
-<span class="token assign-left variable">PrivateTmp</span><span class="token operator">=</span>true
-
-<span class="token punctuation">[</span>Install<span class="token punctuation">]</span>
-<span class="token assign-left variable">WantedBy</span><span class="token operator">=</span>multi-user.target<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-commands.html">含义参考</a></li>
-<li>使用systemd启用服务即可 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 启用</span>
-systemctl start zkServer
-<span class="token comment"># 停止</span>
-systemctl stop zkServer
-<span class="token comment"># 重启</span>
-systemctl restart zkServer<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-</ol>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/06/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/Zookeeper%E5%8D%95%E6%9C%BA%E9%83%A8%E7%BD%B2/" class="go-post">阅读全文</a>
+    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jar%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/" class="go-post">阅读全文</a>
 </div>
 
 <div class="post">
@@ -864,19 +501,19 @@ systemctl restart zkServer<span aria-hidden="true" class="line-numbers-rows"><sp
 <li>limit：在写模式下，Buffer的limit表示你最多能往Buffer里写多少数据。 写模式下，limit等于Buffer的capacity。当切换Buffer到读模式时， limit表示你最多能读到多少数据。因此，当切换Buffer到读模式时，limit会被设置成写模式下的position值。换句话说，你能读到之前写入的所有数据（limit被设置成已写数据的数量，这个值在写模式下就是position）</li>
 </ul>
 <h4 id="Buffer的分配："><a href="#Buffer的分配：" class="headerlink" title="Buffer的分配："></a>Buffer的分配：</h4><p>对Buffer对象的操作必须首先进行分配，Buffer提供一个allocate(int capacity)方法分配一个指定字节大小的对象。<br> 向Buffer中写数据：写数据到Buffer中有两种方式：<br> 1.从channel写到Buffer</p>
-<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> bytes <span class="token operator">=</span> channel<span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span>buf<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//将channel中的数据读取到buf中</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<pre><code class="cpp">int bytes = channel.read(buf); //将channel中的数据读取到buf中
+</code></pre>
 <p>2.通过Buffer的put()方法写到Buffer</p>
-<pre class="line-numbers language-csharp" data-language="csharp"><code class="language-csharp">buf<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token keyword">byte</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//将数据通过put()方法写入到buf中</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<pre><code class="csharp">buf.put(byte); //将数据通过put()方法写入到buf中
+</code></pre>
 <ul>
 <li>flip()方法：将Buffer从写模式切换到读模式，调用flip()方法会将position设置为0，并将limit设置为之前的position的值。<br> 从Buffer中读数据：从Buffer中读数据有两种方式：<br> 1.从Buffer读取数据到Channel</li>
 </ul>
-<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> bytes <span class="token operator">=</span> channel<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span>buf<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//将buf中的数据读取到channel中</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<pre><code class="cpp">int bytes = channel.write(buf); //将buf中的数据读取到channel中
+</code></pre>
 <p>2.通过Buffer的get()方法读取数据</p>
-<pre class="line-numbers language-csharp" data-language="csharp"><code class="language-csharp"><span class="token class-name"><span class="token keyword">byte</span></span> bt <span class="token operator">=</span> buf<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//从buf中读取一个byte</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<pre><code class="csharp">byte bt = buf.get(); //从buf中读取一个byte
+</code></pre>
 <ul>
 <li>rewind()方法：Buffer.rewind()方法将position设置为0，使得可以重读Buffer中的所有数据，limit保持不变。</li>
 <li>clear()与compact()方法：一旦读完Buffer中的数据，需要让Buffer准备好再次被写入，可以通过clear()或compact()方法完成。如果调用的是clear()方法，position将被设置为0，limit设置为capacity的值。但是Buffer并未被清空，只是通过这些标记告诉我们可以从哪里开始往Buffer中写入多少数据。如果Buffer中还有一些未读的数据，调用clear()方法将被”遗忘 “。compact()方法将所有未读的数据拷贝到Buffer起始处，然后将position设置到最后一个未读元素的后面，limit属性依然设置为capacity。可以使得Buffer中的未读数据还可以在后续中被使用。</li>
@@ -899,49 +536,6 @@ systemctl restart zkServer<span aria-hidden="true" class="line-numbers-rows"><sp
         
     </div>
     <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/IO%E4%B8%8ENIO/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jar%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/">
-        <h2 class="post-title">Jar后台运行</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/Java%E5%9F%BA%E7%A1%80/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Java基础
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="JAR后台运行"><a href="#JAR后台运行" class="headerlink" title="JAR后台运行"></a>JAR后台运行</h1><p>保存后台运行，且把日志信息打印输出到指定的文件中</p>
-<p>jar name：jar包的名字</p>
-<p>log file：完整的日志文件路径，包括日志文件</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">nohup</span> <span class="token function">java</span> <span class="token parameter variable">-jar</span> <span class="token string">'jar name'</span> <span class="token operator">></span> <span class="token string">'log file'</span> <span class="token operator">&amp;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jar%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/" class="go-post">阅读全文</a>
 </div>
 
 <div class="post">
@@ -971,82 +565,81 @@ systemctl restart zkServer<span aria-hidden="true" class="line-numbers-rows"><sp
     <div class="description">
         <div class="content" v-pre>
             
-            <h1 id="JavaScript获取视频流且回显"><a href="#JavaScript获取视频流且回显" class="headerlink" title="JavaScript获取视频流且回显"></a>JavaScript获取视频流且回显</h1><pre class="line-numbers language-HTML" data-language="HTML"><code class="language-HTML">&lt;!DOCTYPE html&gt;
+            <h1 id="JavaScript获取视频流且回显"><a href="#JavaScript获取视频流且回显" class="headerlink" title="JavaScript获取视频流且回显"></a>JavaScript获取视频流且回显</h1><pre><code class="HTML">&lt;!DOCTYPE html&gt;
 &lt;html&gt;
-	&lt;head&gt;
-		&lt;style&gt;
+    &lt;head&gt;
+        &lt;style&gt;
 
-		&lt;&#x2F;style&gt;
-	&lt;&#x2F;head&gt;
-	&lt;body&gt;
-		&lt;video id&#x3D;&quot;video&quot; width&#x3D;&quot;640&quot; height&#x3D;&quot;480&quot; autoplay&#x3D;&quot;autoplay&quot;&gt;&lt;&#x2F;video&gt;
-		&lt;br&#x2F;&gt;
-		&lt;button id&#x3D;&quot;snap&quot;&gt;截取图像&lt;&#x2F;button&gt;&lt;button id&#x3D;&quot;start&quot;&gt;开始录制&lt;&#x2F;button&gt;&lt;button id&#x3D;&quot;stop&quot;&gt;停止录制&lt;&#x2F;button&gt;
-		&lt;br&#x2F;&gt;
-		&lt;canvas id&#x3D;&quot;canvas&quot; width&#x3D;&quot;640&quot; height&#x3D;&quot;480&quot;&gt;&lt;&#x2F;canvas&gt;
-	&lt;&#x2F;body&gt;
-	&lt;script type&#x3D;&quot;text&#x2F;javascript&quot;&gt;
-		let videoView &#x3D; document.getElementById(&quot;video&quot;);
-		let buttonView &#x3D; document.getElementById(&quot;snap&quot;);
-		let startButton &#x3D; document.getElementById(&quot;start&quot;);
-		let stopButton &#x3D; document.getElementById(&quot;stop&quot;);
-		let canvasView &#x3D; document.getElementById(&quot;canvas&quot;);
+        &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;video id=&quot;video&quot; width=&quot;640&quot; height=&quot;480&quot; autoplay=&quot;autoplay&quot;&gt;&lt;/video&gt;
+        &lt;br/&gt;
+        &lt;button id=&quot;snap&quot;&gt;截取图像&lt;/button&gt;&lt;button id=&quot;start&quot;&gt;开始录制&lt;/button&gt;&lt;button id=&quot;stop&quot;&gt;停止录制&lt;/button&gt;
+        &lt;br/&gt;
+        &lt;canvas id=&quot;canvas&quot; width=&quot;640&quot; height=&quot;480&quot;&gt;&lt;/canvas&gt;
+    &lt;/body&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+        let videoView = document.getElementById(&quot;video&quot;);
+        let buttonView = document.getElementById(&quot;snap&quot;);
+        let startButton = document.getElementById(&quot;start&quot;);
+        let stopButton = document.getElementById(&quot;stop&quot;);
+        let canvasView = document.getElementById(&quot;canvas&quot;);
 
-		navigator.mediaDevices.getDisplayMedia(&#123;
-			video: &#123;
-				width: 640,
-				height: 480
-			&#125;,
-			audio: true
-		&#125;).then(stream &#x3D;&gt; &#123;
-			console.log(&quot;摄像头打开成功！！！&quot;, stream);
-			&#x2F;&#x2F;以ID为基准,video控件的ID是什么此处的video就是什么
-			video.srcObject &#x3D; stream;
+        navigator.mediaDevices.getDisplayMedia(&#123;
+            video: &#123;
+                width: 640,
+                height: 480
+            &#125;,
+            audio: true
+        &#125;).then(stream =&gt; &#123;
+            console.log(&quot;摄像头打开成功！！！&quot;, stream);
+            //以ID为基准,video控件的ID是什么此处的video就是什么
+            video.srcObject = stream;
 
-			&#x2F;&#x2F; 创建下载对象
-			let mediaRecorder &#x3D; new MediaRecorder(stream, &#123;
-				audioBitsPerSecond: 128000, &#x2F;&#x2F; 音频码率
-				videoBitsPerSecond: 100000, &#x2F;&#x2F; 视频码率
-				mimeType: &#39;video&#x2F;webm;codecs&#x3D;h264&#39; &#x2F;&#x2F; 编码格式
-			&#125;);
-			startButton.onclick &#x3D; (e &#x3D;&gt; &#123;
-				console.log(&quot;触发下载按钮！！！&quot;, e)
-				mediaRecorder.start(5000);
-			&#125;);
-			stopButton.onclick &#x3D; (e &#x3D;&gt; &#123;
-				console.log(&quot;触发结束按钮！！！&quot;, e)
-				mediaRecorder.stop();
-			&#125;);
-			mediaRecorder.ondataavailable &#x3D; (e &#x3D;&gt; &#123;
-				console.log(&quot;开始下载&quot;)
-			    &#x2F;&#x2F; 下载视频
-			    var blob &#x3D; new Blob([e.data], &#123; &#39;type&#39; : &#39;video&#x2F;mp4&#39; &#125;)
-			    let a &#x3D; document.createElement(&#39;a&#39;)
-			    a.href &#x3D; URL.createObjectURL(blob)
-			    a.download &#x3D; &#96;test.mp4&#96;
-			    a.click()
-			&#125;);
+            // 创建下载对象
+            let mediaRecorder = new MediaRecorder(stream, &#123;
+                audioBitsPerSecond: 128000, // 音频码率
+                videoBitsPerSecond: 100000, // 视频码率
+                mimeType: &#39;video/webm;codecs=h264&#39; // 编码格式
+            &#125;);
+            startButton.onclick = (e =&gt; &#123;
+                console.log(&quot;触发下载按钮！！！&quot;, e)
+                mediaRecorder.start(5000);
+            &#125;);
+            stopButton.onclick = (e =&gt; &#123;
+                console.log(&quot;触发结束按钮！！！&quot;, e)
+                mediaRecorder.stop();
+            &#125;);
+            mediaRecorder.ondataavailable = (e =&gt; &#123;
+                console.log(&quot;开始下载&quot;)
+                // 下载视频
+                var blob = new Blob([e.data], &#123; &#39;type&#39; : &#39;video/mp4&#39; &#125;)
+                let a = document.createElement(&#39;a&#39;)
+                a.href = URL.createObjectURL(blob)
+                a.download = `test.mp4`
+                a.click()
+            &#125;);
 
-			&#x2F;&#x2F;监听流录入失败
-			video.onerror &#x3D; (err &#x3D;&gt; &#123;
-				console.log(&quot;加载错误！！！&quot;, err);
-			&#125;);
-			&#x2F;&#x2F;监听流录入成功
-			video.onloadeddata &#x3D; (e &#x3D;&gt; &#123;
-				console.log(&quot;加载成功！！！&quot;, e);
-			&#125;);
-		&#125;).catch(stream &#x3D;&gt; &#123;
-			console.log(&quot;摄像头打开失败！！！&quot;, stream);
-		&#125;);
-		&#x2F;&#x2F;给button按钮设置一个点击事件监听
-		buttonView.onclick &#x3D; function() &#123;
-			&#x2F;&#x2F;获取画布的2d上下文，然后把视频内的一帧绘制到画布上
-			canvasView.getContext(&quot;2d&quot;).drawImage(videoView, 0, 0, 640, 480)
-		&#125;
-	&lt;&#x2F;script&gt;
-&lt;&#x2F;html&gt;
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+            //监听流录入失败
+            video.onerror = (err =&gt; &#123;
+                console.log(&quot;加载错误！！！&quot;, err);
+            &#125;);
+            //监听流录入成功
+            video.onloadeddata = (e =&gt; &#123;
+                console.log(&quot;加载成功！！！&quot;, e);
+            &#125;);
+        &#125;).catch(stream =&gt; &#123;
+            console.log(&quot;摄像头打开失败！！！&quot;, stream);
+        &#125;);
+        //给button按钮设置一个点击事件监听
+        buttonView.onclick = function() &#123;
+            //获取画布的2d上下文，然后把视频内的一帧绘制到画布上
+            canvasView.getContext(&quot;2d&quot;).drawImage(videoView, 0, 0, 640, 480)
+        &#125;
+    &lt;/script&gt;
+&lt;/html&gt;
+</code></pre>
 
             
         </div>
@@ -1056,6 +649,369 @@ systemctl restart zkServer<span aria-hidden="true" class="line-numbers-rows"><sp
         
     </div>
     <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/JavaScript%E8%8E%B7%E5%8F%96%E8%A7%86%E9%A2%91%E6%B5%81%E4%B8%94%E5%9B%9E%E6%98%BE/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E5%92%8C%E5%8F%8D%E5%B0%84%E5%AE%9E%E7%8E%B0%E5%AD%97%E6%AE%B5%E5%90%8D%E6%A0%88%E6%B7%B1%E5%AF%BB%E5%80%BC/">
+        <h2 class="post-title">Java动态代理和反射实现字段名栈深寻值</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/Java%E5%9F%BA%E7%A1%80/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Java基础
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="Java-动态代理与反射实现属性名称栈深寻值"><a href="#Java-动态代理与反射实现属性名称栈深寻值" class="headerlink" title="Java 动态代理与反射实现属性名称栈深寻值"></a>Java 动态代理与反射实现属性名称栈深寻值</h1><p>原因：对方法做动态代理，并且动态代理依赖方法形参的某些属性值，而属性值可能是对象的属性的属性，形成一个栈深寻找</p>
+<p>思路：</p>
+<ol>
+<li>使用Map对所有的形参进行名称和形参对象的映射</li>
+<li>把所指定的属性字符串按照指定规则切割载入队列</li>
+<li>利用队列出栈的特性，对第一个参数名称做map的 key value 值匹配，找到对应的参数对象</li>
+<li>对找到的参数对象做反射解析，利用递归做栈深的属性匹配和值查找</li>
+<li>在队列没有匹配字符串的时候，所拿到的值就是我们最终需要的值，直接强转为字符串类型</li>
+</ol>
+<p>代码</p>
+<pre><code class="java">// 参数对象
+class User &#123;
+    private String username;
+    private String phone;
+    private String birthday;
+
+    private User user;
+    
+    public User(String username, String phone, User user) &#123;
+        this.username = username;
+        this.phone = phone;
+        this.user = user;
+    &#125;
+// 由于JDK的Proxy代理只能代理接口，所以需要创建一个接口
+interface Ts &#123;
+    void a(User user);
+&#125;
+// 执行信息体
+class Test implements Ts &#123;
+    @Override
+    public void a(User user) &#123;
+        System.out.println(&quot;主要信息执行&quot;);
+    &#125;
+&#125;
+
+// 执行代码
+Test test = new Test();
+HashMap&lt;String, Object&gt; map = new HashMap&lt;&gt;(10);
+LinkedBlockingQueue&lt;String&gt; queue = new LinkedBlockingQueue&lt;&gt;(Arrays.asList(&quot;user.user.username&quot;.split(&quot;\\.&quot;)));
+
+Ts ts = (Ts) Proxy.newProxyInstance(Thread.currentThread().getContextClassLoader(),
+            Test.class.getInterfaces(), (Object proxy, Method method, Object[] args1) -&gt; &#123;
+                // 初始化map
+                Parameter[] parameters = method.getParameters();
+                for (int i = 0; i &lt; parameters.length; i++) &#123;
+                    map.put(parameters[i].getName(), args1[i]);
+                &#125;
+                // 匹配参数对象
+                Object o = map.get(queue.poll());
+                // 递归寻值
+                while (queue.size() &gt; 0) &#123;
+                    o = diGui(queue.poll(), o);
+                &#125;
+                String result = (String) o;
+                System.out.println(&quot;lock&quot; + result);
+                Object invoke = method.invoke(test, args1);
+                System.out.println(&quot;unlock&quot; + result);
+                map.clear();
+                queue.clear();
+                return invoke;
+            &#125;);
+    ts.a(new User(&quot;huang&quot;, &quot;153&quot;, new User(&quot;Q202111222256489&quot;, &quot;158&quot;)));
+    
+// 递归寻值
+public static Object diGui(String fieldName, Object o) throws NoSuchFieldException, IllegalAccessException &#123;
+    Field field = o.getClass().getDeclaredField(fieldName);
+    field.setAccessible(true);
+    return field.get(o);
+&#125;
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E5%92%8C%E5%8F%8D%E5%B0%84%E5%AE%9E%E7%8E%B0%E5%AD%97%E6%AE%B5%E5%90%8D%E6%A0%88%E6%B7%B1%E5%AF%BB%E5%80%BC/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E5%8F%8D%E5%B0%84%E5%AF%B9%E8%B1%A1%E5%86%85%E5%AE%B9/">
+        <h2 class="post-title">Java反射对象内容</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/Java%E5%9F%BA%E7%A1%80/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Java基础
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>调用方式</p>
+<pre><code class="java">MonthlyCardOrderParam param = new MonthlyCardOrderParam();
+        param.setRefundStatus(1);
+        notNullCheck(param, NotNull.class, &quot;message&quot;);
+
+        notNullCheck(param, NotNull.class, new INotNullParamCheck&lt;NotNull&gt;() &#123;
+            @Override
+            public void check(String attributeName, Object attributeValue, NotNull annotation) &#123;
+                System.out.println(attributeName+&quot;[&quot;+attributeValue+&quot;] -&gt;&quot;+annotation.message());
+            &#125;
+        &#125;);
+</code></pre>
+<hr>
+<p>方法一</p>
+<pre><code class="java">/**
+     * 判定某个对象的属性值是否为空，通过注解来判定
+     * 主要用在非 Controller 上接受参数的时候
+     *
+     * @param param 所要判定的对象
+     * @param annotationClass 所要判定的注解
+     * @param func 所执行注解方法的名称
+     * @param &lt;E&gt; 判定对象泛型
+     * @param &lt;T&gt; 注解方法泛型 Annotation 的实例
+     * @throws IllegalAccessException 获取字段的异常
+     * @throws NoSuchMethodException 找不到方法异常
+     * @throws InvocationTargetException 反射执行方法异常
+     */
+    public static &lt;E,T extends Annotation&gt; void notNullCheck (E param, Class&lt;T&gt; annotationClass, String func)
+            throws IllegalAccessException, NoSuchMethodException, InvocationTargetException &#123;
+        // 获取 Field 对象：也就是对象的所有属性对象
+        Field[] fields = param.getClass().getDeclaredFields();
+        for (Field field : fields) &#123;
+            // 设置 private 属性可读
+            field.setAccessible(true);
+            // 获取当前属性上的某个注解，并且做空值判断
+            T annotation = field.getAnnotation(annotationClass);
+            if (annotation!=null)&#123;
+                // 获取当前属性的对应值
+                if (field.get(param) == null)&#123;
+                    if (func!=null)&#123;
+                        System.out.println(annotationClass.getMethod(func).invoke(annotation));
+                    &#125;
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+</code></pre>
+<p>方法二</p>
+<pre><code class="java">/**
+     * 校验回调接口
+     * @param &lt;T&gt;
+     */
+    interface INotNullParamCheck&lt;T&gt;&#123;
+        /**
+         * 校验回调
+         *
+         * @param attributeName 属性名称
+         * @param attributeValue 参数
+         * @param annotation 注解对象
+         */
+        void check(String attributeName,Object attributeValue,T annotation);
+    &#125;
+
+    /**
+     * 为空校验
+     * @param param 校验对象
+     * @param annotationClass 查询的接口 Class
+     * @param notNullParamCheck 校验回调接口
+     * @param &lt;E&gt; 参数对象泛型
+     * @param &lt;T&gt; 查询接口泛型
+     * @throws IllegalAccessException 找不到属性异常
+     */
+    public static &lt;E, T extends Annotation&gt; void notNullCheck(E param, Class&lt;T&gt; annotationClass,INotNullParamCheck&lt;T&gt; notNullParamCheck)
+            throws IllegalAccessException &#123;
+        Field[] fields = param.getClass().getDeclaredFields();
+        for (Field field : fields) &#123;
+            field.setAccessible(true);
+            T annotation = field.getAnnotation(annotationClass);
+            Object item = field.get(param);
+            if (annotation!=null) &#123;
+                System.out.println(item);
+                notNullParamCheck.check(field.getName(),item,annotation);
+            &#125;
+        &#125;
+    &#125;
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E5%8F%8D%E5%B0%84%E5%AF%B9%E8%B1%A1%E5%86%85%E5%AE%B9/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E5%8F%8D%E5%B0%84%E6%A0%B9%E6%8D%AE%E6%96%B9%E6%B3%95%E5%90%8D%E8%8E%B7%E5%8F%96%E5%8F%82%E6%95%B0%E5%90%8D/">
+        <h2 class="post-title">Java反射根据方法名获取参数名</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/Java%E5%9F%BA%E7%A1%80/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Java基础
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="Java-反射-根据方法名获取参数名"><a href="#Java-反射-根据方法名获取参数名" class="headerlink" title="Java 反射 根据方法名获取参数名"></a>Java 反射 根据方法名获取参数名</h1><p>首先实现一个可序列化的Function集成接口</p>
+<pre><code class="java">interface CustomFunction&lt;T, R&gt; extends Function&lt;T, R&gt;, Serializable &#123;
+
+&#125;
+</code></pre>
+<p>再构建一个Student类，作为本次获取的测试Entity</p>
+<pre><code class="java">static class Student implements Serializable &#123;
+    private static final long serialVersionUID = -5681957118855943196L;
+    private Integer age;
+    private String studentName;
+    public Student(Integer age, String studentName) &#123;
+        this.age = age;
+        this.studentName = studentName;
+    &#125;
+    public void setAge(Integer age) &#123;
+        this.age = age;
+    &#125;
+    public void setStudentName(String studentName) &#123;
+        this.studentName = studentName;
+    &#125;
+    public Integer getAge() &#123;
+        return age;
+    &#125;
+    public String getStudentName() &#123;
+        return studentName;
+    &#125;
+&#125;
+</code></pre>
+<p>使用反射获取当前方法的名称，然后切割出对应的属性名称，就是获取get的方法名称，再把get的切割，把第一个字母大写</p>
+<pre><code class="java">public static &lt;T, R&gt; String functionToProperStr(CustomFunction&lt;T, R&gt; function) throws Exception &#123;
+    Method writeReplace = function.getClass().getDeclaredMethod(&quot;writeReplace&quot;);
+    boolean accessible = writeReplace.isAccessible();
+    writeReplace.setAccessible(true);
+    SerializedLambda serializedLambda = (SerializedLambda) writeReplace.invoke(function);
+    writeReplace.setAccessible(accessible);
+    String fieldName = serializedLambda.getImplMethodName().substring(&quot;get&quot;.length());
+    fieldName = fieldName.replaceFirst(String.valueOf(fieldName.charAt(0)), String.valueOf(fieldName.charAt(0)).toLowerCase());
+    return fieldName;
+&#125;
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E5%8F%8D%E5%B0%84%E6%A0%B9%E6%8D%AE%E6%96%B9%E6%B3%95%E5%90%8D%E8%8E%B7%E5%8F%96%E5%8F%82%E6%95%B0%E5%90%8D/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E7%9A%84ArrayList/">
+        <h2 class="post-title">Java的ArrayList</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/Java%E5%9F%BA%E7%A1%80/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Java基础
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="Collection中的List中的ArrayList"><a href="#Collection中的List中的ArrayList" class="headerlink" title="Collection中的List中的ArrayList"></a>Collection中的List中的ArrayList</h1><p><code>DEFAULT_CAPACITY = 10;</code>默认大小</p>
+<p>ArrayList的初始化操作为，如果你没有传入参数就是赋予一个默认的Object数组对象，然后在添加第一个元素的时候进行扩容，如果我们传入了创建大小的参数，那么会做大小判定，如果为0就赋予一个空的对象，也是一个Object数组，还有如果参数是Collection对象等等情况。</p>
+<pre><code class="Java">private void grow(int minCapacity) &#123;
+        // overflow-conscious code
+        int oldCapacity = elementData.length;
+        int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);
+        if (newCapacity - minCapacity &lt; 0)
+            newCapacity = minCapacity;
+        if (newCapacity - MAX_ARRAY_SIZE &gt; 0)
+            newCapacity = hugeCapacity(minCapacity);
+        // minCapacity is usually close to size, so this is a win:
+        elementData = Arrays.copyOf(elementData, newCapacity);
+    &#125;
+</code></pre>
+<p>在这里有一行重要的代码即使<code>int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</code>这里得到的新的容量大小为原大小的1.5倍，是因为使用了向右唯一了一个，相当于除以了2，也就是加上了0.5倍的大小</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E7%9A%84ArrayList/" class="go-post">阅读全文</a>
 </div>
 
 

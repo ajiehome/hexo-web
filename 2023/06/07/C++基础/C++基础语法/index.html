@@ -21,7 +21,7 @@
 <script src="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/highlight.min.js"></script>
 <link
     rel="stylesheet"
-    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/github.min.css"
+    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/Github Dark.min.css"
 />
 <script src="/js/lib/highlight.js"></script>
 
@@ -185,7 +185,7 @@
 <li>构造函数在类的构建时调用，析构函数在类的声明周期结束时调用</li>
 </ol>
 <p>Test.h文件</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#ifdef _TEST_H_ 
+<pre><code class="c++">#ifdef _TEST_H_ 
 #defind _TEST_H_ 
 
 #include &lt;iostream&gt;
@@ -194,32 +194,32 @@ namespace test&#123;
     class Test&#123;
         public:
             Test()&#123;
-                this.sex&#x3D;0;
-                this.sex&#x3D;0L;
-            &#125; &#x2F;&#x2F;构造函数
-            ~Test()&#123;&#125; &#x2F;&#x2F;析构函数
+                this.sex=0;
+                this.sex=0L;
+            &#125; //构造函数
+            ~Test()&#123;&#125; //析构函数
         public:
-            void setSex(int sex); &#x2F;&#x2F;公共方法
+            void setSex(int sex); //公共方法
             void setPhone(long phone); 
             int getSex();
             long getPhone();
         private:
-            int sex; &#x2F;&#x2F;私有属性
+            int sex; //私有属性
             long phone;
     &#125;;
-&#125; &#x2F;&#x2F;namespace
-#endif &#x2F;&#x2F;_TEST_H_<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+&#125; //namespace
+#endif //_TEST_H_
+</code></pre>
 <p>Test.cpp文件</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+<pre><code class="c++">#include &lt;iostream&gt;
 #include &quot;Test.h&quot;
 
 namespace test&#123;
     void Test::setSex(int s)&#123;
-        sex &#x3D; s;
+        sex = s;
     &#125;
     void Test::setPhone(long p)&#123;
-        phone &#x3D; p;
+        phone = p;
     &#125;
     int Test::getSex()&#123;
         return sex;
@@ -227,8 +227,8 @@ namespace test&#123;
     long Test::getPhone()&#123;
         return phone;
     &#125;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+&#125;
+</code></pre>
 <p><strong>名存空间</strong></p>
 <p><code>using namespace &#39;Name&#39;</code>：选择名存空间</p>
 <p><code>namespace &#39;Name&#39;</code>：创建名存空间关键字</p>

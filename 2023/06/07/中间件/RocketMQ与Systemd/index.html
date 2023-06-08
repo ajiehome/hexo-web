@@ -21,7 +21,7 @@
 <script src="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/highlight.min.js"></script>
 <link
     rel="stylesheet"
-    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/github.min.css"
+    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/Github Dark.min.css"
 />
 <script src="/js/lib/highlight.js"></script>
 
@@ -183,64 +183,64 @@
 <p>RocketMQ Dashboard: <code>rocketmq-dashboard-rocketmq-dashboard-1.0.0.tar.gz</code> <a target="_blank" rel="noopener" href="https://github.com/apache/rocketmq-dashboard">源码地址,该项目需要自己编译成jar包</a></p>
 <p>在下载了RocketMQ的二进制包之后，解压到指定位置，而后配置对于的<code>namesrv</code>和<code>borker</code>服务，systemd的服务配置在<code>/usr/lib/systemd/system/</code>或者<code>/etc/systemd/system/</code>目录下</p>
 <p>rmq_namesrv.service</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>Unit<span class="token punctuation">]</span>
-<span class="token assign-left variable">Description</span><span class="token operator">=</span>rocketmq namesrv
-<span class="token assign-left variable">After</span><span class="token operator">=</span>network.target
+<pre><code class="shell">[Unit]
+Description=rocketmq namesrv
+After=network.target
 
-<span class="token punctuation">[</span>Service<span class="token punctuation">]</span>
-<span class="token assign-left variable">Type</span><span class="token operator">=</span>simple
-<span class="token assign-left variable">ExecStart</span><span class="token operator">=</span>/opt/rocketmq-all-5.0.0-bin-release/bin/mqnamesrv
-<span class="token assign-left variable">ExecReload</span><span class="token operator">=</span>/bin/kill <span class="token parameter variable">-s</span> HUP <span class="token variable">$MAINPID</span>
-<span class="token assign-left variable">ExecStop</span><span class="token operator">=</span>//opt/rocketmq-all-5.0.0-bin-release/bin/mqshutdown namesrv
+[Service]
+Type=simple
+ExecStart=/opt/rocketmq-all-5.0.0-bin-release/bin/mqnamesrv
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=//opt/rocketmq-all-5.0.0-bin-release/bin/mqshutdown namesrv
 
-<span class="token punctuation">[</span>Install<span class="token punctuation">]</span>
-<span class="token assign-left variable">WantedBy</span><span class="token operator">=</span>mulitiple-rmq-namesrv.target<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+[Install]
+WantedBy=mulitiple-rmq-namesrv.target
+</code></pre>
 <p>rmq_borker.service</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>Unit<span class="token punctuation">]</span>
-<span class="token assign-left variable">Description</span><span class="token operator">=</span>rocketmq broker
-<span class="token assign-left variable">After</span><span class="token operator">=</span>network.target
+<pre><code class="shell">[Unit]
+Description=rocketmq broker
+After=network.target
 
-<span class="token punctuation">[</span>Service<span class="token punctuation">]</span>
-<span class="token assign-left variable">Type</span><span class="token operator">=</span>simple
-<span class="token assign-left variable">ExecStart</span><span class="token operator">=</span>/opt/rocketmq-all-5.0.0-bin-release/bin/mqbroker <span class="token parameter variable">-n</span> localhost:9876 --enable-proxy
-<span class="token assign-left variable">ExecReload</span><span class="token operator">=</span>/bin/kill <span class="token parameter variable">-s</span> HUP <span class="token variable">$MAINPID</span>
-<span class="token assign-left variable">ExecStop</span><span class="token operator">=</span>/opt/rocketmq-all-5.0.0-bin-release/bin/mqshutdown broker
+[Service]
+Type=simple
+ExecStart=/opt/rocketmq-all-5.0.0-bin-release/bin/mqbroker -n localhost:9876 --enable-proxy
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/opt/rocketmq-all-5.0.0-bin-release/bin/mqshutdown broker
 
-<span class="token punctuation">[</span>Install<span class="token punctuation">]</span>
-<span class="token assign-left variable">WantedBy</span><span class="token operator">=</span>multiple-rmq-broker.target<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+[Install]
+WantedBy=multiple-rmq-broker.target
+</code></pre>
 <p>在配置了这两个服务之后，即可通过systemctl start&#x2F;stop&#x2F;restart来执行服务了，由于每次都需要启动<code>namesrv</code>和<code>borker</code>服务还有web管理工具过于麻烦，所以引入<code>shell</code>脚本进行处理</p>
 <p>rocketmq.shell</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
+<pre><code class="shell">#!/bin/bash
 
-<span class="token assign-left variable">instruct</span><span class="token operator">=</span><span class="token variable">$1</span>
+instruct=$1
 
-<span class="token builtin class-name">echo</span> <span class="token variable">$instruct</span>
+echo $instruct
 
-<span class="token keyword">case</span> <span class="token variable">$instruct</span> <span class="token keyword">in</span>
- <span class="token string">'start'</span><span class="token punctuation">)</span>
+case $instruct in
+ &#39;start&#39;)
    systemctl start rmq_namesrv
    systemctl start rmq_borker
-   <span class="token builtin class-name">export</span> <span class="token assign-left variable">NAMSESRV_ADDR</span><span class="token operator">=</span>localhost:9876
-   <span class="token function">nohup</span> <span class="token function">java</span> <span class="token parameter variable">-jar</span> /opt/rocketmq-dashboard-rocketmq-dashboard-1.0.0/target/rocketmq-dashboard-1.0.0.jar <span class="token operator">></span> /root/rocketmq-dashboard.log <span class="token operator">&amp;</span>
-   <span class="token builtin class-name">echo</span> <span class="token variable">$!</span> <span class="token operator">></span> /root/rmq-d-pid
-   <span class="token builtin class-name">echo</span> <span class="token string">"RocketMQ Start SUCCESS PID: "</span> + <span class="token variable">$!</span>
- <span class="token punctuation">;</span><span class="token punctuation">;</span>
+   export NAMSESRV_ADDR=localhost:9876
+   nohup java -jar /opt/rocketmq-dashboard-rocketmq-dashboard-1.0.0/target/rocketmq-dashboard-1.0.0.jar &gt; /root/rocketmq-dashboard.log &amp;
+   echo $! &gt; /root/rmq-d-pid
+   echo &quot;RocketMQ Start SUCCESS PID: &quot; + $!
+ ;;
 
- <span class="token string">'stop'</span><span class="token punctuation">)</span>
+ &#39;stop&#39;)
    systemctl stop rmq_namesrv
    systemctl stop rmq_borker
-   <span class="token assign-left variable">PID</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">cat</span> /root/rmq-d-pid<span class="token variable">)</span></span>
-   <span class="token function">kill</span> <span class="token parameter variable">-9</span> <span class="token variable">$&#123;PID&#125;</span>
-   <span class="token builtin class-name">echo</span> <span class="token string">"RocketMQ Stop SUCCESS"</span>
- <span class="token punctuation">;</span><span class="token punctuation">;</span>
+   PID=$(cat /root/rmq-d-pid)
+   kill -9 $&#123;PID&#125;
+   echo &quot;RocketMQ Stop SUCCESS&quot;
+ ;;
 
- *<span class="token punctuation">)</span>
-   <span class="token builtin class-name">echo</span> <span class="token string">"Input instruct error"</span>
- <span class="token punctuation">;</span><span class="token punctuation">;</span>
-<span class="token keyword">esac</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+ *)
+   echo &quot;Input instruct error&quot;
+ ;;
+esac
+</code></pre>
 <p>可以通过执行该shell脚本对RocketMQ进行启动和关闭</p>
 
     </div>

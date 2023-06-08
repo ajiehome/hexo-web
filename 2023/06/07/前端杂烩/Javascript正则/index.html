@@ -21,7 +21,7 @@
 <script src="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/highlight.min.js"></script>
 <link
     rel="stylesheet"
-    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/github.min.css"
+    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/Github Dark.min.css"
 />
 <script src="/js/lib/highlight.js"></script>
 
@@ -177,8 +177,9 @@
     </div>
     
     <div class="content" v-pre>
-        <h2 id="Javascript正则"><a href="#Javascript正则" class="headerlink" title="Javascript正则"></a>Javascript正则</h2><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> newData  <span class="token operator">=</span> data<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">\"toId\":(\d+)</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">,</span><span class="token string">'"toId": "$1"'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-data <span class="token operator">=</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>newData<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+        <h2 id="Javascript正则"><a href="#Javascript正则" class="headerlink" title="Javascript正则"></a>Javascript正则</h2><pre><code class="javascript">let newData  = data.replace(/\&quot;toId\&quot;:(\d+)/,&#39;&quot;toId&quot;: &quot;$1&quot;&#39;);
+data = JSON.parse(newData)
+</code></pre>
 
     </div>
     

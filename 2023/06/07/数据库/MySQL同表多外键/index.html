@@ -21,7 +21,7 @@
 <script src="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/highlight.min.js"></script>
 <link
     rel="stylesheet"
-    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/github.min.css"
+    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/Github Dark.min.css"
 />
 <script src="/js/lib/highlight.js"></script>
 
@@ -177,42 +177,42 @@
     </div>
     
     <div class="content" v-pre>
-        <h1 id="MySQL同表多外键"><a href="#MySQL同表多外键" class="headerlink" title="MySQL同表多外键"></a>MySQL同表多外键</h1><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">drop</span> <span class="token keyword">database</span> <span class="token keyword">if</span> <span class="token keyword">exists</span> test<span class="token punctuation">;</span>
-<span class="token keyword">create</span> <span class="token keyword">database</span> <span class="token keyword">if</span> <span class="token operator">not</span> <span class="token keyword">exists</span> test<span class="token punctuation">;</span>
+        <h1 id="MySQL同表多外键"><a href="#MySQL同表多外键" class="headerlink" title="MySQL同表多外键"></a>MySQL同表多外键</h1><pre><code class="sql">drop database if exists test;
+create database if not exists test;
 
-<span class="token keyword">use</span> test<span class="token punctuation">;</span>
+use test;
 
-<span class="token keyword">drop</span> <span class="token keyword">table</span> <span class="token keyword">if</span> <span class="token keyword">exists</span> <span class="token keyword">user</span><span class="token punctuation">;</span>
+drop table if exists user;
 
-<span class="token keyword">create</span> <span class="token keyword">table</span>  <span class="token keyword">if</span> <span class="token operator">not</span> <span class="token keyword">exists</span> <span class="token keyword">user</span><span class="token punctuation">(</span>
-	user_id <span class="token keyword">bigint</span><span class="token punctuation">(</span><span class="token number">18</span><span class="token punctuation">)</span> <span class="token keyword">comment</span> <span class="token string">'用户ID'</span><span class="token punctuation">,</span>
-	user_name <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token number">128</span><span class="token punctuation">)</span> <span class="token keyword">comment</span> <span class="token string">'用户名称'</span><span class="token punctuation">,</span>
-	user_sex <span class="token keyword">int</span><span class="token punctuation">(</span><span class="token number">11</span><span class="token punctuation">)</span> <span class="token keyword">comment</span> <span class="token string">'用户性别'</span><span class="token punctuation">,</span>
-	pass_word <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token number">128</span><span class="token punctuation">)</span> <span class="token keyword">comment</span> <span class="token string">'用户密码'</span><span class="token punctuation">,</span>
-	<span class="token keyword">primary</span> <span class="token keyword">key</span> <span class="token punctuation">(</span>user_id<span class="token punctuation">)</span>
-<span class="token punctuation">)</span><span class="token keyword">engine</span> <span class="token operator">=</span> <span class="token keyword">innodb</span> <span class="token keyword">default</span> <span class="token keyword">charset</span> <span class="token operator">=</span> utf8<span class="token punctuation">;</span>
+create table  if not exists user(
+    user_id bigint(18) comment &#39;用户ID&#39;,
+    user_name varchar(128) comment &#39;用户名称&#39;,
+    user_sex int(11) comment &#39;用户性别&#39;,
+    pass_word varchar(128) comment &#39;用户密码&#39;,
+    primary key (user_id)
+)engine = innodb default charset = utf8;
 
-<span class="token keyword">drop</span> <span class="token keyword">table</span> <span class="token keyword">if</span> <span class="token keyword">exists</span> user_related<span class="token punctuation">;</span>
+drop table if exists user_related;
 
-<span class="token keyword">create</span> <span class="token keyword">table</span> <span class="token keyword">if</span> <span class="token operator">not</span> <span class="token keyword">exists</span> user_related<span class="token punctuation">(</span>
-	related_id <span class="token keyword">bigint</span><span class="token punctuation">(</span><span class="token number">18</span><span class="token punctuation">)</span> <span class="token keyword">comment</span> <span class="token string">'关系ID'</span><span class="token punctuation">,</span>
-	from_user_id <span class="token keyword">bigint</span><span class="token punctuation">(</span><span class="token number">18</span><span class="token punctuation">)</span> <span class="token keyword">comment</span> <span class="token string">'用户ID'</span><span class="token punctuation">,</span>
-	to_user_id <span class="token keyword">bigint</span><span class="token punctuation">(</span><span class="token number">18</span><span class="token punctuation">)</span> <span class="token keyword">comment</span> <span class="token string">'用户ID'</span><span class="token punctuation">,</span>
-	<span class="token keyword">primary</span> <span class="token keyword">key</span> <span class="token punctuation">(</span>related_id<span class="token punctuation">)</span><span class="token punctuation">,</span>
-	<span class="token keyword">foreign</span> <span class="token keyword">key</span> <span class="token punctuation">(</span>from_user_id<span class="token punctuation">)</span> <span class="token keyword">references</span> <span class="token keyword">user</span> <span class="token punctuation">(</span>user_id<span class="token punctuation">)</span><span class="token punctuation">,</span>
-	<span class="token keyword">foreign</span> <span class="token keyword">key</span> <span class="token punctuation">(</span>to_user_id<span class="token punctuation">)</span> <span class="token keyword">references</span> <span class="token keyword">user</span> <span class="token punctuation">(</span>user_id<span class="token punctuation">)</span>
-<span class="token punctuation">)</span><span class="token keyword">engine</span> <span class="token operator">=</span> <span class="token keyword">innodb</span> <span class="token keyword">default</span> <span class="token keyword">charset</span> <span class="token operator">=</span> utf8<span class="token punctuation">;</span>
+create table if not exists user_related(
+    related_id bigint(18) comment &#39;关系ID&#39;,
+    from_user_id bigint(18) comment &#39;用户ID&#39;,
+    to_user_id bigint(18) comment &#39;用户ID&#39;,
+    primary key (related_id),
+    foreign key (from_user_id) references user (user_id),
+    foreign key (to_user_id) references user (user_id)
+)engine = innodb default charset = utf8;
 
 
-<span class="token keyword">lock</span> <span class="token keyword">tables</span> <span class="token keyword">user</span> <span class="token keyword">write</span><span class="token punctuation">;</span>
-<span class="token keyword">insert</span> <span class="token keyword">into</span> <span class="token keyword">user</span><span class="token punctuation">(</span>user_id<span class="token punctuation">,</span>user_name<span class="token punctuation">,</span>user_sex<span class="token punctuation">,</span>pass_word<span class="token punctuation">)</span> <span class="token keyword">values</span> <span class="token punctuation">(</span><span class="token number">012345678911121314</span><span class="token punctuation">,</span><span class="token string">'用户1'</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token string">'123456'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">insert</span> <span class="token keyword">into</span> <span class="token keyword">user</span><span class="token punctuation">(</span>user_id<span class="token punctuation">,</span>user_name<span class="token punctuation">,</span>user_sex<span class="token punctuation">,</span>pass_word<span class="token punctuation">)</span> <span class="token keyword">values</span> <span class="token punctuation">(</span><span class="token number">012345678911121315</span><span class="token punctuation">,</span><span class="token string">'用户2'</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token string">'123456'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">unlock</span> <span class="token keyword">tables</span><span class="token punctuation">;</span>
+lock tables user write;
+insert into user(user_id,user_name,user_sex,pass_word) values (012345678911121314,&#39;用户1&#39;,1,&#39;123456&#39;);
+insert into user(user_id,user_name,user_sex,pass_word) values (012345678911121315,&#39;用户2&#39;,1,&#39;123456&#39;);
+unlock tables;
 
-<span class="token keyword">lock</span> <span class="token keyword">tables</span> user_related <span class="token keyword">write</span><span class="token punctuation">;</span>
-<span class="token keyword">insert</span> <span class="token keyword">into</span> user_related <span class="token punctuation">(</span>related_id<span class="token punctuation">,</span>from_user_id<span class="token punctuation">,</span>to_user_id<span class="token punctuation">)</span> <span class="token keyword">values</span> <span class="token punctuation">(</span><span class="token number">012345678911121313</span><span class="token punctuation">,</span><span class="token number">012345678911121314</span><span class="token punctuation">,</span><span class="token number">012345678911121315</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">unlock</span> <span class="token keyword">tables</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+lock tables user_related write;
+insert into user_related (related_id,from_user_id,to_user_id) values (012345678911121313,012345678911121314,012345678911121315);
+unlock tables;
+</code></pre>
 <p>一个用户表设置多个外键，外键的名字可以不和原表一样，只要类型一致就可</p>
 
     </div>

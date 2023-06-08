@@ -21,7 +21,7 @@
 <script src="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/highlight.min.js"></script>
 <link
     rel="stylesheet"
-    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/github.min.css"
+    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/Github Dark.min.css"
 />
 <script src="/js/lib/highlight.js"></script>
 
@@ -180,12 +180,13 @@
         <h1 id="关于集合中的hashmap"><a href="#关于集合中的hashmap" class="headerlink" title="关于集合中的hashmap"></a>关于集合中的hashmap</h1><p>关于tableSizeFor方法：Returns a power of two size for the given target capacity.返回当前数的最小二次幂</p>
 <p>默认初始化的hashmap大小为16个大小，默认的负载系数为0.75<br>负载系数的计算公式：f &#x3D; 当前实际数目 &#x2F; hashmap总数目<br>也就是说当存入的数目大于等于总容量乘以负载系数的时候就会进扩容操作<br>如果负载系数大于或者等于了规定的负载系数，则会进行hashmap的扩容</p>
 <p>get、put：先求hash值，然后右移16位做高位对比，求出hash之后通过hash找到指定的桶，当发生hash冲突的时候，会在同一个桶内存在多个节点，当我们的节点数超过了8个的时候，会做红黑树与链表的转换</p>
-<pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">if ((e &#x3D; p.next) &#x3D;&#x3D; null) &#123;
- p.next &#x3D; newNode(hash, key, value, null);
- if (binCount &gt;&#x3D; TREEIFY_THRESHOLD - 1) &#x2F;&#x2F; -1 for 1st
-   treeifyBin(tab, hash); &#x2F;&#x2F;红黑树转换
+<pre><code class="Java">if ((e = p.next) == null) &#123;
+ p.next = newNode(hash, key, value, null);
+ if (binCount &gt;= TREEIFY_THRESHOLD - 1) // -1 for 1st
+   treeifyBin(tab, hash); //红黑树转换
  break;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+&#125;
+</code></pre>
 <p>TREEIFY_THRESHOLD默认值为8，为树型阈值，在8以内使用链表，在8以外使用红黑树</p>
 <p>hash表里面所用的hashcode方法中的<code>Objects.hashCode(key)</code>，都取自于Object的hashcode方法，而Object的hashcode方法的标注是<code>public native int hashCode();</code>，native是java与其他编程语言进行交互的声明保留字段，也就是说这里的hashCode()方法其实调用的是C&#x2F;C++的hashCode的计算hash值</p>
 

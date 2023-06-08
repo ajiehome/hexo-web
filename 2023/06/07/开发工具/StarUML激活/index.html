@@ -21,7 +21,7 @@
 <script src="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/highlight.min.js"></script>
 <link
     rel="stylesheet"
-    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/github.min.css"
+    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/Github Dark.min.css"
 />
 <script src="/js/lib/highlight.js"></script>
 
@@ -180,20 +180,22 @@
         <h1 id="StarUML激活"><a href="#StarUML激活" class="headerlink" title="StarUML激活"></a>StarUML激活</h1><p>确切的来说并不是激活StarUML，只是去除了StarUML在未激活时的弹窗提示</p>
 <p>原理：对StarUML的依赖启动app.asar文件进行反编译拿到源码，把源码中未激活提示部分移除掉即可，并且关闭自动升级，避免文件被覆盖。</p>
 <p>1、app.asar 所使用的时asar程序，那么我们需要先安装一个node，通过node下载asar应用<br>2、找到StarUML的安装目录，在安装目录的resource文件夹下有一个app.asar文件<br>3、使用asar反编译 <code>asar extract app.asar app</code>生成源代码，源代码在app文件夹内，注意：如果是在C盘的管理员目录，需要用管理员身份执行CMD。<br>4、修改<code>app\src\engine\license-manager.js</code>文件中checkLicenseValidity方法的代码  </p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">checkLicenseValidity</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">validate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
-    <span class="token function">setStatus</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span>
-    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
-    <span class="token comment">//setStatus(this,false)  &lt;-- comment this line</span>
-    <span class="token function">setStatus</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token comment">//&lt;-- add this line</span>
-    <span class="token comment">//UnregisteredDialog.showDialog() &lt;-- comment this line</span>
-    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre><code class="javascript">checkLicenseValidity () &#123;
+    this.validate().then(() =&gt; &#123;
+    setStatus(this, true)
+    &#125;, () =&gt; &#123;
+    //setStatus(this,false)  &lt;-- comment this line
+    setStatus(this, true) //&lt;-- add this line
+    //UnregisteredDialog.showDialog() &lt;-- comment this line
+    &#125;)
+&#125;
+</code></pre>
 <p>5、修改<code>app\src\app-context.js</code>文件的appReady方法的代码，禁止自动更新</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">
-<span class="token comment">// if (this.preferences.get('checkUpdate.checkUpdateOnStart')) &#123;</span>
-<span class="token comment">//    ipcRenderer.send('check-update')</span>
-<span class="token comment">// &#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<pre><code class="javascript">
+// if (this.preferences.get(&#39;checkUpdate.checkUpdateOnStart&#39;)) &#123;
+//    ipcRenderer.send(&#39;check-update&#39;)
+// &#125;
+</code></pre>
 <p>6、重新打包覆盖原来的app.asar文件 <code>asar pack app app.asar</code></p>
 
     </div>

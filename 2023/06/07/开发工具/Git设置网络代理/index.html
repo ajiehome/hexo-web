@@ -21,7 +21,7 @@
 <script src="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/highlight.min.js"></script>
 <link
     rel="stylesheet"
-    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/github.min.css"
+    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/Github Dark.min.css"
 />
 <script src="/js/lib/highlight.js"></script>
 
@@ -177,14 +177,16 @@
     </div>
     
     <div class="content" v-pre>
-        <h2 id="设置http、https代理"><a href="#设置http、https代理" class="headerlink" title="设置http、https代理"></a>设置http、https代理</h2><pre class="line-numbers language-properties" data-language="properties"><code class="language-properties"><span class="token key attr-name">git</span> <span class="token value attr-value">config --global http.proxy http://127.0.0.1:10809</span>
-<span class="token key attr-name">git</span> <span class="token value attr-value">config --global https.proxy socks5://127.0.0.1:10808</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+        <h2 id="设置http、https代理"><a href="#设置http、https代理" class="headerlink" title="设置http、https代理"></a>设置http、https代理</h2><pre><code class="properties">git config --global http.proxy http://127.0.0.1:10809
+git config --global https.proxy socks5://127.0.0.1:10808
+</code></pre>
+<h2 id="查看http、https代理配置情况"><a href="#查看http、https代理配置情况" class="headerlink" title="查看http、https代理配置情况"></a>查看http、https代理配置情况</h2><pre><code class="properties">git config --global --get http.proxy
+git config --global --get https.proxy
+</code></pre>
+<h2 id="取消http、https代理配置"><a href="#取消http、https代理配置" class="headerlink" title="取消http、https代理配置"></a>取消http、https代理配置</h2><pre><code class="properties">git config --global --unset http.proxy
+git config --global --unset https.proxy
+</code></pre>
 
-<h2 id="查看http、https代理配置情况"><a href="#查看http、https代理配置情况" class="headerlink" title="查看http、https代理配置情况"></a>查看http、https代理配置情况</h2><pre class="line-numbers language-properties" data-language="properties"><code class="language-properties"><span class="token key attr-name">git</span> <span class="token value attr-value">config --global --get http.proxy</span>
-<span class="token key attr-name">git</span> <span class="token value attr-value">config --global --get https.proxy</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<h2 id="取消http、https代理配置"><a href="#取消http、https代理配置" class="headerlink" title="取消http、https代理配置"></a>取消http、https代理配置</h2><pre class="line-numbers language-properties" data-language="properties"><code class="language-properties"><span class="token key attr-name">git</span> <span class="token value attr-value">config --global --unset http.proxy</span>
-<span class="token key attr-name">git</span> <span class="token value attr-value">config --global --unset https.proxy</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
     </div>
     
     
