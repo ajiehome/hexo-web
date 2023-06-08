@@ -46,19 +46,19 @@ card:
         github:
             name: github
             theme: brands
-            link: https://github.com/argvchs
+            link: https://github.com/ajiehome
         qq:
             name: qq
             theme: brands
-            link: http://wpa.qq.com/msgrd?v=3&uin=3364555156&site=qq&menu=yes
-        twitter:
-            name: twitter
-            theme: brands
-            link: https://twitter.com/argvchs
+            link: http://wpa.qq.com/msgrd?v=3&uin=1728537059&site=qq&menu=yes
+        # twitter:
+        #     name: twitter
+        #     theme: brands
+        #     link: https://twitter.com/argvchs
         email:
             name: envelope
             theme: solid
-            link: mailto:argvchs@outlook.com
+            link: mailto:ajiehome1024@163.com
     friendLinks:
         Yuzi: https://blog.yuzi.dev
         LynxCatTheThird: https://lynxcatthethird.github.io
