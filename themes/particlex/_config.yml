@@ -153,7 +153,7 @@ waline:
     requiredMeta: # Set required meta field, e.g.: [nick] | [nick, mail]
         - nick
     lang: zh-CN # Language, available values: en-US, zh-CN, zh-TW, pt-BR, ru-RU, jp-JP
-    wordLimit: 10 # Word limit, no limit when setting to 0
+    wordLimit: 0 # Word limit, no limit when setting to 0
     login: enable # Whether enable login, can choose from 'enable', 'disable' and 'force'
     pageSize: 10 # Comment per page
 
