@@ -226,123 +226,6 @@
 </div>
 
 <div class="post">
-    <a href="/2023/06/07/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
-        <h2 class="post-title">Git常用命令</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                开发工具
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="Git基本常用命令"><a href="#Git基本常用命令" class="headerlink" title="Git基本常用命令"></a>Git基本常用命令</h1><pre><code class="shell">#初始化一个Git仓库
-git init
-#把文件添加到本地git仓储缓存
-git add &quot;file name&quot;
-#把当前目录下全部文件加入到本地git仓储缓存
-git add .
-#把仓储缓存提交上去
-git commit -m&quot;description&quot;
-#查看所有的远程分支
-git remote -v
-#添加远程分支
-git remote add origin &quot;git remote warehouse url&quot;
-#移除本地添加的远程分支
-git remote remove &quot;remote branch name&quot;
-#获取远程分支与本地分支合并
-git pull
-#把本地分支提交到远程分支
-git push
-#查看所有的远程分支和本地分支
-
-git branch -a
-#查看所有的本地分支
-git branch
-#本地分支与远程分支关联
-git branch --set-upstream-to=origin/master master
-#创建本地分支
-git branch &quot;local branch name&quot;
-
-#清除输入过的账号密码
-git config --system --unset credential.helper
-
-#回滚
-git log
-git checkout [commit id] [file name]
-commit id:commit提交的编号
-file name:需要回滚的文件名称，不输入则整个版本回滚
-
-#克隆远程仓库到本地
-#fileName:为指定本地文件夹的名字，如果没有就会使用远程仓库默认s的名称
-git clone &quot;git remote warehouse url&quot; [ specified file name]
-</code></pre>
-<h2 id="谨慎使用"><a href="#谨慎使用" class="headerlink" title="谨慎使用"></a>谨慎使用</h2><pre><code class="shell">#&#39;fatal: refusing to merge unrelated histories&#39;:无法合并两个不相干分支，此命令可强行合并建立关系
-git pull origin master --allow-unrelated-histories
-</code></pre>
-<h2 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h2><p><code>.gitignore</code>：文件的内容将是忽略提交的部分，也就是git不会检索该文件指定的文件和文件夹</p>
-<p>例如：</p>
-<pre><code class="shell">HELP.md
-target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**
-!**/src/test/**
-
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
-
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-
-### VS Code ###
-.vscode/
-</code></pre>
-<p>更多高级操作见下一篇：Git操作</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/06/07/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
     <a href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/NodeJS%E9%85%8D%E7%BD%AE%E5%88%9B%E5%BB%BAVUE%E9%A1%B9%E7%9B%AE/">
         <h2 class="post-title">NodeJS配置创建VUE项目</h2>
     </a>
@@ -460,6 +343,123 @@ vue -V
         
     </div>
     <a href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/NodeJS%E9%85%8D%E7%BD%AE%E5%88%9B%E5%BB%BAVUE%E9%A1%B9%E7%9B%AE/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/07/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+        <h2 class="post-title">Git常用命令</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                开发工具
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="Git基本常用命令"><a href="#Git基本常用命令" class="headerlink" title="Git基本常用命令"></a>Git基本常用命令</h1><pre><code class="shell">#初始化一个Git仓库
+git init
+#把文件添加到本地git仓储缓存
+git add &quot;file name&quot;
+#把当前目录下全部文件加入到本地git仓储缓存
+git add .
+#把仓储缓存提交上去
+git commit -m&quot;description&quot;
+#查看所有的远程分支
+git remote -v
+#添加远程分支
+git remote add origin &quot;git remote warehouse url&quot;
+#移除本地添加的远程分支
+git remote remove &quot;remote branch name&quot;
+#获取远程分支与本地分支合并
+git pull
+#把本地分支提交到远程分支
+git push
+#查看所有的远程分支和本地分支
+
+git branch -a
+#查看所有的本地分支
+git branch
+#本地分支与远程分支关联
+git branch --set-upstream-to=origin/master master
+#创建本地分支
+git branch &quot;local branch name&quot;
+
+#清除输入过的账号密码
+git config --system --unset credential.helper
+
+#回滚
+git log
+git checkout [commit id] [file name]
+commit id:commit提交的编号
+file name:需要回滚的文件名称，不输入则整个版本回滚
+
+#克隆远程仓库到本地
+#fileName:为指定本地文件夹的名字，如果没有就会使用远程仓库默认s的名称
+git clone &quot;git remote warehouse url&quot; [ specified file name]
+</code></pre>
+<h2 id="谨慎使用"><a href="#谨慎使用" class="headerlink" title="谨慎使用"></a>谨慎使用</h2><pre><code class="shell">#&#39;fatal: refusing to merge unrelated histories&#39;:无法合并两个不相干分支，此命令可强行合并建立关系
+git pull origin master --allow-unrelated-histories
+</code></pre>
+<h2 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h2><p><code>.gitignore</code>：文件的内容将是忽略提交的部分，也就是git不会检索该文件指定的文件和文件夹</p>
+<p>例如：</p>
+<pre><code class="shell">HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+### VS Code ###
+.vscode/
+</code></pre>
+<p>更多高级操作见下一篇：Git操作</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/06/07/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="go-post">阅读全文</a>
 </div>
 
 <div class="post">
