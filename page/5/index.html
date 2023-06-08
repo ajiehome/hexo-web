@@ -1186,68 +1186,6 @@ public class UserEntity implements UserDetails, Serializable &#123;
 </div>
 
 <div class="post">
-    <a href="/2023/06/07/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/Spring%E4%B8%8A%E4%B8%8B%E6%96%87ApplicationContext/">
-        <h2 class="post-title">Spring上下文ApplicationContext</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                开源框架
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="Java-在静态方法中引入bean"><a href="#Java-在静态方法中引入bean" class="headerlink" title="Java 在静态方法中引入bean"></a>Java 在静态方法中引入bean</h1><p>ApplicationContextAware: 相当于在ApplicationContext上下文初始化的时候，会触发的一个钩子，而要想触发就要加入到Bean容器中去进行管理</p>
-<pre><code class="java">public class SpringContextUtils implements ApplicationContextAware &#123;
-    private static ApplicationContext applicationContext;
-
-    public static void setStatusApplicationContext(ApplicationContext applicationContext) &#123;
-        SpringContextUtils.applicationContext = applicationContext;
-    &#125;
-
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException &#123;
-        SpringContextUtils.setStatusApplicationContext(applicationContext);
-    &#125;
-    public static &lt;T&gt; T bean(Class&lt;T&gt; clazz) &#123;
-        return applicationContext.getBean(clazz);
-    &#125;
-&#125;
-</code></pre>
-<p>bean注入</p>
-<pre><code class="java">@Bean
-public SpringContextUtils springContextUtils()&#123;
-    return new SpringContextUtils();
-&#125;
-</code></pre>
-<p>而后只需要在使用的时候使用bean方法，依据类型或者名称等等进行注入即可</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/06/07/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/Spring%E4%B8%8A%E4%B8%8B%E6%96%87ApplicationContext/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
     <a href="/2023/06/07/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/Spring%E7%9A%84AOP%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/">
         <h2 class="post-title">Spring的AOP自定义注解</h2>
     </a>
@@ -1378,6 +1316,68 @@ public class TokenAspect &#123;
         
     </div>
     <a href="/2023/06/07/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/Spring%E7%9A%84AOP%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/07/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/Spring%E4%B8%8A%E4%B8%8B%E6%96%87ApplicationContext/">
+        <h2 class="post-title">Spring上下文ApplicationContext</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                开源框架
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="Java-在静态方法中引入bean"><a href="#Java-在静态方法中引入bean" class="headerlink" title="Java 在静态方法中引入bean"></a>Java 在静态方法中引入bean</h1><p>ApplicationContextAware: 相当于在ApplicationContext上下文初始化的时候，会触发的一个钩子，而要想触发就要加入到Bean容器中去进行管理</p>
+<pre><code class="java">public class SpringContextUtils implements ApplicationContextAware &#123;
+    private static ApplicationContext applicationContext;
+
+    public static void setStatusApplicationContext(ApplicationContext applicationContext) &#123;
+        SpringContextUtils.applicationContext = applicationContext;
+    &#125;
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException &#123;
+        SpringContextUtils.setStatusApplicationContext(applicationContext);
+    &#125;
+    public static &lt;T&gt; T bean(Class&lt;T&gt; clazz) &#123;
+        return applicationContext.getBean(clazz);
+    &#125;
+&#125;
+</code></pre>
+<p>bean注入</p>
+<pre><code class="java">@Bean
+public SpringContextUtils springContextUtils()&#123;
+    return new SpringContextUtils();
+&#125;
+</code></pre>
+<p>而后只需要在使用的时候使用bean方法，依据类型或者名称等等进行注入即可</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/06/07/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/Spring%E4%B8%8A%E4%B8%8B%E6%96%87ApplicationContext/" class="go-post">阅读全文</a>
 </div>
 
 <div class="post">

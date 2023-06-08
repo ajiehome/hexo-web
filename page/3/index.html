@@ -215,6 +215,66 @@
 </div>
 
 <div class="post">
+    <a href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Android_%E5%A4%B4%E9%83%A8%E5%AF%BC%E8%88%AA%E6%A0%87%E7%AD%BE/">
+        <h2 class="post-title">Android_头部导航标签</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                前端杂烩
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="Toolbar"><a href="#Toolbar" class="headerlink" title="Toolbar"></a>Toolbar</h1><p>关于toolbar使用的几个要点，包如下</p>
+<pre><code class="xml">androidx.appcompat.widget.Toolbar
+</code></pre>
+<p>这里作为toolbar的最左标签使用</p>
+<pre><code class="xml">app:navigationIcon=&quot;@mipmap/sidebar&quot;
+</code></pre>
+<p>最左侧按钮点击事件，这里的点击事件有一个很重要的事情，就是只有在toolbar提交之后才能生效，也就是</p>
+<pre><code class="java">setSupportActionBar(toolbar);
+</code></pre>
+<pre><code class="java">@Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) &#123;
+        if (item.getItemId() ==android.R.id.home)&#123;
+            drawerLayout.openDrawer(Gravity.LEFT);
+        &#125;
+        return super.onOptionsItemSelected(item);
+    &#125;
+</code></pre>
+<p>而其他的所有操作，如设置title，logo等等方法，也要在提交了toolbar之后才能生效，例如</p>
+<pre><code class="java"># 设置title无效
+getSupportActionBar().setDisplayShowTitleEnabled(false);
+</code></pre>
+<p>还有设置toolbar的title的颜色字体大小，等等信息</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Android_%E5%A4%B4%E9%83%A8%E5%AF%BC%E8%88%AA%E6%A0%87%E7%AD%BE/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2023/06/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/Zookeeper%E5%8D%95%E6%9C%BA%E9%83%A8%E7%BD%B2/">
         <h2 class="post-title">Zookeeper单机部署</h2>
     </a>
@@ -286,66 +346,6 @@ systemctl restart zkServer
         
     </div>
     <a href="/2023/06/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/Zookeeper%E5%8D%95%E6%9C%BA%E9%83%A8%E7%BD%B2/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Android_%E5%A4%B4%E9%83%A8%E5%AF%BC%E8%88%AA%E6%A0%87%E7%AD%BE/">
-        <h2 class="post-title">Android_头部导航标签</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                前端杂烩
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="Toolbar"><a href="#Toolbar" class="headerlink" title="Toolbar"></a>Toolbar</h1><p>关于toolbar使用的几个要点，包如下</p>
-<pre><code class="xml">androidx.appcompat.widget.Toolbar
-</code></pre>
-<p>这里作为toolbar的最左标签使用</p>
-<pre><code class="xml">app:navigationIcon=&quot;@mipmap/sidebar&quot;
-</code></pre>
-<p>最左侧按钮点击事件，这里的点击事件有一个很重要的事情，就是只有在toolbar提交之后才能生效，也就是</p>
-<pre><code class="java">setSupportActionBar(toolbar);
-</code></pre>
-<pre><code class="java">@Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) &#123;
-        if (item.getItemId() ==android.R.id.home)&#123;
-            drawerLayout.openDrawer(Gravity.LEFT);
-        &#125;
-        return super.onOptionsItemSelected(item);
-    &#125;
-</code></pre>
-<p>而其他的所有操作，如设置title，logo等等方法，也要在提交了toolbar之后才能生效，例如</p>
-<pre><code class="java"># 设置title无效
-getSupportActionBar().setDisplayShowTitleEnabled(false);
-</code></pre>
-<p>还有设置toolbar的title的颜色字体大小，等等信息</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Android_%E5%A4%B4%E9%83%A8%E5%AF%BC%E8%88%AA%E6%A0%87%E7%AD%BE/" class="go-post">阅读全文</a>
 </div>
 
 <div class="post">
