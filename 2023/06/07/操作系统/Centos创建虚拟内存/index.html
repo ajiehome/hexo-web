@@ -179,10 +179,10 @@
     <div class="content" v-pre>
         <h1 id="Linux创建虚拟内存"><a href="#Linux创建虚拟内存" class="headerlink" title="Linux创建虚拟内存"></a>Linux创建虚拟内存</h1><ol>
 <li>创建swap文件夹，一般在根目录就好，swap通常代表虚拟内存</li>
-<li>创建swapfile文件，swapfile为伪装成内存的文件<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dd if=/dev/zero of=/swap/swapfile bs=1G count=4096</span><br></pre></td></tr></table></figure></li>
-<li>将swapfile文件设置为swap分区文件<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkswap /swap/swapfile</span><br></pre></td></tr></table></figure></li>
-<li>激活swap区，并立即启用交换区文件<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">swapon /swap/swapfile</span><br></pre></td></tr></table></figure></li>
-<li>设置开机自启需要在<code>/etc/fstab</code>文件的末尾添加一行命令<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/swap/swapfile swap swap defaults 0 0</span><br></pre></td></tr></table></figure></li>
+<li>创建swapfile文件，swapfile为伪装成内存的文件<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">dd</span> <span class="token assign-left variable">if</span><span class="token operator">=</span>/dev/zero <span class="token assign-left variable">of</span><span class="token operator">=</span>/swap/swapfile <span class="token assign-left variable">bs</span><span class="token operator">=</span>1G <span class="token assign-left variable">count</span><span class="token operator">=</span><span class="token number">4096</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>将swapfile文件设置为swap分区文件<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">mkswap</span> /swap/swapfile<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>激活swap区，并立即启用交换区文件<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">swapon</span> /swap/swapfile<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>设置开机自启需要在<code>/etc/fstab</code>文件的末尾添加一行命令<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">/swap/swapfile swap swap defaults <span class="token number">0</span> <span class="token number">0</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
 </ol>
 
     </div>

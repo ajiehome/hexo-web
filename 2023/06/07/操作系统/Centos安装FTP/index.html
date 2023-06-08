@@ -178,28 +178,51 @@
     
     <div class="content" v-pre>
         <h1 id="Centos安装FTP-gt-简单安装"><a href="#Centos安装FTP-gt-简单安装" class="headerlink" title="Centos安装FTP-&gt;简单安装"></a>Centos安装FTP-&gt;简单安装</h1><p><strong>1、查看是否安装了FTP</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa | grep vsftpd</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">rpm</span> <span class="token parameter variable">-qa</span> <span class="token operator">|</span> <span class="token function">grep</span> vsftpd<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><strong>2、没有安装-&gt;安装vsftp</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install vsftpd</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yum <span class="token parameter variable">-y</span> <span class="token function">install</span> vsftpd<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><strong>3、添加FTP用户并修改密码</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">useradd ftpLogin -d /home/ftpLogin</span><br><span class="line">passwd ftpLogin</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">useradd</span> ftpLogin <span class="token parameter variable">-d</span> /home/ftpLogin
+<span class="token function">passwd</span> ftpLogin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p><strong>4、修改vsftpd.conf配置文件</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/vsftpd/vsftpd.conf</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">把允许匿名登陆改为不允许</span></span><br><span class="line">anonymous_enable=YES -&gt;  anonymous_enable=NO</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">在最后一行加上默认的加载目录-&gt;也就是FTP目录</span></span><br><span class="line">local_root=/home/ftpLogin/</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">vi</span> /etc/vsftpd/vsftpd.conf
+
+<span class="token comment">#把允许匿名登陆改为不允许</span>
+<span class="token assign-left variable">anonymous_enable</span><span class="token operator">=</span>YES -<span class="token operator">></span>  <span class="token assign-left variable">anonymous_enable</span><span class="token operator">=</span>NO
+
+<span class="token comment">#在最后一行加上默认的加载目录->也就是FTP目录</span>
+<span class="token assign-left variable">local_root</span><span class="token operator">=</span>/home/ftpLogin/<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>5、修改文件夹的用户权限</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod -R 777 /home/ftpLogin</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">chmod</span> <span class="token parameter variable">-R</span> <span class="token number">777</span> /home/ftpLogin<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><strong>6、查看服务是否运行</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">active为绿色则是运行状态 如何非运行的话就重新启动一下服务</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">重新启动</span></span><br><span class="line">systemctl restart vsftpd</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">启动服务</span></span><br><span class="line">systemctl start vsftpd</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看服务状态</span></span><br><span class="line">systemctl status vsftpd</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">设置自动启动</span></span><br><span class="line">systemctl enable vsftpd</span><br><span class="line"></span><br><span class="line">yum -y install ftp</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#active为绿色则是运行状态 如何非运行的话就重新启动一下服务</span>
+<span class="token comment">#重新启动</span>
+systemctl restart vsftpd
+<span class="token comment">#启动服务</span>
+systemctl start vsftpd
+<span class="token comment">#查看服务状态</span>
+systemctl status vsftpd
+<span class="token comment">#设置自动启动</span>
+systemctl <span class="token builtin class-name">enable</span> vsftpd
+
+yum <span class="token parameter variable">-y</span> <span class="token function">install</span> <span class="token function">ftp</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>7、安装FTP测试</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">我的已经安装过了就不再测试</span></span><br><span class="line">yum -y install ftp</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">使用anonymous登陆 可以无密码登陆</span></span><br><span class="line">ftp localhost</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#我的已经安装过了就不再测试</span>
+yum <span class="token parameter variable">-y</span> <span class="token function">install</span> <span class="token function">ftp</span>
+<span class="token comment">#使用anonymous登陆 可以无密码登陆</span>
+<span class="token function">ftp</span> localhost<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>8、关掉防火墙-&gt;放行20&amp;21端口 让其他设备也可访问（也可以设置防火墙规则，放行端口组）</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">关掉防火墙</span></span><br><span class="line">systemctl stop firewalld.service</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">为了防止防火墙自启，设置的永久关闭</span></span><br><span class="line">systemctl disable firewalld.service</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#关掉防火墙</span>
+systemctl stop firewalld.service
+<span class="token comment">#为了防止防火墙自启，设置的永久关闭</span>
+systemctl disable firewalld.service<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
     </div>
     
     

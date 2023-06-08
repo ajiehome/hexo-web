@@ -226,7 +226,27 @@ RANDOMKEY                       从Redis返回随机键
 RENAME key newkey               更改键的名称
 RENAMENX key newkey             重命名键，如果新的键不存在
 TYPE key                        返回存储在键的数据类型的值
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- List列表常见命令</span><br><span class="line"></span><br><span class="line">  - ```shell</span><br><span class="line">    BLPOP key1 [key2 ] timeout 取出并获取列表中的第一个元素，或阻塞，直到有可用</span><br><span class="line">    BRPOP key1 [key2 ] timeout 取出并获取列表中的最后一个元素，或阻塞，直到有可用</span><br><span class="line">    BRPOPLPUSH source destination timeout 从列表中弹出一个值，它推到另一个列表并返回它;或阻塞，直到有可用</span><br><span class="line">    LINDEX key index 从一个列表其索引获取对应的元素</span><br><span class="line">    LINSERT key BEFORE|AFTER pivot value 在列表中的其他元素之后或之前插入一个元素</span><br><span class="line">    LLEN key 获取列表的长度</span><br><span class="line">    LPOP key 获取并取出列表中的第一个元素</span><br><span class="line">    LPUSH key value1 [value2] 在前面加上一个或多个值的列表</span><br><span class="line">    LPUSHX key value 在前面加上一个值列表，仅当列表中存在</span><br><span class="line">    LRANGE key start stop 从一个列表获取各种元素</span><br><span class="line">    LREM key count value 从列表中删除元素</span><br><span class="line">    LSET key index value 在列表中的索引设置一个元素的值</span><br><span class="line">    LTRIM key start stop 修剪列表到指定的范围内</span><br><span class="line">    RPOP key 取出并获取列表中的最后一个元素</span><br><span class="line">    RPOPLPUSH source destination 删除最后一个元素的列表，将其附加到另一个列表并返回它</span><br><span class="line">    RPUSH key value1 [value2] 添加一个或多个值到列表</span><br><span class="line">    RPUSHX key value 添加一个值列表，仅当列表中存在</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">
+- List列表常见命令
+
+  - &#96;&#96;&#96;shell
+    BLPOP key1 [key2 ] timeout 取出并获取列表中的第一个元素，或阻塞，直到有可用
+    BRPOP key1 [key2 ] timeout 取出并获取列表中的最后一个元素，或阻塞，直到有可用
+    BRPOPLPUSH source destination timeout 从列表中弹出一个值，它推到另一个列表并返回它;或阻塞，直到有可用
+    LINDEX key index 从一个列表其索引获取对应的元素
+    LINSERT key BEFORE|AFTER pivot value 在列表中的其他元素之后或之前插入一个元素
+    LLEN key 获取列表的长度
+    LPOP key 获取并取出列表中的第一个元素
+    LPUSH key value1 [value2] 在前面加上一个或多个值的列表
+    LPUSHX key value 在前面加上一个值列表，仅当列表中存在
+    LRANGE key start stop 从一个列表获取各种元素
+    LREM key count value 从列表中删除元素
+    LSET key index value 在列表中的索引设置一个元素的值
+    LTRIM key start stop 修剪列表到指定的范围内
+    RPOP key 取出并获取列表中的最后一个元素
+    RPOPLPUSH source destination 删除最后一个元素的列表，将其附加到另一个列表并返回它
+    RPUSH key value1 [value2] 添加一个或多个值到列表
+    RPUSHX key value 添加一个值列表，仅当列表中存在<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </code></pre>
 </li>
 </ul>
@@ -248,7 +268,25 @@ HMSET key field value [field value ...] 同时设置对象中一个或多个字�
 HSETNX key field value 只在对象不存在指定的字段时才设置字段的值
 HSTRLEN key field 返回对象指定field的value的字符串长度，如果该对象或者field不存在，返回0.
 HSCAN key cursor [MATCH pattern] [COUNT count] 类似SCAN命令
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- Set的常见命令</span><br><span class="line"></span><br><span class="line">  - ```shell</span><br><span class="line">    SADD key member [member ...] 添加一个或者多个元素到集合(set)里</span><br><span class="line">    SCARD key 获取集合里面的元素数量</span><br><span class="line">    SDIFF key [key ...] 获得队列不存在的元素</span><br><span class="line">    SDIFFSTORE destination key [key ...] 获得队列不存在的元素，并存储在一个关键的结果集</span><br><span class="line">    SINTER key [key ...] 获得两个集合的交集</span><br><span class="line">    SINTERSTORE destination key [key ...] 获得两个集合的交集，并存储在一个集合中</span><br><span class="line">    SISMEMBER key member 确定一个给定的值是一个集合的成员</span><br><span class="line">    SMEMBERS key 获取集合里面的所有key</span><br><span class="line">    SMOVE source destination member 移动集合里面的一个key到另一个集合</span><br><span class="line">    SPOP key [count] 获取并删除一个集合里面的元素</span><br><span class="line">    SRANDMEMBER key [count] 从集合里面随机获取一个元素</span><br><span class="line">    SREM key member [member ...] 从集合里删除一个或多个元素，不存在的元素会被忽略</span><br><span class="line">    SUNION key [key ...] 添加多个set元素</span><br><span class="line">    SUNIONSTORE destination key [key ...] 合并set元素，并将结果存入新的set里面</span><br><span class="line">    SSCAN key cursor [MATCH pattern] [COUNT count] 迭代set里面的元素</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">
+- Set的常见命令
+
+  - &#96;&#96;&#96;shell
+    SADD key member [member ...] 添加一个或者多个元素到集合(set)里
+    SCARD key 获取集合里面的元素数量
+    SDIFF key [key ...] 获得队列不存在的元素
+    SDIFFSTORE destination key [key ...] 获得队列不存在的元素，并存储在一个关键的结果集
+    SINTER key [key ...] 获得两个集合的交集
+    SINTERSTORE destination key [key ...] 获得两个集合的交集，并存储在一个集合中
+    SISMEMBER key member 确定一个给定的值是一个集合的成员
+    SMEMBERS key 获取集合里面的所有key
+    SMOVE source destination member 移动集合里面的一个key到另一个集合
+    SPOP key [count] 获取并删除一个集合里面的元素
+    SRANDMEMBER key [count] 从集合里面随机获取一个元素
+    SREM key member [member ...] 从集合里删除一个或多个元素，不存在的元素会被忽略
+    SUNION key [key ...] 添加多个set元素
+    SUNIONSTORE destination key [key ...] 合并set元素，并将结果存入新的set里面
+    SSCAN key cursor [MATCH pattern] [COUNT count] 迭代set里面的元素<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </code></pre>
 </li>
 </ul>
@@ -275,7 +313,33 @@ ZREVRANK key member 确定一个有序集合成员的索引，以分数排序，
 ZSCORE key member 获取给定成员相关联的分数在一个有序集合
 ZUNIONSTORE destination numkeys key [key ...] 添加多个集排序，所得排序集合存储在一个新的键
 ZSCAN key cursor [MATCH pattern] [COUNT count] 增量迭代排序元素集和相关的分数
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">**常用命令**</span><br><span class="line"></span><br><span class="line">- `config get requirepass`   查看当前redis是否由设置密码，显示`requirepass` `null`为没有密码</span><br><span class="line">- `config set requirepass 123456`   设置密码</span><br><span class="line">- `redis-cli --raw -h &#x27;ip&#x27; -p &#x27;port&#x27;`   连接方式 </span><br><span class="line">- `auth 123456`   密码验证</span><br><span class="line"></span><br><span class="line">**配置文件修改**</span><br><span class="line"></span><br><span class="line">- 永久密码修改</span><br><span class="line">  - 进入redis.conf配置文件，找到requirepass属性，修改成自己想要的密码，保存重启redis即可</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">**Redis与代码**</span><br><span class="line"></span><br><span class="line">- 连接的jar包叫做jedis</span><br><span class="line"></span><br><span class="line">  基础使用样例，其方法名称和命令形式基本一致</span><br><span class="line"></span><br><span class="line">  ```java</span><br><span class="line">  Jedis jedis = new Jedis(&quot;localhost&quot;);</span><br><span class="line">  jedis.set(&quot;key1&quot;,&quot;value1&quot;);</span><br><span class="line">  String value = jedis.get(&quot;key1&quot;);</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">
+---
+
+**常用命令**
+
+- &#96;config get requirepass&#96;   查看当前redis是否由设置密码，显示&#96;requirepass&#96; &#96;null&#96;为没有密码
+- &#96;config set requirepass 123456&#96;   设置密码
+- &#96;redis-cli --raw -h &#39;ip&#39; -p &#39;port&#39;&#96;   连接方式 
+- &#96;auth 123456&#96;   密码验证
+
+**配置文件修改**
+
+- 永久密码修改
+  - 进入redis.conf配置文件，找到requirepass属性，修改成自己想要的密码，保存重启redis即可
+
+---
+
+**Redis与代码**
+
+- 连接的jar包叫做jedis
+
+  基础使用样例，其方法名称和命令形式基本一致
+
+  &#96;&#96;&#96;java
+  Jedis jedis &#x3D; new Jedis(&quot;localhost&quot;);
+  jedis.set(&quot;key1&quot;,&quot;value1&quot;);
+  String value &#x3D; jedis.get(&quot;key1&quot;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </code></pre>
 </li>
 </ul>

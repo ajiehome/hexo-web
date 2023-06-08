@@ -178,13 +178,49 @@
     
     <div class="content" v-pre>
         <h1 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h1><p><strong>Fight.h</strong>文件</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#ifdel _CLIENT_TEST_H_</span></span><br><span class="line"><span class="meta">#default _CLIENT_TEST_H_</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;Test.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> fight&#123;</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Fight</span>: <span class="keyword">public</span> Test&#123;</span><br><span class="line">      <span class="keyword">public</span>:</span><br><span class="line">        <span class="built_in">Figint</span>()&#123;</span><br><span class="line">            wea = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        ~<span class="built_in">Fight</span>()&#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">private</span>:</span><br><span class="line">            <span class="type">int</span> wea;</span><br><span class="line">        <span class="keyword">public</span>:</span><br><span class="line">            <span class="function"><span class="type">void</span> <span class="title">setWea</span><span class="params">(<span class="type">int</span> w)</span></span>;</span><br><span class="line">            <span class="function"><span class="type">int</span> <span class="title">getWea</span><span class="params">()</span></span>;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125; <span class="comment">//namespace</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">// _CLIENT_FIGht_H_</span></span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#ifdel _CLIENT_TEST_H_
+#default _CLIENT_TEST_H_
+#include &lt;iostream&gt;
+#include &quot;Test.h&quot;
+
+namespace fight&#123;
+    class Fight: public Test&#123;
+      public:
+        Figint()&#123;
+            wea &#x3D; 1;
+        &#125;
+        ~Fight()&#123;
+
+        &#125;
+        private:
+            int wea;
+        public:
+            void setWea(int w);
+            int getWea();
+    &#125;;
+&#125; &#x2F;&#x2F;namespace
+#endif &#x2F;&#x2F; _CLIENT_FIGht_H_<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>Feight.cpp</strong>文件</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;Fight.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> fight&#123;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Fight::setWea</span><span class="params">(w)</span></span>&#123;</span><br><span class="line">        wea = w;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">Fight::getWea</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> wea;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+#include &quot;Fight.h&quot;
+
+namespace fight&#123;
+    void Fight::setWea(w)&#123;
+        wea &#x3D; w;
+    &#125;
+    int Fight::getWea()&#123;
+        return wea;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>调用</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;Fight.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>* agev[])</span></span>&#123;</span><br><span class="line">    fight::Fight</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+#include &quot;Fight.h&quot;
+
+int main(int argc, char* agev[])&#123;
+    fight::Fight
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
     </div>
     

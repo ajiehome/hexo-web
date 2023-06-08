@@ -178,7 +178,7 @@
     
     <div class="content" v-pre>
         <h1 id="MySQL用户与授权"><a href="#MySQL用户与授权" class="headerlink" title="MySQL用户与授权"></a>MySQL用户与授权</h1><p><strong>1、创建用户</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create user &#x27;userName&#x27;@&#x27;host&#x27; identified by &#x27;passWord&#x27;;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">create user <span class="token string">'userName'</span>@<span class="token string">'host'</span> identified by <span class="token string">'passWord'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <ul>
 <li><code>userName</code>：你需要创建的用户名</li>
@@ -186,10 +186,14 @@
 <li><code>passWord</code>：指定该用户的登录密码，密码可以为空，</li>
 </ul>
 <p><strong>例如：</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">create user &#x27;admin&#x27;@&#x27;localhost&#x27; identified by &#x27;123456&#x27;;</span><br><span class="line">create user &#x27;admin&#x27;@&#x27;192.168.1.101&#x27; identified by &#x27;123456&#x27;;</span><br><span class="line">create user &#x27;admin&#x27;@&#x27;%&#x27; identified by &#x27;123456&#x27;;</span><br><span class="line">create user &#x27;admin&#x27;@&#x27;%&#x27; identified by &#x27;&#x27;;</span><br><span class="line">create user &#x27;admin&#x27;@&#x27;%&#x27;;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">create user <span class="token string">'admin'</span>@<span class="token string">'localhost'</span> identified by <span class="token string">'123456'</span><span class="token punctuation">;</span>
+create user <span class="token string">'admin'</span>@<span class="token string">'192.168.1.101'</span> identified by <span class="token string">'123456'</span><span class="token punctuation">;</span>
+create user <span class="token string">'admin'</span>@<span class="token string">'%'</span> identified by <span class="token string">'123456'</span><span class="token punctuation">;</span>
+create user <span class="token string">'admin'</span>@<span class="token string">'%'</span> identified by <span class="token string">''</span><span class="token punctuation">;</span>
+create user <span class="token string">'admin'</span>@<span class="token string">'%'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>2、授权</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grant &#x27;privileges&#x27; on &#x27;database.table&#x27; to &#x27;userName&#x27;@&#x27;host&#x27;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">grant <span class="token string">'privileges'</span> on <span class="token string">'database.table'</span> to <span class="token string">'userName'</span>@<span class="token string">'host'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <ul>
 <li><code>privileges</code>：用户操作的权限，如<code>select</code>，<code>insert</code>，<code>update</code>等，如果全部需要，使用<code>all</code></li>
@@ -197,16 +201,18 @@
 <li><code>table</code>：授权的数据库表名称，如果对该数据库的所有表都授权可使用<code>*</code>通配符</li>
 </ul>
 <p><strong>例如：</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">grant select, insert on test.user TO &#x27;admin&#x27;@&#x27;%&#x27;;</span><br><span class="line">grant all on test.* to &#x27;admin&#x27;@&#x27;%&#x27;;</span><br><span class="line">grant all on *.* to &#x27;admin&#x27;@&#x27;%&#x27;;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">grant select, insert on test.user TO <span class="token string">'admin'</span>@<span class="token string">'%'</span><span class="token punctuation">;</span>
+grant all on test.* to <span class="token string">'admin'</span>@<span class="token string">'%'</span><span class="token punctuation">;</span>
+grant all on *.* to <span class="token string">'admin'</span>@<span class="token string">'%'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>注意：</strong></p>
 <p>用以上命令授权的用户不能给其他用户授权，如果需要使该用户可以授权，使用如下命令</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grant &#x27;privileges&#x27; on &#x27;database.table&#x27; to &#x27;username&#x27;@&#x27;host&#x27; with grant option;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">grant <span class="token string">'privileges'</span> on <span class="token string">'database.table'</span> to <span class="token string">'username'</span>@<span class="token string">'host'</span> with grant option<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 
 
 <p><strong>3、设置与更改用户密码</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set password for &#x27;userName&#x27;@&#x27;host&#x27; = password(&#x27;passWord&#x27;);</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">set</span> password <span class="token keyword">for</span> <span class="token string">'userName'</span>@<span class="token string">'host'</span> <span class="token operator">=</span> password<span class="token punctuation">(</span><span class="token string">'passWord'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <ul>
 <li><code>userName</code>：用户的名称</li>
@@ -214,22 +220,22 @@
 <li><code>passWord</code>：用户的新密码</li>
 </ul>
 <p><strong>例如：</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set password for &#x27;admin&#x27;@&#x27;%&#x27; = password(&quot;123456&quot;);</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">set</span> password <span class="token keyword">for</span> <span class="token string">'admin'</span>@<span class="token string">'%'</span> <span class="token operator">=</span> password<span class="token punctuation">(</span><span class="token string">"123456"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><strong>4、撤销用户权限</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">revoke &#x27;privilege&#x27; on &#x27;database.table&#x27; from &#x27;username&#x27;@&#x27;host&#x27;;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">revoke <span class="token string">'privilege'</span> on <span class="token string">'database.table'</span> from <span class="token string">'username'</span>@<span class="token string">'host'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <ul>
 <li><code>privilege</code>, <code>database</code>, <code>table</code>：同授权部分，参照授权部分</li>
 </ul>
 <p><strong>例如：</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">revoke select on *.* from &#x27;admin&#x27;@&#x27;%&#x27;;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">revoke <span class="token keyword">select</span> on *.* from <span class="token string">'admin'</span>@<span class="token string">'%'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><strong>注意</strong></p>
 <p>假如你在给用户<code>&#39;pig&#39;@&#39;%&#39;</code>授权的时候是这样的（或类似的）：<code>GRANT SELECT ON test.user TO &#39;pig&#39;@&#39;%&#39;</code>，则在使用<code>REVOKE SELECT ON *.* FROM &#39;pig&#39;@&#39;%&#39;;</code>命令并不能撤销该用户对test数据库中user表的<code>SELECT</code> 操作。相反，如果授权使用的是<code>GRANT SELECT ON *.* TO &#39;pig&#39;@&#39;%&#39;;</code>则<code>REVOKE SELECT ON test.user FROM &#39;pig&#39;@&#39;%&#39;;</code>命令也不能撤销该用户对test数据库中user表的<code>Select</code>权限</p>
 <p>具体信息可以用命令<code>SHOW GRANTS FOR &#39;pig&#39;@&#39;%&#39;;</code> 查看</p>
 <p><strong>5、删除用户</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drop user &#x27;username&#x27;@&#x27;host&#x27;;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">drop user <span class="token string">'username'</span>@<span class="token string">'host'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 
     </div>

@@ -178,7 +178,7 @@
     
     <div class="content" v-pre>
         <h1 id="docker初步使用"><a href="#docker初步使用" class="headerlink" title="docker初步使用"></a>docker初步使用</h1><p>命令解析</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run ubuntu:15.10 /bin/echo &quot;Hello Word&quot;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> run ubuntu:15.10 /bin/echo <span class="token string">"Hello Word"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <ul>
 <li><code>docker</code>Docker的二进制执行文件</li>
@@ -187,7 +187,7 @@
 <li><code>/bin/echo &quot;Hellow Word&quot;</code>在启动的容器中执行的命令</li>
 </ul>
 <p>交互式容器的运行</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it ubuntu:15.10 /bin/bash</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> run <span class="token parameter variable">-it</span> ubuntu:15.10 /bin/bash<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <ul>
 <li><code>-i</code>运行对容器内的标准输入（STDIN）进行交互</li>

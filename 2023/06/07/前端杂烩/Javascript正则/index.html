@@ -177,7 +177,8 @@
     </div>
     
     <div class="content" v-pre>
-        <h2 id="Javascript正则"><a href="#Javascript正则" class="headerlink" title="Javascript正则"></a>Javascript正则</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> newData  = data.<span class="title function_">replace</span>(<span class="regexp">/\&quot;toId\&quot;:(\d+)/</span>,<span class="string">&#x27;&quot;toId&quot;: &quot;$1&quot;&#x27;</span>);</span><br><span class="line">data = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(newData)</span><br></pre></td></tr></table></figure>
+        <h2 id="Javascript正则"><a href="#Javascript正则" class="headerlink" title="Javascript正则"></a>Javascript正则</h2><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> newData  <span class="token operator">=</span> data<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">\"toId\":(\d+)</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">,</span><span class="token string">'"toId": "$1"'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+data <span class="token operator">=</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>newData<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
     </div>
     

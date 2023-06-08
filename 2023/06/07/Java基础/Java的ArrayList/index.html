@@ -179,7 +179,17 @@
     <div class="content" v-pre>
         <h1 id="Collection中的List中的ArrayList"><a href="#Collection中的List中的ArrayList" class="headerlink" title="Collection中的List中的ArrayList"></a>Collection中的List中的ArrayList</h1><p><code>DEFAULT_CAPACITY = 10;</code>默认大小</p>
 <p>ArrayList的初始化操作为，如果你没有传入参数就是赋予一个默认的Object数组对象，然后在添加第一个元素的时候进行扩容，如果我们传入了创建大小的参数，那么会做大小判定，如果为0就赋予一个空的对象，也是一个Object数组，还有如果参数是Collection对象等等情况。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">grow</span><span class="params">(<span class="type">int</span> minCapacity)</span> &#123;</span><br><span class="line">        <span class="comment">// overflow-conscious code</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">oldCapacity</span> <span class="operator">=</span> elementData.length;</span><br><span class="line">        <span class="type">int</span> <span class="variable">newCapacity</span> <span class="operator">=</span> oldCapacity + (oldCapacity &gt;&gt; <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span> (newCapacity - minCapacity &lt; <span class="number">0</span>)</span><br><span class="line">            newCapacity = minCapacity;</span><br><span class="line">        <span class="keyword">if</span> (newCapacity - MAX_ARRAY_SIZE &gt; <span class="number">0</span>)</span><br><span class="line">            newCapacity = hugeCapacity(minCapacity);</span><br><span class="line">        <span class="comment">// minCapacity is usually close to size, so this is a win:</span></span><br><span class="line">        elementData = Arrays.copyOf(elementData, newCapacity);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">private void grow(int minCapacity) &#123;
+        &#x2F;&#x2F; overflow-conscious code
+        int oldCapacity &#x3D; elementData.length;
+        int newCapacity &#x3D; oldCapacity + (oldCapacity &gt;&gt; 1);
+        if (newCapacity - minCapacity &lt; 0)
+            newCapacity &#x3D; minCapacity;
+        if (newCapacity - MAX_ARRAY_SIZE &gt; 0)
+            newCapacity &#x3D; hugeCapacity(minCapacity);
+        &#x2F;&#x2F; minCapacity is usually close to size, so this is a win:
+        elementData &#x3D; Arrays.copyOf(elementData, newCapacity);
+    &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>在这里有一行重要的代码即使<code>int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</code>这里得到的新的容量大小为原大小的1.5倍，是因为使用了向右唯一了一个，相当于除以了2，也就是加上了0.5倍的大小</p>
 
     </div>

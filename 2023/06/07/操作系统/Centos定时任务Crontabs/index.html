@@ -178,7 +178,7 @@
     
     <div class="content" v-pre>
         <h1 id="crontabs-定时执行执行sh"><a href="#crontabs-定时执行执行sh" class="headerlink" title="crontabs-定时执行执行sh"></a>crontabs-定时执行执行sh</h1><p>首先安装crontabs工具</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install crontabs</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yum <span class="token function">install</span> crontabs<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>安装完之后，系统默认安装了<code>crond</code>服务，<code>crond</code>默认是自启状态</p>
 <p><code>crond</code>的执行方式为每一分钟扫描本地是否有需要执行的事务</p>
@@ -212,7 +212,10 @@
 </tr>
 </tbody></table>
 <p>例如：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">crontab -e</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">进入crontab文件显示当前用户的所有内容</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">如下所示</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">* * * * * /root/test.sh &gt;&gt; /root/log.log</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">crontab</span> <span class="token parameter variable">-e</span>
+<span class="token comment"># 进入crontab文件显示当前用户的所有内容</span>
+<span class="token comment"># 如下所示</span>
+<span class="token comment"># * * * * * /root/test.sh >> /root/log.log</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>crontab的定时执行任务是通过<code>*</code>来进行确认时间的</p>
 <table>
@@ -275,7 +278,12 @@
 </tr>
 </tbody></table>
 <p>例如：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">每五分钟执行一次</span></span><br><span class="line">*/5 * * * * /root/test.sh &gt;&gt; /root/log.log</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">每一分钟执行一次</span></span><br><span class="line">* * * * * /root/test.sh &gt;&gt; /root/log.log</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">没五分钟往<span class="built_in">log</span>里面写入11</span></span><br><span class="line">*/5 * * * * /bin/echo &quot;11&quot; &gt;&gt; /root/log.log</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 每五分钟执行一次</span>
+*/5 * * * * /root/test.sh <span class="token operator">>></span> /root/log.log
+<span class="token comment"># 每一分钟执行一次</span>
+* * * * * /root/test.sh <span class="token operator">>></span> /root/log.log
+<span class="token comment"># 没五分钟往log里面写入11</span>
+*/5 * * * * /bin/echo <span class="token string">"11"</span> <span class="token operator">>></span> /root/log.log<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <table>
 <thead>

@@ -177,9 +177,27 @@
     </div>
     
     <div class="content" v-pre>
-        <h1 id="Centos安装RabbitMQ"><a href="#Centos安装RabbitMQ" class="headerlink" title="Centos安装RabbitMQ"></a>Centos安装RabbitMQ</h1><h2 id="安装Erlang环境"><a href="#安装Erlang环境" class="headerlink" title="安装Erlang环境"></a>安装Erlang环境</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">1、安装依赖项</span></span><br><span class="line">yum install -y epel-release</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">2、添加存储库条目</span></span><br><span class="line">wget https://packages.erlang-solutions.com/erlang-solutions-1.0-1.noarch.rpm</span><br><span class="line">rpm -Uvh erlang-solutions-1.0-1.noarch.rpm</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">3、安装</span></span><br><span class="line">yum install -y erlang</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">4、验证是否安装成功</span></span><br><span class="line">erl -version</span><br></pre></td></tr></table></figure>
+        <h1 id="Centos安装RabbitMQ"><a href="#Centos安装RabbitMQ" class="headerlink" title="Centos安装RabbitMQ"></a>Centos安装RabbitMQ</h1><h2 id="安装Erlang环境"><a href="#安装Erlang环境" class="headerlink" title="安装Erlang环境"></a>安装Erlang环境</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 1、安装依赖项</span>
+yum <span class="token function">install</span> <span class="token parameter variable">-y</span> epel-release
 
-<h2 id="rabbitmq的命令"><a href="#rabbitmq的命令" class="headerlink" title="rabbitmq的命令"></a>rabbitmq的命令</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">开启web管理界面</span></span><br><span class="line">rabbitmq-plugins enable rabbitmq_management</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">添加用户</span></span><br><span class="line">rabbitmqctl add_user admin admin</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">设置用户对 <span class="string">&#x27;/ 的权限</span></span></span><br><span class="line">rabbitmqctl set_permissions -p &quot;/&quot; &quot;admin&quot; &quot;.*&quot; &quot;.*&quot; &quot;.*&quot;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">设置用户角色</span></span></span><br><span class="line">rabbitmqctl set_user_tags admin administrator</span><br></pre></td></tr></table></figure>
+<span class="token comment"># 2、添加存储库条目</span>
+<span class="token function">wget</span> https://packages.erlang-solutions.com/erlang-solutions-1.0-1.noarch.rpm
+<span class="token function">rpm</span> <span class="token parameter variable">-Uvh</span> erlang-solutions-1.0-1.noarch.rpm
+
+<span class="token comment"># 3、安装</span>
+yum <span class="token function">install</span> <span class="token parameter variable">-y</span> erlang
+
+<span class="token comment"># 4、验证是否安装成功</span>
+erl <span class="token parameter variable">-version</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="rabbitmq的命令"><a href="#rabbitmq的命令" class="headerlink" title="rabbitmq的命令"></a>rabbitmq的命令</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 开启web管理界面</span>
+rabbitmq-plugins <span class="token builtin class-name">enable</span> rabbitmq_management
+<span class="token comment"># 添加用户</span>
+rabbitmqctl add_user admin admin
+<span class="token comment"># 设置用户对 '/ 的权限</span>
+rabbitmqctl set_permissions <span class="token parameter variable">-p</span> <span class="token string">"/"</span> <span class="token string">"admin"</span> <span class="token string">".*"</span> <span class="token string">".*"</span> <span class="token string">".*"</span>
+<span class="token comment"># 设置用户角色</span>
+rabbitmqctl set_user_tags admin administrator<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
     </div>
     
     

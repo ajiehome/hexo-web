@@ -177,13 +177,83 @@
     </div>
     
     <div class="content" v-pre>
-        <h1 id="Git基本常用命令"><a href="#Git基本常用命令" class="headerlink" title="Git基本常用命令"></a>Git基本常用命令</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">初始化一个Git仓库</span></span><br><span class="line">git init</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">把文件添加到本地git仓储缓存</span></span><br><span class="line">git add &quot;file name&quot;</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">把当前目录下全部文件加入到本地git仓储缓存</span></span><br><span class="line">git add .</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">把仓储缓存提交上去</span></span><br><span class="line">git commit -m&quot;description&quot;</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看所有的远程分支</span></span><br><span class="line">git remote -v</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">添加远程分支</span></span><br><span class="line">git remote add origin &quot;git remote warehouse url&quot;</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">移除本地添加的远程分支</span></span><br><span class="line">git remote remove &quot;remote branch name&quot;</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">获取远程分支与本地分支合并</span></span><br><span class="line">git pull</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">把本地分支提交到远程分支</span></span><br><span class="line">git push</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看所有的远程分支和本地分支</span></span><br><span class="line"></span><br><span class="line">git branch -a</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看所有的本地分支</span></span><br><span class="line">git branch</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">本地分支与远程分支关联</span></span><br><span class="line">git branch --set-upstream-to=origin/master master</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">创建本地分支</span></span><br><span class="line">git branch &quot;local branch name&quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">清除输入过的账号密码</span></span><br><span class="line">git config --system --unset credential.helper</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">回滚</span></span><br><span class="line">git log</span><br><span class="line">git checkout [commit id] [file name]</span><br><span class="line">commit id:commit提交的编号</span><br><span class="line">file name:需要回滚的文件名称，不输入则整个版本回滚</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">克隆远程仓库到本地</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">fileName:为指定本地文件夹的名字，如果没有就会使用远程仓库默认s的名称</span></span><br><span class="line">git clone &quot;git remote warehouse url&quot; [ specified file name]</span><br></pre></td></tr></table></figure>
+        <h1 id="Git基本常用命令"><a href="#Git基本常用命令" class="headerlink" title="Git基本常用命令"></a>Git基本常用命令</h1><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#初始化一个Git仓库</span>
+<span class="token function">git</span> init
+<span class="token comment">#把文件添加到本地git仓储缓存</span>
+<span class="token function">git</span> <span class="token function">add</span> <span class="token string">"file name"</span>
+<span class="token comment">#把当前目录下全部文件加入到本地git仓储缓存</span>
+<span class="token function">git</span> <span class="token function">add</span> <span class="token builtin class-name">.</span>
+<span class="token comment">#把仓储缓存提交上去</span>
+<span class="token function">git</span> commit -m<span class="token string">"description"</span>
+<span class="token comment">#查看所有的远程分支</span>
+<span class="token function">git</span> remote <span class="token parameter variable">-v</span>
+<span class="token comment">#添加远程分支</span>
+<span class="token function">git</span> remote <span class="token function">add</span> origin <span class="token string">"git remote warehouse url"</span>
+<span class="token comment">#移除本地添加的远程分支</span>
+<span class="token function">git</span> remote remove <span class="token string">"remote branch name"</span>
+<span class="token comment">#获取远程分支与本地分支合并</span>
+<span class="token function">git</span> pull
+<span class="token comment">#把本地分支提交到远程分支</span>
+<span class="token function">git</span> push
+<span class="token comment">#查看所有的远程分支和本地分支</span>
 
-<h2 id="谨慎使用"><a href="#谨慎使用" class="headerlink" title="谨慎使用"></a>谨慎使用</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="string">&#x27;fatal: refusing to merge unrelated histories&#x27;</span>:无法合并两个不相干分支，此命令可强行合并建立关系</span></span><br><span class="line">git pull origin master --allow-unrelated-histories</span><br></pre></td></tr></table></figure>
+<span class="token function">git</span> branch <span class="token parameter variable">-a</span>
+<span class="token comment">#查看所有的本地分支</span>
+<span class="token function">git</span> branch
+<span class="token comment">#本地分支与远程分支关联</span>
+<span class="token function">git</span> branch --set-upstream-to<span class="token operator">=</span>origin/master master
+<span class="token comment">#创建本地分支</span>
+<span class="token function">git</span> branch <span class="token string">"local branch name"</span>
+
+<span class="token comment">#清除输入过的账号密码</span>
+<span class="token function">git</span> config <span class="token parameter variable">--system</span> <span class="token parameter variable">--unset</span> credential.helper
+
+<span class="token comment">#回滚</span>
+<span class="token function">git</span> log
+<span class="token function">git</span> checkout <span class="token punctuation">[</span>commit id<span class="token punctuation">]</span> <span class="token punctuation">[</span>file name<span class="token punctuation">]</span>
+commit id:commit提交的编号
+<span class="token function">file</span> name:需要回滚的文件名称，不输入则整个版本回滚
+
+<span class="token comment">#克隆远程仓库到本地</span>
+<span class="token comment">#fileName:为指定本地文件夹的名字，如果没有就会使用远程仓库默认s的名称</span>
+<span class="token function">git</span> clone <span class="token string">"git remote warehouse url"</span> <span class="token punctuation">[</span> specified <span class="token function">file</span> name<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="谨慎使用"><a href="#谨慎使用" class="headerlink" title="谨慎使用"></a>谨慎使用</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#'fatal: refusing to merge unrelated histories':无法合并两个不相干分支，此命令可强行合并建立关系</span>
+<span class="token function">git</span> pull origin master --allow-unrelated-histories<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h2 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h2><p><code>.gitignore</code>：文件的内容将是忽略提交的部分，也就是git不会检索该文件指定的文件和文件夹</p>
 <p>例如：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">HELP.md</span><br><span class="line">target/</span><br><span class="line">!.mvn/wrapper/maven-wrapper.jar</span><br><span class="line">!**/src/main/**</span><br><span class="line">!**/src/test/**</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment">## STS ###</span></span></span><br><span class="line">.apt_generated</span><br><span class="line">.classpath</span><br><span class="line">.factorypath</span><br><span class="line">.project</span><br><span class="line">.settings</span><br><span class="line">.springBeans</span><br><span class="line">.sts4-cache</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment">## IntelliJ IDEA ###</span></span></span><br><span class="line">.idea</span><br><span class="line">*.iws</span><br><span class="line">*.iml</span><br><span class="line">*.ipr</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment">## NetBeans ###</span></span></span><br><span class="line">/nbproject/private/</span><br><span class="line">/nbbuild/</span><br><span class="line">/dist/</span><br><span class="line">/nbdist/</span><br><span class="line">/.nb-gradle/</span><br><span class="line">build/</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment">## VS Code ###</span></span></span><br><span class="line">.vscode/</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">HELP.md
+target/
+<span class="token operator">!</span>.mvn/wrapper/maven-wrapper.jar
+<span class="token operator">!</span>**/src/main/**
+<span class="token operator">!</span>**/src/test/**
+
+<span class="token comment">### STS ###</span>
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+<span class="token comment">### IntelliJ IDEA ###</span>
+.idea
+*.iws
+*.iml
+*.ipr
+
+<span class="token comment">### NetBeans ###</span>
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+<span class="token comment">### VS Code ###</span>
+.vscode/<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>更多高级操作见下一篇：Git操作</p>
 

@@ -252,10 +252,49 @@
 <li>构造函数在类的构建时调用，析构函数在类的声明周期结束时调用</li>
 </ol>
 <p>Test.h文件</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifdef</span> _TEST_H_ </span></span><br><span class="line"><span class="meta">#defind _TEST_H_ </span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> sth</span><br><span class="line"><span class="keyword">namespace</span> test&#123;</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Test</span>&#123;</span><br><span class="line">        <span class="keyword">public</span>:</span><br><span class="line">            <span class="built_in">Test</span>()&#123;</span><br><span class="line">                <span class="keyword">this</span>.sex=<span class="number">0</span>;</span><br><span class="line">                <span class="keyword">this</span>.sex=<span class="number">0L</span>;</span><br><span class="line">            &#125; <span class="comment">//构造函数</span></span><br><span class="line">            ~<span class="built_in">Test</span>()&#123;&#125; <span class="comment">//析构函数</span></span><br><span class="line">        <span class="keyword">public</span>:</span><br><span class="line">            <span class="function"><span class="type">void</span> <span class="title">setSex</span><span class="params">(<span class="type">int</span> sex)</span></span>; <span class="comment">//公共方法</span></span><br><span class="line">            <span class="function"><span class="type">void</span> <span class="title">setPhone</span><span class="params">(<span class="type">long</span> phone)</span></span>; </span><br><span class="line">            <span class="function"><span class="type">int</span> <span class="title">getSex</span><span class="params">()</span></span>;</span><br><span class="line">            <span class="function"><span class="type">long</span> <span class="title">getPhone</span><span class="params">()</span></span>;</span><br><span class="line">        <span class="keyword">private</span>:</span><br><span class="line">            <span class="type">int</span> sex; <span class="comment">//私有属性</span></span><br><span class="line">            <span class="type">long</span> phone;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125; <span class="comment">//namespace</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">//_TEST_H_</span></span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#ifdef _TEST_H_ 
+#defind _TEST_H_ 
+
+#include &lt;iostream&gt;
+using namespace sth
+namespace test&#123;
+    class Test&#123;
+        public:
+            Test()&#123;
+                this.sex&#x3D;0;
+                this.sex&#x3D;0L;
+            &#125; &#x2F;&#x2F;构造函数
+            ~Test()&#123;&#125; &#x2F;&#x2F;析构函数
+        public:
+            void setSex(int sex); &#x2F;&#x2F;公共方法
+            void setPhone(long phone); 
+            int getSex();
+            long getPhone();
+        private:
+            int sex; &#x2F;&#x2F;私有属性
+            long phone;
+    &#125;;
+&#125; &#x2F;&#x2F;namespace
+#endif &#x2F;&#x2F;_TEST_H_<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>Test.cpp文件</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;Test.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> test&#123;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Test::setSex</span><span class="params">(<span class="type">int</span> s)</span></span>&#123;</span><br><span class="line">        sex = s;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Test::setPhone</span><span class="params">(<span class="type">long</span> p)</span></span>&#123;</span><br><span class="line">        phone = p;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">Test::getSex</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> sex;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">long</span> <span class="title">Test::getPhone</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> phone;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+#include &quot;Test.h&quot;
+
+namespace test&#123;
+    void Test::setSex(int s)&#123;
+        sex &#x3D; s;
+    &#125;
+    void Test::setPhone(long p)&#123;
+        phone &#x3D; p;
+    &#125;
+    int Test::getSex()&#123;
+        return sex;
+    &#125;
+    long Test::getPhone()&#123;
+        return phone;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>名存空间</strong></p>
 <p><code>using namespace &#39;Name&#39;</code>：选择名存空间</p>
@@ -299,13 +338,49 @@
         <div class="content" v-pre>
             
             <h1 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h1><p><strong>Fight.h</strong>文件</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#ifdel _CLIENT_TEST_H_</span></span><br><span class="line"><span class="meta">#default _CLIENT_TEST_H_</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;Test.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> fight&#123;</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Fight</span>: <span class="keyword">public</span> Test&#123;</span><br><span class="line">      <span class="keyword">public</span>:</span><br><span class="line">        <span class="built_in">Figint</span>()&#123;</span><br><span class="line">            wea = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        ~<span class="built_in">Fight</span>()&#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">private</span>:</span><br><span class="line">            <span class="type">int</span> wea;</span><br><span class="line">        <span class="keyword">public</span>:</span><br><span class="line">            <span class="function"><span class="type">void</span> <span class="title">setWea</span><span class="params">(<span class="type">int</span> w)</span></span>;</span><br><span class="line">            <span class="function"><span class="type">int</span> <span class="title">getWea</span><span class="params">()</span></span>;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125; <span class="comment">//namespace</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">// _CLIENT_FIGht_H_</span></span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#ifdel _CLIENT_TEST_H_
+#default _CLIENT_TEST_H_
+#include &lt;iostream&gt;
+#include &quot;Test.h&quot;
+
+namespace fight&#123;
+    class Fight: public Test&#123;
+      public:
+        Figint()&#123;
+            wea &#x3D; 1;
+        &#125;
+        ~Fight()&#123;
+
+        &#125;
+        private:
+            int wea;
+        public:
+            void setWea(int w);
+            int getWea();
+    &#125;;
+&#125; &#x2F;&#x2F;namespace
+#endif &#x2F;&#x2F; _CLIENT_FIGht_H_<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>Feight.cpp</strong>文件</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;Fight.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> fight&#123;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Fight::setWea</span><span class="params">(w)</span></span>&#123;</span><br><span class="line">        wea = w;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">Fight::getWea</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> wea;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+#include &quot;Fight.h&quot;
+
+namespace fight&#123;
+    void Fight::setWea(w)&#123;
+        wea &#x3D; w;
+    &#125;
+    int Fight::getWea()&#123;
+        return wea;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>调用</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;Fight.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>* agev[])</span></span>&#123;</span><br><span class="line">    fight::Fight</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+#include &quot;Fight.h&quot;
+
+int main(int argc, char* agev[])&#123;
+    fight::Fight
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
             
         </div>
@@ -315,6 +390,413 @@
         
     </div>
     <a href="/2023/06/07/C++%E5%9F%BA%E7%A1%80/C++%E8%AF%AD%E6%B3%95_%E7%BB%A7%E6%89%BF/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/Kafka%E5%AE%89%E8%A3%85/">
+        <h2 class="post-title">Kafka安装</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                中间件
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>首先下载Kafka的二进制包，以及Kafka-Manager Cmak工具</p>
+<p><a target="_blank" rel="noopener" href="https://downloads.apache.org/kafka/3.3.1/kafka_2.13-3.3.1.tgz">Kafka</a>(<a target="_blank" rel="noopener" href="https://downloads.apache.org/kafka/3.3.1/kafka_2.13-3.3.1.tgz">https://downloads.apache.org/kafka/3.3.1/kafka_2.13-3.3.1.tgz</a>)</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/yahoo/CMAK/releases/download/3.0.0.6/cmak-3.0.0.6.zip">Cmak</a>(<a target="_blank" rel="noopener" href="https://github.com/yahoo/CMAK/releases/download/3.0.0.6/cmak-3.0.0.6.zip">https://github.com/yahoo/CMAK/releases/download/3.0.0.6/cmak-3.0.0.6.zip</a>)</p>
+<p>解压Kafka到<code>/opt</code>目录shell</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">tar</span> <span class="token parameter variable">-zxvf</span> kafka_2.13-3.3.1.tgz <span class="token parameter variable">-C</span> /opt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>解压Cmak到<code>/opt</code>目录</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">unzip</span> cmak-3.0.0.6 <span class="token parameter variable">-C</span> /opt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>修改cmak的application.properties<code>/opt/cmak-3.0.0.6/conf/application.properties</code>的如下信息</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># The address the socket server listens on. If not configured, the host name will be equal to the value of</span>
+<span class="token comment"># java.net.InetAddress.getCanonicalHostName(), with PLAINTEXT listener name, and port 9092.</span>
+<span class="token comment">#   FORMAT:</span>
+<span class="token comment">#     listeners = listener_name://host_name:port</span>
+<span class="token comment">#   EXAMPLE:</span>
+<span class="token comment">#     listeners = PLAINTEXT://your.host.name:9092</span>
+<span class="token comment">#listeners=PLAINTEXT://:9092</span>
+
+<span class="token assign-left variable">listeners</span><span class="token operator">=</span>PLAINTEXT://10.254.0.2:9092
+
+<span class="token comment"># Listener name, hostname and port the broker will advertise to clients.</span>
+<span class="token comment"># If not set, it uses the value for "listeners".</span>
+<span class="token comment">#advertised.listeners=PLAINTEXT://your.host.name:9092</span>
+<span class="token assign-left variable">advertised.listeners</span><span class="token operator">=</span>PLAINTEXT://10.254.0.2:9092
+
+<span class="token comment"># Settings prefixed with 'kafka-manager.' will be deprecated, use 'cmak.' instead.</span>
+<span class="token comment"># https://github.com/yahoo/CMAK/issues/713</span>
+kafka-manager.zkhosts<span class="token operator">=</span><span class="token string">"kafka-manager-zookeeper:2181"</span>
+<span class="token comment">#kafka-manager.zkhosts=$&#123;?ZK_HOSTS&#125;</span>
+kafka-manager.zkhosts<span class="token operator">=</span><span class="token string">"10.254.0.2:2181"</span>
+<span class="token assign-left variable">cmak.zkhosts</span><span class="token operator">=</span><span class="token string">"kafka-manager-zookeeper:2181"</span>
+<span class="token comment">#cmak.zkhosts=$&#123;?ZK_HOSTS&#125;</span>
+<span class="token assign-left variable">cmak.zkhosts</span><span class="token operator">=</span><span class="token string">"10.254.0.2:2181"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>构建如下脚本，一键启动Kafka所需要的Zookeeper服务、Kafka服务以及Cmak管理工具</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token assign-left variable">option</span><span class="token operator">=</span><span class="token variable">$1</span>
+
+<span class="token builtin class-name">echo</span> <span class="token string">"option <span class="token variable">$option</span>"</span>
+
+<span class="token keyword">case</span> <span class="token variable">$option</span> <span class="token keyword">in</span> 
+
+  <span class="token string">'start'</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># create kafka catalogue</span>
+    <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token parameter variable">-d</span> <span class="token string">'/root/kafka'</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+      <span class="token builtin class-name">echo</span> <span class="token string">'kafka catalogue exists'</span>
+    <span class="token keyword">else</span> 
+      <span class="token function">mkdir</span> /root/kafka
+      <span class="token builtin class-name">echo</span> <span class="token string">'create kafka catalogue success'</span>
+    <span class="token keyword">fi</span>
+    <span class="token comment"># create kafka log catalogue</span>
+    <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token parameter variable">-d</span> <span class="token string">"/root/kafka/log"</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+      <span class="token builtin class-name">echo</span> <span class="token string">'kafka log catalogue exists'</span>
+    <span class="token keyword">else</span>
+      <span class="token function">mkdir</span> /root/kafka/log
+      <span class="token builtin class-name">echo</span> <span class="token string">'create kafka log catalogue success'</span>
+    <span class="token keyword">fi</span>
+    <span class="token comment">#  create kafka pid catalogue</span>
+    <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token parameter variable">-d</span> <span class="token string">'/root/kafka/pid'</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+      <span class="token builtin class-name">echo</span> <span class="token string">'kafka pid catalogue exists'</span>
+    <span class="token keyword">else</span>
+      <span class="token function">mkdir</span> /root/kafka/pid
+      <span class="token builtin class-name">echo</span> <span class="token string">'create kafka pid catalogue success'</span>
+    <span class="token keyword">fi</span>
+    <span class="token comment"># creare kafka zk log file </span>
+    <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token parameter variable">-f</span> <span class="token string">'/root/kafka/log/zk.log'</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+      <span class="token builtin class-name">echo</span> <span class="token string">'kafka zk log file already exists'</span>
+    <span class="token keyword">else</span> 
+      <span class="token function">touch</span> /root/kafka/log/zk.log
+      <span class="token builtin class-name">echo</span> <span class="token string">'create kafka zk log file success'</span>
+    <span class="token keyword">fi</span>
+    <span class="token comment"># create zk pid file </span>
+    <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token parameter variable">-f</span> <span class="token string">'/root/kafka/pid/zk-pid'</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+      <span class="token builtin class-name">echo</span> <span class="token string">'kafka zk pid file already exists'</span>
+    <span class="token keyword">else</span>
+      <span class="token function">touch</span> /root/kafka/pid/zk-pid
+      <span class="token builtin class-name">echo</span> <span class="token string">'create kafka zk pid file success'</span>
+    <span class="token keyword">fi</span>
+
+    <span class="token function">nohup</span>  /opt/kafka_2.13-3.3.1/bin/zookeeper-server-start.sh /opt/kafka_2.13-3.3.1/config/zookeeper.properties <span class="token operator">></span> /root/kafka/log/zk.log <span class="token operator"><span class="token file-descriptor important">2</span>></span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span>
+    <span class="token builtin class-name">echo</span> <span class="token variable">$!</span>
+    <span class="token builtin class-name">echo</span> <span class="token variable">$!</span> <span class="token operator">></span> /root/kafka/pid/zk-pid
+    <span class="token builtin class-name">echo</span> <span class="token string">'loading 1 minute ......'</span> 
+    <span class="token function">sleep</span> 1m
+
+    <span class="token comment"># create kafka server log file</span>
+    <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token parameter variable">-f</span> <span class="token string">'/root/kafka/log/kafka.log'</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+      <span class="token builtin class-name">echo</span> <span class="token string">'kafka server log file exists'</span>
+    <span class="token keyword">else</span> 
+      <span class="token function">touch</span> /root/kafka/log/kafka.log
+      <span class="token builtin class-name">echo</span> <span class="token string">'create kafka server log file success'</span>
+    <span class="token keyword">fi</span>
+    <span class="token comment"># create kafka pid pid file</span>
+    <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token parameter variable">-f</span> <span class="token string">'/root/kafka/pid/kafka-pid'</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+      <span class="token builtin class-name">echo</span> <span class="token string">'kafka server pid file exists'</span>
+    <span class="token keyword">else</span>
+      <span class="token function">touch</span> /root/kafka/pid/kafka-pid
+      <span class="token builtin class-name">echo</span> <span class="token string">'create kafka server pid file success'</span>
+    <span class="token keyword">fi</span>
+
+    <span class="token builtin class-name">export</span> <span class="token assign-left variable">JMX_PORT</span><span class="token operator">=</span><span class="token number">9999</span>
+
+    <span class="token function">nohup</span> /opt/kafka_2.13-3.3.1/bin/kafka-server-start.sh /opt/kafka_2.13-3.3.1/config/server.properties <span class="token operator">></span> /root/kafka/log/kafka.log <span class="token operator"><span class="token file-descriptor important">2</span>></span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span>
+    <span class="token builtin class-name">echo</span> <span class="token variable">$!</span>
+    <span class="token builtin class-name">echo</span> <span class="token variable">$!</span> <span class="token operator">></span> /root/kafka/pid/kafka-pid
+
+
+    <span class="token comment"># create kafka-manager cmak log file</span>
+      <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token parameter variable">-f</span> <span class="token string">'/root/kafka/log/cmak.log'</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+        <span class="token builtin class-name">echo</span> <span class="token string">'kafka manager cmak log file exists'</span>
+      <span class="token keyword">else</span>
+        <span class="token function">touch</span> /root/kafka/log/cmak.log
+        <span class="token builtin class-name">echo</span> <span class="token string">'create kafka manager cmak log file success'</span>
+      <span class="token keyword">fi</span>
+    <span class="token comment"># create kafka-manager cmak pid file</span>
+     <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token parameter variable">-f</span> <span class="token string">'/root/kafka/pid/cmak-pid'</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+       <span class="token builtin class-name">echo</span> <span class="token string">'kafka manager cmak pid file exists'</span>
+     <span class="token keyword">else</span> 
+       <span class="token function">touch</span> /root/kafka/pid/cmak-pid
+       <span class="token builtin class-name">echo</span> <span class="token string">'create kafka manager cmak pid file success'</span>
+     <span class="token keyword">fi</span>
+
+    <span class="token function">nohup</span> <span class="token function">bash</span> /opt/cmak-3.0.0.6/bin/cmak <span class="token operator">></span> /root/kafka/log/cmak.log <span class="token operator"><span class="token file-descriptor important">2</span>></span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span>
+    <span class="token builtin class-name">echo</span> <span class="token variable">$!</span>
+    <span class="token builtin class-name">echo</span> <span class="token variable">$!</span> <span class="token operator">></span> /root/kafka/pid/cmak-pid
+
+    <span class="token builtin class-name">echo</span> <span class="token string">'loading 1 minute ......'</span>
+    <span class="token function">sleep</span> 1m
+    <span class="token builtin class-name">echo</span> <span class="token string">'all server start success'</span>
+  <span class="token punctuation">;</span><span class="token punctuation">;</span>
+
+  <span class="token string">'stop'</span><span class="token punctuation">)</span>
+    <span class="token assign-left variable">zk_pid</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">cat</span> /root/kafka/pid/zk-pid<span class="token variable">)</span></span>
+    <span class="token function">kill</span> <span class="token parameter variable">-9</span> <span class="token variable">$zk_pid</span>
+    <span class="token builtin class-name">echo</span> <span class="token string">'kill zookeeper server success'</span>
+
+    <span class="token assign-left variable">kafka_pid</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">cat</span> /root/kafka/pid/kafka-pid<span class="token variable">)</span></span>
+    <span class="token function">kill</span> <span class="token parameter variable">-9</span> <span class="token variable">$kafka_pid</span>
+    <span class="token builtin class-name">echo</span> <span class="token string">'kill kafka server success'</span>
+
+    <span class="token assign-left variable">cmak_pid</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">cat</span> /root/kafka/pid/cmak-pid<span class="token variable">)</span></span>
+    <span class="token function">kill</span> <span class="token parameter variable">-9</span> <span class="token variable">$cmak_pid</span>
+    <span class="token builtin class-name">echo</span> <span class="token string">'kill kafka manager cmak success'</span>     
+    <span class="token function">rm</span> <span class="token parameter variable">-rf</span> /opt/cmak-3.0.0.6/RUNNING_PID
+  <span class="token punctuation">;</span><span class="token punctuation">;</span>
+
+  *<span class="token punctuation">)</span>
+    <span class="token builtin class-name">echo</span> <span class="token string">'option error'</span>
+  <span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span class="token keyword">esac</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/06/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/Kafka%E5%AE%89%E8%A3%85/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/RocketMQ%E4%B8%8ESystemd/">
+        <h2 class="post-title">RocketMQ与Systemd</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                中间件
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="RocketMQ与Systemd"><a href="#RocketMQ与Systemd" class="headerlink" title="RocketMQ与Systemd"></a>RocketMQ与Systemd</h1><p>RocketMQ的安装比较简单，只需要提供了JAVA_HOME环境，之后运行对于的脚本即可，所以这里主要介绍的RocketMQ与Systemd的配置，结合Shell脚本，一次性的启用namsesrv和borker以及web管理工具<code>rocketmq-dashboard</code></p>
+<h2 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h2><p>Java: openjdk-11</p>
+<p>RocketMQ: <code>rocketmq-all-5.0.0-bin-release.zip</code><a target="_blank" rel="noopener" href="https://www.apache.org/dyn/closer.cgi?path=rocketmq/5.0.0/rocketmq-all-5.0.0-bin-release.zip">下载</a></p>
+<p>RocketMQ Dashboard: <code>rocketmq-dashboard-rocketmq-dashboard-1.0.0.tar.gz</code> <a target="_blank" rel="noopener" href="https://github.com/apache/rocketmq-dashboard">源码地址,该项目需要自己编译成jar包</a></p>
+<p>在下载了RocketMQ的二进制包之后，解压到指定位置，而后配置对于的<code>namesrv</code>和<code>borker</code>服务，systemd的服务配置在<code>/usr/lib/systemd/system/</code>或者<code>/etc/systemd/system/</code>目录下</p>
+<p>rmq_namesrv.service</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>Unit<span class="token punctuation">]</span>
+<span class="token assign-left variable">Description</span><span class="token operator">=</span>rocketmq namesrv
+<span class="token assign-left variable">After</span><span class="token operator">=</span>network.target
+
+<span class="token punctuation">[</span>Service<span class="token punctuation">]</span>
+<span class="token assign-left variable">Type</span><span class="token operator">=</span>simple
+<span class="token assign-left variable">ExecStart</span><span class="token operator">=</span>/opt/rocketmq-all-5.0.0-bin-release/bin/mqnamesrv
+<span class="token assign-left variable">ExecReload</span><span class="token operator">=</span>/bin/kill <span class="token parameter variable">-s</span> HUP <span class="token variable">$MAINPID</span>
+<span class="token assign-left variable">ExecStop</span><span class="token operator">=</span>//opt/rocketmq-all-5.0.0-bin-release/bin/mqshutdown namesrv
+
+<span class="token punctuation">[</span>Install<span class="token punctuation">]</span>
+<span class="token assign-left variable">WantedBy</span><span class="token operator">=</span>mulitiple-rmq-namesrv.target<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>rmq_borker.service</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>Unit<span class="token punctuation">]</span>
+<span class="token assign-left variable">Description</span><span class="token operator">=</span>rocketmq broker
+<span class="token assign-left variable">After</span><span class="token operator">=</span>network.target
+
+<span class="token punctuation">[</span>Service<span class="token punctuation">]</span>
+<span class="token assign-left variable">Type</span><span class="token operator">=</span>simple
+<span class="token assign-left variable">ExecStart</span><span class="token operator">=</span>/opt/rocketmq-all-5.0.0-bin-release/bin/mqbroker <span class="token parameter variable">-n</span> localhost:9876 --enable-proxy
+<span class="token assign-left variable">ExecReload</span><span class="token operator">=</span>/bin/kill <span class="token parameter variable">-s</span> HUP <span class="token variable">$MAINPID</span>
+<span class="token assign-left variable">ExecStop</span><span class="token operator">=</span>/opt/rocketmq-all-5.0.0-bin-release/bin/mqshutdown broker
+
+<span class="token punctuation">[</span>Install<span class="token punctuation">]</span>
+<span class="token assign-left variable">WantedBy</span><span class="token operator">=</span>multiple-rmq-broker.target<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>在配置了这两个服务之后，即可通过systemctl start&#x2F;stop&#x2F;restart来执行服务了，由于每次都需要启动<code>namesrv</code>和<code>borker</code>服务还有web管理工具过于麻烦，所以引入<code>shell</code>脚本进行处理</p>
+<p>rocketmq.shell</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token assign-left variable">instruct</span><span class="token operator">=</span><span class="token variable">$1</span>
+
+<span class="token builtin class-name">echo</span> <span class="token variable">$instruct</span>
+
+<span class="token keyword">case</span> <span class="token variable">$instruct</span> <span class="token keyword">in</span>
+ <span class="token string">'start'</span><span class="token punctuation">)</span>
+   systemctl start rmq_namesrv
+   systemctl start rmq_borker
+   <span class="token builtin class-name">export</span> <span class="token assign-left variable">NAMSESRV_ADDR</span><span class="token operator">=</span>localhost:9876
+   <span class="token function">nohup</span> <span class="token function">java</span> <span class="token parameter variable">-jar</span> /opt/rocketmq-dashboard-rocketmq-dashboard-1.0.0/target/rocketmq-dashboard-1.0.0.jar <span class="token operator">></span> /root/rocketmq-dashboard.log <span class="token operator">&amp;</span>
+   <span class="token builtin class-name">echo</span> <span class="token variable">$!</span> <span class="token operator">></span> /root/rmq-d-pid
+   <span class="token builtin class-name">echo</span> <span class="token string">"RocketMQ Start SUCCESS PID: "</span> + <span class="token variable">$!</span>
+ <span class="token punctuation">;</span><span class="token punctuation">;</span>
+
+ <span class="token string">'stop'</span><span class="token punctuation">)</span>
+   systemctl stop rmq_namesrv
+   systemctl stop rmq_borker
+   <span class="token assign-left variable">PID</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">cat</span> /root/rmq-d-pid<span class="token variable">)</span></span>
+   <span class="token function">kill</span> <span class="token parameter variable">-9</span> <span class="token variable">$&#123;PID&#125;</span>
+   <span class="token builtin class-name">echo</span> <span class="token string">"RocketMQ Stop SUCCESS"</span>
+ <span class="token punctuation">;</span><span class="token punctuation">;</span>
+
+ *<span class="token punctuation">)</span>
+   <span class="token builtin class-name">echo</span> <span class="token string">"Input instruct error"</span>
+ <span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span class="token keyword">esac</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>可以通过执行该shell脚本对RocketMQ进行启动和关闭</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/06/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/RocketMQ%E4%B8%8ESystemd/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/RocketMQ%E5%85%B3%E7%B3%BB%E6%A2%B3%E7%90%86/">
+        <h2 class="post-title">RocketMQ关系梳理</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                中间件
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="RocketMQ关系梳理"><a href="#RocketMQ关系梳理" class="headerlink" title="RocketMQ关系梳理"></a>RocketMQ关系梳理</h1><p>对于RocketMQ的生产者、消息、消费者、消费者分组、主题、队列、订阅关系的梳理</p>
+<p>主题: 主题是订阅的首要关系，不管是生产者还是消费者都是和主题进行关联订阅，而主题内是由队列组成，队列拥有读、写等权限控制，主题通过队列进行横向扩展，来提要主题的性能，主题是存储消息的实际。</p>
+<p>消息: 消息是队列内信息流通的最小粒子，消息本身拥有一定的特性，如延迟消息等。</p>
+<p>生产者: 生产者通过向指定的主题发送消息完成生产任务，更多理解暂时没有</p>
+<p>消费者: 消费者必定需要提起续费这分组，因为消费者与主题之间的订阅关系是由消费者分组完成的，换句话说，消费者与主题没有直接关系，与主题有直接关系的是消费者组，消费者组通过订阅关系与主题构建关联，而消费者属于消费者组，那么在消费者组得到消息之后，通过进一步的消息订阅关系分发给组下面的消费者，需要注意的是，在同一个消费者分组下的消费者，其订阅关系必须保持一致性，如果多个消费者分组订阅同一个主题，那么这个主题的消息会分发给所有的消费者分组。</p>
+<p><img src="https://rocketmq.apache.org/zh/assets/images/archiforproducer-ebb8ff832f6e857cbebc2c17c2044a3b.png" alt="alt"></p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/06/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/RocketMQ%E5%85%B3%E7%B3%BB%E6%A2%B3%E7%90%86/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/Zookeeper%E5%8D%95%E6%9C%BA%E9%83%A8%E7%BD%B2/">
+        <h2 class="post-title">Zookeeper单机部署</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                中间件
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <hr>
+<h2 id="title-Zookeeper单机部署date-2022-10-10-13-59-49-654updated-2022-10-13-14-44-16-087url-x2F-archives-x2F-zookeeper-dan-ji-bu-shucategories-Zookeepertags-Zookeeper"><a href="#title-Zookeeper单机部署date-2022-10-10-13-59-49-654updated-2022-10-13-14-44-16-087url-x2F-archives-x2F-zookeeper-dan-ji-bu-shucategories-Zookeepertags-Zookeeper" class="headerlink" title="title: Zookeeper单机部署date: 2022-10-10 13:59:49.654updated: 2022-10-13 14:44:16.087url: &#x2F;archives&#x2F;zookeeper-dan-ji-bu-shucategories:- Zookeepertags:- Zookeeper"></a>title: Zookeeper单机部署<br>date: 2022-10-10 13:59:49.654<br>updated: 2022-10-13 14:44:16.087<br>url: &#x2F;archives&#x2F;zookeeper-dan-ji-bu-shu<br>categories:<br>- Zookeeper<br>tags:<br>- Zookeeper</h2><h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><blockquote>
+<p>CentOS7、openJdk11</p>
+</blockquote>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><ol>
+<li>首先使用<code>wget</code>下载zk的二进制包 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">    <span class="token function">wget</span> https://dlcdn.apache.org/zookeeper/zookeeper-3.8.0/apache-zookeeper-3.8.0-bin.tar.gz
+    ```<span class="token variable"><span class="token variable">`</span>
+<span class="token number">2</span>. 解压出到opt目录下
+   <span class="token variable">`</span></span>``shell
+   <span class="token function">tar</span> <span class="token parameter variable">-zxvf</span> apache-zookeeper-3.8.0-bin.tar.gz <span class="token parameter variable">-O</span> /opt<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li>配置systemd服务管理<br> 在&#x2F;etc&#x2F;systemd&#x2F;system目录下创建zkServer.service文件<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>Unit<span class="token punctuation">]</span>
+<span class="token assign-left variable">Description</span><span class="token operator">=</span>zkServer
+
+<span class="token punctuation">[</span>Service<span class="token punctuation">]</span>
+<span class="token assign-left variable">Type</span><span class="token operator">=</span>forking
+<span class="token comment">#PIDFile=/var/run/zkServer_2181.pid</span>
+<span class="token assign-left variable">ExecStart</span><span class="token operator">=</span>/opt/apache-zookeeper-3.8.0-bin/bin/zkServer.sh start
+<span class="token assign-left variable">ExecStartPost</span><span class="token operator">=</span>/bin/sleep <span class="token number">0.1</span>
+<span class="token assign-left variable">ExecReload</span><span class="token operator">=</span>/bin/kill <span class="token parameter variable">-s</span> HUP <span class="token variable">$MAINPID</span>
+<span class="token assign-left variable">ExecStop</span><span class="token operator">=</span>/opt/apache-zookeeper-3.8.0-bin/bin/zkServer.sh stop
+<span class="token assign-left variable">PrivateTmp</span><span class="token operator">=</span>true
+
+<span class="token punctuation">[</span>Install<span class="token punctuation">]</span>
+<span class="token assign-left variable">WantedBy</span><span class="token operator">=</span>multi-user.target<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-commands.html">含义参考</a></li>
+<li>使用systemd启用服务即可 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 启用</span>
+systemctl start zkServer
+<span class="token comment"># 停止</span>
+systemctl stop zkServer
+<span class="token comment"># 重启</span>
+systemctl restart zkServer<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ol>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/06/07/%E4%B8%AD%E9%97%B4%E4%BB%B6/Zookeeper%E5%8D%95%E6%9C%BA%E9%83%A8%E7%BD%B2/" class="go-post">阅读全文</a>
 </div>
 
 <div class="post">
@@ -382,18 +864,18 @@
 <li>limit：在写模式下，Buffer的limit表示你最多能往Buffer里写多少数据。 写模式下，limit等于Buffer的capacity。当切换Buffer到读模式时， limit表示你最多能读到多少数据。因此，当切换Buffer到读模式时，limit会被设置成写模式下的position值。换句话说，你能读到之前写入的所有数据（limit被设置成已写数据的数量，这个值在写模式下就是position）</li>
 </ul>
 <h4 id="Buffer的分配："><a href="#Buffer的分配：" class="headerlink" title="Buffer的分配："></a>Buffer的分配：</h4><p>对Buffer对象的操作必须首先进行分配，Buffer提供一个allocate(int capacity)方法分配一个指定字节大小的对象。<br> 向Buffer中写数据：写数据到Buffer中有两种方式：<br> 1.从channel写到Buffer</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> bytes = channel.<span class="built_in">read</span>(buf); <span class="comment">//将channel中的数据读取到buf中</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> bytes <span class="token operator">=</span> channel<span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span>buf<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//将channel中的数据读取到buf中</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>2.通过Buffer的put()方法写到Buffer</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">buf.put(<span class="built_in">byte</span>); <span class="comment">//将数据通过put()方法写入到buf中</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-csharp" data-language="csharp"><code class="language-csharp">buf<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token keyword">byte</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//将数据通过put()方法写入到buf中</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <ul>
 <li>flip()方法：将Buffer从写模式切换到读模式，调用flip()方法会将position设置为0，并将limit设置为之前的position的值。<br> 从Buffer中读数据：从Buffer中读数据有两种方式：<br> 1.从Buffer读取数据到Channel</li>
 </ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> bytes = channel.<span class="built_in">write</span>(buf); <span class="comment">//将buf中的数据读取到channel中</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> bytes <span class="token operator">=</span> channel<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span>buf<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//将buf中的数据读取到channel中</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>2.通过Buffer的get()方法读取数据</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">byte</span> bt = buf.<span class="keyword">get</span>(); <span class="comment">//从buf中读取一个byte</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-csharp" data-language="csharp"><code class="language-csharp"><span class="token class-name"><span class="token keyword">byte</span></span> bt <span class="token operator">=</span> buf<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//从buf中读取一个byte</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <ul>
 <li>rewind()方法：Buffer.rewind()方法将position设置为0，使得可以重读Buffer中的所有数据，limit保持不变。</li>
@@ -449,7 +931,7 @@
             <h1 id="JAR后台运行"><a href="#JAR后台运行" class="headerlink" title="JAR后台运行"></a>JAR后台运行</h1><p>保存后台运行，且把日志信息打印输出到指定的文件中</p>
 <p>jar name：jar包的名字</p>
 <p>log file：完整的日志文件路径，包括日志文件</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar &#x27;jar name&#x27; &gt; &#x27;log file&#x27; &amp;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">nohup</span> <span class="token function">java</span> <span class="token parameter variable">-jar</span> <span class="token string">'jar name'</span> <span class="token operator">></span> <span class="token string">'log file'</span> <span class="token operator">&amp;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 
             
@@ -489,7 +971,81 @@
     <div class="description">
         <div class="content" v-pre>
             
-            <h1 id="JavaScript获取视频流且回显"><a href="#JavaScript获取视频流且回显" class="headerlink" title="JavaScript获取视频流且回显"></a>JavaScript获取视频流且回显</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line">		<span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">video</span> <span class="attr">id</span>=<span class="string">&quot;video&quot;</span> <span class="attr">width</span>=<span class="string">&quot;640&quot;</span> <span class="attr">height</span>=<span class="string">&quot;480&quot;</span> <span class="attr">autoplay</span>=<span class="string">&quot;autoplay&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;snap&quot;</span>&gt;</span>截取图像<span class="tag">&lt;/<span class="name">button</span>&gt;</span><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;start&quot;</span>&gt;</span>开始录制<span class="tag">&lt;/<span class="name">button</span>&gt;</span><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;stop&quot;</span>&gt;</span>停止录制<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">&quot;canvas&quot;</span> <span class="attr">width</span>=<span class="string">&quot;640&quot;</span> <span class="attr">height</span>=<span class="string">&quot;480&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">		<span class="keyword">let</span> videoView = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;video&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">		<span class="keyword">let</span> buttonView = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;snap&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">		<span class="keyword">let</span> startButton = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;start&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">		<span class="keyword">let</span> stopButton = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;stop&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">		<span class="keyword">let</span> canvasView = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;canvas&quot;</span>);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">		navigator.<span class="property">mediaDevices</span>.<span class="title function_">getDisplayMedia</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">			<span class="attr">video</span>: &#123;</span></span><br><span class="line"><span class="language-javascript">				<span class="attr">width</span>: <span class="number">640</span>,</span></span><br><span class="line"><span class="language-javascript">				<span class="attr">height</span>: <span class="number">480</span></span></span><br><span class="line"><span class="language-javascript">			&#125;,</span></span><br><span class="line"><span class="language-javascript">			<span class="attr">audio</span>: <span class="literal">true</span></span></span><br><span class="line"><span class="language-javascript">		&#125;).<span class="title function_">then</span>(<span class="function"><span class="params">stream</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">			<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;摄像头打开成功！！！&quot;</span>, stream);</span></span><br><span class="line"><span class="language-javascript">			<span class="comment">//以ID为基准,video控件的ID是什么此处的video就是什么</span></span></span><br><span class="line"><span class="language-javascript">			video.<span class="property">srcObject</span> = stream;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">			<span class="comment">// 创建下载对象</span></span></span><br><span class="line"><span class="language-javascript">			<span class="keyword">let</span> mediaRecorder = <span class="keyword">new</span> <span class="title class_">MediaRecorder</span>(stream, &#123;</span></span><br><span class="line"><span class="language-javascript">				<span class="attr">audioBitsPerSecond</span>: <span class="number">128000</span>, <span class="comment">// 音频码率</span></span></span><br><span class="line"><span class="language-javascript">				<span class="attr">videoBitsPerSecond</span>: <span class="number">100000</span>, <span class="comment">// 视频码率</span></span></span><br><span class="line"><span class="language-javascript">				<span class="attr">mimeType</span>: <span class="string">&#x27;video/webm;codecs=h264&#x27;</span> <span class="comment">// 编码格式</span></span></span><br><span class="line"><span class="language-javascript">			&#125;);</span></span><br><span class="line"><span class="language-javascript">			startButton.<span class="property">onclick</span> = (<span class="function"><span class="params">e</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">				<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;触发下载按钮！！！&quot;</span>, e)</span></span><br><span class="line"><span class="language-javascript">				mediaRecorder.<span class="title function_">start</span>(<span class="number">5000</span>);</span></span><br><span class="line"><span class="language-javascript">			&#125;);</span></span><br><span class="line"><span class="language-javascript">			stopButton.<span class="property">onclick</span> = (<span class="function"><span class="params">e</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">				<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;触发结束按钮！！！&quot;</span>, e)</span></span><br><span class="line"><span class="language-javascript">				mediaRecorder.<span class="title function_">stop</span>();</span></span><br><span class="line"><span class="language-javascript">			&#125;);</span></span><br><span class="line"><span class="language-javascript">			mediaRecorder.<span class="property">ondataavailable</span> = (<span class="function"><span class="params">e</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">				<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;开始下载&quot;</span>)</span></span><br><span class="line"><span class="language-javascript">			    <span class="comment">// 下载视频</span></span></span><br><span class="line"><span class="language-javascript">			    <span class="keyword">var</span> blob = <span class="keyword">new</span> <span class="title class_">Blob</span>([e.<span class="property">data</span>], &#123; <span class="string">&#x27;type&#x27;</span> : <span class="string">&#x27;video/mp4&#x27;</span> &#125;)</span></span><br><span class="line"><span class="language-javascript">			    <span class="keyword">let</span> a = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;a&#x27;</span>)</span></span><br><span class="line"><span class="language-javascript">			    a.<span class="property">href</span> = <span class="variable constant_">URL</span>.<span class="title function_">createObjectURL</span>(blob)</span></span><br><span class="line"><span class="language-javascript">			    a.<span class="property">download</span> = <span class="string">`test.mp4`</span></span></span><br><span class="line"><span class="language-javascript">			    a.<span class="title function_">click</span>()</span></span><br><span class="line"><span class="language-javascript">			&#125;);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">			<span class="comment">//监听流录入失败</span></span></span><br><span class="line"><span class="language-javascript">			video.<span class="property">onerror</span> = (<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">				<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;加载错误！！！&quot;</span>, err);</span></span><br><span class="line"><span class="language-javascript">			&#125;);</span></span><br><span class="line"><span class="language-javascript">			<span class="comment">//监听流录入成功</span></span></span><br><span class="line"><span class="language-javascript">			video.<span class="property">onloadeddata</span> = (<span class="function"><span class="params">e</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">				<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;加载成功！！！&quot;</span>, e);</span></span><br><span class="line"><span class="language-javascript">			&#125;);</span></span><br><span class="line"><span class="language-javascript">		&#125;).<span class="title function_">catch</span>(<span class="function"><span class="params">stream</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">			<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;摄像头打开失败！！！&quot;</span>, stream);</span></span><br><span class="line"><span class="language-javascript">		&#125;);</span></span><br><span class="line"><span class="language-javascript">		<span class="comment">//给button按钮设置一个点击事件监听</span></span></span><br><span class="line"><span class="language-javascript">		buttonView.<span class="property">onclick</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">			<span class="comment">//获取画布的2d上下文，然后把视频内的一帧绘制到画布上</span></span></span><br><span class="line"><span class="language-javascript">			canvasView.<span class="title function_">getContext</span>(<span class="string">&quot;2d&quot;</span>).<span class="title function_">drawImage</span>(videoView, <span class="number">0</span>, <span class="number">0</span>, <span class="number">640</span>, <span class="number">480</span>)</span></span><br><span class="line"><span class="language-javascript">		&#125;</span></span><br><span class="line"><span class="language-javascript">	</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+            <h1 id="JavaScript获取视频流且回显"><a href="#JavaScript获取视频流且回显" class="headerlink" title="JavaScript获取视频流且回显"></a>JavaScript获取视频流且回显</h1><pre class="line-numbers language-HTML" data-language="HTML"><code class="language-HTML">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+	&lt;head&gt;
+		&lt;style&gt;
+
+		&lt;&#x2F;style&gt;
+	&lt;&#x2F;head&gt;
+	&lt;body&gt;
+		&lt;video id&#x3D;&quot;video&quot; width&#x3D;&quot;640&quot; height&#x3D;&quot;480&quot; autoplay&#x3D;&quot;autoplay&quot;&gt;&lt;&#x2F;video&gt;
+		&lt;br&#x2F;&gt;
+		&lt;button id&#x3D;&quot;snap&quot;&gt;截取图像&lt;&#x2F;button&gt;&lt;button id&#x3D;&quot;start&quot;&gt;开始录制&lt;&#x2F;button&gt;&lt;button id&#x3D;&quot;stop&quot;&gt;停止录制&lt;&#x2F;button&gt;
+		&lt;br&#x2F;&gt;
+		&lt;canvas id&#x3D;&quot;canvas&quot; width&#x3D;&quot;640&quot; height&#x3D;&quot;480&quot;&gt;&lt;&#x2F;canvas&gt;
+	&lt;&#x2F;body&gt;
+	&lt;script type&#x3D;&quot;text&#x2F;javascript&quot;&gt;
+		let videoView &#x3D; document.getElementById(&quot;video&quot;);
+		let buttonView &#x3D; document.getElementById(&quot;snap&quot;);
+		let startButton &#x3D; document.getElementById(&quot;start&quot;);
+		let stopButton &#x3D; document.getElementById(&quot;stop&quot;);
+		let canvasView &#x3D; document.getElementById(&quot;canvas&quot;);
+
+		navigator.mediaDevices.getDisplayMedia(&#123;
+			video: &#123;
+				width: 640,
+				height: 480
+			&#125;,
+			audio: true
+		&#125;).then(stream &#x3D;&gt; &#123;
+			console.log(&quot;摄像头打开成功！！！&quot;, stream);
+			&#x2F;&#x2F;以ID为基准,video控件的ID是什么此处的video就是什么
+			video.srcObject &#x3D; stream;
+
+			&#x2F;&#x2F; 创建下载对象
+			let mediaRecorder &#x3D; new MediaRecorder(stream, &#123;
+				audioBitsPerSecond: 128000, &#x2F;&#x2F; 音频码率
+				videoBitsPerSecond: 100000, &#x2F;&#x2F; 视频码率
+				mimeType: &#39;video&#x2F;webm;codecs&#x3D;h264&#39; &#x2F;&#x2F; 编码格式
+			&#125;);
+			startButton.onclick &#x3D; (e &#x3D;&gt; &#123;
+				console.log(&quot;触发下载按钮！！！&quot;, e)
+				mediaRecorder.start(5000);
+			&#125;);
+			stopButton.onclick &#x3D; (e &#x3D;&gt; &#123;
+				console.log(&quot;触发结束按钮！！！&quot;, e)
+				mediaRecorder.stop();
+			&#125;);
+			mediaRecorder.ondataavailable &#x3D; (e &#x3D;&gt; &#123;
+				console.log(&quot;开始下载&quot;)
+			    &#x2F;&#x2F; 下载视频
+			    var blob &#x3D; new Blob([e.data], &#123; &#39;type&#39; : &#39;video&#x2F;mp4&#39; &#125;)
+			    let a &#x3D; document.createElement(&#39;a&#39;)
+			    a.href &#x3D; URL.createObjectURL(blob)
+			    a.download &#x3D; &#96;test.mp4&#96;
+			    a.click()
+			&#125;);
+
+			&#x2F;&#x2F;监听流录入失败
+			video.onerror &#x3D; (err &#x3D;&gt; &#123;
+				console.log(&quot;加载错误！！！&quot;, err);
+			&#125;);
+			&#x2F;&#x2F;监听流录入成功
+			video.onloadeddata &#x3D; (e &#x3D;&gt; &#123;
+				console.log(&quot;加载成功！！！&quot;, e);
+			&#125;);
+		&#125;).catch(stream &#x3D;&gt; &#123;
+			console.log(&quot;摄像头打开失败！！！&quot;, stream);
+		&#125;);
+		&#x2F;&#x2F;给button按钮设置一个点击事件监听
+		buttonView.onclick &#x3D; function() &#123;
+			&#x2F;&#x2F;获取画布的2d上下文，然后把视频内的一帧绘制到画布上
+			canvasView.getContext(&quot;2d&quot;).drawImage(videoView, 0, 0, 640, 480)
+		&#125;
+	&lt;&#x2F;script&gt;
+&lt;&#x2F;html&gt;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
             
@@ -500,188 +1056,6 @@
         
     </div>
     <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/JavaScript%E8%8E%B7%E5%8F%96%E8%A7%86%E9%A2%91%E6%B5%81%E4%B8%94%E5%9B%9E%E6%98%BE/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E5%92%8C%E5%8F%8D%E5%B0%84%E5%AE%9E%E7%8E%B0%E5%AD%97%E6%AE%B5%E5%90%8D%E6%A0%88%E6%B7%B1%E5%AF%BB%E5%80%BC/">
-        <h2 class="post-title">Java动态代理和反射实现字段名栈深寻值</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/Java%E5%9F%BA%E7%A1%80/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Java基础
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="Java-动态代理与反射实现属性名称栈深寻值"><a href="#Java-动态代理与反射实现属性名称栈深寻值" class="headerlink" title="Java 动态代理与反射实现属性名称栈深寻值"></a>Java 动态代理与反射实现属性名称栈深寻值</h1><p>原因：对方法做动态代理，并且动态代理依赖方法形参的某些属性值，而属性值可能是对象的属性的属性，形成一个栈深寻找</p>
-<p>思路：</p>
-<ol>
-<li>使用Map对所有的形参进行名称和形参对象的映射</li>
-<li>把所指定的属性字符串按照指定规则切割载入队列</li>
-<li>利用队列出栈的特性，对第一个参数名称做map的 key value 值匹配，找到对应的参数对象</li>
-<li>对找到的参数对象做反射解析，利用递归做栈深的属性匹配和值查找</li>
-<li>在队列没有匹配字符串的时候，所拿到的值就是我们最终需要的值，直接强转为字符串类型</li>
-</ol>
-<p>代码</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 参数对象</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line">    <span class="keyword">private</span> String phone;</span><br><span class="line">    <span class="keyword">private</span> String birthday;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> User user;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">User</span><span class="params">(String username, String phone, User user)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.username = username;</span><br><span class="line">        <span class="built_in">this</span>.phone = phone;</span><br><span class="line">        <span class="built_in">this</span>.user = user;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">// 由于JDK的Proxy代理只能代理接口，所以需要创建一个接口</span></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">Ts</span> &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">a</span><span class="params">(User user)</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 执行信息体</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Test</span> <span class="keyword">implements</span> <span class="title class_">Ts</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">a</span><span class="params">(User user)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;主要信息执行&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 执行代码</span></span><br><span class="line"><span class="type">Test</span> <span class="variable">test</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Test</span>();</span><br><span class="line">HashMap&lt;String, Object&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;(<span class="number">10</span>);</span><br><span class="line">LinkedBlockingQueue&lt;String&gt; queue = <span class="keyword">new</span> <span class="title class_">LinkedBlockingQueue</span>&lt;&gt;(Arrays.asList(<span class="string">&quot;user.user.username&quot;</span>.split(<span class="string">&quot;\\.&quot;</span>)));</span><br><span class="line"></span><br><span class="line"><span class="type">Ts</span> <span class="variable">ts</span> <span class="operator">=</span> (Ts) Proxy.newProxyInstance(Thread.currentThread().getContextClassLoader(),</span><br><span class="line">            Test.class.getInterfaces(), (Object proxy, Method method, Object[] args1) -&gt; &#123;</span><br><span class="line">                <span class="comment">// 初始化map</span></span><br><span class="line">                Parameter[] parameters = method.getParameters();</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; parameters.length; i++) &#123;</span><br><span class="line">                    map.put(parameters[i].getName(), args1[i]);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 匹配参数对象</span></span><br><span class="line">                <span class="type">Object</span> <span class="variable">o</span> <span class="operator">=</span> map.get(queue.poll());</span><br><span class="line">                <span class="comment">// 递归寻值</span></span><br><span class="line">                <span class="keyword">while</span> (queue.size() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                    o = diGui(queue.poll(), o);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="type">String</span> <span class="variable">result</span> <span class="operator">=</span> (String) o;</span><br><span class="line">                System.out.println(<span class="string">&quot;lock&quot;</span> + result);</span><br><span class="line">                <span class="type">Object</span> <span class="variable">invoke</span> <span class="operator">=</span> method.invoke(test, args1);</span><br><span class="line">                System.out.println(<span class="string">&quot;unlock&quot;</span> + result);</span><br><span class="line">                map.clear();</span><br><span class="line">                queue.clear();</span><br><span class="line">                <span class="keyword">return</span> invoke;</span><br><span class="line">            &#125;);</span><br><span class="line">    ts.a(<span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">&quot;huang&quot;</span>, <span class="string">&quot;153&quot;</span>, <span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">&quot;Q202111222256489&quot;</span>, <span class="string">&quot;158&quot;</span>)));</span><br><span class="line">    </span><br><span class="line"><span class="comment">// 递归寻值</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> Object <span class="title function_">diGui</span><span class="params">(String fieldName, Object o)</span> <span class="keyword">throws</span> NoSuchFieldException, IllegalAccessException &#123;</span><br><span class="line">    <span class="type">Field</span> <span class="variable">field</span> <span class="operator">=</span> o.getClass().getDeclaredField(fieldName);</span><br><span class="line">    field.setAccessible(<span class="literal">true</span>);</span><br><span class="line">    <span class="keyword">return</span> field.get(o);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E5%92%8C%E5%8F%8D%E5%B0%84%E5%AE%9E%E7%8E%B0%E5%AD%97%E6%AE%B5%E5%90%8D%E6%A0%88%E6%B7%B1%E5%AF%BB%E5%80%BC/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E5%8F%8D%E5%B0%84%E5%AF%B9%E8%B1%A1%E5%86%85%E5%AE%B9/">
-        <h2 class="post-title">Java反射对象内容</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/Java%E5%9F%BA%E7%A1%80/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Java基础
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>调用方式</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">MonthlyCardOrderParam</span> <span class="variable">param</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MonthlyCardOrderParam</span>();</span><br><span class="line">        param.setRefundStatus(<span class="number">1</span>);</span><br><span class="line">        notNullCheck(param, NotNull.class, <span class="string">&quot;message&quot;</span>);</span><br><span class="line"></span><br><span class="line">        notNullCheck(param, NotNull.class, <span class="keyword">new</span> <span class="title class_">INotNullParamCheck</span>&lt;NotNull&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">check</span><span class="params">(String attributeName, Object attributeValue, NotNull annotation)</span> &#123;</span><br><span class="line">                System.out.println(attributeName+<span class="string">&quot;[&quot;</span>+attributeValue+<span class="string">&quot;] -&gt;&quot;</span>+annotation.message());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure>
-
-<hr>
-<p>方法一</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 判定某个对象的属性值是否为空，通过注解来判定</span></span><br><span class="line"><span class="comment">     * 主要用在非 Controller 上接受参数的时候</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> param 所要判定的对象</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> annotationClass 所要判定的注解</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> func 所执行注解方法的名称</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &lt;E&gt; 判定对象泛型</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &lt;T&gt; 注解方法泛型 Annotation 的实例</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IllegalAccessException 获取字段的异常</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> NoSuchMethodException 找不到方法异常</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> InvocationTargetException 反射执行方法异常</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;E,T <span class="keyword">extends</span> <span class="title class_">Annotation</span>&gt; <span class="keyword">void</span> <span class="title function_">notNullCheck</span> <span class="params">(E param, Class&lt;T&gt; annotationClass, String func)</span></span><br><span class="line">            <span class="keyword">throws</span> IllegalAccessException, NoSuchMethodException, InvocationTargetException &#123;</span><br><span class="line">        <span class="comment">// 获取 Field 对象：也就是对象的所有属性对象</span></span><br><span class="line">        Field[] fields = param.getClass().getDeclaredFields();</span><br><span class="line">        <span class="keyword">for</span> (Field field : fields) &#123;</span><br><span class="line">            <span class="comment">// 设置 private 属性可读</span></span><br><span class="line">            field.setAccessible(<span class="literal">true</span>);</span><br><span class="line">            <span class="comment">// 获取当前属性上的某个注解，并且做空值判断</span></span><br><span class="line">            <span class="type">T</span> <span class="variable">annotation</span> <span class="operator">=</span> field.getAnnotation(annotationClass);</span><br><span class="line">            <span class="keyword">if</span> (annotation!=<span class="literal">null</span>)&#123;</span><br><span class="line">                <span class="comment">// 获取当前属性的对应值</span></span><br><span class="line">                <span class="keyword">if</span> (field.get(param) == <span class="literal">null</span>)&#123;</span><br><span class="line">                    <span class="keyword">if</span> (func!=<span class="literal">null</span>)&#123;</span><br><span class="line">                        System.out.println(annotationClass.getMethod(func).invoke(annotation));</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>方法二</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 校验回调接口</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &lt;T&gt;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">interface</span> <span class="title class_">INotNullParamCheck</span>&lt;T&gt;&#123;</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 校验回调</span></span><br><span class="line"><span class="comment">         *</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@param</span> attributeName 属性名称</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@param</span> attributeValue 参数</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@param</span> annotation 注解对象</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="keyword">void</span> <span class="title function_">check</span><span class="params">(String attributeName,Object attributeValue,T annotation)</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 为空校验</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> param 校验对象</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> annotationClass 查询的接口 Class</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> notNullParamCheck 校验回调接口</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &lt;E&gt; 参数对象泛型</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> &lt;T&gt; 查询接口泛型</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IllegalAccessException 找不到属性异常</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;E, T <span class="keyword">extends</span> <span class="title class_">Annotation</span>&gt; <span class="keyword">void</span> <span class="title function_">notNullCheck</span><span class="params">(E param, Class&lt;T&gt; annotationClass,INotNullParamCheck&lt;T&gt; notNullParamCheck)</span></span><br><span class="line">            <span class="keyword">throws</span> IllegalAccessException &#123;</span><br><span class="line">        Field[] fields = param.getClass().getDeclaredFields();</span><br><span class="line">        <span class="keyword">for</span> (Field field : fields) &#123;</span><br><span class="line">            field.setAccessible(<span class="literal">true</span>);</span><br><span class="line">            <span class="type">T</span> <span class="variable">annotation</span> <span class="operator">=</span> field.getAnnotation(annotationClass);</span><br><span class="line">            <span class="type">Object</span> <span class="variable">item</span> <span class="operator">=</span> field.get(param);</span><br><span class="line">            <span class="keyword">if</span> (annotation!=<span class="literal">null</span>) &#123;</span><br><span class="line">                System.out.println(item);</span><br><span class="line">                notNullParamCheck.check(field.getName(),item,annotation);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E5%8F%8D%E5%B0%84%E5%AF%B9%E8%B1%A1%E5%86%85%E5%AE%B9/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E5%8F%8D%E5%B0%84%E6%A0%B9%E6%8D%AE%E6%96%B9%E6%B3%95%E5%90%8D%E8%8E%B7%E5%8F%96%E5%8F%82%E6%95%B0%E5%90%8D/">
-        <h2 class="post-title">Java反射根据方法名获取参数名</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/Java%E5%9F%BA%E7%A1%80/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Java基础
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="Java-反射-根据方法名获取参数名"><a href="#Java-反射-根据方法名获取参数名" class="headerlink" title="Java 反射 根据方法名获取参数名"></a>Java 反射 根据方法名获取参数名</h1><p>首先实现一个可序列化的Function集成接口</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">CustomFunction</span>&lt;T, R&gt; <span class="keyword">extends</span> <span class="title class_">Function</span>&lt;T, R&gt;, Serializable &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>再构建一个Student类，作为本次获取的测试Entity</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Student</span> <span class="keyword">implements</span> <span class="title class_">Serializable</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">long</span> <span class="variable">serialVersionUID</span> <span class="operator">=</span> -<span class="number">5681957118855943196L</span>;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">    <span class="keyword">private</span> String studentName;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Student</span><span class="params">(Integer age, String studentName)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">        <span class="built_in">this</span>.studentName = studentName;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setAge</span><span class="params">(Integer age)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setStudentName</span><span class="params">(String studentName)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.studentName = studentName;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> Integer <span class="title function_">getAge</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getStudentName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> studentName;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>使用反射获取当前方法的名称，然后切割出对应的属性名称，就是获取get的方法名称，再把get的切割，把第一个字母大写</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T, R&gt; String <span class="title function_">functionToProperStr</span><span class="params">(CustomFunction&lt;T, R&gt; function)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">    <span class="type">Method</span> <span class="variable">writeReplace</span> <span class="operator">=</span> function.getClass().getDeclaredMethod(<span class="string">&quot;writeReplace&quot;</span>);</span><br><span class="line">    <span class="type">boolean</span> <span class="variable">accessible</span> <span class="operator">=</span> writeReplace.isAccessible();</span><br><span class="line">    writeReplace.setAccessible(<span class="literal">true</span>);</span><br><span class="line">    <span class="type">SerializedLambda</span> <span class="variable">serializedLambda</span> <span class="operator">=</span> (SerializedLambda) writeReplace.invoke(function);</span><br><span class="line">    writeReplace.setAccessible(accessible);</span><br><span class="line">    <span class="type">String</span> <span class="variable">fieldName</span> <span class="operator">=</span> serializedLambda.getImplMethodName().substring(<span class="string">&quot;get&quot;</span>.length());</span><br><span class="line">    fieldName = fieldName.replaceFirst(String.valueOf(fieldName.charAt(<span class="number">0</span>)), String.valueOf(fieldName.charAt(<span class="number">0</span>)).toLowerCase());</span><br><span class="line">    <span class="keyword">return</span> fieldName;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E5%8F%8D%E5%B0%84%E6%A0%B9%E6%8D%AE%E6%96%B9%E6%B3%95%E5%90%8D%E8%8E%B7%E5%8F%96%E5%8F%82%E6%95%B0%E5%90%8D/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E7%9A%84ArrayList/">
-        <h2 class="post-title">Java的ArrayList</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/Java%E5%9F%BA%E7%A1%80/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Java基础
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="Collection中的List中的ArrayList"><a href="#Collection中的List中的ArrayList" class="headerlink" title="Collection中的List中的ArrayList"></a>Collection中的List中的ArrayList</h1><p><code>DEFAULT_CAPACITY = 10;</code>默认大小</p>
-<p>ArrayList的初始化操作为，如果你没有传入参数就是赋予一个默认的Object数组对象，然后在添加第一个元素的时候进行扩容，如果我们传入了创建大小的参数，那么会做大小判定，如果为0就赋予一个空的对象，也是一个Object数组，还有如果参数是Collection对象等等情况。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">grow</span><span class="params">(<span class="type">int</span> minCapacity)</span> &#123;</span><br><span class="line">        <span class="comment">// overflow-conscious code</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">oldCapacity</span> <span class="operator">=</span> elementData.length;</span><br><span class="line">        <span class="type">int</span> <span class="variable">newCapacity</span> <span class="operator">=</span> oldCapacity + (oldCapacity &gt;&gt; <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span> (newCapacity - minCapacity &lt; <span class="number">0</span>)</span><br><span class="line">            newCapacity = minCapacity;</span><br><span class="line">        <span class="keyword">if</span> (newCapacity - MAX_ARRAY_SIZE &gt; <span class="number">0</span>)</span><br><span class="line">            newCapacity = hugeCapacity(minCapacity);</span><br><span class="line">        <span class="comment">// minCapacity is usually close to size, so this is a win:</span></span><br><span class="line">        elementData = Arrays.copyOf(elementData, newCapacity);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>在这里有一行重要的代码即使<code>int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);</code>这里得到的新的容量大小为原大小的1.5倍，是因为使用了向右唯一了一个，相当于除以了2，也就是加上了0.5倍的大小</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Java%E7%9A%84ArrayList/" class="go-post">阅读全文</a>
 </div>
 
 

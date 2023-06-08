@@ -185,10 +185,49 @@
 <li>构造函数在类的构建时调用，析构函数在类的声明周期结束时调用</li>
 </ol>
 <p>Test.h文件</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifdef</span> _TEST_H_ </span></span><br><span class="line"><span class="meta">#defind _TEST_H_ </span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> sth</span><br><span class="line"><span class="keyword">namespace</span> test&#123;</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Test</span>&#123;</span><br><span class="line">        <span class="keyword">public</span>:</span><br><span class="line">            <span class="built_in">Test</span>()&#123;</span><br><span class="line">                <span class="keyword">this</span>.sex=<span class="number">0</span>;</span><br><span class="line">                <span class="keyword">this</span>.sex=<span class="number">0L</span>;</span><br><span class="line">            &#125; <span class="comment">//构造函数</span></span><br><span class="line">            ~<span class="built_in">Test</span>()&#123;&#125; <span class="comment">//析构函数</span></span><br><span class="line">        <span class="keyword">public</span>:</span><br><span class="line">            <span class="function"><span class="type">void</span> <span class="title">setSex</span><span class="params">(<span class="type">int</span> sex)</span></span>; <span class="comment">//公共方法</span></span><br><span class="line">            <span class="function"><span class="type">void</span> <span class="title">setPhone</span><span class="params">(<span class="type">long</span> phone)</span></span>; </span><br><span class="line">            <span class="function"><span class="type">int</span> <span class="title">getSex</span><span class="params">()</span></span>;</span><br><span class="line">            <span class="function"><span class="type">long</span> <span class="title">getPhone</span><span class="params">()</span></span>;</span><br><span class="line">        <span class="keyword">private</span>:</span><br><span class="line">            <span class="type">int</span> sex; <span class="comment">//私有属性</span></span><br><span class="line">            <span class="type">long</span> phone;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125; <span class="comment">//namespace</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">//_TEST_H_</span></span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#ifdef _TEST_H_ 
+#defind _TEST_H_ 
+
+#include &lt;iostream&gt;
+using namespace sth
+namespace test&#123;
+    class Test&#123;
+        public:
+            Test()&#123;
+                this.sex&#x3D;0;
+                this.sex&#x3D;0L;
+            &#125; &#x2F;&#x2F;构造函数
+            ~Test()&#123;&#125; &#x2F;&#x2F;析构函数
+        public:
+            void setSex(int sex); &#x2F;&#x2F;公共方法
+            void setPhone(long phone); 
+            int getSex();
+            long getPhone();
+        private:
+            int sex; &#x2F;&#x2F;私有属性
+            long phone;
+    &#125;;
+&#125; &#x2F;&#x2F;namespace
+#endif &#x2F;&#x2F;_TEST_H_<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>Test.cpp文件</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;Test.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> test&#123;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Test::setSex</span><span class="params">(<span class="type">int</span> s)</span></span>&#123;</span><br><span class="line">        sex = s;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Test::setPhone</span><span class="params">(<span class="type">long</span> p)</span></span>&#123;</span><br><span class="line">        phone = p;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">Test::getSex</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> sex;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">long</span> <span class="title">Test::getPhone</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> phone;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;iostream&gt;
+#include &quot;Test.h&quot;
+
+namespace test&#123;
+    void Test::setSex(int s)&#123;
+        sex &#x3D; s;
+    &#125;
+    void Test::setPhone(long p)&#123;
+        phone &#x3D; p;
+    &#125;
+    int Test::getSex()&#123;
+        return sex;
+    &#125;
+    long Test::getPhone()&#123;
+        return phone;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>名存空间</strong></p>
 <p><code>using namespace &#39;Name&#39;</code>：选择名存空间</p>

@@ -178,13 +178,20 @@
     
     <div class="content" v-pre>
         <h1 id="SpringBoot中MySQL链接超时"><a href="#SpringBoot中MySQL链接超时" class="headerlink" title="SpringBoot中MySQL链接超时"></a>SpringBoot中MySQL链接超时</h1><p>springboot项目启动开始可以访问数据库，但是几分钟之后就会报错 </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Failed</span> <span class="token keyword">to</span> <span class="token namespace">validate</span> connection <span class="token class-name"><span class="token namespace">com<span class="token punctuation">.</span>mysql<span class="token punctuation">.</span>cj<span class="token punctuation">.</span>jdbc<span class="token punctuation">.</span></span>ConnectionImpl</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>由于在使用SpringBoot连接数据库的时候，会建立一个和数据库的连接，这个连接保存在数据库连接池中，而现在这个连接已经Time Out已经不可用了，但是你的连接还是保存在连接池中，SpringBoot还是使用这个连接去连接数据库，所以造成警告信息  </p>
 <p>那么知道了原因，我们怎么解决这个问题呢，首先要知道我们可以设置连接在连接池中的存活时间，什么是连接的存活时间呢，简而言之就是你这个连接要保存在连接池中多长时间才被清除，如果你连接时间设置是五分钟，那么这个连接在三分钟的时候timeout了还是得再等两分钟才能被清除  </p>
 <p>那么问题就很明了，你的连接在三分钟的时候就已经和数据库断开了连接，但是你默认连接的存活时间是五分钟，所以导致你的springboot项目开始能访问数据库，一会之后就不能访问数据库了  </p>
 <p>解决方案<br>那么这样，假设说连接在三分钟的时候和数据库断开了连接，我们设置连接的存活时间是两分钟，连接就一直处于可用状态，当两分钟之后你再次访问数据库，就会new一个连接，这个连接在其生命周期内仍然是可用的  </p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">spring</span></span><br><span class="line">  <span class="string">datasource</span></span><br><span class="line">    <span class="attr">hikari:</span></span><br><span class="line">      <span class="attr">max-lifetime:</span> <span class="number">60000</span> <span class="comment">#最大存活时间</span></span><br><span class="line">      <span class="attr">idle-timeout:</span> <span class="number">60000</span> <span class="comment">#空闲连接时间</span></span><br><span class="line">      <span class="attr">connection-timeout:</span> <span class="number">50000</span> <span class="comment">#连接超时时间</span></span><br><span class="line">      <span class="attr">maximum-pool-size:</span> <span class="number">60</span> <span class="comment">#连接池最大数</span></span><br><span class="line">      <span class="attr">minimum-idle:</span> <span class="number">10</span> <span class="comment">#连接池最小数</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">spring
+  datasource
+    <span class="token key atrule">hikari</span><span class="token punctuation">:</span>
+      <span class="token key atrule">max-lifetime</span><span class="token punctuation">:</span> <span class="token number">60000</span> <span class="token comment">#最大存活时间</span>
+      <span class="token key atrule">idle-timeout</span><span class="token punctuation">:</span> <span class="token number">60000</span> <span class="token comment">#空闲连接时间</span>
+      <span class="token key atrule">connection-timeout</span><span class="token punctuation">:</span> <span class="token number">50000</span> <span class="token comment">#连接超时时间</span>
+      <span class="token key atrule">maximum-pool-size</span><span class="token punctuation">:</span> <span class="token number">60</span> <span class="token comment">#连接池最大数</span>
+      <span class="token key atrule">minimum-idle</span><span class="token punctuation">:</span> <span class="token number">10</span> <span class="token comment">#连接池最小数</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
     </div>
