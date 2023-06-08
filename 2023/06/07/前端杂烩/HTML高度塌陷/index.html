@@ -1,279 +1,32 @@
+extends includes/layout.pug
 
-<!DOCTYPE html>
-<html lang="zh-CN">
-    <head>
-        <meta charset="utf-8" />
-        <title>HTML高度塌陷 | 阿杰之家</title>
-        <meta name="author" content="ajiehome" />
-        <meta name="description" content="山有扶苏，隰有荷华" />
-        <meta name="keywords" content="ajiehome,阿杰之家" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-        <link rel="icon" href="https://static-argvchs.netlify.app/images/favicon.png" />
-        <script src="https://static-argvchs.netlify.app/libs/vue/3.2.47/vue.global.prod.min.js"></script>
-<link rel="preconnect" href="https://static-argvchs.netlify.app" crossorigin />
-<link rel="stylesheet" href="https://static-argvchs.netlify.app/libs/font-awesome/6.3.0/css/all.min.css" />
-<link rel="stylesheet" href="https://static-argvchs.netlify.app/css/fonts.min.css" />
-<script> const mixins = {}; </script>
+block content
+  #post
+    if top_img === false
+      include includes/header/post-info.pug
 
-<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-
-
-<script src="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/highlight.min.js"></script>
-<link
-    rel="stylesheet"
-    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/devibeans.min.css"
-/>
-<script src="/js/lib/highlight.js"></script>
-
-
-<script src="https://static-argvchs.netlify.app/libs/KaTeX/0.16.4/katex.min.js"></script>
-<script src="https://static-argvchs.netlify.app/libs/KaTeX/0.16.4/contrib/auto-render.min.js"></script>
-<link rel="stylesheet" href="https://static-argvchs.netlify.app/libs/KaTeX/0.16.4/katex.min.css" />
-<script src="/js/lib/math.js"></script>
-
-
-<script src="/js/lib/preview.js"></script>
-
-
-
-
-
-
-
-
-
-<script src="https://static-argvchs.netlify.app/libs/animejs/3.2.1/anime.min.js"></script>
-<link rel="stylesheet" href="/css/main.css" />
-
-    <meta name="generator" content="Hexo 6.3.0"></head>
-    <body>
-        <div id="layout">
-            <transition name="fade">
-                <div id="loading" v-show="loading">
-                    <div id="loading-circle">
-                        <h2>LOADING</h2>
-                        <p>加载过慢请开启缓存 浏览器默认开启</p>
-                        <img src="/images/loading.gif" />
-                    </div>
-                </div>
-            </transition>
-            <nav id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
-    <div id="desktop-menu">
-        <a class="title" href="/">
-            <span>阿杰之家</span>
-        </a>
+    article#article-container.post-content!=page.content
+    include includes/post/post-copyright.pug
+    .tag_share
+      if (theme.post_meta.post.tags)
+        .post-meta__tag-list
+          each item, index in page.tags.data
+            a(href=url_for(item.path)).post-meta__tags #[=item.name]
+      include includes/third-party/share/index.pug
         
-        <a href="/">
-            <i class="fa-solid fa-house fa-fw"></i>
-            <span>&ensp;Home</span>
-        </a>
-        
-        <a href="/about">
-            <i class="fa-solid fa-id-card fa-fw"></i>
-            <span>&ensp;About</span>
-        </a>
-        
-        <a href="/archives">
-            <i class="fa-solid fa-box-archive fa-fw"></i>
-            <span>&ensp;Archives</span>
-        </a>
-        
-        <a href="/categories">
-            <i class="fa-solid fa-bookmark fa-fw"></i>
-            <span>&ensp;Categories</span>
-        </a>
-        
-        <a href="/tags">
-            <i class="fa-solid fa-tags fa-fw"></i>
-            <span>&ensp;Tags</span>
-        </a>
-        
-    </div>
-    <div id="mobile-menu">
-        <div class="title" @click="showMenuItems = !showMenuItems">
-            <i class="fa-solid fa-bars fa-fw"></i>
-            <span>&emsp;阿杰之家</span>
-        </div>
-        <transition name="slide">
-            <div class="items" v-show="showMenuItems">
-                
-                <a href="/">
-                    <div class="item">
-                        <div style="min-width: 20px; max-width: 50px; width: 10%">
-                            <i class="fa-solid fa-house fa-fw"></i>
-                        </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
-                    </div>
-                </a>
-                
-                <a href="/about">
-                    <div class="item">
-                        <div style="min-width: 20px; max-width: 50px; width: 10%">
-                            <i class="fa-solid fa-id-card fa-fw"></i>
-                        </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
-                    </div>
-                </a>
-                
-                <a href="/archives">
-                    <div class="item">
-                        <div style="min-width: 20px; max-width: 50px; width: 10%">
-                            <i class="fa-solid fa-box-archive fa-fw"></i>
-                        </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
-                    </div>
-                </a>
-                
-                <a href="/categories">
-                    <div class="item">
-                        <div style="min-width: 20px; max-width: 50px; width: 10%">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
-                    </div>
-                </a>
-                
-                <a href="/tags">
-                    <div class="item">
-                        <div style="min-width: 20px; max-width: 50px; width: 10%">
-                            <i class="fa-solid fa-tags fa-fw"></i>
-                        </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
-                    </div>
-                </a>
-                
-            </div>
-        </transition>
-    </div>
-</nav>
-<transition name="fade">
-    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
-</transition>
+    if theme.reward.enable && theme.reward.QR_code
+      !=partial('includes/post/reward', {}, {cache: true})
 
-            <transition name="into">
-                <div id="main" v-show="!loading">
-                    <div class="article">
-    <div>
-        <h1>HTML高度塌陷</h1>
-    </div>
-    <div class="info">
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/7
-        </span>
-        
-        <span class="category">
-            <a href="/categories/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                前端杂烩
-            </a>
-        </span>
-        
-        
-    </div>
-    
-    <div class="content" v-pre>
-        <h1 id="HTML盒子高度塌陷"><a href="#HTML盒子高度塌陷" class="headerlink" title="HTML盒子高度塌陷"></a>HTML盒子高度塌陷</h1><p>使用<code>overflow: hidden;</code>可以处理盒子的高度塌陷</p>
-<p>引用：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/luoqian/p/5987788.html">https://www.cnblogs.com/luoqian/p/5987788.html</a></p>
-<p>最近在看《CSS Mastery》这本书，里面有用overflow：hidden来清理浮动的方法。但是一直想不明白为什么能够实现清除浮动，查阅了网络上的解释，下面来总结一下。</p>
-<p>一、首先来想想</p>
-<p>我们大家理解的overflow:hidden是超出该元素的部分进行隐藏。这个时候就需要明确一点，该元素的高度是怎么定义的。当一个div中的两个元素浮动之后，此时div的高度就会塌陷，此时div的高度为0。那是不是意味着就要将浮动元素隐藏起来，如果是真的隐藏就是反布局常识的。所以这中间肯定有我们现在还不知道的机制。</p>
-<p>二、不了解的机制-BFC</p>
-<p>定义：BFC（Block Formatting Context）全称是块级格式化上下文，用于对块级元素排版，默认情况下只有根元素（body）一个块级上下文，但是如果一个块级元素设置了float:left,overflow:hidden或position:absolute样式，就会为这个块级元素生产一个独立的块级上下文，使这个块级元素内部的排版完全独立。</p>
-<p>作用：独立的块级上下文可以包裹浮动流，全部浮动子元素也不会引起容器高度塌陷，就是说包含块会把浮动元素的高度也计算在内，所以就不用清除浮动来撑起包含块的高度。</p>
-<p>三、总结清除浮动的方法</p>
-<p>我经常用到的清除浮动的方法有</p>
-<p>1、添加额外标签设置clearfix类为clear:both;</p>
-<p>　　原理是这个空的div能让父级获取到高度，是因为设置之后这个div的左右都不能有浮动元素，所以这个空的div元素会向下移动，直到换行，而为了让这个div能够换行，父元素至少要包含浮动元素的高度才能提高足够的空间，这样实现清除浮动的影响。</p>
-<p>2、设置父元素为浮动元素</p>
-<p>3、设置position:absolute</p>
-<p>我不常用的清除浮动的方法有</p>
-<p>1、父级div定义height</p>
-<p>3、overflow:hidden</p>
-<p>2、父级div定义伪类:after和zoom;</p>
-<p>　　这个方法的原理还不理解，欢迎大神解答。</p>
-<p>四、清除浮动的影响方法分类</p>
-<p>参考张鑫旭老师的说法，清除浮动的说法是不准确的。应该是为清除浮动的影响。我也觉得张老师的说法是正确的，因为float:none才叫清除浮动。张老师还说到了包裹的这个概念，根据这个概念将清除浮动的影响的方法分为两大类。</p>
-<p>一类是clear:both&#x2F;left&#x2F;right，这就不用说了。</p>
-<p>另一类是：包裹清除，因为他发现浮动、绝对定位、inline-block、overflow都有自适应元素宽度的特性，就想到了用包裹来形容。</p>
+    //- ad
+    if theme.ad && theme.ad.post
+      .ads-wrap!=theme.ad.post
 
-    </div>
-    
-    
-    
-    
-    <div id="comment">
-        <div id="giscus-container" class="giscus"></div>
-    </div>
-    
-    
-    
-    
-</div>
+    if theme.post_pagination
+      include includes/pagination.pug
+    if theme.related_post && theme.related_post.enable
+      != related_posts(page,site.posts)
 
-                    <footer id="footer">
-    <div id="footer-wrap">
-        <div>
-            &copy;
-            2022 - 2023 阿杰之家
-            <span id="footer-icon">
-                <i class="fa-solid fa-font-awesome fa-fw"></i>
-            </span>
-            &commat;ajiehome
-        </div>
-        <div>
-            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
-            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
-        </div>
-        
-    </div>
-</footer>
-
-                </div>
-            </transition>
-            
-            <transition name="fade">
-                <div id="preview" ref="preview" v-show="previewShow">
-                    <img id="preview-content" ref="previewContent" />
-                </div>
-            </transition>
-            
-        </div>
-        <script src="/js/main.js"></script>
-        <script>
-            console.info("Welcome to Argvchs' blog!");
-            if (!window.hasOwnProperty("ontouchstart")) {
-                let html = '<canvas id="fireworks" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 32767"></canvas><script src="https://static-argvchs.netlify.app/js/fireworks.min.js"><\/script>';
-                document.body.append(document.createRange().createContextualFragment(html));
-            }
-        </script>
-        
-        
-<script
-    src="https://giscus.app/client.js"
-    data-repo="argvchs/giscus-comments"
-    data-repo-id="R_kgDOI_uC-w"
-    data-category="Announcements"
-    data-category-id="DIC_kwDOI_uC-84CUToF"
-    data-mapping="pathname"
-    data-strict="1"
-    data-reactions-enabled="1"
-    data-emit-metadata="0"
-    data-input-position="bottom"
-    data-theme="https://static-argvchs.netlify.app/css/giscus.css"
-    data-lang="zh-CN"
-    crossorigin
-    async
-></script>
-
-
-
-
-
-        
-    </body>
-</html>
+    if page.comments !== false && theme.comments && theme.comments.use
+      - var commentsJsLoad = true
+      !=partial('includes/third-party/comments/index', {}, {cache: true})
+      

@@ -1,297 +1,32 @@
+extends includes/layout.pug
 
-<!DOCTYPE html>
-<html lang="zh-CN">
-    <head>
-        <meta charset="utf-8" />
-        <title>Redis描述 | 阿杰之家</title>
-        <meta name="author" content="ajiehome" />
-        <meta name="description" content="山有扶苏，隰有荷华" />
-        <meta name="keywords" content="ajiehome,阿杰之家" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-        <link rel="icon" href="https://static-argvchs.netlify.app/images/favicon.png" />
-        <script src="https://static-argvchs.netlify.app/libs/vue/3.2.47/vue.global.prod.min.js"></script>
-<link rel="preconnect" href="https://static-argvchs.netlify.app" crossorigin />
-<link rel="stylesheet" href="https://static-argvchs.netlify.app/libs/font-awesome/6.3.0/css/all.min.css" />
-<link rel="stylesheet" href="https://static-argvchs.netlify.app/css/fonts.min.css" />
-<script> const mixins = {}; </script>
+block content
+  #post
+    if top_img === false
+      include includes/header/post-info.pug
 
-<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-
-
-<script src="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/highlight.min.js"></script>
-<link
-    rel="stylesheet"
-    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/devibeans.min.css"
-/>
-<script src="/js/lib/highlight.js"></script>
-
-
-<script src="https://static-argvchs.netlify.app/libs/KaTeX/0.16.4/katex.min.js"></script>
-<script src="https://static-argvchs.netlify.app/libs/KaTeX/0.16.4/contrib/auto-render.min.js"></script>
-<link rel="stylesheet" href="https://static-argvchs.netlify.app/libs/KaTeX/0.16.4/katex.min.css" />
-<script src="/js/lib/math.js"></script>
-
-
-<script src="/js/lib/preview.js"></script>
-
-
-
-
-
-
-
-
-
-<script src="https://static-argvchs.netlify.app/libs/animejs/3.2.1/anime.min.js"></script>
-<link rel="stylesheet" href="/css/main.css" />
-
-    <meta name="generator" content="Hexo 6.3.0"></head>
-    <body>
-        <div id="layout">
-            <transition name="fade">
-                <div id="loading" v-show="loading">
-                    <div id="loading-circle">
-                        <h2>LOADING</h2>
-                        <p>加载过慢请开启缓存 浏览器默认开启</p>
-                        <img src="/images/loading.gif" />
-                    </div>
-                </div>
-            </transition>
-            <nav id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
-    <div id="desktop-menu">
-        <a class="title" href="/">
-            <span>阿杰之家</span>
-        </a>
+    article#article-container.post-content!=page.content
+    include includes/post/post-copyright.pug
+    .tag_share
+      if (theme.post_meta.post.tags)
+        .post-meta__tag-list
+          each item, index in page.tags.data
+            a(href=url_for(item.path)).post-meta__tags #[=item.name]
+      include includes/third-party/share/index.pug
         
-        <a href="/">
-            <i class="fa-solid fa-house fa-fw"></i>
-            <span>&ensp;Home</span>
-        </a>
-        
-        <a href="/about">
-            <i class="fa-solid fa-id-card fa-fw"></i>
-            <span>&ensp;About</span>
-        </a>
-        
-        <a href="/archives">
-            <i class="fa-solid fa-box-archive fa-fw"></i>
-            <span>&ensp;Archives</span>
-        </a>
-        
-        <a href="/categories">
-            <i class="fa-solid fa-bookmark fa-fw"></i>
-            <span>&ensp;Categories</span>
-        </a>
-        
-        <a href="/tags">
-            <i class="fa-solid fa-tags fa-fw"></i>
-            <span>&ensp;Tags</span>
-        </a>
-        
-    </div>
-    <div id="mobile-menu">
-        <div class="title" @click="showMenuItems = !showMenuItems">
-            <i class="fa-solid fa-bars fa-fw"></i>
-            <span>&emsp;阿杰之家</span>
-        </div>
-        <transition name="slide">
-            <div class="items" v-show="showMenuItems">
-                
-                <a href="/">
-                    <div class="item">
-                        <div style="min-width: 20px; max-width: 50px; width: 10%">
-                            <i class="fa-solid fa-house fa-fw"></i>
-                        </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
-                    </div>
-                </a>
-                
-                <a href="/about">
-                    <div class="item">
-                        <div style="min-width: 20px; max-width: 50px; width: 10%">
-                            <i class="fa-solid fa-id-card fa-fw"></i>
-                        </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
-                    </div>
-                </a>
-                
-                <a href="/archives">
-                    <div class="item">
-                        <div style="min-width: 20px; max-width: 50px; width: 10%">
-                            <i class="fa-solid fa-box-archive fa-fw"></i>
-                        </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
-                    </div>
-                </a>
-                
-                <a href="/categories">
-                    <div class="item">
-                        <div style="min-width: 20px; max-width: 50px; width: 10%">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
-                    </div>
-                </a>
-                
-                <a href="/tags">
-                    <div class="item">
-                        <div style="min-width: 20px; max-width: 50px; width: 10%">
-                            <i class="fa-solid fa-tags fa-fw"></i>
-                        </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
-                    </div>
-                </a>
-                
-            </div>
-        </transition>
-    </div>
-</nav>
-<transition name="fade">
-    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
-</transition>
+    if theme.reward.enable && theme.reward.QR_code
+      !=partial('includes/post/reward', {}, {cache: true})
 
-            <transition name="into">
-                <div id="main" v-show="!loading">
-                    <div class="article">
-    <div>
-        <h1>Redis描述</h1>
-    </div>
-    <div class="info">
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/7
-        </span>
-        
-        <span class="category">
-            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                数据库
-            </a>
-        </span>
-        
-        
-    </div>
-    
-    <div class="content" v-pre>
-        <h1 id="redis-understand"><a href="#redis-understand" class="headerlink" title="redis understand"></a>redis understand</h1><p><strong>概述</strong></p>
-<p>redis全称是 remote dictionary server（远程字典服务），是一个ANSI C语言编写、支持网络、可基于内存也可以持久化的日志型的 kay-value 数据库。</p>
-<p>于mysql不同的是，redis的信息是存在于内存当中，读写速度快，每秒读写（iops）10w+，因此redis常被应用自缓存，另外redis也经常被用作分布式锁，redis支持事务、持久化、lua脚本、lru驱动事件、多种集群方案。</p>
-<p><strong>数据类型</strong></p>
-<p>redis有如下五种基础数据类型</p>
-<ol>
-<li>String（字符串）</li>
-<li>Hash（哈希）</li>
-<li>List（列表）</li>
-<li>Set（集合）</li>
-<li>zset（有序集合）</li>
-</ol>
-<p>三种特殊的数据结构类型</p>
-<ol>
-<li>Geospatial</li>
-<li>Hyperloglog</li>
-<li>Bitmap</li>
-</ol>
-<p><strong>缓存问题</strong></p>
-<p>穿透：</p>
-<p>指查询一个不存在的数据，redis查不到就往db中差，db也查不到就无法创建缓存，一直查就会一直请求数据库，进而给db带来压力</p>
-<p>解决方案：</p>
-<ol>
-<li>接口API验证，避免非法请求，过滤非法值</li>
-<li>如果查询为空，我们也设置一个缓存，或者叫默认值，每次返回默认值即可，直到下次写入刷新，也要给缓存设置一定时间的过期</li>
-<li>布隆过滤，</li>
-</ol>
-<p>雪崩：</p>
-<p>指某一时刻，redis中大量的数据过期，而同时查询的数据量巨大，那么请求都将直接访问db，引起db的压力过大深圳down机</p>
-<p>解决方案：</p>
-<ol>
-<li>把redis数据过期的时间做微调，也就是说，我们在给定的时间上，做微量偏移，使得过期的时间分布在一个范围内，而不是聚集在某一时刻</li>
-<li>单个redis宕机也会造成，这个时候要使用redis的集群服务</li>
-</ol>
-<p>击穿：</p>
-<p>击穿与雪崩很像，击穿是指某一个key过期，而当前的key又有很大的访问量，造成全部去访问db，造成压力过大宕机</p>
-<p>解决方案：</p>
-<ol>
-<li>使用互斥锁方案，缓存失效的时候，不马上去加载db，而是先使用某些带返回的原子操作命令（就是给redis设置一个值，先让这个给值顶着，然后我跑去db拿数据刷新过来，保证只有一个db操作进入），成功了再去数据库加载数据</li>
-<li>永不过期，指不设置过期时间，在快过期的时候，由异步线程去刷新数据</li>
-</ol>
+    //- ad
+    if theme.ad && theme.ad.post
+      .ads-wrap!=theme.ad.post
 
-    </div>
-    
-    
-    
-    
-    <div id="comment">
-        <div id="giscus-container" class="giscus"></div>
-    </div>
-    
-    
-    
-    
-</div>
+    if theme.post_pagination
+      include includes/pagination.pug
+    if theme.related_post && theme.related_post.enable
+      != related_posts(page,site.posts)
 
-                    <footer id="footer">
-    <div id="footer-wrap">
-        <div>
-            &copy;
-            2022 - 2023 阿杰之家
-            <span id="footer-icon">
-                <i class="fa-solid fa-font-awesome fa-fw"></i>
-            </span>
-            &commat;ajiehome
-        </div>
-        <div>
-            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
-            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
-        </div>
-        
-    </div>
-</footer>
-
-                </div>
-            </transition>
-            
-            <transition name="fade">
-                <div id="preview" ref="preview" v-show="previewShow">
-                    <img id="preview-content" ref="previewContent" />
-                </div>
-            </transition>
-            
-        </div>
-        <script src="/js/main.js"></script>
-        <script>
-            console.info("Welcome to Argvchs' blog!");
-            if (!window.hasOwnProperty("ontouchstart")) {
-                let html = '<canvas id="fireworks" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 32767"></canvas><script src="https://static-argvchs.netlify.app/js/fireworks.min.js"><\/script>';
-                document.body.append(document.createRange().createContextualFragment(html));
-            }
-        </script>
-        
-        
-<script
-    src="https://giscus.app/client.js"
-    data-repo="argvchs/giscus-comments"
-    data-repo-id="R_kgDOI_uC-w"
-    data-category="Announcements"
-    data-category-id="DIC_kwDOI_uC-84CUToF"
-    data-mapping="pathname"
-    data-strict="1"
-    data-reactions-enabled="1"
-    data-emit-metadata="0"
-    data-input-position="bottom"
-    data-theme="https://static-argvchs.netlify.app/css/giscus.css"
-    data-lang="zh-CN"
-    crossorigin
-    async
-></script>
-
-
-
-
-
-        
-    </body>
-</html>
+    if page.comments !== false && theme.comments && theme.comments.use
+      - var commentsJsLoad = true
+      !=partial('includes/third-party/comments/index', {}, {cache: true})
+      
