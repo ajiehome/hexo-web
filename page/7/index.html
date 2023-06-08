@@ -222,81 +222,6 @@
 </div>
 
 <div class="post">
-    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E5%90%8C%E8%A1%A8%E5%A4%9A%E5%A4%96%E9%94%AE/">
-        <h2 class="post-title">MySQL同表多外键</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                数据库
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="MySQL同表多外键"><a href="#MySQL同表多外键" class="headerlink" title="MySQL同表多外键"></a>MySQL同表多外键</h1><pre><code class="sql">drop database if exists test;
-create database if not exists test;
-
-use test;
-
-drop table if exists user;
-
-create table  if not exists user(
-    user_id bigint(18) comment &#39;用户ID&#39;,
-    user_name varchar(128) comment &#39;用户名称&#39;,
-    user_sex int(11) comment &#39;用户性别&#39;,
-    pass_word varchar(128) comment &#39;用户密码&#39;,
-    primary key (user_id)
-)engine = innodb default charset = utf8;
-
-drop table if exists user_related;
-
-create table if not exists user_related(
-    related_id bigint(18) comment &#39;关系ID&#39;,
-    from_user_id bigint(18) comment &#39;用户ID&#39;,
-    to_user_id bigint(18) comment &#39;用户ID&#39;,
-    primary key (related_id),
-    foreign key (from_user_id) references user (user_id),
-    foreign key (to_user_id) references user (user_id)
-)engine = innodb default charset = utf8;
-
-
-lock tables user write;
-insert into user(user_id,user_name,user_sex,pass_word) values (012345678911121314,&#39;用户1&#39;,1,&#39;123456&#39;);
-insert into user(user_id,user_name,user_sex,pass_word) values (012345678911121315,&#39;用户2&#39;,1,&#39;123456&#39;);
-unlock tables;
-
-lock tables user_related write;
-insert into user_related (related_id,from_user_id,to_user_id) values (012345678911121313,012345678911121314,012345678911121315);
-unlock tables;
-</code></pre>
-<p>一个用户表设置多个外键，外键的名字可以不和原表一样，只要类型一致就可</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E5%90%8C%E8%A1%A8%E5%A4%9A%E5%A4%96%E9%94%AE/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
     <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/">
         <h2 class="post-title">MySQL事务隔离级别</h2>
     </a>
@@ -400,6 +325,81 @@ unlock tables;
         
     </div>
     <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E5%90%8C%E8%A1%A8%E5%A4%9A%E5%A4%96%E9%94%AE/">
+        <h2 class="post-title">MySQL同表多外键</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                数据库
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="MySQL同表多外键"><a href="#MySQL同表多外键" class="headerlink" title="MySQL同表多外键"></a>MySQL同表多外键</h1><pre><code class="sql">drop database if exists test;
+create database if not exists test;
+
+use test;
+
+drop table if exists user;
+
+create table  if not exists user(
+    user_id bigint(18) comment &#39;用户ID&#39;,
+    user_name varchar(128) comment &#39;用户名称&#39;,
+    user_sex int(11) comment &#39;用户性别&#39;,
+    pass_word varchar(128) comment &#39;用户密码&#39;,
+    primary key (user_id)
+)engine = innodb default charset = utf8;
+
+drop table if exists user_related;
+
+create table if not exists user_related(
+    related_id bigint(18) comment &#39;关系ID&#39;,
+    from_user_id bigint(18) comment &#39;用户ID&#39;,
+    to_user_id bigint(18) comment &#39;用户ID&#39;,
+    primary key (related_id),
+    foreign key (from_user_id) references user (user_id),
+    foreign key (to_user_id) references user (user_id)
+)engine = innodb default charset = utf8;
+
+
+lock tables user write;
+insert into user(user_id,user_name,user_sex,pass_word) values (012345678911121314,&#39;用户1&#39;,1,&#39;123456&#39;);
+insert into user(user_id,user_name,user_sex,pass_word) values (012345678911121315,&#39;用户2&#39;,1,&#39;123456&#39;);
+unlock tables;
+
+lock tables user_related write;
+insert into user_related (related_id,from_user_id,to_user_id) values (012345678911121313,012345678911121314,012345678911121315);
+unlock tables;
+</code></pre>
+<p>一个用户表设置多个外键，外键的名字可以不和原表一样，只要类型一致就可</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E5%90%8C%E8%A1%A8%E5%A4%9A%E5%A4%96%E9%94%AE/" class="go-post">阅读全文</a>
 </div>
 
 <div class="post">
@@ -701,52 +701,6 @@ select group_concat(age) from demo1;
 </div>
 
 <div class="post">
-    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E6%8C%81%E4%B9%85%E5%8C%96/">
-        <h2 class="post-title">Redis持久化</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                数据库
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="redis的持久化"><a href="#redis的持久化" class="headerlink" title="redis的持久化"></a>redis的持久化</h1><ol>
-<li>aop（append only file）<br> 把每一次的数据变化都写入到本地文件 ——— 全持久化模式以日志的形式记录 每一次的写、删操作，以文本的形式记录</li>
-<li>rdb<br> 定时把redis中的数据写入到本地文件 ——— 半持久化模式<br> fork一个字进程，把数据写入临时文件，然后在替换掉本地的文件，使用二进制压缩</li>
-</ol>
-<h2 id="RDB持久化配置"><a href="#RDB持久化配置" class="headerlink" title="RDB持久化配置"></a>RDB持久化配置</h2><p>Redis会将数据集的快照dump到dump.rdb文件中。此外，我们也可以通过配置文件来修改Redis服务器dump快照的频率，在打开6379.conf文件之后，我们搜索save，可以看到下面的配置信息：</p>
-<p>save 900 1       #在900秒(15分钟)之后，如果至少有1个key发生变化，则dump内存快照。<br>save 300 10      #在300秒(5分钟)之后，如果至少有10个key发生变化，则dump内存快照。<br>save 60 10000    #在60秒(1分钟)之后，如果至少有10000个key发生变化，则dump内存快照。</p>
-<h2 id="AOF持久化配置"><a href="#AOF持久化配置" class="headerlink" title="AOF持久化配置"></a>AOF持久化配置</h2><p>在Redis的配置文件中存在三种同步方式，它们分别是：</p>
-<p>appendfsync always   #每次有数据修改发生时都会写入AOF文件。<br>appendfsync everysec #每秒钟同步一次，该策略为AOF的缺省策略。<br>appendfsync no     #从不同步。高效但是数据不会被持久化。</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E6%8C%81%E4%B9%85%E5%8C%96/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
     <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E5%91%BD%E4%BB%A4/">
         <h2 class="post-title">Redis命令</h2>
     </a>
@@ -957,6 +911,52 @@ String value = jedis.get(&quot;key1&quot;);
         
     </div>
     <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E5%91%BD%E4%BB%A4/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E6%8C%81%E4%B9%85%E5%8C%96/">
+        <h2 class="post-title">Redis持久化</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                数据库
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="redis的持久化"><a href="#redis的持久化" class="headerlink" title="redis的持久化"></a>redis的持久化</h1><ol>
+<li>aop（append only file）<br> 把每一次的数据变化都写入到本地文件 ——— 全持久化模式以日志的形式记录 每一次的写、删操作，以文本的形式记录</li>
+<li>rdb<br> 定时把redis中的数据写入到本地文件 ——— 半持久化模式<br> fork一个字进程，把数据写入临时文件，然后在替换掉本地的文件，使用二进制压缩</li>
+</ol>
+<h2 id="RDB持久化配置"><a href="#RDB持久化配置" class="headerlink" title="RDB持久化配置"></a>RDB持久化配置</h2><p>Redis会将数据集的快照dump到dump.rdb文件中。此外，我们也可以通过配置文件来修改Redis服务器dump快照的频率，在打开6379.conf文件之后，我们搜索save，可以看到下面的配置信息：</p>
+<p>save 900 1       #在900秒(15分钟)之后，如果至少有1个key发生变化，则dump内存快照。<br>save 300 10      #在300秒(5分钟)之后，如果至少有10个key发生变化，则dump内存快照。<br>save 60 10000    #在60秒(1分钟)之后，如果至少有10000个key发生变化，则dump内存快照。</p>
+<h2 id="AOF持久化配置"><a href="#AOF持久化配置" class="headerlink" title="AOF持久化配置"></a>AOF持久化配置</h2><p>在Redis的配置文件中存在三种同步方式，它们分别是：</p>
+<p>appendfsync always   #每次有数据修改发生时都会写入AOF文件。<br>appendfsync everysec #每秒钟同步一次，该策略为AOF的缺省策略。<br>appendfsync no     #从不同步。高效但是数据不会被持久化。</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E6%8C%81%E4%B9%85%E5%8C%96/" class="go-post">阅读全文</a>
 </div>
 
 <div class="post">
@@ -1194,7 +1194,7 @@ mysql -uroot -pXCeQtsgMO7-F
         </div>
         <div class="name">ajiehome</div>
         <div class="description">
-            <p>Here’s an argvchs…</p>
+            <p>Welcome to ajiehome …</p>
 
         </div>
         

@@ -171,17 +171,17 @@
         
 
 <div class="post">
-    <a href="/2023/06/07/%E8%99%9A%E6%8B%9F%E5%AE%B9%E5%99%A8/Docker%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
-        <h2 class="post-title">Docker的常用命令</h2>
+    <a href="/2023/06/07/%E7%90%86%E8%AE%BA%E4%BD%93%E7%B3%BB/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">
+        <h2 class="post-title">网络协议</h2>
     </a>
     <div class="category-and-date">
         
         <span class="category">
-            <a href="/categories/%E8%99%9A%E6%8B%9F%E5%AE%B9%E5%99%A8/">
+            <a href="/categories/%E7%90%86%E8%AE%BA%E4%BD%93%E7%B3%BB/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                虚拟容器
+                理论体系
             </a>
         </span>
         
@@ -197,69 +197,8 @@
     <div class="description">
         <div class="content" v-pre>
             
-            <h1 id="docker的常用命令"><a href="#docker的常用命令" class="headerlink" title="docker的常用命令"></a>docker的常用命令</h1><p>容器的创建</p>
-<pre><code class="shell">docker run -i ubuntu:15.10 
-</code></pre>
-<p>创建后台运行容器</p>
-<pre><code class="shell">docker run -itd [--name specified_name] ubuntu /bin/bash
-</code></pre>
-<ul>
-<li><code>docker</code>Docker的二进制执行文件</li>
-<li><code>run </code>与docker组合来运行一个容器</li>
-<li><code>/bin/bash</code>放在镜像名后的是命令，这里我们希望有个交互式 Shell，因此用的是 &#x2F;bin&#x2F;bash</li>
-<li><code>-t:</code>终端</li>
-<li><code>-i:</code>交互式操作</li>
-<li><code>-d:</code> 参数默认不会进入容器，想要进入容器需要使用指令 <strong>docker exec</strong></li>
-<li><code>ubuntu:15.10</code>指定需要运行的镜像，docker首先在本地查找是否有该镜像，如果没有的话就将从镜像库中获取对应的镜像</li>
-</ul>
-<p>查看所有容器</p>
-<pre><code class="shell">docker ps -a
-</code></pre>
-<p>启动容器</p>
-<pre><code class="shell">docker start [mirror_name or mirror_id]
-</code></pre>
-<p>停止容器</p>
-<pre><code class="shell">docker stop [docker_name or docker_id]
-</code></pre>
-<p>删除容器</p>
-<pre><code class="shell">docker rm [specifind_name or specifind_id]
-</code></pre>
-<hr>
-<p>镜像获取</p>
-<pre><code class="shell">docker pull [mirror_name]
-</code></pre>
-<p>进入容器</p>
-<pre><code class="shell">docker exec -it [specifind_name or specifind_id] /bin/bash
-docker attach [specifind_name or specifind_id]
-</code></pre>
-<ul>
-<li><code>exec:</code>此退出容器终端，不会导致容器的停止，推荐使用</li>
-</ul>
-<p>导出容器</p>
-<pre><code class="shell">docker export [specifind_name or specifind_id] &gt; ubuntu.tar
-</code></pre>
-<p>导入容器快照</p>
-<pre><code class="shell">cat ubuntu.tar | docker import - test/ubuntu:v1
-</code></pre>
-<p>通过URL导入快照</p>
-<pre><code class="shell"> docker import http://example.com/exampleimage.tgz example/imagerepo
-</code></pre>
-<p><img src="http://www.ajiehome.cn/wp-content/uploads/2021/03/docker%E7%9A%84%E6%89%80%E6%9C%89%E9%95%9C%E5%83%8F.png"></p>
-<p>载入镜像</p>
-<pre><code class="shell">docker pull training/webapp
-</code></pre>
-<p>运行镜像程序</p>
-<pre><code class="shell">docker run -d -P training/webapp python app.py
-</code></pre>
-<ul>
-<li><code>-d:</code>让容器在后台运行。</li>
-<li><code>-P:</code>将容器内部使用的网络端口随机映射到我们使用的主机上</li>
-</ul>
-<p><img src="http://www.ajiehome.cn/wp-content/uploads/2021/03/webapp%E8%BF%90%E8%A1%8C%E5%9B%BE.png"></p>
-<p><strong>PORTS</strong></p>
-<ul>
-<li><code>0.0.0.0:49153-&gt;5000:</code>表明docker开放了5000端口，映射到了本地的49153端口</li>
-</ul>
+            <h1 id="网络协议"><a href="#网络协议" class="headerlink" title="网络协议"></a>网络协议</h1><p><strong>CDN</strong>：CDN的全称是Content Delivery Network，即内容分发网络。CDN是构建在现有网络基础之上的智能虚拟网络，依靠部署在各地的边缘服务器，通过中心平台的负载均衡、内容分发、调度等功能模块，使用户就近获取所需内容，降低网络拥塞，提高用户访问响应速度和命中率。CDN的关键技术主要有内容存储和分发技术。</p>
+<p>CDN(Content Delivery Network)是指内容分发网络，也称为内容传送网络，这个概念始于1996年，是美国麻省理工学院的一个研究小组为改善互联网的服务质量而提出的。为了能在传统IP网上发布丰富的宽带媒体内容，他们提出在现有互联网基础上建立一个内容分发平台专门为网站提供服务，并于1999年成立了专门的CDN服务公司，为Yahoo提供专业服务。由于CDN是为加快网络访问速度而被优化的网络覆盖层，因此被形象地称为“网络加速器”。</p>
 
             
         </div>
@@ -268,7 +207,7 @@ docker attach [specifind_name or specifind_id]
         
         
     </div>
-    <a href="/2023/06/07/%E8%99%9A%E6%8B%9F%E5%AE%B9%E5%99%A8/Docker%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="go-post">阅读全文</a>
+    <a href="/2023/06/07/%E7%90%86%E8%AE%BA%E4%BD%93%E7%B3%BB/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/" class="go-post">阅读全文</a>
 </div>
 
 
@@ -314,7 +253,7 @@ docker attach [specifind_name or specifind_id]
         </div>
         <div class="name">ajiehome</div>
         <div class="description">
-            <p>Here’s an argvchs…</p>
+            <p>Welcome to ajiehome …</p>
 
         </div>
         

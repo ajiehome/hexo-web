@@ -171,6 +171,423 @@
         
 
 <div class="post">
+    <a href="/2023/06/07/%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/Python%E7%9A%84Anaconda%E6%8D%A2%E6%BA%90/">
+        <h2 class="post-title">Python的Anaconda换源</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                脚本语言
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="Anaconda-切换镜像源"><a href="#Anaconda-切换镜像源" class="headerlink" title="Anaconda 切换镜像源"></a>Anaconda 切换镜像源</h1><p>清华镜像源，由于https不通，只能将所有的链接全部换成http</p>
+<pre><code class="yaml">channels:
+  - defaults
+show_channel_urls: true
+default_channels:
+  - http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+  - http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r
+  - http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2
+custom_channels:
+  conda-forge: http://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  msys2: http://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  bioconda: http://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  menpo: http://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  pytorch: http://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  simpleitk: http://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+</code></pre>
+<p>基础命令</p>
+<pre><code class="shell"># 创建虚拟环境
+conda crate -n py37 python=3.7
+# 激活环境，windows不用conda
+conda activate py37
+# 删除虚拟环境
+conda remove -n py37 --all
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/06/07/%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/Python%E7%9A%84Anaconda%E6%8D%A2%E6%BA%90/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/07/%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/Shell%E4%BF%9D%E7%95%99%E5%8F%98%E9%87%8F/">
+        <h2 class="post-title">Shell保留变量</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                脚本语言
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="Shell保留变量"><a href="#Shell保留变量" class="headerlink" title="Shell保留变量"></a>Shell保留变量</h1><table>
+<thead>
+<tr>
+<th>变量名</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$IFS</td>
+<td>这个变量中保存了用于分割输入参数的分割字符，默认识空格。</td>
+</tr>
+<tr>
+<td>$HOME</td>
+<td>这个变量中存储了当前用户的根目录路径。</td>
+</tr>
+<tr>
+<td>$PATH</td>
+<td>这个变量中存储了当前 Shell 的默认路径字符串。</td>
+</tr>
+<tr>
+<td>$PS1</td>
+<td>表示第一个系统提示符。</td>
+</tr>
+<tr>
+<td>$PS2</td>
+<td>表示第一个系统提示符。</td>
+</tr>
+<tr>
+<td>$PWD</td>
+<td>表示当前工作路径。</td>
+</tr>
+<tr>
+<td>$EDITOR</td>
+<td>表示系统的默认编辑器名称。</td>
+</tr>
+<tr>
+<td>$BASH</td>
+<td>表示当前 Shell 的路径字符串。</td>
+</tr>
+<tr>
+<td>$0,$1…</td>
+<td>表示系统传给脚本程序或脚本程序传给函数的第0个、第一个等参数。</td>
+</tr>
+<tr>
+<td>$#</td>
+<td>表示脚本程序的命令参数个数或函数的参数个数。</td>
+</tr>
+<tr>
+<td>$$</td>
+<td>表示该脚本程序的进程号，常用于生成文件名唯一的临时文件。</td>
+</tr>
+<tr>
+<td>$?</td>
+<td>表示脚本程序或函数的返回状态值，正常为 0，否则为非零的错误号。</td>
+</tr>
+<tr>
+<td>$*</td>
+<td>表示所有的脚本参数或函数参数。</td>
+</tr>
+<tr>
+<td>$@</td>
+<td>和 $* 涵义相似，但是比$* 更安全。</td>
+</tr>
+<tr>
+<td>$!</td>
+<td>表示最近一个在后台运行的进程的进程号。</td>
+</tr>
+</tbody></table>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/06/07/%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/Shell%E4%BF%9D%E7%95%99%E5%8F%98%E9%87%8F/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/07/%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/Shell%E7%AC%94%E8%AE%B0/">
+        <h2 class="post-title">Shell笔记</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                脚本语言
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="Shell笔记"><a href="#Shell笔记" class="headerlink" title="Shell笔记"></a>Shell笔记</h1><pre><code class="shell"># 定义变量tips
+tips=&#39;Hello Word ！&#39;
+# 使用tips变量
+echo $&#123;tips&#125;
+# 设置为只读
+readonly tips
+# 删除变量
+unset tips
+</code></pre>
+<p>选择器语法</p>
+<pre><code class="shell"># 获取第一个参数，默认是从0开始，但是由于第0个是sh脚本名称所以从第一个开始
+param1=$1;
+
+case $param1 in
+  &#39;start&#39;)
+    echo &#39;service start ...&#39;;;
+  &#39;restart&#39;)
+    echo &#39;service restart ...&#39;;;
+    &#39;stop&#39;)
+      echo &#39;service stop ...&#39;;;
+    *)
+      echo &#39;comment not exists ...&#39;;;
+esac
+</code></pre>
+<p>条件语法</p>
+<pre><code class="shell">param=$1;
+if [[ param == &#39;start&#39; ]]; then
+  echo &#39;service start ...&#39;;
+fi
+
+if [[ param == &#39;start&#39; ]]; then
+  echo &#39;service start ...&#39;;
+elif [[ param == &#39;restart&#39; ]]; then
+  echo &#39;service restart ...&#39;;  
+fi
+</code></pre>
+<p>循环语法</p>
+<pre><code class="shell">param1=$1;
+while [[ condition ]]; do
+  echo &quot;----$param1----&quot;;
+  let &quot;param1-=1&quot;;
+done
+
+for (( i = 0; i &lt; 10; i++ )); do
+  #statements
+done
+</code></pre>
+<p><strong>要点</strong></p>
+<ol>
+<li>shell的变量定义为直接定义，变量名与内容之间不能有空格</li>
+<li>使用变量的时候，需要使用美元符号，可以用花括号括起来，也可以不用，主要是为了区分边界</li>
+<li>readonly设置变量为只读模式，其后不可再赋值，只能读取</li>
+<li>unset删除指定变量</li>
+<li>shell语法需要注意单引号和双引号，单引号的字符串内不能再使用相关变量，而双引号可以</li>
+<li>变量赋值方式 let variable&#x3D;variable+1;  let “variable++”; ((variable++))</li>
+</ol>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/06/07/%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/Shell%E7%AC%94%E8%AE%B0/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/07/%E8%99%9A%E6%8B%9F%E5%AE%B9%E5%99%A8/Docker%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/">
+        <h2 class="post-title">Docker初步使用</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E8%99%9A%E6%8B%9F%E5%AE%B9%E5%99%A8/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                虚拟容器
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="docker初步使用"><a href="#docker初步使用" class="headerlink" title="docker初步使用"></a>docker初步使用</h1><p>命令解析</p>
+<pre><code class="shell">docker run ubuntu:15.10 /bin/echo &quot;Hello Word&quot;
+</code></pre>
+<ul>
+<li><code>docker</code>Docker的二进制执行文件</li>
+<li><code>run </code>与docker组合来运行一个容器</li>
+<li><code>ubuntu:15.10</code>指定需要运行的镜像，docker首先在本地查找是否有该镜像，如果没有的话就将从镜像库中获取对应的镜像</li>
+<li><code>/bin/echo &quot;Hellow Word&quot;</code>在启动的容器中执行的命令</li>
+</ul>
+<p>交互式容器的运行</p>
+<pre><code class="shell">docker run -it ubuntu:15.10 /bin/bash
+</code></pre>
+<ul>
+<li><code>-i</code>运行对容器内的标准输入（STDIN）进行交互</li>
+<li><code>-t</code>在新的容器内指定一个伪终端或者终端</li>
+</ul>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/06/07/%E8%99%9A%E6%8B%9F%E5%AE%B9%E5%99%A8/Docker%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/07/%E8%99%9A%E6%8B%9F%E5%AE%B9%E5%99%A8/Docker%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+        <h2 class="post-title">Docker的常用命令</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E8%99%9A%E6%8B%9F%E5%AE%B9%E5%99%A8/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                虚拟容器
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="docker的常用命令"><a href="#docker的常用命令" class="headerlink" title="docker的常用命令"></a>docker的常用命令</h1><p>容器的创建</p>
+<pre><code class="shell">docker run -i ubuntu:15.10 
+</code></pre>
+<p>创建后台运行容器</p>
+<pre><code class="shell">docker run -itd [--name specified_name] ubuntu /bin/bash
+</code></pre>
+<ul>
+<li><code>docker</code>Docker的二进制执行文件</li>
+<li><code>run </code>与docker组合来运行一个容器</li>
+<li><code>/bin/bash</code>放在镜像名后的是命令，这里我们希望有个交互式 Shell，因此用的是 &#x2F;bin&#x2F;bash</li>
+<li><code>-t:</code>终端</li>
+<li><code>-i:</code>交互式操作</li>
+<li><code>-d:</code> 参数默认不会进入容器，想要进入容器需要使用指令 <strong>docker exec</strong></li>
+<li><code>ubuntu:15.10</code>指定需要运行的镜像，docker首先在本地查找是否有该镜像，如果没有的话就将从镜像库中获取对应的镜像</li>
+</ul>
+<p>查看所有容器</p>
+<pre><code class="shell">docker ps -a
+</code></pre>
+<p>启动容器</p>
+<pre><code class="shell">docker start [mirror_name or mirror_id]
+</code></pre>
+<p>停止容器</p>
+<pre><code class="shell">docker stop [docker_name or docker_id]
+</code></pre>
+<p>删除容器</p>
+<pre><code class="shell">docker rm [specifind_name or specifind_id]
+</code></pre>
+<hr>
+<p>镜像获取</p>
+<pre><code class="shell">docker pull [mirror_name]
+</code></pre>
+<p>进入容器</p>
+<pre><code class="shell">docker exec -it [specifind_name or specifind_id] /bin/bash
+docker attach [specifind_name or specifind_id]
+</code></pre>
+<ul>
+<li><code>exec:</code>此退出容器终端，不会导致容器的停止，推荐使用</li>
+</ul>
+<p>导出容器</p>
+<pre><code class="shell">docker export [specifind_name or specifind_id] &gt; ubuntu.tar
+</code></pre>
+<p>导入容器快照</p>
+<pre><code class="shell">cat ubuntu.tar | docker import - test/ubuntu:v1
+</code></pre>
+<p>通过URL导入快照</p>
+<pre><code class="shell"> docker import http://example.com/exampleimage.tgz example/imagerepo
+</code></pre>
+<p><img src="http://www.ajiehome.cn/wp-content/uploads/2021/03/docker%E7%9A%84%E6%89%80%E6%9C%89%E9%95%9C%E5%83%8F.png"></p>
+<p>载入镜像</p>
+<pre><code class="shell">docker pull training/webapp
+</code></pre>
+<p>运行镜像程序</p>
+<pre><code class="shell">docker run -d -P training/webapp python app.py
+</code></pre>
+<ul>
+<li><code>-d:</code>让容器在后台运行。</li>
+<li><code>-P:</code>将容器内部使用的网络端口随机映射到我们使用的主机上</li>
+</ul>
+<p><img src="http://www.ajiehome.cn/wp-content/uploads/2021/03/webapp%E8%BF%90%E8%A1%8C%E5%9B%BE.png"></p>
+<p><strong>PORTS</strong></p>
+<ul>
+<li><code>0.0.0.0:49153-&gt;5000:</code>表明docker开放了5000端口，映射到了本地的49153端口</li>
+</ul>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/06/07/%E8%99%9A%E6%8B%9F%E5%AE%B9%E5%99%A8/Docker%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2023/06/07/%E7%90%86%E8%AE%BA%E4%BD%93%E7%B3%BB/B%E6%A0%91&B+%E6%A0%91/">
         <h2 class="post-title">B树&amp;B+树</h2>
     </a>
@@ -638,362 +1055,6 @@ C --&gt;|物理链路| A
     <a href="/2023/06/07/%E7%90%86%E8%AE%BA%E4%BD%93%E7%B3%BB/%E7%BD%91%E7%BB%9C%E4%B8%83%E5%B1%82%E6%A8%A1%E5%9E%8B/" class="go-post">阅读全文</a>
 </div>
 
-<div class="post">
-    <a href="/2023/06/07/%E7%90%86%E8%AE%BA%E4%BD%93%E7%B3%BB/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">
-        <h2 class="post-title">网络协议</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E7%90%86%E8%AE%BA%E4%BD%93%E7%B3%BB/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                理论体系
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="网络协议"><a href="#网络协议" class="headerlink" title="网络协议"></a>网络协议</h1><p><strong>CDN</strong>：CDN的全称是Content Delivery Network，即内容分发网络。CDN是构建在现有网络基础之上的智能虚拟网络，依靠部署在各地的边缘服务器，通过中心平台的负载均衡、内容分发、调度等功能模块，使用户就近获取所需内容，降低网络拥塞，提高用户访问响应速度和命中率。CDN的关键技术主要有内容存储和分发技术。</p>
-<p>CDN(Content Delivery Network)是指内容分发网络，也称为内容传送网络，这个概念始于1996年，是美国麻省理工学院的一个研究小组为改善互联网的服务质量而提出的。为了能在传统IP网上发布丰富的宽带媒体内容，他们提出在现有互联网基础上建立一个内容分发平台专门为网站提供服务，并于1999年成立了专门的CDN服务公司，为Yahoo提供专业服务。由于CDN是为加快网络访问速度而被优化的网络覆盖层，因此被形象地称为“网络加速器”。</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/06/07/%E7%90%86%E8%AE%BA%E4%BD%93%E7%B3%BB/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/06/07/%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/Python%E7%9A%84Anaconda%E6%8D%A2%E6%BA%90/">
-        <h2 class="post-title">Python的Anaconda换源</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                脚本语言
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="Anaconda-切换镜像源"><a href="#Anaconda-切换镜像源" class="headerlink" title="Anaconda 切换镜像源"></a>Anaconda 切换镜像源</h1><p>清华镜像源，由于https不通，只能将所有的链接全部换成http</p>
-<pre><code class="yaml">channels:
-  - defaults
-show_channel_urls: true
-default_channels:
-  - http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
-  - http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r
-  - http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2
-custom_channels:
-  conda-forge: http://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
-  msys2: http://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
-  bioconda: http://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
-  menpo: http://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
-  pytorch: http://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
-  simpleitk: http://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
-</code></pre>
-<p>基础命令</p>
-<pre><code class="shell"># 创建虚拟环境
-conda crate -n py37 python=3.7
-# 激活环境，windows不用conda
-conda activate py37
-# 删除虚拟环境
-conda remove -n py37 --all
-</code></pre>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/06/07/%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/Python%E7%9A%84Anaconda%E6%8D%A2%E6%BA%90/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/06/07/%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/Shell%E4%BF%9D%E7%95%99%E5%8F%98%E9%87%8F/">
-        <h2 class="post-title">Shell保留变量</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                脚本语言
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="Shell保留变量"><a href="#Shell保留变量" class="headerlink" title="Shell保留变量"></a>Shell保留变量</h1><table>
-<thead>
-<tr>
-<th>变量名</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>$IFS</td>
-<td>这个变量中保存了用于分割输入参数的分割字符，默认识空格。</td>
-</tr>
-<tr>
-<td>$HOME</td>
-<td>这个变量中存储了当前用户的根目录路径。</td>
-</tr>
-<tr>
-<td>$PATH</td>
-<td>这个变量中存储了当前 Shell 的默认路径字符串。</td>
-</tr>
-<tr>
-<td>$PS1</td>
-<td>表示第一个系统提示符。</td>
-</tr>
-<tr>
-<td>$PS2</td>
-<td>表示第一个系统提示符。</td>
-</tr>
-<tr>
-<td>$PWD</td>
-<td>表示当前工作路径。</td>
-</tr>
-<tr>
-<td>$EDITOR</td>
-<td>表示系统的默认编辑器名称。</td>
-</tr>
-<tr>
-<td>$BASH</td>
-<td>表示当前 Shell 的路径字符串。</td>
-</tr>
-<tr>
-<td>$0,$1…</td>
-<td>表示系统传给脚本程序或脚本程序传给函数的第0个、第一个等参数。</td>
-</tr>
-<tr>
-<td>$#</td>
-<td>表示脚本程序的命令参数个数或函数的参数个数。</td>
-</tr>
-<tr>
-<td>$$</td>
-<td>表示该脚本程序的进程号，常用于生成文件名唯一的临时文件。</td>
-</tr>
-<tr>
-<td>$?</td>
-<td>表示脚本程序或函数的返回状态值，正常为 0，否则为非零的错误号。</td>
-</tr>
-<tr>
-<td>$*</td>
-<td>表示所有的脚本参数或函数参数。</td>
-</tr>
-<tr>
-<td>$@</td>
-<td>和 $* 涵义相似，但是比$* 更安全。</td>
-</tr>
-<tr>
-<td>$!</td>
-<td>表示最近一个在后台运行的进程的进程号。</td>
-</tr>
-</tbody></table>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/06/07/%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/Shell%E4%BF%9D%E7%95%99%E5%8F%98%E9%87%8F/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/06/07/%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/Shell%E7%AC%94%E8%AE%B0/">
-        <h2 class="post-title">Shell笔记</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                脚本语言
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="Shell笔记"><a href="#Shell笔记" class="headerlink" title="Shell笔记"></a>Shell笔记</h1><pre><code class="shell"># 定义变量tips
-tips=&#39;Hello Word ！&#39;
-# 使用tips变量
-echo $&#123;tips&#125;
-# 设置为只读
-readonly tips
-# 删除变量
-unset tips
-</code></pre>
-<p>选择器语法</p>
-<pre><code class="shell"># 获取第一个参数，默认是从0开始，但是由于第0个是sh脚本名称所以从第一个开始
-param1=$1;
-
-case $param1 in
-  &#39;start&#39;)
-    echo &#39;service start ...&#39;;;
-  &#39;restart&#39;)
-    echo &#39;service restart ...&#39;;;
-    &#39;stop&#39;)
-      echo &#39;service stop ...&#39;;;
-    *)
-      echo &#39;comment not exists ...&#39;;;
-esac
-</code></pre>
-<p>条件语法</p>
-<pre><code class="shell">param=$1;
-if [[ param == &#39;start&#39; ]]; then
-  echo &#39;service start ...&#39;;
-fi
-
-if [[ param == &#39;start&#39; ]]; then
-  echo &#39;service start ...&#39;;
-elif [[ param == &#39;restart&#39; ]]; then
-  echo &#39;service restart ...&#39;;  
-fi
-</code></pre>
-<p>循环语法</p>
-<pre><code class="shell">param1=$1;
-while [[ condition ]]; do
-  echo &quot;----$param1----&quot;;
-  let &quot;param1-=1&quot;;
-done
-
-for (( i = 0; i &lt; 10; i++ )); do
-  #statements
-done
-</code></pre>
-<p><strong>要点</strong></p>
-<ol>
-<li>shell的变量定义为直接定义，变量名与内容之间不能有空格</li>
-<li>使用变量的时候，需要使用美元符号，可以用花括号括起来，也可以不用，主要是为了区分边界</li>
-<li>readonly设置变量为只读模式，其后不可再赋值，只能读取</li>
-<li>unset删除指定变量</li>
-<li>shell语法需要注意单引号和双引号，单引号的字符串内不能再使用相关变量，而双引号可以</li>
-<li>变量赋值方式 let variable&#x3D;variable+1;  let “variable++”; ((variable++))</li>
-</ol>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/06/07/%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/Shell%E7%AC%94%E8%AE%B0/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/06/07/%E8%99%9A%E6%8B%9F%E5%AE%B9%E5%99%A8/Docker%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/">
-        <h2 class="post-title">Docker初步使用</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E8%99%9A%E6%8B%9F%E5%AE%B9%E5%99%A8/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                虚拟容器
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="docker初步使用"><a href="#docker初步使用" class="headerlink" title="docker初步使用"></a>docker初步使用</h1><p>命令解析</p>
-<pre><code class="shell">docker run ubuntu:15.10 /bin/echo &quot;Hello Word&quot;
-</code></pre>
-<ul>
-<li><code>docker</code>Docker的二进制执行文件</li>
-<li><code>run </code>与docker组合来运行一个容器</li>
-<li><code>ubuntu:15.10</code>指定需要运行的镜像，docker首先在本地查找是否有该镜像，如果没有的话就将从镜像库中获取对应的镜像</li>
-<li><code>/bin/echo &quot;Hellow Word&quot;</code>在启动的容器中执行的命令</li>
-</ul>
-<p>交互式容器的运行</p>
-<pre><code class="shell">docker run -it ubuntu:15.10 /bin/bash
-</code></pre>
-<ul>
-<li><code>-i</code>运行对容器内的标准输入（STDIN）进行交互</li>
-<li><code>-t</code>在新的容器内指定一个伪终端或者终端</li>
-</ul>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/06/07/%E8%99%9A%E6%8B%9F%E5%AE%B9%E5%99%A8/Docker%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8/" class="go-post">阅读全文</a>
-</div>
-
 
         <div class="page-current">
     <div class="prev">
@@ -1047,7 +1108,7 @@ done
         </div>
         <div class="name">ajiehome</div>
         <div class="description">
-            <p>Here’s an argvchs…</p>
+            <p>Welcome to ajiehome …</p>
 
         </div>
         
