@@ -1,13 +1,13 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Windows安装MySQL | 阿杰之家</title><meta name="author" content="ajiehome"><meta name="copyright" content="ajiehome"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Windows下MySQL的安装首先下载MySQL的的压缩包（MySQL社区版） MySQL5.7社区版 安装如果以前安装过其它版本的MySQL那么需要先卸载mysql的服务在进行安装卸载方式：以管理员身份进入CMD控制台，然后输入一下命令进行删除服务如果未安装则可以忽略这一步骤：mysql是服务的名称 sc delete mysql  1、MySQL的解压将下载好的mysql的压缩包解压，并且把">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Windows安装MySQL | 阿杰之家</title><meta name="author" content="ajiehome"><meta name="copyright" content="ajiehome"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Windows下MySQL的安装首先下载MySQL的的压缩包（MySQL社区版） MySQL5.7社区版 安装如果以前安装过其它版本的MySQL那么需要先卸载mysql的服务在进行安装卸载方式：以管理员身份进入CMD控制台，然后输入一下命令进行删除服务如果未安装则可以忽略这一步骤：mysql是服务的名称 sc delete mysql 1、MySQL的解压将下载好的mysql的压缩包解压，并且把解">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Windows安装MySQL">
 <meta property="og:url" content="http://ajiehome.github.io/hexo-web/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Windows%E5%AE%89%E8%A3%85MySQL/index.html">
 <meta property="og:site_name" content="阿杰之家">
-<meta property="og:description" content="Windows下MySQL的安装首先下载MySQL的的压缩包（MySQL社区版） MySQL5.7社区版 安装如果以前安装过其它版本的MySQL那么需要先卸载mysql的服务在进行安装卸载方式：以管理员身份进入CMD控制台，然后输入一下命令进行删除服务如果未安装则可以忽略这一步骤：mysql是服务的名称 sc delete mysql  1、MySQL的解压将下载好的mysql的压缩包解压，并且把">
+<meta property="og:description" content="Windows下MySQL的安装首先下载MySQL的的压缩包（MySQL社区版） MySQL5.7社区版 安装如果以前安装过其它版本的MySQL那么需要先卸载mysql的服务在进行安装卸载方式：以管理员身份进入CMD控制台，然后输入一下命令进行删除服务如果未安装则可以忽略这一步骤：mysql是服务的名称 sc delete mysql 1、MySQL的解压将下载好的mysql的压缩包解压，并且把解">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
 <meta property="article:published_time" content="2023-06-07T07:58:40.000Z">
-<meta property="article:modified_time" content="2023-06-08T09:27:30.436Z">
+<meta property="article:modified_time" content="2023-06-08T09:29:30.775Z">
 <meta property="article:author" content="ajiehome">
 <meta property="article:tag" content="ajiehome">
 <meta property="article:tag" content="阿杰之家">
@@ -18,7 +18,7 @@
   localSearch: {"path":"/./search.xml","preload":false,"top_n_per_article":1,"unescape":true,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
   translate: undefined,
   noticeOutdate: undefined,
-  highlight: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
   copy: {
     success: '复制成功',
     error: '复制错误',
@@ -59,7 +59,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2023-06-08 17:27:30'
+  postUpdate: '2023-06-08 17:29:30'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -163,63 +163,51 @@
       }
     }
     detectApple()
-    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">81</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">11</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://api.btstu.cn/sjbz/api.php?lx=dongman&amp;format=images')"><nav id="nav"><span id="blog-info"><a href="/" title="阿杰之家"><span class="site-name">阿杰之家</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Windows安装MySQL</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-06-07T07:58:40.000Z" title="发表于 2023-06-07 15:58:40">2023-06-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-06-08T09:27:30.436Z" title="更新于 2023-06-08 17:27:30">2023-06-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Windows安装MySQL"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Windows下MySQL的安装"><a href="#Windows下MySQL的安装" class="headerlink" title="Windows下MySQL的安装"></a>Windows下MySQL的安装</h1><p>首先下载MySQL的的压缩包（MySQL社区版）</p>
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">81</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">11</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://api.btstu.cn/sjbz/api.php?lx=dongman&amp;format=images')"><nav id="nav"><span id="blog-info"><a href="/" title="阿杰之家"><span class="site-name">阿杰之家</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Windows安装MySQL</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-06-07T07:58:40.000Z" title="发表于 2023-06-07 15:58:40">2023-06-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-06-08T09:29:30.775Z" title="更新于 2023-06-08 17:29:30">2023-06-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Windows安装MySQL"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Windows下MySQL的安装"><a href="#Windows下MySQL的安装" class="headerlink" title="Windows下MySQL的安装"></a>Windows下MySQL的安装</h1><p>首先下载MySQL的的压缩包（MySQL社区版）</p>
 <p><a target="_blank" rel="noopener" href="https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-5.7.37-winx64.zip">MySQL5.7社区版</a></p>
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>如果以前安装过其它版本的MySQL那么需要先卸载mysql的服务在进行安装<br>卸载方式：以管理员身份进入CMD控制台，然后输入一下命令进行删除服务<br>如果未安装则可以忽略这一步骤：mysql是服务的名称</p>
-<pre><code class="shell">sc delete mysql
-</code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sc delete mysql<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h2 id="1、MySQL的解压"><a href="#1、MySQL的解压" class="headerlink" title="1、MySQL的解压"></a>1、MySQL的解压</h2><p>将下载好的mysql的压缩包解压，并且把解压之后的mysql-8.0.15-winx64文件夹放到安装文件夹<br>我的是放在：D:\Software\MySQL\mysql-8.0.15-winx64</p>
 <h2 id="2、配置环境变量"><a href="#2、配置环境变量" class="headerlink" title="2、配置环境变量"></a>2、配置环境变量</h2><p>右键我的计算机-&gt;属性-&gt;高级系统设置-&gt;环境变量<br>新建系统变量</p>
-<pre><code class="shell">变量名称：MYSQL_HOME
-变量路径：D:\Software\MySQL\mysql-8.0.15-winx64\bin
-</code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">变量名称：MYSQL_HOME
+变量路径：D:<span class="token punctuation">\</span>Software<span class="token punctuation">\</span>MySQL<span class="token punctuation">\</span>mysql-8.0.15-winx64<span class="token punctuation">\</span>bin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>修改path变量，加入</p>
-<pre><code class="shell">%MYSQL_HOME%\bin
-</code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">%MYSQL_HOME%<span class="token punctuation">\</span>bin<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><strong>注意：</strong>如果失败，可以创建一个指定初始配置文件(我现在这个版本是没有配置的)<br>初始化mysql前，可以通过ini文件来指定部分初始配置，比如<code>basedir</code>和<code>datadir</code>等，当然，也可以不指定利用默认的，参考文档<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/windows-create-option-file.html">官方文档</a><br>在mysql的根目录下，创建mysql.ini文件，加入下面内容</p>
-<pre><code class="yml">[mysqld]
-# set basedir to your installation path
-basedir=D:\Software\MySQL\mysql-8.0.15-winx64
-# set datadir to the location of your data directory
-datadir=D:\Software\MySQL\mysql-8.0.15-winx64\data
-</code></pre>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token punctuation">[</span>mysqld<span class="token punctuation">]</span>
+<span class="token comment"># set basedir to your installation path</span>
+basedir=D<span class="token punctuation">:</span>\Software\MySQL\mysql<span class="token punctuation">-</span>8.0.15<span class="token punctuation">-</span>winx64
+<span class="token comment"># set datadir to the location of your data directory</span>
+datadir=D<span class="token punctuation">:</span>\Software\MySQL\mysql<span class="token punctuation">-</span>8.0.15<span class="token punctuation">-</span>winx64\data<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="3、初始化"><a href="#3、初始化" class="headerlink" title="3、初始化"></a>3、初始化</h2><p>打开cmd控制台，输入初始化命令（由于配置了系统的环境变量，所以不需要进入到D:\Software\MySQL\mysql-8.0.15-winx64\bin下）</p>
-<pre><code class="shell">//生成临时密码
-mysqlid --initialize --console
-</code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">//生成临时密码
+mysqlid <span class="token parameter variable">--initialize</span> <span class="token parameter variable">--console</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>或者</p>
-<pre><code class="shell">//空密码
-mysqld --initialize-insecure --console
-</code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">//空密码
+mysqld --initialize-insecure <span class="token parameter variable">--console</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>如果选择临时密码，控制台会有以下输出，可以看到里面有临时密码（temporary password is generated for root@localhost:后面的值，注意去掉空格），请一定要记住，当然你如果不想记住也可以，只是需要再折腾一下去重置密码</p>
-<pre><code class="yml">2018-08-15T02:55:43.924361Z 0 [System] [MY-013169] [Server] C:\MyPrograms\mysql-8.0.12-winx64\bin\mysqld.exe (mysqld 8.0.12) initializing of server in progress as process 12040
-2018-08-15T02:55:55.962035Z 5 [Note] [MY-010454] [Server] A temporary password is generated for root@localhost: XCeQtsgMO7-F
-2018-08-15T02:56:03.261174Z 0 [System] [MY-013170] [Server] C:\MyPrograms\mysql-8.0.12-winx64\bin\mysqld.exe (mysqld 8.0.12) initializing of server has completed
-</code></pre>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">2018<span class="token punctuation">-</span>08<span class="token punctuation">-</span>15T02<span class="token punctuation">:</span>55<span class="token punctuation">:</span>43.924361Z 0 <span class="token punctuation">[</span>System<span class="token punctuation">]</span> <span class="token punctuation">[</span>MY<span class="token punctuation">-</span><span class="token number">013169</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>Server<span class="token punctuation">]</span> C<span class="token punctuation">:</span>\MyPrograms\mysql<span class="token punctuation">-</span>8.0.12<span class="token punctuation">-</span>winx64\bin\mysqld.exe (mysqld 8.0.12) initializing of server in progress as process 12040
+2018<span class="token punctuation">-</span>08<span class="token punctuation">-</span>15T02<span class="token punctuation">:</span>55<span class="token punctuation">:</span>55.962035Z 5 <span class="token punctuation">[</span>Note<span class="token punctuation">]</span> <span class="token punctuation">[</span>MY<span class="token punctuation">-</span><span class="token number">010454</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>Server<span class="token punctuation">]</span> A temporary password is generated for root@localhost<span class="token punctuation">:</span> XCeQtsgMO7<span class="token punctuation">-</span>F
+2018<span class="token punctuation">-</span>08<span class="token punctuation">-</span>15T02<span class="token punctuation">:</span>56<span class="token punctuation">:</span>03.261174Z 0 <span class="token punctuation">[</span>System<span class="token punctuation">]</span> <span class="token punctuation">[</span>MY<span class="token punctuation">-</span><span class="token number">013170</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>Server<span class="token punctuation">]</span> C<span class="token punctuation">:</span>\MyPrograms\mysql<span class="token punctuation">-</span>8.0.12<span class="token punctuation">-</span>winx64\bin\mysqld.exe (mysqld 8.0.12) initializing of server has completed<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <h2 id="4、安装windows服务"><a href="#4、安装windows服务" class="headerlink" title="4、安装windows服务"></a>4、安装windows服务</h2><p>用管理员身份打开CMD，在里面输入如下命令</p>
-<pre><code class="shell">//serviceName为服务名，不输入默认为mysql
-mysqld --install [serviceName]
-</code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">//serviceName为服务名，不输入默认为mysql
+mysqld <span class="token parameter variable">--install</span> <span class="token punctuation">[</span>serviceName<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>如果看到下面内容，则证明服务安装成功</p>
-<pre><code>Service successfully installed.
-</code></pre>
+<pre class="line-numbers language-none"><code class="language-none">Service successfully installed.<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h2 id="5、启动服务"><a href="#5、启动服务" class="headerlink" title="5、启动服务"></a>5、启动服务</h2><p>还是用管理员身份打开CMD，输入如下命令</p>
-<pre><code class="shell">net start mysql
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">net start mysql
 
 //以下输出证明启动成功
-MySQL 服务正在启动 ..
+MySQL 服务正在启动 <span class="token punctuation">..</span>
 MySQL 服务已经启动成功。
 
 //如果你要关闭的话
-net stop mysql
-</code></pre>
+net stop mysql<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="6、更改密码"><a href="#6、更改密码" class="headerlink" title="6、更改密码"></a>6、更改密码</h2><p>连接到mysql</p>
-<pre><code class="shell">//下面-p后面的内容就是临时密码
-mysql -uroot -pXCeQtsgMO7-F
-</code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">//下面-p后面的内容就是临时密码
+mysql <span class="token parameter variable">-uroot</span> -pXCeQtsgMO7-F<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>修改密码</p>
-<pre><code class="shell">ALTER USER &#39;root&#39;@&#39;localhost&#39; IDENTIFIED WITH mysql_native_password BY &#39;newpassword&#39;;
-</code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ALTER <span class="token environment constant">USER</span> <span class="token string">'root'</span>@<span class="token string">'localhost'</span> IDENTIFIED WITH mysql_native_password BY <span class="token string">'newpassword'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
 <li>1、环境变量是为了在命令行CMD中更加方便使用mysql命令；</li>
 <li>2、如果有之前有安装过其他版本mysql，记得先卸载并删除服务；</li>

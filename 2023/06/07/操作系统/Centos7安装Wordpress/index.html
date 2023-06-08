@@ -7,7 +7,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
 <meta property="article:published_time" content="2023-06-07T07:58:40.000Z">
-<meta property="article:modified_time" content="2023-06-08T09:27:30.436Z">
+<meta property="article:modified_time" content="2023-06-08T09:29:30.775Z">
 <meta property="article:author" content="ajiehome">
 <meta property="article:tag" content="ajiehome">
 <meta property="article:tag" content="阿杰之家">
@@ -18,7 +18,7 @@
   localSearch: {"path":"/./search.xml","preload":false,"top_n_per_article":1,"unescape":true,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
   translate: undefined,
   noticeOutdate: undefined,
-  highlight: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
   copy: {
     success: '复制成功',
     error: '复制错误',
@@ -59,7 +59,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2023-06-08 17:27:30'
+  postUpdate: '2023-06-08 17:29:30'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -163,96 +163,97 @@
       }
     }
     detectApple()
-    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">81</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">11</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://api.btstu.cn/sjbz/api.php?lx=dongman&amp;format=images')"><nav id="nav"><span id="blog-info"><a href="/" title="阿杰之家"><span class="site-name">阿杰之家</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Centos7安装Wordpress</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-06-07T07:58:40.000Z" title="发表于 2023-06-07 15:58:40">2023-06-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-06-08T09:27:30.436Z" title="更新于 2023-06-08 17:27:30">2023-06-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Centos7安装Wordpress"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Centos7安装Wordpress以及环境"><a href="#Centos7安装Wordpress以及环境" class="headerlink" title="Centos7安装Wordpress以及环境"></a>Centos7安装Wordpress以及环境</h1><h2 id="一、安装MySQL57版本"><a href="#一、安装MySQL57版本" class="headerlink" title="一、安装MySQL57版本"></a>一、安装MySQL57版本</h2><p><strong>1、从MySQL官网下载YUM源的RPM安装包</strong></p>
-<pre><code class="shell">wget http://dev.mysql.com/get/mysql57-community-release-el7-8.noarch.rpm
-</code></pre>
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">81</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">11</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://api.btstu.cn/sjbz/api.php?lx=dongman&amp;format=images')"><nav id="nav"><span id="blog-info"><a href="/" title="阿杰之家"><span class="site-name">阿杰之家</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Centos7安装Wordpress</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-06-07T07:58:40.000Z" title="发表于 2023-06-07 15:58:40">2023-06-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-06-08T09:29:30.775Z" title="更新于 2023-06-08 17:29:30">2023-06-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Centos7安装Wordpress"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Centos7安装Wordpress以及环境"><a href="#Centos7安装Wordpress以及环境" class="headerlink" title="Centos7安装Wordpress以及环境"></a>Centos7安装Wordpress以及环境</h1><h2 id="一、安装MySQL57版本"><a href="#一、安装MySQL57版本" class="headerlink" title="一、安装MySQL57版本"></a>一、安装MySQL57版本</h2><p><strong>1、从MySQL官网下载YUM源的RPM安装包</strong></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">wget</span> http://dev.mysql.com/get/mysql57-community-release-el7-8.noarch.rpm<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <p><strong>2、从下载好的rpm包安装MYSQL</strong></p>
-<pre><code class="shell">yum localinstall mysql57-community-release-el7-8.noarch.rpm
-</code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yum localinstall mysql57-community-release-el7-8.noarch.rpm<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <p><strong>3、安装MySQL服务</strong></p>
-<pre><code class="shell">yum install mysql-community-server
-</code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yum <span class="token function">install</span> mysql-community-server<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <p><strong>4、启动MySQL服务</strong></p>
-<pre><code class="shell">systemctl start mysqld.service
-</code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">systemctl start mysqld.service<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <p><strong>5、设置开机自启并且刷新</strong></p>
-<pre><code class="shell">systemctl enable mysqld
-systemctl daemon-reload
-</code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">systemctl <span class="token builtin class-name">enable</span> mysqld
+systemctl daemon-reload<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
 <p><strong>6、修改默认初始化密码-&gt;由于密码策略所以只能设置较为复杂的密码</strong></p>
-<pre><code class="shell">#临时密码在/var/log/mysqld.log
-alter user &#39;root&#39;@&#39;localhost&#39; identified by &#39;ZhonHua@5000Nian&#39;;
-</code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#临时密码在/var/log/mysqld.log</span>
+alter user <span class="token string">'root'</span>@<span class="token string">'localhost'</span> identified by <span class="token string">'ZhonHua@5000Nian'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
 <p><strong>7、查看MySQL的密码安全策略</strong></p>
-<pre><code class="shell">show variables like &#39;validate_password%&#39;;
-</code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">show variables like <span class="token string">'validate_password%'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <p><img src="/./images/MYSQL%E5%AF%86%E7%A0%81%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5.PNG" alt="img"></p>
 <p><strong>8、修改密码杂度为最低以及把密码长度改为自己想要的</strong></p>
-<pre><code class="shell">set global validate_password_policy = LOW;
-set global validate_password_length = 6;
-</code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">set</span> global validate_password_policy <span class="token operator">=</span> LOW<span class="token punctuation">;</span>
+<span class="token builtin class-name">set</span> global validate_password_length <span class="token operator">=</span> <span class="token number">6</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
 <p><img src="/./images/MySQL%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81%E7%AD%96%E7%95%A5.PNG" alt="img"></p>
 <p><strong>9、修改为自己想要的密码</strong></p>
-<pre><code class="shell">alter user &#39;root&#39;@&#39;localhost&#39; identified by &#39;123456&#39;;
-</code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">alter user <span class="token string">'root'</span>@<span class="token string">'localhost'</span> identified by <span class="token string">'123456'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <p><strong>10、创建wordpress数据库</strong></p>
-<pre><code class="shell">create database wordpress;
-</code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">create database wordpress<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
 <p><strong>11、允许远程登陆然后刷新</strong></p>
-<pre><code class="shell">grant all on *.* to root@&#39;%&#39; identified by &#39;password&#39; with grant option;
-flush privileges;
-</code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">grant all on *.* to root@<span class="token string">'%'</span> identified by <span class="token string">'password'</span> with grant option<span class="token punctuation">;</span>
+flush privileges<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
 <p><strong>12、重启MySQL服务</strong></p>
-<pre><code class="shell">systemctl restart mysqld.service
-</code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">systemctl restart mysqld.service<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <p><strong>13、密码忘记或者策略失败</strong></p>
-<pre><code class="shell">#关闭密码验证策略，url：vi /root/my.cnf
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#关闭密码验证策略，url：vi /root/my.cnf</span>
 skip-grant-tables
-#修改mysql.user表的密码
-update mysql.user set authentication_string=password(&#39;新密码&#39;) where user=&#39;root&#39; ;
-#刷新
-flush privileges ;
-#然后删除skip-grant-tables之后重启MySQL服务
-</code></pre>
+<span class="token comment">#修改mysql.user表的密码</span>
+update mysql.user <span class="token builtin class-name">set</span> <span class="token assign-left variable">authentication_string</span><span class="token operator">=</span>password<span class="token punctuation">(</span><span class="token string">'新密码'</span><span class="token punctuation">)</span> where <span class="token assign-left variable">user</span><span class="token operator">=</span><span class="token string">'root'</span> <span class="token punctuation">;</span>
+<span class="token comment">#刷新</span>
+flush privileges <span class="token punctuation">;</span>
+<span class="token comment">#然后删除skip-grant-tables之后重启MySQL服务</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h2 id="二、安装apache-gt-httpd"><a href="#二、安装apache-gt-httpd" class="headerlink" title="二、安装apache-&gt;httpd"></a>二、安装apache-&gt;httpd</h2><p><strong>1、安装httpd</strong></p>
-<pre><code class="shell">yum install httpd
-</code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yum <span class="token function">install</span> httpd<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <p><strong>2、启动httpd服务</strong></p>
-<pre><code class="shell">systemctl start httpd.service
-</code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">systemctl start httpd.service<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <p><strong>3、设置成开机自启并且刷新</strong></p>
-<pre><code class="shell">systemctl enable httpd.service
-systemctl daemon-reload
-</code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">systemctl <span class="token builtin class-name">enable</span> httpd.service
+systemctl daemon-reload<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
 <h2 id="三、安装php-gt-及相关驱动"><a href="#三、安装php-gt-及相关驱动" class="headerlink" title="三、安装php-&gt;及相关驱动"></a>三、安装php-&gt;及相关驱动</h2><p><strong>1、安装php、php-fpm、php-mysql</strong></p>
-<pre><code class="shell">yum install php php-fpm php-mysql
-</code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yum <span class="token function">install</span> php php-fpm php-mysql<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <p><strong>2、启动php-fpm服务</strong></p>
-<pre><code class="shell">systemctl start php-fpm.service
-</code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">systemctl start php-fpm.service<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <p><strong>3、设置成开机自启并且刷新</strong></p>
-<pre><code class="shell">systemctl enable php-fpm.service
-systemctl daemon-reload
-</code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">systemctl <span class="token builtin class-name">enable</span> php-fpm.service
+systemctl daemon-reload<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
 <h2 id="四、查看三个服务的运行状态"><a href="#四、查看三个服务的运行状态" class="headerlink" title="四、查看三个服务的运行状态"></a>四、查看三个服务的运行状态</h2><p><strong>httpd监听80端口，mysql监听3306端口，php-fpm监听9000端口</strong></p>
-<pre><code class="shell">netstat -tunlp
-</code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">netstat</span> <span class="token parameter variable">-tunlp</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <h2 id="五、安装wordpress官网tar-gz安装包"><a href="#五、安装wordpress官网tar-gz安装包" class="headerlink" title="五、安装wordpress官网tar.gz安装包"></a>五、安装wordpress官网tar.gz安装包</h2><p><strong>2、用wget获取wordpress安装包</strong></p>
-<pre><code class="shell">wget https://ww.wp.xz.cn/wordpress-4.5.20.tar.gz
-</code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">wget</span> https://ww.wp.xz.cn/wordpress-4.5.20.tar.gz<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <p><strong>3、解压安装包到&#x2F;var&#x2F;www路径下</strong></p>
-<pre><code class="shell">tar -zxf wordpress-4.5.20.tar.gz -C /var/www
-</code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">tar</span> <span class="token parameter variable">-zxf</span> wordpress-4.5.20.tar.gz <span class="token parameter variable">-C</span> /var/www<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <p><strong>4、修改httpd的配置文件把默认的映射路径改为&#x2F;var&#x2F;www&#x2F;wordpress</strong>  </p>
-<pre><code class="shell">vi  /etc/httpd/conf/httpd.conf
-# DocumentRoot的值
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">vi</span>  /etc/httpd/conf/httpd.conf
+<span class="token comment"># DocumentRoot的值</span>
 
 **5、保存修改文件退出后重新启动httpd服务**
 
 ```shell
-systemctl restart httpd.service
-</code></pre>
+systemctl restart httpd.service<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p><strong>6、把wordpress目录赋予apache所有权限</strong></p>
-<pre><code class="shell">chown -R apache:apache /var/www/wordpress
-</code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">chown</span> <span class="token parameter variable">-R</span> apache:apache /var/www/wordpress<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h2 id="六、用浏览器启动绑定服务器的域名或者服务器的IP然后就可以开始配置相关的数据"><a href="#六、用浏览器启动绑定服务器的域名或者服务器的IP然后就可以开始配置相关的数据" class="headerlink" title="六、用浏览器启动绑定服务器的域名或者服务器的IP然后就可以开始配置相关的数据"></a>六、用浏览器启动绑定服务器的域名或者服务器的IP然后就可以开始配置相关的数据</h2></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://ajiehome.github.io/hexo-web">ajiehome</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://ajiehome.github.io/hexo-web/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos7%E5%AE%89%E8%A3%85Wordpress/">http://ajiehome.github.io/hexo-web/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos7%E5%AE%89%E8%A3%85Wordpress/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://ajiehome.github.io/hexo-web" target="_blank">阿杰之家</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/06/07/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/Spring%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95%E4%B8%AD%E4%BD%BF%E7%94%A8Bean/" title="Spring静态方法中使用Bean"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Spring静态方法中使用Bean</div></div></a></div><div class="next-post pull-right"><a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos7%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="Centos7常用命令"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Centos7常用命令</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">ajiehome</div><div class="author-info__description">山有扶苏，隰有荷华</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">81</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">11</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ajiehome"><i class="fab fa-github"></i><span>ajiehome</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">Welcome to ajiehome ...</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Centos7%E5%AE%89%E8%A3%85Wordpress%E4%BB%A5%E5%8F%8A%E7%8E%AF%E5%A2%83"><span class="toc-number">1.</span> <span class="toc-text">Centos7安装Wordpress以及环境</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AE%89%E8%A3%85MySQL57%E7%89%88%E6%9C%AC"><span class="toc-number">1.1.</span> <span class="toc-text">一、安装MySQL57版本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%AE%89%E8%A3%85apache-gt-httpd"><span class="toc-number">1.2.</span> <span class="toc-text">二、安装apache-&gt;httpd</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%AE%89%E8%A3%85php-gt-%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%A9%B1%E5%8A%A8"><span class="toc-number">1.3.</span> <span class="toc-text">三、安装php-&gt;及相关驱动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E6%9F%A5%E7%9C%8B%E4%B8%89%E4%B8%AA%E6%9C%8D%E5%8A%A1%E7%9A%84%E8%BF%90%E8%A1%8C%E7%8A%B6%E6%80%81"><span class="toc-number">1.4.</span> <span class="toc-text">四、查看三个服务的运行状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%AE%89%E8%A3%85wordpress%E5%AE%98%E7%BD%91tar-gz%E5%AE%89%E8%A3%85%E5%8C%85"><span class="toc-number">1.5.</span> <span class="toc-text">五、安装wordpress官网tar.gz安装包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E7%94%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E5%90%AF%E5%8A%A8%E7%BB%91%E5%AE%9A%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E5%9F%9F%E5%90%8D%E6%88%96%E8%80%85%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84IP%E7%84%B6%E5%90%8E%E5%B0%B1%E5%8F%AF%E4%BB%A5%E5%BC%80%E5%A7%8B%E9%85%8D%E7%BD%AE%E7%9B%B8%E5%85%B3%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="toc-number">1.6.</span> <span class="toc-text">六、用浏览器启动绑定服务器的域名或者服务器的IP然后就可以开始配置相关的数据</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/06/07/C++%E5%9F%BA%E7%A1%80/C++%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/" title="C++内存分配">C++内存分配</a><time datetime="2023-06-07T07:58:40.000Z" title="发表于 2023-06-07 15:58:40">2023-06-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/06/07/C++%E5%9F%BA%E7%A1%80/C++%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" title="C++基础语法">C++基础语法</a><time datetime="2023-06-07T07:58:40.000Z" title="发表于 2023-06-07 15:58:40">2023-06-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/06/07/C++%E5%9F%BA%E7%A1%80/C++%E8%AF%AD%E6%B3%95_%E7%BB%A7%E6%89%BF/" title="C++语法_继承">C++语法_继承</a><time datetime="2023-06-07T07:58:40.000Z" title="发表于 2023-06-07 15:58:40">2023-06-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/IO%E4%B8%8ENIO/" title="IO与NIO">IO与NIO</a><time datetime="2023-06-07T07:58:40.000Z" title="发表于 2023-06-07 15:58:40">2023-06-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jar%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/" title="Jar后台运行">Jar后台运行</a><time datetime="2023-06-07T07:58:40.000Z" title="发表于 2023-06-07 15:58:40">2023-06-07</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By ajiehome</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
