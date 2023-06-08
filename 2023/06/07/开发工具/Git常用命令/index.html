@@ -1,13 +1,13 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Git常用命令 | 阿杰之家</title><meta name="author" content="ajiehome"><meta name="copyright" content="ajiehome"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Git基本常用命令#初始化一个Git仓库 git init #把文件添加到本地git仓储缓存 git add &quot;file name&quot; #把当前目录下全部文件加入到本地git仓储缓存 git add . #把仓储缓存提交上去 git commit -m&quot;description&quot; #查看所有的远程分支 git remote -v #添加远程分支 git remote add origin &quot;git r">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Git常用命令 | 阿杰之家</title><meta name="author" content="ajiehome"><meta name="copyright" content="ajiehome"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Git基本常用命令#初始化一个Git仓库 git init #把文件添加到本地git仓储缓存 git add &quot;file name&quot; #把当前目录下全部文件加入到本地git仓储缓存 git add . #把仓储缓存提交上去 git commit -m&quot;description&quot; #查看所有的远程分支 git remote -v #添加远程分支 git remo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Git常用命令">
 <meta property="og:url" content="http://ajiehome.github.io/hexo-web/2023/06/07/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/index.html">
 <meta property="og:site_name" content="阿杰之家">
-<meta property="og:description" content="Git基本常用命令#初始化一个Git仓库 git init #把文件添加到本地git仓储缓存 git add &quot;file name&quot; #把当前目录下全部文件加入到本地git仓储缓存 git add . #把仓储缓存提交上去 git commit -m&quot;description&quot; #查看所有的远程分支 git remote -v #添加远程分支 git remote add origin &quot;git r">
+<meta property="og:description" content="Git基本常用命令#初始化一个Git仓库 git init #把文件添加到本地git仓储缓存 git add &quot;file name&quot; #把当前目录下全部文件加入到本地git仓储缓存 git add . #把仓储缓存提交上去 git commit -m&quot;description&quot; #查看所有的远程分支 git remote -v #添加远程分支 git remo">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
 <meta property="article:published_time" content="2023-06-07T07:58:40.000Z">
-<meta property="article:modified_time" content="2023-06-08T08:55:33.261Z">
+<meta property="article:modified_time" content="2023-06-08T08:56:52.404Z">
 <meta property="article:author" content="ajiehome">
 <meta property="article:tag" content="ajiehome">
 <meta property="article:tag" content="阿杰之家">
@@ -18,7 +18,7 @@
   localSearch: {"path":"/./search.xml","preload":false,"top_n_per_article":1,"unescape":true,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
   translate: undefined,
   noticeOutdate: undefined,
-  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  highlight: undefined,
   copy: {
     success: '复制成功',
     error: '复制错误',
@@ -59,7 +59,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2023-06-08 16:55:33'
+  postUpdate: '2023-06-08 16:56:52'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -163,59 +163,59 @@
       }
     }
     detectApple()
-    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">81</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">11</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://api.btstu.cn/sjbz/api.php?lx=dongman&amp;format=images')"><nav id="nav"><span id="blog-info"><a href="/" title="阿杰之家"><span class="site-name">阿杰之家</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Git常用命令</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-06-07T07:58:40.000Z" title="发表于 2023-06-07 15:58:40">2023-06-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-06-08T08:55:33.261Z" title="更新于 2023-06-08 16:55:33">2023-06-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">开发工具</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Git常用命令"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Git基本常用命令"><a href="#Git基本常用命令" class="headerlink" title="Git基本常用命令"></a>Git基本常用命令</h1><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#初始化一个Git仓库</span>
-<span class="token function">git</span> init
-<span class="token comment">#把文件添加到本地git仓储缓存</span>
-<span class="token function">git</span> <span class="token function">add</span> <span class="token string">"file name"</span>
-<span class="token comment">#把当前目录下全部文件加入到本地git仓储缓存</span>
-<span class="token function">git</span> <span class="token function">add</span> <span class="token builtin class-name">.</span>
-<span class="token comment">#把仓储缓存提交上去</span>
-<span class="token function">git</span> commit -m<span class="token string">"description"</span>
-<span class="token comment">#查看所有的远程分支</span>
-<span class="token function">git</span> remote <span class="token parameter variable">-v</span>
-<span class="token comment">#添加远程分支</span>
-<span class="token function">git</span> remote <span class="token function">add</span> origin <span class="token string">"git remote warehouse url"</span>
-<span class="token comment">#移除本地添加的远程分支</span>
-<span class="token function">git</span> remote remove <span class="token string">"remote branch name"</span>
-<span class="token comment">#获取远程分支与本地分支合并</span>
-<span class="token function">git</span> pull
-<span class="token comment">#把本地分支提交到远程分支</span>
-<span class="token function">git</span> push
-<span class="token comment">#查看所有的远程分支和本地分支</span>
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">81</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">11</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://api.btstu.cn/sjbz/api.php?lx=dongman&amp;format=images')"><nav id="nav"><span id="blog-info"><a href="/" title="阿杰之家"><span class="site-name">阿杰之家</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Git常用命令</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-06-07T07:58:40.000Z" title="发表于 2023-06-07 15:58:40">2023-06-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-06-08T08:56:52.404Z" title="更新于 2023-06-08 16:56:52">2023-06-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">开发工具</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Git常用命令"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Git基本常用命令"><a href="#Git基本常用命令" class="headerlink" title="Git基本常用命令"></a>Git基本常用命令</h1><pre><code class="shell">#初始化一个Git仓库
+git init
+#把文件添加到本地git仓储缓存
+git add &quot;file name&quot;
+#把当前目录下全部文件加入到本地git仓储缓存
+git add .
+#把仓储缓存提交上去
+git commit -m&quot;description&quot;
+#查看所有的远程分支
+git remote -v
+#添加远程分支
+git remote add origin &quot;git remote warehouse url&quot;
+#移除本地添加的远程分支
+git remote remove &quot;remote branch name&quot;
+#获取远程分支与本地分支合并
+git pull
+#把本地分支提交到远程分支
+git push
+#查看所有的远程分支和本地分支
 
-<span class="token function">git</span> branch <span class="token parameter variable">-a</span>
-<span class="token comment">#查看所有的本地分支</span>
-<span class="token function">git</span> branch
-<span class="token comment">#本地分支与远程分支关联</span>
-<span class="token function">git</span> branch --set-upstream-to<span class="token operator">=</span>origin/master master
-<span class="token comment">#创建本地分支</span>
-<span class="token function">git</span> branch <span class="token string">"local branch name"</span>
+git branch -a
+#查看所有的本地分支
+git branch
+#本地分支与远程分支关联
+git branch --set-upstream-to=origin/master master
+#创建本地分支
+git branch &quot;local branch name&quot;
 
-<span class="token comment">#清除输入过的账号密码</span>
-<span class="token function">git</span> config <span class="token parameter variable">--system</span> <span class="token parameter variable">--unset</span> credential.helper
+#清除输入过的账号密码
+git config --system --unset credential.helper
 
-<span class="token comment">#回滚</span>
-<span class="token function">git</span> log
-<span class="token function">git</span> checkout <span class="token punctuation">[</span>commit id<span class="token punctuation">]</span> <span class="token punctuation">[</span>file name<span class="token punctuation">]</span>
+#回滚
+git log
+git checkout [commit id] [file name]
 commit id:commit提交的编号
-<span class="token function">file</span> name:需要回滚的文件名称，不输入则整个版本回滚
+file name:需要回滚的文件名称，不输入则整个版本回滚
 
-<span class="token comment">#克隆远程仓库到本地</span>
-<span class="token comment">#fileName:为指定本地文件夹的名字，如果没有就会使用远程仓库默认s的名称</span>
-<span class="token function">git</span> clone <span class="token string">"git remote warehouse url"</span> <span class="token punctuation">[</span> specified <span class="token function">file</span> name<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="谨慎使用"><a href="#谨慎使用" class="headerlink" title="谨慎使用"></a>谨慎使用</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#'fatal: refusing to merge unrelated histories':无法合并两个不相干分支，此命令可强行合并建立关系</span>
-<span class="token function">git</span> pull origin master --allow-unrelated-histories<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
+#克隆远程仓库到本地
+#fileName:为指定本地文件夹的名字，如果没有就会使用远程仓库默认s的名称
+git clone &quot;git remote warehouse url&quot; [ specified file name]
+</code></pre>
+<h2 id="谨慎使用"><a href="#谨慎使用" class="headerlink" title="谨慎使用"></a>谨慎使用</h2><pre><code class="shell">#&#39;fatal: refusing to merge unrelated histories&#39;:无法合并两个不相干分支，此命令可强行合并建立关系
+git pull origin master --allow-unrelated-histories
+</code></pre>
 <h2 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h2><p><code>.gitignore</code>：文件的内容将是忽略提交的部分，也就是git不会检索该文件指定的文件和文件夹</p>
 <p>例如：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">HELP.md
+<pre><code class="shell">HELP.md
 target/
-<span class="token operator">!</span>.mvn/wrapper/maven-wrapper.jar
-<span class="token operator">!</span>**/src/main/**
-<span class="token operator">!</span>**/src/test/**
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
 
-<span class="token comment">### STS ###</span>
+### STS ###
 .apt_generated
 .classpath
 .factorypath
@@ -224,13 +224,13 @@ target/
 .springBeans
 .sts4-cache
 
-<span class="token comment">### IntelliJ IDEA ###</span>
+### IntelliJ IDEA ###
 .idea
 *.iws
 *.iml
 *.ipr
 
-<span class="token comment">### NetBeans ###</span>
+### NetBeans ###
 /nbproject/private/
 /nbbuild/
 /dist/
@@ -238,8 +238,8 @@ target/
 /.nb-gradle/
 build/
 
-<span class="token comment">### VS Code ###</span>
-.vscode/<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+### VS Code ###
+.vscode/
+</code></pre>
 <p>更多高级操作见下一篇：Git操作</p>
 </article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://ajiehome.github.io/hexo-web">ajiehome</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://ajiehome.github.io/hexo-web/2023/06/07/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">http://ajiehome.github.io/hexo-web/2023/06/07/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://ajiehome.github.io/hexo-web" target="_blank">阿杰之家</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/NodeJS%E9%85%8D%E7%BD%AE%E5%88%9B%E5%BB%BAVUE%E9%A1%B9%E7%9B%AE/" title="NodeJS配置创建VUE项目"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">NodeJS配置创建VUE项目</div></div></a></div><div class="next-post pull-right"><a href="/2023/06/07/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/Git%E8%AE%BE%E7%BD%AE%E7%BD%91%E7%BB%9C%E4%BB%A3%E7%90%86/" title="Git设置网络代理"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Git设置网络代理</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">ajiehome</div><div class="author-info__description">山有扶苏，隰有荷华</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">81</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">11</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ajiehome"><i class="fab fa-github"></i><span>ajiehome</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">Welcome to ajiehome ...</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Git%E5%9F%BA%E6%9C%AC%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">1.</span> <span class="toc-text">Git基本常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%A8%E6%85%8E%E4%BD%BF%E7%94%A8"><span class="toc-number">1.1.</span> <span class="toc-text">谨慎使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6"><span class="toc-number">1.2.</span> <span class="toc-text">文件</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/06/07/C++%E5%9F%BA%E7%A1%80/C++%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/" title="C++内存分配">C++内存分配</a><time datetime="2023-06-07T07:58:40.000Z" title="发表于 2023-06-07 15:58:40">2023-06-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/06/07/C++%E5%9F%BA%E7%A1%80/C++%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" title="C++基础语法">C++基础语法</a><time datetime="2023-06-07T07:58:40.000Z" title="发表于 2023-06-07 15:58:40">2023-06-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/06/07/C++%E5%9F%BA%E7%A1%80/C++%E8%AF%AD%E6%B3%95_%E7%BB%A7%E6%89%BF/" title="C++语法_继承">C++语法_继承</a><time datetime="2023-06-07T07:58:40.000Z" title="发表于 2023-06-07 15:58:40">2023-06-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/IO%E4%B8%8ENIO/" title="IO与NIO">IO与NIO</a><time datetime="2023-06-07T07:58:40.000Z" title="发表于 2023-06-07 15:58:40">2023-06-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jar%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/" title="Jar后台运行">Jar后台运行</a><time datetime="2023-06-07T07:58:40.000Z" title="发表于 2023-06-07 15:58:40">2023-06-07</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By ajiehome</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
