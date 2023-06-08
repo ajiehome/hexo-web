@@ -83,7 +83,7 @@ polyfill:
 # https://highlightjs.org
 highlight:
     enable: true
-    style: Github Dark
+    style: github
 
 # KaTeX math rendering
 math:
