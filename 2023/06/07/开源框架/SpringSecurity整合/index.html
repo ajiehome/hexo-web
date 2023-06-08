@@ -7,7 +7,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
 <meta property="article:published_time" content="2023-06-07T07:58:40.000Z">
-<meta property="article:modified_time" content="2023-06-08T08:33:01.743Z">
+<meta property="article:modified_time" content="2023-06-08T08:35:18.365Z">
 <meta property="article:author" content="ajiehome">
 <meta property="article:tag" content="ajiehome">
 <meta property="article:tag" content="阿杰之家">
@@ -18,7 +18,7 @@
   localSearch: {"path":"/./search.xml","preload":false,"top_n_per_article":1,"unescape":true,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
   translate: undefined,
   noticeOutdate: undefined,
-  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  highlight: undefined,
   copy: {
     success: '复制成功',
     error: '复制错误',
@@ -59,7 +59,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2023-06-08 16:33:01'
+  postUpdate: '2023-06-08 16:35:18'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -163,213 +163,218 @@
       }
     }
     detectApple()
-    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">81</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">11</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://api.btstu.cn/sjbz/api.php?lx=dongman&amp;format=images')"><nav id="nav"><span id="blog-info"><a href="/" title="阿杰之家"><span class="site-name">阿杰之家</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">SpringSecurity整合</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-06-07T07:58:40.000Z" title="发表于 2023-06-07 15:58:40">2023-06-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-06-08T08:33:01.743Z" title="更新于 2023-06-08 16:33:01">2023-06-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/">开源框架</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="SpringSecurity整合"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><hr>
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">81</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">11</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://api.btstu.cn/sjbz/api.php?lx=dongman&amp;format=images')"><nav id="nav"><span id="blog-info"><a href="/" title="阿杰之家"><span class="site-name">阿杰之家</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">SpringSecurity整合</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-06-07T07:58:40.000Z" title="发表于 2023-06-07 15:58:40">2023-06-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-06-08T08:35:18.365Z" title="更新于 2023-06-08 16:35:18">2023-06-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/">开源框架</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="SpringSecurity整合"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><hr>
 <h2 id="title-SpringSecurity初体验date-2022-10-13-10-09-19-248updated-2022-10-13-14-40-09-804url-x2F-archives-x2F-springsecurity-chu-ti-yancategories-SpringSecuritytags-SpringSecurity"><a href="#title-SpringSecurity初体验date-2022-10-13-10-09-19-248updated-2022-10-13-14-40-09-804url-x2F-archives-x2F-springsecurity-chu-ti-yancategories-SpringSecuritytags-SpringSecurity" class="headerlink" title="title: SpringSecurity初体验date: 2022-10-13 10:09:19.248updated: 2022-10-13 14:40:09.804url: &#x2F;archives&#x2F;springsecurity-chu-ti-yancategories:- SpringSecuritytags:- SpringSecurity"></a>title: SpringSecurity初体验<br>date: 2022-10-13 10:09:19.248<br>updated: 2022-10-13 14:40:09.804<br>url: &#x2F;archives&#x2F;springsecurity-chu-ti-yan<br>categories:<br>- SpringSecurity<br>tags:<br>- SpringSecurity</h2><p>首先引入pom依赖</p>
-<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-security<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<pre><code class="xml">&lt;dependency&gt;
+      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-boot-starter-security&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
 <p>继承WebSecurityConfigurerAdapter复写如下方法，完成配置</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
+<pre><code class="java">/**
  * @author huangJie
  * @version 1.0v
  * @date 2022/10/12 10:33
- */</span>
-<span class="token annotation punctuation">@Configuration</span>
-<span class="token annotation punctuation">@EnableWebSecurity</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SecurityConfig</span> <span class="token keyword">extends</span> <span class="token class-name">WebSecurityConfigurerAdapter</span> <span class="token punctuation">&#123;</span>
+ */
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig extends WebSecurityConfigurerAdapter &#123;
 
 
-    <span class="token annotation punctuation">@Resource</span>
-    <span class="token keyword">private</span> <span class="token class-name">UserService</span> userService<span class="token punctuation">;</span>
+    @Resource
+    private UserService userService;
 
-    <span class="token annotation punctuation">@Resource</span>
-    <span class="token keyword">private</span> <span class="token class-name">SecurityExcludeUrlProperty</span> securityExcludeUrlProperty<span class="token punctuation">;</span>
+    @Resource
+    private SecurityExcludeUrlProperty securityExcludeUrlProperty;
 
-    <span class="token comment">/**
+    /**
      * 自定义的编码密码接口，这里直接返回的明码，demo不做加密编码处理
      *
      * @return 接口实现
-     */</span>
-    <span class="token annotation punctuation">@Bean</span>
-    <span class="token keyword">public</span> <span class="token class-name">PasswordEncoder</span> <span class="token function">passwordEncoder</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">PasswordEncoder</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token annotation punctuation">@Override</span>
-            <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">encode</span><span class="token punctuation">(</span><span class="token class-name">CharSequence</span> charSequence<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">)</span> charSequence<span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
+     */
+    @Bean
+    public PasswordEncoder passwordEncoder() &#123;
+        return new PasswordEncoder() &#123;
+            @Override
+            public String encode(CharSequence charSequence) &#123;
+                return (String) charSequence;
+            &#125;
 
-            <span class="token annotation punctuation">@Override</span>
-            <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">matches</span><span class="token punctuation">(</span><span class="token class-name">CharSequence</span> charSequence<span class="token punctuation">,</span> <span class="token class-name">String</span> s<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                <span class="token keyword">return</span> charSequence<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
-        <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+            @Override
+            public boolean matches(CharSequence charSequence, String s) &#123;
+                return charSequence.equals(s);
+            &#125;
+        &#125;;
+    &#125;
 
-    <span class="token comment">/**
+    /**
      * 配置HttpSecurity
      *
      * @param http HttpSecurity
      * @throws Exception 产生异常
-     */</span>
-    <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">protected</span> <span class="token keyword">void</span> <span class="token function">configure</span><span class="token punctuation">(</span><span class="token class-name">HttpSecurity</span> http<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">Exception</span> <span class="token punctuation">&#123;</span>
-        http<span class="token punctuation">.</span><span class="token function">authorizeRequests</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-                <span class="token punctuation">.</span><span class="token function">antMatchers</span><span class="token punctuation">(</span>securityExcludeUrlProperty<span class="token punctuation">.</span><span class="token function">getUri</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">permitAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-                <span class="token punctuation">.</span><span class="token function">anyRequest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">authenticated</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+     */
+    @Override
+    protected void configure(HttpSecurity http) throws Exception &#123;
+        http.authorizeRequests()
+                .antMatchers(securityExcludeUrlProperty.getUri()).permitAll()
+                .anyRequest().authenticated()
 
-                <span class="token punctuation">.</span><span class="token function">and</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-                <span class="token punctuation">.</span><span class="token function">addFilterBefore</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">TokenFilter</span><span class="token punctuation">(</span>userService<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token class-name">UsernamePasswordAuthenticationFilter</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>
+                .and()
+                .addFilterBefore(new TokenFilter(userService), UsernamePasswordAuthenticationFilter.class)
 
-                <span class="token punctuation">.</span><span class="token function">exceptionHandling</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-                <span class="token punctuation">.</span><span class="token function">accessDeniedHandler</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">CustomAccessDeniedHandler</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-                <span class="token punctuation">.</span><span class="token function">authenticationEntryPoint</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">CustomAuthenticationEntryPoint</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                .exceptionHandling()
+                .accessDeniedHandler(new CustomAccessDeniedHandler())
+                .authenticationEntryPoint(new CustomAuthenticationEntryPoint())
 
-                <span class="token punctuation">.</span><span class="token function">and</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">sessionManagement</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">sessionCreationPolicy</span><span class="token punctuation">(</span><span class="token class-name">SessionCreationPolicy</span><span class="token punctuation">.</span><span class="token constant">STATELESS</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">disable</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).disable()
 
-                <span class="token punctuation">.</span><span class="token function">formLogin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">disable</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-                <span class="token punctuation">.</span><span class="token function">logout</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">disable</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-                <span class="token punctuation">.</span><span class="token function">csrf</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">disable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+                .formLogin().disable()
+                .logout().disable()
+                .csrf().disable();
+    &#125;
 
-    <span class="token comment">/**
+    /**
      * 用来配置自定义的鉴权操作
      *
      * @param auth 用来配置支持鉴权的构建器
      * @throws Exception 产生异常
-     */</span>
-    <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">protected</span> <span class="token keyword">void</span> <span class="token function">configure</span><span class="token punctuation">(</span><span class="token class-name">AuthenticationManagerBuilder</span> auth<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">Exception</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">configure</span><span class="token punctuation">(</span>auth<span class="token punctuation">)</span><span class="token punctuation">;</span>
+     */
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception &#123;
+        super.configure(auth);
 
-        <span class="token comment">// auth.authenticationProvider(new AuthenticationProvider() &#123;</span>
-        <span class="token comment">//     @Override</span>
-        <span class="token comment">//     public Authentication authenticate(Authentication authentication) throws AuthenticationException &#123;</span>
-        <span class="token comment">//         return null;</span>
-        <span class="token comment">//     &#125;</span>
-        <span class="token comment">//</span>
-        <span class="token comment">//     @Override</span>
-        <span class="token comment">//     public boolean supports(Class&lt;?> authentication) &#123;</span>
-        <span class="token comment">//         return true;</span>
-        <span class="token comment">//     &#125;</span>
-        <span class="token comment">// &#125;);</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+        // auth.authenticationProvider(new AuthenticationProvider() &#123;
+        //     @Override
+        //     public Authentication authenticate(Authentication authentication) throws AuthenticationException &#123;
+        //         return null;
+        //     &#125;
+        //
+        //     @Override
+        //     public boolean supports(Class&lt;?&gt; authentication) &#123;
+        //         return true;
+        //     &#125;
+        // &#125;);
+    &#125;
+&#125;
+</code></pre>
 <p>自定义HttpSecurity之后的调用链路</p>
 <blockquote>
 <p>Security filter chain:<br>  WebAsyncManagerIntegrationFilter<br>  SecurityContextPersistenceFilter<br>  HeaderWriterFilter<br>  TokenFilter<br>  RequestCacheAwareFilter<br>  SecurityContextHolderAwareRequestFilter<br>  AnonymousAuthenticationFilter<br>  ExceptionTranslationFilter<br>  FilterSecurityInterceptor</p>
 </blockquote>
 <p>其中TokenFilter为自定义的Filter</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
+<pre><code class="java">/**
  * @author huangJie
  * @version 1.0v
  * @date 2022/10/12 11:00
- */</span>
-<span class="token annotation punctuation">@Slf4j</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TokenFilter</span> <span class="token keyword">extends</span> <span class="token class-name">GenericFilterBean</span> <span class="token punctuation">&#123;</span>
+ */
+@Slf4j
+public class TokenFilter extends GenericFilterBean &#123;
 
-    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token class-name">UserService</span> userService<span class="token punctuation">;</span>
+    private final UserService userService;
 
-    <span class="token keyword">public</span> <span class="token class-name">TokenFilter</span><span class="token punctuation">(</span><span class="token class-name">UserService</span> userService<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>userService <span class="token operator">=</span> userService<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+    public TokenFilter(UserService userService) &#123;
+        this.userService = userService;
+    &#125;
 
-    <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">doFilter</span><span class="token punctuation">(</span><span class="token class-name">ServletRequest</span> servletRequest<span class="token punctuation">,</span> <span class="token class-name">ServletResponse</span> servletResponse<span class="token punctuation">,</span> <span class="token class-name">FilterChain</span> filterChain<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IOException</span><span class="token punctuation">,</span> <span class="token class-name">ServletException</span> <span class="token punctuation">&#123;</span>
-        <span class="token class-name">HttpServletRequest</span> request <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">HttpServletRequest</span><span class="token punctuation">)</span> servletRequest<span class="token punctuation">;</span>
-        <span class="token class-name">String</span> authorization <span class="token operator">=</span> request<span class="token punctuation">.</span><span class="token function">getHeader</span><span class="token punctuation">(</span><span class="token string">"Authorization"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">StringUtils</span><span class="token punctuation">.</span><span class="token function">hasLength</span><span class="token punctuation">(</span>authorization<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-            <span class="token class-name">UserDetails</span> userDetails <span class="token operator">=</span> userService<span class="token punctuation">.</span><span class="token function">loadUserByUsername</span><span class="token punctuation">(</span>authorization<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token class-name">SecurityContextHolder</span><span class="token punctuation">.</span><span class="token function">getContext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setAuthentication</span><span class="token punctuation">(</span>
-                    <span class="token keyword">new</span> <span class="token class-name">UsernamePasswordAuthenticationToken</span><span class="token punctuation">(</span>userDetails<span class="token punctuation">.</span><span class="token function">getUsername</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> userDetails<span class="token punctuation">.</span><span class="token function">getPassword</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-        filterChain<span class="token punctuation">.</span><span class="token function">doFilter</span><span class="token punctuation">(</span>servletRequest<span class="token punctuation">,</span> servletResponse<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    @Override
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException &#123;
+        HttpServletRequest request = (HttpServletRequest) servletRequest;
+        String authorization = request.getHeader(&quot;Authorization&quot;);
+        if (StringUtils.hasLength(authorization))&#123;
+            UserDetails userDetails = userService.loadUserByUsername(authorization);
+            SecurityContextHolder.getContext().setAuthentication(
+                    new UsernamePasswordAuthenticationToken(userDetails.getUsername(), userDetails.getPassword()));
+        &#125;
+        filterChain.doFilter(servletRequest, servletResponse);
+    &#125;
+&#125;
+</code></pre>
 <p>对于用户信息获取需要实现<code>UserDetailsService</code>接口，这里并未对用户信息做复杂操作，只为过登录校验做了处理</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
+<pre><code class="java">/**
  * @author huangJie
  * @version 1.0v
  * @date 2022/10/12 14:02
- */</span>
-<span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">UserService</span> <span class="token keyword">extends</span> <span class="token class-name">UserDetailsService</span> <span class="token punctuation">&#123;</span>
+ */
+public interface UserService extends UserDetailsService &#123;
 
-<span class="token punctuation">&#125;</span>
+&#125;
 
-<span class="token comment">/**
+/**
  * @author huangJie
  * @version 1.0v
  * @date 2022/10/12 14:02
- */</span>
-<span class="token annotation punctuation">@Service</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">UserServiceImpl</span> <span class="token keyword">implements</span> <span class="token class-name">UserService</span> <span class="token punctuation">&#123;</span>
-    <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> <span class="token class-name">UserDetails</span> <span class="token function">loadUserByUsername</span><span class="token punctuation">(</span><span class="token class-name">String</span> username<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">UsernameNotFoundException</span> <span class="token punctuation">&#123;</span>
-        <span class="token class-name">UserEntity</span> user <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">UserEntity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        user<span class="token punctuation">.</span><span class="token function">setUsername</span><span class="token punctuation">(</span>username<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        user<span class="token punctuation">.</span><span class="token function">setPassword</span><span class="token punctuation">(</span>username<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> user<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+ */
+@Service
+public class UserServiceImpl implements UserService &#123;
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException &#123;
+        UserEntity user = new UserEntity();
+        user.setUsername(username);
+        user.setPassword(username);
+        return user;
+    &#125;
+&#125;
+</code></pre>
 <p>其中<code>UserEntity</code>也是实现自UserDetails类</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
+<pre><code class="java">/**
  * @author huangJie
  * @version 1.0v
  * @date 2022/10/12 10:44
- */</span>
-<span class="token annotation punctuation">@Setter</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">UserEntity</span> <span class="token keyword">implements</span> <span class="token class-name">UserDetails</span><span class="token punctuation">,</span> <span class="token class-name">Serializable</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">long</span> serialVersionUID <span class="token operator">=</span> <span class="token number">3532830780866118325L</span><span class="token punctuation">;</span>
+ */
+@Setter
+public class UserEntity implements UserDetails, Serializable &#123;
+    private static final long serialVersionUID = 3532830780866118325L;
 
 
-    <span class="token keyword">private</span> <span class="token class-name">String</span> username<span class="token punctuation">;</span>
-    <span class="token keyword">private</span> <span class="token class-name">String</span> password<span class="token punctuation">;</span>
-    <span class="token keyword">private</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> roles <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">long</span> serialVersionUID <span class="token operator">=</span> <span class="token number">8112282703158213813L</span><span class="token punctuation">;</span>
+    private String username;
+    private String password;
+    private List&lt;String&gt; roles = new ArrayList&lt;String&gt;() &#123;
+        private static final long serialVersionUID = 8112282703158213813L;
 
-        <span class="token punctuation">&#123;</span>
-            <span class="token function">add</span><span class="token punctuation">(</span><span class="token string">"ADMIN"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token function">add</span><span class="token punctuation">(</span><span class="token string">"USER"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+        &#123;
+            add(&quot;ADMIN&quot;);
+            add(&quot;USER&quot;);
+        &#125;
+    &#125;;
 
-    <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> <span class="token class-name">Collection</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span> <span class="token keyword">extends</span> <span class="token class-name">GrantedAuthority</span><span class="token punctuation">></span></span> <span class="token function">getAuthorities</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">GrantedAuthority</span><span class="token punctuation">></span></span> auth <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">String</span> role <span class="token operator">:</span> roles<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            auth<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">SimpleGrantedAuthority</span><span class="token punctuation">(</span>role<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-        <span class="token keyword">return</span> auth<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+    @Override
+    public Collection&lt;? extends GrantedAuthority&gt; getAuthorities() &#123;
+        List&lt;GrantedAuthority&gt; auth = new ArrayList&lt;&gt;();
+        for (String role : roles) &#123;
+            auth.add(new SimpleGrantedAuthority(role));
+        &#125;
+        return auth;
+    &#125;
 
-    <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getPassword</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">return</span> password<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+    @Override
+    public String getPassword() &#123;
+        return password;
+    &#125;
 
-    <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getUsername</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">return</span> username<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+    @Override
+    public String getUsername() &#123;
+        return username;
+    &#125;
 
-    <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">isAccountNonExpired</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+    @Override
+    public boolean isAccountNonExpired() &#123;
+        return true;
+    &#125;
 
-    <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">isAccountNonLocked</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+    @Override
+    public boolean isAccountNonLocked() &#123;
+        return true;
+    &#125;
 
-    <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">isCredentialsNonExpired</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+    @Override
+    public boolean isCredentialsNonExpired() &#123;
+        return true;
+    &#125;
 
-    <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">isEnabled</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://ajiehome.github.io/hexo-web">ajiehome</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://ajiehome.github.io/hexo-web/2023/06/07/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/SpringSecurity%E6%95%B4%E5%90%88/">http://ajiehome.github.io/hexo-web/2023/06/07/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/SpringSecurity%E6%95%B4%E5%90%88/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://ajiehome.github.io/hexo-web" target="_blank">阿杰之家</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/06/07/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/SpringCloud%E7%AC%94%E8%AE%B0/" title="SpringCloud笔记"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">SpringCloud笔记</div></div></a></div><div class="next-post pull-right"><a href="/2023/06/07/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/Spring%E4%B8%8A%E4%B8%8B%E6%96%87ApplicationContext/" title="Spring上下文ApplicationContext"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Spring上下文ApplicationContext</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">ajiehome</div><div class="author-info__description">山有扶苏，隰有荷华</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">81</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">11</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ajiehome"><i class="fab fa-github"></i><span>ajiehome</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">Welcome to ajiehome ...</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#title-SpringSecurity%E5%88%9D%E4%BD%93%E9%AA%8Cdate-2022-10-13-10-09-19-248updated-2022-10-13-14-40-09-804url-x2F-archives-x2F-springsecurity-chu-ti-yancategories-SpringSecuritytags-SpringSecurity"><span class="toc-number">1.</span> <span class="toc-text">title: SpringSecurity初体验date: 2022-10-13 10:09:19.248updated: 2022-10-13 14:40:09.804url: &#x2F;archives&#x2F;springsecurity-chu-ti-yancategories:- SpringSecuritytags:- SpringSecurity</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/06/07/C++%E5%9F%BA%E7%A1%80/C++%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/" title="C++内存分配">C++内存分配</a><time datetime="2023-06-07T07:58:40.000Z" title="发表于 2023-06-07 15:58:40">2023-06-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/06/07/C++%E5%9F%BA%E7%A1%80/C++%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" title="C++基础语法">C++基础语法</a><time datetime="2023-06-07T07:58:40.000Z" title="发表于 2023-06-07 15:58:40">2023-06-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/06/07/C++%E5%9F%BA%E7%A1%80/C++%E8%AF%AD%E6%B3%95_%E7%BB%A7%E6%89%BF/" title="C++语法_继承">C++语法_继承</a><time datetime="2023-06-07T07:58:40.000Z" title="发表于 2023-06-07 15:58:40">2023-06-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/IO%E4%B8%8ENIO/" title="IO与NIO">IO与NIO</a><time datetime="2023-06-07T07:58:40.000Z" title="发表于 2023-06-07 15:58:40">2023-06-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jar%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/" title="Jar后台运行">Jar后台运行</a><time datetime="2023-06-07T07:58:40.000Z" title="发表于 2023-06-07 15:58:40">2023-06-07</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By ajiehome</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
+    @Override
+    public boolean isEnabled() &#123;
+        return true;
+    &#125;
+&#125;
+</code></pre>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://ajiehome.github.io/hexo-web">ajiehome</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://ajiehome.github.io/hexo-web/2023/06/07/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/SpringSecurity%E6%95%B4%E5%90%88/">http://ajiehome.github.io/hexo-web/2023/06/07/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/SpringSecurity%E6%95%B4%E5%90%88/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://ajiehome.github.io/hexo-web" target="_blank">阿杰之家</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/06/07/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/SpringCloud%E7%AC%94%E8%AE%B0/" title="SpringCloud笔记"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">SpringCloud笔记</div></div></a></div><div class="next-post pull-right"><a href="/2023/06/07/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/Spring%E4%B8%8A%E4%B8%8B%E6%96%87ApplicationContext/" title="Spring上下文ApplicationContext"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Spring上下文ApplicationContext</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">ajiehome</div><div class="author-info__description">山有扶苏，隰有荷华</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">81</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">11</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ajiehome"><i class="fab fa-github"></i><span>ajiehome</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">Welcome to ajiehome ...</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#title-SpringSecurity%E5%88%9D%E4%BD%93%E9%AA%8Cdate-2022-10-13-10-09-19-248updated-2022-10-13-14-40-09-804url-x2F-archives-x2F-springsecurity-chu-ti-yancategories-SpringSecuritytags-SpringSecurity"><span class="toc-number">1.</span> <span class="toc-text">title: SpringSecurity初体验date: 2022-10-13 10:09:19.248updated: 2022-10-13 14:40:09.804url: &#x2F;archives&#x2F;springsecurity-chu-ti-yancategories:- SpringSecuritytags:- SpringSecurity</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/06/07/C++%E5%9F%BA%E7%A1%80/C++%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/" title="C++内存分配">C++内存分配</a><time datetime="2023-06-07T07:58:40.000Z" title="发表于 2023-06-07 15:58:40">2023-06-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/06/07/C++%E5%9F%BA%E7%A1%80/C++%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" title="C++基础语法">C++基础语法</a><time datetime="2023-06-07T07:58:40.000Z" title="发表于 2023-06-07 15:58:40">2023-06-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/06/07/C++%E5%9F%BA%E7%A1%80/C++%E8%AF%AD%E6%B3%95_%E7%BB%A7%E6%89%BF/" title="C++语法_继承">C++语法_继承</a><time datetime="2023-06-07T07:58:40.000Z" title="发表于 2023-06-07 15:58:40">2023-06-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/IO%E4%B8%8ENIO/" title="IO与NIO">IO与NIO</a><time datetime="2023-06-07T07:58:40.000Z" title="发表于 2023-06-07 15:58:40">2023-06-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jar%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/" title="Jar后台运行">Jar后台运行</a><time datetime="2023-06-07T07:58:40.000Z" title="发表于 2023-06-07 15:58:40">2023-06-07</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By ajiehome</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

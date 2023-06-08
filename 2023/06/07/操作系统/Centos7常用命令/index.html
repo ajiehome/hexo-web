@@ -1,13 +1,13 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Centos7常用命令 | 阿杰之家</title><meta name="author" content="ajiehome"><meta name="copyright" content="ajiehome"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Centos7常用命令防火墙相关命令  防火墙的开启、关闭、重启、与状态  #开启 systemctl start   firewalld.service #关闭 systemctl stop    firewalld.service #重启 systemctl restart firewalld.service #状态 systemctl status  firewalld.service #设">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Centos7常用命令 | 阿杰之家</title><meta name="author" content="ajiehome"><meta name="copyright" content="ajiehome"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Centos7常用命令防火墙相关命令  防火墙的开启、关闭、重启、与状态  #开启  systemctl start   firewalld.service  #关闭  systemctl stop    firewalld.service  #重启  systemctl restart firewalld.service  #状态  systemctl status  firewalld.ser">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Centos7常用命令">
 <meta property="og:url" content="http://ajiehome.github.io/hexo-web/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos7%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/index.html">
 <meta property="og:site_name" content="阿杰之家">
-<meta property="og:description" content="Centos7常用命令防火墙相关命令  防火墙的开启、关闭、重启、与状态  #开启 systemctl start   firewalld.service #关闭 systemctl stop    firewalld.service #重启 systemctl restart firewalld.service #状态 systemctl status  firewalld.service #设">
+<meta property="og:description" content="Centos7常用命令防火墙相关命令  防火墙的开启、关闭、重启、与状态  #开启  systemctl start   firewalld.service  #关闭  systemctl stop    firewalld.service  #重启  systemctl restart firewalld.service  #状态  systemctl status  firewalld.ser">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
 <meta property="article:published_time" content="2023-06-07T07:58:40.000Z">
-<meta property="article:modified_time" content="2023-06-08T08:33:01.743Z">
+<meta property="article:modified_time" content="2023-06-08T08:35:18.365Z">
 <meta property="article:author" content="ajiehome">
 <meta property="article:tag" content="ajiehome">
 <meta property="article:tag" content="阿杰之家">
@@ -18,7 +18,7 @@
   localSearch: {"path":"/./search.xml","preload":false,"top_n_per_article":1,"unescape":true,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
   translate: undefined,
   noticeOutdate: undefined,
-  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  highlight: undefined,
   copy: {
     success: '复制成功',
     error: '复制错误',
@@ -59,7 +59,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2023-06-08 16:33:01'
+  postUpdate: '2023-06-08 16:35:18'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -163,122 +163,139 @@
       }
     }
     detectApple()
-    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">81</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">11</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://api.btstu.cn/sjbz/api.php?lx=dongman&amp;format=images')"><nav id="nav"><span id="blog-info"><a href="/" title="阿杰之家"><span class="site-name">阿杰之家</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Centos7常用命令</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-06-07T07:58:40.000Z" title="发表于 2023-06-07 15:58:40">2023-06-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-06-08T08:33:01.743Z" title="更新于 2023-06-08 16:33:01">2023-06-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Centos7常用命令"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Centos7常用命令"><a href="#Centos7常用命令" class="headerlink" title="Centos7常用命令"></a>Centos7常用命令</h1><p><strong>防火墙相关命令</strong></p>
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">81</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">11</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://api.btstu.cn/sjbz/api.php?lx=dongman&amp;format=images')"><nav id="nav"><span id="blog-info"><a href="/" title="阿杰之家"><span class="site-name">阿杰之家</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Centos7常用命令</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-06-07T07:58:40.000Z" title="发表于 2023-06-07 15:58:40">2023-06-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-06-08T08:35:18.365Z" title="更新于 2023-06-08 16:35:18">2023-06-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Centos7常用命令"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Centos7常用命令"><a href="#Centos7常用命令" class="headerlink" title="Centos7常用命令"></a>Centos7常用命令</h1><p><strong>防火墙相关命令</strong></p>
 <ul>
 <li><p>防火墙的开启、关闭、重启、与状态</p>
- <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#开启</span>
-systemctl start   firewalld.service
-<span class="token comment">#关闭</span>
-systemctl stop    firewalld.service
-<span class="token comment">#重启</span>
-systemctl restart firewalld.service
-<span class="token comment">#状态</span>
-systemctl status  firewalld.service
-<span class="token comment">#设置开机自启</span>
-systemctl <span class="token builtin class-name">enable</span>  firewalld.service
-<span class="token comment">#关闭开机自启</span>
-systemctl disable firewalld.service
-
-<span class="token comment">#指定IP放行指定端口</span>
-firewall-cmd <span class="token parameter variable">--permanent</span> --add-rich-rule<span class="token operator">=</span><span class="token string">"rule family="</span>ipv4<span class="token string">" source address="</span><span class="token number">192.168</span>.142.166<span class="token string">" port protocol="</span>tcp<span class="token string">" port="</span><span class="token number">5432</span><span class="token string">" accept"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre><code class="shell"> #开启
+ systemctl start   firewalld.service
+ #关闭
+ systemctl stop    firewalld.service
+ #重启
+ systemctl restart firewalld.service
+ #状态
+ systemctl status  firewalld.service
+ #设置开机自启
+ systemctl enable  firewalld.service
+ #关闭开机自启
+ systemctl disable firewalld.service
+ 
+ #指定IP放行指定端口
+ firewall-cmd --permanent --add-rich-rule=&quot;rule family=&quot;ipv4&quot; source address=&quot;192.168.142.166&quot; port protocol=&quot;tcp&quot; port=&quot;5432&quot; accept&quot;
+</code></pre>
 </li>
 <li><p>查看所有公开项目</p>
- <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#查看所有公开项</span>
-firewall-cmd --list-all
-<span class="token comment">#查看端口是否放行</span>
-firewall-cmd <span class="token parameter variable">--zone</span><span class="token operator">=</span>public --query-port<span class="token operator">=</span><span class="token number">80</span>/tcp<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<pre><code class="shell"> #查看所有公开项
+ firewall-cmd --list-all
+ #查看端口是否放行
+ firewall-cmd --zone=public --query-port=80/tcp
+</code></pre>
 </li>
 <li><p>防火墙放行端口或服务</p>
- <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#添加放行端口</span>
-firewall-cmd <span class="token parameter variable">--zone</span><span class="token operator">=</span>public --add-port<span class="token operator">=</span><span class="token number">80</span>/tcp <span class="token parameter variable">--permanent</span>
-<span class="token comment">#重新加载所有的设置项</span>
-firewall-cmd <span class="token parameter variable">--reload</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#添加放行服务</span>
-firewall-cmd <span class="token parameter variable">--zone</span><span class="token operator">=</span>public --add-service<span class="token operator">=</span>http <span class="token parameter variable">--permanent</span>
-firewall-cmd <span class="token parameter variable">--reload</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<pre><code class="shell"> #添加放行端口
+ firewall-cmd --zone=public --add-port=80/tcp --permanent
+ #重新加载所有的设置项
+ firewall-cmd --reload
+</code></pre>
+<pre><code class="shell">  #添加放行服务
+  firewall-cmd --zone=public --add-service=http --permanent
+  firewall-cmd --reload
+</code></pre>
 </li>
 <li><p>防火墙移除放行端口或服务</p>
- <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#移除已经放行的端口</span>
-firewall-cmd <span class="token parameter variable">--zone</span><span class="token operator">=</span>public --remove-port<span class="token operator">=</span><span class="token number">80</span>/tcp
-firewall-cmd <span class="token parameter variable">--reload</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#移除已经放行服务</span>
-firewall-cmd <span class="token parameter variable">--zone</span><span class="token operator">=</span>public --remove-service<span class="token operator">=</span>http
-firewall-cmd <span class="token parameter variable">--reload</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
+<pre><code class="shell"> #移除已经放行的端口
+ firewall-cmd --zone=public --remove-port=80/tcp
+ firewall-cmd --reload
+</code></pre>
+<pre><code class="shell">  #移除已经放行服务
+  firewall-cmd --zone=public --remove-service=http
+  firewall-cmd --reload
+</code></pre>
+</li>
 </ul>
 <p><strong>端口操作</strong></p>
 <ul>
 <li><p>端口占用查询</p>
- <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">netstat</span> <span class="token parameter variable">-tunlp</span> <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">'port'</span>
-----------------------------------------------------------------------------------
-<span class="token parameter variable">-t</span> <span class="token punctuation">(</span>tcp<span class="token punctuation">)</span> 仅显示tcp相关选项
-<span class="token parameter variable">-u</span> <span class="token punctuation">(</span>udp<span class="token punctuation">)</span> 仅显示udp相关选项
-<span class="token parameter variable">-n</span> 拒绝显示别名，能显示数字的全部转化为数字
-<span class="token parameter variable">-l</span> 仅列出在Listen<span class="token punctuation">(</span>监听<span class="token punctuation">)</span>的服务状态
-<span class="token parameter variable">-p</span> 显示建立相关链接的程序名<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
- <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">lsof</span> -i:<span class="token string">'port'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre><code class="shell"> netstat -tunlp | grep &#39;port&#39;
+ ----------------------------------------------------------------------------------
+ -t (tcp) 仅显示tcp相关选项
+ -u (udp) 仅显示udp相关选项
+ -n 拒绝显示别名，能显示数字的全部转化为数字
+ -l 仅列出在Listen(监听)的服务状态
+ -p 显示建立相关链接的程序名
+</code></pre>
+<pre><code class="shell"> lsof -i:&#39;port&#39;
+</code></pre>
 </li>
 <li><p>端口终结</p>
- <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">kill</span> <span class="token parameter variable">-9</span> <span class="token string">'pid'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<pre><code class="shell"> kill -9 &#39;pid&#39;
+</code></pre>
+</li>
 </ul>
 <p><strong>服务操作</strong></p>
 <ul>
 <li><p>服务状态查询</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">systemctl status <span class="token string">'serverName'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre><code class="shell">  systemctl status &#39;serverName&#39;
+</code></pre>
 </li>
 <li><p>服务开启</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sysyemctl start <span class="token string">'serverName'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre><code class="shell">  sysyemctl start &#39;serverName&#39;
+</code></pre>
 </li>
 <li><p>服务关闭</p>
- <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">systemctl stop <span class="token string">'serverName'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre><code class="shell"> systemctl stop &#39;serverName&#39;
+</code></pre>
 </li>
 <li><p>服务自启</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">systemctl <span class="token builtin class-name">enable</span> <span class="token string">'serverName'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre><code class="shell">  systemctl enable &#39;serverName&#39;
+</code></pre>
 </li>
 <li><p>关闭服务自启</p>
- <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">systemctl disable <span class="token string">'serverName'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<pre><code class="shell"> systemctl disable &#39;serverName&#39;
+</code></pre>
+</li>
 </ul>
 <p><strong>用户和组</strong></p>
 <ul>
 <li><p>用户和组</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#添加用户</span>
-adduser <span class="token string">'userName'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#新建工作组</span>
-<span class="token function">groupadd</span> <span class="token string">'groupName'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#添加用户，并且把把用户添加到指定名称的组</span>
-<span class="token function">useradd</span> <span class="token parameter variable">-g</span> <span class="token string">'groupName'</span> <span class="token string">'userName'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#给已有用户添加到工作组</span>
-<span class="token function">usermod</span> <span class="token parameter variable">-G</span> <span class="token string">'groupName'</span> <span class="token string">'userName'</span>
-gpasswd <span class="token parameter variable">-a</span> <span class="token string">'userName'</span> <span class="token string">'groupName'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#临时锁定用户的密码，使账户失效</span>
-<span class="token function">passwd</span> <span class="token string">'userName'</span> <span class="token parameter variable">-l</span>
-<span class="token comment">#把临时锁定密码的用户开发，使账户重新有效</span>
-<span class="token function">passwd</span> <span class="token string">'userName'</span> <span class="token parameter variable">-u</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#永久删除用户</span>
-<span class="token function">userdel</span> <span class="token string">'userName'</span>
-<span class="token comment">#永久删除组</span>
-<span class="token function">groupdel</span> <span class="token string">'groupName'</span>
-<span class="token comment">#同时删除用户和组</span>
-<span class="token function">usermod</span> <span class="token parameter variable">-G</span> <span class="token string">'userName'</span> <span class="token string">'groupName'</span>
-<span class="token comment">#从指定的组中删除指定的用户</span>
-gpassed <span class="token parameter variable">-d</span> <span class="token string">'userName'</span> <span class="token string">'groupName'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#显示用户信息</span>
-<span class="token function">id</span> <span class="token string">'userName'</span>
-<span class="token comment">#将用户添加到指定组</span>
-<span class="token function">usermod</span> <span class="token parameter variable">-G</span> <span class="token string">'groupName'</span> <span class="token string">'userName'</span>
-<span class="token comment">#修改用户userName1的名称为userName2</span>
-<span class="token function">usermod</span> <span class="token parameter variable">-l</span> <span class="token string">'userName2'</span> <span class="token string">'userName1'</span>
-<span class="token comment">#锁定账户</span>
-<span class="token function">usermod</span> <span class="token parameter variable">-L</span> <span class="token string">'userName'</span>
-<span class="token comment">#解除用户锁定</span>
-<span class="token function">usermod</span> <span class="token parameter variable">-U</span> <span class="token string">'userName'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<pre><code class="shell">  #添加用户
+  adduser &#39;userName&#39;
+</code></pre>
+<pre><code class="shell">#新建工作组
+groupadd &#39;groupName&#39;
+</code></pre>
+<pre><code class="shell">#添加用户，并且把把用户添加到指定名称的组
+useradd -g &#39;groupName&#39; &#39;userName&#39;
+</code></pre>
+<pre><code class="shell">#给已有用户添加到工作组
+usermod -G &#39;groupName&#39; &#39;userName&#39;
+gpasswd -a &#39;userName&#39; &#39;groupName&#39;
+</code></pre>
+<pre><code class="shell">#临时锁定用户的密码，使账户失效
+passwd &#39;userName&#39; -l
+#把临时锁定密码的用户开发，使账户重新有效
+passwd &#39;userName&#39; -u
+</code></pre>
+<pre><code class="shell">#永久删除用户
+userdel &#39;userName&#39;
+#永久删除组
+groupdel &#39;groupName&#39;
+#同时删除用户和组
+usermod -G &#39;userName&#39; &#39;groupName&#39;
+#从指定的组中删除指定的用户
+gpassed -d &#39;userName&#39; &#39;groupName&#39;
+</code></pre>
+<pre><code class="shell">#显示用户信息
+id &#39;userName&#39;
+#将用户添加到指定组
+usermod -G &#39;groupName&#39; &#39;userName&#39;
+#修改用户userName1的名称为userName2
+usermod -l &#39;userName2&#39; &#39;userName1&#39;
+#锁定账户
+usermod -L &#39;userName&#39;
+#解除用户锁定
+usermod -U &#39;userName&#39;
+</code></pre>
+</li>
 </ul>
 <hr>
 <p><strong>持续更新中…</strong></p>
