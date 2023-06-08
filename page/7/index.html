@@ -1,113 +1,203 @@
+
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  
-  <title>阿杰之家</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="山有扶苏，隰有荷华">
-<meta property="og:type" content="website">
-<meta property="og:title" content="阿杰之家">
-<meta property="og:url" content="http://ajiehome.github.io/hexo-web/page/7/index.html">
-<meta property="og:site_name" content="阿杰之家">
-<meta property="og:description" content="山有扶苏，隰有荷华">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:author" content="ajiehome">
-<meta property="article:tag" content="ajiehome">
-<meta property="article:tag" content="阿杰之家">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="阿杰之家" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8" />
+        <title>阿杰之家</title>
+        <meta name="author" content="ajiehome" />
+        <meta name="description" content="山有扶苏，隰有荷华" />
+        <meta name="keywords" content="ajiehome,阿杰之家" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <link rel="icon" href="https://static-argvchs.netlify.app/images/favicon.png" />
+        <script src="https://static-argvchs.netlify.app/libs/vue/3.2.47/vue.global.prod.min.js"></script>
+<link rel="preconnect" href="https://static-argvchs.netlify.app" crossorigin />
+<link rel="stylesheet" href="https://static-argvchs.netlify.app/libs/font-awesome/6.3.0/css/all.min.css" />
+<link rel="stylesheet" href="https://static-argvchs.netlify.app/css/fonts.min.css" />
+<script> const mixins = {}; </script>
 
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
 
-  
-  
-<meta name="generator" content="Hexo 6.3.0"></head>
+<script src="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/highlight.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://static-argvchs.netlify.app/libs/highlight.js/11.7.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">阿杰之家</a>
-      </h1>
-      
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">山有扶苏，隰有荷华</a>
-        </h2>
-      
+
+<script src="https://static-argvchs.netlify.app/libs/KaTeX/0.16.4/katex.min.js"></script>
+<script src="https://static-argvchs.netlify.app/libs/KaTeX/0.16.4/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://static-argvchs.netlify.app/libs/KaTeX/0.16.4/katex.min.css" />
+<script src="/js/lib/math.js"></script>
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+<script src="/js/lib/home.js"></script>
+
+<script src="https://static-argvchs.netlify.app/libs/animejs/3.2.1/anime.min.js"></script>
+<link rel="stylesheet" href="/css/main.css" />
+
+    <meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div id="layout">
+            <transition name="fade">
+                <div id="loading" v-show="loading">
+                    <div id="loading-circle">
+                        <h2>LOADING</h2>
+                        <p>加载过慢请开启缓存 浏览器默认开启</p>
+                        <img src="/images/loading.gif" />
+                    </div>
+                </div>
+            </transition>
+            <nav id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <div id="desktop-menu">
+        <a class="title" href="/">
+            <span>阿杰之家</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ajiehome.github.io/hexo-web"></form>
-      </div>
+    <div id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;阿杰之家</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
     </div>
-  </div>
-</header>
+</nav>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
 
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-操作系统/Windows删除BIOS内的引导选项" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Windows%E5%88%A0%E9%99%A4BIOS%E5%86%85%E7%9A%84%E5%BC%95%E5%AF%BC%E9%80%89%E9%A1%B9/" class="article-date">
-  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+            <transition name="into">
+                <div id="main" v-show="!loading">
+                    <div id="home-head">
+    <div id="home-background" ref="homeBackground" data-images="https://static-argvchs.netlify.app/images/background.jpg"></div>
+    <div id="home-info" @click="homeClick">
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="info">
+            <div class="wrap">
+                <h1>阿杰之家</h1>
+                <h3>山有扶苏，隰有荷华</h3>
+                <h5>山有扶苏，隰有荷华</h5>
+            </div>
+        </span>
+    </div>
+</div>
+<div id="home-posts-wrap"  ref="homePostsWrap">
+    <div id="home-posts">
         
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Windows%E5%88%A0%E9%99%A4BIOS%E5%86%85%E7%9A%84%E5%BC%95%E5%AF%BC%E9%80%89%E9%A1%B9/">Windows删除BIOS内的引导选项</a>
-    </h1>
-  
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="删除BIOS内的UEFI引导选项"><a href="#删除BIOS内的UEFI引导选项" class="headerlink" title="删除BIOS内的UEFI引导选项"></a>删除BIOS内的UEFI引导选项</h1><ol>
+<div class="post">
+    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Windows%E5%88%A0%E9%99%A4BIOS%E5%86%85%E7%9A%84%E5%BC%95%E5%AF%BC%E9%80%89%E9%A1%B9/">
+        <h2 class="post-title">Windows删除BIOS内的引导选项</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                操作系统
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="删除BIOS内的UEFI引导选项"><a href="#删除BIOS内的UEFI引导选项" class="headerlink" title="删除BIOS内的UEFI引导选项"></a>删除BIOS内的UEFI引导选项</h1><ol>
 <li>首先使用管理员打开<code>cmd</code>面板</li>
 <li>输入<code>diskpart</code>进入工具</li>
 <li>输入<code>list disk</code>查看磁盘窗台</li>
@@ -121,48 +211,44 @@
 <li>最后使用<code>remove letter [挂载号]</code>移除分区即可</li>
 </ol>
 
-      
+            
+        </div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://ajiehome.github.io/hexo-web/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Windows%E5%88%A0%E9%99%A4BIOS%E5%86%85%E7%9A%84%E5%BC%95%E5%AF%BC%E9%80%89%E9%A1%B9/" data-id="climh8yyo003zc0oq4ckv825z" data-title="Windows删除BIOS内的引导选项" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-数据库/MySQL事务隔离级别" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/" class="article-date">
-  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <div class="post-tags">
         
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/">MySQL事务隔离级别</a>
-    </h1>
-  
+        
+    </div>
+    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Windows%E5%88%A0%E9%99%A4BIOS%E5%86%85%E7%9A%84%E5%BC%95%E5%AF%BC%E9%80%89%E9%A1%B9/" class="go-post">阅读全文</a>
+</div>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="SQL隔离级别"><a href="#SQL隔离级别" class="headerlink" title="SQL隔离级别"></a>SQL隔离级别</h1><ol>
+<div class="post">
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/">
+        <h2 class="post-title">MySQL事务隔离级别</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                数据库
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="SQL隔离级别"><a href="#SQL隔离级别" class="headerlink" title="SQL隔离级别"></a>SQL隔离级别</h1><ol>
 <li><p>未提交读（Read Uncomminted）也叫 脏读（Dirty Reader）</p>
 <p>在事物中的修改即使没有提交，对其他事物也是可见的。事务可以读取未被提交的数据</p>
 </li>
@@ -231,93 +317,85 @@
 </li>
 </ul>
 
-      
+            
+        </div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://ajiehome.github.io/hexo-web/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/" data-id="climh8yyp0040c0oqf5naaduz" data-title="MySQL事务隔离级别" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-数据库/MySQL同表多外键" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E5%90%8C%E8%A1%A8%E5%A4%9A%E5%A4%96%E9%94%AE/" class="article-date">
-  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <div class="post-tags">
         
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E5%90%8C%E8%A1%A8%E5%A4%9A%E5%A4%96%E9%94%AE/">MySQL同表多外键</a>
-    </h1>
-  
+        
+    </div>
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/" class="go-post">阅读全文</a>
+</div>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="MySQL同表多外键"><a href="#MySQL同表多外键" class="headerlink" title="MySQL同表多外键"></a>MySQL同表多外键</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> database if <span class="keyword">exists</span> test;</span><br><span class="line"><span class="keyword">create</span> database if <span class="keyword">not</span> <span class="keyword">exists</span> test;</span><br><span class="line"></span><br><span class="line">use test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> if <span class="keyword">exists</span> <span class="keyword">user</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span>  if <span class="keyword">not</span> <span class="keyword">exists</span> <span class="keyword">user</span>(</span><br><span class="line">	user_id <span class="type">bigint</span>(<span class="number">18</span>) comment <span class="string">&#x27;用户ID&#x27;</span>,</span><br><span class="line">	user_name <span class="type">varchar</span>(<span class="number">128</span>) comment <span class="string">&#x27;用户名称&#x27;</span>,</span><br><span class="line">	user_sex <span class="type">int</span>(<span class="number">11</span>) comment <span class="string">&#x27;用户性别&#x27;</span>,</span><br><span class="line">	pass_word <span class="type">varchar</span>(<span class="number">128</span>) comment <span class="string">&#x27;用户密码&#x27;</span>,</span><br><span class="line">	<span class="keyword">primary</span> key (user_id)</span><br><span class="line">)engine <span class="operator">=</span> innodb <span class="keyword">default</span> charset <span class="operator">=</span> utf8;</span><br><span class="line"></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> if <span class="keyword">exists</span> user_related;</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> if <span class="keyword">not</span> <span class="keyword">exists</span> user_related(</span><br><span class="line">	related_id <span class="type">bigint</span>(<span class="number">18</span>) comment <span class="string">&#x27;关系ID&#x27;</span>,</span><br><span class="line">	from_user_id <span class="type">bigint</span>(<span class="number">18</span>) comment <span class="string">&#x27;用户ID&#x27;</span>,</span><br><span class="line">	to_user_id <span class="type">bigint</span>(<span class="number">18</span>) comment <span class="string">&#x27;用户ID&#x27;</span>,</span><br><span class="line">	<span class="keyword">primary</span> key (related_id),</span><br><span class="line">	<span class="keyword">foreign</span> key (from_user_id) <span class="keyword">references</span> <span class="keyword">user</span> (user_id),</span><br><span class="line">	<span class="keyword">foreign</span> key (to_user_id) <span class="keyword">references</span> <span class="keyword">user</span> (user_id)</span><br><span class="line">)engine <span class="operator">=</span> innodb <span class="keyword">default</span> charset <span class="operator">=</span> utf8;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">lock tables <span class="keyword">user</span> write;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> <span class="keyword">user</span>(user_id,user_name,user_sex,pass_word) <span class="keyword">values</span> (<span class="number">012345678911121314</span>,<span class="string">&#x27;用户1&#x27;</span>,<span class="number">1</span>,<span class="string">&#x27;123456&#x27;</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> <span class="keyword">user</span>(user_id,user_name,user_sex,pass_word) <span class="keyword">values</span> (<span class="number">012345678911121315</span>,<span class="string">&#x27;用户2&#x27;</span>,<span class="number">1</span>,<span class="string">&#x27;123456&#x27;</span>);</span><br><span class="line">unlock tables;</span><br><span class="line"></span><br><span class="line">lock tables user_related write;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> user_related (related_id,from_user_id,to_user_id) <span class="keyword">values</span> (<span class="number">012345678911121313</span>,<span class="number">012345678911121314</span>,<span class="number">012345678911121315</span>);</span><br><span class="line">unlock tables;</span><br></pre></td></tr></table></figure>
+<div class="post">
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E5%90%8C%E8%A1%A8%E5%A4%9A%E5%A4%96%E9%94%AE/">
+        <h2 class="post-title">MySQL同表多外键</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                数据库
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="MySQL同表多外键"><a href="#MySQL同表多外键" class="headerlink" title="MySQL同表多外键"></a>MySQL同表多外键</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> database if <span class="keyword">exists</span> test;</span><br><span class="line"><span class="keyword">create</span> database if <span class="keyword">not</span> <span class="keyword">exists</span> test;</span><br><span class="line"></span><br><span class="line">use test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> if <span class="keyword">exists</span> <span class="keyword">user</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span>  if <span class="keyword">not</span> <span class="keyword">exists</span> <span class="keyword">user</span>(</span><br><span class="line">	user_id <span class="type">bigint</span>(<span class="number">18</span>) comment <span class="string">&#x27;用户ID&#x27;</span>,</span><br><span class="line">	user_name <span class="type">varchar</span>(<span class="number">128</span>) comment <span class="string">&#x27;用户名称&#x27;</span>,</span><br><span class="line">	user_sex <span class="type">int</span>(<span class="number">11</span>) comment <span class="string">&#x27;用户性别&#x27;</span>,</span><br><span class="line">	pass_word <span class="type">varchar</span>(<span class="number">128</span>) comment <span class="string">&#x27;用户密码&#x27;</span>,</span><br><span class="line">	<span class="keyword">primary</span> key (user_id)</span><br><span class="line">)engine <span class="operator">=</span> innodb <span class="keyword">default</span> charset <span class="operator">=</span> utf8;</span><br><span class="line"></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> if <span class="keyword">exists</span> user_related;</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> if <span class="keyword">not</span> <span class="keyword">exists</span> user_related(</span><br><span class="line">	related_id <span class="type">bigint</span>(<span class="number">18</span>) comment <span class="string">&#x27;关系ID&#x27;</span>,</span><br><span class="line">	from_user_id <span class="type">bigint</span>(<span class="number">18</span>) comment <span class="string">&#x27;用户ID&#x27;</span>,</span><br><span class="line">	to_user_id <span class="type">bigint</span>(<span class="number">18</span>) comment <span class="string">&#x27;用户ID&#x27;</span>,</span><br><span class="line">	<span class="keyword">primary</span> key (related_id),</span><br><span class="line">	<span class="keyword">foreign</span> key (from_user_id) <span class="keyword">references</span> <span class="keyword">user</span> (user_id),</span><br><span class="line">	<span class="keyword">foreign</span> key (to_user_id) <span class="keyword">references</span> <span class="keyword">user</span> (user_id)</span><br><span class="line">)engine <span class="operator">=</span> innodb <span class="keyword">default</span> charset <span class="operator">=</span> utf8;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">lock tables <span class="keyword">user</span> write;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> <span class="keyword">user</span>(user_id,user_name,user_sex,pass_word) <span class="keyword">values</span> (<span class="number">012345678911121314</span>,<span class="string">&#x27;用户1&#x27;</span>,<span class="number">1</span>,<span class="string">&#x27;123456&#x27;</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> <span class="keyword">user</span>(user_id,user_name,user_sex,pass_word) <span class="keyword">values</span> (<span class="number">012345678911121315</span>,<span class="string">&#x27;用户2&#x27;</span>,<span class="number">1</span>,<span class="string">&#x27;123456&#x27;</span>);</span><br><span class="line">unlock tables;</span><br><span class="line"></span><br><span class="line">lock tables user_related write;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> user_related (related_id,from_user_id,to_user_id) <span class="keyword">values</span> (<span class="number">012345678911121313</span>,<span class="number">012345678911121314</span>,<span class="number">012345678911121315</span>);</span><br><span class="line">unlock tables;</span><br></pre></td></tr></table></figure>
 
 <p>一个用户表设置多个外键，外键的名字可以不和原表一样，只要类型一致就可</p>
 
-      
+            
+        </div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://ajiehome.github.io/hexo-web/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E5%90%8C%E8%A1%A8%E5%A4%9A%E5%A4%96%E9%94%AE/" data-id="climh8yyr0043c0oq6smi1004" data-title="MySQL同表多外键" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-数据库/MySQL命令集" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E5%91%BD%E4%BB%A4%E9%9B%86/" class="article-date">
-  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <div class="post-tags">
         
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E5%91%BD%E4%BB%A4%E9%9B%86/">MySQL命令集</a>
-    </h1>
-  
+        
+    </div>
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E5%90%8C%E8%A1%A8%E5%A4%9A%E5%A4%96%E9%94%AE/" class="go-post">阅读全文</a>
+</div>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="MySQL命令集"><a href="#MySQL命令集" class="headerlink" title="MySQL命令集"></a>MySQL命令集</h1><p><strong>MySQL连接</strong></p>
+<div class="post">
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E5%91%BD%E4%BB%A4%E9%9B%86/">
+        <h2 class="post-title">MySQL命令集</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                数据库
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="MySQL命令集"><a href="#MySQL命令集" class="headerlink" title="MySQL命令集"></a>MySQL命令集</h1><p><strong>MySQL连接</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">本地连接</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">password:可直接填写密码，或者直接回车，然后再保密输入密码</span></span><br><span class="line">mysql -u root -p &quot;password&quot;;</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">远程连接</span></span><br><span class="line">mysql -h &quot;ip&quot; -u root -p &quot;password&quot;;</span><br></pre></td></tr></table></figure>
 
 <p><strong>修改密码</strong></p>
@@ -341,48 +419,44 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查询最大连接数</span></span><br><span class="line">show variables like &#x27;max_connections&#x27;;</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">修改最大连接数</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">方法一</span></span><br><span class="line">set global max_connections = 1000;</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">方法二 修改my.conf配置文件：加上或者修改max_connections</span></span><br><span class="line">max_connections = 1000</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
-      
+            
+        </div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://ajiehome.github.io/hexo-web/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E5%91%BD%E4%BB%A4%E9%9B%86/" data-id="climh8yyr0044c0oq8nslgpa6" data-title="MySQL命令集" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-数据库/MySQL用户与授权" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E7%94%A8%E6%88%B7%E4%B8%8E%E6%8E%88%E6%9D%83/" class="article-date">
-  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <div class="post-tags">
         
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E7%94%A8%E6%88%B7%E4%B8%8E%E6%8E%88%E6%9D%83/">MySQL用户与授权</a>
-    </h1>
-  
+        
+    </div>
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E5%91%BD%E4%BB%A4%E9%9B%86/" class="go-post">阅读全文</a>
+</div>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="MySQL用户与授权"><a href="#MySQL用户与授权" class="headerlink" title="MySQL用户与授权"></a>MySQL用户与授权</h1><p><strong>1、创建用户</strong></p>
+<div class="post">
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E7%94%A8%E6%88%B7%E4%B8%8E%E6%8E%88%E6%9D%83/">
+        <h2 class="post-title">MySQL用户与授权</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                数据库
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="MySQL用户与授权"><a href="#MySQL用户与授权" class="headerlink" title="MySQL用户与授权"></a>MySQL用户与授权</h1><p><strong>1、创建用户</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create user &#x27;userName&#x27;@&#x27;host&#x27; identified by &#x27;passWord&#x27;;</span><br></pre></td></tr></table></figure>
 
 <ul>
@@ -437,48 +511,44 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drop user &#x27;username&#x27;@&#x27;host&#x27;;</span><br></pre></td></tr></table></figure>
 
 
-      
+            
+        </div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://ajiehome.github.io/hexo-web/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E7%94%A8%E6%88%B7%E4%B8%8E%E6%8E%88%E6%9D%83/" data-id="climh8yys0047c0oqa2t4dwv6" data-title="MySQL用户与授权" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-数据库/MySQL视图" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E8%A7%86%E5%9B%BE/" class="article-date">
-  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <div class="post-tags">
         
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E8%A7%86%E5%9B%BE/">MySQL视图</a>
-    </h1>
-  
+        
+    </div>
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E7%94%A8%E6%88%B7%E4%B8%8E%E6%8E%88%E6%9D%83/" class="go-post">阅读全文</a>
+</div>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p><strong>1、数据库的查询</strong></p>
+<div class="post">
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E8%A7%86%E5%9B%BE/">
+        <h2 class="post-title">MySQL视图</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                数据库
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p><strong>1、数据库的查询</strong></p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">/</span><span class="operator">/</span>选择指定列</span><br><span class="line"><span class="keyword">select</span>  name, age <span class="keyword">from</span> demo1;</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>定义列的别名</span><br><span class="line"><span class="keyword">select</span> name <span class="keyword">as</span> 姓名 ,age <span class="keyword">as</span> 年龄 <span class="keyword">from</span> demo1;</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>当定义列的别名有空格的时候必须要用引号将标题括起来</span><br><span class="line"><span class="keyword">select</span> name <span class="keyword">as</span> &quot;student name&quot; ,age <span class="keyword">as</span> &quot;student age&quot; <span class="keyword">from</span> demo1;</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>替换查询结果的数据，<span class="keyword">end</span>后面的字符串代替的是整个case...end语句，不然会直接输出整个case...end语句</span><br><span class="line"><span class="keyword">select</span> name,age,</span><br><span class="line">  <span class="keyword">case</span></span><br><span class="line">    <span class="keyword">when</span> age <span class="keyword">is</span> <span class="keyword">null</span> <span class="keyword">then</span> &quot;尚未设置&quot;</span><br><span class="line">    <span class="keyword">when</span> age <span class="operator">&lt;</span> <span class="number">18</span> <span class="keyword">then</span> &quot;未成年&quot;</span><br><span class="line">    <span class="keyword">else</span> &quot;成年&quot;</span><br><span class="line">  <span class="keyword">end</span> <span class="keyword">as</span> &quot;是否成年&quot;</span><br><span class="line">  <span class="keyword">from</span> demo1;</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>计算列值，把age扩大<span class="number">10</span>被输出</span><br><span class="line"><span class="keyword">select</span> name,age<span class="operator">*</span><span class="number">10</span> <span class="keyword">as</span> &quot;年龄x10&quot; <span class="keyword">from</span> demo1;</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>消除重复的行</span><br><span class="line"><span class="keyword">select</span> <span class="keyword">distinct</span>  name,age,sex <span class="keyword">from</span> demo1;</span><br></pre></td></tr></table></figure>
 <p>聚合函数</p>
 <table>
@@ -544,48 +614,44 @@
 </tr>
 </tbody></table>
 
-      
+            
+        </div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://ajiehome.github.io/hexo-web/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E8%A7%86%E5%9B%BE/" data-id="climh8yyt0048c0oqhhxi9vsg" data-title="MySQL视图" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-数据库/Redis命令" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E5%91%BD%E4%BB%A4/" class="article-date">
-  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <div class="post-tags">
         
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E5%91%BD%E4%BB%A4/">Redis命令</a>
-    </h1>
-  
+        
+    </div>
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E8%A7%86%E5%9B%BE/" class="go-post">阅读全文</a>
+</div>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><p><a target="_blank" rel="noopener" href="http://www.redis.cn/commands.html">官方命令文档地址</a></p>
+<div class="post">
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E5%91%BD%E4%BB%A4/">
+        <h2 class="post-title">Redis命令</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                数据库
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><p><a target="_blank" rel="noopener" href="http://www.redis.cn/commands.html">官方命令文档地址</a></p>
 <ul>
 <li><p>五种数据类型</p>
 <ul>
@@ -694,48 +760,44 @@ ZSCAN key cursor [MATCH pattern] [COUNT count] 增量迭代排序元素集和相
 </li>
 </ul>
 
-      
+            
+        </div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://ajiehome.github.io/hexo-web/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E5%91%BD%E4%BB%A4/" data-id="climh8yyu004bc0oqbmmv6fg5" data-title="Redis命令" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-数据库/Redis持久化" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E6%8C%81%E4%B9%85%E5%8C%96/" class="article-date">
-  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <div class="post-tags">
         
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E6%8C%81%E4%B9%85%E5%8C%96/">Redis持久化</a>
-    </h1>
-  
+        
+    </div>
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E5%91%BD%E4%BB%A4/" class="go-post">阅读全文</a>
+</div>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="redis的持久化"><a href="#redis的持久化" class="headerlink" title="redis的持久化"></a>redis的持久化</h1><ol>
+<div class="post">
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E6%8C%81%E4%B9%85%E5%8C%96/">
+        <h2 class="post-title">Redis持久化</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                数据库
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="redis的持久化"><a href="#redis的持久化" class="headerlink" title="redis的持久化"></a>redis的持久化</h1><ol>
 <li>aop（append only file）<br> 把每一次的数据变化都写入到本地文件 ——— 全持久化模式以日志的形式记录 每一次的写、删操作，以文本的形式记录</li>
 <li>rdb<br> 定时把redis中的数据写入到本地文件 ——— 半持久化模式<br> fork一个字进程，把数据写入临时文件，然后在替换掉本地的文件，使用二进制压缩</li>
 </ol>
@@ -744,48 +806,44 @@ ZSCAN key cursor [MATCH pattern] [COUNT count] 增量迭代排序元素集和相
 <h2 id="AOF持久化配置"><a href="#AOF持久化配置" class="headerlink" title="AOF持久化配置"></a>AOF持久化配置</h2><p>在Redis的配置文件中存在三种同步方式，它们分别是：</p>
 <p>appendfsync always   #每次有数据修改发生时都会写入AOF文件。<br>appendfsync everysec #每秒钟同步一次，该策略为AOF的缺省策略。<br>appendfsync no     #从不同步。高效但是数据不会被持久化。</p>
 
-      
+            
+        </div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://ajiehome.github.io/hexo-web/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E6%8C%81%E4%B9%85%E5%8C%96/" data-id="climh8yyv004cc0oqhn3p3o4s" data-title="Redis持久化" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-数据库/Redis描述" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E6%8F%8F%E8%BF%B0/" class="article-date">
-  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <div class="post-tags">
         
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E6%8F%8F%E8%BF%B0/">Redis描述</a>
-    </h1>
-  
+        
+    </div>
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E6%8C%81%E4%B9%85%E5%8C%96/" class="go-post">阅读全文</a>
+</div>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="redis-understand"><a href="#redis-understand" class="headerlink" title="redis understand"></a>redis understand</h1><p><strong>概述</strong></p>
+<div class="post">
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E6%8F%8F%E8%BF%B0/">
+        <h2 class="post-title">Redis描述</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                数据库
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="redis-understand"><a href="#redis-understand" class="headerlink" title="redis understand"></a>redis understand</h1><p><strong>概述</strong></p>
 <p>redis全称是 remote dictionary server（远程字典服务），是一个ANSI C语言编写、支持网络、可基于内存也可以持久化的日志型的 kay-value 数据库。</p>
 <p>于mysql不同的是，redis的信息是存在于内存当中，读写速度快，每秒读写（iops）10w+，因此redis常被应用自缓存，另外redis也经常被用作分布式锁，redis支持事务、持久化、lua脚本、lru驱动事件、多种集群方案。</p>
 <p><strong>数据类型</strong></p>
@@ -827,204 +885,217 @@ ZSCAN key cursor [MATCH pattern] [COUNT count] 增量迭代排序元素集和相
 <li>永不过期，指不设置过期时间，在快过期的时候，由异步线程去刷新数据</li>
 </ol>
 
-      
+            
+        </div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://ajiehome.github.io/hexo-web/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E6%8F%8F%E8%BF%B0/" data-id="climh8yyv004fc0oq9snb73vm" data-title="Redis描述" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-数据库/Windows安装MySQL" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Windows%E5%AE%89%E8%A3%85MySQL/" class="article-date">
-  <time class="dt-published" datetime="2023-06-07T07:58:40.000Z" itemprop="datePublished">2023-06-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <div class="post-tags">
         
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Windows%E5%AE%89%E8%A3%85MySQL/">Windows安装MySQL</a>
-    </h1>
-  
+        
+    </div>
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E6%8F%8F%E8%BF%B0/" class="go-post">阅读全文</a>
+</div>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="Windows下MySQL的安装"><a href="#Windows下MySQL的安装" class="headerlink" title="Windows下MySQL的安装"></a>Windows下MySQL的安装</h1><p>首先下载MySQL的的压缩包（MySQL社区版）</p>
-<p><a target="_blank" rel="noopener" href="https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-5.7.37-winx64.zip">MySQL5.7社区版</a></p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>如果以前安装过其它版本的MySQL那么需要先卸载mysql的服务在进行安装<br>卸载方式：以管理员身份进入CMD控制台，然后输入一下命令进行删除服务<br>如果未安装则可以忽略这一步骤：mysql是服务的名称</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sc delete mysql</span><br></pre></td></tr></table></figure>
-<h2 id="1、MySQL的解压"><a href="#1、MySQL的解压" class="headerlink" title="1、MySQL的解压"></a>1、MySQL的解压</h2><p>将下载好的mysql的压缩包解压，并且把解压之后的mysql-8.0.15-winx64文件夹放到安装文件夹<br>我的是放在：D:\Software\MySQL\mysql-8.0.15-winx64</p>
-<h2 id="2、配置环境变量"><a href="#2、配置环境变量" class="headerlink" title="2、配置环境变量"></a>2、配置环境变量</h2><p>右键我的计算机-&gt;属性-&gt;高级系统设置-&gt;环境变量<br>新建系统变量</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">变量名称：MYSQL_HOME</span><br><span class="line">变量路径：D:\Software\MySQL\mysql-8.0.15-winx64\bin</span><br></pre></td></tr></table></figure>
-<p>修改path变量，加入</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">%</span><span class="language-bash">MYSQL_HOME%\bin</span></span><br></pre></td></tr></table></figure>
-<p><strong>注意：</strong>如果失败，可以创建一个指定初始配置文件(我现在这个版本是没有配置的)<br>初始化mysql前，可以通过ini文件来指定部分初始配置，比如<code>basedir</code>和<code>datadir</code>等，当然，也可以不指定利用默认的，参考文档<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/windows-create-option-file.html">官方文档</a><br>在mysql的根目录下，创建mysql.ini文件，加入下面内容</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">mysqld</span>]</span><br><span class="line"><span class="comment"># set basedir to your installation path</span></span><br><span class="line"><span class="string">basedir=D:\Software\MySQL\mysql-8.0.15-winx64</span></span><br><span class="line"><span class="comment"># set datadir to the location of your data directory</span></span><br><span class="line"><span class="string">datadir=D:\Software\MySQL\mysql-8.0.15-winx64\data</span></span><br></pre></td></tr></table></figure>
-<h2 id="3、初始化"><a href="#3、初始化" class="headerlink" title="3、初始化"></a>3、初始化</h2><p>打开cmd控制台，输入初始化命令（由于配置了系统的环境变量，所以不需要进入到D:\Software\MySQL\mysql-8.0.15-winx64\bin下）</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//生成临时密码</span><br><span class="line">mysqlid --initialize --console</span><br></pre></td></tr></table></figure>
-<p>或者</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//空密码</span><br><span class="line">mysqld --initialize-insecure --console</span><br></pre></td></tr></table></figure>
-<p>如果选择临时密码，控制台会有以下输出，可以看到里面有临时密码（temporary password is generated for root@localhost:后面的值，注意去掉空格），请一定要记住，当然你如果不想记住也可以，只是需要再折腾一下去重置密码</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2018-08-15T02:55:43.924361Z</span> <span class="number">0</span> [<span class="string">System</span>] [<span class="string">MY-013169</span>] [<span class="string">Server</span>] <span class="string">C:\MyPrograms\mysql-8.0.12-winx64\bin\mysqld.exe</span> <span class="string">(mysqld</span> <span class="number">8.0</span><span class="number">.12</span><span class="string">)</span> <span class="string">initializing</span> <span class="string">of</span> <span class="string">server</span> <span class="string">in</span> <span class="string">progress</span> <span class="string">as</span> <span class="string">process</span> <span class="number">12040</span></span><br><span class="line"><span class="number">2018-08-15T02:55:55.962035Z</span> <span class="number">5</span> [<span class="string">Note</span>] [<span class="string">MY-010454</span>] [<span class="string">Server</span>] <span class="string">A</span> <span class="string">temporary</span> <span class="string">password</span> <span class="string">is</span> <span class="string">generated</span> <span class="string">for</span> <span class="string">root@localhost:</span> <span class="string">XCeQtsgMO7-F</span></span><br><span class="line"><span class="number">2018-08-15T02:56:03.261174Z</span> <span class="number">0</span> [<span class="string">System</span>] [<span class="string">MY-013170</span>] [<span class="string">Server</span>] <span class="string">C:\MyPrograms\mysql-8.0.12-winx64\bin\mysqld.exe</span> <span class="string">(mysqld</span> <span class="number">8.0</span><span class="number">.12</span><span class="string">)</span> <span class="string">initializing</span> <span class="string">of</span> <span class="string">server</span> <span class="string">has</span> <span class="string">completed</span></span><br></pre></td></tr></table></figure>
-<h2 id="4、安装windows服务"><a href="#4、安装windows服务" class="headerlink" title="4、安装windows服务"></a>4、安装windows服务</h2><p>用管理员身份打开CMD，在里面输入如下命令</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//serviceName为服务名，不输入默认为mysql</span><br><span class="line">mysqld --install [serviceName]</span><br></pre></td></tr></table></figure>
-<p>如果看到下面内容，则证明服务安装成功</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Service successfully installed.</span><br></pre></td></tr></table></figure>
-<h2 id="5、启动服务"><a href="#5、启动服务" class="headerlink" title="5、启动服务"></a>5、启动服务</h2><p>还是用管理员身份打开CMD，输入如下命令</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">net start mysql</span><br><span class="line"></span><br><span class="line">//以下输出证明启动成功</span><br><span class="line">MySQL 服务正在启动 ..</span><br><span class="line">MySQL 服务已经启动成功。</span><br><span class="line"></span><br><span class="line">//如果你要关闭的话</span><br><span class="line">net stop mysql</span><br></pre></td></tr></table></figure>
-<h2 id="6、更改密码"><a href="#6、更改密码" class="headerlink" title="6、更改密码"></a>6、更改密码</h2><p>连接到mysql</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//下面-p后面的内容就是临时密码</span><br><span class="line">mysql -uroot -pXCeQtsgMO7-F</span><br></pre></td></tr></table></figure>
-<p>修改密码</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER USER &#x27;root&#x27;@&#x27;localhost&#x27; IDENTIFIED WITH mysql_native_password BY &#x27;newpassword&#x27;;</span><br></pre></td></tr></table></figure>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
-<li>1、环境变量是为了在命令行CMD中更加方便使用mysql命令；</li>
-<li>2、如果有之前有安装过其他版本mysql，记得先卸载并删除服务；</li>
-<li>3、安装完记得登录并修改密码，不论是采用空密码还是临时密码；</li>
-<li>4、当然，命令行终归是不方便的，现在有很多可视化界面，如：Navicat等。</li>
+<div class="post">
+    <a href="/2023/06/07/%E7%90%86%E8%AE%BA%E4%BD%93%E7%B3%BB/B%E6%A0%91&B+%E6%A0%91/">
+        <h2 class="post-title">B树&amp;B+树</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E7%90%86%E8%AE%BA%E4%BD%93%E7%B3%BB/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                理论体系
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <hr>
+<h2 id="title-B-Treedate-2022-04-26-13-44-11-89updated-2022-08-04-18-30-16-893url-x2F-archives-x2F-btreecategories-tags"><a href="#title-B-Treedate-2022-04-26-13-44-11-89updated-2022-08-04-18-30-16-893url-x2F-archives-x2F-btreecategories-tags" class="headerlink" title="title: B Treedate: 2022-04-26 13:44:11.89updated: 2022-08-04 18:30:16.893url: &#x2F;archives&#x2F;btreecategories:tags: "></a>title: B Tree<br>date: 2022-04-26 13:44:11.89<br>updated: 2022-08-04 18:30:16.893<br>url: &#x2F;archives&#x2F;btree<br>categories:<br>tags: </h2><h1 id="B-Tree"><a href="#B-Tree" class="headerlink" title="B Tree"></a>B Tree</h1><p>mi’g’c</p>
+<ul>
+<li>叶子节点：最后的那一场节点</li>
+<li>非叶子节点：除去最后的那一层节点</li>
+<li>阶：B树中所有孩子节点数的最大值</li>
+<li>度：数的高度，一般不包括叶子节点那一层</li>
 </ul>
+<p>规则：</p>
+<ol>
+<li>树中每个节点最多只能有M（M为阶）颗子树</li>
+</ol>
 
-      
+            
+        </div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://ajiehome.github.io/hexo-web/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Windows%E5%AE%89%E8%A3%85MySQL/" data-id="climh8yyw004gc0oqebilbk1h" data-title="Windows安装MySQL" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
-
-  <nav id="page-nav">
-    
-    <a class="extend prev" rel="prev" href="/page/6/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/8/">下一页 &raquo;</a>
-  </nav>
-
-</section>
+    <div class="post-tags">
         
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">分类</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C-%E5%9F%BA%E7%A1%80/">C++基础</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/">前端杂烩</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">开发工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/">开源框架</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%90%86%E8%AE%BA%E4%BD%93%E7%B3%BB/">理论体系</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/">脚本语言</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%99%9A%E6%8B%9F%E5%AE%B9%E5%99%A8/">虚拟容器</a></li></ul>
+        
     </div>
-  </div>
+    <a href="/2023/06/07/%E7%90%86%E8%AE%BA%E4%BD%93%E7%B3%BB/B%E6%A0%91&B+%E6%A0%91/" class="go-post">阅读全文</a>
+</div>
 
 
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">六月 2023</a></li></ul>
+        <div class="page-current">
+    <div class="prev">
+        
+        <a class="page-num" href="/page/6/">
+            <i class="fa-solid fa-caret-left fa-fw"></i>
+        </a>
+        
     </div>
-  </div>
+    <div class="page-index">
+        
+        <span>
+            
+            <a class="page-num" href="/">1</a>
+            <span class="page-omit">...</span>
+            
+            
+            
+            
+            <a class="page-num" href="/page/5">5</a>
+            
+            
+            <a class="page-num" href="/page/6/">6</a>
+        </span>
+        
+        <span class="current">7</span>
+        
+        <span>
+            <a class="page-num" href="/page/8/">8</a>
+            
+            <a class="page-num" href="/page/9">9</a>
+            
+            
+        </span>
+        
+    </div>
+    <div class="next">
+        
+        <a class="page-num" href="/page/8/">
+            <i class="fa-solid fa-caret-right fa-fw"></i>
+        </a>
+        
+    </div>
+</div>
 
-
-  
+    </div>
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2023/06/07/C++%E5%9F%BA%E7%A1%80/C++%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/">C++内存分配</a>
-          </li>
-        
-          <li>
-            <a href="/2023/06/07/C++%E5%9F%BA%E7%A1%80/C++%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/">C++基础语法</a>
-          </li>
-        
-          <li>
-            <a href="/2023/06/07/C++%E5%9F%BA%E7%A1%80/C++%E8%AF%AD%E6%B3%95_%E7%BB%A7%E6%89%BF/">C++语法_继承</a>
-          </li>
-        
-          <li>
-            <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/IO%E4%B8%8ENIO/">IO与NIO</a>
-          </li>
-        
-          <li>
-            <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jar%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/">Jar后台运行</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
+    <div id="home-card">
+        <div id="card-div">
+    <div class="card-style">
+        <div class="avatar">
+            <img src="https://static-argvchs.netlify.app/images/avatar.jpg" alt="avatar" />
+        </div>
+        <div class="name">ajiehome</div>
+        <div class="description">
+            <p>Here’s an argvchs…</p>
 
-  
-</aside>
+        </div>
         
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2023 ajiehome<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+        <div class="icon-links">
+            
+            <span class="icon-link">
+                <a target="_blank" rel="noopener" href="https://github.com/argvchs">
+                    <i
+                        class="fa-brands fa-github fa-fw"
+                    ></i>
+                </a>
+            </span>
+            
+            <span class="icon-link">
+                <a target="_blank" rel="noopener" href="http://wpa.qq.com/msgrd?v=3&uin=3364555156&site=qq&menu=yes">
+                    <i
+                        class="fa-brands fa-qq fa-fw"
+                    ></i>
+                </a>
+            </span>
+            
+            <span class="icon-link">
+                <a target="_blank" rel="noopener" href="https://twitter.com/argvchs">
+                    <i
+                        class="fa-brands fa-twitter fa-fw"
+                    ></i>
+                </a>
+            </span>
+            
+            <span class="icon-link">
+                <a href="mailto:argvchs@outlook.com">
+                    <i
+                        class="fa-solid fa-envelope fa-fw"
+                    ></i>
+                </a>
+            </span>
+            
+        </div>
+        
+        
+        <div class="friend-links">
+            
+            <div class="friend-link">
+                <a target="_blank" rel="noopener" href="https://blog.yuzi.dev">Yuzi</a>
+            </div>
+            
+            <div class="friend-link">
+                <a target="_blank" rel="noopener" href="https://lynxcatthethird.github.io">LynxCatTheThird</a>
+            </div>
+            
+        </div>
+        
     </div>
-  </div>
+</div>
+
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2023 阿杰之家
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;ajiehome
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
 </footer>
 
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.6.4.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
-</body>
+                </div>
+            </transition>
+            
+            <transition name="fade">
+                <div id="preview" ref="preview" v-show="previewShow">
+                    <img id="preview-content" ref="previewContent" />
+                </div>
+            </transition>
+            
+        </div>
+        <script src="/js/main.js"></script>
+        <script>
+            console.info("Welcome to Argvchs' blog!");
+            if (!window.hasOwnProperty("ontouchstart")) {
+                let html = '<canvas id="fireworks" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 32767"></canvas><script src="https://static-argvchs.netlify.app/js/fireworks.min.js"><\/script>';
+                document.body.append(document.createRange().createContextualFragment(html));
+            }
+        </script>
+        
+    </body>
 </html>
