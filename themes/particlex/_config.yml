@@ -105,7 +105,7 @@ search:
 # Giscus
 # https://github.com/giscus/giscus
 giscus:
-    enable: true
+    enable: false
     src: https://giscus.app/client.js
     repo: argvchs/giscus-comments
     repoID: R_kgDOI_uC-w
