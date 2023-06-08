@@ -701,52 +701,6 @@ select group_concat(age) from demo1;
 </div>
 
 <div class="post">
-    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E6%8C%81%E4%B9%85%E5%8C%96/">
-        <h2 class="post-title">Redis持久化</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                数据库
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="redis的持久化"><a href="#redis的持久化" class="headerlink" title="redis的持久化"></a>redis的持久化</h1><ol>
-<li>aop（append only file）<br> 把每一次的数据变化都写入到本地文件 ——— 全持久化模式以日志的形式记录 每一次的写、删操作，以文本的形式记录</li>
-<li>rdb<br> 定时把redis中的数据写入到本地文件 ——— 半持久化模式<br> fork一个字进程，把数据写入临时文件，然后在替换掉本地的文件，使用二进制压缩</li>
-</ol>
-<h2 id="RDB持久化配置"><a href="#RDB持久化配置" class="headerlink" title="RDB持久化配置"></a>RDB持久化配置</h2><p>Redis会将数据集的快照dump到dump.rdb文件中。此外，我们也可以通过配置文件来修改Redis服务器dump快照的频率，在打开6379.conf文件之后，我们搜索save，可以看到下面的配置信息：</p>
-<p>save 900 1       #在900秒(15分钟)之后，如果至少有1个key发生变化，则dump内存快照。<br>save 300 10      #在300秒(5分钟)之后，如果至少有10个key发生变化，则dump内存快照。<br>save 60 10000    #在60秒(1分钟)之后，如果至少有10000个key发生变化，则dump内存快照。</p>
-<h2 id="AOF持久化配置"><a href="#AOF持久化配置" class="headerlink" title="AOF持久化配置"></a>AOF持久化配置</h2><p>在Redis的配置文件中存在三种同步方式，它们分别是：</p>
-<p>appendfsync always   #每次有数据修改发生时都会写入AOF文件。<br>appendfsync everysec #每秒钟同步一次，该策略为AOF的缺省策略。<br>appendfsync no     #从不同步。高效但是数据不会被持久化。</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E6%8C%81%E4%B9%85%E5%8C%96/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
     <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E5%91%BD%E4%BB%A4/">
         <h2 class="post-title">Redis命令</h2>
     </a>
@@ -960,6 +914,52 @@ String value = jedis.get(&quot;key1&quot;);
 </div>
 
 <div class="post">
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E6%8C%81%E4%B9%85%E5%8C%96/">
+        <h2 class="post-title">Redis持久化</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                数据库
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="redis的持久化"><a href="#redis的持久化" class="headerlink" title="redis的持久化"></a>redis的持久化</h1><ol>
+<li>aop（append only file）<br> 把每一次的数据变化都写入到本地文件 ——— 全持久化模式以日志的形式记录 每一次的写、删操作，以文本的形式记录</li>
+<li>rdb<br> 定时把redis中的数据写入到本地文件 ——— 半持久化模式<br> fork一个字进程，把数据写入临时文件，然后在替换掉本地的文件，使用二进制压缩</li>
+</ol>
+<h2 id="RDB持久化配置"><a href="#RDB持久化配置" class="headerlink" title="RDB持久化配置"></a>RDB持久化配置</h2><p>Redis会将数据集的快照dump到dump.rdb文件中。此外，我们也可以通过配置文件来修改Redis服务器dump快照的频率，在打开6379.conf文件之后，我们搜索save，可以看到下面的配置信息：</p>
+<p>save 900 1       #在900秒(15分钟)之后，如果至少有1个key发生变化，则dump内存快照。<br>save 300 10      #在300秒(5分钟)之后，如果至少有10个key发生变化，则dump内存快照。<br>save 60 10000    #在60秒(1分钟)之后，如果至少有10000个key发生变化，则dump内存快照。</p>
+<h2 id="AOF持久化配置"><a href="#AOF持久化配置" class="headerlink" title="AOF持久化配置"></a>AOF持久化配置</h2><p>在Redis的配置文件中存在三种同步方式，它们分别是：</p>
+<p>appendfsync always   #每次有数据修改发生时都会写入AOF文件。<br>appendfsync everysec #每秒钟同步一次，该策略为AOF的缺省策略。<br>appendfsync no     #从不同步。高效但是数据不会被持久化。</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E6%8C%81%E4%B9%85%E5%8C%96/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis%E6%8F%8F%E8%BF%B0/">
         <h2 class="post-title">Redis描述</h2>
     </a>
@@ -1039,17 +1039,17 @@ String value = jedis.get(&quot;key1&quot;);
 </div>
 
 <div class="post">
-    <a href="/2023/06/07/%E7%90%86%E8%AE%BA%E4%BD%93%E7%B3%BB/B%E6%A0%91&B+%E6%A0%91/">
-        <h2 class="post-title">B树&amp;B+树</h2>
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Windows%E5%AE%89%E8%A3%85MySQL/">
+        <h2 class="post-title">Windows安装MySQL</h2>
     </a>
     <div class="category-and-date">
         
         <span class="category">
-            <a href="/categories/%E7%90%86%E8%AE%BA%E4%BD%93%E7%B3%BB/">
+            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                理论体系
+                数据库
             </a>
         </span>
         
@@ -1065,18 +1065,69 @@ String value = jedis.get(&quot;key1&quot;);
     <div class="description">
         <div class="content" v-pre>
             
-            <hr>
-<h2 id="title-B-Treedate-2022-04-26-13-44-11-89updated-2022-08-04-18-30-16-893url-x2F-archives-x2F-btreecategories-tags"><a href="#title-B-Treedate-2022-04-26-13-44-11-89updated-2022-08-04-18-30-16-893url-x2F-archives-x2F-btreecategories-tags" class="headerlink" title="title: B Treedate: 2022-04-26 13:44:11.89updated: 2022-08-04 18:30:16.893url: &#x2F;archives&#x2F;btreecategories:tags: "></a>title: B Tree<br>date: 2022-04-26 13:44:11.89<br>updated: 2022-08-04 18:30:16.893<br>url: &#x2F;archives&#x2F;btree<br>categories:<br>tags: </h2><h1 id="B-Tree"><a href="#B-Tree" class="headerlink" title="B Tree"></a>B Tree</h1><p>mi’g’c</p>
-<ul>
-<li>叶子节点：最后的那一场节点</li>
-<li>非叶子节点：除去最后的那一层节点</li>
-<li>阶：B树中所有孩子节点数的最大值</li>
-<li>度：数的高度，一般不包括叶子节点那一层</li>
+            <h1 id="Windows下MySQL的安装"><a href="#Windows下MySQL的安装" class="headerlink" title="Windows下MySQL的安装"></a>Windows下MySQL的安装</h1><p>首先下载MySQL的的压缩包（MySQL社区版）</p>
+<p><a target="_blank" rel="noopener" href="https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-5.7.37-winx64.zip">MySQL5.7社区版</a></p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>如果以前安装过其它版本的MySQL那么需要先卸载mysql的服务在进行安装<br>卸载方式：以管理员身份进入CMD控制台，然后输入一下命令进行删除服务<br>如果未安装则可以忽略这一步骤：mysql是服务的名称</p>
+<pre><code class="shell">sc delete mysql
+</code></pre>
+<h2 id="1、MySQL的解压"><a href="#1、MySQL的解压" class="headerlink" title="1、MySQL的解压"></a>1、MySQL的解压</h2><p>将下载好的mysql的压缩包解压，并且把解压之后的mysql-8.0.15-winx64文件夹放到安装文件夹<br>我的是放在：D:\Software\MySQL\mysql-8.0.15-winx64</p>
+<h2 id="2、配置环境变量"><a href="#2、配置环境变量" class="headerlink" title="2、配置环境变量"></a>2、配置环境变量</h2><p>右键我的计算机-&gt;属性-&gt;高级系统设置-&gt;环境变量<br>新建系统变量</p>
+<pre><code class="shell">变量名称：MYSQL_HOME
+变量路径：D:\Software\MySQL\mysql-8.0.15-winx64\bin
+</code></pre>
+<p>修改path变量，加入</p>
+<pre><code class="shell">%MYSQL_HOME%\bin
+</code></pre>
+<p><strong>注意：</strong>如果失败，可以创建一个指定初始配置文件(我现在这个版本是没有配置的)<br>初始化mysql前，可以通过ini文件来指定部分初始配置，比如<code>basedir</code>和<code>datadir</code>等，当然，也可以不指定利用默认的，参考文档<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/windows-create-option-file.html">官方文档</a><br>在mysql的根目录下，创建mysql.ini文件，加入下面内容</p>
+<pre><code class="yml">[mysqld]
+# set basedir to your installation path
+basedir=D:\Software\MySQL\mysql-8.0.15-winx64
+# set datadir to the location of your data directory
+datadir=D:\Software\MySQL\mysql-8.0.15-winx64\data
+</code></pre>
+<h2 id="3、初始化"><a href="#3、初始化" class="headerlink" title="3、初始化"></a>3、初始化</h2><p>打开cmd控制台，输入初始化命令（由于配置了系统的环境变量，所以不需要进入到D:\Software\MySQL\mysql-8.0.15-winx64\bin下）</p>
+<pre><code class="shell">//生成临时密码
+mysqlid --initialize --console
+</code></pre>
+<p>或者</p>
+<pre><code class="shell">//空密码
+mysqld --initialize-insecure --console
+</code></pre>
+<p>如果选择临时密码，控制台会有以下输出，可以看到里面有临时密码（temporary password is generated for root@localhost:后面的值，注意去掉空格），请一定要记住，当然你如果不想记住也可以，只是需要再折腾一下去重置密码</p>
+<pre><code class="yml">2018-08-15T02:55:43.924361Z 0 [System] [MY-013169] [Server] C:\MyPrograms\mysql-8.0.12-winx64\bin\mysqld.exe (mysqld 8.0.12) initializing of server in progress as process 12040
+2018-08-15T02:55:55.962035Z 5 [Note] [MY-010454] [Server] A temporary password is generated for root@localhost: XCeQtsgMO7-F
+2018-08-15T02:56:03.261174Z 0 [System] [MY-013170] [Server] C:\MyPrograms\mysql-8.0.12-winx64\bin\mysqld.exe (mysqld 8.0.12) initializing of server has completed
+</code></pre>
+<h2 id="4、安装windows服务"><a href="#4、安装windows服务" class="headerlink" title="4、安装windows服务"></a>4、安装windows服务</h2><p>用管理员身份打开CMD，在里面输入如下命令</p>
+<pre><code class="shell">//serviceName为服务名，不输入默认为mysql
+mysqld --install [serviceName]
+</code></pre>
+<p>如果看到下面内容，则证明服务安装成功</p>
+<pre><code>Service successfully installed.
+</code></pre>
+<h2 id="5、启动服务"><a href="#5、启动服务" class="headerlink" title="5、启动服务"></a>5、启动服务</h2><p>还是用管理员身份打开CMD，输入如下命令</p>
+<pre><code class="shell">net start mysql
+
+//以下输出证明启动成功
+MySQL 服务正在启动 ..
+MySQL 服务已经启动成功。
+
+//如果你要关闭的话
+net stop mysql
+</code></pre>
+<h2 id="6、更改密码"><a href="#6、更改密码" class="headerlink" title="6、更改密码"></a>6、更改密码</h2><p>连接到mysql</p>
+<pre><code class="shell">//下面-p后面的内容就是临时密码
+mysql -uroot -pXCeQtsgMO7-F
+</code></pre>
+<p>修改密码</p>
+<pre><code class="shell">ALTER USER &#39;root&#39;@&#39;localhost&#39; IDENTIFIED WITH mysql_native_password BY &#39;newpassword&#39;;
+</code></pre>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>1、环境变量是为了在命令行CMD中更加方便使用mysql命令；</li>
+<li>2、如果有之前有安装过其他版本mysql，记得先卸载并删除服务；</li>
+<li>3、安装完记得登录并修改密码，不论是采用空密码还是临时密码；</li>
+<li>4、当然，命令行终归是不方便的，现在有很多可视化界面，如：Navicat等。</li>
 </ul>
-<p>规则：</p>
-<ol>
-<li>树中每个节点最多只能有M（M为阶）颗子树</li>
-</ol>
 
             
         </div>
@@ -1085,7 +1136,7 @@ String value = jedis.get(&quot;key1&quot;);
         
         
     </div>
-    <a href="/2023/06/07/%E7%90%86%E8%AE%BA%E4%BD%93%E7%B3%BB/B%E6%A0%91&B+%E6%A0%91/" class="go-post">阅读全文</a>
+    <a href="/2023/06/07/%E6%95%B0%E6%8D%AE%E5%BA%93/Windows%E5%AE%89%E8%A3%85MySQL/" class="go-post">阅读全文</a>
 </div>
 
 

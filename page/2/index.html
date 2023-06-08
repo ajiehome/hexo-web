@@ -392,45 +392,6 @@
 </div>
 
 <div class="post">
-    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jvm%E8%99%9A%E6%8B%9F%E6%9C%BA/">
-        <h2 class="post-title">Jvm虚拟机</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/Java%E5%9F%BA%E7%A1%80/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Java基础
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="JVM虚拟机"><a href="#JVM虚拟机" class="headerlink" title="JVM虚拟机"></a>JVM虚拟机</h1><p>指针碰撞（bump the pointer）： 指在分配内存的时候，由于堆空间的内存是整齐规划的，一边是使用的内存，一边是空闲的内存，中间由指针分开，在移动指针进行内存分配的时候叫做内存分配</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jvm%E8%99%9A%E6%8B%9F%E6%9C%BA/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
     <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jvm%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/">
         <h2 class="post-title">Jvm垃圾收集器</h2>
     </a>
@@ -474,8 +435,8 @@
 </div>
 
 <div class="post">
-    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%96%87%E4%BB%B6%E7%9A%84MD5/">
-        <h2 class="post-title">计算文件的MD5</h2>
+    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jvm%E8%99%9A%E6%8B%9F%E6%9C%BA/">
+        <h2 class="post-title">Jvm虚拟机</h2>
     </a>
     <div class="category-and-date">
         
@@ -500,30 +461,7 @@
     <div class="description">
         <div class="content" v-pre>
             
-            <hr>
-<h2 id="title-计算文件的MD5date-2022-04-20-09-41-15-031updated-2022-10-13-14-57-26-724url-x2F-archives-x2F-ji-suan-wen-jian-de-md5categories-Javatags-Java-MD5"><a href="#title-计算文件的MD5date-2022-04-20-09-41-15-031updated-2022-10-13-14-57-26-724url-x2F-archives-x2F-ji-suan-wen-jian-de-md5categories-Javatags-Java-MD5" class="headerlink" title="title: 计算文件的MD5date: 2022-04-20 09:41:15.031updated: 2022-10-13 14:57:26.724url: &#x2F;archives&#x2F;ji-suan-wen-jian-de-md5categories:- Javatags:- Java- MD5"></a>title: 计算文件的MD5<br>date: 2022-04-20 09:41:15.031<br>updated: 2022-10-13 14:57:26.724<br>url: &#x2F;archives&#x2F;ji-suan-wen-jian-de-md5<br>categories:<br>- Java<br>tags:<br>- Java<br>- MD5</h2><pre><code class="java">public String md5(File file)&#123;
-        try &#123;
-            MessageDigest md5 = MessageDigest.getInstance(&quot;MD5&quot;);
-            FileInputStream fileInputStream = new FileInputStream(file);
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            byte [] bytes = new byte[1024];
-            int read = 0;
-            while ((read=(fileInputStream.read(bytes)))!=-1)&#123;
-                stream.write(bytes,0,read);
-            &#125;
-            fileInputStream.close();
-            stream.close();
-            byte[] byteArray = stream.toByteArray();
-            md5.update(byteArray);
-            byte[] digest = md5.digest();
-            BigInteger bigInteger = new BigInteger(1,digest);
-            //生成MD5的进制数
-            return bigInteger.toString(16);
-        &#125; catch (NoSuchAlgorithmException | IOException e) &#123;
-            throw new ApplicationException(CodeType.SERVICE_ERROR, &quot;MD5转换失败&quot;);
-        &#125;
-    &#125;
-</code></pre>
+            <h1 id="JVM虚拟机"><a href="#JVM虚拟机" class="headerlink" title="JVM虚拟机"></a>JVM虚拟机</h1><p>指针碰撞（bump the pointer）： 指在分配内存的时候，由于堆空间的内存是整齐规划的，一边是使用的内存，一边是空闲的内存，中间由指针分开，在移动指针进行内存分配的时候叫做内存分配</p>
 
             
         </div>
@@ -532,7 +470,7 @@
         
         
     </div>
-    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%96%87%E4%BB%B6%E7%9A%84MD5/" class="go-post">阅读全文</a>
+    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jvm%E8%99%9A%E6%8B%9F%E6%9C%BA/" class="go-post">阅读全文</a>
 </div>
 
 <div class="post">
@@ -630,6 +568,68 @@
         
     </div>
     <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/%E4%BA%8C%E7%BB%B4%E7%A0%81%E7%94%9F%E6%88%90/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%96%87%E4%BB%B6%E7%9A%84MD5/">
+        <h2 class="post-title">计算文件的MD5</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/Java%E5%9F%BA%E7%A1%80/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Java基础
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <hr>
+<h2 id="title-计算文件的MD5date-2022-04-20-09-41-15-031updated-2022-10-13-14-57-26-724url-x2F-archives-x2F-ji-suan-wen-jian-de-md5categories-Javatags-Java-MD5"><a href="#title-计算文件的MD5date-2022-04-20-09-41-15-031updated-2022-10-13-14-57-26-724url-x2F-archives-x2F-ji-suan-wen-jian-de-md5categories-Javatags-Java-MD5" class="headerlink" title="title: 计算文件的MD5date: 2022-04-20 09:41:15.031updated: 2022-10-13 14:57:26.724url: &#x2F;archives&#x2F;ji-suan-wen-jian-de-md5categories:- Javatags:- Java- MD5"></a>title: 计算文件的MD5<br>date: 2022-04-20 09:41:15.031<br>updated: 2022-10-13 14:57:26.724<br>url: &#x2F;archives&#x2F;ji-suan-wen-jian-de-md5<br>categories:<br>- Java<br>tags:<br>- Java<br>- MD5</h2><pre><code class="java">public String md5(File file)&#123;
+        try &#123;
+            MessageDigest md5 = MessageDigest.getInstance(&quot;MD5&quot;);
+            FileInputStream fileInputStream = new FileInputStream(file);
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            byte [] bytes = new byte[1024];
+            int read = 0;
+            while ((read=(fileInputStream.read(bytes)))!=-1)&#123;
+                stream.write(bytes,0,read);
+            &#125;
+            fileInputStream.close();
+            stream.close();
+            byte[] byteArray = stream.toByteArray();
+            md5.update(byteArray);
+            byte[] digest = md5.digest();
+            BigInteger bigInteger = new BigInteger(1,digest);
+            //生成MD5的进制数
+            return bigInteger.toString(16);
+        &#125; catch (NoSuchAlgorithmException | IOException e) &#123;
+            throw new ApplicationException(CodeType.SERVICE_ERROR, &quot;MD5转换失败&quot;);
+        &#125;
+    &#125;
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%96%87%E4%BB%B6%E7%9A%84MD5/" class="go-post">阅读全文</a>
 </div>
 
 <div class="post">
