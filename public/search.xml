@@ -61,11 +61,11 @@
     
     
     <entry>
-      <title>IO与NIO</title>
-      <link href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/IO%E4%B8%8ENIO/"/>
-      <url>/2023/06/07/Java%E5%9F%BA%E7%A1%80/IO%E4%B8%8ENIO/</url>
+      <title>Jar后台运行</title>
+      <link href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jar%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/"/>
+      <url>/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jar%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/</url>
       
-        <content type="html"><![CDATA[<h1 id="IO与NIO"><a href="#IO与NIO" class="headerlink" title="IO与NIO"></a>IO与NIO</h1><h3 id="1、阻塞与非阻塞"><a href="#1、阻塞与非阻塞" class="headerlink" title="1、阻塞与非阻塞"></a>1、阻塞与非阻塞</h3><p>阻塞与非阻塞是描述进程在访问某个资源时，数据是否准备就绪的的一种处理方式。当数据没有准备就绪时：</p><ul><li>阻塞：线程持续等待资源中数据准备完成，直到返回响应结果。</li><li>非阻塞：线程直接返回结果，不会持续等待资源准备数据结束后才响应结果。</li></ul><h3 id="2、同步与异步"><a href="#2、同步与异步" class="headerlink" title="2、同步与异步"></a>2、同步与异步</h3><ul><li>同步与异步是指访问数据的机制，同步一般指主动请求并等待IO操作完成的方式。</li><li>异步则指主动请求数据后便可以继续处理其它任务，随后等待IO操作完毕的通知。</li></ul><p>老王烧开水：<br> 1、普通水壶煮水，站在旁边，主动的看水开了没有？同步的阻塞<br> 2、普通水壶煮水，去干点别的事，每过一段时间去看看水开了没有，水没开就走人。 同步非阻塞<br> 3、响水壶煮水，站在旁边，不会每过一段时间主动看水开了没有。如果水开了，水壶自动通知他。 异步阻塞<br> 4、响水壶煮水，去干点别的事，如果水开了，水壶自动通知他。异步非阻塞</p><h3 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h3><h4 id="1、传统BIO模型"><a href="#1、传统BIO模型" class="headerlink" title="1、传统BIO模型"></a>1、传统BIO模型</h4><p>传统BIO是一种同步的阻塞IO，IO在进行读写时，该线程将被阻塞，线程无法进行其它操作。<br> IO流在读取时，会阻塞。直到发生以下情况：1、有数据可以读取。2、数据读取完成。3、发生异常</p><h4 id="2、伪异步IO模型"><a href="#2、伪异步IO模型" class="headerlink" title="2、伪异步IO模型"></a>2、伪异步IO模型</h4><p>以传统BIO模型为基础，通过线程池的方式维护所有的IO线程，实现相对高效的线程开销及管理。</p><h4 id="3、NIO模型"><a href="#3、NIO模型" class="headerlink" title="3、NIO模型"></a>3、NIO模型</h4><p>NIO（JDK1.4）模型是一种同步非阻塞IO，主要有三大核心部分：Channel(通道)，Buffer(缓冲区), Selector（多路复用器）。传统IO基于字节流和字符流进行操作，而NIO基于Channel和Buffer(缓冲区)进行操作，数据总是从通道读取到缓冲区中，或者从缓冲区写入到通道中。Selector(多路复用器)用于监听多个通道的事件（比如：连接打开，数据到达）。因此，单个线程可以监听多个数据通道。<br> NIO和传统IO（一下简称IO）之间第一个最大的区别是，IO是面向流的，NIO是面向缓冲区的。 Java IO面向流意味着每次从流中读一个或多个字节，直至读取所有字节，它们没有被缓存在任何地方。此外，它不能前后移动流中的数据。如果需要前后移动从流中读取的数据，需要先将它缓存到一个缓冲区。NIO的缓冲导向方法略有不同。数据读取到一个它稍后处理的缓冲区，需要时可在缓冲区中前后移动。这就增加了处理过程中的灵活性。但是，还需要检查是否该缓冲区中包含所有您需要处理的数据。而且，需确保当更多的数据读入缓冲区时，不要覆盖缓冲区里尚未处理的数据。<br> IO的各种流是阻塞的。这意味着，当一个线程调用read() 或 write()时，该线程被阻塞，直到有一些数据被读取，或数据完全写入。该线程在此期间不能再干任何事情了。 NIO的非阻塞模式，使一个线程从某通道发送请求读取数据，但是它仅能得到目前可用的数据，如果目前没有数据可用时，就什么都不会获取。而不是保持线程阻塞，所以直至数据变的可以读取之前，该线程可以继续做其他的事情。 非阻塞写也是如此。一个线程请求写入一些数据到某通道，但不需要等待它完全写入，这个线程同时可以去做别的事情。 线程通常将非阻塞IO的空闲时间用于在其它通道上执行IO操作，所以一个单独的线程现在可以管理多个输入和输出通道（channel）。</p><h4 id="NIO优点："><a href="#NIO优点：" class="headerlink" title="NIO优点："></a>NIO优点：</h4><ol><li>通过Channel注册到Selector上的状态来实现一种客户端与服务端的通信。</li><li>Channel中数据的读取是通过Buffer , 一种非阻塞的读取方式。</li><li>Selector 多路复用器  单线程模型，  线程的资源开销相对比较小。</li></ol><h4 id="Channel-通道"><a href="#Channel-通道" class="headerlink" title="Channel(通道)"></a>Channel(通道)</h4><p>传统IO操作对read()或write()方法的调用，可能会因为没有数据可读&#x2F;可写而阻塞，直到有数据响应。也就是说读写数据的IO调用，可能会无限期的阻塞等待，效率依赖网络传输的速度。最重要的是在调用一个方法前，无法知道是否会被阻塞。</p><p>NIO的Channel抽象了一个重要特征就是可以通过配置它的阻塞行为，来实现非阻塞式的通道。</p><p>Channel是一个双向通道，与传统IO操作只允许单向的读写不同的是，NIO的Channel允许在一个通道上进行读和写的操作。</p><p>FileChannel:文件</p><p>SocketChannel:</p><p>ServerSocketChannel:</p><p>DatagramChannel: UDP</p><h4 id="Buffer-缓冲区"><a href="#Buffer-缓冲区" class="headerlink" title="Buffer(缓冲区)"></a>Buffer(缓冲区)</h4><p>Bufer顾名思义，它是一个缓冲区，实际上是一个容器，一个连续数组。Channel提供从文件、网络读取数据的渠道，但是读写的数据都必须经过Buffer。</p><p><img src="https://upload-images.jianshu.io/upload_images/13449209-300fd48a7251c327.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/654/format/webp" alt="img"></p><p>Buffer(缓冲区)</p><p>Buffer缓冲区本质上是一块可以写入数据，然后可以从中读取数据的内存。这块内存被包装成NIO Buffer对象，并提供了一组方法，用来方便的访问该模块内存。为了理解Buffer的工作原理，需要熟悉它的三个属性：capacity、position和limit。</p><p>position和limit的含义取决于Buffer处在读模式还是写模式。不管Buffer处在什么模式，capacity的含义总是一样的。见下图：</p><p><img src="https://upload-images.jianshu.io/upload_images/13449209-d261cbcb9b9ed88f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/506/format/webp" alt="img"></p><p>capacity、position和limit</p><ul><li>capacity：作为一个内存块，Buffer有固定的大小值，也叫作“capacity”，只能往其中写入capacity个byte、long、char等类型。一旦Buffer满了，需要将其清空（通过读数据或者清楚数据）才能继续写数据。</li><li>position：当你写数据到Buffer中时，position表示当前的位置。出事的position值为0，当写入一个字节数据到Buffer中后，position会向前移动到下一个可插入数据的Buffer单元。position最大可为capacity-1。当读取数据时，也是从某个特定位置读，讲Buffer从写模式切换到读模式，position会被重置为0。当从Buffer的position处读取一个字节数据后，position向前移动到下一个可读的位置。</li><li>limit：在写模式下，Buffer的limit表示你最多能往Buffer里写多少数据。 写模式下，limit等于Buffer的capacity。当切换Buffer到读模式时， limit表示你最多能读到多少数据。因此，当切换Buffer到读模式时，limit会被设置成写模式下的position值。换句话说，你能读到之前写入的所有数据（limit被设置成已写数据的数量，这个值在写模式下就是position）</li></ul><h4 id="Buffer的分配："><a href="#Buffer的分配：" class="headerlink" title="Buffer的分配："></a>Buffer的分配：</h4><p>对Buffer对象的操作必须首先进行分配，Buffer提供一个allocate(int capacity)方法分配一个指定字节大小的对象。<br> 向Buffer中写数据：写数据到Buffer中有两种方式：<br> 1.从channel写到Buffer</p><pre><code class="cpp">int bytes = channel.read(buf); //将channel中的数据读取到buf中</code></pre><p>2.通过Buffer的put()方法写到Buffer</p><pre><code class="csharp">buf.put(byte); //将数据通过put()方法写入到buf中</code></pre><ul><li>flip()方法：将Buffer从写模式切换到读模式，调用flip()方法会将position设置为0，并将limit设置为之前的position的值。<br> 从Buffer中读数据：从Buffer中读数据有两种方式：<br> 1.从Buffer读取数据到Channel</li></ul><pre><code class="cpp">int bytes = channel.write(buf); //将buf中的数据读取到channel中</code></pre><p>2.通过Buffer的get()方法读取数据</p><pre><code class="csharp">byte bt = buf.get(); //从buf中读取一个byte</code></pre><ul><li>rewind()方法：Buffer.rewind()方法将position设置为0，使得可以重读Buffer中的所有数据，limit保持不变。</li><li>clear()与compact()方法：一旦读完Buffer中的数据，需要让Buffer准备好再次被写入，可以通过clear()或compact()方法完成。如果调用的是clear()方法，position将被设置为0，limit设置为capacity的值。但是Buffer并未被清空，只是通过这些标记告诉我们可以从哪里开始往Buffer中写入多少数据。如果Buffer中还有一些未读的数据，调用clear()方法将被”遗忘 “。compact()方法将所有未读的数据拷贝到Buffer起始处，然后将position设置到最后一个未读元素的后面，limit属性依然设置为capacity。可以使得Buffer中的未读数据还可以在后续中被使用。</li><li>mark()与reset()方法：通过调用Buffer.mark()方法可以标记一个特定的position，之后可以通过调用Buffer.reset()恢复到这个position上。</li></ul><h4 id="Selector-多路复用器"><a href="#Selector-多路复用器" class="headerlink" title="Selector(多路复用器)"></a>Selector(多路复用器)</h4><p>Selector与Channel是相互配合使用的，将Channel注册在Selector上之后，才可以正确的使用Selector，但此时Channel必须为非阻塞模式。Selector可以监听Channel的四种状态（Connect、Accept、Read、Write），当监听到某一Channel的某个状态时，才允许对Channel进行相应的操作。</p><ul><li>Connect：某一个客户端连接成功后</li><li>Accept：准备好进行连接</li><li>Read:可读</li><li>Write:可写</li></ul><p>作者：林亚希<br>链接：<a href="https://www.jianshu.com/p/5bb812ca5f8e">https://www.jianshu.com/p/5bb812ca5f8e</a><br>来源：简书<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>]]></content>
+        <content type="html"><![CDATA[<h1 id="JAR后台运行"><a href="#JAR后台运行" class="headerlink" title="JAR后台运行"></a>JAR后台运行</h1><p>保存后台运行，且把日志信息打印输出到指定的文件中</p><p>jar name：jar包的名字</p><p>log file：完整的日志文件路径，包括日志文件</p><pre><code class="shell">nohup java -jar &#39;jar name&#39; &gt; &#39;log file&#39; &amp;</code></pre>]]></content>
       
       
       <categories>
@@ -80,11 +80,11 @@
     
     
     <entry>
-      <title>Jar后台运行</title>
-      <link href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jar%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/"/>
-      <url>/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jar%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/</url>
+      <title>IO与NIO</title>
+      <link href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/IO%E4%B8%8ENIO/"/>
+      <url>/2023/06/07/Java%E5%9F%BA%E7%A1%80/IO%E4%B8%8ENIO/</url>
       
-        <content type="html"><![CDATA[<h1 id="JAR后台运行"><a href="#JAR后台运行" class="headerlink" title="JAR后台运行"></a>JAR后台运行</h1><p>保存后台运行，且把日志信息打印输出到指定的文件中</p><p>jar name：jar包的名字</p><p>log file：完整的日志文件路径，包括日志文件</p><pre><code class="shell">nohup java -jar &#39;jar name&#39; &gt; &#39;log file&#39; &amp;</code></pre>]]></content>
+        <content type="html"><![CDATA[<h1 id="IO与NIO"><a href="#IO与NIO" class="headerlink" title="IO与NIO"></a>IO与NIO</h1><h3 id="1、阻塞与非阻塞"><a href="#1、阻塞与非阻塞" class="headerlink" title="1、阻塞与非阻塞"></a>1、阻塞与非阻塞</h3><p>阻塞与非阻塞是描述进程在访问某个资源时，数据是否准备就绪的的一种处理方式。当数据没有准备就绪时：</p><ul><li>阻塞：线程持续等待资源中数据准备完成，直到返回响应结果。</li><li>非阻塞：线程直接返回结果，不会持续等待资源准备数据结束后才响应结果。</li></ul><h3 id="2、同步与异步"><a href="#2、同步与异步" class="headerlink" title="2、同步与异步"></a>2、同步与异步</h3><ul><li>同步与异步是指访问数据的机制，同步一般指主动请求并等待IO操作完成的方式。</li><li>异步则指主动请求数据后便可以继续处理其它任务，随后等待IO操作完毕的通知。</li></ul><p>老王烧开水：<br> 1、普通水壶煮水，站在旁边，主动的看水开了没有？同步的阻塞<br> 2、普通水壶煮水，去干点别的事，每过一段时间去看看水开了没有，水没开就走人。 同步非阻塞<br> 3、响水壶煮水，站在旁边，不会每过一段时间主动看水开了没有。如果水开了，水壶自动通知他。 异步阻塞<br> 4、响水壶煮水，去干点别的事，如果水开了，水壶自动通知他。异步非阻塞</p><h3 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h3><h4 id="1、传统BIO模型"><a href="#1、传统BIO模型" class="headerlink" title="1、传统BIO模型"></a>1、传统BIO模型</h4><p>传统BIO是一种同步的阻塞IO，IO在进行读写时，该线程将被阻塞，线程无法进行其它操作。<br> IO流在读取时，会阻塞。直到发生以下情况：1、有数据可以读取。2、数据读取完成。3、发生异常</p><h4 id="2、伪异步IO模型"><a href="#2、伪异步IO模型" class="headerlink" title="2、伪异步IO模型"></a>2、伪异步IO模型</h4><p>以传统BIO模型为基础，通过线程池的方式维护所有的IO线程，实现相对高效的线程开销及管理。</p><h4 id="3、NIO模型"><a href="#3、NIO模型" class="headerlink" title="3、NIO模型"></a>3、NIO模型</h4><p>NIO（JDK1.4）模型是一种同步非阻塞IO，主要有三大核心部分：Channel(通道)，Buffer(缓冲区), Selector（多路复用器）。传统IO基于字节流和字符流进行操作，而NIO基于Channel和Buffer(缓冲区)进行操作，数据总是从通道读取到缓冲区中，或者从缓冲区写入到通道中。Selector(多路复用器)用于监听多个通道的事件（比如：连接打开，数据到达）。因此，单个线程可以监听多个数据通道。<br> NIO和传统IO（一下简称IO）之间第一个最大的区别是，IO是面向流的，NIO是面向缓冲区的。 Java IO面向流意味着每次从流中读一个或多个字节，直至读取所有字节，它们没有被缓存在任何地方。此外，它不能前后移动流中的数据。如果需要前后移动从流中读取的数据，需要先将它缓存到一个缓冲区。NIO的缓冲导向方法略有不同。数据读取到一个它稍后处理的缓冲区，需要时可在缓冲区中前后移动。这就增加了处理过程中的灵活性。但是，还需要检查是否该缓冲区中包含所有您需要处理的数据。而且，需确保当更多的数据读入缓冲区时，不要覆盖缓冲区里尚未处理的数据。<br> IO的各种流是阻塞的。这意味着，当一个线程调用read() 或 write()时，该线程被阻塞，直到有一些数据被读取，或数据完全写入。该线程在此期间不能再干任何事情了。 NIO的非阻塞模式，使一个线程从某通道发送请求读取数据，但是它仅能得到目前可用的数据，如果目前没有数据可用时，就什么都不会获取。而不是保持线程阻塞，所以直至数据变的可以读取之前，该线程可以继续做其他的事情。 非阻塞写也是如此。一个线程请求写入一些数据到某通道，但不需要等待它完全写入，这个线程同时可以去做别的事情。 线程通常将非阻塞IO的空闲时间用于在其它通道上执行IO操作，所以一个单独的线程现在可以管理多个输入和输出通道（channel）。</p><h4 id="NIO优点："><a href="#NIO优点：" class="headerlink" title="NIO优点："></a>NIO优点：</h4><ol><li>通过Channel注册到Selector上的状态来实现一种客户端与服务端的通信。</li><li>Channel中数据的读取是通过Buffer , 一种非阻塞的读取方式。</li><li>Selector 多路复用器  单线程模型，  线程的资源开销相对比较小。</li></ol><h4 id="Channel-通道"><a href="#Channel-通道" class="headerlink" title="Channel(通道)"></a>Channel(通道)</h4><p>传统IO操作对read()或write()方法的调用，可能会因为没有数据可读&#x2F;可写而阻塞，直到有数据响应。也就是说读写数据的IO调用，可能会无限期的阻塞等待，效率依赖网络传输的速度。最重要的是在调用一个方法前，无法知道是否会被阻塞。</p><p>NIO的Channel抽象了一个重要特征就是可以通过配置它的阻塞行为，来实现非阻塞式的通道。</p><p>Channel是一个双向通道，与传统IO操作只允许单向的读写不同的是，NIO的Channel允许在一个通道上进行读和写的操作。</p><p>FileChannel:文件</p><p>SocketChannel:</p><p>ServerSocketChannel:</p><p>DatagramChannel: UDP</p><h4 id="Buffer-缓冲区"><a href="#Buffer-缓冲区" class="headerlink" title="Buffer(缓冲区)"></a>Buffer(缓冲区)</h4><p>Bufer顾名思义，它是一个缓冲区，实际上是一个容器，一个连续数组。Channel提供从文件、网络读取数据的渠道，但是读写的数据都必须经过Buffer。</p><p><img src="https://upload-images.jianshu.io/upload_images/13449209-300fd48a7251c327.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/654/format/webp" alt="img"></p><p>Buffer(缓冲区)</p><p>Buffer缓冲区本质上是一块可以写入数据，然后可以从中读取数据的内存。这块内存被包装成NIO Buffer对象，并提供了一组方法，用来方便的访问该模块内存。为了理解Buffer的工作原理，需要熟悉它的三个属性：capacity、position和limit。</p><p>position和limit的含义取决于Buffer处在读模式还是写模式。不管Buffer处在什么模式，capacity的含义总是一样的。见下图：</p><p><img src="https://upload-images.jianshu.io/upload_images/13449209-d261cbcb9b9ed88f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/506/format/webp" alt="img"></p><p>capacity、position和limit</p><ul><li>capacity：作为一个内存块，Buffer有固定的大小值，也叫作“capacity”，只能往其中写入capacity个byte、long、char等类型。一旦Buffer满了，需要将其清空（通过读数据或者清楚数据）才能继续写数据。</li><li>position：当你写数据到Buffer中时，position表示当前的位置。出事的position值为0，当写入一个字节数据到Buffer中后，position会向前移动到下一个可插入数据的Buffer单元。position最大可为capacity-1。当读取数据时，也是从某个特定位置读，讲Buffer从写模式切换到读模式，position会被重置为0。当从Buffer的position处读取一个字节数据后，position向前移动到下一个可读的位置。</li><li>limit：在写模式下，Buffer的limit表示你最多能往Buffer里写多少数据。 写模式下，limit等于Buffer的capacity。当切换Buffer到读模式时， limit表示你最多能读到多少数据。因此，当切换Buffer到读模式时，limit会被设置成写模式下的position值。换句话说，你能读到之前写入的所有数据（limit被设置成已写数据的数量，这个值在写模式下就是position）</li></ul><h4 id="Buffer的分配："><a href="#Buffer的分配：" class="headerlink" title="Buffer的分配："></a>Buffer的分配：</h4><p>对Buffer对象的操作必须首先进行分配，Buffer提供一个allocate(int capacity)方法分配一个指定字节大小的对象。<br> 向Buffer中写数据：写数据到Buffer中有两种方式：<br> 1.从channel写到Buffer</p><pre><code class="cpp">int bytes = channel.read(buf); //将channel中的数据读取到buf中</code></pre><p>2.通过Buffer的put()方法写到Buffer</p><pre><code class="csharp">buf.put(byte); //将数据通过put()方法写入到buf中</code></pre><ul><li>flip()方法：将Buffer从写模式切换到读模式，调用flip()方法会将position设置为0，并将limit设置为之前的position的值。<br> 从Buffer中读数据：从Buffer中读数据有两种方式：<br> 1.从Buffer读取数据到Channel</li></ul><pre><code class="cpp">int bytes = channel.write(buf); //将buf中的数据读取到channel中</code></pre><p>2.通过Buffer的get()方法读取数据</p><pre><code class="csharp">byte bt = buf.get(); //从buf中读取一个byte</code></pre><ul><li>rewind()方法：Buffer.rewind()方法将position设置为0，使得可以重读Buffer中的所有数据，limit保持不变。</li><li>clear()与compact()方法：一旦读完Buffer中的数据，需要让Buffer准备好再次被写入，可以通过clear()或compact()方法完成。如果调用的是clear()方法，position将被设置为0，limit设置为capacity的值。但是Buffer并未被清空，只是通过这些标记告诉我们可以从哪里开始往Buffer中写入多少数据。如果Buffer中还有一些未读的数据，调用clear()方法将被”遗忘 “。compact()方法将所有未读的数据拷贝到Buffer起始处，然后将position设置到最后一个未读元素的后面，limit属性依然设置为capacity。可以使得Buffer中的未读数据还可以在后续中被使用。</li><li>mark()与reset()方法：通过调用Buffer.mark()方法可以标记一个特定的position，之后可以通过调用Buffer.reset()恢复到这个position上。</li></ul><h4 id="Selector-多路复用器"><a href="#Selector-多路复用器" class="headerlink" title="Selector(多路复用器)"></a>Selector(多路复用器)</h4><p>Selector与Channel是相互配合使用的，将Channel注册在Selector上之后，才可以正确的使用Selector，但此时Channel必须为非阻塞模式。Selector可以监听Channel的四种状态（Connect、Accept、Read、Write），当监听到某一Channel的某个状态时，才允许对Channel进行相应的操作。</p><ul><li>Connect：某一个客户端连接成功后</li><li>Accept：准备好进行连接</li><li>Read:可读</li><li>Write:可写</li></ul><p>作者：林亚希<br>链接：<a href="https://www.jianshu.com/p/5bb812ca5f8e">https://www.jianshu.com/p/5bb812ca5f8e</a><br>来源：简书<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>]]></content>
       
       
       <categories>
@@ -289,11 +289,11 @@
     
     
     <entry>
-      <title>二维码生成</title>
-      <link href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/%E4%BA%8C%E7%BB%B4%E7%A0%81%E7%94%9F%E6%88%90/"/>
-      <url>/2023/06/07/Java%E5%9F%BA%E7%A1%80/%E4%BA%8C%E7%BB%B4%E7%A0%81%E7%94%9F%E6%88%90/</url>
+      <title>Jvm虚拟机</title>
+      <link href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jvm%E8%99%9A%E6%8B%9F%E6%9C%BA/"/>
+      <url>/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jvm%E8%99%9A%E6%8B%9F%E6%9C%BA/</url>
       
-        <content type="html"><![CDATA[<h1 id="Zxing"><a href="#Zxing" class="headerlink" title="Zxing"></a>Zxing</h1><h3 id="POM文件的引入"><a href="#POM文件的引入" class="headerlink" title="POM文件的引入"></a>POM文件的引入</h3><pre><code class="xml">&lt;dependency&gt;    &lt;groupId&gt;com.google.zxing&lt;/groupId&gt;    &lt;artifactId&gt;javase&lt;/artifactId&gt;    &lt;version&gt;3.3.3&lt;/version&gt;&lt;/dependency&gt;</code></pre><h3 id="后端Controller的port代码"><a href="#后端Controller的port代码" class="headerlink" title="后端Controller的port代码"></a>后端Controller的port代码</h3><pre><code class="java"> @PortMapping(&quot;/qrCode/&quot;)    public Object qrCode(@RequestParam(&quot;centext&quot;)String centext, HttpServletResponse response, HttpServletRequest request)&#123;        Map&lt;EncodeHintType, Object&gt; hints = new HashMap&lt;&gt;(3);        hints.put(EncodeHintType.CHARACTER_SET,&quot;UTF-8&quot;);        hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);        hints.put(EncodeHintType.MARGIN,1);        try &#123;            response.setContentType(&quot;image/png;charset=UTF-8&quot;);            ServletOutputStream outputStream = response.getOutputStream();            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();            BitMatrix bitMatrix = new MultiFormatWriter().encode(context, BarcodeFormat.QR_CODE, 200, 200, hints);            MatrixToImageWriter.writeToStream(bitMatrix,&quot;png&quot;,byteArrayOutputStream);   //编码格式转换，由于前端用ajax设置img标签的src属性需要  response.getOutputStream().write(Base64.encodeBase64(byteArrayOutputStream.toByteArray()));            outputStream.flush();            outputStream.close();        &#125; catch (WriterException | IOException e) &#123;            e.printStackTrace();        &#125;        //枚举内容替换成了字符串，不好展示        return &#123;&quot;code&quot;:2001,&quot;message&quot;:&quot;二维码生成成功&quot;&#125;;    &#125;</code></pre><h3 id="前端js代码"><a href="#前端js代码" class="headerlink" title="前端js代码"></a>前端js代码</h3><pre><code class="javascript"> $(document).ready(function () &#123;            $(&quot;#showQRCode&quot;).click(function () &#123;                let inputText = $(&quot;#inputText&quot;).val();                $.port(&#123;                    url: &quot;/qrCode&quot;,                    data: &#123;&quot;context&quot;:inputText&#125;,                    dataType: &quot;application/json&quot;,                    contentType: &quot;application/json&quot;,                    responseType: &quot;blob&quot;,                    accept:&quot;image/png&quot;,                    success: function (response)&#123;                        //后台的Base64编码作用于这里                        $(&quot;#qrCode&quot;).attr(&quot;src&quot;,&quot;data:image/png;base64,&quot;+response);                    &#125;,                    error: function () &#123;                        alert(&quot;请求错误&quot;);                    &#125;                &#125;)            &#125;);        &#125;);</code></pre><h3 id="前端HTML代码"><a href="#前端HTML代码" class="headerlink" title="前端HTML代码"></a>前端HTML代码</h3><pre><code class="html">&lt;div&gt;        &lt;img  id=&quot;qrCode&quot; style=&quot;padding-left: 20px&quot; alt=&quot;QRCode&quot; src=&quot;&quot;&gt;&lt;br/&gt;        &lt;label for=&quot;inputText&quot;&gt;输入二维码内容：&lt;/label&gt;&lt;input type=&quot;text&quot; id=&quot;inputText&quot;&gt;&lt;br/&gt;        &lt;button id=&quot;showQRCode&quot;&gt;提交&lt;/button&gt;&lt;/div&gt;</code></pre><hr><h4 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h4><p>*使用<strong>Zxing</strong>第三方jar包，使用<strong>MultiFormatWriter</strong>的<strong>encode()<strong>方法生成一个二维码类</strong>BitMatrix</strong>的对象，然后用<strong>MatrixToImageWriter</strong>的流写入方法<strong>writeToStream()<strong>以</strong>png</strong>的形式写入<strong>OutputStresam</strong>流中，如果需要，可以进行相应的编码转换。*</p><p><em><strong>如果使用get的方式，直接往img标签的src属性添加生成二维码的访问地址即可，并且不需要base64编码。</strong></em></p>]]></content>
+        <content type="html"><![CDATA[<h1 id="JVM虚拟机"><a href="#JVM虚拟机" class="headerlink" title="JVM虚拟机"></a>JVM虚拟机</h1><p>指针碰撞（bump the pointer）： 指在分配内存的时候，由于堆空间的内存是整齐规划的，一边是使用的内存，一边是空闲的内存，中间由指针分开，在移动指针进行内存分配的时候叫做内存分配</p>]]></content>
       
       
       <categories>
@@ -308,11 +308,11 @@
     
     
     <entry>
-      <title>Jvm虚拟机</title>
-      <link href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jvm%E8%99%9A%E6%8B%9F%E6%9C%BA/"/>
-      <url>/2023/06/07/Java%E5%9F%BA%E7%A1%80/Jvm%E8%99%9A%E6%8B%9F%E6%9C%BA/</url>
+      <title>二维码生成</title>
+      <link href="/2023/06/07/Java%E5%9F%BA%E7%A1%80/%E4%BA%8C%E7%BB%B4%E7%A0%81%E7%94%9F%E6%88%90/"/>
+      <url>/2023/06/07/Java%E5%9F%BA%E7%A1%80/%E4%BA%8C%E7%BB%B4%E7%A0%81%E7%94%9F%E6%88%90/</url>
       
-        <content type="html"><![CDATA[<h1 id="JVM虚拟机"><a href="#JVM虚拟机" class="headerlink" title="JVM虚拟机"></a>JVM虚拟机</h1><p>指针碰撞（bump the pointer）： 指在分配内存的时候，由于堆空间的内存是整齐规划的，一边是使用的内存，一边是空闲的内存，中间由指针分开，在移动指针进行内存分配的时候叫做内存分配</p>]]></content>
+        <content type="html"><![CDATA[<h1 id="Zxing"><a href="#Zxing" class="headerlink" title="Zxing"></a>Zxing</h1><h3 id="POM文件的引入"><a href="#POM文件的引入" class="headerlink" title="POM文件的引入"></a>POM文件的引入</h3><pre><code class="xml">&lt;dependency&gt;    &lt;groupId&gt;com.google.zxing&lt;/groupId&gt;    &lt;artifactId&gt;javase&lt;/artifactId&gt;    &lt;version&gt;3.3.3&lt;/version&gt;&lt;/dependency&gt;</code></pre><h3 id="后端Controller的port代码"><a href="#后端Controller的port代码" class="headerlink" title="后端Controller的port代码"></a>后端Controller的port代码</h3><pre><code class="java"> @PortMapping(&quot;/qrCode/&quot;)    public Object qrCode(@RequestParam(&quot;centext&quot;)String centext, HttpServletResponse response, HttpServletRequest request)&#123;        Map&lt;EncodeHintType, Object&gt; hints = new HashMap&lt;&gt;(3);        hints.put(EncodeHintType.CHARACTER_SET,&quot;UTF-8&quot;);        hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);        hints.put(EncodeHintType.MARGIN,1);        try &#123;            response.setContentType(&quot;image/png;charset=UTF-8&quot;);            ServletOutputStream outputStream = response.getOutputStream();            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();            BitMatrix bitMatrix = new MultiFormatWriter().encode(context, BarcodeFormat.QR_CODE, 200, 200, hints);            MatrixToImageWriter.writeToStream(bitMatrix,&quot;png&quot;,byteArrayOutputStream);   //编码格式转换，由于前端用ajax设置img标签的src属性需要  response.getOutputStream().write(Base64.encodeBase64(byteArrayOutputStream.toByteArray()));            outputStream.flush();            outputStream.close();        &#125; catch (WriterException | IOException e) &#123;            e.printStackTrace();        &#125;        //枚举内容替换成了字符串，不好展示        return &#123;&quot;code&quot;:2001,&quot;message&quot;:&quot;二维码生成成功&quot;&#125;;    &#125;</code></pre><h3 id="前端js代码"><a href="#前端js代码" class="headerlink" title="前端js代码"></a>前端js代码</h3><pre><code class="javascript"> $(document).ready(function () &#123;            $(&quot;#showQRCode&quot;).click(function () &#123;                let inputText = $(&quot;#inputText&quot;).val();                $.port(&#123;                    url: &quot;/qrCode&quot;,                    data: &#123;&quot;context&quot;:inputText&#125;,                    dataType: &quot;application/json&quot;,                    contentType: &quot;application/json&quot;,                    responseType: &quot;blob&quot;,                    accept:&quot;image/png&quot;,                    success: function (response)&#123;                        //后台的Base64编码作用于这里                        $(&quot;#qrCode&quot;).attr(&quot;src&quot;,&quot;data:image/png;base64,&quot;+response);                    &#125;,                    error: function () &#123;                        alert(&quot;请求错误&quot;);                    &#125;                &#125;)            &#125;);        &#125;);</code></pre><h3 id="前端HTML代码"><a href="#前端HTML代码" class="headerlink" title="前端HTML代码"></a>前端HTML代码</h3><pre><code class="html">&lt;div&gt;        &lt;img  id=&quot;qrCode&quot; style=&quot;padding-left: 20px&quot; alt=&quot;QRCode&quot; src=&quot;&quot;&gt;&lt;br/&gt;        &lt;label for=&quot;inputText&quot;&gt;输入二维码内容：&lt;/label&gt;&lt;input type=&quot;text&quot; id=&quot;inputText&quot;&gt;&lt;br/&gt;        &lt;button id=&quot;showQRCode&quot;&gt;提交&lt;/button&gt;&lt;/div&gt;</code></pre><hr><h4 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h4><p>*使用<strong>Zxing</strong>第三方jar包，使用<strong>MultiFormatWriter</strong>的<strong>encode()<strong>方法生成一个二维码类</strong>BitMatrix</strong>的对象，然后用<strong>MatrixToImageWriter</strong>的流写入方法<strong>writeToStream()<strong>以</strong>png</strong>的形式写入<strong>OutputStresam</strong>流中，如果需要，可以进行相应的编码转换。*</p><p><em><strong>如果使用get的方式，直接往img标签的src属性添加生成二维码的访问地址即可，并且不需要base64编码。</strong></em></p>]]></content>
       
       
       <categories>
@@ -413,6 +413,196 @@
       <categories>
           
           <category> 中间件 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Android_头部导航标签</title>
+      <link href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Android_%E5%A4%B4%E9%83%A8%E5%AF%BC%E8%88%AA%E6%A0%87%E7%AD%BE/"/>
+      <url>/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Android_%E5%A4%B4%E9%83%A8%E5%AF%BC%E8%88%AA%E6%A0%87%E7%AD%BE/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Toolbar"><a href="#Toolbar" class="headerlink" title="Toolbar"></a>Toolbar</h1><p>关于toolbar使用的几个要点，包如下</p><pre><code class="xml">androidx.appcompat.widget.Toolbar</code></pre><p>这里作为toolbar的最左标签使用</p><pre><code class="xml">app:navigationIcon=&quot;@mipmap/sidebar&quot;</code></pre><p>最左侧按钮点击事件，这里的点击事件有一个很重要的事情，就是只有在toolbar提交之后才能生效，也就是</p><pre><code class="java">setSupportActionBar(toolbar);</code></pre><pre><code class="java">@Override    public boolean onOptionsItemSelected(@NonNull MenuItem item) &#123;        if (item.getItemId() ==android.R.id.home)&#123;            drawerLayout.openDrawer(Gravity.LEFT);        &#125;        return super.onOptionsItemSelected(item);    &#125;</code></pre><p>而其他的所有操作，如设置title，logo等等方法，也要在提交了toolbar之后才能生效，例如</p><pre><code class="java"># 设置title无效getSupportActionBar().setDisplayShowTitleEnabled(false);</code></pre><p>还有设置toolbar的title的颜色字体大小，等等信息</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 前端杂烩 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Android网络请求回调</title>
+      <link href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Android%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%E5%9B%9E%E8%B0%83/"/>
+      <url>/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Android%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%E5%9B%9E%E8%B0%83/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Android的HTTP网络请求超时UI更新（回调）"><a href="#Android的HTTP网络请求超时UI更新（回调）" class="headerlink" title="Android的HTTP网络请求超时UI更新（回调）"></a>Android的HTTP网络请求超时UI更新（回调）</h1><h3 id="原因及运行原理"><a href="#原因及运行原理" class="headerlink" title="原因及运行原理"></a>原因及运行原理</h3><p>当在网络请求出现连接超时（httpURLConnection.setConnectTimeout(TimeOut)）的时候，此时调用的活动中的Dialog弹窗会一直浮现在桌面上，而网络请求是位于子线程，活动只是调用之后就没有太多的关联，这时当网络出现连接超时的时候会一直卡在httpURLConnection.connect()中，此时可以在网络请求类中新建一个接口，并且实现一个刷新方法，再在活动中实例化一个请求类，并且参数为接口对象，然后再到网络请求出现超时，并且抛出异常的try…catch代码块的异常处理块中用接口对象调用刷新的方法，由于接口内的刷新方法时抽象方法，所以会自动往子级里面去找到运行的代码块，也就是说运行活动中覆写的代码块，注意：虽然运行的代码块时活动中的，但是其调用的主体方法还是在子线程中，所以需要更新UI的时候，还是需要回调到主线程中        </p><pre><code class="java">public  class BaseHttpConn &#123;    private static final String TAG = &quot;BaseHttpConn&quot;;    private static TimeOut shuaxin;    private static int TimeOut = 3*1000;    public static HttpURLConnection httpConn(String baseUrl, HashMap&lt;String, String&gt; map) &#123;        HttpURLConnection httpURLConnection = null;        try &#123;            URL url = new URL(baseUrl);            httpURLConnection = (HttpURLConnection) url.openConnection();            httpURLConnection.setConnectTimeout(TimeOut);//连接超时            httpURLConnection.setReadTimeout(TimeOut);//读取超时            httpURLConnection.setRequestMethod(&quot;POST&quot;);//请求方式            httpURLConnection.setInstanceFollowRedirects(true);//是否重定向            httpURLConnection.setUseCaches(true);//是否启用缓存            httpURLConnection.setRequestProperty(&quot;Content-Type&quot;,&quot;application/json&quot;);//传入服务器的数据类型            OutputStream outputStream = httpURLConnection.getOutputStream();            outputStream.write(getByte(map));            outputStream.close();        &#125; catch (Exception e) &#123;            e.printStackTrace();            httpURLConnection.disconnect();//关闭此次网络请求            shuaxin.ShuaXin();//通过接口对象调用抽象方法ShuaXin();        &#125;        return httpURLConnection;    &#125;    private static byte[] getByte(HashMap&lt;String,String&gt; map) &#123;        JSONObject jsonObject = new JSONObject();        for(String key: map.keySet())&#123;            try &#123;                jsonObject.put(key,map.get(key));            &#125; catch (JSONException e) &#123;                e.printStackTrace();            &#125;        &#125;        return jsonObject.toString().getBytes();    &#125;    public BaseHttpConn(TimeOut timeOut) &#123;        this.shuaxin = timeOut;    &#125;    //监听接口    public interface TimeOut&#123;        void ShuaXin();//接口中刷新的方法    &#125;&#125;</code></pre><h3 id="Activity中的代码"><a href="#Activity中的代码" class="headerlink" title="Activity中的代码"></a>Activity中的代码</h3><pre><code class="java">     BaseHttpConn baseHttpConn = new BaseHttpConn(new BaseHttpConn.TimeOut() &#123;        @Override        public void ShuaXin() &#123;            progressDialog.dismiss();            getActivity().runOnUiThread(new Runnable() &#123;//位于碎片中，所以需要通过getActivity()获取活动                @Override                public void run() &#123;                    Toast.makeText(getContext(),&quot;网络连接失败&quot;,Toast.LENGTH_SHORT).show();                &#125;            &#125;);        &#125;    &#125;);</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 前端杂烩 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>CSS布局问题</title>
+      <link href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/CSS%E5%B8%83%E5%B1%80%E9%97%AE%E9%A2%98/"/>
+      <url>/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/CSS%E5%B8%83%E5%B1%80%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<h1 id="CSS布局问题"><a href="#CSS布局问题" class="headerlink" title="CSS布局问题"></a>CSS布局问题</h1><pre><code class="css"># 作为行内表格元素，可以使相对于父元素有效display: inline-table;width:100%;height: 100%;</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 前端杂烩 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>HTML5图片拖放</title>
+      <link href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/HTML5%E5%9B%BE%E7%89%87%E6%8B%96%E6%94%BE/"/>
+      <url>/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/HTML5%E5%9B%BE%E7%89%87%E6%8B%96%E6%94%BE/</url>
+      
+        <content type="html"><![CDATA[<h2 id="实现HTML5中图片的拖放"><a href="#实现HTML5中图片的拖放" class="headerlink" title="实现HTML5中图片的拖放"></a>实现HTML5中图片的拖放</h2><pre><code class="html">&lt;!DOCTYPE html&gt;&lt;html&gt;    &lt;head&gt;        &lt;meta charset=&quot;utf-8&quot;&gt;        &lt;title&gt;阿杰之家&lt;/title&gt;        &lt;style type=&quot;text/css&quot;&gt;            #div1,            #div2 &#123;                float: left;                width: 500px;                height: 350px;                margin: 10px;                padding: 10px;                border: 1px solid #aaaaaa;            &#125;        &lt;/style&gt;        &lt;script&gt;            function allowDrop(ev) &#123;                // 6、默认地，无法将数据/元素放置到其他元素中。如果需要设置允许放置，我们必须阻止对元素的默认处理方式,这要通过调用 ondragover 事件的 event.preventDefault() 方法.                ev.preventDefault();            &#125;            function drag(ev) &#123;                // 3、dataTransfer.setData() 方法设置被拖数据的数据类型和值                // 4、Text 是一个 DOMString 表示要添加到 drag object 的拖动数据的类型。值是可拖动元素的 id (&quot;drag1&quot;)。                ev.dataTransfer.setData(&quot;Text&quot;, ev.target.id);            &#125;            function drop(ev) &#123;                // 8、调用 preventDefault() 来避免浏览器对数据的默认处理（drop 事件的默认行为是以链接形式打开）                ev.preventDefault();                // 9、通过 dataTransfer.getData(&quot;Text&quot;) 方法获得被拖的数据。该方法将返回在 setData() 方法中设置为相同类型的任何数据。被拖数据是被拖元素的 id (&quot;drag1&quot;)                var data = ev.dataTransfer.getData(&quot;Text&quot;);                // 10、把被拖元素追加到放置元素（目标元素）中                ev.target.appendChild(document.getElementById(data));            &#125;        &lt;/script&gt;    &lt;/head&gt;    &lt;body&gt;        &lt;!-- 5、ondragover 事件规定在何处放置被拖动的数据。 --&gt;        &lt;!-- 7、当放置被拖数据时，会发生 drop 事件 --&gt;        &lt;div id=&quot;div1&quot; ondrop=&quot;drop(event)&quot; ondragover=&quot;allowDrop(event)&quot;&gt;            &lt;!-- 1、为了使元素可拖动，把 draggable 属性设置为 true --&gt;            &lt;!-- 2、ondragstart 属性调用了一个函数，drag(event)，它规定了被拖动的数据。 --&gt;            &lt;img src=&quot;./img/logo.png&quot; draggable=&quot;true&quot; ondragstart=&quot;drag(event)&quot; id=&quot;drag1&quot; width=&quot;500&quot; height=&quot;350&quot;&gt;&lt;/div&gt;        &lt;div id=&quot;div2&quot; ondrop=&quot;drop(event)&quot; ondragover=&quot;allowDrop(event)&quot;&gt;&lt;/div&gt;    &lt;/body&gt;&lt;/html&gt;</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 前端杂烩 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>HTML高度塌陷</title>
+      <link href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/HTML%E9%AB%98%E5%BA%A6%E5%A1%8C%E9%99%B7/"/>
+      <url>/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/HTML%E9%AB%98%E5%BA%A6%E5%A1%8C%E9%99%B7/</url>
+      
+        <content type="html"><![CDATA[<h1 id="HTML盒子高度塌陷"><a href="#HTML盒子高度塌陷" class="headerlink" title="HTML盒子高度塌陷"></a>HTML盒子高度塌陷</h1><p>使用<code>overflow: hidden;</code>可以处理盒子的高度塌陷</p><p>引用：<a href="https://www.cnblogs.com/luoqian/p/5987788.html">https://www.cnblogs.com/luoqian/p/5987788.html</a></p><p>最近在看《CSS Mastery》这本书，里面有用overflow：hidden来清理浮动的方法。但是一直想不明白为什么能够实现清除浮动，查阅了网络上的解释，下面来总结一下。</p><p>一、首先来想想</p><p>我们大家理解的overflow:hidden是超出该元素的部分进行隐藏。这个时候就需要明确一点，该元素的高度是怎么定义的。当一个div中的两个元素浮动之后，此时div的高度就会塌陷，此时div的高度为0。那是不是意味着就要将浮动元素隐藏起来，如果是真的隐藏就是反布局常识的。所以这中间肯定有我们现在还不知道的机制。</p><p>二、不了解的机制-BFC</p><p>定义：BFC（Block Formatting Context）全称是块级格式化上下文，用于对块级元素排版，默认情况下只有根元素（body）一个块级上下文，但是如果一个块级元素设置了float:left,overflow:hidden或position:absolute样式，就会为这个块级元素生产一个独立的块级上下文，使这个块级元素内部的排版完全独立。</p><p>作用：独立的块级上下文可以包裹浮动流，全部浮动子元素也不会引起容器高度塌陷，就是说包含块会把浮动元素的高度也计算在内，所以就不用清除浮动来撑起包含块的高度。</p><p>三、总结清除浮动的方法</p><p>我经常用到的清除浮动的方法有</p><p>1、添加额外标签设置clearfix类为clear:both;</p><p>　　原理是这个空的div能让父级获取到高度，是因为设置之后这个div的左右都不能有浮动元素，所以这个空的div元素会向下移动，直到换行，而为了让这个div能够换行，父元素至少要包含浮动元素的高度才能提高足够的空间，这样实现清除浮动的影响。</p><p>2、设置父元素为浮动元素</p><p>3、设置position:absolute</p><p>我不常用的清除浮动的方法有</p><p>1、父级div定义height</p><p>3、overflow:hidden</p><p>2、父级div定义伪类:after和zoom;</p><p>　　这个方法的原理还不理解，欢迎大神解答。</p><p>四、清除浮动的影响方法分类</p><p>参考张鑫旭老师的说法，清除浮动的说法是不准确的。应该是为清除浮动的影响。我也觉得张老师的说法是正确的，因为float:none才叫清除浮动。张老师还说到了包裹的这个概念，根据这个概念将清除浮动的影响的方法分为两大类。</p><p>一类是clear:both&#x2F;left&#x2F;right，这就不用说了。</p><p>另一类是：包裹清除，因为他发现浮动、绝对定位、inline-block、overflow都有自适应元素宽度的特性，就想到了用包裹来形容。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 前端杂烩 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>JavaScript下载文件</title>
+      <link href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/JavaScript%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6/"/>
+      <url>/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/JavaScript%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6/</url>
+      
+        <content type="html"><![CDATA[<p>JavaScript异步请求，把响应的Base64图片内容下载到本地文件存储</p><pre><code class="javascript">/** * Base64的文件下载 * @param content Base64字符内容 * @param fileName 文件名称 */function downloadFile(content, fileName) &#123; //下载base64图片    let base64ToBlob = function (code) &#123;        let parts = code.split(&#39;;base64,&#39;);        let contentType = parts[0].split(&#39;:&#39;)[1];        let raw = window.atob(parts[1]);        let rawLength = raw.length;        let uInt8Array = new Uint8Array(rawLength);        for (let i = 0; i &lt; rawLength; ++i) &#123;            uInt8Array[i] = raw.charCodeAt(i);        &#125;        return new Blob([uInt8Array], &#123;            type: contentType        &#125;);    &#125;;    let aLink = document.createElement(&#39;a&#39;);    let blob = base64ToBlob(content); //new Blob([content]);    let evt = document.createEvent(&quot;HTMLEvents&quot;);    evt.initEvent(&quot;click&quot;, true, true); //initEvent 不加后两个参数在FF下会报错  事件类型，是否冒泡，是否阻止浏览器的默认行为    aLink.download = fileName;    aLink.href = URL.createObjectURL(blob);    aLink.click();&#125;</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 前端杂烩 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>JavaScript获取视频流且回显</title>
+      <link href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/JavaScript%E8%8E%B7%E5%8F%96%E8%A7%86%E9%A2%91%E6%B5%81%E4%B8%94%E5%9B%9E%E6%98%BE/"/>
+      <url>/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/JavaScript%E8%8E%B7%E5%8F%96%E8%A7%86%E9%A2%91%E6%B5%81%E4%B8%94%E5%9B%9E%E6%98%BE/</url>
+      
+        <content type="html"><![CDATA[<hr><h2 id="title-JavaScript获取视频流且回显date-2022-04-20-09-38-55-438updated-2022-10-13-14-58-40-564url-x2F-archives-x2F-javascript-huo-qu-shi-pin-liu-qie-hui-xiancategories-JavaScripttags-JavaScript"><a href="#title-JavaScript获取视频流且回显date-2022-04-20-09-38-55-438updated-2022-10-13-14-58-40-564url-x2F-archives-x2F-javascript-huo-qu-shi-pin-liu-qie-hui-xiancategories-JavaScripttags-JavaScript" class="headerlink" title="title: JavaScript获取视频流且回显date: 2022-04-20 09:38:55.438updated: 2022-10-13 14:58:40.564url: &#x2F;archives&#x2F;javascript-huo-qu-shi-pin-liu-qie-hui-xiancategories:- JavaScripttags:- JavaScript"></a>title: JavaScript获取视频流且回显<br>date: 2022-04-20 09:38:55.438<br>updated: 2022-10-13 14:58:40.564<br>url: &#x2F;archives&#x2F;javascript-huo-qu-shi-pin-liu-qie-hui-xian<br>categories:<br>- JavaScript<br>tags:<br>- JavaScript</h2><pre><code class="HTML">&lt;!DOCTYPE html&gt;&lt;html&gt;    &lt;head&gt;        &lt;style&gt;        &lt;/style&gt;    &lt;/head&gt;    &lt;body&gt;        &lt;video id=&quot;video&quot; width=&quot;640&quot; height=&quot;480&quot; autoplay=&quot;autoplay&quot;&gt;&lt;/video&gt;        &lt;br/&gt;        &lt;button id=&quot;snap&quot;&gt;截取图像&lt;/button&gt;&lt;button id=&quot;start&quot;&gt;开始录制&lt;/button&gt;&lt;button id=&quot;stop&quot;&gt;停止录制&lt;/button&gt;        &lt;br/&gt;        &lt;canvas id=&quot;canvas&quot; width=&quot;640&quot; height=&quot;480&quot;&gt;&lt;/canvas&gt;    &lt;/body&gt;    &lt;script type=&quot;text/javascript&quot;&gt;        let videoView = document.getElementById(&quot;video&quot;);        let buttonView = document.getElementById(&quot;snap&quot;);        let startButton = document.getElementById(&quot;start&quot;);        let stopButton = document.getElementById(&quot;stop&quot;);        let canvasView = document.getElementById(&quot;canvas&quot;);        navigator.mediaDevices.getDisplayMedia(&#123;            video: &#123;                width: 640,                height: 480            &#125;,            audio: true        &#125;).then(stream =&gt; &#123;            console.log(&quot;摄像头打开成功！！！&quot;, stream);            //以ID为基准,video控件的ID是什么此处的video就是什么            video.srcObject = stream;            // 创建下载对象            let mediaRecorder = new MediaRecorder(stream, &#123;                audioBitsPerSecond: 128000, // 音频码率                videoBitsPerSecond: 100000, // 视频码率                mimeType: &#39;video/webm;codecs=h264&#39; // 编码格式            &#125;);            startButton.onclick = (e =&gt; &#123;                console.log(&quot;触发下载按钮！！！&quot;, e)                mediaRecorder.start(5000);            &#125;);            stopButton.onclick = (e =&gt; &#123;                console.log(&quot;触发结束按钮！！！&quot;, e)                mediaRecorder.stop();            &#125;);            mediaRecorder.ondataavailable = (e =&gt; &#123;                console.log(&quot;开始下载&quot;)                // 下载视频                var blob = new Blob([e.data], &#123; &#39;type&#39; : &#39;video/mp4&#39; &#125;)                let a = document.createElement(&#39;a&#39;)                a.href = URL.createObjectURL(blob)                a.download = `test.mp4`                a.click()            &#125;);            //监听流录入失败            video.onerror = (err =&gt; &#123;                console.log(&quot;加载错误！！！&quot;, err);            &#125;);            //监听流录入成功            video.onloadeddata = (e =&gt; &#123;                console.log(&quot;加载成功！！！&quot;, e);            &#125;);        &#125;).catch(stream =&gt; &#123;            console.log(&quot;摄像头打开失败！！！&quot;, stream);        &#125;);        //给button按钮设置一个点击事件监听        buttonView.onclick = function() &#123;            //获取画布的2d上下文，然后把视频内的一帧绘制到画布上            canvasView.getContext(&quot;2d&quot;).drawImage(videoView, 0, 0, 640, 480)        &#125;    &lt;/script&gt;&lt;/html&gt;</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 前端杂烩 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Javascript正则</title>
+      <link href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Javascript%E6%AD%A3%E5%88%99/"/>
+      <url>/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Javascript%E6%AD%A3%E5%88%99/</url>
+      
+        <content type="html"><![CDATA[<h2 id="Javascript正则"><a href="#Javascript正则" class="headerlink" title="Javascript正则"></a>Javascript正则</h2><pre><code class="javascript">let newData  = data.replace(/\&quot;toId\&quot;:(\d+)/,&#39;&quot;toId&quot;: &quot;$1&quot;&#39;);data = JSON.parse(newData)</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 前端杂烩 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Javascript的dom操作</title>
+      <link href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Javascript%E7%9A%84dom%E6%93%8D%E4%BD%9C/"/>
+      <url>/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Javascript%E7%9A%84dom%E6%93%8D%E4%BD%9C/</url>
+      
+        <content type="html"><![CDATA[<h1 id="JS原生DOM操作"><a href="#JS原生DOM操作" class="headerlink" title="JS原生DOM操作"></a>JS原生DOM操作</h1><pre><code class="javascript">let mainView = document.getElementById(&quot;main&quot;);                console.log(mainView)                let textDom = document.createElement(&quot;img&quot;);                let x = Math.random()*200+&quot;px&quot;;                let y = (Math.random()*300+100)+&quot;px&quot;;                textDom.style.top = y;                textDom.style.width = &quot;20px&quot;;                textDom.style.height = &quot;20px&quot;;                textDom.style.left = x;                textDom.style.border = &quot;solid 1px #cccccc&quot;;                textDom.style.zIndex = &quot;999&quot;;                textDom.style.position = &quot;absolute&quot;;                textDom.setAttribute(&quot;src&quot;,&quot;../../static/log.jpg&quot;);                // textDom.setAttribute(&quot;src&quot;,&quot;http://a2.att.hudong.com/36/48/19300001357258133412489354717.jpg&quot;);                mainView.appendChild(textDom)                console.log(mainView)</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 前端杂烩 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>NodeJS配置创建VUE项目</title>
+      <link href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/NodeJS%E9%85%8D%E7%BD%AE%E5%88%9B%E5%BB%BAVUE%E9%A1%B9%E7%9B%AE/"/>
+      <url>/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/NodeJS%E9%85%8D%E7%BD%AE%E5%88%9B%E5%BB%BAVUE%E9%A1%B9%E7%9B%AE/</url>
+      
+        <content type="html"><![CDATA[<h1 id="nodejs"><a href="#nodejs" class="headerlink" title="nodejs"></a>nodejs</h1><p>查看node版本</p><pre><code class="shell">node -v</code></pre><p>查看npm版本</p><pre><code class="shell">npm -v</code></pre><p>查看配置文件</p><pre><code class="shell">npm config list</code></pre><p>修改本地仓库</p><pre><code class="shell">npm config set prefix &quot;C:\Software\node\node_global&quot;npm config set cache &quot;C:\Software\node\node_cache&quot;</code></pre><p>修改镜像站</p><pre><code class="shell">npm config set registry=https://registry.npm.taobao.org</code></pre><p>node更新</p><pre><code class="shell">*# 全局安装n$ npm install -g n # 升级到最新稳定版$ n stable# 升级到最新版$ n latest# 升级到定制版$ n v7.10.0# 切换使用版本$ n 7.10.0 (ENTER)</code></pre><p>配置文件所在位置<code>C:\Users\Administrator\.npmrc</code></p><p>获取镜像信息（非安装）</p><pre><code class="shell">npm info vue</code></pre><p>更新模块命令</p><pre><code class="shell">#老版本安装方式 2.*npm install npm –g</code></pre><pre><code class="shell">#老版本安装方式 3.* /4.*npm install -g @vue/cli</code></pre><ul><li>npm install&#96;：表示更新</li><li><code>第二个npm</code>：表示需要更新的模块</li><li><code>-g</code>：表示安装到global目录下</li></ul><p>配置NodeJS的环境变量</p><pre><code class="shell">path: D:\software\nodejs</code></pre><p>配置global仓的环境变量</p><pre><code class="shell">path: D:\software\nodejs\node_global</code></pre><p>新增一个<code>NODE_PATH</code>环节变量（子项的全局命令）</p><pre><code class="shell">D:\software\nodejs\node_global\node_modules</code></pre><p>安装vue，安装vue-routher，安装vue脚手架，验证是否安装成功</p><pre><code class="shell">npm install vue -gnpm install vue-routher -gnpm install @vue/cli -gvue -V</code></pre><hr><p><strong>老版本构建方式</strong></p><p>1、构建初始化vue项目</p><pre><code class="shell">vuew init webpack vue01</code></pre><p>2、进入vue01的目录，初始化安装依赖</p><pre><code class="shell">npm install</code></pre><p>3、运行vue01的dev状态</p><pre><code class="shell">npm run dev</code></pre><p>然后访问**<a href="http://localhost:8080/">http://localhost:8080</a>**</p><p>4、编译生成静态文件</p><pre><code class="shell">npm run build</code></pre><hr><p><strong>新版本构建方式</strong></p><pre><code class="shell">vue create vue01</code></pre><p>可以选择创建的方式，moban是我创建的模板，可以选择default默认，或者Manually重新选择</p><blockquote><p>√ Babel<br>× TyreScript<br>× Progressive Web App (PWA) Support<br>√ Routher<br>√ Vuex<br>√ CSS Pre-processors<br>× Linter &#x2F; Formatter<br>× Unit Testing<br>× E2E Testing</p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> 前端杂烩 </category>
           
       </categories>
       
@@ -707,11 +897,11 @@
     
     
     <entry>
-      <title>Centos7常用命令</title>
-      <link href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos7%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
-      <url>/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos7%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
+      <title>Centos7安装Wordpress</title>
+      <link href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos7%E5%AE%89%E8%A3%85Wordpress/"/>
+      <url>/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos7%E5%AE%89%E8%A3%85Wordpress/</url>
       
-        <content type="html"><![CDATA[<h1 id="Centos7常用命令"><a href="#Centos7常用命令" class="headerlink" title="Centos7常用命令"></a>Centos7常用命令</h1><p><strong>防火墙相关命令</strong></p><ul><li><p>防火墙的开启、关闭、重启、与状态</p><pre><code class="shell"> #开启 systemctl start   firewalld.service #关闭 systemctl stop    firewalld.service #重启 systemctl restart firewalld.service #状态 systemctl status  firewalld.service #设置开机自启 systemctl enable  firewalld.service #关闭开机自启 systemctl disable firewalld.service  #指定IP放行指定端口 firewall-cmd --permanent --add-rich-rule=&quot;rule family=&quot;ipv4&quot; source address=&quot;192.168.142.166&quot; port protocol=&quot;tcp&quot; port=&quot;5432&quot; accept&quot;</code></pre></li><li><p>查看所有公开项目</p><pre><code class="shell"> #查看所有公开项 firewall-cmd --list-all #查看端口是否放行 firewall-cmd --zone=public --query-port=80/tcp</code></pre></li><li><p>防火墙放行端口或服务</p><pre><code class="shell"> #添加放行端口 firewall-cmd --zone=public --add-port=80/tcp --permanent #重新加载所有的设置项 firewall-cmd --reload</code></pre><pre><code class="shell">  #添加放行服务  firewall-cmd --zone=public --add-service=http --permanent  firewall-cmd --reload</code></pre></li><li><p>防火墙移除放行端口或服务</p><pre><code class="shell"> #移除已经放行的端口 firewall-cmd --zone=public --remove-port=80/tcp firewall-cmd --reload</code></pre><pre><code class="shell">  #移除已经放行服务  firewall-cmd --zone=public --remove-service=http  firewall-cmd --reload</code></pre></li></ul><p><strong>端口操作</strong></p><ul><li><p>端口占用查询</p><pre><code class="shell"> netstat -tunlp | grep &#39;port&#39; ---------------------------------------------------------------------------------- -t (tcp) 仅显示tcp相关选项 -u (udp) 仅显示udp相关选项 -n 拒绝显示别名，能显示数字的全部转化为数字 -l 仅列出在Listen(监听)的服务状态 -p 显示建立相关链接的程序名</code></pre><pre><code class="shell"> lsof -i:&#39;port&#39;</code></pre></li><li><p>端口终结</p><pre><code class="shell"> kill -9 &#39;pid&#39;</code></pre></li></ul><p><strong>服务操作</strong></p><ul><li><p>服务状态查询</p><pre><code class="shell">  systemctl status &#39;serverName&#39;</code></pre></li><li><p>服务开启</p><pre><code class="shell">  sysyemctl start &#39;serverName&#39;</code></pre></li><li><p>服务关闭</p><pre><code class="shell"> systemctl stop &#39;serverName&#39;</code></pre></li><li><p>服务自启</p><pre><code class="shell">  systemctl enable &#39;serverName&#39;</code></pre></li><li><p>关闭服务自启</p><pre><code class="shell"> systemctl disable &#39;serverName&#39;</code></pre></li></ul><p><strong>用户和组</strong></p><ul><li><p>用户和组</p><pre><code class="shell">  #添加用户  adduser &#39;userName&#39;</code></pre><pre><code class="shell">#新建工作组groupadd &#39;groupName&#39;</code></pre><pre><code class="shell">#添加用户，并且把把用户添加到指定名称的组useradd -g &#39;groupName&#39; &#39;userName&#39;</code></pre><pre><code class="shell">#给已有用户添加到工作组usermod -G &#39;groupName&#39; &#39;userName&#39;gpasswd -a &#39;userName&#39; &#39;groupName&#39;</code></pre><pre><code class="shell">#临时锁定用户的密码，使账户失效passwd &#39;userName&#39; -l#把临时锁定密码的用户开发，使账户重新有效passwd &#39;userName&#39; -u</code></pre><pre><code class="shell">#永久删除用户userdel &#39;userName&#39;#永久删除组groupdel &#39;groupName&#39;#同时删除用户和组usermod -G &#39;userName&#39; &#39;groupName&#39;#从指定的组中删除指定的用户gpassed -d &#39;userName&#39; &#39;groupName&#39;</code></pre><pre><code class="shell">#显示用户信息id &#39;userName&#39;#将用户添加到指定组usermod -G &#39;groupName&#39; &#39;userName&#39;#修改用户userName1的名称为userName2usermod -l &#39;userName2&#39; &#39;userName1&#39;#锁定账户usermod -L &#39;userName&#39;#解除用户锁定usermod -U &#39;userName&#39;</code></pre></li></ul><hr><p><strong>持续更新中…</strong></p>]]></content>
+        <content type="html"><![CDATA[<h1 id="Centos7安装Wordpress以及环境"><a href="#Centos7安装Wordpress以及环境" class="headerlink" title="Centos7安装Wordpress以及环境"></a>Centos7安装Wordpress以及环境</h1><h2 id="一、安装MySQL57版本"><a href="#一、安装MySQL57版本" class="headerlink" title="一、安装MySQL57版本"></a>一、安装MySQL57版本</h2><p><strong>1、从MySQL官网下载YUM源的RPM安装包</strong></p><pre><code class="shell">wget http://dev.mysql.com/get/mysql57-community-release-el7-8.noarch.rpm</code></pre><p><strong>2、从下载好的rpm包安装MYSQL</strong></p><pre><code class="shell">yum localinstall mysql57-community-release-el7-8.noarch.rpm</code></pre><p><strong>3、安装MySQL服务</strong></p><pre><code class="shell">yum install mysql-community-server</code></pre><p><strong>4、启动MySQL服务</strong></p><pre><code class="shell">systemctl start mysqld.service</code></pre><p><strong>5、设置开机自启并且刷新</strong></p><pre><code class="shell">systemctl enable mysqldsystemctl daemon-reload</code></pre><p><strong>6、修改默认初始化密码-&gt;由于密码策略所以只能设置较为复杂的密码</strong></p><pre><code class="shell">#临时密码在/var/log/mysqld.logalter user &#39;root&#39;@&#39;localhost&#39; identified by &#39;ZhonHua@5000Nian&#39;;</code></pre><p><strong>7、查看MySQL的密码安全策略</strong></p><pre><code class="shell">show variables like &#39;validate_password%&#39;;</code></pre><p><img src="/./images/MYSQL%E5%AF%86%E7%A0%81%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5.PNG" alt="img"></p><p><strong>8、修改密码杂度为最低以及把密码长度改为自己想要的</strong></p><pre><code class="shell">set global validate_password_policy = LOW;set global validate_password_length = 6;</code></pre><p><img src="/./images/MySQL%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81%E7%AD%96%E7%95%A5.PNG" alt="img"></p><p><strong>9、修改为自己想要的密码</strong></p><pre><code class="shell">alter user &#39;root&#39;@&#39;localhost&#39; identified by &#39;123456&#39;;</code></pre><p><strong>10、创建wordpress数据库</strong></p><pre><code class="shell">create database wordpress;</code></pre><p><strong>11、允许远程登陆然后刷新</strong></p><pre><code class="shell">grant all on *.* to root@&#39;%&#39; identified by &#39;password&#39; with grant option;flush privileges;</code></pre><p><strong>12、重启MySQL服务</strong></p><pre><code class="shell">systemctl restart mysqld.service</code></pre><p><strong>13、密码忘记或者策略失败</strong></p><pre><code class="shell">#关闭密码验证策略，url：vi /root/my.cnfskip-grant-tables#修改mysql.user表的密码update mysql.user set authentication_string=password(&#39;新密码&#39;) where user=&#39;root&#39; ;#刷新flush privileges ;#然后删除skip-grant-tables之后重启MySQL服务</code></pre><h2 id="二、安装apache-gt-httpd"><a href="#二、安装apache-gt-httpd" class="headerlink" title="二、安装apache-&gt;httpd"></a>二、安装apache-&gt;httpd</h2><p><strong>1、安装httpd</strong></p><pre><code class="shell">yum install httpd</code></pre><p><strong>2、启动httpd服务</strong></p><pre><code class="shell">systemctl start httpd.service</code></pre><p><strong>3、设置成开机自启并且刷新</strong></p><pre><code class="shell">systemctl enable httpd.servicesystemctl daemon-reload</code></pre><h2 id="三、安装php-gt-及相关驱动"><a href="#三、安装php-gt-及相关驱动" class="headerlink" title="三、安装php-&gt;及相关驱动"></a>三、安装php-&gt;及相关驱动</h2><p><strong>1、安装php、php-fpm、php-mysql</strong></p><pre><code class="shell">yum install php php-fpm php-mysql</code></pre><p><strong>2、启动php-fpm服务</strong></p><pre><code class="shell">systemctl start php-fpm.service</code></pre><p><strong>3、设置成开机自启并且刷新</strong></p><pre><code class="shell">systemctl enable php-fpm.servicesystemctl daemon-reload</code></pre><h2 id="四、查看三个服务的运行状态"><a href="#四、查看三个服务的运行状态" class="headerlink" title="四、查看三个服务的运行状态"></a>四、查看三个服务的运行状态</h2><p><strong>httpd监听80端口，mysql监听3306端口，php-fpm监听9000端口</strong></p><pre><code class="shell">netstat -tunlp</code></pre><h2 id="五、安装wordpress官网tar-gz安装包"><a href="#五、安装wordpress官网tar-gz安装包" class="headerlink" title="五、安装wordpress官网tar.gz安装包"></a>五、安装wordpress官网tar.gz安装包</h2><p><strong>2、用wget获取wordpress安装包</strong></p><pre><code class="shell">wget https://ww.wp.xz.cn/wordpress-4.5.20.tar.gz</code></pre><p><strong>3、解压安装包到&#x2F;var&#x2F;www路径下</strong></p><pre><code class="shell">tar -zxf wordpress-4.5.20.tar.gz -C /var/www</code></pre><p><strong>4、修改httpd的配置文件把默认的映射路径改为&#x2F;var&#x2F;www&#x2F;wordpress</strong>  </p><pre><code class="shell">vi  /etc/httpd/conf/httpd.conf# DocumentRoot的值**5、保存修改文件退出后重新启动httpd服务**```shellsystemctl restart httpd.service</code></pre><p><strong>6、把wordpress目录赋予apache所有权限</strong></p><pre><code class="shell">chown -R apache:apache /var/www/wordpress</code></pre><h2 id="六、用浏览器启动绑定服务器的域名或者服务器的IP然后就可以开始配置相关的数据"><a href="#六、用浏览器启动绑定服务器的域名或者服务器的IP然后就可以开始配置相关的数据" class="headerlink" title="六、用浏览器启动绑定服务器的域名或者服务器的IP然后就可以开始配置相关的数据"></a>六、用浏览器启动绑定服务器的域名或者服务器的IP然后就可以开始配置相关的数据</h2>]]></content>
       
       
       <categories>
@@ -726,11 +916,11 @@
     
     
     <entry>
-      <title>Centos7安装Wordpress</title>
-      <link href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos7%E5%AE%89%E8%A3%85Wordpress/"/>
-      <url>/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos7%E5%AE%89%E8%A3%85Wordpress/</url>
+      <title>Centos7常用命令</title>
+      <link href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos7%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+      <url>/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos7%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
       
-        <content type="html"><![CDATA[<h1 id="Centos7安装Wordpress以及环境"><a href="#Centos7安装Wordpress以及环境" class="headerlink" title="Centos7安装Wordpress以及环境"></a>Centos7安装Wordpress以及环境</h1><h2 id="一、安装MySQL57版本"><a href="#一、安装MySQL57版本" class="headerlink" title="一、安装MySQL57版本"></a>一、安装MySQL57版本</h2><p><strong>1、从MySQL官网下载YUM源的RPM安装包</strong></p><pre><code class="shell">wget http://dev.mysql.com/get/mysql57-community-release-el7-8.noarch.rpm</code></pre><p><strong>2、从下载好的rpm包安装MYSQL</strong></p><pre><code class="shell">yum localinstall mysql57-community-release-el7-8.noarch.rpm</code></pre><p><strong>3、安装MySQL服务</strong></p><pre><code class="shell">yum install mysql-community-server</code></pre><p><strong>4、启动MySQL服务</strong></p><pre><code class="shell">systemctl start mysqld.service</code></pre><p><strong>5、设置开机自启并且刷新</strong></p><pre><code class="shell">systemctl enable mysqldsystemctl daemon-reload</code></pre><p><strong>6、修改默认初始化密码-&gt;由于密码策略所以只能设置较为复杂的密码</strong></p><pre><code class="shell">#临时密码在/var/log/mysqld.logalter user &#39;root&#39;@&#39;localhost&#39; identified by &#39;ZhonHua@5000Nian&#39;;</code></pre><p><strong>7、查看MySQL的密码安全策略</strong></p><pre><code class="shell">show variables like &#39;validate_password%&#39;;</code></pre><p><img src="/./images/MYSQL%E5%AF%86%E7%A0%81%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5.PNG" alt="img"></p><p><strong>8、修改密码杂度为最低以及把密码长度改为自己想要的</strong></p><pre><code class="shell">set global validate_password_policy = LOW;set global validate_password_length = 6;</code></pre><p><img src="/./images/MySQL%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81%E7%AD%96%E7%95%A5.PNG" alt="img"></p><p><strong>9、修改为自己想要的密码</strong></p><pre><code class="shell">alter user &#39;root&#39;@&#39;localhost&#39; identified by &#39;123456&#39;;</code></pre><p><strong>10、创建wordpress数据库</strong></p><pre><code class="shell">create database wordpress;</code></pre><p><strong>11、允许远程登陆然后刷新</strong></p><pre><code class="shell">grant all on *.* to root@&#39;%&#39; identified by &#39;password&#39; with grant option;flush privileges;</code></pre><p><strong>12、重启MySQL服务</strong></p><pre><code class="shell">systemctl restart mysqld.service</code></pre><p><strong>13、密码忘记或者策略失败</strong></p><pre><code class="shell">#关闭密码验证策略，url：vi /root/my.cnfskip-grant-tables#修改mysql.user表的密码update mysql.user set authentication_string=password(&#39;新密码&#39;) where user=&#39;root&#39; ;#刷新flush privileges ;#然后删除skip-grant-tables之后重启MySQL服务</code></pre><h2 id="二、安装apache-gt-httpd"><a href="#二、安装apache-gt-httpd" class="headerlink" title="二、安装apache-&gt;httpd"></a>二、安装apache-&gt;httpd</h2><p><strong>1、安装httpd</strong></p><pre><code class="shell">yum install httpd</code></pre><p><strong>2、启动httpd服务</strong></p><pre><code class="shell">systemctl start httpd.service</code></pre><p><strong>3、设置成开机自启并且刷新</strong></p><pre><code class="shell">systemctl enable httpd.servicesystemctl daemon-reload</code></pre><h2 id="三、安装php-gt-及相关驱动"><a href="#三、安装php-gt-及相关驱动" class="headerlink" title="三、安装php-&gt;及相关驱动"></a>三、安装php-&gt;及相关驱动</h2><p><strong>1、安装php、php-fpm、php-mysql</strong></p><pre><code class="shell">yum install php php-fpm php-mysql</code></pre><p><strong>2、启动php-fpm服务</strong></p><pre><code class="shell">systemctl start php-fpm.service</code></pre><p><strong>3、设置成开机自启并且刷新</strong></p><pre><code class="shell">systemctl enable php-fpm.servicesystemctl daemon-reload</code></pre><h2 id="四、查看三个服务的运行状态"><a href="#四、查看三个服务的运行状态" class="headerlink" title="四、查看三个服务的运行状态"></a>四、查看三个服务的运行状态</h2><p><strong>httpd监听80端口，mysql监听3306端口，php-fpm监听9000端口</strong></p><pre><code class="shell">netstat -tunlp</code></pre><h2 id="五、安装wordpress官网tar-gz安装包"><a href="#五、安装wordpress官网tar-gz安装包" class="headerlink" title="五、安装wordpress官网tar.gz安装包"></a>五、安装wordpress官网tar.gz安装包</h2><p><strong>2、用wget获取wordpress安装包</strong></p><pre><code class="shell">wget https://ww.wp.xz.cn/wordpress-4.5.20.tar.gz</code></pre><p><strong>3、解压安装包到&#x2F;var&#x2F;www路径下</strong></p><pre><code class="shell">tar -zxf wordpress-4.5.20.tar.gz -C /var/www</code></pre><p><strong>4、修改httpd的配置文件把默认的映射路径改为&#x2F;var&#x2F;www&#x2F;wordpress</strong>  </p><pre><code class="shell">vi  /etc/httpd/conf/httpd.conf# DocumentRoot的值**5、保存修改文件退出后重新启动httpd服务**```shellsystemctl restart httpd.service</code></pre><p><strong>6、把wordpress目录赋予apache所有权限</strong></p><pre><code class="shell">chown -R apache:apache /var/www/wordpress</code></pre><h2 id="六、用浏览器启动绑定服务器的域名或者服务器的IP然后就可以开始配置相关的数据"><a href="#六、用浏览器启动绑定服务器的域名或者服务器的IP然后就可以开始配置相关的数据" class="headerlink" title="六、用浏览器启动绑定服务器的域名或者服务器的IP然后就可以开始配置相关的数据"></a>六、用浏览器启动绑定服务器的域名或者服务器的IP然后就可以开始配置相关的数据</h2>]]></content>
+        <content type="html"><![CDATA[<h1 id="Centos7常用命令"><a href="#Centos7常用命令" class="headerlink" title="Centos7常用命令"></a>Centos7常用命令</h1><p><strong>防火墙相关命令</strong></p><ul><li><p>防火墙的开启、关闭、重启、与状态</p><pre><code class="shell"> #开启 systemctl start   firewalld.service #关闭 systemctl stop    firewalld.service #重启 systemctl restart firewalld.service #状态 systemctl status  firewalld.service #设置开机自启 systemctl enable  firewalld.service #关闭开机自启 systemctl disable firewalld.service  #指定IP放行指定端口 firewall-cmd --permanent --add-rich-rule=&quot;rule family=&quot;ipv4&quot; source address=&quot;192.168.142.166&quot; port protocol=&quot;tcp&quot; port=&quot;5432&quot; accept&quot;</code></pre></li><li><p>查看所有公开项目</p><pre><code class="shell"> #查看所有公开项 firewall-cmd --list-all #查看端口是否放行 firewall-cmd --zone=public --query-port=80/tcp</code></pre></li><li><p>防火墙放行端口或服务</p><pre><code class="shell"> #添加放行端口 firewall-cmd --zone=public --add-port=80/tcp --permanent #重新加载所有的设置项 firewall-cmd --reload</code></pre><pre><code class="shell">  #添加放行服务  firewall-cmd --zone=public --add-service=http --permanent  firewall-cmd --reload</code></pre></li><li><p>防火墙移除放行端口或服务</p><pre><code class="shell"> #移除已经放行的端口 firewall-cmd --zone=public --remove-port=80/tcp firewall-cmd --reload</code></pre><pre><code class="shell">  #移除已经放行服务  firewall-cmd --zone=public --remove-service=http  firewall-cmd --reload</code></pre></li></ul><p><strong>端口操作</strong></p><ul><li><p>端口占用查询</p><pre><code class="shell"> netstat -tunlp | grep &#39;port&#39; ---------------------------------------------------------------------------------- -t (tcp) 仅显示tcp相关选项 -u (udp) 仅显示udp相关选项 -n 拒绝显示别名，能显示数字的全部转化为数字 -l 仅列出在Listen(监听)的服务状态 -p 显示建立相关链接的程序名</code></pre><pre><code class="shell"> lsof -i:&#39;port&#39;</code></pre></li><li><p>端口终结</p><pre><code class="shell"> kill -9 &#39;pid&#39;</code></pre></li></ul><p><strong>服务操作</strong></p><ul><li><p>服务状态查询</p><pre><code class="shell">  systemctl status &#39;serverName&#39;</code></pre></li><li><p>服务开启</p><pre><code class="shell">  sysyemctl start &#39;serverName&#39;</code></pre></li><li><p>服务关闭</p><pre><code class="shell"> systemctl stop &#39;serverName&#39;</code></pre></li><li><p>服务自启</p><pre><code class="shell">  systemctl enable &#39;serverName&#39;</code></pre></li><li><p>关闭服务自启</p><pre><code class="shell"> systemctl disable &#39;serverName&#39;</code></pre></li></ul><p><strong>用户和组</strong></p><ul><li><p>用户和组</p><pre><code class="shell">  #添加用户  adduser &#39;userName&#39;</code></pre><pre><code class="shell">#新建工作组groupadd &#39;groupName&#39;</code></pre><pre><code class="shell">#添加用户，并且把把用户添加到指定名称的组useradd -g &#39;groupName&#39; &#39;userName&#39;</code></pre><pre><code class="shell">#给已有用户添加到工作组usermod -G &#39;groupName&#39; &#39;userName&#39;gpasswd -a &#39;userName&#39; &#39;groupName&#39;</code></pre><pre><code class="shell">#临时锁定用户的密码，使账户失效passwd &#39;userName&#39; -l#把临时锁定密码的用户开发，使账户重新有效passwd &#39;userName&#39; -u</code></pre><pre><code class="shell">#永久删除用户userdel &#39;userName&#39;#永久删除组groupdel &#39;groupName&#39;#同时删除用户和组usermod -G &#39;userName&#39; &#39;groupName&#39;#从指定的组中删除指定的用户gpassed -d &#39;userName&#39; &#39;groupName&#39;</code></pre><pre><code class="shell">#显示用户信息id &#39;userName&#39;#将用户添加到指定组usermod -G &#39;groupName&#39; &#39;userName&#39;#修改用户userName1的名称为userName2usermod -l &#39;userName2&#39; &#39;userName1&#39;#锁定账户usermod -L &#39;userName&#39;#解除用户锁定usermod -U &#39;userName&#39;</code></pre></li></ul><hr><p><strong>持续更新中…</strong></p>]]></content>
       
       
       <categories>
@@ -1144,196 +1334,6 @@
     
     
     <entry>
-      <title>Android_头部导航标签</title>
-      <link href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Android_%E5%A4%B4%E9%83%A8%E5%AF%BC%E8%88%AA%E6%A0%87%E7%AD%BE/"/>
-      <url>/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Android_%E5%A4%B4%E9%83%A8%E5%AF%BC%E8%88%AA%E6%A0%87%E7%AD%BE/</url>
-      
-        <content type="html"><![CDATA[<h1 id="Toolbar"><a href="#Toolbar" class="headerlink" title="Toolbar"></a>Toolbar</h1><p>关于toolbar使用的几个要点，包如下</p><pre><code class="xml">androidx.appcompat.widget.Toolbar</code></pre><p>这里作为toolbar的最左标签使用</p><pre><code class="xml">app:navigationIcon=&quot;@mipmap/sidebar&quot;</code></pre><p>最左侧按钮点击事件，这里的点击事件有一个很重要的事情，就是只有在toolbar提交之后才能生效，也就是</p><pre><code class="java">setSupportActionBar(toolbar);</code></pre><pre><code class="java">@Override    public boolean onOptionsItemSelected(@NonNull MenuItem item) &#123;        if (item.getItemId() ==android.R.id.home)&#123;            drawerLayout.openDrawer(Gravity.LEFT);        &#125;        return super.onOptionsItemSelected(item);    &#125;</code></pre><p>而其他的所有操作，如设置title，logo等等方法，也要在提交了toolbar之后才能生效，例如</p><pre><code class="java"># 设置title无效getSupportActionBar().setDisplayShowTitleEnabled(false);</code></pre><p>还有设置toolbar的title的颜色字体大小，等等信息</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 前端杂烩 </category>
-          
-      </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Android网络请求回调</title>
-      <link href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Android%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%E5%9B%9E%E8%B0%83/"/>
-      <url>/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Android%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%E5%9B%9E%E8%B0%83/</url>
-      
-        <content type="html"><![CDATA[<h1 id="Android的HTTP网络请求超时UI更新（回调）"><a href="#Android的HTTP网络请求超时UI更新（回调）" class="headerlink" title="Android的HTTP网络请求超时UI更新（回调）"></a>Android的HTTP网络请求超时UI更新（回调）</h1><h3 id="原因及运行原理"><a href="#原因及运行原理" class="headerlink" title="原因及运行原理"></a>原因及运行原理</h3><p>当在网络请求出现连接超时（httpURLConnection.setConnectTimeout(TimeOut)）的时候，此时调用的活动中的Dialog弹窗会一直浮现在桌面上，而网络请求是位于子线程，活动只是调用之后就没有太多的关联，这时当网络出现连接超时的时候会一直卡在httpURLConnection.connect()中，此时可以在网络请求类中新建一个接口，并且实现一个刷新方法，再在活动中实例化一个请求类，并且参数为接口对象，然后再到网络请求出现超时，并且抛出异常的try…catch代码块的异常处理块中用接口对象调用刷新的方法，由于接口内的刷新方法时抽象方法，所以会自动往子级里面去找到运行的代码块，也就是说运行活动中覆写的代码块，注意：虽然运行的代码块时活动中的，但是其调用的主体方法还是在子线程中，所以需要更新UI的时候，还是需要回调到主线程中        </p><pre><code class="java">public  class BaseHttpConn &#123;    private static final String TAG = &quot;BaseHttpConn&quot;;    private static TimeOut shuaxin;    private static int TimeOut = 3*1000;    public static HttpURLConnection httpConn(String baseUrl, HashMap&lt;String, String&gt; map) &#123;        HttpURLConnection httpURLConnection = null;        try &#123;            URL url = new URL(baseUrl);            httpURLConnection = (HttpURLConnection) url.openConnection();            httpURLConnection.setConnectTimeout(TimeOut);//连接超时            httpURLConnection.setReadTimeout(TimeOut);//读取超时            httpURLConnection.setRequestMethod(&quot;POST&quot;);//请求方式            httpURLConnection.setInstanceFollowRedirects(true);//是否重定向            httpURLConnection.setUseCaches(true);//是否启用缓存            httpURLConnection.setRequestProperty(&quot;Content-Type&quot;,&quot;application/json&quot;);//传入服务器的数据类型            OutputStream outputStream = httpURLConnection.getOutputStream();            outputStream.write(getByte(map));            outputStream.close();        &#125; catch (Exception e) &#123;            e.printStackTrace();            httpURLConnection.disconnect();//关闭此次网络请求            shuaxin.ShuaXin();//通过接口对象调用抽象方法ShuaXin();        &#125;        return httpURLConnection;    &#125;    private static byte[] getByte(HashMap&lt;String,String&gt; map) &#123;        JSONObject jsonObject = new JSONObject();        for(String key: map.keySet())&#123;            try &#123;                jsonObject.put(key,map.get(key));            &#125; catch (JSONException e) &#123;                e.printStackTrace();            &#125;        &#125;        return jsonObject.toString().getBytes();    &#125;    public BaseHttpConn(TimeOut timeOut) &#123;        this.shuaxin = timeOut;    &#125;    //监听接口    public interface TimeOut&#123;        void ShuaXin();//接口中刷新的方法    &#125;&#125;</code></pre><h3 id="Activity中的代码"><a href="#Activity中的代码" class="headerlink" title="Activity中的代码"></a>Activity中的代码</h3><pre><code class="java">     BaseHttpConn baseHttpConn = new BaseHttpConn(new BaseHttpConn.TimeOut() &#123;        @Override        public void ShuaXin() &#123;            progressDialog.dismiss();            getActivity().runOnUiThread(new Runnable() &#123;//位于碎片中，所以需要通过getActivity()获取活动                @Override                public void run() &#123;                    Toast.makeText(getContext(),&quot;网络连接失败&quot;,Toast.LENGTH_SHORT).show();                &#125;            &#125;);        &#125;    &#125;);</code></pre>]]></content>
-      
-      
-      <categories>
-          
-          <category> 前端杂烩 </category>
-          
-      </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>CSS布局问题</title>
-      <link href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/CSS%E5%B8%83%E5%B1%80%E9%97%AE%E9%A2%98/"/>
-      <url>/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/CSS%E5%B8%83%E5%B1%80%E9%97%AE%E9%A2%98/</url>
-      
-        <content type="html"><![CDATA[<h1 id="CSS布局问题"><a href="#CSS布局问题" class="headerlink" title="CSS布局问题"></a>CSS布局问题</h1><pre><code class="css"># 作为行内表格元素，可以使相对于父元素有效display: inline-table;width:100%;height: 100%;</code></pre>]]></content>
-      
-      
-      <categories>
-          
-          <category> 前端杂烩 </category>
-          
-      </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>HTML5图片拖放</title>
-      <link href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/HTML5%E5%9B%BE%E7%89%87%E6%8B%96%E6%94%BE/"/>
-      <url>/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/HTML5%E5%9B%BE%E7%89%87%E6%8B%96%E6%94%BE/</url>
-      
-        <content type="html"><![CDATA[<h2 id="实现HTML5中图片的拖放"><a href="#实现HTML5中图片的拖放" class="headerlink" title="实现HTML5中图片的拖放"></a>实现HTML5中图片的拖放</h2><pre><code class="html">&lt;!DOCTYPE html&gt;&lt;html&gt;    &lt;head&gt;        &lt;meta charset=&quot;utf-8&quot;&gt;        &lt;title&gt;阿杰之家&lt;/title&gt;        &lt;style type=&quot;text/css&quot;&gt;            #div1,            #div2 &#123;                float: left;                width: 500px;                height: 350px;                margin: 10px;                padding: 10px;                border: 1px solid #aaaaaa;            &#125;        &lt;/style&gt;        &lt;script&gt;            function allowDrop(ev) &#123;                // 6、默认地，无法将数据/元素放置到其他元素中。如果需要设置允许放置，我们必须阻止对元素的默认处理方式,这要通过调用 ondragover 事件的 event.preventDefault() 方法.                ev.preventDefault();            &#125;            function drag(ev) &#123;                // 3、dataTransfer.setData() 方法设置被拖数据的数据类型和值                // 4、Text 是一个 DOMString 表示要添加到 drag object 的拖动数据的类型。值是可拖动元素的 id (&quot;drag1&quot;)。                ev.dataTransfer.setData(&quot;Text&quot;, ev.target.id);            &#125;            function drop(ev) &#123;                // 8、调用 preventDefault() 来避免浏览器对数据的默认处理（drop 事件的默认行为是以链接形式打开）                ev.preventDefault();                // 9、通过 dataTransfer.getData(&quot;Text&quot;) 方法获得被拖的数据。该方法将返回在 setData() 方法中设置为相同类型的任何数据。被拖数据是被拖元素的 id (&quot;drag1&quot;)                var data = ev.dataTransfer.getData(&quot;Text&quot;);                // 10、把被拖元素追加到放置元素（目标元素）中                ev.target.appendChild(document.getElementById(data));            &#125;        &lt;/script&gt;    &lt;/head&gt;    &lt;body&gt;        &lt;!-- 5、ondragover 事件规定在何处放置被拖动的数据。 --&gt;        &lt;!-- 7、当放置被拖数据时，会发生 drop 事件 --&gt;        &lt;div id=&quot;div1&quot; ondrop=&quot;drop(event)&quot; ondragover=&quot;allowDrop(event)&quot;&gt;            &lt;!-- 1、为了使元素可拖动，把 draggable 属性设置为 true --&gt;            &lt;!-- 2、ondragstart 属性调用了一个函数，drag(event)，它规定了被拖动的数据。 --&gt;            &lt;img src=&quot;./img/logo.png&quot; draggable=&quot;true&quot; ondragstart=&quot;drag(event)&quot; id=&quot;drag1&quot; width=&quot;500&quot; height=&quot;350&quot;&gt;&lt;/div&gt;        &lt;div id=&quot;div2&quot; ondrop=&quot;drop(event)&quot; ondragover=&quot;allowDrop(event)&quot;&gt;&lt;/div&gt;    &lt;/body&gt;&lt;/html&gt;</code></pre>]]></content>
-      
-      
-      <categories>
-          
-          <category> 前端杂烩 </category>
-          
-      </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>HTML高度塌陷</title>
-      <link href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/HTML%E9%AB%98%E5%BA%A6%E5%A1%8C%E9%99%B7/"/>
-      <url>/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/HTML%E9%AB%98%E5%BA%A6%E5%A1%8C%E9%99%B7/</url>
-      
-        <content type="html"><![CDATA[<h1 id="HTML盒子高度塌陷"><a href="#HTML盒子高度塌陷" class="headerlink" title="HTML盒子高度塌陷"></a>HTML盒子高度塌陷</h1><p>使用<code>overflow: hidden;</code>可以处理盒子的高度塌陷</p><p>引用：<a href="https://www.cnblogs.com/luoqian/p/5987788.html">https://www.cnblogs.com/luoqian/p/5987788.html</a></p><p>最近在看《CSS Mastery》这本书，里面有用overflow：hidden来清理浮动的方法。但是一直想不明白为什么能够实现清除浮动，查阅了网络上的解释，下面来总结一下。</p><p>一、首先来想想</p><p>我们大家理解的overflow:hidden是超出该元素的部分进行隐藏。这个时候就需要明确一点，该元素的高度是怎么定义的。当一个div中的两个元素浮动之后，此时div的高度就会塌陷，此时div的高度为0。那是不是意味着就要将浮动元素隐藏起来，如果是真的隐藏就是反布局常识的。所以这中间肯定有我们现在还不知道的机制。</p><p>二、不了解的机制-BFC</p><p>定义：BFC（Block Formatting Context）全称是块级格式化上下文，用于对块级元素排版，默认情况下只有根元素（body）一个块级上下文，但是如果一个块级元素设置了float:left,overflow:hidden或position:absolute样式，就会为这个块级元素生产一个独立的块级上下文，使这个块级元素内部的排版完全独立。</p><p>作用：独立的块级上下文可以包裹浮动流，全部浮动子元素也不会引起容器高度塌陷，就是说包含块会把浮动元素的高度也计算在内，所以就不用清除浮动来撑起包含块的高度。</p><p>三、总结清除浮动的方法</p><p>我经常用到的清除浮动的方法有</p><p>1、添加额外标签设置clearfix类为clear:both;</p><p>　　原理是这个空的div能让父级获取到高度，是因为设置之后这个div的左右都不能有浮动元素，所以这个空的div元素会向下移动，直到换行，而为了让这个div能够换行，父元素至少要包含浮动元素的高度才能提高足够的空间，这样实现清除浮动的影响。</p><p>2、设置父元素为浮动元素</p><p>3、设置position:absolute</p><p>我不常用的清除浮动的方法有</p><p>1、父级div定义height</p><p>3、overflow:hidden</p><p>2、父级div定义伪类:after和zoom;</p><p>　　这个方法的原理还不理解，欢迎大神解答。</p><p>四、清除浮动的影响方法分类</p><p>参考张鑫旭老师的说法，清除浮动的说法是不准确的。应该是为清除浮动的影响。我也觉得张老师的说法是正确的，因为float:none才叫清除浮动。张老师还说到了包裹的这个概念，根据这个概念将清除浮动的影响的方法分为两大类。</p><p>一类是clear:both&#x2F;left&#x2F;right，这就不用说了。</p><p>另一类是：包裹清除，因为他发现浮动、绝对定位、inline-block、overflow都有自适应元素宽度的特性，就想到了用包裹来形容。</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 前端杂烩 </category>
-          
-      </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>JavaScript下载文件</title>
-      <link href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/JavaScript%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6/"/>
-      <url>/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/JavaScript%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6/</url>
-      
-        <content type="html"><![CDATA[<p>JavaScript异步请求，把响应的Base64图片内容下载到本地文件存储</p><pre><code class="javascript">/** * Base64的文件下载 * @param content Base64字符内容 * @param fileName 文件名称 */function downloadFile(content, fileName) &#123; //下载base64图片    let base64ToBlob = function (code) &#123;        let parts = code.split(&#39;;base64,&#39;);        let contentType = parts[0].split(&#39;:&#39;)[1];        let raw = window.atob(parts[1]);        let rawLength = raw.length;        let uInt8Array = new Uint8Array(rawLength);        for (let i = 0; i &lt; rawLength; ++i) &#123;            uInt8Array[i] = raw.charCodeAt(i);        &#125;        return new Blob([uInt8Array], &#123;            type: contentType        &#125;);    &#125;;    let aLink = document.createElement(&#39;a&#39;);    let blob = base64ToBlob(content); //new Blob([content]);    let evt = document.createEvent(&quot;HTMLEvents&quot;);    evt.initEvent(&quot;click&quot;, true, true); //initEvent 不加后两个参数在FF下会报错  事件类型，是否冒泡，是否阻止浏览器的默认行为    aLink.download = fileName;    aLink.href = URL.createObjectURL(blob);    aLink.click();&#125;</code></pre>]]></content>
-      
-      
-      <categories>
-          
-          <category> 前端杂烩 </category>
-          
-      </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>JavaScript获取视频流且回显</title>
-      <link href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/JavaScript%E8%8E%B7%E5%8F%96%E8%A7%86%E9%A2%91%E6%B5%81%E4%B8%94%E5%9B%9E%E6%98%BE/"/>
-      <url>/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/JavaScript%E8%8E%B7%E5%8F%96%E8%A7%86%E9%A2%91%E6%B5%81%E4%B8%94%E5%9B%9E%E6%98%BE/</url>
-      
-        <content type="html"><![CDATA[<hr><h2 id="title-JavaScript获取视频流且回显date-2022-04-20-09-38-55-438updated-2022-10-13-14-58-40-564url-x2F-archives-x2F-javascript-huo-qu-shi-pin-liu-qie-hui-xiancategories-JavaScripttags-JavaScript"><a href="#title-JavaScript获取视频流且回显date-2022-04-20-09-38-55-438updated-2022-10-13-14-58-40-564url-x2F-archives-x2F-javascript-huo-qu-shi-pin-liu-qie-hui-xiancategories-JavaScripttags-JavaScript" class="headerlink" title="title: JavaScript获取视频流且回显date: 2022-04-20 09:38:55.438updated: 2022-10-13 14:58:40.564url: &#x2F;archives&#x2F;javascript-huo-qu-shi-pin-liu-qie-hui-xiancategories:- JavaScripttags:- JavaScript"></a>title: JavaScript获取视频流且回显<br>date: 2022-04-20 09:38:55.438<br>updated: 2022-10-13 14:58:40.564<br>url: &#x2F;archives&#x2F;javascript-huo-qu-shi-pin-liu-qie-hui-xian<br>categories:<br>- JavaScript<br>tags:<br>- JavaScript</h2><pre><code class="HTML">&lt;!DOCTYPE html&gt;&lt;html&gt;    &lt;head&gt;        &lt;style&gt;        &lt;/style&gt;    &lt;/head&gt;    &lt;body&gt;        &lt;video id=&quot;video&quot; width=&quot;640&quot; height=&quot;480&quot; autoplay=&quot;autoplay&quot;&gt;&lt;/video&gt;        &lt;br/&gt;        &lt;button id=&quot;snap&quot;&gt;截取图像&lt;/button&gt;&lt;button id=&quot;start&quot;&gt;开始录制&lt;/button&gt;&lt;button id=&quot;stop&quot;&gt;停止录制&lt;/button&gt;        &lt;br/&gt;        &lt;canvas id=&quot;canvas&quot; width=&quot;640&quot; height=&quot;480&quot;&gt;&lt;/canvas&gt;    &lt;/body&gt;    &lt;script type=&quot;text/javascript&quot;&gt;        let videoView = document.getElementById(&quot;video&quot;);        let buttonView = document.getElementById(&quot;snap&quot;);        let startButton = document.getElementById(&quot;start&quot;);        let stopButton = document.getElementById(&quot;stop&quot;);        let canvasView = document.getElementById(&quot;canvas&quot;);        navigator.mediaDevices.getDisplayMedia(&#123;            video: &#123;                width: 640,                height: 480            &#125;,            audio: true        &#125;).then(stream =&gt; &#123;            console.log(&quot;摄像头打开成功！！！&quot;, stream);            //以ID为基准,video控件的ID是什么此处的video就是什么            video.srcObject = stream;            // 创建下载对象            let mediaRecorder = new MediaRecorder(stream, &#123;                audioBitsPerSecond: 128000, // 音频码率                videoBitsPerSecond: 100000, // 视频码率                mimeType: &#39;video/webm;codecs=h264&#39; // 编码格式            &#125;);            startButton.onclick = (e =&gt; &#123;                console.log(&quot;触发下载按钮！！！&quot;, e)                mediaRecorder.start(5000);            &#125;);            stopButton.onclick = (e =&gt; &#123;                console.log(&quot;触发结束按钮！！！&quot;, e)                mediaRecorder.stop();            &#125;);            mediaRecorder.ondataavailable = (e =&gt; &#123;                console.log(&quot;开始下载&quot;)                // 下载视频                var blob = new Blob([e.data], &#123; &#39;type&#39; : &#39;video/mp4&#39; &#125;)                let a = document.createElement(&#39;a&#39;)                a.href = URL.createObjectURL(blob)                a.download = `test.mp4`                a.click()            &#125;);            //监听流录入失败            video.onerror = (err =&gt; &#123;                console.log(&quot;加载错误！！！&quot;, err);            &#125;);            //监听流录入成功            video.onloadeddata = (e =&gt; &#123;                console.log(&quot;加载成功！！！&quot;, e);            &#125;);        &#125;).catch(stream =&gt; &#123;            console.log(&quot;摄像头打开失败！！！&quot;, stream);        &#125;);        //给button按钮设置一个点击事件监听        buttonView.onclick = function() &#123;            //获取画布的2d上下文，然后把视频内的一帧绘制到画布上            canvasView.getContext(&quot;2d&quot;).drawImage(videoView, 0, 0, 640, 480)        &#125;    &lt;/script&gt;&lt;/html&gt;</code></pre>]]></content>
-      
-      
-      <categories>
-          
-          <category> 前端杂烩 </category>
-          
-      </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Javascript正则</title>
-      <link href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Javascript%E6%AD%A3%E5%88%99/"/>
-      <url>/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Javascript%E6%AD%A3%E5%88%99/</url>
-      
-        <content type="html"><![CDATA[<h2 id="Javascript正则"><a href="#Javascript正则" class="headerlink" title="Javascript正则"></a>Javascript正则</h2><pre><code class="javascript">let newData  = data.replace(/\&quot;toId\&quot;:(\d+)/,&#39;&quot;toId&quot;: &quot;$1&quot;&#39;);data = JSON.parse(newData)</code></pre>]]></content>
-      
-      
-      <categories>
-          
-          <category> 前端杂烩 </category>
-          
-      </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Javascript的dom操作</title>
-      <link href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Javascript%E7%9A%84dom%E6%93%8D%E4%BD%9C/"/>
-      <url>/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/Javascript%E7%9A%84dom%E6%93%8D%E4%BD%9C/</url>
-      
-        <content type="html"><![CDATA[<h1 id="JS原生DOM操作"><a href="#JS原生DOM操作" class="headerlink" title="JS原生DOM操作"></a>JS原生DOM操作</h1><pre><code class="javascript">let mainView = document.getElementById(&quot;main&quot;);                console.log(mainView)                let textDom = document.createElement(&quot;img&quot;);                let x = Math.random()*200+&quot;px&quot;;                let y = (Math.random()*300+100)+&quot;px&quot;;                textDom.style.top = y;                textDom.style.width = &quot;20px&quot;;                textDom.style.height = &quot;20px&quot;;                textDom.style.left = x;                textDom.style.border = &quot;solid 1px #cccccc&quot;;                textDom.style.zIndex = &quot;999&quot;;                textDom.style.position = &quot;absolute&quot;;                textDom.setAttribute(&quot;src&quot;,&quot;../../static/log.jpg&quot;);                // textDom.setAttribute(&quot;src&quot;,&quot;http://a2.att.hudong.com/36/48/19300001357258133412489354717.jpg&quot;);                mainView.appendChild(textDom)                console.log(mainView)</code></pre>]]></content>
-      
-      
-      <categories>
-          
-          <category> 前端杂烩 </category>
-          
-      </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>NodeJS配置创建VUE项目</title>
-      <link href="/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/NodeJS%E9%85%8D%E7%BD%AE%E5%88%9B%E5%BB%BAVUE%E9%A1%B9%E7%9B%AE/"/>
-      <url>/2023/06/07/%E5%89%8D%E7%AB%AF%E6%9D%82%E7%83%A9/NodeJS%E9%85%8D%E7%BD%AE%E5%88%9B%E5%BB%BAVUE%E9%A1%B9%E7%9B%AE/</url>
-      
-        <content type="html"><![CDATA[<h1 id="nodejs"><a href="#nodejs" class="headerlink" title="nodejs"></a>nodejs</h1><p>查看node版本</p><pre><code class="shell">node -v</code></pre><p>查看npm版本</p><pre><code class="shell">npm -v</code></pre><p>查看配置文件</p><pre><code class="shell">npm config list</code></pre><p>修改本地仓库</p><pre><code class="shell">npm config set prefix &quot;C:\Software\node\node_global&quot;npm config set cache &quot;C:\Software\node\node_cache&quot;</code></pre><p>修改镜像站</p><pre><code class="shell">npm config set registry=https://registry.npm.taobao.org</code></pre><p>node更新</p><pre><code class="shell">*# 全局安装n$ npm install -g n # 升级到最新稳定版$ n stable# 升级到最新版$ n latest# 升级到定制版$ n v7.10.0# 切换使用版本$ n 7.10.0 (ENTER)</code></pre><p>配置文件所在位置<code>C:\Users\Administrator\.npmrc</code></p><p>获取镜像信息（非安装）</p><pre><code class="shell">npm info vue</code></pre><p>更新模块命令</p><pre><code class="shell">#老版本安装方式 2.*npm install npm –g</code></pre><pre><code class="shell">#老版本安装方式 3.* /4.*npm install -g @vue/cli</code></pre><ul><li>npm install&#96;：表示更新</li><li><code>第二个npm</code>：表示需要更新的模块</li><li><code>-g</code>：表示安装到global目录下</li></ul><p>配置NodeJS的环境变量</p><pre><code class="shell">path: D:\software\nodejs</code></pre><p>配置global仓的环境变量</p><pre><code class="shell">path: D:\software\nodejs\node_global</code></pre><p>新增一个<code>NODE_PATH</code>环节变量（子项的全局命令）</p><pre><code class="shell">D:\software\nodejs\node_global\node_modules</code></pre><p>安装vue，安装vue-routher，安装vue脚手架，验证是否安装成功</p><pre><code class="shell">npm install vue -gnpm install vue-routher -gnpm install @vue/cli -gvue -V</code></pre><hr><p><strong>老版本构建方式</strong></p><p>1、构建初始化vue项目</p><pre><code class="shell">vuew init webpack vue01</code></pre><p>2、进入vue01的目录，初始化安装依赖</p><pre><code class="shell">npm install</code></pre><p>3、运行vue01的dev状态</p><pre><code class="shell">npm run dev</code></pre><p>然后访问**<a href="http://localhost:8080/">http://localhost:8080</a>**</p><p>4、编译生成静态文件</p><pre><code class="shell">npm run build</code></pre><hr><p><strong>新版本构建方式</strong></p><pre><code class="shell">vue create vue01</code></pre><p>可以选择创建的方式，moban是我创建的模板，可以选择default默认，或者Manually重新选择</p><blockquote><p>√ Babel<br>× TyreScript<br>× Progressive Web App (PWA) Support<br>√ Routher<br>√ Vuex<br>√ CSS Pre-processors<br>× Linter &#x2F; Formatter<br>× Unit Testing<br>× E2E Testing</p></blockquote>]]></content>
-      
-      
-      <categories>
-          
-          <category> 前端杂烩 </category>
-          
-      </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>B树&amp;B+树</title>
       <link href="/2023/06/07/%E7%90%86%E8%AE%BA%E4%BD%93%E7%B3%BB/B%E6%A0%91&amp;B+%E6%A0%91/"/>
       <url>/2023/06/07/%E7%90%86%E8%AE%BA%E4%BD%93%E7%B3%BB/B%E6%A0%91&amp;B+%E6%A0%91/</url>
@@ -1353,11 +1353,11 @@
     
     
     <entry>
-      <title>二叉树定义</title>
-      <link href="/2023/06/07/%E7%90%86%E8%AE%BA%E4%BD%93%E7%B3%BB/%E4%BA%8C%E5%8F%89%E6%A0%91%E5%AE%9A%E4%B9%89/"/>
-      <url>/2023/06/07/%E7%90%86%E8%AE%BA%E4%BD%93%E7%B3%BB/%E4%BA%8C%E5%8F%89%E6%A0%91%E5%AE%9A%E4%B9%89/</url>
+      <title>IO与NIO</title>
+      <link href="/2023/06/07/%E7%90%86%E8%AE%BA%E4%BD%93%E7%B3%BB/IO%E4%B8%8ENIO/"/>
+      <url>/2023/06/07/%E7%90%86%E8%AE%BA%E4%BD%93%E7%B3%BB/IO%E4%B8%8ENIO/</url>
       
-        <content type="html"><![CDATA[<hr><h2 id="title-二叉树定义date-2022-07-11-22-58-34-662updated-2022-08-04-18-30-08-316url-x2F-archives-x2F-二叉树定义categories-tags"><a href="#title-二叉树定义date-2022-07-11-22-58-34-662updated-2022-08-04-18-30-08-316url-x2F-archives-x2F-二叉树定义categories-tags" class="headerlink" title="title: 二叉树定义date: 2022-07-11 22:58:34.662updated: 2022-08-04 18:30:08.316url: &#x2F;archives&#x2F;二叉树定义categories:tags: "></a>title: 二叉树定义<br>date: 2022-07-11 22:58:34.662<br>updated: 2022-08-04 18:30:08.316<br>url: &#x2F;archives&#x2F;二叉树定义<br>categories:<br>tags: </h2><h4 id="前、中、后序遍历"><a href="#前、中、后序遍历" class="headerlink" title="前、中、后序遍历"></a>前、中、后序遍历</h4><pre><code class="mermaid">graph TBA((A))B((B))C((C))D((D))E((E))A–&gt;BA–&gt;CB–&gt;DB–&gt;E</code></pre>]]></content>
+        <content type="html"><![CDATA[<hr><h2 id="title-IO与NIOdate-2022-03-31-09-16-30-027updated-2022-10-13-15-10-56-133url-x2F-archives-x2F-io-yu-niocategories-理论体系tags-理论体系-IO"><a href="#title-IO与NIOdate-2022-03-31-09-16-30-027updated-2022-10-13-15-10-56-133url-x2F-archives-x2F-io-yu-niocategories-理论体系tags-理论体系-IO" class="headerlink" title="title: IO与NIOdate: 2022-03-31 09:16:30.027updated: 2022-10-13 15:10:56.133url: &#x2F;archives&#x2F;io-yu-niocategories:- 理论体系tags:- 理论体系- IO"></a>title: IO与NIO<br>date: 2022-03-31 09:16:30.027<br>updated: 2022-10-13 15:10:56.133<br>url: &#x2F;archives&#x2F;io-yu-nio<br>categories:<br>- 理论体系<br>tags:<br>- 理论体系<br>- IO</h2><h2 id="1、阻塞与非阻塞"><a href="#1、阻塞与非阻塞" class="headerlink" title="1、阻塞与非阻塞"></a>1、阻塞与非阻塞</h2><p>阻塞与非阻塞是描述进程在访问某个资源时，数据是否准备就绪的的一种处理方式。当数据没有准备就绪时：</p><ul><li>阻塞：线程持续等待资源中数据准备完成，直到返回响应结果。</li><li>非阻塞：线程直接返回结果，不会持续等待资源准备数据结束后才响应结果。</li></ul><h2 id="2、同步与异步"><a href="#2、同步与异步" class="headerlink" title="2、同步与异步"></a>2、同步与异步</h2><ul><li>同步与异步是指访问数据的机制，同步一般指主动请求并等待IO操作完成的方式。</li><li>异步则指主动请求数据后便可以继续处理其它任务，随后等待IO操作完毕的通知。</li></ul><p>老王烧开水：</p><ol><li>普通水壶煮水，站在旁边，主动的看水开了没有？同步的阻塞</li><li>普通水壶煮水，去干点别的事，每过一段时间去看看水开了没有，水没开就走人。 同步非阻塞</li><li>响水壶煮水，站在旁边，不会每过一段时间主动看水开了没有。如果水开了，水壶自动通知他。 异步阻塞</li><li>响水壶煮水，去干点别的事，如果水开了，水壶自动通知他。异步非阻塞</li></ol><h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><h3 id="1、传统BIO模型"><a href="#1、传统BIO模型" class="headerlink" title="1、传统BIO模型"></a>1、传统BIO模型</h3><p>传统BIO是一种同步的阻塞IO，IO在进行读写时，该线程将被阻塞，线程无法进行其它操作。<br> IO流在读取时，会阻塞。直到发生以下情况：1、有数据可以读取。2、数据读取完成。3、发生异常</p><h3 id="2、伪异步IO模型"><a href="#2、伪异步IO模型" class="headerlink" title="2、伪异步IO模型"></a>2、伪异步IO模型</h3><p>以传统BIO模型为基础，通过线程池的方式维护所有的IO线程，实现相对高效的线程开销及管理。</p><h3 id="3、NIO模型"><a href="#3、NIO模型" class="headerlink" title="3、NIO模型"></a>3、NIO模型</h3><p>NIO（JDK1.4）模型是一种同步非阻塞IO，主要有三大核心部分：Channel(通道)，Buffer(缓冲区), Selector（多路复用器）。传统IO基于字节流和字符流进行操作，而NIO基于Channel和Buffer(缓冲区)进行操作，数据总是从通道读取到缓冲区中，或者从缓冲区写入到通道中。Selector(多路复用器)用于监听多个通道的事件（比如：连接打开，数据到达）。因此，单个线程可以监听多个数据通道。<br> NIO和传统IO（一下简称IO）之间第一个最大的区别是，IO是面向流的，NIO是面向缓冲区的。 Java IO面向流意味着每次从流中读一个或多个字节，直至读取所有字节，它们没有被缓存在任何地方。此外，它不能前后移动流中的数据。如果需要前后移动从流中读取的数据，需要先将它缓存到一个缓冲区。NIO的缓冲导向方法略有不同。数据读取到一个它稍后处理的缓冲区，需要时可在缓冲区中前后移动。这就增加了处理过程中的灵活性。但是，还需要检查是否该缓冲区中包含所有您需要处理的数据。而且，需确保当更多的数据读入缓冲区时，不要覆盖缓冲区里尚未处理的数据。<br> IO的各种流是阻塞的。这意味着，当一个线程调用read() 或 write()时，该线程被阻塞，直到有一些数据被读取，或数据完全写入。该线程在此期间不能再干任何事情了。 NIO的非阻塞模式，使一个线程从某通道发送请求读取数据，但是它仅能得到目前可用的数据，如果目前没有数据可用时，就什么都不会获取。而不是保持线程阻塞，所以直至数据变的可以读取之前，该线程可以继续做其他的事情。 非阻塞写也是如此。一个线程请求写入一些数据到某通道，但不需要等待它完全写入，这个线程同时可以去做别的事情。 线程通常将非阻塞IO的空闲时间用于在其它通道上执行IO操作，所以一个单独的线程现在可以管理多个输入和输出通道（channel）。</p><h3 id="NIO优点："><a href="#NIO优点：" class="headerlink" title="NIO优点："></a>NIO优点：</h3><ol><li>通过Channel注册到Selector上的状态来实现一种客户端与服务端的通信。</li><li>Channel中数据的读取是通过Buffer , 一种非阻塞的读取方式。</li><li>Selector 多路复用器  单线程模型，  线程的资源开销相对比较小。</li></ol><h4 id="Channel-通道"><a href="#Channel-通道" class="headerlink" title="Channel(通道)"></a>Channel(通道)</h4><p>传统IO操作对read()或write()方法的调用，可能会因为没有数据可读&#x2F;可写而阻塞，直到有数据响应。也就是说读写数据的IO调用，可能会无限期的阻塞等待，效率依赖网络传输的速度。最重要的是在调用一个方法前，无法知道是否会被阻塞。</p><p>NIO的Channel抽象了一个重要特征就是可以通过配置它的阻塞行为，来实现非阻塞式的通道。</p><p>Channel是一个双向通道，与传统IO操作只允许单向的读写不同的是，NIO的Channel允许在一个通道上进行读和写的操作。</p><p>FileChannel:文件</p><p>SocketChannel:</p><p>ServerSocketChannel:</p><p>DatagramChannel: UDP</p><h4 id="Buffer-缓冲区"><a href="#Buffer-缓冲区" class="headerlink" title="Buffer(缓冲区)"></a>Buffer(缓冲区)</h4><p>Bufer顾名思义，它是一个缓冲区，实际上是一个容器，一个连续数组。Channel提供从文件、网络读取数据的渠道，但是读写的数据都必须经过Buffer。</p><p><img src="/upload/2022/03/13449209-300fd48a7251c327.png" alt="13449209-300fd48a7251c327"></p><p>Buffer(缓冲区)</p><p>Buffer缓冲区本质上是一块可以写入数据，然后可以从中读取数据的内存。这块内存被包装成NIO Buffer对象，并提供了一组方法，用来方便的访问该模块内存。为了理解Buffer的工作原理，需要熟悉它的三个属性：capacity、position和limit。</p><p>position和limit的含义取决于Buffer处在读模式还是写模式。不管Buffer处在什么模式，capacity的含义总是一样的。见下图：</p><p><img src="/upload/2022/03/13449209-d261cbcb9b9ed88f.png" alt="13449209-d261cbcb9b9ed88f"></p><p>capacity、position和limit</p><ul><li>capacity：作为一个内存块，Buffer有固定的大小值，也叫作“capacity”，只能往其中写入capacity个byte、long、char等类型。一旦Buffer满了，需要将其清空（通过读数据或者清楚数据）才能继续写数据。</li><li>position：当你写数据到Buffer中时，position表示当前的位置。出事的position值为0，当写入一个字节数据到Buffer中后，position会向前移动到下一个可插入数据的Buffer单元。position最大可为capacity-1。当读取数据时，也是从某个特定位置读，讲Buffer从写模式切换到读模式，position会被重置为0。当从Buffer的position处读取一个字节数据后，position向前移动到下一个可读的位置。</li><li>limit：在写模式下，Buffer的limit表示你最多能往Buffer里写多少数据。 写模式下，limit等于Buffer的capacity。当切换Buffer到读模式时， limit表示你最多能读到多少数据。因此，当切换Buffer到读模式时，limit会被设置成写模式下的position值。换句话说，你能读到之前写入的所有数据（limit被设置成已写数据的数量，这个值在写模式下就是position）</li></ul><h4 id="Buffer的分配："><a href="#Buffer的分配：" class="headerlink" title="Buffer的分配："></a>Buffer的分配：</h4><p>对Buffer对象的操作必须首先进行分配，Buffer提供一个allocate(int capacity)方法分配一个指定字节大小的对象。<br> 向Buffer中写数据：写数据到Buffer中有两种方式：<br> 1.从channel写到Buffer</p><pre><code class="cpp">int bytes = channel.read(buf); //将channel中的数据读取到buf中</code></pre><p>2.通过Buffer的put()方法写到Buffer</p><pre><code class="csharp">buf.put(byte); //将数据通过put()方法写入到buf中</code></pre><ul><li>flip()方法：将Buffer从写模式切换到读模式，调用flip()方法会将position设置为0，并将limit设置为之前的position的值。<br> 从Buffer中读数据：从Buffer中读数据有两种方式：<br> 1.从Buffer读取数据到Channel</li></ul><pre><code class="cpp">int bytes = channel.write(buf); //将buf中的数据读取到channel中</code></pre><p>2.通过Buffer的get()方法读取数据</p><pre><code class="csharp">byte bt = buf.get(); //从buf中读取一个byte</code></pre><ul><li>rewind()方法：Buffer.rewind()方法将position设置为0，使得可以重读Buffer中的所有数据，limit保持不变。</li><li>clear()与compact()方法：一旦读完Buffer中的数据，需要让Buffer准备好再次被写入，可以通过clear()或compact()方法完成。如果调用的是clear()方法，position将被设置为0，limit设置为capacity的值。但是Buffer并未被清空，只是通过这些标记告诉我们可以从哪里开始往Buffer中写入多少数据。如果Buffer中还有一些未读的数据，调用clear()方法将被”遗忘 “。compact()方法将所有未读的数据拷贝到Buffer起始处，然后将position设置到最后一个未读元素的后面，limit属性依然设置为capacity。可以使得Buffer中的未读数据还可以在后续中被使用。</li><li>mark()与reset()方法：通过调用Buffer.mark()方法可以标记一个特定的position，之后可以通过调用Buffer.reset()恢复到这个position上。</li></ul><h4 id="Selector-多路复用器"><a href="#Selector-多路复用器" class="headerlink" title="Selector(多路复用器)"></a>Selector(多路复用器)</h4><p>Selector与Channel是相互配合使用的，将Channel注册在Selector上之后，才可以正确的使用Selector，但此时Channel必须为非阻塞模式。Selector可以监听Channel的四种状态（Connect、Accept、Read、Write），当监听到某一Channel的某个状态时，才允许对Channel进行相应的操作。</p><ul><li>Connect：某一个客户端连接成功后</li><li>Accept：准备好进行连接</li><li>Read:可读</li><li>Write:可写</li></ul><p>作者：林亚希<br>链接：<a href="https://www.jianshu.com/p/5bb812ca5f8e">https://www.jianshu.com/p/5bb812ca5f8e</a><br>来源：简书<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>]]></content>
       
       
       <categories>
@@ -1372,11 +1372,11 @@
     
     
     <entry>
-      <title>IO与NIO</title>
-      <link href="/2023/06/07/%E7%90%86%E8%AE%BA%E4%BD%93%E7%B3%BB/IO%E4%B8%8ENIO/"/>
-      <url>/2023/06/07/%E7%90%86%E8%AE%BA%E4%BD%93%E7%B3%BB/IO%E4%B8%8ENIO/</url>
+      <title>二叉树定义</title>
+      <link href="/2023/06/07/%E7%90%86%E8%AE%BA%E4%BD%93%E7%B3%BB/%E4%BA%8C%E5%8F%89%E6%A0%91%E5%AE%9A%E4%B9%89/"/>
+      <url>/2023/06/07/%E7%90%86%E8%AE%BA%E4%BD%93%E7%B3%BB/%E4%BA%8C%E5%8F%89%E6%A0%91%E5%AE%9A%E4%B9%89/</url>
       
-        <content type="html"><![CDATA[<hr><h2 id="title-IO与NIOdate-2022-03-31-09-16-30-027updated-2022-10-13-15-10-56-133url-x2F-archives-x2F-io-yu-niocategories-理论体系tags-理论体系-IO"><a href="#title-IO与NIOdate-2022-03-31-09-16-30-027updated-2022-10-13-15-10-56-133url-x2F-archives-x2F-io-yu-niocategories-理论体系tags-理论体系-IO" class="headerlink" title="title: IO与NIOdate: 2022-03-31 09:16:30.027updated: 2022-10-13 15:10:56.133url: &#x2F;archives&#x2F;io-yu-niocategories:- 理论体系tags:- 理论体系- IO"></a>title: IO与NIO<br>date: 2022-03-31 09:16:30.027<br>updated: 2022-10-13 15:10:56.133<br>url: &#x2F;archives&#x2F;io-yu-nio<br>categories:<br>- 理论体系<br>tags:<br>- 理论体系<br>- IO</h2><h2 id="1、阻塞与非阻塞"><a href="#1、阻塞与非阻塞" class="headerlink" title="1、阻塞与非阻塞"></a>1、阻塞与非阻塞</h2><p>阻塞与非阻塞是描述进程在访问某个资源时，数据是否准备就绪的的一种处理方式。当数据没有准备就绪时：</p><ul><li>阻塞：线程持续等待资源中数据准备完成，直到返回响应结果。</li><li>非阻塞：线程直接返回结果，不会持续等待资源准备数据结束后才响应结果。</li></ul><h2 id="2、同步与异步"><a href="#2、同步与异步" class="headerlink" title="2、同步与异步"></a>2、同步与异步</h2><ul><li>同步与异步是指访问数据的机制，同步一般指主动请求并等待IO操作完成的方式。</li><li>异步则指主动请求数据后便可以继续处理其它任务，随后等待IO操作完毕的通知。</li></ul><p>老王烧开水：</p><ol><li>普通水壶煮水，站在旁边，主动的看水开了没有？同步的阻塞</li><li>普通水壶煮水，去干点别的事，每过一段时间去看看水开了没有，水没开就走人。 同步非阻塞</li><li>响水壶煮水，站在旁边，不会每过一段时间主动看水开了没有。如果水开了，水壶自动通知他。 异步阻塞</li><li>响水壶煮水，去干点别的事，如果水开了，水壶自动通知他。异步非阻塞</li></ol><h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><h3 id="1、传统BIO模型"><a href="#1、传统BIO模型" class="headerlink" title="1、传统BIO模型"></a>1、传统BIO模型</h3><p>传统BIO是一种同步的阻塞IO，IO在进行读写时，该线程将被阻塞，线程无法进行其它操作。<br> IO流在读取时，会阻塞。直到发生以下情况：1、有数据可以读取。2、数据读取完成。3、发生异常</p><h3 id="2、伪异步IO模型"><a href="#2、伪异步IO模型" class="headerlink" title="2、伪异步IO模型"></a>2、伪异步IO模型</h3><p>以传统BIO模型为基础，通过线程池的方式维护所有的IO线程，实现相对高效的线程开销及管理。</p><h3 id="3、NIO模型"><a href="#3、NIO模型" class="headerlink" title="3、NIO模型"></a>3、NIO模型</h3><p>NIO（JDK1.4）模型是一种同步非阻塞IO，主要有三大核心部分：Channel(通道)，Buffer(缓冲区), Selector（多路复用器）。传统IO基于字节流和字符流进行操作，而NIO基于Channel和Buffer(缓冲区)进行操作，数据总是从通道读取到缓冲区中，或者从缓冲区写入到通道中。Selector(多路复用器)用于监听多个通道的事件（比如：连接打开，数据到达）。因此，单个线程可以监听多个数据通道。<br> NIO和传统IO（一下简称IO）之间第一个最大的区别是，IO是面向流的，NIO是面向缓冲区的。 Java IO面向流意味着每次从流中读一个或多个字节，直至读取所有字节，它们没有被缓存在任何地方。此外，它不能前后移动流中的数据。如果需要前后移动从流中读取的数据，需要先将它缓存到一个缓冲区。NIO的缓冲导向方法略有不同。数据读取到一个它稍后处理的缓冲区，需要时可在缓冲区中前后移动。这就增加了处理过程中的灵活性。但是，还需要检查是否该缓冲区中包含所有您需要处理的数据。而且，需确保当更多的数据读入缓冲区时，不要覆盖缓冲区里尚未处理的数据。<br> IO的各种流是阻塞的。这意味着，当一个线程调用read() 或 write()时，该线程被阻塞，直到有一些数据被读取，或数据完全写入。该线程在此期间不能再干任何事情了。 NIO的非阻塞模式，使一个线程从某通道发送请求读取数据，但是它仅能得到目前可用的数据，如果目前没有数据可用时，就什么都不会获取。而不是保持线程阻塞，所以直至数据变的可以读取之前，该线程可以继续做其他的事情。 非阻塞写也是如此。一个线程请求写入一些数据到某通道，但不需要等待它完全写入，这个线程同时可以去做别的事情。 线程通常将非阻塞IO的空闲时间用于在其它通道上执行IO操作，所以一个单独的线程现在可以管理多个输入和输出通道（channel）。</p><h3 id="NIO优点："><a href="#NIO优点：" class="headerlink" title="NIO优点："></a>NIO优点：</h3><ol><li>通过Channel注册到Selector上的状态来实现一种客户端与服务端的通信。</li><li>Channel中数据的读取是通过Buffer , 一种非阻塞的读取方式。</li><li>Selector 多路复用器  单线程模型，  线程的资源开销相对比较小。</li></ol><h4 id="Channel-通道"><a href="#Channel-通道" class="headerlink" title="Channel(通道)"></a>Channel(通道)</h4><p>传统IO操作对read()或write()方法的调用，可能会因为没有数据可读&#x2F;可写而阻塞，直到有数据响应。也就是说读写数据的IO调用，可能会无限期的阻塞等待，效率依赖网络传输的速度。最重要的是在调用一个方法前，无法知道是否会被阻塞。</p><p>NIO的Channel抽象了一个重要特征就是可以通过配置它的阻塞行为，来实现非阻塞式的通道。</p><p>Channel是一个双向通道，与传统IO操作只允许单向的读写不同的是，NIO的Channel允许在一个通道上进行读和写的操作。</p><p>FileChannel:文件</p><p>SocketChannel:</p><p>ServerSocketChannel:</p><p>DatagramChannel: UDP</p><h4 id="Buffer-缓冲区"><a href="#Buffer-缓冲区" class="headerlink" title="Buffer(缓冲区)"></a>Buffer(缓冲区)</h4><p>Bufer顾名思义，它是一个缓冲区，实际上是一个容器，一个连续数组。Channel提供从文件、网络读取数据的渠道，但是读写的数据都必须经过Buffer。</p><p><img src="/upload/2022/03/13449209-300fd48a7251c327.png" alt="13449209-300fd48a7251c327"></p><p>Buffer(缓冲区)</p><p>Buffer缓冲区本质上是一块可以写入数据，然后可以从中读取数据的内存。这块内存被包装成NIO Buffer对象，并提供了一组方法，用来方便的访问该模块内存。为了理解Buffer的工作原理，需要熟悉它的三个属性：capacity、position和limit。</p><p>position和limit的含义取决于Buffer处在读模式还是写模式。不管Buffer处在什么模式，capacity的含义总是一样的。见下图：</p><p><img src="/upload/2022/03/13449209-d261cbcb9b9ed88f.png" alt="13449209-d261cbcb9b9ed88f"></p><p>capacity、position和limit</p><ul><li>capacity：作为一个内存块，Buffer有固定的大小值，也叫作“capacity”，只能往其中写入capacity个byte、long、char等类型。一旦Buffer满了，需要将其清空（通过读数据或者清楚数据）才能继续写数据。</li><li>position：当你写数据到Buffer中时，position表示当前的位置。出事的position值为0，当写入一个字节数据到Buffer中后，position会向前移动到下一个可插入数据的Buffer单元。position最大可为capacity-1。当读取数据时，也是从某个特定位置读，讲Buffer从写模式切换到读模式，position会被重置为0。当从Buffer的position处读取一个字节数据后，position向前移动到下一个可读的位置。</li><li>limit：在写模式下，Buffer的limit表示你最多能往Buffer里写多少数据。 写模式下，limit等于Buffer的capacity。当切换Buffer到读模式时， limit表示你最多能读到多少数据。因此，当切换Buffer到读模式时，limit会被设置成写模式下的position值。换句话说，你能读到之前写入的所有数据（limit被设置成已写数据的数量，这个值在写模式下就是position）</li></ul><h4 id="Buffer的分配："><a href="#Buffer的分配：" class="headerlink" title="Buffer的分配："></a>Buffer的分配：</h4><p>对Buffer对象的操作必须首先进行分配，Buffer提供一个allocate(int capacity)方法分配一个指定字节大小的对象。<br> 向Buffer中写数据：写数据到Buffer中有两种方式：<br> 1.从channel写到Buffer</p><pre><code class="cpp">int bytes = channel.read(buf); //将channel中的数据读取到buf中</code></pre><p>2.通过Buffer的put()方法写到Buffer</p><pre><code class="csharp">buf.put(byte); //将数据通过put()方法写入到buf中</code></pre><ul><li>flip()方法：将Buffer从写模式切换到读模式，调用flip()方法会将position设置为0，并将limit设置为之前的position的值。<br> 从Buffer中读数据：从Buffer中读数据有两种方式：<br> 1.从Buffer读取数据到Channel</li></ul><pre><code class="cpp">int bytes = channel.write(buf); //将buf中的数据读取到channel中</code></pre><p>2.通过Buffer的get()方法读取数据</p><pre><code class="csharp">byte bt = buf.get(); //从buf中读取一个byte</code></pre><ul><li>rewind()方法：Buffer.rewind()方法将position设置为0，使得可以重读Buffer中的所有数据，limit保持不变。</li><li>clear()与compact()方法：一旦读完Buffer中的数据，需要让Buffer准备好再次被写入，可以通过clear()或compact()方法完成。如果调用的是clear()方法，position将被设置为0，limit设置为capacity的值。但是Buffer并未被清空，只是通过这些标记告诉我们可以从哪里开始往Buffer中写入多少数据。如果Buffer中还有一些未读的数据，调用clear()方法将被”遗忘 “。compact()方法将所有未读的数据拷贝到Buffer起始处，然后将position设置到最后一个未读元素的后面，limit属性依然设置为capacity。可以使得Buffer中的未读数据还可以在后续中被使用。</li><li>mark()与reset()方法：通过调用Buffer.mark()方法可以标记一个特定的position，之后可以通过调用Buffer.reset()恢复到这个position上。</li></ul><h4 id="Selector-多路复用器"><a href="#Selector-多路复用器" class="headerlink" title="Selector(多路复用器)"></a>Selector(多路复用器)</h4><p>Selector与Channel是相互配合使用的，将Channel注册在Selector上之后，才可以正确的使用Selector，但此时Channel必须为非阻塞模式。Selector可以监听Channel的四种状态（Connect、Accept、Read、Write），当监听到某一Channel的某个状态时，才允许对Channel进行相应的操作。</p><ul><li>Connect：某一个客户端连接成功后</li><li>Accept：准备好进行连接</li><li>Read:可读</li><li>Write:可写</li></ul><p>作者：林亚希<br>链接：<a href="https://www.jianshu.com/p/5bb812ca5f8e">https://www.jianshu.com/p/5bb812ca5f8e</a><br>来源：简书<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>]]></content>
+        <content type="html"><![CDATA[<hr><h2 id="title-二叉树定义date-2022-07-11-22-58-34-662updated-2022-08-04-18-30-08-316url-x2F-archives-x2F-二叉树定义categories-tags"><a href="#title-二叉树定义date-2022-07-11-22-58-34-662updated-2022-08-04-18-30-08-316url-x2F-archives-x2F-二叉树定义categories-tags" class="headerlink" title="title: 二叉树定义date: 2022-07-11 22:58:34.662updated: 2022-08-04 18:30:08.316url: &#x2F;archives&#x2F;二叉树定义categories:tags: "></a>title: 二叉树定义<br>date: 2022-07-11 22:58:34.662<br>updated: 2022-08-04 18:30:08.316<br>url: &#x2F;archives&#x2F;二叉树定义<br>categories:<br>tags: </h2><h4 id="前、中、后序遍历"><a href="#前、中、后序遍历" class="headerlink" title="前、中、后序遍历"></a>前、中、后序遍历</h4><pre><code class="mermaid">graph TBA((A))B((B))C((C))D((D))E((E))A–&gt;BA–&gt;CB–&gt;DB–&gt;E</code></pre>]]></content>
       
       
       <categories>

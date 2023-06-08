@@ -171,17 +171,17 @@
         
 
 <div class="post">
-    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%92%8CApache/">
-        <h2 class="post-title">Centos和Apache</h2>
+    <a href="/2023/06/07/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/SpringBoot%E6%95%B4%E5%90%88Kafka/">
+        <h2 class="post-title">SpringBoot整合Kafka</h2>
     </a>
     <div class="category-and-date">
         
         <span class="category">
-            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+            <a href="/categories/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                操作系统
+                开源框架
             </a>
         </span>
         
@@ -197,409 +197,102 @@
     <div class="description">
         <div class="content" v-pre>
             
-            <h1 id="Centos与Apache"><a href="#Centos与Apache" class="headerlink" title="Centos与Apache"></a>Centos与Apache</h1><p>Apache<br>在Apache的安装目录，默认：<code>/etc/httpd</code>下有若干文件夹，<code>conf.d</code>文件夹是用来存储各个模块的配置文件，<code>conf.module.d</code>是用来给各个模块做映入的，也就是很多模块的引入都在这里面，<code>conf</code>文件夹主要是主配置文件的目录，<code>logs</code>文件夹打印日志的存储地，<code>moduls</code>是各个模块的位置</p>
-<h2 id="例如：httpd-conf：这个文件是apache的主配置文件，其他的conf-d和conf-module-d内的配置文件夹能够生效也是因为在这里面引入了两个文件夹下的所有文件，如shell-引入了conf-moudles-d下的所有配置文件，也就是所有需要的模块-Include-conf-modules-d-conf-引入了conf-d下的所有配置文件，也就是每个模块服务需要做的详细配置-IncludeOptional-conf-d-conf-gt-在我的主配置文件里面还有一个功能，那就是多域名的配置，这个的主要作用是，针对不同域名的访问，映射到不同的访问文件夹，具体的映射由vhost-map文件配置shell-RewriteEngine-on-RewriteMap-lowercase-int-tolower-RewriteMap-vhost-txt-var-www-vhost-map-RewriteCond-lowercase-SERVER-NAME-RewriteCond-vhost-1-RewriteRule-1-1"><a href="#例如：httpd-conf：这个文件是apache的主配置文件，其他的conf-d和conf-module-d内的配置文件夹能够生效也是因为在这里面引入了两个文件夹下的所有文件，如shell-引入了conf-moudles-d下的所有配置文件，也就是所有需要的模块-Include-conf-modules-d-conf-引入了conf-d下的所有配置文件，也就是每个模块服务需要做的详细配置-IncludeOptional-conf-d-conf-gt-在我的主配置文件里面还有一个功能，那就是多域名的配置，这个的主要作用是，针对不同域名的访问，映射到不同的访问文件夹，具体的映射由vhost-map文件配置shell-RewriteEngine-on-RewriteMap-lowercase-int-tolower-RewriteMap-vhost-txt-var-www-vhost-map-RewriteCond-lowercase-SERVER-NAME-RewriteCond-vhost-1-RewriteRule-1-1" class="headerlink" title="例如：httpd.conf：这个文件是apache的主配置文件，其他的conf.d和conf.module.d内的配置文件夹能够生效也是因为在这里面引入了两个文件夹下的所有文件，如shell #引入了conf.moudles.d下的所有配置文件，也就是所有需要的模块 Include conf.modules.d/*.conf #引入了conf.d下的所有配置文件，也就是每个模块服务需要做的详细配置 IncludeOptional conf.d/*.conf &gt;在我的主配置文件里面还有一个功能，那就是多域名的配置，这个的主要作用是，针对不同域名的访问，映射到不同的访问文件夹，具体的映射由vhost.map文件配置shell RewriteEngine on RewriteMap lowercase int:tolower RewriteMap vhost txt:/var/www/vhost.map RewriteCond ${lowercase:%{SERVER_NAME}} ^(.+)$ RewriteCond ${vhost:%1} ^(/.*)$ RewriteRule ^/(.*)$ %1/$1 "></a>例如：<code>httpd.conf</code>：这个文件是apache的主配置文件，其他的<code>conf.d</code>和<code>conf.module.d</code>内的配置文件夹能够生效也是因为在这里面引入了两个文件夹下的所有文件，如<br><code>shell #引入了conf.moudles.d下的所有配置文件，也就是所有需要的模块 Include conf.modules.d/*.conf #引入了conf.d下的所有配置文件，也就是每个模块服务需要做的详细配置 IncludeOptional conf.d/*.conf </code><br>&gt;在我的主配置文件里面还有一个功能，那就是多域名的配置，这个的主要作用是，针对不同域名的访问，映射到不同的访问文件夹，具体的映射由<code>vhost.map</code>文件配置<br><code>shell RewriteEngine on RewriteMap lowercase int:tolower RewriteMap vhost txt:/var/www/vhost.map RewriteCond $&#123;lowercase:%&#123;SERVER_NAME&#125;&#125; ^(.+)$ RewriteCond $&#123;vhost:%1&#125; ^(/.*)$ RewriteRule ^/(.*)$ %1/$1 </code></h2><blockquote>
-<p>在开启了SSL服务之后，存在一个问题，由于我的域名证书是单域名证书，所以我只能够给特定的域名SSL授权，所以我配置了一个SSL的但域名拦截重定向，这里的意思是只拦截<code>ajiehome.cn</code>和<code>www.ajiehome.cn</code>两个服务请求开头的所有服务，并且转到<code>https</code>服务</p>
-</blockquote>
-<pre><code class="shell">RewriteEngine On
-RewriteCond %&#123;SERVER_PORT&#125; 80
-RewriteCond %&#123;HTTP_HOST&#125; ^ajiehome.cn [NC,OR]
-RewriteCond %&#123;HTTP_HOST&#125; ^www.ajiehome.cn [NC]
-RewriteRule ^(.*)$ https://%&#123;HTTP_HOST&#125;/$1 [R,L]
+            <p>引入Spring-Kafka的POM依赖</p>
+<pre><code class="promql">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.kafka&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-kafka&lt;/artifactId&gt;
+&lt;/dependency&gt;
 </code></pre>
-<hr>
-<blockquote>
-<p>如果用下面这个进行拦截重定向的话，会造成所有二级子域名全部转到https，甚至由于正则匹配写的不当会全部重定向到主服务之下，这里的意思是，所有不是443端口的服务请求，全部重定向https下去，<br><code>SERVER_NAME</code>：指的是服务，也就是域名部分<br><code>REQUEST_URI</code>：指的是请求的地址，也就是域名的后半部分<br><code>HTTP_HOST</code>：</p>
-</blockquote>
-<pre><code class="shell">RewriteEngine On
-RewriteCond %&#123;SERVER_PORT&#125; !^443 \$
-RewriteRule ^(.*)? \$ https://%&#123;SERVER_NAME&#125;%&#123;REQUEST_URI&#125; [L,R]
+<p>配置<code>application.properties</code>信息</p>
+<pre><code class="properties">spring.kafka.bootstrap-servers=10.254.0.2:9092
+spring.kafka.consumer.group-id=multiple-consumer-group
+spring.kafka.consumer.auto-offset-reset=earliest
 </code></pre>
-<hr>
-<p>例如：<code>conf.module.d</code>下的<code>00-ssl.cof</code>文件</p>
-<blockquote>
-<p><code>00-ss.conf</code>文件，里面有一个<code>mod_ssl</code>模块的引用，这个文件夹里的模块主要就是给<code>ssl</code>服务使用的模块，如：</p>
-</blockquote>
-<pre><code class="shell">LoadModule ssl_module modules/mod_ssl.so
-</code></pre>
+<p>配置Kafka的Topic</p>
+<pre><code class="java">/**
+ * @author huangJie
+ * @version 1.0v
+ * @date 2022/10/19 9:49
+ */
+@Configuration
+public class KafkaConfig &#123;
 
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%92%8CApache/" class="go-post">阅读全文</a>
-</div>
+    @Bean
+    NewTopic multipleTopic() &#123;
+        return TopicBuilder.name(&quot;multiple-topic&quot;).build();
+    &#125;
 
-<div class="post">
-    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85FTP/">
-        <h2 class="post-title">Centos安装FTP</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                操作系统
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="Centos安装FTP-gt-简单安装"><a href="#Centos安装FTP-gt-简单安装" class="headerlink" title="Centos安装FTP-&gt;简单安装"></a>Centos安装FTP-&gt;简单安装</h1><p><strong>1、查看是否安装了FTP</strong></p>
-<pre><code class="shell">rpm -qa | grep vsftpd
-</code></pre>
-<p><strong>2、没有安装-&gt;安装vsftp</strong></p>
-<pre><code class="shell">yum -y install vsftpd
-</code></pre>
-<p><strong>3、添加FTP用户并修改密码</strong></p>
-<pre><code class="shell">useradd ftpLogin -d /home/ftpLogin
-passwd ftpLogin
-</code></pre>
-<p><strong>4、修改vsftpd.conf配置文件</strong></p>
-<pre><code class="shell">vi /etc/vsftpd/vsftpd.conf
-
-#把允许匿名登陆改为不允许
-anonymous_enable=YES -&gt;  anonymous_enable=NO
-
-#在最后一行加上默认的加载目录-&gt;也就是FTP目录
-local_root=/home/ftpLogin/
-</code></pre>
-<p><strong>5、修改文件夹的用户权限</strong></p>
-<pre><code class="shell">chmod -R 777 /home/ftpLogin
-</code></pre>
-<p><strong>6、查看服务是否运行</strong></p>
-<pre><code class="shell">#active为绿色则是运行状态 如何非运行的话就重新启动一下服务
-#重新启动
-systemctl restart vsftpd
-#启动服务
-systemctl start vsftpd
-#查看服务状态
-systemctl status vsftpd
-#设置自动启动
-systemctl enable vsftpd
-
-yum -y install ftp
-</code></pre>
-<p><strong>7、安装FTP测试</strong></p>
-<pre><code class="shell">#我的已经安装过了就不再测试
-yum -y install ftp
-#使用anonymous登陆 可以无密码登陆
-ftp localhost
-</code></pre>
-<p><strong>8、关掉防火墙-&gt;放行20&amp;21端口 让其他设备也可访问（也可以设置防火墙规则，放行端口组）</strong></p>
-<pre><code class="shell">#关掉防火墙
-systemctl stop firewalld.service
-#为了防止防火墙自启，设置的永久关闭
-systemctl disable firewalld.service
-</code></pre>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85FTP/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85Java/">
-        <h2 class="post-title">Centos安装Java</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                操作系统
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="Centos使用yum安装java"><a href="#Centos使用yum安装java" class="headerlink" title="Centos使用yum安装java"></a>Centos使用yum安装java</h1><p><strong>首先查询系统是否自带jdk</strong></p>
-<pre><code class="shell">rpm -qa | grep java
-rpm -qa | grep jdk
-rpm -qa | grep gcj
-</code></pre>
-<p><strong>如果有就卸载对应的</strong></p>
-<pre><code class="shell">rpm -qa | grep java | xargs rpm -e --nodeps
-</code></pre>
-<p><strong>列出所有可安装的rpm包</strong></p>
-<pre><code class="shell">yum list java-1.8*
-</code></pre>
-<p><strong>安装java</strong></p>
-<pre><code class="shell">yum install java-1.8.0-openjdk* -y
-</code></pre>
-<p><strong>校验版本</strong></p>
-<pre><code class="shell">java -version
-</code></pre>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85Java/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85MySQL/">
-        <h2 class="post-title">Centos安装MySQL</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                操作系统
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="Centos安装MySQL"><a href="#Centos安装MySQL" class="headerlink" title="Centos安装MySQL"></a>Centos安装MySQL</h1><h4 id="1、首先更新yum命令"><a href="#1、首先更新yum命令" class="headerlink" title="1、首先更新yum命令"></a>1、首先更新yum命令</h4><pre><code class="shell">yum update -y
-</code></pre>
-<h4 id="3、下载MySQL的npm源"><a href="#3、下载MySQL的npm源" class="headerlink" title="3、下载MySQL的npm源"></a>3、下载MySQL的npm源</h4><pre><code class="shell">wget https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm
-</code></pre>
-<h4 id="4、添加MySQL的npm源"><a href="#4、添加MySQL的npm源" class="headerlink" title="4、添加MySQL的npm源"></a>4、添加MySQL的npm源</h4><pre><code class="shell">yum localinstall mysql80-community-release-el7-3.noarch.rpm
-</code></pre>
-<h4 id="5、查看当前的MySQL版本"><a href="#5、查看当前的MySQL版本" class="headerlink" title="5、查看当前的MySQL版本"></a>5、查看当前的MySQL版本</h4><pre><code class="shell">yum repolist enabled | grep &quot;mysql.*-community.*&quot;
-</code></pre>
-<h4 id="6、查看所有MySQL可用版本"><a href="#6、查看所有MySQL可用版本" class="headerlink" title="6、查看所有MySQL可用版本"></a>6、查看所有MySQL可用版本</h4><pre><code class="shell">yum repolist all | grep mysql
-</code></pre>
-<h4 id="7、关闭-x2F-禁用8-0的MySQL版本并且启用5-7的版本"><a href="#7、关闭-x2F-禁用8-0的MySQL版本并且启用5-7的版本" class="headerlink" title="7、关闭&#x2F;禁用8.0的MySQL版本并且启用5.7的版本"></a>7、关闭&#x2F;禁用8.0的MySQL版本并且启用5.7的版本</h4><pre><code class="shell">yum-config-manager --disable mysql80-community
-
-yum-config-manager --enable mysql57-community
-</code></pre>
-<h4 id="8、再次查看当前版本（正则匹配）"><a href="#8、再次查看当前版本（正则匹配）" class="headerlink" title="8、再次查看当前版本（正则匹配）"></a>8、再次查看当前版本（正则匹配）</h4><pre><code class="shell">yum repolist enabled | grep mysql
-</code></pre>
-<h4 id="9、安装MySQL服务"><a href="#9、安装MySQL服务" class="headerlink" title="9、安装MySQL服务"></a>9、安装MySQL服务</h4><pre><code class="shell">yum install -y mysql-community-server
-</code></pre>
-<h4 id="10、启用MySQL服务"><a href="#10、启用MySQL服务" class="headerlink" title="10、启用MySQL服务"></a>10、启用MySQL服务</h4><pre><code class="shell">systemctl start mysqld
-</code></pre>
-<h4 id="11、查看临时默认密码，且修改密码"><a href="#11、查看临时默认密码，且修改密码" class="headerlink" title="11、查看临时默认密码，且修改密码"></a>11、查看临时默认密码，且修改密码</h4><pre><code class="shell">cat /var/log/mysqld.log
-# 由于密码策略所以只能设置较为复杂的密码
-alter user &#39;root&#39;@&#39;localhost&#39; identified by &#39;ZhonHua@5000Nian&#39;;
-</code></pre>
-<h4 id="12、查看MySQL的密码安全策略"><a href="#12、查看MySQL的密码安全策略" class="headerlink" title="12、查看MySQL的密码安全策略"></a>12、查看MySQL的密码安全策略</h4><pre><code class="shell">show variables like &#39;validate_password%&#39;;
-</code></pre>
-<h4 id="13、修改密码杂度为最低以及把密码长度改为自己想要的"><a href="#13、修改密码杂度为最低以及把密码长度改为自己想要的" class="headerlink" title="13、修改密码杂度为最低以及把密码长度改为自己想要的"></a>13、修改密码杂度为最低以及把密码长度改为自己想要的</h4><pre><code class="shell">set global validate_password_policy = LOW;
-set global validate_password_length = 6;
-</code></pre>
-<h4 id="14、修改密码为自己想要的"><a href="#14、修改密码为自己想要的" class="headerlink" title="14、修改密码为自己想要的"></a>14、修改密码为自己想要的</h4><pre><code class="shell">alter user &#39;root&#39;@&#39;localhost&#39; identified by &#39;123456&#39;;
-</code></pre>
-<h4 id="15、允许远程登陆然后刷新"><a href="#15、允许远程登陆然后刷新" class="headerlink" title="15、允许远程登陆然后刷新"></a>15、允许远程登陆然后刷新</h4><pre><code class="shell"># 允许登录
-grant all on *.* to root@&#39;%&#39; identified by &#39;you new password&#39; with grant option;
-# 刷新
-flush privileges;
-</code></pre>
-<p>you new password：设置的新密码</p>
-<h4 id="16、重启MySQL服务"><a href="#16、重启MySQL服务" class="headerlink" title="16、重启MySQL服务"></a>16、重启MySQL服务</h4><pre><code class="shell">systemctl restart mysqld.service
-</code></pre>
-<hr>
-<p><a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/mysql-yum-repo-quick-guide/en/">详情参照官方文档</a></p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85MySQL/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85RabbitMQ/">
-        <h2 class="post-title">Centos安装RabbitMQ</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                操作系统
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="Centos安装RabbitMQ"><a href="#Centos安装RabbitMQ" class="headerlink" title="Centos安装RabbitMQ"></a>Centos安装RabbitMQ</h1><h2 id="安装Erlang环境"><a href="#安装Erlang环境" class="headerlink" title="安装Erlang环境"></a>安装Erlang环境</h2><pre><code class="shell"># 1、安装依赖项
-yum install -y epel-release
-
-# 2、添加存储库条目
-wget https://packages.erlang-solutions.com/erlang-solutions-1.0-1.noarch.rpm
-rpm -Uvh erlang-solutions-1.0-1.noarch.rpm
-
-# 3、安装
-yum install -y erlang
-
-# 4、验证是否安装成功
-erl -version
-</code></pre>
-<h2 id="rabbitmq的命令"><a href="#rabbitmq的命令" class="headerlink" title="rabbitmq的命令"></a>rabbitmq的命令</h2><pre><code class="shell"># 开启web管理界面
-rabbitmq-plugins enable rabbitmq_management
-# 添加用户
-rabbitmqctl add_user admin admin
-# 设置用户对 &#39;/ 的权限
-rabbitmqctl set_permissions -p &quot;/&quot; &quot;admin&quot; &quot;.*&quot; &quot;.*&quot; &quot;.*&quot;
-# 设置用户角色
-rabbitmqctl set_user_tags admin administrator
-</code></pre>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85RabbitMQ/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85V2ray%E5%92%8CAcmesh/">
-        <h2 class="post-title">Centos安装V2ray和Acmesh</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                操作系统
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>acme.sh作为自动签发ssl证书，为域名提供https的服务<br>v2ray作为代理使用<br>acme.sh要做到自动签发就需要在域名服务商哪授权token，用来acme.sh在验证域名所有权的时候使用，所以我们使用阿里云的平台，授权一个能够访问验证域名权限的子用户，并且创建一个Secret</p>
-<p>在CentOS中创建Secret的临时key和Secret</p>
-<pre><code class="shell">export Ali_Key=&quot;&quot;
-export Ali_Secret=&quot;&quot;
-</code></pre>
-<p>安装acme.sh,会在执行该命令的用户目录下生成一个.acme.sh目录，目录为隐藏目录，可以用ls -a查看</p>
-<pre><code class="shell">curl  https://get.acme.sh | sh
-</code></pre>
-<p>为指定的域名请求证书</p>
-<pre><code class="shell">/root/.acme.sh/acme.sh   --issue   --dns dns_ali   -d ajiehome.online  -d www.ajiehome.online
-# 或
-/root/.acme.sh/acme.sh   --issue   --dns dns_ali   -d v.ajiehome.online
-</code></pre>
-<p>将生成的域名ssl密钥文件拷贝到指定的目录</p>
-<pre><code class="shell">/root/.acme.sh/acme.sh --install-cert -d ajiehome.online  \
---key-file       /etc/nginx/ssl/ajiehome.online/ajiehome.online.key  \
---fullchain-file /etc/nginx/ssl/ajiehome.online/ajiehome.online.cert \
---reloadcmd     &quot;service nginx force-reload&quot;
-</code></pre>
-<p>然后就是nginx的配置项</p>
-<pre><code class="conf">server &#123;
-        listen  80;
-        listen [::]:80;
-        server_name ajiehome.online;
-
-        root /usr/share/nginx/ajiehome.online;
-
-        index index.html index.htm;
-
-        rewrite ^(.*)$ https://$&#123;server_name&#125;$1 permanent;
-
-        location / &#123;
-
-        &#125;
 &#125;
-server &#123;
+</code></pre>
+<p>编写KafkaTemplate使用的Service</p>
+<pre><code class="java">/**
+ * @author huangJie
+ * @version 1.0v
+ * @date 2022/10/19 10:01
+ */
+@Slf4j
+@Service
+public class KafkaServiceImpl implements KafkaService &#123;
 
-        listen 443 ssl;
-        listen [::]:443 ssl;
-        server_name ajiehome.online;
+    @Resource
+    private KafkaTemplate&lt;String, String&gt; kafkaTemplate;
 
-        root /usr/share/nginx/ajiehome.online;
-        index index.html inex.htm;
+    @Resource
+    private CustomListenableFutureCallback futureCallback;
 
-
-        location / &#123;
-
-                proxy_pass http://127.0.0.1:8090;
-
+    @Override
+    public void send(String topic, String message) &#123;
+        try &#123;
+            ListenableFuture&lt;SendResult&lt;String, String&gt;&gt; send = kafkaTemplate.send(topic, message);
+            send.addCallback(futureCallback);
+        &#125; catch (Exception e) &#123;
+            e.printStackTrace();
         &#125;
+    &#125;
+&#125;
+</code></pre>
+<p>消息发送回调</p>
+<pre><code class="java">/**
+ * @author huangJie
+ * @version 1.0v
+ * @date 2022/10/19 14:10
+ */
+@Slf4j
+@Component
+public class CustomListenableFutureCallback implements ListenableFutureCallback&lt;SendResult&lt;String, String&gt;&gt; &#123;
+    @Override
+    public void onFailure(@Nullable Throwable throwable) &#123;
+        log.error(&quot;kafka send message error&quot;, throwable);
+    &#125;
 
-        ssl_certificate /etc/nginx/ssl/ajiehome.online/ajiehome.online.cert;
-        ssl_certificate_key /etc/nginx/ssl/ajiehome.online/ajiehome.online.key;
+    @Override
+    public void onSuccess(SendResult&lt;String, String&gt; sendResult) &#123;
+        log.info(&quot;kafka send message success [&#123;&#125;]&quot;, sendResult);
+    &#125;
+&#125;
+</code></pre>
+<p>配置监听</p>
+<pre><code class="java">/**
+ * @author huangJie
+ * @version 1.0v
+ * @date 2022/10/19 9:52
+ */
+@Slf4j
+@Component
+@KafkaListener(topics = &quot;multiple-topic&quot;)
+public class MultipleListening &#123;
 
-        ssl_session_timeout 1d;
-        ssl_session_cache shared:MozSSL:10m;
-        ssl_session_tickets off;
+    @KafkaHandler
+    public void handler(String message) &#123;
+        log.info(&quot;kafka listening message [&#123;&#125;]&quot;, message);
+    &#125;
 
-        ssl_protocols         TLSv1.2 TLSv1.3;
-        ssl_ciphers           ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384;
-        ssl_prefer_server_ciphers off;
+
+    // @KafkaHandler
+    public &lt;K, V&gt; void handler0(ConsumerRecord&lt;K, V&gt; record, Acknowledgment ack, @Header(KafkaHeaders.RECEIVED_TOPIC) String topic) &#123;
+        log.info(&quot;kafka listening message: topic [&#123;&#125;] key [&#123;&#125;] value [&#123;&#125;]&quot;, topic, record.key(), record.value());
+        ack.acknowledge();
+    &#125;
 
 &#125;
 </code></pre>
@@ -611,246 +304,21 @@ server &#123;
         
         
     </div>
-    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%89%E8%A3%85V2ray%E5%92%8CAcmesh/" class="go-post">阅读全文</a>
+    <a href="/2023/06/07/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/SpringBoot%E6%95%B4%E5%90%88Kafka/" class="go-post">阅读全文</a>
 </div>
 
 <div class="post">
-    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1Crontabs/">
-        <h2 class="post-title">Centos定时任务Crontabs</h2>
+    <a href="/2023/06/07/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/SpringBoot%E6%95%B4%E5%90%88Zookeeper%E7%AE%80%E5%8D%95%E8%BF%90%E7%94%A8/">
+        <h2 class="post-title">SpringBoot整合Zookeeper简单运用</h2>
     </a>
     <div class="category-and-date">
         
         <span class="category">
-            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+            <a href="/categories/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                操作系统
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="crontabs-定时执行执行sh"><a href="#crontabs-定时执行执行sh" class="headerlink" title="crontabs-定时执行执行sh"></a>crontabs-定时执行执行sh</h1><p>首先安装crontabs工具</p>
-<pre><code class="shell">yum install crontabs
-</code></pre>
-<p>安装完之后，系统默认安装了<code>crond</code>服务，<code>crond</code>默认是自启状态</p>
-<p><code>crond</code>的执行方式为每一分钟扫描本地是否有需要执行的事务</p>
-<p><code>crontab</code> 命令。该命令和 at 命令类似，也是通过 <code>/etc/cron.allow </code>和 <code>/etc/cron.deny</code> 文件来限制某些用户是否可以使用 crontab 命令的。</p>
-<table>
-<thead>
-<tr>
-<th>功能</th>
-<th>选项</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>-u user</td>
-<td>用来选择某个用户的crontab服务，如-u demo，则运行demo用户的crontab服务，一般默认root用户</td>
-</tr>
-<tr>
-<td>-e</td>
-<td>编辑某个用户的crontab文件内容，如果不指定用户，则默认编辑当前用户的crontab文件</td>
-</tr>
-<tr>
-<td>-l</td>
-<td>显示某个用户的crontab文件内容，如果不指定用户，则默认编辑当前用户的crontab文件</td>
-</tr>
-<tr>
-<td>-r</td>
-<td>从&#x2F;var&#x2F;spool&#x2F;cron中删除某个用户的crontab文件，如果不指定用户，则默认删除当前用户的crontab文件</td>
-</tr>
-<tr>
-<td>-i</td>
-<td>删除用户的crontab文件是给予提示</td>
-</tr>
-</tbody></table>
-<p>例如：</p>
-<pre><code class="shell">crontab -e
-# 进入crontab文件显示当前用户的所有内容
-# 如下所示
-# * * * * * /root/test.sh &gt;&gt; /root/log.log
-</code></pre>
-<p>crontab的定时执行任务是通过<code>*</code>来进行确认时间的</p>
-<table>
-<thead>
-<tr>
-<th>项目</th>
-<th>含义</th>
-<th>范围</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>第一个<code>*</code></td>
-<td>一小时当中的第几分钟（minute）</td>
-<td>0~59</td>
-</tr>
-<tr>
-<td>第二个<code>*</code></td>
-<td>一天当中的第几小时（hour）</td>
-<td>0~23</td>
-</tr>
-<tr>
-<td>第三个<code>*</code></td>
-<td>一个月当中的第几天（day）</td>
-<td>1~31</td>
-</tr>
-<tr>
-<td>第四个<code>*</code></td>
-<td>一年当中的第几个月（month）</td>
-<td>1~12</td>
-</tr>
-<tr>
-<td>第五个<code>*</code></td>
-<td>一周当中的星期几（week）</td>
-<td>0~7（0和7都代表星期日）</td>
-</tr>
-</tbody></table>
-<p>在时间表示中还有一些符号含有特殊含义</p>
-<table>
-<thead>
-<tr>
-<th>符号</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>*</td>
-<td>表任何时间。比如第一个”*”就代表一小时中<br />每分钟都执行一次的意思。</td>
-</tr>
-<tr>
-<td>,</td>
-<td>代表不连续的时间。比如”0 8，12，16***”命令就代表在每<br />天的8点0分、12点0分、16点0分都执行一次命令</td>
-</tr>
-<tr>
-<td>-</td>
-<td>代表连续的时间范围。比如”0 5 ** 1-6”命令<br />代表在周一到周六的凌晨5点0分执行命令。</td>
-</tr>
-<tr>
-<td>&#x2F;</td>
-<td>代表每隔多久执行一次。比如”<em>&#x2F;10</em>***命令”<br />代表每隔 10 分钟就执行一次命令。</td>
-</tr>
-</tbody></table>
-<p>例如：</p>
-<pre><code class="shell"># 每五分钟执行一次
-*/5 * * * * /root/test.sh &gt;&gt; /root/log.log
-# 每一分钟执行一次
-* * * * * /root/test.sh &gt;&gt; /root/log.log
-# 没五分钟往log里面写入11
-*/5 * * * * /bin/echo &quot;11&quot; &gt;&gt; /root/log.log
-</code></pre>
-<table>
-<thead>
-<tr>
-<th>时间</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>45 22 * * *</code></td>
-<td>在 22 点 45 分执行命令</td>
-</tr>
-<tr>
-<td><code>0 17 * * 1</code></td>
-<td>在每周一的 17 点 0 分执行命令</td>
-</tr>
-<tr>
-<td><code>0 5 1，15 * *</code></td>
-<td>在每月1日和15日的凌晨 5 点 0 分执行命令</td>
-</tr>
-<tr>
-<td><code>40 4 * * 1-5</code></td>
-<td>在每周一到周五的凌晨 4 点 40 分执行命令</td>
-</tr>
-<tr>
-<td><code>*/10 4 * * *</code></td>
-<td>在每天的凌晨 4 点，每隔 10 分钟执行一次命令</td>
-</tr>
-<tr>
-<td><code>0 0 1，15 * 1</code></td>
-<td>在每月1日和15日，每周一个0点0分都会执行命令<br />注意：星期几和几日最好不要同时出现，因为它们定义的都是天，非常容易让管理员混淆</td>
-</tr>
-</tbody></table>
-<p><em>注意</em>：每个用户都可以执行自己的crontab任务</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1Crontabs/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E6%9D%83%E9%99%90%E7%9A%84%E6%B5%85%E8%A7%A3/">
-        <h2 class="post-title">Centos权限的浅解</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                操作系统
-            </a>
-        </span>
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="Centos权限的浅解"><a href="#Centos权限的浅解" class="headerlink" title="Centos权限的浅解"></a>Centos权限的浅解</h1><pre><code class="shell">chomd 777 test.sh
-</code></pre>
-<p><code>chomd</code>：修改文件及文件夹等的权限<br><code>777</code>：表示三个组的权限，第一个为文件所有者的权限，第二个为所属用户组的权限，第三个为其他用户的权限,7-&gt;rwx</p>
-<ul>
-<li>r-&gt;4:为读取权限</li>
-<li>w-&gt;2:为写入权限</li>
-<li>x-&gt;1:为执行权限<br><code>test.sh</code>：需要修改的目标<br>此外，在权限前面可添加-+&#x3D;等三个符号，分别表示减去权限，增加权限，唯一权限</li>
-</ul>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E6%9D%83%E9%99%90%E7%9A%84%E6%B5%85%E8%A7%A3/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Ubuntu%20idae%20%E4%B8%8D%E8%83%BD%E8%BE%93%E5%85%A5%E4%B8%AD%E6%96%87/">
-        <h2 class="post-title">Ubuntu idae 不能输入中文</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="category">
-            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                操作系统
+                开源框架
             </a>
         </span>
         
@@ -867,8 +335,211 @@ server &#123;
         <div class="content" v-pre>
             
             <hr>
-<h2 id="title-ubuntu-idae-不能输入中文date-2022-08-29-20-48-14-684updated-2022-10-13-14-45-23-084url-x2F-archives-x2F-ubuntuidae-bu-neng-shu-ru-zhong-wencategories-Ubuntu-Ideatags-Ubuntu-Idea"><a href="#title-ubuntu-idae-不能输入中文date-2022-08-29-20-48-14-684updated-2022-10-13-14-45-23-084url-x2F-archives-x2F-ubuntuidae-bu-neng-shu-ru-zhong-wencategories-Ubuntu-Ideatags-Ubuntu-Idea" class="headerlink" title="title: ubuntu idae 不能输入中文date: 2022-08-29 20:48:14.684updated: 2022-10-13 14:45:23.084url: &#x2F;archives&#x2F;ubuntuidae-bu-neng-shu-ru-zhong-wencategories:- Ubuntu- Ideatags:- Ubuntu- Idea"></a>title: ubuntu idae 不能输入中文<br>date: 2022-08-29 20:48:14.684<br>updated: 2022-10-13 14:45:23.084<br>url: &#x2F;archives&#x2F;ubuntuidae-bu-neng-shu-ru-zhong-wen<br>categories:<br>- Ubuntu<br>- Idea<br>tags:<br>- Ubuntu<br>- Idea</h2><p>解决方案<br>在<code>Edit Custom VM options</code>中配置如下参数</p>
-<pre><code class="properties">-Drecreate.x11.input.method=true
+<h2 id="title-SpringBoot整合Zookeeper简单运用date-2022-10-11-10-27-30-04updated-2022-10-13-14-43-42-459url-x2F-archives-x2F-spring-boot-zheng-he-zookeeper-jian-dan-yun-yongcategories-Zookeeper-SpringBoottags-SpringBoot-Zookeeper"><a href="#title-SpringBoot整合Zookeeper简单运用date-2022-10-11-10-27-30-04updated-2022-10-13-14-43-42-459url-x2F-archives-x2F-spring-boot-zheng-he-zookeeper-jian-dan-yun-yongcategories-Zookeeper-SpringBoottags-SpringBoot-Zookeeper" class="headerlink" title="title: SpringBoot整合Zookeeper简单运用date: 2022-10-11 10:27:30.04updated: 2022-10-13 14:43:42.459url: &#x2F;archives&#x2F;spring-boot-zheng-he-zookeeper-jian-dan-yun-yongcategories:- Zookeeper- SpringBoottags:- SpringBoot- Zookeeper"></a>title: SpringBoot整合Zookeeper简单运用<br>date: 2022-10-11 10:27:30.04<br>updated: 2022-10-13 14:43:42.459<br>url: &#x2F;archives&#x2F;spring-boot-zheng-he-zookeeper-jian-dan-yun-yong<br>categories:<br>- Zookeeper<br>- SpringBoot<br>tags:<br>- SpringBoot<br>- Zookeeper</h2><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>zookeeper一般作为注册中心、配置中心等使用，对于此处的使用，spring cloud zookeeper有非常完善的api，引入相对于的pom即可</p>
+<p>而在此处是对zookeeper的基础api进行简单的运用，也就是对zookeeper的节点运用，不涉及集群操作</p>
+<pre><code class="xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.zookeeper&lt;/groupId&gt;
+  &lt;artifactId&gt;zookeeper&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p><a target="_blank" rel="noopener" href="https://zookeeper.apache.org/">详情参照</a></p>
+<h2 id="节点"><a href="#节点" class="headerlink" title="节点"></a>节点</h2><p>zookeeper的节点存储为树形结构，并且其存在多种节点类型，这里只简单使用了持久节点和临时节点<br>持久节点为客户端一经创建，则会永久的存在与本地文件系统，除非客户端手动删除<br>临时节点与客户端的本次连接生命周期一致，连接断掉即自动删除节点，也可手动删除</p>
+<p>需要注意的是临时节点下不能存在子节点</p>
+<h2 id="代码使用"><a href="#代码使用" class="headerlink" title="代码使用"></a>代码使用</h2><p>属性值</p>
+<pre><code class="java">/**
+ * @author huangJie
+ * @version 1.0v
+ * @date 2022/10/10 14:57
+ */
+@Data
+@Configuration
+@ConfigurationProperties(prefix = PropertiesPrefixConstant.ZK)
+public class ZkProperties &#123;
+    private String address;
+    private Integer timeout;
+&#125;
+</code></pre>
+<p>配置: 此处的bean配置的为客户端的连接，Zookeeper的客户端对象作为单例存在于IOC容器，维持客户端连接</p>
+<pre><code class="java">/**
+ * @author huangJie
+ * @version 1.0v
+ * @date 2022/10/10 15:06
+ */
+@Configuration
+@ConditionalOnProperty(prefix = Constant.CONDITIONAL, name = &quot;zk&quot;, havingValue = &quot;true&quot;)
+public class ZookeeperConfig &#123;
+
+    private final static Logger LOGGER = LoggerFactory.getLogger(ZookeeperConfig.class);
+    @Resource
+    private ZkProperties zkProperties;
+
+
+    public void test()&#123;
+
+    &#125;
+
+    @Bean
+    public ZooKeeper zkClient() &#123;
+        ZooKeeper zooKeeper = null;
+        try &#123;
+            final CountDownLatch countDownLatch = new CountDownLatch(1);
+            zooKeeper = new ZooKeeper(zkProperties.getAddress(), zkProperties.getTimeout(), new Watcher() &#123;
+                @Override
+                public void process(WatchedEvent event) &#123;
+                    if (Event.KeeperState.SyncConnected == event.getState()) &#123;
+                        countDownLatch.countDown();
+                    &#125;
+                &#125;
+            &#125;);
+            countDownLatch.await();
+        &#125; catch (Exception e) &#123;
+            LOGGER.error(&quot;zk init client for error&quot;, e);
+        &#125;
+        return zooKeeper;
+    &#125;
+
+&#125;
+</code></pre>
+<p>API提供者</p>
+<pre><code class="java">/**
+ * @author huangJie
+ * @version 1.0v
+ * @date 2022/10/10 15:32
+ */
+@Component
+public class ZkProducer &#123;
+    private final static Logger LOGGER = LoggerFactory.getLogger(ZkProducer.class);
+    @Resource
+    private ZooKeeper zkClient;
+
+    /**
+     * 创建永久节点
+     *
+     * @param path 节点路径
+     * @param data 节点的数据
+     * @return true创建成功 false创建失败
+     */
+    public boolean createNode(String path, String data) &#123;
+        try &#123;
+            if (!existsNode(path)) &#123;
+                zkClient.create(path, data.getBytes(StandardCharsets
+                        .UTF_8), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
+            &#125;
+            return true;
+        &#125; catch (Exception e) &#123;
+            LOGGER.error(&quot;create zk node for error&quot;, e);
+        &#125;
+        return false;
+    &#125;
+
+
+    /**
+     * 创建临时节点
+     *
+     * @param path 路径
+     * @param data 数据
+     * @return true创建成功 false创建失败
+     */
+    public boolean createTmpNode(String path, String data) &#123;
+        try &#123;
+            if (!existsNode(path)) &#123;
+                zkClient.create(path, data.getBytes(StandardCharsets
+                        .UTF_8), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);
+            &#125;
+            return true;
+        &#125; catch (Exception e) &#123;
+            LOGGER.error(&quot;create zk tmp node for error&quot;, e);
+        &#125;
+        return false;
+    &#125;
+
+    /**
+     * 更新节点数据
+     *
+     * @param path 节点路径
+     * @param data 数据
+     * @return true成功 false失败
+     */
+    public boolean updateNode(String path, String data) &#123;
+        try &#123;
+            if (existsNode(path)) &#123;
+                zkClient.setData(path, data.getBytes(StandardCharsets.UTF_8), -1);
+                return true;
+            &#125;
+        &#125; catch (Exception e) &#123;
+            LOGGER.error(&quot;update for zk node data error&quot;, e);
+        &#125;
+        return false;
+    &#125;
+
+    /**
+     * 删除节点
+     *
+     * @param path 节点路径
+     * @return true成功 false失败
+     */
+    public boolean deleteNode(String path) &#123;
+        try &#123;
+            if (existsNode(path)) &#123;
+                zkClient.delete(path, -1);
+            &#125;
+            return true;
+        &#125; catch (Exception e) &#123;
+            LOGGER.error(&quot;delete for zk node error&quot;, e);
+        &#125;
+        return false;
+    &#125;
+
+    /**
+     * 获取子级节点
+     *
+     * @param path 节点路径
+     * @return 子级结果集合
+     */
+    public List&lt;String&gt; childrenNode(String path) &#123;
+        try &#123;
+            return zkClient.getChildren(path, true);
+        &#125; catch (Exception e) &#123;
+            LOGGER.error(&quot;obtain node child for error&quot;, e);
+        &#125;
+        return Collections.emptyList();
+    &#125;
+
+    /**
+     * 获取节点的数据
+     *
+     * @param path 节点路径
+     * @return 数据
+     */
+    public String dataGet(String path) &#123;
+        try &#123;
+            if (existsNode(path)) &#123;
+                byte[] data = zkClient.getData(path, true, new Stat());
+                return new String(data);
+            &#125;
+        &#125; catch (Exception e) &#123;
+            LOGGER.error(&quot;get zk node on data for error&quot;, e);
+        &#125;
+        return null;
+    &#125;
+
+
+    /**
+     * 判断节点是不是存在
+     *
+     * @param path zk节点
+     * @return true存在 false不存在
+     */
+    private boolean existsNode(String path) &#123;
+        try &#123;
+            return zkClient.exists(path, true) != null;
+        &#125; catch (Exception e) &#123;
+            LOGGER.error(&quot;judge zk node whether exists for error&quot;, e);
+        &#125;
+        return false;
+    &#125;
+
+&#125;
 </code></pre>
 
             
@@ -878,12 +549,903 @@ server &#123;
         
         
     </div>
-    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Ubuntu%20idae%20%E4%B8%8D%E8%83%BD%E8%BE%93%E5%85%A5%E4%B8%AD%E6%96%87/" class="go-post">阅读全文</a>
+    <a href="/2023/06/07/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/SpringBoot%E6%95%B4%E5%90%88Zookeeper%E7%AE%80%E5%8D%95%E8%BF%90%E7%94%A8/" class="go-post">阅读全文</a>
 </div>
 
 <div class="post">
-    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Windows11%E6%94%B9%E5%B0%8F%E7%8A%B6%E6%80%81%E6%A0%8F/">
-        <h2 class="post-title">Windows11改小状态栏</h2>
+    <a href="/2023/06/07/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/SpringCloud%E7%AC%94%E8%AE%B0/">
+        <h2 class="post-title">SpringCloud笔记</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                开源框架
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="Spring-Cloud"><a href="#Spring-Cloud" class="headerlink" title="Spring Cloud"></a>Spring Cloud</h1><p><strong>服务注册中心<code>eureka-server</code></strong></p>
+<p>pom支持</p>
+<pre><code class="xml"> &lt;dependency&gt;
+     &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+     &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-server&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>application.properties</p>
+<pre><code class="properties">server.port=8080
+eureka.instance.hostname=localhost
+#是否注册到服务中心，本身就是注册中
+eureka.client.register-with-eureka=false
+eureka.client.fetch-registry=false
+#服务中心的名字地址
+eureka.client.service-url.defaultZone=http://$&#123;eureka.instance.hostname&#125;:$&#123;server.port&#125;/eureka/
+spring.application.name=eureka-server
+</code></pre>
+<p>启动类支持<code>@EnableEurekaServer</code></p>
+<pre><code class="java">@SpringBootApplication
+@EnableEurekaServer
+public class SubkeyOneApplication &#123;
+    public static void main(String[] args) &#123;
+        SpringApplication.run(SubkeyOneApplication.class, args);
+    &#125;
+&#125;
+</code></pre>
+<p>访问<a href="http://localhost:8080即可看到所有已经注册的服务">http://localhost:8080即可看到所有已经注册的服务</a></p>
+<hr>
+<p><strong>服务注册</strong></p>
+<p>pom支持</p>
+<pre><code class="xml"> &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-client&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+</code></pre>
+<p>application.properties</p>
+<pre><code class="properties">server.port=8081
+spring.application.name=zuul-server
+eureka.client.service-url.defaultZone=http://localhost:8080/eureka
+</code></pre>
+<p>启动类支持</p>
+<pre><code class="java">@SpringBootApplication
+@EnableEurekaClient
+@EnableDiscoveryClient
+</code></pre>
+<hr>
+<p><strong>负载均衡：<code>Ribbon</code></strong></p>
+<p>在使用<code>Ribbon</code>作为负载均衡的时候，需要手动注入一个<code>RestTemplate</code>的Bean到Ioc，并且为该Bean加入<code>@LoadBalanced</code>开启负载均衡，使其能够以查询到服务注册中心的服务。</p>
+<p>例如：</p>
+<pre><code class="java">@Bean
+@LoadBalanced
+public RestTemplate getRestTemplate()&#123;
+    return new RestTemplate();
+&#125;
+</code></pre>
+<hr>
+<p><strong>负载均衡：<code>Feign</code></strong></p>
+<p>使用<code>Feign</code>作为负载均衡的时候，需要先在启动类使用<code>@EnableFeignClients</code>来开启，而后创建一个接口，使用<code>@FeignClient(value = &quot;DATA-SERVER&quot;)</code>标签来指定访问的服务</p>
+<p>例如：</p>
+<pre><code class="java">@FeignClient(value = &quot;DATA-SERVER&quot;)
+public interface IProductClientFeign &#123;
+    /**
+     * 请求数据
+     * @return 结果
+     */
+    @GetMapping(&quot;/product/all&quot;)
+    List&lt;Product&gt; allProduct();
+&#125;
+</code></pre>
+<hr>
+<p><strong>配置服务<code>ConfigServer</code></strong></p>
+<p>pom配置服务包</p>
+<pre><code class="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-config-server&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>配置文件<code>properties</code>，配置服务参数</p>
+<pre><code class="properties">server.port=8030
+spring.application.name=config-server
+eureka.client.service-url.defaultZone=http://localhost:8080/eureka
+spring.cloud.config.label=master
+spring.cloud.config.server.git.uri=https://github.com/Huangjie-Github/spring-cloud-config-server
+spring.cloud.config.server.git.search-paths=config
+spring.cloud.config.server.git.username=Huangjie-Github
+spring.cloud.config.server.git.password=h19981228j
+</code></pre>
+<p>在启动类上开启服务</p>
+<pre><code class="java">@EnableEurekaClient
+@EnableConfigServer
+@EnableDiscoveryClient
+</code></pre>
+<hr>
+<p><strong>使用<code>ConfigServer</code></strong></p>
+<p>pom引入服务使用包</p>
+<pre><code class="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-config&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>配置文件中声明配置服务参数</p>
+<p><strong>注意：</strong>在使用配置服务的时候，下列参数一定要新建一个bootstrap.properties&#x2F;bootstrap.yml的配置文件，因为bootstrap的配置文件会比application的配置文件先启动加载，需要先启动加载好配置服务才能进行本服务的相关数据注入</p>
+<pre><code class="properties">#分支
+spring.cloud.config.label=master
+#启用的模式
+spring.cloud.config.profile=dev
+#是否发现启用
+spring.cloud.config.discovery.enabled=true
+#注册中心的名称
+spring.cloud.config.discovery.serviceId=CONFIG-SERVER
+eureka.client.service-url.defaultZone=http://localhost:8080/eureka
+</code></pre>
+<p>配置之后，只需要在引用的类上使用<code>@RefreshScope</code>标签开启，需要引用的参数上使用<code>@Value</code>标签即可</p>
+<hr>
+<p><strong>消息总线bus：<code>RabbitMQ</code></strong></p>
+<p>pom使用jar</p>
+<pre><code class="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;
+&lt;/dependency&gt;   
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-bus-amqp&lt;/artifactId&gt;
+&lt;/dependency&gt; 
+</code></pre>
+<p>配置文件修改</p>
+<p>bootstrap.properties</p>
+<pre><code class="properties">#与配置服务绑定
+spring.cloud.config.label=master
+spring.cloud.config.profile=dev
+spring.cloud.config.discovery.enabled=true
+spring.cloud.config.discovery.serviceId=CONFIG-SERVER
+eureka.client.service-url.defaultZone=http://localhost:8080/eureka
+#bus总线配置
+spring.cloud.bus.enabled=true
+spring.cloud.bus.trace.enabled=true
+#配置RabbitMQ
+spring.rabbitmq.host=127.0.0.1
+spring.rabbitmq.port=5672
+spring.rabbitmq.username=guest
+spring.rabbitmq.password=guest
+</code></pre>
+<p>application.properties</p>
+<pre><code class="properties">server.port=8011
+spring.application.name=feign-server
+#路线访问允许/actuator/refresh
+management.endpoints.web.exposure.include=*
+management.endpoints.web.cors.allowed-origins=*
+management.endpoints.web.cors.allowed-methods=*
+</code></pre>
+<p>访问需要更新的微服务<a target="_blank" rel="noopener" href="http://localhost:801/actuator/refresh">http://localhost:801/actuator/refresh</a></p>
+<p>该访问不支持Get访问，只支持Post访问</p>
+<pre><code class="java">public static void main(String[] args) &#123;
+        HashMap&lt;String,String&gt; headers =new HashMap&lt;&gt;();
+        headers.put(&quot;Content-Type&quot;, &quot;application/json; charset=utf-8&quot;);
+        System.out.println(&quot;因为要去git获取，还要刷新config-server, 会比较卡，所以一般会要好几秒才能完成，请耐心等待&quot;);
+ 
+        String result = HttpUtil.createPost(&quot;http://localhost:8012/actuator/bus-refresh&quot;).addHeaders(headers).execute().body();
+        System.out.println(&quot;result:&quot;+result);
+        System.out.println(&quot;refresh 完成&quot;);
+    &#125;
+</code></pre>
+<hr>
+<p><strong>断路器<code>Hystrix</code></strong></p>
+<p>pom支持</p>
+<pre><code class="xml">&lt;dependency&gt;
+     &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+     &lt;artifactId&gt;spring-cloud-starter-netflix-hystrix&lt;/artifactId&gt;
+&lt;/dependency&gt;   
+</code></pre>
+<p>原来使用Feign做负载均衡的连接接口类修改其</p>
+<pre><code class="java">//原来的
+@FeignClient(value = &quot;DATA-SERVER&quot;)
+//修改之后的
+@FeignClient(value = &quot;DATA-SERVER&quot;,fallback = ProductClientFeignHystrixImpl.class)
+</code></pre>
+<p><code>fallback</code>：回退，大概就是说，当指定的微服务不可用时，回退到指定类中的复写方法。因为指定的回退类是继承与当前的接口，那么必定需要继承当前的访问抽象方法。所以，在微服务不可用的时候，调用其复写的方法，做微服务不可用处理。</p>
+<p>IProductClientFeign.class</p>
+<pre><code class="java">@FeignClient(value = &quot;DATA-SERVER&quot;,fallback = ProductClientFeignHystrixImpl.class)
+public interface IProductClientFeign &#123;
+    /**
+     * 请求数据
+     * @return 结果
+     */
+    @GetMapping(&quot;/product/all&quot;)
+    List&lt;Product&gt; allProduct();
+&#125;
+</code></pre>
+<p>ProductClientFeignHystrixImpl.class</p>
+<pre><code class="java">@Component
+public class ProductClientFeignHystrixImpl implements IProductClientFeign &#123;
+    @Override
+    public List&lt;Product&gt; allProduct() &#123;
+        ArrayList&lt;Product&gt; products = new ArrayList&lt;&gt;();
+        products.add(new Product(1,&quot;数据服务不可用&quot;,0));
+        return products;
+    &#125;
+&#125;
+</code></pre>
+<p>配置完断路器之后，还需要去启动类中启用它<code>@EnableHystri</code>，以及去配置文件中开启相关服务操作<code>feign.hystrix.enabled=true</code></p>
+<hr>
+<p><strong>断路器监听<code>hystrix-dashboard</code></strong></p>
+<p>pom支持</p>
+<pre><code class="xml">&lt;!--        连接服务注册中心--&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-client&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;!--        断路器监听--&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-netflix-hystrix-dashboard&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;!--        断路器--&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-netflix-hystrix&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;!--        环节映射--&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>启动类上开启断路器监听</p>
+<p><code>@EnableHystrixDashboard</code>：开启断路监听</p>
+<pre><code class="java">@SpringBootApplication
+@EnableHystrixDashboard
+@EnableEurekaClient
+public class HystrixMonitorServerApplication &#123;
+    public static void main(String[] args) &#123;
+        SpringApplication.run(HystrixMonitorServerApplication.class, args);
+    &#125;
+&#125;
+</code></pre>
+<p>application.properties</p>
+<pre><code class="properties">server.port=8040
+spring.application.name=hystrix-monitor-server
+eureka.client.service-url.defaultZone=http://localhost:8080/eureka
+</code></pre>
+<p>给共享信息让监听器监听的微服务使用<code>@EnableCircuitBreaker</code>开启分享</p>
+<pre><code class="java">@SpringBootApplication
+@EnableEurekaClient
+@EnableFeignClients
+@EnableDiscoveryClient
+@EnableHystrix
+@EnableCircuitBreaker
+public class FeignServerApplication &#123;
+    public static void main(String[] args) &#123;
+        SpringApplication.run(FeignServerApplication.class, args);
+    &#125;
+&#125;
+</code></pre>
+<p><code>@SpringBootApplication</code>：SpeingBoot启动类<br><code>@EnableEurekaClient</code>：启用微服务注册连接，让注册中心发现，扫描该服务<br><code>@EnableFeignClients</code>：让注册中心发现这个Feign负载均衡的服务<br><code>@EnableDiscoveryClient</code>：<br><code>@EnableHystrix</code>：启用熔断<br><code>@EnableCircuitBreaker</code>：分享信息给熔断监听，本身必须要有熔断机制</p>
+<p>访问地址</p>
+<p><a target="_blank" rel="noopener" href="http://localhost:8040/hystrix">http://localhost:8040/hystrix</a></p>
+<p>监听地址</p>
+<p><a target="_blank" rel="noopener" href="http://localhost:8011/actuator/hystrix.stream">http://localhost:8011/actuator/hystrix.stream</a></p>
+<hr>
+<p>断路器聚合监听</p>
+<p>pom支持</p>
+<pre><code class="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-client&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-netflix-hystrix&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-netflix-hystrix-dashboard&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-netflix-turbine&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>application.properties</p>
+<pre><code class="properties">server.port=8050
+spring.application.name=hystrix-turbine-server
+eureka.client.service-url.defaultZone=http://localhost:8080/eureka
+
+turbine.aggregator.cluster-config=default
+#配置Eureka中的serviceId列表，表明监控哪些服务
+turbine.app-config=feign-server
+turbine.cluster-name-expression= new String(&quot;default&quot;)
+</code></pre>
+<p>启动类开启</p>
+<pre><code class="java">@SpringBootApplication
+@EnableTurbine
+@EnableEurekaClient
+public class HystrixTurbineServerApplication &#123;
+    public static void main(String[] args) &#123;
+        SpringApplication.run(HystrixTurbineServerApplication.class, args);
+    &#125;
+&#125;
+</code></pre>
+<p>使用上面的熔断监听服务去获得监听服务</p>
+<p><a target="_blank" rel="noopener" href="http://localhost:8040/hystrix%E3%80%81">http://localhost:8040/hystrix、</a></p>
+<p>输入聚合监听的端口地址进行局和监听</p>
+<p><a target="_blank" rel="noopener" href="http://localhost:8050/turbine.stream">http://localhost:8050/turbine.stream</a></p>
+<hr>
+<p><strong>网关<code>zuul</code></strong></p>
+<p>pom支持</p>
+<pre><code class="xml">&lt;dependency&gt;
+     &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+     &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-client&lt;/artifactId&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-netflix-zuul&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>application.properties</p>
+<pre><code class="properties">server.port=8060
+spring.application.name=zuul-server
+eureka.client.service-url.defaultZone=http://localhost:8080/eureka
+#映射
+zuul.routes.api-a.path=/api-data/**
+zuul.routes.api-a.service-id=DATA-SERVER
+zuul.routes.api-b.path=/api-feign/**
+zuul.routes.api-b.service-id=FEIGN-SERVER
+</code></pre>
+<p>启动类开启网关注册<code>@EnableZuulProxy</code></p>
+<pre><code class="java">@SpringBootApplication
+@EnableEurekaClient
+@EnableDiscoveryClient
+@EnableZuulProxy
+public class ZuulServerApplication &#123;
+    public static void main(String[] args) &#123;
+        SpringApplication.run(ZuulServerApplication.class, args);
+    &#125;
+&#125;
+</code></pre>
+<p>访问地址</p>
+<p><a target="_blank" rel="noopener" href="http://localhost:8060/api-feign/feign/all">http://localhost:8060/api-feign/feign/all</a></p>
+<hr>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/06/07/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/SpringCloud%E7%AC%94%E8%AE%B0/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/07/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/SpringSecurity%E6%95%B4%E5%90%88/">
+        <h2 class="post-title">SpringSecurity整合</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                开源框架
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <hr>
+<h2 id="title-SpringSecurity初体验date-2022-10-13-10-09-19-248updated-2022-10-13-14-40-09-804url-x2F-archives-x2F-springsecurity-chu-ti-yancategories-SpringSecuritytags-SpringSecurity"><a href="#title-SpringSecurity初体验date-2022-10-13-10-09-19-248updated-2022-10-13-14-40-09-804url-x2F-archives-x2F-springsecurity-chu-ti-yancategories-SpringSecuritytags-SpringSecurity" class="headerlink" title="title: SpringSecurity初体验date: 2022-10-13 10:09:19.248updated: 2022-10-13 14:40:09.804url: &#x2F;archives&#x2F;springsecurity-chu-ti-yancategories:- SpringSecuritytags:- SpringSecurity"></a>title: SpringSecurity初体验<br>date: 2022-10-13 10:09:19.248<br>updated: 2022-10-13 14:40:09.804<br>url: &#x2F;archives&#x2F;springsecurity-chu-ti-yan<br>categories:<br>- SpringSecurity<br>tags:<br>- SpringSecurity</h2><p>首先引入pom依赖</p>
+<pre><code class="xml">&lt;dependency&gt;
+      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-boot-starter-security&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>继承WebSecurityConfigurerAdapter复写如下方法，完成配置</p>
+<pre><code class="java">/**
+ * @author huangJie
+ * @version 1.0v
+ * @date 2022/10/12 10:33
+ */
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig extends WebSecurityConfigurerAdapter &#123;
+
+
+    @Resource
+    private UserService userService;
+
+    @Resource
+    private SecurityExcludeUrlProperty securityExcludeUrlProperty;
+
+    /**
+     * 自定义的编码密码接口，这里直接返回的明码，demo不做加密编码处理
+     *
+     * @return 接口实现
+     */
+    @Bean
+    public PasswordEncoder passwordEncoder() &#123;
+        return new PasswordEncoder() &#123;
+            @Override
+            public String encode(CharSequence charSequence) &#123;
+                return (String) charSequence;
+            &#125;
+
+            @Override
+            public boolean matches(CharSequence charSequence, String s) &#123;
+                return charSequence.equals(s);
+            &#125;
+        &#125;;
+    &#125;
+
+    /**
+     * 配置HttpSecurity
+     *
+     * @param http HttpSecurity
+     * @throws Exception 产生异常
+     */
+    @Override
+    protected void configure(HttpSecurity http) throws Exception &#123;
+        http.authorizeRequests()
+                .antMatchers(securityExcludeUrlProperty.getUri()).permitAll()
+                .anyRequest().authenticated()
+
+                .and()
+                .addFilterBefore(new TokenFilter(userService), UsernamePasswordAuthenticationFilter.class)
+
+                .exceptionHandling()
+                .accessDeniedHandler(new CustomAccessDeniedHandler())
+                .authenticationEntryPoint(new CustomAuthenticationEntryPoint())
+
+                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).disable()
+
+                .formLogin().disable()
+                .logout().disable()
+                .csrf().disable();
+    &#125;
+
+    /**
+     * 用来配置自定义的鉴权操作
+     *
+     * @param auth 用来配置支持鉴权的构建器
+     * @throws Exception 产生异常
+     */
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception &#123;
+        super.configure(auth);
+
+        // auth.authenticationProvider(new AuthenticationProvider() &#123;
+        //     @Override
+        //     public Authentication authenticate(Authentication authentication) throws AuthenticationException &#123;
+        //         return null;
+        //     &#125;
+        //
+        //     @Override
+        //     public boolean supports(Class&lt;?&gt; authentication) &#123;
+        //         return true;
+        //     &#125;
+        // &#125;);
+    &#125;
+&#125;
+</code></pre>
+<p>自定义HttpSecurity之后的调用链路</p>
+<blockquote>
+<p>Security filter chain:<br>  WebAsyncManagerIntegrationFilter<br>  SecurityContextPersistenceFilter<br>  HeaderWriterFilter<br>  TokenFilter<br>  RequestCacheAwareFilter<br>  SecurityContextHolderAwareRequestFilter<br>  AnonymousAuthenticationFilter<br>  ExceptionTranslationFilter<br>  FilterSecurityInterceptor</p>
+</blockquote>
+<p>其中TokenFilter为自定义的Filter</p>
+<pre><code class="java">/**
+ * @author huangJie
+ * @version 1.0v
+ * @date 2022/10/12 11:00
+ */
+@Slf4j
+public class TokenFilter extends GenericFilterBean &#123;
+
+    private final UserService userService;
+
+    public TokenFilter(UserService userService) &#123;
+        this.userService = userService;
+    &#125;
+
+    @Override
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException &#123;
+        HttpServletRequest request = (HttpServletRequest) servletRequest;
+        String authorization = request.getHeader(&quot;Authorization&quot;);
+        if (StringUtils.hasLength(authorization))&#123;
+            UserDetails userDetails = userService.loadUserByUsername(authorization);
+            SecurityContextHolder.getContext().setAuthentication(
+                    new UsernamePasswordAuthenticationToken(userDetails.getUsername(), userDetails.getPassword()));
+        &#125;
+        filterChain.doFilter(servletRequest, servletResponse);
+    &#125;
+&#125;
+</code></pre>
+<p>对于用户信息获取需要实现<code>UserDetailsService</code>接口，这里并未对用户信息做复杂操作，只为过登录校验做了处理</p>
+<pre><code class="java">/**
+ * @author huangJie
+ * @version 1.0v
+ * @date 2022/10/12 14:02
+ */
+public interface UserService extends UserDetailsService &#123;
+
+&#125;
+
+/**
+ * @author huangJie
+ * @version 1.0v
+ * @date 2022/10/12 14:02
+ */
+@Service
+public class UserServiceImpl implements UserService &#123;
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException &#123;
+        UserEntity user = new UserEntity();
+        user.setUsername(username);
+        user.setPassword(username);
+        return user;
+    &#125;
+&#125;
+</code></pre>
+<p>其中<code>UserEntity</code>也是实现自UserDetails类</p>
+<pre><code class="java">/**
+ * @author huangJie
+ * @version 1.0v
+ * @date 2022/10/12 10:44
+ */
+@Setter
+public class UserEntity implements UserDetails, Serializable &#123;
+    private static final long serialVersionUID = 3532830780866118325L;
+
+
+    private String username;
+    private String password;
+    private List&lt;String&gt; roles = new ArrayList&lt;String&gt;() &#123;
+        private static final long serialVersionUID = 8112282703158213813L;
+
+        &#123;
+            add(&quot;ADMIN&quot;);
+            add(&quot;USER&quot;);
+        &#125;
+    &#125;;
+
+    @Override
+    public Collection&lt;? extends GrantedAuthority&gt; getAuthorities() &#123;
+        List&lt;GrantedAuthority&gt; auth = new ArrayList&lt;&gt;();
+        for (String role : roles) &#123;
+            auth.add(new SimpleGrantedAuthority(role));
+        &#125;
+        return auth;
+    &#125;
+
+    @Override
+    public String getPassword() &#123;
+        return password;
+    &#125;
+
+    @Override
+    public String getUsername() &#123;
+        return username;
+    &#125;
+
+    @Override
+    public boolean isAccountNonExpired() &#123;
+        return true;
+    &#125;
+
+    @Override
+    public boolean isAccountNonLocked() &#123;
+        return true;
+    &#125;
+
+    @Override
+    public boolean isCredentialsNonExpired() &#123;
+        return true;
+    &#125;
+
+    @Override
+    public boolean isEnabled() &#123;
+        return true;
+    &#125;
+&#125;
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/06/07/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/SpringSecurity%E6%95%B4%E5%90%88/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/07/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/Spring%E4%B8%8A%E4%B8%8B%E6%96%87ApplicationContext/">
+        <h2 class="post-title">Spring上下文ApplicationContext</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                开源框架
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="Java-在静态方法中引入bean"><a href="#Java-在静态方法中引入bean" class="headerlink" title="Java 在静态方法中引入bean"></a>Java 在静态方法中引入bean</h1><p>ApplicationContextAware: 相当于在ApplicationContext上下文初始化的时候，会触发的一个钩子，而要想触发就要加入到Bean容器中去进行管理</p>
+<pre><code class="java">public class SpringContextUtils implements ApplicationContextAware &#123;
+    private static ApplicationContext applicationContext;
+
+    public static void setStatusApplicationContext(ApplicationContext applicationContext) &#123;
+        SpringContextUtils.applicationContext = applicationContext;
+    &#125;
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException &#123;
+        SpringContextUtils.setStatusApplicationContext(applicationContext);
+    &#125;
+    public static &lt;T&gt; T bean(Class&lt;T&gt; clazz) &#123;
+        return applicationContext.getBean(clazz);
+    &#125;
+&#125;
+</code></pre>
+<p>bean注入</p>
+<pre><code class="java">@Bean
+public SpringContextUtils springContextUtils()&#123;
+    return new SpringContextUtils();
+&#125;
+</code></pre>
+<p>而后只需要在使用的时候使用bean方法，依据类型或者名称等等进行注入即可</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/06/07/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/Spring%E4%B8%8A%E4%B8%8B%E6%96%87ApplicationContext/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/07/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/Spring%E7%9A%84AOP%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/">
+        <h2 class="post-title">Spring的AOP自定义注解</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                开源框架
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="自定义注解AOP"><a href="#自定义注解AOP" class="headerlink" title="自定义注解AOP"></a>自定义注解AOP</h1><p><strong>POM文件导入</strong></p>
+<p>开启AOP操作</p>
+<pre><code class="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-aop&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p><strong>创建一个注解</strong></p>
+<p>元注解</p>
+<ul>
+<li>@Documented：用于描述其它类型的annotation应该被作为被标注的程序成员的公共API，因此可以被例如javadoc此类的工具文档化。它是一个标记注解，没有成员。</li>
+<li>@Inherited：用于表示某个被标注的类型是被继承的。如果一个使用了@Inherited修饰的annotation类型被用于一个class，则这个annotation将被用于该class的子类。</li>
+<li>@Target：用于描述注解的范围，即注解在哪用。它说明了Annotation所修饰的对象范围：Annotation可被用于 packages、types（类、接口、枚举、Annotation类型）、类型成员（方法、构造方法、成员变量、枚举值）、方法参数和本地变量（如循环变量、catch参数）等。取值类型（ElementType）有以下几种：<ul>
+<li>CONSTRUCTOR:用于描述构造器</li>
+<li>FIELD:用于描述域即类成员变量</li>
+<li>LOCAL_VARIABLE:用于描述局部变量</li>
+<li>METHOD:用于描述方法</li>
+<li>PACKAGE:用于描述包</li>
+<li>PARAMETER:用于描述参数</li>
+<li>TYPE:用于描述类、接口(包括注解类型) 或enum声明</li>
+<li>TYPE_PARAMETER:1.8版本开始，描述类、接口或enum参数的声明</li>
+<li>TYPE_USE:1.8版本开始，描述一种类、接口或enum的使用声明</li>
+</ul>
+</li>
+<li>Retention：用于描述注解的生命周期，表示需要在什么级别保存该注解，即保留的时间长短。取值类型（RetentionPolicy）有以下几种：<ul>
+<li>SOURCE:在源文件中有效（即源文件保留）</li>
+<li>CLASS:在class文件中有效（即class保留）</li>
+<li>RUNTIME:在运行时有效（即运行时保留）</li>
+</ul>
+</li>
+</ul>
+<pre><code class="java">@Documented
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface AllowToken &#123;&#125;
+</code></pre>
+<p><strong>创建AOP切入实现类</strong></p>
+<pre><code class="java">@Aspect
+@Component
+public class TokenAspect &#123;
+    //设置切入点
+    @Pointcut(value = &quot;@annotation(cn.ajiehome.tools.annotations.AllowToken)&quot;)
+    private void pointCut()&#123;&#125;
+
+    @Before(value = &quot;pointCut()&amp;&amp;@annotation(allowToken)&quot;)
+    private void before(AllowToken allowToken)&#123;
+        //AOP前置通知 advice
+        //获取被注解方法的request
+        ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        assert servletRequestAttributes != null;
+        HttpServletRequest request = servletRequestAttributes.getRequest();
+        
+        String token = request.getHeader(&quot;token&quot;);
+        if (token==null)&#123;
+            throw new ApplicationException(CodeType.TOKEN_TIME_OUT);
+        &#125;
+        //解析token
+        DecodedJWT decode = JWT.decode(token);
+        //Jwt的头部，由于头部被Base64编码过了，所以需要base64逆解编码
+        String header = new String(Base64.getDecoder().decode(decode.getHeader()));
+        //Jwt的中间部分，理由同上头部
+        String payload = new String(Base64.getDecoder().decode(decode.getPayload()));
+        //解析头部
+        JSONObject userJson = JSONObject.parseObject(header);
+        String id = userJson.getString(&quot;id&quot;);
+        String userName = userJson.getString(&quot;userName&quot;);
+        //逆解匹配整个Token的编码以及密钥key
+        Algorithm algorithm = Algorithm.HMAC256(id);
+        try &#123;
+            //设置验证条件，这里设置了验证的密钥和编码以及验证的签发人
+            JWTVerifier jwtVerifier = JWT.require(algorithm).withIssuer(userName).build();
+            //验证是否匹配，如果Token不匹配或者超时，此处将抛出异常
+            DecodedJWT verify = jwtVerifier.verify(token);
+            //需要的信息获取从头部份获取和中间部分获取
+        &#125;catch (Exception e)&#123;
+
+            throw  new ApplicationException(CodeType.TOKEN_TIME_OUT);
+        &#125;
+    &#125;
+    @After(value = &quot;pointCut()&amp;&amp;@annotation(allowToken)&quot;)
+    private void after(AllowToken allowToken)&#123;
+        //AOP后置通知 advice
+    &#125;
+
+    @AfterReturning(value = &quot;pointCut()&amp;&amp; @annotation(allowToken)&quot;,returning = &quot;o&quot;)
+    private void alterReturn(AllowToken allowToken,Object o)&#123;
+        //AOP返回通知 advice
+    &#125;
+
+    @AfterThrowing(value = &quot;pointCut()&amp;&amp;@annotation(allowToken)&quot;)
+    private void alterError(AllowToken allowToken)&#123;
+        //AOP异常通知 advice
+    &#125;
+&#125;
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/06/07/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/Spring%E7%9A%84AOP%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/07/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/Spring%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95%E4%B8%AD%E4%BD%BF%E7%94%A8Bean/">
+        <h2 class="post-title">Spring静态方法中使用Bean</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                开源框架
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <hr>
+<h2 id="title-Java-在静态方法中引入beandate-2022-04-15-18-27-17-616updated-2022-10-13-15-03-27-631url-x2F-archives-x2F-java-zai-jing-tai-fang-fa-zhong-yin-ru-beancategories-SpringBoottags-SpringBoot"><a href="#title-Java-在静态方法中引入beandate-2022-04-15-18-27-17-616updated-2022-10-13-15-03-27-631url-x2F-archives-x2F-java-zai-jing-tai-fang-fa-zhong-yin-ru-beancategories-SpringBoottags-SpringBoot" class="headerlink" title="title: Java 在静态方法中引入beandate: 2022-04-15 18:27:17.616updated: 2022-10-13 15:03:27.631url: &#x2F;archives&#x2F;java-zai-jing-tai-fang-fa-zhong-yin-ru-beancategories:- SpringBoottags:- SpringBoot"></a>title: Java 在静态方法中引入bean<br>date: 2022-04-15 18:27:17.616<br>updated: 2022-10-13 15:03:27.631<br>url: &#x2F;archives&#x2F;java-zai-jing-tai-fang-fa-zhong-yin-ru-bean<br>categories:<br>- SpringBoot<br>tags:<br>- SpringBoot</h2><p>ApplicationContextAware: 相当于在ApplicationContext上下文初始化的时候，会触发的一个钩子，而要想触发就要加入到Bean容器中去进行管理</p>
+<pre><code class="java">public class SpringContextUtils implements ApplicationContextAware &#123;
+    private static ApplicationContext applicationContext;
+
+    public static void setStatusApplicationContext(ApplicationContext applicationContext) &#123;
+        SpringContextUtils.applicationContext = applicationContext;
+    &#125;
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException &#123;
+        SpringContextUtils.setStatusApplicationContext(applicationContext);
+    &#125;
+    public static &lt;T&gt; T bean(Class&lt;T&gt; clazz) &#123;
+        return applicationContext.getBean(clazz);
+    &#125;
+&#125;
+</code></pre>
+<p>bean注入</p>
+<pre><code class="java">@Bean
+public SpringContextUtils springContextUtils()&#123;
+    return new SpringContextUtils();
+&#125;
+</code></pre>
+<p>而后只需要在使用的时候使用bean方法，依据类型或者名称等等进行注入即可</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/06/07/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/Spring%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95%E4%B8%AD%E4%BD%BF%E7%94%A8Bean/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos7%E5%AE%89%E8%A3%85Wordpress/">
+        <h2 class="post-title">Centos7安装Wordpress</h2>
     </a>
     <div class="category-and-date">
         
@@ -908,10 +1470,272 @@ server &#123;
     <div class="description">
         <div class="content" v-pre>
             
-            <p>在注册表如下路径</p>
-<pre><code class="propreties">HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
+            <h1 id="Centos7安装Wordpress以及环境"><a href="#Centos7安装Wordpress以及环境" class="headerlink" title="Centos7安装Wordpress以及环境"></a>Centos7安装Wordpress以及环境</h1><h2 id="一、安装MySQL57版本"><a href="#一、安装MySQL57版本" class="headerlink" title="一、安装MySQL57版本"></a>一、安装MySQL57版本</h2><p><strong>1、从MySQL官网下载YUM源的RPM安装包</strong></p>
+<pre><code class="shell">wget http://dev.mysql.com/get/mysql57-community-release-el7-8.noarch.rpm
 </code></pre>
-<p>新建一个<code>DWORD</code><br>名称为：<code>TaskbarSi </code><br>值为：<code>0、1、2</code></p>
+<p><strong>2、从下载好的rpm包安装MYSQL</strong></p>
+<pre><code class="shell">yum localinstall mysql57-community-release-el7-8.noarch.rpm
+</code></pre>
+<p><strong>3、安装MySQL服务</strong></p>
+<pre><code class="shell">yum install mysql-community-server
+</code></pre>
+<p><strong>4、启动MySQL服务</strong></p>
+<pre><code class="shell">systemctl start mysqld.service
+</code></pre>
+<p><strong>5、设置开机自启并且刷新</strong></p>
+<pre><code class="shell">systemctl enable mysqld
+systemctl daemon-reload
+</code></pre>
+<p><strong>6、修改默认初始化密码-&gt;由于密码策略所以只能设置较为复杂的密码</strong></p>
+<pre><code class="shell">#临时密码在/var/log/mysqld.log
+alter user &#39;root&#39;@&#39;localhost&#39; identified by &#39;ZhonHua@5000Nian&#39;;
+</code></pre>
+<p><strong>7、查看MySQL的密码安全策略</strong></p>
+<pre><code class="shell">show variables like &#39;validate_password%&#39;;
+</code></pre>
+<p><img src="/./images/MYSQL%E5%AF%86%E7%A0%81%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5.PNG" alt="img"></p>
+<p><strong>8、修改密码杂度为最低以及把密码长度改为自己想要的</strong></p>
+<pre><code class="shell">set global validate_password_policy = LOW;
+set global validate_password_length = 6;
+</code></pre>
+<p><img src="/./images/MySQL%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81%E7%AD%96%E7%95%A5.PNG" alt="img"></p>
+<p><strong>9、修改为自己想要的密码</strong></p>
+<pre><code class="shell">alter user &#39;root&#39;@&#39;localhost&#39; identified by &#39;123456&#39;;
+</code></pre>
+<p><strong>10、创建wordpress数据库</strong></p>
+<pre><code class="shell">create database wordpress;
+</code></pre>
+<p><strong>11、允许远程登陆然后刷新</strong></p>
+<pre><code class="shell">grant all on *.* to root@&#39;%&#39; identified by &#39;password&#39; with grant option;
+flush privileges;
+</code></pre>
+<p><strong>12、重启MySQL服务</strong></p>
+<pre><code class="shell">systemctl restart mysqld.service
+</code></pre>
+<p><strong>13、密码忘记或者策略失败</strong></p>
+<pre><code class="shell">#关闭密码验证策略，url：vi /root/my.cnf
+skip-grant-tables
+#修改mysql.user表的密码
+update mysql.user set authentication_string=password(&#39;新密码&#39;) where user=&#39;root&#39; ;
+#刷新
+flush privileges ;
+#然后删除skip-grant-tables之后重启MySQL服务
+</code></pre>
+<h2 id="二、安装apache-gt-httpd"><a href="#二、安装apache-gt-httpd" class="headerlink" title="二、安装apache-&gt;httpd"></a>二、安装apache-&gt;httpd</h2><p><strong>1、安装httpd</strong></p>
+<pre><code class="shell">yum install httpd
+</code></pre>
+<p><strong>2、启动httpd服务</strong></p>
+<pre><code class="shell">systemctl start httpd.service
+</code></pre>
+<p><strong>3、设置成开机自启并且刷新</strong></p>
+<pre><code class="shell">systemctl enable httpd.service
+systemctl daemon-reload
+</code></pre>
+<h2 id="三、安装php-gt-及相关驱动"><a href="#三、安装php-gt-及相关驱动" class="headerlink" title="三、安装php-&gt;及相关驱动"></a>三、安装php-&gt;及相关驱动</h2><p><strong>1、安装php、php-fpm、php-mysql</strong></p>
+<pre><code class="shell">yum install php php-fpm php-mysql
+</code></pre>
+<p><strong>2、启动php-fpm服务</strong></p>
+<pre><code class="shell">systemctl start php-fpm.service
+</code></pre>
+<p><strong>3、设置成开机自启并且刷新</strong></p>
+<pre><code class="shell">systemctl enable php-fpm.service
+systemctl daemon-reload
+</code></pre>
+<h2 id="四、查看三个服务的运行状态"><a href="#四、查看三个服务的运行状态" class="headerlink" title="四、查看三个服务的运行状态"></a>四、查看三个服务的运行状态</h2><p><strong>httpd监听80端口，mysql监听3306端口，php-fpm监听9000端口</strong></p>
+<pre><code class="shell">netstat -tunlp
+</code></pre>
+<h2 id="五、安装wordpress官网tar-gz安装包"><a href="#五、安装wordpress官网tar-gz安装包" class="headerlink" title="五、安装wordpress官网tar.gz安装包"></a>五、安装wordpress官网tar.gz安装包</h2><p><strong>2、用wget获取wordpress安装包</strong></p>
+<pre><code class="shell">wget https://ww.wp.xz.cn/wordpress-4.5.20.tar.gz
+</code></pre>
+<p><strong>3、解压安装包到&#x2F;var&#x2F;www路径下</strong></p>
+<pre><code class="shell">tar -zxf wordpress-4.5.20.tar.gz -C /var/www
+</code></pre>
+<p><strong>4、修改httpd的配置文件把默认的映射路径改为&#x2F;var&#x2F;www&#x2F;wordpress</strong>  </p>
+<pre><code class="shell">vi  /etc/httpd/conf/httpd.conf
+# DocumentRoot的值
+
+**5、保存修改文件退出后重新启动httpd服务**
+
+```shell
+systemctl restart httpd.service
+</code></pre>
+<p><strong>6、把wordpress目录赋予apache所有权限</strong></p>
+<pre><code class="shell">chown -R apache:apache /var/www/wordpress
+</code></pre>
+<h2 id="六、用浏览器启动绑定服务器的域名或者服务器的IP然后就可以开始配置相关的数据"><a href="#六、用浏览器启动绑定服务器的域名或者服务器的IP然后就可以开始配置相关的数据" class="headerlink" title="六、用浏览器启动绑定服务器的域名或者服务器的IP然后就可以开始配置相关的数据"></a>六、用浏览器启动绑定服务器的域名或者服务器的IP然后就可以开始配置相关的数据</h2>
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos7%E5%AE%89%E8%A3%85Wordpress/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos7%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+        <h2 class="post-title">Centos7常用命令</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                操作系统
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="Centos7常用命令"><a href="#Centos7常用命令" class="headerlink" title="Centos7常用命令"></a>Centos7常用命令</h1><p><strong>防火墙相关命令</strong></p>
+<ul>
+<li><p>防火墙的开启、关闭、重启、与状态</p>
+<pre><code class="shell"> #开启
+ systemctl start   firewalld.service
+ #关闭
+ systemctl stop    firewalld.service
+ #重启
+ systemctl restart firewalld.service
+ #状态
+ systemctl status  firewalld.service
+ #设置开机自启
+ systemctl enable  firewalld.service
+ #关闭开机自启
+ systemctl disable firewalld.service
+ 
+ #指定IP放行指定端口
+ firewall-cmd --permanent --add-rich-rule=&quot;rule family=&quot;ipv4&quot; source address=&quot;192.168.142.166&quot; port protocol=&quot;tcp&quot; port=&quot;5432&quot; accept&quot;
+</code></pre>
+</li>
+<li><p>查看所有公开项目</p>
+<pre><code class="shell"> #查看所有公开项
+ firewall-cmd --list-all
+ #查看端口是否放行
+ firewall-cmd --zone=public --query-port=80/tcp
+</code></pre>
+</li>
+<li><p>防火墙放行端口或服务</p>
+<pre><code class="shell"> #添加放行端口
+ firewall-cmd --zone=public --add-port=80/tcp --permanent
+ #重新加载所有的设置项
+ firewall-cmd --reload
+</code></pre>
+<pre><code class="shell">  #添加放行服务
+  firewall-cmd --zone=public --add-service=http --permanent
+  firewall-cmd --reload
+</code></pre>
+</li>
+<li><p>防火墙移除放行端口或服务</p>
+<pre><code class="shell"> #移除已经放行的端口
+ firewall-cmd --zone=public --remove-port=80/tcp
+ firewall-cmd --reload
+</code></pre>
+<pre><code class="shell">  #移除已经放行服务
+  firewall-cmd --zone=public --remove-service=http
+  firewall-cmd --reload
+</code></pre>
+</li>
+</ul>
+<p><strong>端口操作</strong></p>
+<ul>
+<li><p>端口占用查询</p>
+<pre><code class="shell"> netstat -tunlp | grep &#39;port&#39;
+ ----------------------------------------------------------------------------------
+ -t (tcp) 仅显示tcp相关选项
+ -u (udp) 仅显示udp相关选项
+ -n 拒绝显示别名，能显示数字的全部转化为数字
+ -l 仅列出在Listen(监听)的服务状态
+ -p 显示建立相关链接的程序名
+</code></pre>
+<pre><code class="shell"> lsof -i:&#39;port&#39;
+</code></pre>
+</li>
+<li><p>端口终结</p>
+<pre><code class="shell"> kill -9 &#39;pid&#39;
+</code></pre>
+</li>
+</ul>
+<p><strong>服务操作</strong></p>
+<ul>
+<li><p>服务状态查询</p>
+<pre><code class="shell">  systemctl status &#39;serverName&#39;
+</code></pre>
+</li>
+<li><p>服务开启</p>
+<pre><code class="shell">  sysyemctl start &#39;serverName&#39;
+</code></pre>
+</li>
+<li><p>服务关闭</p>
+<pre><code class="shell"> systemctl stop &#39;serverName&#39;
+</code></pre>
+</li>
+<li><p>服务自启</p>
+<pre><code class="shell">  systemctl enable &#39;serverName&#39;
+</code></pre>
+</li>
+<li><p>关闭服务自启</p>
+<pre><code class="shell"> systemctl disable &#39;serverName&#39;
+</code></pre>
+</li>
+</ul>
+<p><strong>用户和组</strong></p>
+<ul>
+<li><p>用户和组</p>
+<pre><code class="shell">  #添加用户
+  adduser &#39;userName&#39;
+</code></pre>
+<pre><code class="shell">#新建工作组
+groupadd &#39;groupName&#39;
+</code></pre>
+<pre><code class="shell">#添加用户，并且把把用户添加到指定名称的组
+useradd -g &#39;groupName&#39; &#39;userName&#39;
+</code></pre>
+<pre><code class="shell">#给已有用户添加到工作组
+usermod -G &#39;groupName&#39; &#39;userName&#39;
+gpasswd -a &#39;userName&#39; &#39;groupName&#39;
+</code></pre>
+<pre><code class="shell">#临时锁定用户的密码，使账户失效
+passwd &#39;userName&#39; -l
+#把临时锁定密码的用户开发，使账户重新有效
+passwd &#39;userName&#39; -u
+</code></pre>
+<pre><code class="shell">#永久删除用户
+userdel &#39;userName&#39;
+#永久删除组
+groupdel &#39;groupName&#39;
+#同时删除用户和组
+usermod -G &#39;userName&#39; &#39;groupName&#39;
+#从指定的组中删除指定的用户
+gpassed -d &#39;userName&#39; &#39;groupName&#39;
+</code></pre>
+<pre><code class="shell">#显示用户信息
+id &#39;userName&#39;
+#将用户添加到指定组
+usermod -G &#39;groupName&#39; &#39;userName&#39;
+#修改用户userName1的名称为userName2
+usermod -l &#39;userName2&#39; &#39;userName1&#39;
+#锁定账户
+usermod -L &#39;userName&#39;
+#解除用户锁定
+usermod -U &#39;userName&#39;
+</code></pre>
+</li>
+</ul>
+<hr>
+<p><strong>持续更新中…</strong></p>
 
             
         </div>
@@ -920,7 +1744,60 @@ server &#123;
         
         
     </div>
-    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Windows11%E6%94%B9%E5%B0%8F%E7%8A%B6%E6%80%81%E6%A0%8F/" class="go-post">阅读全文</a>
+    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos7%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/">
+        <h2 class="post-title">Centos创建虚拟内存</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="category">
+            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                操作系统
+            </a>
+        </span>
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="Linux创建虚拟内存"><a href="#Linux创建虚拟内存" class="headerlink" title="Linux创建虚拟内存"></a>Linux创建虚拟内存</h1><ol>
+<li>创建swap文件夹，一般在根目录就好，swap通常代表虚拟内存</li>
+<li>创建swapfile文件，swapfile为伪装成内存的文件<pre><code class="shell"> dd if=/dev/zero of=/swap/swapfile bs=1G count=4096
+</code></pre>
+</li>
+<li>将swapfile文件设置为swap分区文件<pre><code class="shell"> mkswap /swap/swapfile
+</code></pre>
+</li>
+<li>激活swap区，并立即启用交换区文件<pre><code class="shell"> swapon /swap/swapfile
+</code></pre>
+</li>
+<li>设置开机自启需要在<code>/etc/fstab</code>文件的末尾添加一行命令<pre><code class="shell">/swap/swapfile swap swap defaults 0 0
+</code></pre>
+</li>
+</ol>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/06/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Centos%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/" class="go-post">阅读全文</a>
 </div>
 
 
